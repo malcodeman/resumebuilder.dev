@@ -16,11 +16,11 @@ import NewResumeModal from "../components/NewResumeModal";
 import ResumeItem from "../components/ResumeItem";
 
 import utils from "../lib/utils";
-import { resume } from "../types";
+import { Resume } from "../types";
 
 function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [resumes, setResumes] = React.useState<resume[]>(
+  const [resumes, setResumes] = React.useState<Resume[]>(
     utils.getStorageResumes()
   );
 

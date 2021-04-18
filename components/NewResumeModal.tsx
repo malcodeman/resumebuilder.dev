@@ -9,6 +9,8 @@ import {
   ModalFooter,
   Button,
   Input,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
@@ -36,11 +38,10 @@ function NewResumeModal(props: props) {
         <ModalCloseButton />
         <ModalBody>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              size="sm"
-              placeholder="Resume name"
-              {...register("name", { required: true })}
-            />
+            <FormControl>
+              <FormLabel>Resume name</FormLabel>
+              <Input size="sm" {...register("name", { required: true })} />
+            </FormControl>
           </form>
         </ModalBody>
         <ModalFooter>

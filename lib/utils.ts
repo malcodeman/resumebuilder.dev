@@ -1,4 +1,4 @@
-import { resume } from "../types";
+import { Resume } from "../types";
 
 const defaultResume = {
   id: "",
@@ -8,7 +8,7 @@ const defaultResume = {
 
 function getStorageResume(id: string | string[]) {
   try {
-    const resumes: resume[] = JSON.parse(localStorage.getItem("resumes")) || [];
+    const resumes: Resume[] = JSON.parse(localStorage.getItem("resumes")) || [];
     const data = resumes.find((item) => item.id === id) || defaultResume;
 
     return data;
@@ -19,14 +19,14 @@ function getStorageResume(id: string | string[]) {
 
 function getStorageResumes() {
   try {
-    const resumes: resume[] = JSON.parse(localStorage.getItem("resumes")) || [];
+    const resumes: Resume[] = JSON.parse(localStorage.getItem("resumes")) || [];
     return resumes;
   } catch {
     return [];
   }
 }
 
-function setStorageResumes(resumes: resume[]) {
+function setStorageResumes(resumes: Resume[]) {
   try {
     const value = JSON.stringify(resumes);
     localStorage.setItem("resumes", value);

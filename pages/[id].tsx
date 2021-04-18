@@ -12,7 +12,7 @@ import SkillsSection from "../components/SkillsSection";
 import EditableName from "../components/EditableName";
 
 import utils from "../lib/utils";
-import { resume } from "../types";
+import { Resume } from "../types";
 
 const defaultResume = {
   id: "",
@@ -23,7 +23,7 @@ const defaultResume = {
 function Builder() {
   const router = useRouter();
   const { id } = router.query;
-  const [resume, setResume] = React.useState<resume>(defaultResume);
+  const [resume, setResume] = React.useState<Resume>(defaultResume);
 
   React.useEffect(() => {
     if (id) {
