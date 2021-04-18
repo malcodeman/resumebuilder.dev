@@ -7,8 +7,9 @@ import {
   AccordionPanel,
   Input,
   GridItem,
-  Textarea,
   Button,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 
@@ -26,7 +27,10 @@ function SkillsSection() {
       <AccordionPanel pb={4}>
         <Grid templateColumns="1fr 1fr" gap="20px" mb="20px">
           <GridItem colSpan={2}>
-            <Input placeholder="Name" />
+            <FormControl>
+              <FormLabel>Name</FormLabel>
+              <Input size="sm" />
+            </FormControl>
           </GridItem>
         </Grid>
         <Button size="sm" leftIcon={<Plus size={20} />} width="100%">

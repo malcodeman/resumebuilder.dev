@@ -9,6 +9,8 @@ import {
   GridItem,
   Textarea,
   Button,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 
@@ -26,18 +28,36 @@ function EmploymentSection() {
       <AccordionPanel pb={4}>
         <Grid templateColumns="1fr 1fr" gap="20px" mb="20px">
           <GridItem colSpan={2}>
-            <Input placeholder="Job title" />
+            <FormControl>
+              <FormLabel>Job title</FormLabel>
+              <Input size="sm" />
+            </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <Input placeholder="Company name" />
+            <FormControl>
+              <FormLabel>Company name</FormLabel>
+              <Input size="sm" />
+            </FormControl>
           </GridItem>
-          <Input placeholder="Start date" />
-          <Input placeholder="End date" />
+          <FormControl>
+            <FormLabel>Start date</FormLabel>
+            <Input size="sm" />
+          </FormControl>
+          <FormControl>
+            <FormLabel>End date</FormLabel>
+            <Input size="sm" />
+          </FormControl>
           <GridItem colSpan={2}>
-            <Input placeholder="City" />
+            <FormControl>
+              <FormLabel>City</FormLabel>
+              <Input size="sm" />
+            </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <Textarea placeholder="Description" />
+            <FormControl>
+              <FormLabel>Description</FormLabel>
+              <Textarea size="sm" />
+            </FormControl>
           </GridItem>
         </Grid>
         <Button size="sm" leftIcon={<Plus size={20} />} width="100%">

@@ -8,7 +8,12 @@ import {
   Input,
   GridItem,
   Textarea,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  InputLeftElement,
 } from "@chakra-ui/react";
+import { Mail, Phone } from "react-feather";
 
 function PersonalDetailsSection() {
   return (
@@ -24,14 +29,44 @@ function PersonalDetailsSection() {
       <AccordionPanel pb={4}>
         <Grid templateColumns="1fr 1fr" gap="20px">
           <GridItem colSpan={2}>
-            <Input placeholder="Title" />
+            <FormControl>
+              <FormLabel>Title</FormLabel>
+              <Input size="sm" />
+            </FormControl>
           </GridItem>
-          <Input placeholder="First name" />
-          <Input placeholder="Last name" />
-          <Input placeholder="Email" />
-          <Input placeholder="Phone" />
+          <FormControl>
+            <FormLabel>First name</FormLabel>
+            <Input size="sm" />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Last name</FormLabel>
+            <Input size="sm" />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <InputGroup size="sm">
+              <InputLeftElement
+                pointerEvents="none"
+                children={<Mail size={20} />}
+              />
+              <Input />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Phone</FormLabel>
+            <InputGroup size="sm">
+              <InputLeftElement
+                pointerEvents="none"
+                children={<Phone size={20} />}
+              />
+              <Input />
+            </InputGroup>
+          </FormControl>
           <GridItem colSpan={2}>
-            <Textarea placeholder="Summary" />
+            <FormControl>
+              <FormLabel>Summary</FormLabel>
+              <Textarea size="sm" />
+            </FormControl>
           </GridItem>
         </Grid>
       </AccordionPanel>
