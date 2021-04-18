@@ -1,14 +1,17 @@
 import { Text, Flex, Box } from "@chakra-ui/react";
 import { FileText } from "react-feather";
+import Link from "next/link";
 
 function Logo() {
   return (
-    <Flex alignItems="center">
-      <Box marginRight="20px">
-        <FileText size={20} />
-      </Box>
-      <Text>resumebuilder.dev</Text>
-    </Flex>
+    <Link href="/">
+      <Flex alignItems="center" _hover={{ cursor: "pointer" }}>
+        <Box marginRight="20px">
+          <FileText size={20} />
+        </Box>
+        <Text>resumebuilder.dev</Text>
+      </Flex>
+    </Link>
   );
 }
 
