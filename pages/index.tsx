@@ -1,3 +1,4 @@
+import React from "react";
 import Head from "next/head";
 import {
   Box,
@@ -5,27 +6,65 @@ import {
   Flex,
   Button,
   useDisclosure,
-  Text,
   SimpleGrid,
-  IconButton,
 } from "@chakra-ui/react";
-import { MoreHorizontal, Plus } from "react-feather";
+import { Plus } from "react-feather";
 import { nanoid } from "nanoid";
-import { formatDistanceToNow } from "date-fns";
 
 import Header from "../components/Header";
 import NewResumeModal from "../components/NewResumeModal";
+import ResumeItem from "../components/ResumeItem";
+
+type resumeType = {
+  id: string;
+  name: string;
+  updated: number;
+};
+
+function getStorageResumes() {
+  try {
+    const resumes: resumeType[] =
+      JSON.parse(localStorage.getItem("resumes")) || [];
+    return resumes;
+  } catch {
+    return [];
+  }
+}
 
 function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const resumes = JSON.parse(localStorage.getItem("resumes")) || [];
+  const [resumes, setResumes] = React.useState<resumeType[]>(
+    getStorageResumes()
+  );
+
+  React.useEffect(() => {
+    try {
+      const value = JSON.stringify(resumes);
+      localStorage.setItem("resumes", value);
+    } catch (err) {
+      console.error(err);
+    }
+  }, [resumes.length]);
 
   function handleOnSubmit(data: { name: string }) {
-    const resume = { id: nanoid(), updated: new Date(), name: data.name };
-    const value = JSON.stringify([...resumes, resume]);
-
-    localStorage.setItem("resumes", value);
+    const resume = { id: nanoid(), updated: Date.now(), name: data.name };
+    setResumes([...resumes, resume]);
     onClose();
+  }
+
+  function handleOnDelete(id: string) {
+    const newResumes = resumes.filter((item) => item.id !== id);
+    setResumes(newResumes);
+  }
+
+  function handleOnDuplicate(id: string) {
+    const resume = resumes.find((item) => item.id === id);
+    const value = {
+      ...resume,
+      id: nanoid(),
+      updated: Date.now(),
+    };
+    setResumes([...resumes, value]);
   }
 
   return (
@@ -43,33 +82,16 @@ function Home() {
             </Button>
           </Flex>
           <SimpleGrid minChildWidth="270px" spacing="20px">
-            {resumes.map(
-              (item: { id: string; name: string; updated: string }) => (
-                <Flex key={item.id} direction="column">
-                  <Box
-                    backgroundColor="#f3f3f3"
-                    height="360px"
-                    marginBottom="10px"
-                    borderRadius="lg"
-                  />
-                  <Flex justifyContent="space-between" alignItems="center">
-                    <Box>
-                      <Text>{item.name}</Text>
-                      <Text opacity="0.5">
-                        {formatDistanceToNow(Date.parse(item.updated), {
-                          addSuffix: true,
-                        })}
-                      </Text>
-                    </Box>
-                    <IconButton
-                      size="sm"
-                      aria-label="More options"
-                      icon={<MoreHorizontal size={20} />}
-                    />
-                  </Flex>
-                </Flex>
-              )
-            )}
+            {resumes.map((item) => (
+              <ResumeItem
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                updated={item.updated}
+                onDelete={handleOnDelete}
+                onDuplicate={handleOnDuplicate}
+              />
+            ))}
           </SimpleGrid>
         </Container>
       </Box>
