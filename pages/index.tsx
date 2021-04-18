@@ -15,35 +15,17 @@ import Header from "../components/Header";
 import NewResumeModal from "../components/NewResumeModal";
 import ResumeItem from "../components/ResumeItem";
 
-type resumeType = {
-  id: string;
-  name: string;
-  updated: number;
-};
-
-function getStorageResumes() {
-  try {
-    const resumes: resumeType[] =
-      JSON.parse(localStorage.getItem("resumes")) || [];
-    return resumes;
-  } catch {
-    return [];
-  }
-}
+import utils from "../lib/utils";
+import { resume } from "../types";
 
 function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [resumes, setResumes] = React.useState<resumeType[]>(
-    getStorageResumes()
+  const [resumes, setResumes] = React.useState<resume[]>(
+    utils.getStorageResumes()
   );
 
   React.useEffect(() => {
-    try {
-      const value = JSON.stringify(resumes);
-      localStorage.setItem("resumes", value);
-    } catch (err) {
-      console.error(err);
-    }
+    utils.setStorageResumes(resumes);
   }, [resumes.length]);
 
   function handleOnSubmit(data: { name: string }) {

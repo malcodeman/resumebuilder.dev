@@ -9,40 +9,47 @@ import PersonalDetailsSection from "../components/PersonalDetailsSection";
 import EmploymentSection from "../components/EmploymentSection";
 import SchoolSection from "../components/SchoolSection";
 import SkillsSection from "../components/SkillsSection";
+import EditableName from "../components/EditableName";
 
-type resumeType = {
-  id: string;
-  name: string;
-  updated: number;
-};
+import utils from "../lib/utils";
+import { resume } from "../types";
+
 const defaultResume = {
   id: "",
   name: "",
   updated: Date.now(),
 };
 
-function getStorageResume(id: string | string[]) {
-  try {
-    const resumes: resumeType[] =
-      JSON.parse(localStorage.getItem("resumes")) || [];
-    const data = resumes.find((item) => item.id === id) || defaultResume;
-
-    return data;
-  } catch {
-    return defaultResume;
-  }
-}
-
 function Builder() {
   const router = useRouter();
   const { id } = router.query;
-  const [resume, setResume] = React.useState<resumeType>(defaultResume);
+  const [resume, setResume] = React.useState<resume>(defaultResume);
 
   React.useEffect(() => {
     if (id) {
-      setResume(getStorageResume(id));
+      setResume(utils.getStorageResume(id));
     }
   }, [id]);
+
+  function handleOnNameChange(nextValue: string) {
+    setResume({
+      ...resume,
+      name: nextValue,
+      updated: Date.now(),
+    });
+    const resumes = utils.getStorageResumes();
+    const storageResume = resumes.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          name: nextValue,
+          updated: Date.now(),
+        };
+      }
+      return item;
+    });
+    utils.setStorageResumes(storageResume);
+  }
 
   return (
     <>
@@ -52,7 +59,7 @@ function Builder() {
       <Box as="header" padding="20px">
         <Flex as="nav" justifyContent="space-between">
           <Logo />
-          <Text>{resume.name}</Text>
+          <EditableName value={resume.name} onChange={handleOnNameChange} />
           <Button size="sm">Download</Button>
         </Flex>
       </Box>
