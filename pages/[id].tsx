@@ -3,6 +3,9 @@ import Head from "next/head";
 import { Box, Button, Flex, Grid, Text, Accordion } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { usePDF } from "@react-pdf/renderer";
+import FileSaver from "file-saver";
 
 import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/PersonalDetailsSection";
@@ -10,6 +13,7 @@ import EmploymentSection from "../components/EmploymentSection";
 import SchoolSection from "../components/SchoolSection";
 import SkillsSection from "../components/SkillsSection";
 import EditableName from "../components/EditableName";
+import BerlinTemplate from "../components/BerlinTemplate";
 
 import utils from "../lib/utils";
 import { Resume } from "../types";
@@ -24,6 +28,13 @@ function Builder() {
   const router = useRouter();
   const { id } = router.query;
   const [resume, setResume] = React.useState<Resume>(defaultResume);
+  const { register, watch } = useForm();
+  const fields = watch();
+  const [instance, updateInstance] = usePDF({
+    document: (
+      <BerlinTemplate title={fields.title} firstName={fields.firstName} />
+    ),
+  });
 
   React.useEffect(() => {
     if (id) {
@@ -51,6 +62,11 @@ function Builder() {
     utils.setStorageResumes(storageResume);
   }
 
+  function handleDownload() {
+    updateInstance();
+    FileSaver.saveAs(instance.url, resume.name);
+  }
+
   return (
     <>
       <Head>
@@ -60,7 +76,9 @@ function Builder() {
         <Flex as="nav" justifyContent="space-between">
           <Logo />
           <EditableName value={resume.name} onChange={handleOnNameChange} />
-          <Button size="sm">Download</Button>
+          <Button size="sm" onClick={handleDownload}>
+            Download
+          </Button>
         </Flex>
       </Box>
       <Grid as="main" templateColumns="340px 1fr">
@@ -72,7 +90,7 @@ function Builder() {
             <Text fontSize="sm">Templates</Text>
           </Flex>
           <Accordion defaultIndex={[0]} allowMultiple padding="20px 0">
-            <PersonalDetailsSection />
+            <PersonalDetailsSection register={register} />
             <EmploymentSection />
             <SchoolSection />
             <SkillsSection />
@@ -85,7 +103,9 @@ function Builder() {
             Add new section
           </Button>
         </Flex>
-        <Box backgroundColor="#EEEEEE" />
+        <Box>
+          <BerlinTemplate title={fields.title} firstName={fields.firstName} />
+        </Box>
       </Grid>
     </>
   );
