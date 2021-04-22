@@ -4,8 +4,8 @@ import { Box, Button, Flex, Grid, Text, Accordion } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { usePDF } from "@react-pdf/renderer";
-import FileSaver from "file-saver";
+import { pdf } from "@react-pdf/renderer";
+import { saveAs } from "file-saver";
 
 import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/PersonalDetailsSection";
@@ -30,11 +30,9 @@ function Builder() {
   const [resume, setResume] = React.useState<Resume>(defaultResume);
   const { register, watch } = useForm();
   const fields = watch();
-  const [instance, updateInstance] = usePDF({
-    document: (
-      <BerlinTemplate title={fields.title} firstName={fields.firstName} />
-    ),
-  });
+  const document = (
+    <BerlinTemplate title={fields.title} firstName={fields.firstName} />
+  );
 
   React.useEffect(() => {
     if (id) {
@@ -62,9 +60,10 @@ function Builder() {
     utils.setStorageResumes(storageResume);
   }
 
-  function handleDownload() {
-    updateInstance();
-    FileSaver.saveAs(instance.url, resume.name);
+  async function handleDownload() {
+    const blob = await pdf(document).toBlob();
+
+    saveAs(blob, resume.name);
   }
 
   return (
@@ -103,9 +102,7 @@ function Builder() {
             Add new section
           </Button>
         </Flex>
-        <Box>
-          <BerlinTemplate title={fields.title} firstName={fields.firstName} />
-        </Box>
+        <Box>{document}</Box>
       </Grid>
     </>
   );
