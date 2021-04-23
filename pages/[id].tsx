@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Box, Button, Flex, Grid, Text, Accordion } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
 
@@ -17,22 +17,64 @@ import BerlinTemplate from "../components/BerlinTemplate";
 
 import utils from "../lib/utils";
 import { Resume } from "../types";
+import { IS_PROD } from "../lib/constants";
 
 const defaultResume = {
   id: "",
   name: "",
   updated: Date.now(),
 };
+const defaultValuesDev = {
+  title: "Software engineer",
+  firstName: "Amer",
+  lastName: "Karamustafic",
+  email: "malcodeman@gmail.com",
+  phone: "+387644343494",
+  summary:
+    "Creative full stack developer dedicated to building and optimizing the performance of user-centric, high-impact websites. Leverage technical, analytical and problem-solving skills to create dynamic, high-speed websites, apps and platforms fueling competitive advantage and revenue growth.",
+  employment: [
+    {
+      jobTitle: "Software engineer",
+      companyName: "Ministry of Programming",
+      startDate: "April 2018",
+      endDate: "Present",
+      city: "",
+      description:
+        "Worked well independently and on a team to solve problems. Served as a friendly, hardworking, and punctual employee. Organized and prioritized work to complete assignments in a timely, efficient manner. Remained committed to adding to my knowledge and skills base. Consistently exhibited loyalty and passion for success.",
+    },
+  ],
+};
+const defaultValuesProd = {
+  title: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  summary: "",
+  employment: [
+    {
+      jobTitle: "",
+      companyName: "",
+      startDate: "",
+      endDate: "",
+      city: "",
+      description: "",
+    },
+  ],
+};
+const defaultValues = IS_PROD ? defaultValuesProd : defaultValuesDev;
 
 function Builder() {
   const router = useRouter();
   const { id } = router.query;
   const [resume, setResume] = React.useState<Resume>(defaultResume);
-  const { register, watch } = useForm();
+  const { register, watch, control } = useForm({ defaultValues });
+  const { fields: fieldsEmployment, append: appendEmployment } = useFieldArray({
+    control,
+    name: "employment",
+  });
   const fields = watch();
-  const document = (
-    <BerlinTemplate title={fields.title} firstName={fields.firstName} />
-  );
+  const document = <BerlinTemplate {...fields} />;
 
   React.useEffect(() => {
     if (id) {
@@ -66,6 +108,17 @@ function Builder() {
     saveAs(blob, resume.name);
   }
 
+  function handleAppendEmployment() {
+    appendEmployment({
+      jobTitle: "",
+      companyName: "",
+      startDate: "",
+      endDate: "",
+      city: "",
+      description: "",
+    });
+  }
+
   return (
     <>
       <Head>
@@ -88,9 +141,13 @@ function Builder() {
             </Text>
             <Text fontSize="sm">Templates</Text>
           </Flex>
-          <Accordion defaultIndex={[0]} allowMultiple padding="20px 0">
+          <Accordion defaultIndex={[0]} padding="20px 0">
             <PersonalDetailsSection register={register} />
-            <EmploymentSection />
+            <EmploymentSection
+              fields={fieldsEmployment}
+              register={register}
+              onAppend={handleAppendEmployment}
+            />
             <SchoolSection />
             <SkillsSection />
           </Accordion>

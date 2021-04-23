@@ -14,10 +14,11 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import { Mail, Phone } from "react-feather";
-import { UseFormRegister, FieldValues } from "react-hook-form";
+
+import { Register } from "../types";
 
 type props = {
-  register: UseFormRegister<FieldValues>;
+  register: Register;
 };
 
 function PersonalDetailsSection(props: props) {

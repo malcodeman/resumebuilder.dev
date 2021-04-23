@@ -20,8 +20,6 @@ import Logo from "./Logo";
 function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  console.log("colorMode - ", colorMode);
-
   return (
     <Box as="header" padding="20px 0">
       <Container maxW="container.lg">
