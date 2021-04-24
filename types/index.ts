@@ -1,5 +1,5 @@
 import { ColorMode } from "@chakra-ui/react";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, FieldArrayWithId } from "react-hook-form";
 
 type Resume = {
   id: string;
@@ -20,6 +20,14 @@ type Register = UseFormRegister<{
   employment: {
     jobTitle: string;
     companyName: string;
+    startDate: string;
+    endDate: string;
+    city: string;
+    description: string;
+  }[];
+  education: {
+    school: string;
+    degree: string;
     startDate: string;
     endDate: string;
     city: string;

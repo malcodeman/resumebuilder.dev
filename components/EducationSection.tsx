@@ -44,14 +44,14 @@ type props = {
         description: string;
       }[];
     },
-    "employment",
+    "education",
     "id"
   >[];
   register: Register;
   onAppend: () => void;
 };
 
-function EmploymentSection(props: props) {
+function EducationSection(props: props) {
   const { fields, register, onAppend } = props;
 
   return (
@@ -59,7 +59,7 @@ function EmploymentSection(props: props) {
       <h2>
         <AccordionButton>
           <Box flex="1" textAlign="left">
-            Employment
+            Education
           </Box>
           <AccordionIcon />
         </AccordionButton>
@@ -71,19 +71,19 @@ function EmploymentSection(props: props) {
               <React.Fragment key={item.id}>
                 <GridItem colSpan={2}>
                   <FormControl>
-                    <FormLabel>Job title</FormLabel>
+                    <FormLabel>School</FormLabel>
                     <Input
                       size="sm"
-                      {...register(`employment.${index}.jobTitle` as const)}
+                      {...register(`education.${index}.school` as const)}
                     />
                   </FormControl>
                 </GridItem>
                 <GridItem colSpan={2}>
                   <FormControl>
-                    <FormLabel>Company name</FormLabel>
+                    <FormLabel>Degree</FormLabel>
                     <Input
                       size="sm"
-                      {...register(`employment.${index}.companyName` as const)}
+                      {...register(`education.${index}.degree` as const)}
                     />
                   </FormControl>
                 </GridItem>
@@ -91,14 +91,14 @@ function EmploymentSection(props: props) {
                   <FormLabel>Start date</FormLabel>
                   <Input
                     size="sm"
-                    {...register(`employment.${index}.startDate` as const)}
+                    {...register(`education.${index}.startDate` as const)}
                   />
                 </FormControl>
                 <FormControl>
                   <FormLabel>End date</FormLabel>
                   <Input
                     size="sm"
-                    {...register(`employment.${index}.endDate` as const)}
+                    {...register(`education.${index}.endDate` as const)}
                   />
                 </FormControl>
                 <GridItem colSpan={2}>
@@ -106,7 +106,7 @@ function EmploymentSection(props: props) {
                     <FormLabel>City</FormLabel>
                     <Input
                       size="sm"
-                      {...register(`employment.${index}.city` as const)}
+                      {...register(`education.${index}.city` as const)}
                     />
                   </FormControl>
                 </GridItem>
@@ -115,7 +115,7 @@ function EmploymentSection(props: props) {
                     <FormLabel>Description</FormLabel>
                     <Textarea
                       size="sm"
-                      {...register(`employment.${index}.description` as const)}
+                      {...register(`education.${index}.description` as const)}
                     />
                   </FormControl>
                 </GridItem>
@@ -129,11 +129,11 @@ function EmploymentSection(props: props) {
           width="100%"
           onClick={onAppend}
         >
-          Add employment
+          Add education
         </Button>
       </AccordionPanel>
     </AccordionItem>
   );
 }
 
-export default EmploymentSection;
+export default EducationSection;

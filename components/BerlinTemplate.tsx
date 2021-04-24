@@ -69,6 +69,7 @@ function BerlinTemplate(props: props) {
     phone,
     summary,
     employment,
+    education,
   } = props;
 
   return (
@@ -92,6 +93,22 @@ function BerlinTemplate(props: props) {
                 <Text style={styles.companyName}>{item.companyName}</Text>
                 <Text style={styles.secondaryText}>
                   {item.jobTitle} | {item.startDate} - {item.endDate}
+                </Text>
+                <Text style={styles.sectionDescription}>
+                  {item.description}
+                </Text>
+              </View>
+            );
+          })}
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Education</Text>
+          {education.map((item, index: number) => {
+            return (
+              <View style={styles.sectionItem} key={index}>
+                <Text style={styles.companyName}>{item.school}</Text>
+                <Text style={styles.secondaryText}>
+                  {item.degree} | {item.startDate} - {item.endDate}
                 </Text>
                 <Text style={styles.sectionDescription}>
                   {item.description}

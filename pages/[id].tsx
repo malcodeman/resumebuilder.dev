@@ -10,7 +10,7 @@ import { saveAs } from "file-saver";
 import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/PersonalDetailsSection";
 import EmploymentSection from "../components/EmploymentSection";
-import SchoolSection from "../components/SchoolSection";
+import EducationSection from "../components/EducationSection";
 import SkillsSection from "../components/SkillsSection";
 import EditableName from "../components/EditableName";
 import BerlinTemplate from "../components/BerlinTemplate";
@@ -43,6 +43,16 @@ const defaultValuesDev = {
         "Worked well independently and on a team to solve problems. Served as a friendly, hardworking, and punctual employee. Organized and prioritized work to complete assignments in a timely, efficient manner. Remained committed to adding to my knowledge and skills base. Consistently exhibited loyalty and passion for success.",
     },
   ],
+  education: [
+    {
+      school: "Faculty of Information Technology",
+      degree: "Bachelor's Degree",
+      startDate: "August 2020",
+      endDate: "Present",
+      city: "Mostar",
+      description: "",
+    },
+  ],
 };
 const defaultValuesProd = {
   title: "",
@@ -61,6 +71,16 @@ const defaultValuesProd = {
       description: "",
     },
   ],
+  education: [
+    {
+      school: "",
+      degree: "",
+      startDate: "",
+      endDate: "",
+      city: "",
+      description: "",
+    },
+  ],
 };
 const defaultValues = IS_PROD ? defaultValuesProd : defaultValuesDev;
 
@@ -72,6 +92,10 @@ function Builder() {
   const { fields: fieldsEmployment, append: appendEmployment } = useFieldArray({
     control,
     name: "employment",
+  });
+  const { fields: fieldsEducation, append: appendEducation } = useFieldArray({
+    control,
+    name: "education",
   });
   const fields = watch();
   const document = <BerlinTemplate {...fields} />;
@@ -119,6 +143,17 @@ function Builder() {
     });
   }
 
+  function handleAppendEducation() {
+    appendEducation({
+      school: "",
+      degree: "",
+      startDate: "",
+      endDate: "",
+      city: "",
+      description: "",
+    });
+  }
+
   return (
     <>
       <Head>
@@ -148,7 +183,11 @@ function Builder() {
               register={register}
               onAppend={handleAppendEmployment}
             />
-            <SchoolSection />
+            <EducationSection
+              fields={fieldsEducation}
+              register={register}
+              onAppend={handleAppendEducation}
+            />
             <SkillsSection />
           </Accordion>
           <Button
