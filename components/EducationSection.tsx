@@ -43,6 +43,9 @@ type props = {
         city: string;
         description: string;
       }[];
+      skill: {
+        name: string;
+      }[];
     },
     "education",
     "id"

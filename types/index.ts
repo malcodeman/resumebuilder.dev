@@ -33,6 +33,9 @@ type Register = UseFormRegister<{
     city: string;
     description: string;
   }[];
+  skill: {
+    name: string;
+  }[];
 }>;
 
 export type { Resume, ChakraThemeConfig, Register };

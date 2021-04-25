@@ -11,7 +11,7 @@ import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/PersonalDetailsSection";
 import EmploymentSection from "../components/EmploymentSection";
 import EducationSection from "../components/EducationSection";
-import SkillsSection from "../components/SkillsSection";
+import SkillSection from "../components/SkillSection";
 import EditableName from "../components/EditableName";
 import BerlinTemplate from "../components/BerlinTemplate";
 
@@ -53,6 +53,23 @@ const defaultValuesDev = {
       description: "",
     },
   ],
+  skill: [
+    {
+      name: "React.js",
+    },
+    {
+      name: "Next.js",
+    },
+    {
+      name: "Node.js",
+    },
+    {
+      name: "Python",
+    },
+    {
+      name: "TypeScript",
+    },
+  ],
 };
 const defaultValuesProd = {
   title: "",
@@ -81,6 +98,11 @@ const defaultValuesProd = {
       description: "",
     },
   ],
+  skill: [
+    {
+      name: "",
+    },
+  ],
 };
 const defaultValues = IS_PROD ? defaultValuesProd : defaultValuesDev;
 
@@ -96,6 +118,10 @@ function Builder() {
   const { fields: fieldsEducation, append: appendEducation } = useFieldArray({
     control,
     name: "education",
+  });
+  const { fields: fieldsSkill, append: appendSkill } = useFieldArray({
+    control,
+    name: "skill",
   });
   const fields = watch();
   const document = <BerlinTemplate {...fields} />;
@@ -154,6 +180,12 @@ function Builder() {
     });
   }
 
+  function handleAppendSkill() {
+    appendSkill({
+      name: "",
+    });
+  }
+
   return (
     <>
       <Head>
@@ -188,7 +220,11 @@ function Builder() {
               register={register}
               onAppend={handleAppendEducation}
             />
-            <SkillsSection />
+            <SkillSection
+              fields={fieldsSkill}
+              register={register}
+              onAppend={handleAppendSkill}
+            />
           </Accordion>
           <Button
             size="sm"

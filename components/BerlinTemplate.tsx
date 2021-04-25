@@ -10,11 +10,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     backgroundColor: "#ffffff",
   },
-  header: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: 16,
-  },
   name: {
     color: "#323336",
     fontSize: 21,
@@ -32,7 +27,11 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginBottom: 1,
   },
-  section: {},
+  section: {
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: 8,
+  },
   sectionItem: {
     display: "flex",
     flexDirection: "column",
@@ -54,6 +53,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     letterSpacing: 0.06,
   },
+  skills: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  skill: {
+    color: "#323336",
+    fontSize: 10,
+    backgroundColor: "#f1f5f7",
+    marginRight: 2,
+    marginBottom: 2,
+    padding: 4,
+  },
 });
 
 type props = {
@@ -70,12 +81,13 @@ function BerlinTemplate(props: props) {
     summary,
     employment,
     education,
+    skill,
   } = props;
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
+        <View style={styles.section}>
           <Text style={styles.name}>
             {firstName} {lastName}
           </Text>
@@ -116,6 +128,18 @@ function BerlinTemplate(props: props) {
               </View>
             );
           })}
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Skills</Text>
+          <View style={styles.skills}>
+            {skill.map((item, index: number) => {
+              return (
+                <Text style={styles.skill} key={index}>
+                  {item.name}
+                </Text>
+              );
+            })}
+          </View>
         </View>
       </Page>
     </Document>
