@@ -2,13 +2,30 @@ import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
   page: {
+    position: "relative",
     display: "flex",
     flexDirection: "column",
     paddingTop: 30,
-    paddingRight: 20,
+    paddingRight: 60,
     paddingBottom: 30,
-    paddingLeft: 20,
+    paddingLeft: 60,
     backgroundColor: "#ffffff",
+  },
+  initials: {
+    position: "absolute",
+    top: 15,
+    left: 15,
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#43f398",
+    fontWeight: "bold",
+    fontSize: 10,
+    textTransform: "uppercase",
+    paddingTop: 4,
+    paddingRight: 8,
+    paddingBottom: 4,
+    paddingLeft: 8,
+    color: "#000",
   },
   name: {
     color: "#323336",
@@ -87,6 +104,10 @@ function BerlinTemplate(props: props) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
+        <View style={styles.initials}>
+          <Text>{firstName[0]}</Text>
+          <Text>{lastName[0]}</Text>
+        </View>
         <View style={styles.section}>
           <Text style={styles.name}>
             {firstName} {lastName}
