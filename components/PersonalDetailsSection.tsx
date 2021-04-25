@@ -25,7 +25,7 @@ function PersonalDetailsSection(props: props) {
   const { register } = props;
 
   return (
-    <AccordionItem>
+    <AccordionItem borderTop="0">
       <h2>
         <AccordionButton>
           <Box flex="1" textAlign="left">

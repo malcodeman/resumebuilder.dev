@@ -1,6 +1,17 @@
 import React from "react";
 import Head from "next/head";
-import { Box, Button, Flex, Grid, Text, Accordion } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Accordion,
+  Tabs,
+  TabList,
+  TabPanels,
+  TabPanel,
+  Tab,
+} from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useRouter } from "next/router";
 import { useForm, useFieldArray } from "react-hook-form";
@@ -206,37 +217,44 @@ function Builder() {
         height="100vh"
         overflowY="auto"
       >
-        <Flex flexDir="column" overflowY="auto">
-          <Flex alignItems="center" padding="0 20px">
-            <Text fontSize="sm" mr="20px">
-              Sections
-            </Text>
-            <Text fontSize="sm">Templates</Text>
-          </Flex>
-          <Accordion defaultIndex={[0]} padding="20px 0">
-            <PersonalDetailsSection register={register} />
-            <EmploymentSection
-              fields={fieldsEmployment}
-              register={register}
-              onAppend={handleAppendEmployment}
-            />
-            <EducationSection
-              fields={fieldsEducation}
-              register={register}
-              onAppend={handleAppendEducation}
-            />
-            <SkillSection
-              fields={fieldsSkill}
-              register={register}
-              onAppend={handleAppendSkill}
-            />
-            <Box paddingInlineStart="4" paddingInlineEnd="4" marginTop="20px">
-              <Button size="sm" leftIcon={<Plus size={20} />} width="100%">
-                Add new section
-              </Button>
-            </Box>
-          </Accordion>
-        </Flex>
+        <Tabs overflowY="auto">
+          <TabList>
+            <Tab>Sections</Tab>
+            <Tab>Templates</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel padding="0">
+              <Accordion defaultIndex={[0]} marginBottom="20px">
+                <PersonalDetailsSection register={register} />
+                <EmploymentSection
+                  fields={fieldsEmployment}
+                  register={register}
+                  onAppend={handleAppendEmployment}
+                />
+                <EducationSection
+                  fields={fieldsEducation}
+                  register={register}
+                  onAppend={handleAppendEducation}
+                />
+                <SkillSection
+                  fields={fieldsSkill}
+                  register={register}
+                  onAppend={handleAppendSkill}
+                />
+              </Accordion>
+              <Box
+                paddingInlineStart="4"
+                paddingInlineEnd="4"
+                marginBottom="20px"
+              >
+                <Button size="sm" leftIcon={<Plus size={20} />} width="100%">
+                  Add new section
+                </Button>
+              </Box>
+            </TabPanel>
+            <TabPanel>Templates</TabPanel>
+          </TabPanels>
+        </Tabs>
         <Box>{document}</Box>
       </Grid>
     </>
