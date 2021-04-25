@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     paddingLeft: 60,
     backgroundColor: "#ffffff",
+    height: "100%",
   },
   initials: {
     position: "absolute",

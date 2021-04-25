@@ -200,7 +200,12 @@ function Builder() {
           </Button>
         </Flex>
       </Box>
-      <Grid as="main" templateColumns="340px 1fr">
+      <Grid
+        as="main"
+        templateColumns="340px 1fr"
+        height="100vh"
+        overflowY="auto"
+      >
         <Flex flexDir="column" overflowY="auto">
           <Flex alignItems="center" padding="0 20px">
             <Text fontSize="sm" mr="20px">
@@ -225,14 +230,12 @@ function Builder() {
               register={register}
               onAppend={handleAppendSkill}
             />
+            <Box paddingInlineStart="4" paddingInlineEnd="4" marginTop="20px">
+              <Button size="sm" leftIcon={<Plus size={20} />} width="100%">
+                Add new section
+              </Button>
+            </Box>
           </Accordion>
-          <Button
-            size="sm"
-            leftIcon={<Plus size={20} />}
-            margin="0 20px 20px 20px"
-          >
-            Add new section
-          </Button>
         </Flex>
         <Box>{document}</Box>
       </Grid>
