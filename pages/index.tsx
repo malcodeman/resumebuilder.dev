@@ -7,9 +7,16 @@ import {
   Button,
   useDisclosure,
   SimpleGrid,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  Text,
+  Kbd,
 } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { nanoid } from "nanoid";
+import { useKeyPressEvent } from "react-use";
 
 import Header from "../components/Header";
 import NewResumeModal from "../components/NewResumeModal";
@@ -27,6 +34,8 @@ function Home() {
   React.useEffect(() => {
     utils.setStorageResumes(resumes);
   }, [resumes.length]);
+
+  useKeyPressEvent("n", onOpen);
 
   function handleOnSubmit(data: { name: string }) {
     const resume = { id: nanoid(), updated: Date.now(), name: data.name };
@@ -59,9 +68,25 @@ function Home() {
       <Box as="main" mt="140px">
         <Container maxW="container.lg">
           <Flex justifyContent="flex-end" mb="20px">
-            <Button size="sm" leftIcon={<Plus size={20} />} onClick={onOpen}>
-              New
-            </Button>
+            <Popover trigger="hover">
+              <PopoverTrigger>
+                <Button
+                  size="sm"
+                  leftIcon={<Plus size={20} />}
+                  onClick={onOpen}
+                >
+                  New
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent width="unset">
+                <PopoverBody display="inline-flex" alignItems="center">
+                  <Text marginInlineEnd="2" fontSize="sm">
+                    Press
+                  </Text>
+                  <Kbd>N</Kbd>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
           </Flex>
           <SimpleGrid minChildWidth="270px" spacing="20px">
             {resumes.map((item) => (
