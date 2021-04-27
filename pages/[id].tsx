@@ -17,6 +17,8 @@ import { useRouter } from "next/router";
 import { useForm, useFieldArray } from "react-hook-form";
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
+import { useDebounce } from "react-use";
+import { useToast } from "@chakra-ui/react";
 
 import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/PersonalDetailsSection";
@@ -78,6 +80,7 @@ const defaultValues = {
     },
   ],
 };
+const toastId = "onSave";
 
 function Builder() {
   const router = useRouter();
@@ -100,6 +103,34 @@ function Builder() {
   });
   const fields = watch();
   const document = <BerlinTemplate {...fields} />;
+  const [keyboardJs, setKeyboardJs] = React.useState(null);
+  const toast = useToast();
+
+  function handleOnSave(event: React.KeyboardEvent) {
+    event.preventDefault();
+    if (!toast.isActive(toastId)) {
+      toast({
+        id: toastId,
+        description: "We save your work automatically.",
+        duration: 1000,
+        isClosable: true,
+      });
+    }
+  }
+
+  React.useEffect(() => {
+    import("keyboardjs").then((k) => setKeyboardJs(k.default || k));
+  }, []);
+
+  React.useEffect(() => {
+    if (!keyboardJs) {
+      return;
+    }
+    keyboardJs.bind(`ctrl + s`, handleOnSave);
+    return () => {
+      keyboardJs.unbind(`ctrl + s`, handleOnSave);
+    };
+  }, [keyboardJs]);
 
   React.useEffect(() => {
     if (id) {
@@ -114,19 +145,23 @@ function Builder() {
     }
   }, [id]);
 
-  React.useEffect(() => {
-    const resumes = utils.getStorageResumes();
-    const storageResume = resumes.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          fields,
-        };
-      }
-      return item;
-    });
-    utils.setStorageResumes(storageResume);
-  }, [fields]);
+  useDebounce(
+    () => {
+      const resumes = utils.getStorageResumes();
+      const storageResume = resumes.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            fields,
+          };
+        }
+        return item;
+      });
+      utils.setStorageResumes(storageResume);
+    },
+    1000,
+    [fields]
+  );
 
   function handleOnNameChange(nextValue: string) {
     setResume({
