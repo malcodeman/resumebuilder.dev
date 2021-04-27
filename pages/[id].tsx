@@ -28,61 +28,24 @@ import BerlinTemplate from "../components/BerlinTemplate";
 
 import utils from "../lib/utils";
 import { Resume } from "../types";
-import { IS_PROD } from "../lib/constants";
 
 const defaultResume = {
   id: "",
   name: "",
   updated: Date.now(),
+  fields: {
+    title: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    summary: "",
+    employment: [],
+    education: [],
+    skill: [],
+  },
 };
-const defaultValuesDev = {
-  title: "Software engineer",
-  firstName: "Amer",
-  lastName: "Karamustafic",
-  email: "malcodeman@gmail.com",
-  phone: "+387644343494",
-  summary:
-    "Creative full stack developer dedicated to building and optimizing the performance of user-centric, high-impact websites. Leverage technical, analytical and problem-solving skills to create dynamic, high-speed websites, apps and platforms fueling competitive advantage and revenue growth.",
-  employment: [
-    {
-      jobTitle: "Software engineer",
-      companyName: "Ministry of Programming",
-      startDate: "April 2018",
-      endDate: "Present",
-      city: "",
-      description:
-        "Worked well independently and on a team to solve problems. Served as a friendly, hardworking, and punctual employee. Organized and prioritized work to complete assignments in a timely, efficient manner. Remained committed to adding to my knowledge and skills base. Consistently exhibited loyalty and passion for success.",
-    },
-  ],
-  education: [
-    {
-      school: "Faculty of Information Technology",
-      degree: "Bachelor's Degree",
-      startDate: "August 2020",
-      endDate: "Present",
-      city: "Mostar",
-      description: "",
-    },
-  ],
-  skill: [
-    {
-      name: "React.js",
-    },
-    {
-      name: "Next.js",
-    },
-    {
-      name: "Node.js",
-    },
-    {
-      name: "Python",
-    },
-    {
-      name: "TypeScript",
-    },
-  ],
-};
-const defaultValuesProd = {
+const defaultValues = {
   title: "",
   firstName: "",
   lastName: "",
@@ -115,13 +78,14 @@ const defaultValuesProd = {
     },
   ],
 };
-const defaultValues = IS_PROD ? defaultValuesProd : defaultValuesDev;
 
 function Builder() {
   const router = useRouter();
   const { id } = router.query;
   const [resume, setResume] = React.useState<Resume>(defaultResume);
-  const { register, watch, control } = useForm({ defaultValues });
+  const { register, watch, reset, control } = useForm({
+    defaultValues,
+  });
   const { fields: fieldsEmployment, append: appendEmployment } = useFieldArray({
     control,
     name: "employment",
@@ -142,6 +106,27 @@ function Builder() {
       setResume(utils.getStorageResume(id));
     }
   }, [id]);
+
+  React.useEffect(() => {
+    if (id) {
+      const fields = utils.getStorageResume(id).fields;
+      reset({ ...fields });
+    }
+  }, [id]);
+
+  React.useEffect(() => {
+    const resumes = utils.getStorageResumes();
+    const storageResume = resumes.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          fields,
+        };
+      }
+      return item;
+    });
+    utils.setStorageResumes(storageResume);
+  }, [fields]);
 
   function handleOnNameChange(nextValue: string) {
     setResume({

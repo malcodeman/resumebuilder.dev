@@ -4,6 +4,17 @@ const defaultResume = {
   id: "",
   name: "",
   updated: Date.now(),
+  fields: {
+    title: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    summary: "",
+    employment: [],
+    education: [],
+    skill: [],
+  },
 };
 
 function getStorageResume(id: string | string[]) {

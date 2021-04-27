@@ -38,7 +38,22 @@ function Home() {
   useKeyPressEvent("n", onOpen);
 
   function handleOnSubmit(data: { name: string }) {
-    const resume = { id: nanoid(), updated: Date.now(), name: data.name };
+    const resume = {
+      id: nanoid(),
+      updated: Date.now(),
+      name: data.name,
+      fields: {
+        title: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        summary: "",
+        employment: [],
+        education: [],
+        skill: [],
+      },
+    };
     setResumes([...resumes, resume]);
     onClose();
   }
