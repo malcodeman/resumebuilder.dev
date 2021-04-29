@@ -152,6 +152,7 @@ function Builder() {
         if (item.id === id) {
           return {
             ...item,
+            updated: Date.now(),
             fields,
           };
         }

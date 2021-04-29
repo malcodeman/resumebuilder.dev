@@ -107,9 +107,7 @@ function Home() {
             {resumes.map((item) => (
               <ResumeItem
                 key={item.id}
-                id={item.id}
-                name={item.name}
-                updated={item.updated}
+                resume={item}
                 onDelete={handleOnDelete}
                 onDuplicate={handleOnDuplicate}
               />

@@ -13,16 +13,18 @@ import { Copy, MoreHorizontal, Trash2 } from "react-feather";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 
+import BerlinTemplate from "./BerlinTemplate";
+
+import { Resume } from "../types";
+
 type props = {
-  id: string;
-  name: string;
-  updated: number;
+  resume: Resume;
   onDelete: (id: string) => void;
   onDuplicate: (id: string) => void;
 };
 
 function ResumeItem(props: props) {
-  const { id, name, updated, onDelete, onDuplicate, ...rest } = props;
+  const { resume, onDelete, onDuplicate, ...rest } = props;
 
   function handleOnDuplicate(
     id: string,
@@ -45,7 +47,7 @@ function ResumeItem(props: props) {
   }
 
   return (
-    <Link href={`/${id}`}>
+    <Link href={`/${resume.id}`}>
       <Flex
         {...rest}
         direction="column"
@@ -53,16 +55,19 @@ function ResumeItem(props: props) {
         _hover={{ cursor: "pointer" }}
       >
         <Box
-          backgroundColor="#f3f3f3"
           height="360px"
           marginBottom="10px"
           borderRadius="lg"
-        />
+          overflowY="hidden"
+        >
+          <BerlinTemplate {...resume.fields} />
+        </Box>
         <Flex justifyContent="space-between" alignItems="center">
           <Box>
-            <Text>{name}</Text>
+            <Text>{resume.name}</Text>
             <Text opacity="0.5">
-              {formatDistanceToNow(updated, {
+              Edited{" "}
+              {formatDistanceToNow(resume.updated, {
                 addSuffix: true,
               })}
             </Text>
@@ -85,14 +90,16 @@ function ResumeItem(props: props) {
                         size="sm"
                         leftIcon={<Copy size={20} />}
                         mb="2"
-                        onClick={(e) => handleOnDuplicate(id, onClose, e)}
+                        onClick={(e) =>
+                          handleOnDuplicate(resume.id, onClose, e)
+                        }
                       >
                         Duplicate
                       </Button>
                       <Button
                         size="sm"
                         leftIcon={<Trash2 size={20} />}
-                        onClick={(e) => handleOnDelete(id, onClose, e)}
+                        onClick={(e) => handleOnDelete(resume.id, onClose, e)}
                       >
                         Delete
                       </Button>
