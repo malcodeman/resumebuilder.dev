@@ -11,6 +11,8 @@ import {
   TabPanels,
   TabPanel,
   Tab,
+  SimpleGrid,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useRouter } from "next/router";
@@ -26,15 +28,18 @@ import EmploymentSection from "../components/EmploymentSection";
 import EducationSection from "../components/EducationSection";
 import SkillSection from "../components/SkillSection";
 import EditableName from "../components/EditableName";
-import BerlinTemplate from "../components/BerlinTemplate";
 
 import utils from "../lib/utils";
-import { Resume } from "../types";
+import { TEMPLATES } from "../lib/constants";
+import getTemplate from "../lib/getTemplate";
+
+import { Resume, Template } from "../types";
 
 const defaultResume = {
   id: "",
   name: "",
   updated: Date.now(),
+  template: Template.berlin,
   fields: {
     title: "",
     firstName: "",
@@ -102,9 +107,10 @@ function Builder() {
     name: "skill",
   });
   const fields = watch();
-  const document = <BerlinTemplate {...fields} />;
+  const document = getTemplate(resume.template, fields);
   const [keyboardJs, setKeyboardJs] = React.useState(null);
   const toast = useToast();
+  const templateBgColor = useColorModeValue("gray.300", "gray.600");
 
   function handleOnSave(event: React.KeyboardEvent) {
     event.preventDefault();
@@ -164,24 +170,35 @@ function Builder() {
     [fields]
   );
 
-  function handleOnNameChange(nextValue: string) {
-    setResume({
-      ...resume,
-      name: nextValue,
-      updated: Date.now(),
-    });
+  function updateInLocalStorage(nextResume: Resume) {
     const resumes = utils.getStorageResumes();
     const storageResume = resumes.map((item) => {
       if (item.id === id) {
-        return {
-          ...item,
-          name: nextValue,
-          updated: Date.now(),
-        };
+        return nextResume;
       }
       return item;
     });
     utils.setStorageResumes(storageResume);
+  }
+
+  function handleOnNameChange(nextValue: string) {
+    const nextResume = {
+      ...resume,
+      name: nextValue,
+      updated: Date.now(),
+    };
+    setResume(nextResume);
+    updateInLocalStorage(nextResume);
+  }
+
+  function handleOnTemplateChange(nextTemplate: Template) {
+    const nextResume = {
+      ...resume,
+      template: nextTemplate,
+      updated: Date.now(),
+    };
+    setResume(nextResume);
+    updateInLocalStorage(nextResume);
   }
 
   async function handleDownload() {
@@ -273,7 +290,24 @@ function Builder() {
                 </Button>
               </Box>
             </TabPanel>
-            <TabPanel>Templates</TabPanel>
+            <TabPanel>
+              <SimpleGrid templateColumns="1fr 1fr" spacing="20px">
+                {TEMPLATES.map((item) => (
+                  <Flex
+                    height="200px"
+                    alignItems="center"
+                    justifyContent="center"
+                    cursor="pointer"
+                    backgroundColor={templateBgColor}
+                    borderRadius="lg"
+                    color="#999"
+                    onClick={() => handleOnTemplateChange(item)}
+                  >
+                    {item}
+                  </Flex>
+                ))}
+              </SimpleGrid>
+            </TabPanel>
           </TabPanels>
         </Tabs>
         <Box>{document}</Box>

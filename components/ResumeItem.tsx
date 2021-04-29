@@ -13,7 +13,7 @@ import { Copy, MoreHorizontal, Trash2 } from "react-feather";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 
-import BerlinTemplate from "./BerlinTemplate";
+import getTemplate from "../lib/getTemplate";
 
 import { Resume } from "../types";
 
@@ -60,7 +60,7 @@ function ResumeItem(props: props) {
           borderRadius="lg"
           overflowY="hidden"
         >
-          <BerlinTemplate {...resume.fields} />
+          {getTemplate(resume.template, resume.fields)}
         </Box>
         <Flex justifyContent="space-between" alignItems="center">
           <Box>

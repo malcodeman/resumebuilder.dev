@@ -23,7 +23,7 @@ import NewResumeModal from "../components/NewResumeModal";
 import ResumeItem from "../components/ResumeItem";
 
 import utils from "../lib/utils";
-import { Resume } from "../types";
+import { Resume, Template } from "../types";
 
 function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,6 +42,7 @@ function Home() {
       id: nanoid(),
       updated: Date.now(),
       name: data.name,
+      template: Template.berlin,
       fields: {
         title: "",
         firstName: "",

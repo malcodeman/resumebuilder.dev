@@ -1,9 +1,10 @@
-import { Resume } from "../types";
+import { Resume, Template } from "../types";
 
 const defaultResume = {
   id: "",
   name: "",
   updated: Date.now(),
+  template: Template.berlin,
   fields: {
     title: "",
     firstName: "",

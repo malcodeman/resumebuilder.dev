@@ -1,37 +1,43 @@
 import { ColorMode } from "@chakra-ui/react";
 import { UseFormRegister } from "react-hook-form";
 
+enum Template {
+  berlin = "berlin",
+  tokyo = "tokyo",
+}
+type Fields = {
+  title: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  summary: string;
+  employment: {
+    jobTitle: string;
+    companyName: string;
+    startDate: string;
+    endDate: string;
+    city: string;
+    description: string;
+  }[];
+  education: {
+    school: string;
+    degree: string;
+    startDate: string;
+    endDate: string;
+    city: string;
+    description: string;
+  }[];
+  skill: {
+    name: string;
+  }[];
+};
 type Resume = {
   id: string;
   name: string;
   updated: number;
-  fields: {
-    title: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    summary: string;
-    employment: {
-      jobTitle: string;
-      companyName: string;
-      startDate: string;
-      endDate: string;
-      city: string;
-      description: string;
-    }[];
-    education: {
-      school: string;
-      degree: string;
-      startDate: string;
-      endDate: string;
-      city: string;
-      description: string;
-    }[];
-    skill: {
-      name: string;
-    }[];
-  };
+  template: Template;
+  fields: Fields;
 };
 type ChakraThemeConfig = {
   initialColorMode: ColorMode;
@@ -65,4 +71,5 @@ type Register = UseFormRegister<{
   }[];
 }>;
 
-export type { Resume, ChakraThemeConfig, Register };
+export type { Resume, ChakraThemeConfig, Register, Fields };
+export { Template };

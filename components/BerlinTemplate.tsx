@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     color: "#000",
   },
+  section: {
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: 8,
+  },
   name: {
     color: "#323336",
     fontSize: 21,
@@ -40,36 +45,31 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 1,
   },
-  secondaryText: {
+  text: {
     color: "#707678",
     fontSize: 10,
     marginBottom: 1,
   },
-  section: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: 8,
+  sectionTitleText: {
+    fontSize: 10,
+    color: "#707678",
+    textTransform: "uppercase",
+    marginBottom: 2,
   },
   sectionItem: {
     display: "flex",
     flexDirection: "column",
     marginBottom: 2,
   },
-  sectionTitle: {
-    fontSize: 10,
-    color: "#707678",
+  sectionHeading: {
+    color: "#323336",
     textTransform: "uppercase",
-    marginBottom: 2,
+    fontSize: 16,
+    letterSpacing: 0.06,
   },
   sectionDescription: {
     fontSize: 10,
     color: "#323336",
-  },
-  companyName: {
-    color: "#323336",
-    textTransform: "uppercase",
-    fontSize: 12,
-    letterSpacing: 0.06,
   },
   skills: {
     display: "flex",
@@ -114,18 +114,18 @@ function BerlinTemplate(props: props) {
             {firstName} {lastName}
           </Text>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.secondaryText}>
+          <Text style={styles.text}>
             {email} | {phone}
           </Text>
-          <Text style={styles.secondaryText}>{summary}</Text>
+          <Text style={styles.text}>{summary}</Text>
         </View>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Work Experience</Text>
+          <Text style={styles.sectionTitleText}>Work Experience</Text>
           {employment.map((item, index: number) => {
             return (
               <View style={styles.sectionItem} key={index}>
-                <Text style={styles.companyName}>{item.companyName}</Text>
-                <Text style={styles.secondaryText}>
+                <Text style={styles.sectionHeading}>{item.companyName}</Text>
+                <Text style={styles.text}>
                   {item.jobTitle} | {item.city} | {item.startDate} -{" "}
                   {item.endDate}
                 </Text>
@@ -137,12 +137,12 @@ function BerlinTemplate(props: props) {
           })}
         </View>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Education</Text>
+          <Text style={styles.sectionTitleText}>Education</Text>
           {education.map((item, index: number) => {
             return (
               <View style={styles.sectionItem} key={index}>
-                <Text style={styles.companyName}>{item.school}</Text>
-                <Text style={styles.secondaryText}>
+                <Text style={styles.sectionHeading}>{item.school}</Text>
+                <Text style={styles.text}>
                   {item.degree} | {item.city} | {item.startDate} -{" "}
                   {item.endDate}
                 </Text>
@@ -154,7 +154,7 @@ function BerlinTemplate(props: props) {
           })}
         </View>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Skills</Text>
+          <Text style={styles.sectionTitleText}>Skills</Text>
           <View style={styles.skills}>
             {skill.map((item, index: number) => {
               return (
