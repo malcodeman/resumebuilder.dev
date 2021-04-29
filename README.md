@@ -9,8 +9,8 @@ Resume builder for developers.
 ## Getting started
 
 ```
-git clone https://github.com/yottacorn/cv-builder.git cv-builder
-cd cv-builder
+git clone https://github.com/yottacorn/resumebuilder.dev.git resumebuilder.dev
+cd resumebuilder.dev
 yarn install && yarn dev
 ```
 

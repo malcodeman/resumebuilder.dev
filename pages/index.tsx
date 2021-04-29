@@ -76,7 +76,7 @@ function Home() {
   return (
     <>
       <Head>
-        <title>CV-builder</title>
+        <title>resumebuilder.dev</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
