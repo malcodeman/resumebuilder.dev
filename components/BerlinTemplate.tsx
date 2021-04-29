@@ -126,7 +126,8 @@ function BerlinTemplate(props: props) {
               <View style={styles.sectionItem} key={index}>
                 <Text style={styles.companyName}>{item.companyName}</Text>
                 <Text style={styles.secondaryText}>
-                  {item.jobTitle} | {item.startDate} - {item.endDate}
+                  {item.jobTitle} | {item.city} | {item.startDate} -{" "}
+                  {item.endDate}
                 </Text>
                 <Text style={styles.sectionDescription}>
                   {item.description}
@@ -142,7 +143,8 @@ function BerlinTemplate(props: props) {
               <View style={styles.sectionItem} key={index}>
                 <Text style={styles.companyName}>{item.school}</Text>
                 <Text style={styles.secondaryText}>
-                  {item.degree} | {item.startDate} - {item.endDate}
+                  {item.degree} | {item.city} | {item.startDate} -{" "}
+                  {item.endDate}
                 </Text>
                 <Text style={styles.sectionDescription}>
                   {item.description}
