@@ -13,8 +13,15 @@ import {
   Tab,
   SimpleGrid,
   useColorModeValue,
+  ButtonGroup,
+  IconButton,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  Text,
 } from "@chakra-ui/react";
-import { Plus } from "react-feather";
+import { MoreVertical, Plus } from "react-feather";
 import { useRouter } from "next/router";
 import { useForm, useFieldArray } from "react-hook-form";
 import { pdf } from "@react-pdf/renderer";
@@ -153,18 +160,13 @@ function Builder() {
 
   useDebounce(
     () => {
-      const resumes = utils.getStorageResumes();
-      const storageResume = resumes.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            updated: Date.now(),
-            fields,
-          };
-        }
-        return item;
-      });
-      utils.setStorageResumes(storageResume);
+      const nextResume = {
+        ...resume,
+        fields,
+        updated: Date.now(),
+      };
+      setResume(nextResume);
+      updateInLocalStorage(nextResume);
     },
     1000,
     [fields]
@@ -203,8 +205,14 @@ function Builder() {
 
   async function handleDownload() {
     const blob = await pdf(document).toBlob();
-
     saveAs(blob, resume.name);
+  }
+
+  function handleJsonDownload() {
+    const blob = new Blob([JSON.stringify(resume)], {
+      type: "application/json",
+    });
+    saveAs(blob, `${resume.name}.json`);
   }
 
   function handleAppendEmployment() {
@@ -244,9 +252,26 @@ function Builder() {
         <Flex as="nav" justifyContent="space-between">
           <Logo />
           <EditableName value={resume.name} onChange={handleOnNameChange} />
-          <Button size="sm" onClick={handleDownload}>
-            Download
-          </Button>
+          <ButtonGroup size="sm" isAttached>
+            <Button mr="-px" onClick={handleDownload}>
+              Download PDF
+            </Button>
+            <Popover>
+              <PopoverTrigger>
+                <IconButton
+                  aria-label="More options"
+                  icon={<MoreVertical size={20} />}
+                />
+              </PopoverTrigger>
+              <PopoverContent width="unset">
+                <PopoverBody>
+                  <Text cursor="pointer" onClick={handleJsonDownload}>
+                    Download JSON
+                  </Text>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+          </ButtonGroup>
         </Flex>
       </Box>
       <Grid

@@ -58,7 +58,7 @@ function ResumeItem(props: props) {
           height="360px"
           marginBottom="10px"
           borderRadius="lg"
-          overflowY="hidden"
+          overflow="hidden"
         >
           {getTemplate(resume.template, resume.fields)}
         </Box>
