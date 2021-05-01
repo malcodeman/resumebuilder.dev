@@ -287,7 +287,7 @@ function Builder() {
           </TabList>
           <TabPanels>
             <TabPanel padding="0">
-              <Accordion defaultIndex={[0]} marginBottom="20px">
+              <Accordion defaultIndex={[0]} allowToggle marginBottom="20px">
                 <PersonalDetailsSection register={register} />
                 <EmploymentSection
                   fields={fieldsEmployment}
