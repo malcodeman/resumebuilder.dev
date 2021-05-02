@@ -310,7 +310,12 @@ function Builder() {
                 paddingInlineEnd="4"
                 marginBottom="20px"
               >
-                <Button size="sm" leftIcon={<Plus size={20} />} width="100%">
+                <Button
+                  size="sm"
+                  leftIcon={<Plus size={20} />}
+                  width="100%"
+                  variant="ghost"
+                >
                   Add new section
                 </Button>
               </Box>

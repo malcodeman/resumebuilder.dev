@@ -16,6 +16,8 @@ import {
 import { Plus } from "react-feather";
 import { FieldArrayWithId } from "react-hook-form";
 
+import SectionFooter from "./SectionFooter";
+
 import { Register } from "../types";
 
 type props = {
@@ -68,10 +70,10 @@ function EducationSection(props: props) {
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        <Grid templateColumns="1fr 1fr" gap="20px" mb="20px">
-          {fields.map((item, index) => {
-            return (
-              <React.Fragment key={item.id}>
+        {fields.map((item, index) => {
+          return (
+            <React.Fragment key={item.id}>
+              <Grid templateColumns="1fr 1fr" gap="4" mb="4">
                 <GridItem colSpan={2}>
                   <FormControl>
                     <FormLabel>School</FormLabel>
@@ -122,15 +124,17 @@ function EducationSection(props: props) {
                     />
                   </FormControl>
                 </GridItem>
-              </React.Fragment>
-            );
-          })}
-        </Grid>
+              </Grid>
+              <SectionFooter />
+            </React.Fragment>
+          );
+        })}
         <Button
           size="sm"
           leftIcon={<Plus size={20} />}
           width="100%"
           onClick={onAppend}
+          variant="ghost"
         >
           Add education
         </Button>
