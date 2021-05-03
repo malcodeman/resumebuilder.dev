@@ -54,10 +54,12 @@ type props = {
   >[];
   register: Register;
   onAppend: () => void;
+  onDuplicate: (index: number) => void;
+  onRemove: (index: number) => void;
 };
 
 function EmploymentSection(props: props) {
-  const { fields, register, onAppend } = props;
+  const { fields, register, onAppend, onDuplicate, onRemove } = props;
 
   return (
     <AccordionItem>
@@ -125,7 +127,10 @@ function EmploymentSection(props: props) {
                   </FormControl>
                 </GridItem>
               </Grid>
-              <SectionFooter />
+              <SectionFooter
+                onDuplicate={() => onDuplicate(index)}
+                onRemove={() => onRemove(index)}
+              />
             </React.Fragment>
           );
         })}

@@ -101,11 +101,19 @@ function Builder() {
   const { register, watch, reset, control } = useForm({
     defaultValues,
   });
-  const { fields: fieldsEmployment, append: appendEmployment } = useFieldArray({
+  const {
+    fields: fieldsEmployment,
+    append: appendEmployment,
+    remove: removeEmployment,
+  } = useFieldArray({
     control,
     name: "employment",
   });
-  const { fields: fieldsEducation, append: appendEducation } = useFieldArray({
+  const {
+    fields: fieldsEducation,
+    append: appendEducation,
+    remove: removeEducation,
+  } = useFieldArray({
     control,
     name: "education",
   });
@@ -226,6 +234,24 @@ function Builder() {
     });
   }
 
+  function handleDuplicateEmployment(index: number) {
+    const employment = fields.employment[index];
+    appendEmployment(employment);
+  }
+
+  function handleRemoveEmployment(index: number) {
+    removeEmployment(index);
+  }
+
+  function handleDuplicateEducation(index: number) {
+    const education = fields.education[index];
+    appendEducation(education);
+  }
+
+  function handleRemoveEducation(index: number) {
+    removeEducation(index);
+  }
+
   function handleAppendEducation() {
     appendEducation({
       school: "",
@@ -293,11 +319,15 @@ function Builder() {
                   fields={fieldsEmployment}
                   register={register}
                   onAppend={handleAppendEmployment}
+                  onDuplicate={handleDuplicateEmployment}
+                  onRemove={handleRemoveEmployment}
                 />
                 <EducationSection
                   fields={fieldsEducation}
                   register={register}
                   onAppend={handleAppendEducation}
+                  onDuplicate={handleDuplicateEducation}
+                  onRemove={handleRemoveEducation}
                 />
                 <SkillSection
                   fields={fieldsSkill}

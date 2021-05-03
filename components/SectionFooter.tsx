@@ -9,13 +9,22 @@ import {
 } from "@chakra-ui/react";
 import { MoreHorizontal, Copy, Trash2 } from "react-feather";
 
-function SectionFooter(props) {
+type props = {
+  onDuplicate: () => void;
+  onRemove: () => void;
+};
+
+function SectionFooter(props: props) {
+  const { onDuplicate, onRemove } = props;
+
   function handleOnDuplicate(onClose: () => void) {
     onClose();
+    onDuplicate();
   }
 
   function handleOnDelete(onClose: () => void) {
     onClose();
+    onRemove();
   }
 
   return (
