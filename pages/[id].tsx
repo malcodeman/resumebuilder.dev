@@ -36,7 +36,6 @@ import EducationSection from "../components/EducationSection";
 import SkillSection from "../components/SkillSection";
 import EditableName from "../components/EditableName";
 
-import utils from "../lib/utils";
 import { TEMPLATES } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
 
@@ -97,7 +96,7 @@ const toastId = "onSave";
 function Builder() {
   const router = useRouter();
   const { id } = router.query;
-  const [resumes, setResumes] = useLocalStorage("resumes", []);
+  const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
   const resume = resumes.find((item) => item.id === id) || defaultResume;
   const { register, watch, reset, control } = useForm({
     defaultValues,
@@ -155,11 +154,10 @@ function Builder() {
   }, [keyboardJs]);
 
   React.useEffect(() => {
-    if (id) {
-      const fields = utils.getStorageResume(id).fields;
-      reset({ ...fields });
+    if (resume.id) {
+      reset({ ...resume.fields });
     }
-  }, [id]);
+  }, [resume.id]);
 
   const [, cancel] = useDebounce(
     () => {
@@ -346,6 +344,7 @@ function Builder() {
               <SimpleGrid templateColumns="1fr 1fr" spacing="20px">
                 {TEMPLATES.map((item) => (
                   <Flex
+                    key={item}
                     height="200px"
                     alignItems="center"
                     justifyContent="center"

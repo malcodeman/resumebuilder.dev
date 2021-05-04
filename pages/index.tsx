@@ -16,24 +16,17 @@ import {
 } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { nanoid } from "nanoid";
-import { useKeyPressEvent } from "react-use";
+import { useKeyPressEvent, useLocalStorage } from "react-use";
 
 import Header from "../components/Header";
 import NewResumeModal from "../components/NewResumeModal";
 import ResumeItem from "../components/ResumeItem";
 
-import utils from "../lib/utils";
 import { Resume, Template } from "../types";
 
 function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [resumes, setResumes] = React.useState<Resume[]>(
-    utils.getStorageResumes()
-  );
-
-  React.useEffect(() => {
-    utils.setStorageResumes(resumes);
-  }, [resumes.length]);
+  const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
 
   useKeyPressEvent("n", onOpen);
 
@@ -60,8 +53,8 @@ function Home() {
   }
 
   function handleOnDelete(id: string) {
-    const newResumes = resumes.filter((item) => item.id !== id);
-    setResumes(newResumes);
+    const nextResumes = resumes.filter((item) => item.id !== id);
+    setResumes(nextResumes);
   }
 
   function handleOnDuplicate(id: string) {
