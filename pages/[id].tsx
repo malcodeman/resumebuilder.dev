@@ -26,7 +26,7 @@ import { useRouter } from "next/router";
 import { useForm, useFieldArray } from "react-hook-form";
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
-import { useDebounce } from "react-use";
+import { useDebounce, useLocalStorage } from "react-use";
 import { useToast } from "@chakra-ui/react";
 
 import Logo from "../components/Logo";
@@ -97,7 +97,8 @@ const toastId = "onSave";
 function Builder() {
   const router = useRouter();
   const { id } = router.query;
-  const [resume, setResume] = React.useState<Resume>(defaultResume);
+  const [resumes, setResumes] = useLocalStorage("resumes", []);
+  const resume = resumes.find((item) => item.id === id) || defaultResume;
   const { register, watch, reset, control } = useForm({
     defaultValues,
   });
@@ -155,40 +156,33 @@ function Builder() {
 
   React.useEffect(() => {
     if (id) {
-      setResume(utils.getStorageResume(id));
-    }
-  }, [id]);
-
-  React.useEffect(() => {
-    if (id) {
       const fields = utils.getStorageResume(id).fields;
       reset({ ...fields });
     }
   }, [id]);
 
-  useDebounce(
+  const [, cancel] = useDebounce(
     () => {
       const nextResume = {
         ...resume,
         fields,
         updated: Date.now(),
       };
-      setResume(nextResume);
       updateInLocalStorage(nextResume);
+      cancel();
     },
     1000,
     [fields]
   );
 
   function updateInLocalStorage(nextResume: Resume) {
-    const resumes = utils.getStorageResumes();
-    const storageResume = resumes.map((item) => {
+    const nextResumes = resumes.map((item) => {
       if (item.id === id) {
         return nextResume;
       }
       return item;
     });
-    utils.setStorageResumes(storageResume);
+    setResumes(nextResumes);
   }
 
   function handleOnNameChange(nextValue: string) {
@@ -197,7 +191,6 @@ function Builder() {
       name: nextValue,
       updated: Date.now(),
     };
-    setResume(nextResume);
     updateInLocalStorage(nextResume);
   }
 
@@ -207,7 +200,6 @@ function Builder() {
       template: nextTemplate,
       updated: Date.now(),
     };
-    setResume(nextResume);
     updateInLocalStorage(nextResume);
   }
 
