@@ -6,7 +6,7 @@ import {
   Flex,
   Button,
   useDisclosure,
-  SimpleGrid,
+  Grid,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -76,7 +76,7 @@ function Home() {
       <Header />
       <Box as="main" mt="140px">
         <Container maxW="container.lg">
-          <Flex justifyContent="flex-end" mb="20px">
+          <Flex justifyContent="flex-end" mb="4">
             <Popover trigger="hover">
               <PopoverTrigger>
                 <Button
@@ -97,7 +97,10 @@ function Home() {
               </PopoverContent>
             </Popover>
           </Flex>
-          <SimpleGrid minChildWidth="270px" spacing="20px">
+          <Grid
+            gap="4"
+            gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
+          >
             {resumes.map((item) => (
               <ResumeItem
                 key={item.id}
@@ -106,7 +109,7 @@ function Home() {
                 onDuplicate={handleOnDuplicate}
               />
             ))}
-          </SimpleGrid>
+          </Grid>
         </Container>
       </Box>
       <NewResumeModal
