@@ -83,6 +83,7 @@ function Home() {
                   size="sm"
                   leftIcon={<Plus size={20} />}
                   onClick={onOpen}
+                  data-cy="new_resume_btn"
                 >
                   New
                 </Button>
@@ -100,6 +101,7 @@ function Home() {
           <Grid
             gap="4"
             gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
+            data-cy="resumes_grid"
           >
             {resumes.map((item) => (
               <ResumeItem

@@ -40,12 +40,20 @@ function NewResumeModal(props: props) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
               <FormLabel>Resume name</FormLabel>
-              <Input size="sm" {...register("name", { required: true })} />
+              <Input
+                size="sm"
+                {...register("name", { required: true })}
+                data-cy="resume_name_input"
+              />
             </FormControl>
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button size="sm" onClick={handleSubmit(onSubmit)}>
+          <Button
+            size="sm"
+            onClick={handleSubmit(onSubmit)}
+            data-cy="create_resume_btn"
+          >
             Create resume
           </Button>
         </ModalFooter>
