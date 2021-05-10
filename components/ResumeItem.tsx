@@ -81,6 +81,7 @@ function ResumeItem(props: props) {
                     aria-label="More options"
                     icon={<MoreHorizontal size={20} />}
                     onClick={(e) => e.stopPropagation()}
+                    data-cy="resume_more_options_btn"
                   />
                 </PopoverTrigger>
                 <PopoverContent width="unset">
@@ -100,6 +101,7 @@ function ResumeItem(props: props) {
                         size="sm"
                         leftIcon={<Trash2 size={20} />}
                         onClick={(e) => handleOnDelete(resume.id, onClose, e)}
+                        data-cy="delete_resume_btn"
                       >
                         Delete
                       </Button>
