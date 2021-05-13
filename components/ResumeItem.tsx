@@ -94,6 +94,7 @@ function ResumeItem(props: props) {
                         onClick={(e) =>
                           handleOnDuplicate(resume.id, onClose, e)
                         }
+                        data-cy="duplicate_resume_btn"
                       >
                         Duplicate
                       </Button>
