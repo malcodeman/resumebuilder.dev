@@ -17,6 +17,7 @@ import {
 import { Plus } from "react-feather";
 import { nanoid } from "nanoid";
 import { useKeyPressEvent, useLocalStorage } from "react-use";
+import { useRouter } from "next/router";
 
 import Header from "../components/Header";
 import NewResumeModal from "../components/NewResumeModal";
@@ -25,6 +26,7 @@ import ResumeItem from "../components/ResumeItem";
 import { Resume, Template } from "../types";
 
 function Home() {
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
 
@@ -50,6 +52,7 @@ function Home() {
     };
     setResumes([...resumes, resume]);
     onClose();
+    router.push(`/${resume.id}`);
   }
 
   function handleOnDelete(id: string) {
@@ -62,6 +65,7 @@ function Home() {
     const value = {
       ...resume,
       id: nanoid(),
+      name: `${resume.name} copy`,
       updated: Date.now(),
     };
     setResumes([...resumes, value]);
