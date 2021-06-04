@@ -102,6 +102,12 @@ function Home() {
               </PopoverContent>
             </Popover>
           </Flex>
+          {resumes.length === 0 && (
+            <Flex flexDirection="column" alignItems="center" padding="4">
+              <Text>No Resumes</Text>
+              <Text fontSize="small">Create a new resume to get started.</Text>
+            </Flex>
+          )}
           <Grid
             gap="4"
             gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
