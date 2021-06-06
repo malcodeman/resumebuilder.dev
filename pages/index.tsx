@@ -30,7 +30,7 @@ function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
 
-  useKeyPressEvent("n", onOpen);
+  useKeyPressEvent("n", () => {}, onOpen);
 
   function handleOnSubmit(data: { name: string }) {
     const resume = {

@@ -23,6 +23,7 @@ type props = {
 function NewResumeModal(props: props) {
   const { isOpen, onClose, onSubmit } = props;
   const { register, handleSubmit, reset } = useForm();
+  const initialRef = React.useRef();
 
   React.useEffect(() => {
     if (!isOpen) {
@@ -31,7 +32,7 @@ function NewResumeModal(props: props) {
   }, [isOpen]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Create new resume</ModalHeader>
@@ -44,6 +45,7 @@ function NewResumeModal(props: props) {
                 size="sm"
                 {...register("name", { required: true })}
                 data-cy="resume_name_input"
+                ref={initialRef}
               />
             </FormControl>
           </form>
