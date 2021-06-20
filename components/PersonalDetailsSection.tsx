@@ -70,6 +70,14 @@ function PersonalDetailsSection(props: props) {
               <Input {...register("phone")} />
             </InputGroup>
           </FormControl>
+          <FormControl>
+            <FormLabel>City</FormLabel>
+            <Input size="sm" {...register("city")} />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Country</FormLabel>
+            <Input size="sm" {...register("country")} />
+          </FormControl>
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>Summary</FormLabel>

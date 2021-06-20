@@ -131,6 +131,8 @@ function TokyoTemplate(props: props) {
     lastName,
     email,
     phone,
+    city,
+    country,
     summary,
     employment,
     education,
@@ -153,6 +155,9 @@ function TokyoTemplate(props: props) {
           <View style={styles.columnA}>
             <View style={styles.contactInfo}>
               <SectionTitle>Contact Info</SectionTitle>
+              <Text style={styles.text}>
+                {city}, {country}
+              </Text>
               <Text style={styles.text}>{email}</Text>
               <Text style={styles.text}>{phone}</Text>
             </View>

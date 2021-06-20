@@ -11,6 +11,8 @@ type Fields = {
   lastName: string;
   email: string;
   phone: string;
+  city: string;
+  country: string;
   summary: string;
   employment: {
     jobTitle: string;
@@ -49,6 +51,8 @@ type Register = UseFormRegister<{
   lastName: string;
   email: string;
   phone: string;
+  city: string;
+  country: string;
   summary: string;
   employment: {
     jobTitle: string;

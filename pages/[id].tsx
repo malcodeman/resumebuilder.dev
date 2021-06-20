@@ -52,6 +52,8 @@ const defaultResume = {
     lastName: "",
     email: "",
     phone: "",
+    city: "",
+    country: "",
     summary: "",
     employment: [],
     education: [],
@@ -64,6 +66,8 @@ const defaultValues = {
   lastName: "",
   email: "",
   phone: "",
+  city: "",
+  country: "",
   summary: "",
   employment: [
     {

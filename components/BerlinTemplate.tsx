@@ -96,6 +96,8 @@ function BerlinTemplate(props: props) {
     lastName,
     email,
     phone,
+    city,
+    country,
     summary,
     employment,
     education,
@@ -115,7 +117,7 @@ function BerlinTemplate(props: props) {
           </Text>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.text}>
-            {email} | {phone}
+            {city}, {country} | {email} | {phone}
           </Text>
           <Text style={styles.text}>{summary}</Text>
         </View>
