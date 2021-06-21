@@ -44,6 +44,8 @@ function Home() {
         lastName: "",
         email: "",
         phone: "",
+        city: "",
+        country: "",
         summary: "",
         employment: [],
         education: [],
