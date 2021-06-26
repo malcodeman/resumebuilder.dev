@@ -17,7 +17,7 @@ import {
   EditableInput,
 } from "@chakra-ui/react";
 import { Plus } from "react-feather";
-import { useFieldArray, UseFormGetValues } from "react-hook-form";
+import { useFieldArray, UseFormGetValues, Control } from "react-hook-form";
 
 import SectionFooter from "./SectionFooter";
 
@@ -25,7 +25,7 @@ import { Register, Fields } from "../types";
 
 type props = {
   nestIndex: number;
-  control: any;
+  control: Control<Fields>;
   label: string;
   getValues: UseFormGetValues<Fields>;
   register: Register;
@@ -35,11 +35,23 @@ function StandardSection(props: props) {
   const { nestIndex, control, label, getValues, register } = props;
   const { fields, remove, append } = useFieldArray({
     control,
-    name: `standardSection[${nestIndex}].nested`,
+    name: `standardSection.${nestIndex}.nested`,
   });
 
   function onDuplicate(index: number) {
     append(getValues(`standardSection.${nestIndex}.nested.${index}`));
+  }
+
+  function handleAppend() {
+    append({
+      title: "",
+      subtitle: "",
+      website: "",
+      city: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+    });
   }
 
   return (
@@ -143,7 +155,7 @@ function StandardSection(props: props) {
           size="sm"
           leftIcon={<Plus size={20} />}
           width="100%"
-          onClick={append}
+          onClick={handleAppend}
           variant="ghost"
         >
           Add item
