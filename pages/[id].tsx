@@ -31,9 +31,8 @@ import { useToast } from "@chakra-ui/react";
 
 import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/PersonalDetailsSection";
-import EmploymentSection from "../components/EmploymentSection";
-import EducationSection from "../components/EducationSection";
 import SkillSection from "../components/SkillSection";
+import StandardSection from "../components/StandardSection";
 import EditableName from "../components/EditableName";
 
 import { TEMPLATES } from "../lib/constants";
@@ -55,8 +54,7 @@ const defaultResume = {
     city: "",
     country: "",
     summary: "",
-    employment: [],
-    education: [],
+    standardSection: [],
     skill: [],
   },
 };
@@ -69,31 +67,8 @@ const defaultValues = {
   city: "",
   country: "",
   summary: "",
-  employment: [
-    {
-      jobTitle: "",
-      companyName: "",
-      startDate: "",
-      endDate: "",
-      city: "",
-      description: "",
-    },
-  ],
-  education: [
-    {
-      school: "",
-      degree: "",
-      startDate: "",
-      endDate: "",
-      city: "",
-      description: "",
-    },
-  ],
-  skill: [
-    {
-      name: "",
-    },
-  ],
+  standardSection: [],
+  skill: [],
 };
 const toastId = "onSave";
 
@@ -102,25 +77,14 @@ function Builder() {
   const { id } = router.query;
   const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
   const resume = resumes.find((item) => item.id === id) || defaultResume;
-  const { register, watch, reset, control } = useForm({
+  const { register, watch, reset, getValues, control } = useForm({
     defaultValues,
   });
-  const {
-    fields: fieldsEmployment,
-    append: appendEmployment,
-    remove: removeEmployment,
-  } = useFieldArray({
-    control,
-    name: "employment",
-  });
-  const {
-    fields: fieldsEducation,
-    append: appendEducation,
-    remove: removeEducation,
-  } = useFieldArray({
-    control,
-    name: "education",
-  });
+  const { fields: standardSectionFields, append: appendStandardSection } =
+    useFieldArray({
+      control,
+      name: "standardSection",
+    });
   const { fields: fieldsSkill, append: appendSkill } = useFieldArray({
     control,
     name: "skill",
@@ -217,43 +181,20 @@ function Builder() {
     saveAs(blob, `${resume.name}.json`);
   }
 
-  function handleAppendEmployment() {
-    appendEmployment({
-      jobTitle: "",
-      companyName: "",
-      startDate: "",
-      endDate: "",
-      city: "",
-      description: "",
-    });
-  }
-
-  function handleDuplicateEmployment(index: number) {
-    const employment = fields.employment[index];
-    appendEmployment(employment);
-  }
-
-  function handleRemoveEmployment(index: number) {
-    removeEmployment(index);
-  }
-
-  function handleDuplicateEducation(index: number) {
-    const education = fields.education[index];
-    appendEducation(education);
-  }
-
-  function handleRemoveEducation(index: number) {
-    removeEducation(index);
-  }
-
-  function handleAppendEducation() {
-    appendEducation({
-      school: "",
-      degree: "",
-      startDate: "",
-      endDate: "",
-      city: "",
-      description: "",
+  function handleAppendStandardSection() {
+    appendStandardSection({
+      label: "Custom section",
+      nested: [
+        {
+          title: "",
+          subtitle: "",
+          website: "",
+          city: "",
+          startDate: "",
+          endDate: "",
+          description: "",
+        },
+      ],
     });
   }
 
@@ -309,25 +250,20 @@ function Builder() {
             <TabPanel padding="0">
               <Accordion defaultIndex={[0]} allowToggle marginBottom="20px">
                 <PersonalDetailsSection register={register} />
-                <EmploymentSection
-                  fields={fieldsEmployment}
-                  register={register}
-                  onAppend={handleAppendEmployment}
-                  onDuplicate={handleDuplicateEmployment}
-                  onRemove={handleRemoveEmployment}
-                />
-                <EducationSection
-                  fields={fieldsEducation}
-                  register={register}
-                  onAppend={handleAppendEducation}
-                  onDuplicate={handleDuplicateEducation}
-                  onRemove={handleRemoveEducation}
-                />
                 <SkillSection
                   fields={fieldsSkill}
                   register={register}
                   onAppend={handleAppendSkill}
                 />
+                {standardSectionFields.map((item, index) => (
+                  <StandardSection
+                    nestIndex={index}
+                    control={control}
+                    label={item.label}
+                    getValues={getValues}
+                    register={register}
+                  />
+                ))}
               </Accordion>
               <Box
                 paddingInlineStart="4"
@@ -339,6 +275,7 @@ function Builder() {
                   leftIcon={<Plus size={20} />}
                   width="100%"
                   variant="ghost"
+                  onClick={handleAppendStandardSection}
                 >
                   Add new section
                 </Button>
