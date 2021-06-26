@@ -14,21 +14,17 @@ type Fields = {
   city: string;
   country: string;
   summary: string;
-  employment: {
-    jobTitle: string;
-    companyName: string;
-    startDate: string;
-    endDate: string;
-    city: string;
-    description: string;
-  }[];
-  education: {
-    school: string;
-    degree: string;
-    startDate: string;
-    endDate: string;
-    city: string;
-    description: string;
+  standardSection: {
+    label: string;
+    nested: {
+      title: string;
+      subtitle: string;
+      website: string;
+      city: string;
+      startDate: string;
+      endDate: string;
+      description: string;
+    }[];
   }[];
   skill: {
     name: string;
@@ -45,35 +41,7 @@ type ChakraThemeConfig = {
   initialColorMode: ColorMode;
   useSystemColorMode: boolean;
 };
-type Register = UseFormRegister<{
-  title: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  city: string;
-  country: string;
-  summary: string;
-  employment: {
-    jobTitle: string;
-    companyName: string;
-    startDate: string;
-    endDate: string;
-    city: string;
-    description: string;
-  }[];
-  education: {
-    school: string;
-    degree: string;
-    startDate: string;
-    endDate: string;
-    city: string;
-    description: string;
-  }[];
-  skill: {
-    name: string;
-  }[];
-}>;
+type Register = UseFormRegister<Fields>;
 
 export type { Resume, ChakraThemeConfig, Register, Fields };
 export { Template };

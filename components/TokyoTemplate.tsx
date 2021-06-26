@@ -1,5 +1,7 @@
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
+import { Fields } from "../types";
+
 const styles = StyleSheet.create({
   page: {
     position: "relative",
@@ -105,10 +107,6 @@ const styles = StyleSheet.create({
   },
 });
 
-type props = {
-  [x: string]: any;
-};
-
 function SectionTitle(props: {
   lineWidth?: "short" | "long";
   children: React.ReactNode;
@@ -124,7 +122,7 @@ function SectionTitle(props: {
   );
 }
 
-function TokyoTemplate(props: props) {
+function TokyoTemplate(props: Fields) {
   const {
     title,
     firstName,
@@ -134,8 +132,7 @@ function TokyoTemplate(props: props) {
     city,
     country,
     summary,
-    employment,
-    education,
+    standardSection,
     skill,
   } = props;
 
@@ -173,38 +170,29 @@ function TokyoTemplate(props: props) {
             </View>
           </View>
           <View style={styles.columnB}>
-            <View style={styles.section}>
-              <SectionTitle lineWidth="long">Work Experience</SectionTitle>
-              {employment.map((item, index: number) => {
-                return (
-                  <View style={styles.sectionItem} key={index}>
-                    <Text style={styles.sectionHeading}>
-                      {item.companyName}
-                    </Text>
-                    <Text style={styles.sectionText}>
-                      {item.jobTitle} | {item.city} | {item.startDate} -{" "}
-                      {item.endDate}
-                    </Text>
-                    <Text style={styles.sectionText}>{item.description}</Text>
-                  </View>
-                );
-              })}
-            </View>
-            <View style={styles.section}>
-              <SectionTitle lineWidth="long">Education</SectionTitle>
-              {education.map((item, index: number) => {
-                return (
-                  <View style={styles.sectionItem} key={index}>
-                    <Text style={styles.sectionHeading}>{item.school}</Text>
-                    <Text style={styles.sectionText}>
-                      {item.degree} | {item.city} | {item.startDate} -{" "}
-                      {item.endDate}
-                    </Text>
-                    <Text style={styles.sectionText}>{item.description}</Text>
-                  </View>
-                );
-              })}
-            </View>
+            {standardSection.map((sectionItem) => {
+              return (
+                <View style={styles.section}>
+                  <SectionTitle lineWidth="long">
+                    {sectionItem.label}
+                  </SectionTitle>
+                  {sectionItem.nested.map((item, index: number) => {
+                    return (
+                      <View style={styles.sectionItem} key={index}>
+                        <Text style={styles.sectionHeading}>{item.title}</Text>
+                        <Text style={styles.text}>
+                          {item.subtitle} | {item.city} | {item.startDate} -{" "}
+                          {item.endDate}
+                        </Text>
+                        <Text style={styles.sectionText}>
+                          {item.description}
+                        </Text>
+                      </View>
+                    );
+                  })}
+                </View>
+              );
+            })}
           </View>
         </View>
       </Page>

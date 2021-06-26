@@ -1,5 +1,7 @@
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
+import { Fields } from "../types";
+
 const styles = StyleSheet.create({
   page: {
     position: "relative",
@@ -85,11 +87,7 @@ const styles = StyleSheet.create({
   },
 });
 
-type props = {
-  [x: string]: any;
-};
-
-function BerlinTemplate(props: props) {
+function BerlinTemplate(props: Fields) {
   const {
     title,
     firstName,
@@ -99,8 +97,7 @@ function BerlinTemplate(props: props) {
     city,
     country,
     summary,
-    employment,
-    education,
+    standardSection,
     skill,
   } = props;
 
@@ -121,40 +118,27 @@ function BerlinTemplate(props: props) {
           </Text>
           <Text style={styles.text}>{summary}</Text>
         </View>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitleText}>Work Experience</Text>
-          {employment.map((item, index: number) => {
-            return (
-              <View style={styles.sectionItem} key={index}>
-                <Text style={styles.sectionHeading}>{item.companyName}</Text>
-                <Text style={styles.text}>
-                  {item.jobTitle} | {item.city} | {item.startDate} -{" "}
-                  {item.endDate}
-                </Text>
-                <Text style={styles.sectionDescription}>
-                  {item.description}
-                </Text>
-              </View>
-            );
-          })}
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitleText}>Education</Text>
-          {education.map((item, index: number) => {
-            return (
-              <View style={styles.sectionItem} key={index}>
-                <Text style={styles.sectionHeading}>{item.school}</Text>
-                <Text style={styles.text}>
-                  {item.degree} | {item.city} | {item.startDate} -{" "}
-                  {item.endDate}
-                </Text>
-                <Text style={styles.sectionDescription}>
-                  {item.description}
-                </Text>
-              </View>
-            );
-          })}
-        </View>
+        {standardSection.map((sectionItem) => {
+          return (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>
+              {sectionItem.nested.map((item, index: number) => {
+                return (
+                  <View style={styles.sectionItem} key={index}>
+                    <Text style={styles.sectionHeading}>{item.title}</Text>
+                    <Text style={styles.text}>
+                      {item.subtitle} | {item.city} | {item.startDate} -{" "}
+                      {item.endDate}
+                    </Text>
+                    <Text style={styles.sectionDescription}>
+                      {item.description}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
+          );
+        })}
         <View style={styles.section}>
           <Text style={styles.sectionTitleText}>Skills</Text>
           <View style={styles.skills}>

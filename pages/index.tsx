@@ -47,8 +47,36 @@ function Home() {
         city: "",
         country: "",
         summary: "",
-        employment: [],
-        education: [],
+        standardSection: [
+          {
+            label: "Employment History",
+            nested: [
+              {
+                title: "",
+                subtitle: "",
+                website: "",
+                city: "",
+                startDate: "",
+                endDate: "",
+                description: "",
+              },
+            ],
+          },
+          {
+            label: "Education",
+            nested: [
+              {
+                title: "",
+                subtitle: "",
+                website: "",
+                city: "",
+                startDate: "",
+                endDate: "",
+                description: "",
+              },
+            ],
+          },
+        ],
         skill: [],
       },
     };
