@@ -35,11 +35,11 @@ function StandardSection(props: props) {
   const { nestIndex, control, label, getValues, register } = props;
   const { fields, remove, append } = useFieldArray({
     control,
-    name: `standardSection.${nestIndex}.nested`,
+    name: `standardSection.${nestIndex}.nested` as const,
   });
 
   function onDuplicate(index: number) {
-    append(getValues(`standardSection.${nestIndex}.nested.${index}`));
+    append(getValues(`standardSection.${nestIndex}.nested.${index}` as const));
   }
 
   function handleAppend() {
