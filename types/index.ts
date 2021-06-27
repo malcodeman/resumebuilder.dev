@@ -5,6 +5,10 @@ enum Template {
   berlin = "berlin",
   tokyo = "tokyo",
 }
+enum Section {
+  standard = "standard",
+  tagList = "tagList",
+}
 type Fields = {
   title: string;
   firstName: string;
@@ -26,8 +30,9 @@ type Fields = {
       description: string;
     }[];
   }[];
-  skill: {
-    name: string;
+  tagListSection: {
+    label: string;
+    tags: string;
   }[];
 };
 type Resume = {
@@ -44,4 +49,4 @@ type ChakraThemeConfig = {
 type Register = UseFormRegister<Fields>;
 
 export type { Resume, ChakraThemeConfig, Register, Fields };
-export { Template };
+export { Template, Section };

@@ -14,17 +14,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     height: "100%",
   },
-  header: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 48,
-    width: "100%",
-  },
-  column: {
-    display: "flex",
-    flexDirection: "column",
-  },
   name: {
     color: "#e36e60",
     fontSize: 28,
@@ -133,20 +122,18 @@ function TokyoTemplate(props: Fields) {
     country,
     summary,
     standardSection,
-    skill,
+    tagListSection,
   } = props;
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
-          <View style={styles.column}>
-            <Text style={styles.name}>
-              {firstName} {lastName}
-            </Text>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.summary}>{summary}</Text>
-          </View>
+        <View style={styles.section}>
+          <Text style={styles.name}>
+            {firstName} {lastName}
+          </Text>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.summary}>{summary}</Text>
         </View>
         <View style={styles.main}>
           <View style={styles.columnA}>
@@ -158,16 +145,20 @@ function TokyoTemplate(props: Fields) {
               <Text style={styles.text}>{email}</Text>
               <Text style={styles.text}>{phone}</Text>
             </View>
-            <View style={styles.column}>
-              <SectionTitle>Skills</SectionTitle>
-              {skill.map((item, index: number) => {
-                return (
-                  <Text style={styles.text} key={index}>
-                    {item.name}
-                  </Text>
-                );
-              })}
-            </View>
+            {tagListSection.map((sectionItem) => {
+              return (
+                <View style={styles.section}>
+                  <SectionTitle>{sectionItem.label}</SectionTitle>
+                  {sectionItem.tags?.split("\n").map((item, index: number) => {
+                    return (
+                      <Text style={styles.text} key={index}>
+                        {item}
+                      </Text>
+                    );
+                  })}
+                </View>
+              );
+            })}
           </View>
           <View style={styles.columnB}>
             {standardSection.map((sectionItem) => {

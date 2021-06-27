@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: "#323336",
   },
-  skills: {
+  list: {
     display: "flex",
     flexDirection: "row",
   },
-  skill: {
+  listItem: {
     color: "#323336",
     fontSize: 10,
     backgroundColor: "#f1f5f7",
@@ -98,7 +98,7 @@ function BerlinTemplate(props: Fields) {
     country,
     summary,
     standardSection,
-    skill,
+    tagListSection,
   } = props;
 
   return (
@@ -139,18 +139,22 @@ function BerlinTemplate(props: Fields) {
             </View>
           );
         })}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitleText}>Skills</Text>
-          <View style={styles.skills}>
-            {skill.map((item, index: number) => {
-              return (
-                <Text style={styles.skill} key={index}>
-                  {item.name}
-                </Text>
-              );
-            })}
-          </View>
-        </View>
+        {tagListSection.map((sectionItem) => {
+          return (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>
+              <View style={styles.list}>
+                {sectionItem.tags?.split("\n").map((item, index: number) => {
+                  return (
+                    <Text style={styles.listItem} key={index}>
+                      {item}
+                    </Text>
+                  );
+                })}
+              </View>
+            </View>
+          );
+        })}
       </Page>
     </Document>
   );

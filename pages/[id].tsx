@@ -20,6 +20,7 @@ import {
   PopoverContent,
   PopoverBody,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { MoreVertical, Plus } from "react-feather";
 import { useRouter } from "next/router";
@@ -31,14 +32,15 @@ import { useToast } from "@chakra-ui/react";
 
 import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/PersonalDetailsSection";
-import SkillSection from "../components/SkillSection";
+import TagListSection from "../components/TagListSection";
 import StandardSection from "../components/StandardSection";
 import EditableName from "../components/EditableName";
+import AddSectionModal from "../components/AddSectionModal";
 
 import { TEMPLATES } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
 
-import { Resume, Template } from "../types";
+import { Resume, Template, Section } from "../types";
 
 const defaultResume = {
   id: "",
@@ -55,7 +57,7 @@ const defaultResume = {
     country: "",
     summary: "",
     standardSection: [],
-    skill: [],
+    tagListSection: [],
   },
 };
 const defaultValues = {
@@ -68,7 +70,7 @@ const defaultValues = {
   country: "",
   summary: "",
   standardSection: [],
-  skill: [],
+  tagListSection: [],
 };
 const toastId = "onSave";
 
@@ -85,15 +87,17 @@ function Builder() {
       control,
       name: "standardSection",
     });
-  const { fields: fieldsSkill, append: appendSkill } = useFieldArray({
-    control,
-    name: "skill",
-  });
+  const { fields: tagListSectionFields, append: appendTagListSection } =
+    useFieldArray({
+      control,
+      name: "tagListSection",
+    });
   const fields = watch();
   const document = getTemplate(resume.template, fields);
   const [keyboardJs, setKeyboardJs] = React.useState(null);
   const toast = useToast();
   const templateBgColor = useColorModeValue("gray.300", "gray.600");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   function handleOnSave(event: React.KeyboardEvent) {
     event.preventDefault();
@@ -181,27 +185,30 @@ function Builder() {
     saveAs(blob, `${resume.name}.json`);
   }
 
-  function handleAppendStandardSection() {
-    appendStandardSection({
-      label: "Custom section",
-      nested: [
-        {
-          title: "",
-          subtitle: "",
-          website: "",
-          city: "",
-          startDate: "",
-          endDate: "",
-          description: "",
-        },
-      ],
-    });
-  }
-
-  function handleAppendSkill() {
-    appendSkill({
-      name: "",
-    });
+  function handleOnSubmit(data: { label: string; type: Section }) {
+    onClose();
+    switch (data.type) {
+      case "standard":
+        return appendStandardSection({
+          label: data.label,
+          nested: [
+            {
+              title: "",
+              subtitle: "",
+              website: "",
+              city: "",
+              startDate: "",
+              endDate: "",
+              description: "",
+            },
+          ],
+        });
+      case "tagList":
+        return appendTagListSection({
+          label: data.label,
+          tags: [],
+        });
+    }
   }
 
   return (
@@ -250,11 +257,13 @@ function Builder() {
             <TabPanel padding="0">
               <Accordion defaultIndex={[0]} allowToggle marginBottom="20px">
                 <PersonalDetailsSection register={register} />
-                <SkillSection
-                  fields={fieldsSkill}
-                  register={register}
-                  onAppend={handleAppendSkill}
-                />
+                {tagListSectionFields.map((item, index) => (
+                  <TagListSection
+                    nestIndex={index}
+                    label={item.label}
+                    register={register}
+                  />
+                ))}
                 {standardSectionFields.map((item, index) => (
                   <StandardSection
                     nestIndex={index}
@@ -275,7 +284,7 @@ function Builder() {
                   leftIcon={<Plus size={20} />}
                   width="100%"
                   variant="ghost"
-                  onClick={handleAppendStandardSection}
+                  onClick={onOpen}
                 >
                   Add new section
                 </Button>
@@ -304,6 +313,11 @@ function Builder() {
         </Tabs>
         <Box>{document}</Box>
       </Grid>
+      <AddSectionModal
+        isOpen={isOpen}
+        onSubmit={handleOnSubmit}
+        onClose={onClose}
+      />
     </>
   );
 }

@@ -77,7 +77,16 @@ function Home() {
             ],
           },
         ],
-        skill: [],
+        tagListSection: [
+          {
+            label: "Skills",
+            tags: "",
+          },
+          {
+            label: "Hobbies",
+            tags: "",
+          },
+        ],
       },
     };
     setResumes([...resumes, resume]);
