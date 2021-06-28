@@ -133,7 +133,9 @@ function TokyoTemplate(props: Fields) {
             {firstName} {lastName}
           </Text>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.summary}>{summary}</Text>
+          {summary.split("\n").map((item) => (
+            <Text style={styles.summary}>{item}</Text>
+          ))}
         </View>
         <View style={styles.main}>
           <View style={styles.columnA}>

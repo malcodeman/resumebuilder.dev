@@ -116,7 +116,9 @@ function BerlinTemplate(props: Fields) {
           <Text style={styles.text}>
             {city}, {country} | {email} | {phone}
           </Text>
-          <Text style={styles.text}>{summary}</Text>
+          {summary.split("\n").map((item) => (
+            <Text style={styles.text}>{item}</Text>
+          ))}
         </View>
         {standardSection.map((sectionItem) => {
           return (
