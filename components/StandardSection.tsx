@@ -15,6 +15,7 @@ import {
   Editable,
   EditablePreview,
   EditableInput,
+  Accordion,
 } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useFieldArray, UseFormGetValues, Control } from "react-hook-form";
@@ -55,9 +56,10 @@ function StandardSection(props: props) {
   }
 
   return (
-    <AccordionItem>
+    <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
       <h2>
         <AccordionButton>
+          <AccordionIcon mr="2" />
           <Box flex="1" textAlign="left">
             <Editable defaultValue={label}>
               <EditablePreview />
@@ -66,89 +68,105 @@ function StandardSection(props: props) {
               />
             </Editable>
           </Box>
-          <AccordionIcon />
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
         {fields.map((item, index) => {
           return (
-            <React.Fragment key={item.id}>
-              <Grid templateColumns="1fr 1fr" gap="4" mb="4">
-                <GridItem colSpan={2}>
-                  <FormControl>
-                    <FormLabel>Title</FormLabel>
-                    <Input
-                      size="sm"
-                      {...register(
+            <Accordion key={item.id} allowToggle>
+              <AccordionItem
+                borderTopWidth="0"
+                _last={{ borderBottomWidth: 0 }}
+              >
+                <h2>
+                  <AccordionButton>
+                    <AccordionIcon mr="2" />
+                    <Box flex="1" textAlign="left">
+                      {getValues(
                         `standardSection.${nestIndex}.nested.${index}.title` as const
-                      )}
-                    />
-                  </FormControl>
-                </GridItem>
-                <GridItem colSpan={2}>
-                  <FormControl>
-                    <FormLabel>Subtitle</FormLabel>
-                    <Input
-                      size="sm"
-                      {...register(
-                        `standardSection.${nestIndex}.nested.${index}.subtitle` as const
-                      )}
-                    />
-                  </FormControl>
-                </GridItem>
-                <FormControl>
-                  <FormLabel>Website</FormLabel>
-                  <Input
-                    size="sm"
-                    {...register(
-                      `standardSection.${nestIndex}.nested.${index}.website` as const
-                    )}
+                      ) || "Untitled"}
+                    </Box>
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <Grid templateColumns="1fr 1fr" gap="4" mb="4">
+                    <GridItem colSpan={2}>
+                      <FormControl>
+                        <FormLabel>Title</FormLabel>
+                        <Input
+                          size="sm"
+                          {...register(
+                            `standardSection.${nestIndex}.nested.${index}.title` as const
+                          )}
+                        />
+                      </FormControl>
+                    </GridItem>
+                    <GridItem colSpan={2}>
+                      <FormControl>
+                        <FormLabel>Subtitle</FormLabel>
+                        <Input
+                          size="sm"
+                          {...register(
+                            `standardSection.${nestIndex}.nested.${index}.subtitle` as const
+                          )}
+                        />
+                      </FormControl>
+                    </GridItem>
+                    <FormControl>
+                      <FormLabel>Website</FormLabel>
+                      <Input
+                        size="sm"
+                        {...register(
+                          `standardSection.${nestIndex}.nested.${index}.website` as const
+                        )}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>City</FormLabel>
+                      <Input
+                        size="sm"
+                        {...register(
+                          `standardSection.${nestIndex}.nested.${index}.city` as const
+                        )}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>Start date</FormLabel>
+                      <Input
+                        size="sm"
+                        {...register(
+                          `standardSection.${nestIndex}.nested.${index}.startDate` as const
+                        )}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <FormLabel>End date</FormLabel>
+                      <Input
+                        size="sm"
+                        {...register(
+                          `standardSection.${nestIndex}.nested.${index}.endDate` as const
+                        )}
+                      />
+                    </FormControl>
+                    <GridItem colSpan={2}>
+                      <FormControl>
+                        <FormLabel>Description</FormLabel>
+                        <Textarea
+                          size="sm"
+                          {...register(
+                            `standardSection.${nestIndex}.nested.${index}.description` as const
+                          )}
+                        />
+                      </FormControl>
+                    </GridItem>
+                  </Grid>
+                  <SectionFooter
+                    onDuplicate={() => onDuplicate(index)}
+                    onRemove={() => remove(index)}
                   />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>City</FormLabel>
-                  <Input
-                    size="sm"
-                    {...register(
-                      `standardSection.${nestIndex}.nested.${index}.city` as const
-                    )}
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Start date</FormLabel>
-                  <Input
-                    size="sm"
-                    {...register(
-                      `standardSection.${nestIndex}.nested.${index}.startDate` as const
-                    )}
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>End date</FormLabel>
-                  <Input
-                    size="sm"
-                    {...register(
-                      `standardSection.${nestIndex}.nested.${index}.endDate` as const
-                    )}
-                  />
-                </FormControl>
-                <GridItem colSpan={2}>
-                  <FormControl>
-                    <FormLabel>Description</FormLabel>
-                    <Textarea
-                      size="sm"
-                      {...register(
-                        `standardSection.${nestIndex}.nested.${index}.description` as const
-                      )}
-                    />
-                  </FormControl>
-                </GridItem>
-              </Grid>
-              <SectionFooter
-                onDuplicate={() => onDuplicate(index)}
-                onRemove={() => remove(index)}
-              />
-            </React.Fragment>
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
           );
         })}
         <Button

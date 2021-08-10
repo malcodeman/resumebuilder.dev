@@ -26,9 +26,10 @@ function TagListSection(props: props) {
   const { nestIndex, label, register } = props;
 
   return (
-    <AccordionItem>
+    <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
       <h2>
         <AccordionButton>
+          <AccordionIcon mr="2" />
           <Box flex="1" textAlign="left">
             <Editable defaultValue={label}>
               <EditablePreview />
@@ -37,7 +38,6 @@ function TagListSection(props: props) {
               />
             </Editable>
           </Box>
-          <AccordionIcon />
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>

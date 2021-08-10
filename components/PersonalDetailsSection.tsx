@@ -25,13 +25,13 @@ function PersonalDetailsSection(props: props) {
   const { register } = props;
 
   return (
-    <AccordionItem borderTop="0">
+    <AccordionItem borderTopWidth="0">
       <h2>
         <AccordionButton>
+          <AccordionIcon mr="2" />
           <Box flex="1" textAlign="left">
             Personal details
           </Box>
-          <AccordionIcon />
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
