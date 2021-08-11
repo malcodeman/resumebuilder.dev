@@ -1,50 +1,66 @@
 import React from "react";
 import {
-  Box,
   Grid,
-  AccordionButton,
-  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Input,
   GridItem,
   Textarea,
-  Button,
   FormControl,
   FormLabel,
-  Editable,
-  EditablePreview,
-  EditableInput,
   Accordion,
 } from "@chakra-ui/react";
-import { Plus } from "react-feather";
-import { useFieldArray, UseFormGetValues, Control } from "react-hook-form";
+import {
+  useFieldArray,
+  UseFormGetValues,
+  Control,
+  FieldArrayMethodProps,
+} from "react-hook-form";
 
-import SectionFooter from "./SectionFooter";
+import SectionHeader from "./SectionHeader";
 
 import { Register, Fields } from "../types";
 
 type props = {
   nestIndex: number;
   control: Control<Fields>;
-  label: string;
+  defaultLabel: string;
   getValues: UseFormGetValues<Fields>;
   register: Register;
+  remove: (index: number) => void;
+  append: (
+    value: Partial<any> | Partial<any>[],
+    options?: FieldArrayMethodProps
+  ) => void;
 };
 
 function StandardSection(props: props) {
-  const { nestIndex, control, label, getValues, register } = props;
-  const { fields, remove, append } = useFieldArray({
+  const {
+    nestIndex,
+    control,
+    defaultLabel,
+    getValues,
+    register,
+    remove,
+    append,
+  } = props;
+  const {
+    fields,
+    remove: removeNested,
+    append: appendNested,
+  } = useFieldArray({
     control,
     name: `standardSection.${nestIndex}.nested` as const,
   });
 
   function onDuplicate(index: number) {
-    append(getValues(`standardSection.${nestIndex}.nested.${index}` as const));
+    appendNested(
+      getValues(`standardSection.${nestIndex}.nested.${index}` as const)
+    );
   }
 
-  function handleAppend() {
-    append({
+  function onAppend() {
+    appendNested({
       title: "",
       subtitle: "",
       website: "",
@@ -57,20 +73,15 @@ function StandardSection(props: props) {
 
   return (
     <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
-      <h2>
-        <AccordionButton>
-          <AccordionIcon mr="2" />
-          <Box flex="1" textAlign="left">
-            <Editable defaultValue={label}>
-              <EditablePreview />
-              <EditableInput
-                {...register(`standardSection.${nestIndex}.label` as const)}
-              />
-            </Editable>
-          </Box>
-        </AccordionButton>
-      </h2>
-      <AccordionPanel pb={4}>
+      <SectionHeader
+        defaultLabel={defaultLabel}
+        labelRegister={register(`standardSection.${nestIndex}.label` as const)}
+        title={getValues(`standardSection.${nestIndex}.label` as const)}
+        onAppend={onAppend}
+        onRemove={() => remove(nestIndex)}
+        onDuplicate={() => append(getValues(`standardSection.${nestIndex}`))}
+      />
+      <AccordionPanel>
         {fields.map((item, index) => {
           return (
             <Accordion key={item.id} allowToggle>
@@ -78,18 +89,19 @@ function StandardSection(props: props) {
                 borderTopWidth="0"
                 _last={{ borderBottomWidth: 0 }}
               >
-                <h2>
-                  <AccordionButton>
-                    <AccordionIcon mr="2" />
-                    <Box flex="1" textAlign="left">
-                      {getValues(
-                        `standardSection.${nestIndex}.nested.${index}.title` as const
-                      ) || "Untitled"}
-                    </Box>
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <Grid templateColumns="1fr 1fr" gap="4" mb="4">
+                <SectionHeader
+                  defaultLabel=""
+                  title={
+                    getValues(
+                      `standardSection.${nestIndex}.nested.${index}.title` as const
+                    ) || "Untitled"
+                  }
+                  onAppend={onAppend}
+                  onRemove={() => removeNested(index)}
+                  onDuplicate={() => onDuplicate(index)}
+                />
+                <AccordionPanel>
+                  <Grid templateColumns="1fr 1fr" gap="4">
                     <GridItem colSpan={2}>
                       <FormControl>
                         <FormLabel>Title</FormLabel>
@@ -160,24 +172,11 @@ function StandardSection(props: props) {
                       </FormControl>
                     </GridItem>
                   </Grid>
-                  <SectionFooter
-                    onDuplicate={() => onDuplicate(index)}
-                    onRemove={() => remove(index)}
-                  />
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
           );
         })}
-        <Button
-          size="sm"
-          leftIcon={<Plus size={20} />}
-          width="100%"
-          onClick={handleAppend}
-          variant="ghost"
-        >
-          Add item
-        </Button>
       </AccordionPanel>
     </AccordionItem>
   );

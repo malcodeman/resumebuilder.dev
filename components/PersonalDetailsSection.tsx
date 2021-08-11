@@ -34,8 +34,8 @@ function PersonalDetailsSection(props: props) {
           </Box>
         </AccordionButton>
       </h2>
-      <AccordionPanel pb={4}>
-        <Grid templateColumns="1fr 1fr" gap="20px">
+      <AccordionPanel>
+        <Grid templateColumns="1fr 1fr" gap="4">
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>Title</FormLabel>

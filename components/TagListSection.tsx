@@ -1,47 +1,45 @@
 import {
-  Box,
   Grid,
-  AccordionButton,
-  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   GridItem,
   Textarea,
   FormControl,
   FormHelperText,
-  Editable,
-  EditablePreview,
-  EditableInput,
 } from "@chakra-ui/react";
+import { UseFormGetValues, FieldArrayMethodProps } from "react-hook-form";
 
-import { Register } from "../types";
+import SectionHeader from "./SectionHeader";
+
+import { Register, Fields } from "../types";
 
 type props = {
   nestIndex: number;
-  label: string;
+  defaultLabel: string;
+  getValues: UseFormGetValues<Fields>;
   register: Register;
+  remove: (index: number) => void;
+  append: (
+    value: Partial<any> | Partial<any>[],
+    options?: FieldArrayMethodProps
+  ) => void;
 };
 
 function TagListSection(props: props) {
-  const { nestIndex, label, register } = props;
+  const { nestIndex, defaultLabel, getValues, register, remove, append } =
+    props;
 
   return (
     <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
-      <h2>
-        <AccordionButton>
-          <AccordionIcon mr="2" />
-          <Box flex="1" textAlign="left">
-            <Editable defaultValue={label}>
-              <EditablePreview />
-              <EditableInput
-                {...register(`tagListSection.${nestIndex}.label` as const)}
-              />
-            </Editable>
-          </Box>
-        </AccordionButton>
-      </h2>
-      <AccordionPanel pb={4}>
-        <Grid templateColumns="1fr 1fr" gap="4" mb="4">
+      <SectionHeader
+        defaultLabel={defaultLabel}
+        labelRegister={register(`tagListSection.${nestIndex}.label` as const)}
+        title={getValues(`tagListSection.${nestIndex}.label` as const)}
+        onRemove={() => remove(nestIndex)}
+        onDuplicate={() => append(getValues(`tagListSection.${nestIndex}`))}
+      />
+      <AccordionPanel>
+        <Grid templateColumns="1fr 1fr" gap="4">
           <GridItem colSpan={2}>
             <FormControl>
               <Textarea

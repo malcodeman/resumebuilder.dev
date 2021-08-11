@@ -82,16 +82,22 @@ function Builder() {
   const { register, watch, reset, getValues, control } = useForm({
     defaultValues,
   });
-  const { fields: standardSectionFields, append: appendStandardSection } =
-    useFieldArray({
-      control,
-      name: "standardSection",
-    });
-  const { fields: tagListSectionFields, append: appendTagListSection } =
-    useFieldArray({
-      control,
-      name: "tagListSection",
-    });
+  const {
+    fields: standardSectionFields,
+    append: appendStandardSection,
+    remove: removeStandardSection,
+  } = useFieldArray({
+    control,
+    name: "standardSection",
+  });
+  const {
+    fields: tagListSectionFields,
+    append: appendTagListSection,
+    remove: removeTagListSection,
+  } = useFieldArray({
+    control,
+    name: "tagListSection",
+  });
   const fields = watch();
   const document = getTemplate(resume.template, fields);
   const [keyboardJs, setKeyboardJs] = React.useState(null);
@@ -260,17 +266,22 @@ function Builder() {
                 {tagListSectionFields.map((item, index) => (
                   <TagListSection
                     nestIndex={index}
-                    label={item.label}
+                    defaultLabel={item.label}
+                    getValues={getValues}
                     register={register}
+                    remove={removeTagListSection}
+                    append={appendTagListSection}
                   />
                 ))}
                 {standardSectionFields.map((item, index) => (
                   <StandardSection
                     nestIndex={index}
                     control={control}
-                    label={item.label}
+                    defaultLabel={item.label}
                     getValues={getValues}
                     register={register}
+                    remove={removeStandardSection}
+                    append={appendStandardSection}
                   />
                 ))}
               </Accordion>
