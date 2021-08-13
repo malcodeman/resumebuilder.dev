@@ -116,17 +116,19 @@ function BerlinTemplate(props: Fields) {
           <Text style={styles.text}>
             {city}, {country} | {email} | {phone}
           </Text>
-          {summary.split("\n").map((item) => (
-            <Text style={styles.text}>{item}</Text>
+          {summary.split("\n").map((item, index) => (
+            <Text key={index} style={styles.text}>
+              {item}
+            </Text>
           ))}
         </View>
-        {standardSection.map((sectionItem) => {
+        {standardSection.map((sectionItem, index) => {
           return (
-            <View style={styles.section}>
+            <View key={index} style={styles.section}>
               <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>
-              {sectionItem.nested.map((item, index: number) => {
+              {sectionItem.nested.map((item, index) => {
                 return (
-                  <View style={styles.sectionItem} key={index}>
+                  <View key={index} style={styles.sectionItem}>
                     <Text style={styles.sectionHeading}>{item.title}</Text>
                     <Text style={styles.text}>
                       {item.subtitle} | {item.city} | {item.startDate} -{" "}
@@ -141,14 +143,14 @@ function BerlinTemplate(props: Fields) {
             </View>
           );
         })}
-        {tagListSection.map((sectionItem) => {
+        {tagListSection.map((sectionItem, index) => {
           return (
-            <View style={styles.section}>
+            <View key={index} style={styles.section}>
               <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>
               <View style={styles.list}>
-                {sectionItem.tags?.split("\n").map((item, index: number) => {
+                {sectionItem.tags?.split("\n").map((item, index) => {
                   return (
-                    <Text style={styles.listItem} key={index}>
+                    <Text key={index} style={styles.listItem}>
                       {item}
                     </Text>
                   );

@@ -133,8 +133,10 @@ function TokyoTemplate(props: Fields) {
             {firstName} {lastName}
           </Text>
           <Text style={styles.title}>{title}</Text>
-          {summary.split("\n").map((item) => (
-            <Text style={styles.summary}>{item}</Text>
+          {summary.split("\n").map((item, index) => (
+            <Text key={index} style={styles.summary}>
+              {item}
+            </Text>
           ))}
         </View>
         <View style={styles.main}>
@@ -147,13 +149,13 @@ function TokyoTemplate(props: Fields) {
               <Text style={styles.text}>{email}</Text>
               <Text style={styles.text}>{phone}</Text>
             </View>
-            {tagListSection.map((sectionItem) => {
+            {tagListSection.map((sectionItem, index) => {
               return (
-                <View style={styles.section}>
+                <View key={index} style={styles.section}>
                   <SectionTitle>{sectionItem.label}</SectionTitle>
-                  {sectionItem.tags?.split("\n").map((item, index: number) => {
+                  {sectionItem.tags?.split("\n").map((item, index) => {
                     return (
-                      <Text style={styles.text} key={index}>
+                      <Text key={index} style={styles.text}>
                         {item}
                       </Text>
                     );
@@ -163,15 +165,15 @@ function TokyoTemplate(props: Fields) {
             })}
           </View>
           <View style={styles.columnB}>
-            {standardSection.map((sectionItem) => {
+            {standardSection.map((sectionItem, index) => {
               return (
-                <View style={styles.section}>
+                <View key={index} style={styles.section}>
                   <SectionTitle lineWidth="long">
                     {sectionItem.label}
                   </SectionTitle>
-                  {sectionItem.nested.map((item, index: number) => {
+                  {sectionItem.nested.map((item, index) => {
                     return (
-                      <View style={styles.sectionItem} key={index}>
+                      <View key={index} style={styles.sectionItem}>
                         <Text style={styles.sectionHeading}>{item.title}</Text>
                         <Text style={styles.text}>
                           {item.subtitle} | {item.city} | {item.startDate} -{" "}

@@ -265,6 +265,7 @@ function Builder() {
                 <PersonalDetailsSection register={register} />
                 {tagListSectionFields.map((item, index) => (
                   <TagListSection
+                    key={item.id}
                     nestIndex={index}
                     defaultLabel={item.label}
                     getValues={getValues}
@@ -275,6 +276,7 @@ function Builder() {
                 ))}
                 {standardSectionFields.map((item, index) => (
                   <StandardSection
+                    key={item.id}
                     nestIndex={index}
                     control={control}
                     defaultLabel={item.label}
