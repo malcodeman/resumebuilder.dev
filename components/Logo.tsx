@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function Logo() {
   return (
-    <Link href="/">
+    <Link href="/" passHref>
       <Flex alignItems="center" _hover={{ cursor: "pointer" }}>
         <Box marginRight="20px">
           <FileText size={20} />

@@ -47,7 +47,7 @@ function ResumeItem(props: props) {
   }
 
   return (
-    <Link href={`/${resume.id}`}>
+    <Link href={`/${resume.id}`} passHref>
       <Flex
         {...rest}
         direction="column"

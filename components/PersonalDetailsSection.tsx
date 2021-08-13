@@ -53,20 +53,18 @@ function PersonalDetailsSection(props: props) {
           <FormControl>
             <FormLabel>Email</FormLabel>
             <InputGroup size="sm">
-              <InputLeftElement
-                pointerEvents="none"
-                children={<Mail size={20} />}
-              />
+              <InputLeftElement pointerEvents="none">
+                <Mail size={20} />
+              </InputLeftElement>
               <Input {...register("email")} />
             </InputGroup>
           </FormControl>
           <FormControl>
             <FormLabel>Phone</FormLabel>
             <InputGroup size="sm">
-              <InputLeftElement
-                pointerEvents="none"
-                children={<Phone size={20} />}
-              />
+              <InputLeftElement pointerEvents="none">
+                <Phone size={20} />
+              </InputLeftElement>
               <Input {...register("phone")} />
             </InputGroup>
           </FormControl>

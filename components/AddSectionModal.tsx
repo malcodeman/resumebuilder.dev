@@ -36,7 +36,7 @@ function AddSectionModal(props: props) {
     if (!isOpen) {
       reset();
     }
-  }, [isOpen]);
+  }, [isOpen, reset]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
