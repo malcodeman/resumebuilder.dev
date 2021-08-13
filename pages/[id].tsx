@@ -212,7 +212,7 @@ function Builder() {
       case "tagList":
         return appendTagListSection({
           label: data.label,
-          tags: [],
+          tags: "",
         });
     }
   }
