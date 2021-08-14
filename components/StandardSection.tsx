@@ -9,6 +9,8 @@ import {
   FormControl,
   FormLabel,
   Accordion,
+  Text,
+  Box,
 } from "@chakra-ui/react";
 import {
   useFieldArray,
@@ -16,6 +18,7 @@ import {
   Control,
   FieldArrayMethodProps,
 } from "react-hook-form";
+import * as R from "ramda";
 
 import SectionHeader from "./SectionHeader";
 
@@ -82,6 +85,17 @@ function StandardSection(props: props) {
         onDuplicate={() => append(getValues(`standardSection.${nestIndex}`))}
       />
       <AccordionPanel>
+        {R.isEmpty(fields) ? (
+          <Box
+            paddingY="2"
+            paddingInlineStart="calc(1.5rem + 20px)"
+            paddingInlineEnd="4"
+          >
+            <Text>No items inside</Text>
+          </Box>
+        ) : (
+          <></>
+        )}
         {fields.map((item, index) => {
           return (
             <Accordion key={item.id} allowToggle>
