@@ -18,6 +18,7 @@ import { Plus } from "react-feather";
 import { nanoid } from "nanoid";
 import { useKeyPressEvent, useLocalStorage } from "react-use";
 import { useRouter } from "next/router";
+import * as R from "ramda";
 
 import Header from "../components/Header";
 import NewResumeModal from "../components/NewResumeModal";
@@ -110,6 +111,20 @@ function Home() {
     setResumes([...resumes, value]);
   }
 
+  function handleOnNameChange(id: string, nextValue: string) {
+    const nextResumes = R.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          name: nextValue,
+          updated: Date.now(),
+        };
+      }
+      return item;
+    }, resumes);
+    setResumes(nextResumes);
+  }
+
   return (
     <>
       <Head>
@@ -158,6 +173,7 @@ function Home() {
                 resume={item}
                 onDelete={handleOnDelete}
                 onDuplicate={handleOnDuplicate}
+                onNameChange={handleOnNameChange}
               />
             ))}
           </Grid>

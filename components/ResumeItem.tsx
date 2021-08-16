@@ -8,6 +8,9 @@ import {
   PopoverContent,
   PopoverBody,
   Button,
+  Editable,
+  EditablePreview,
+  EditableInput,
 } from "@chakra-ui/react";
 import { Copy, MoreHorizontal, Trash2 } from "react-feather";
 import { formatDistanceToNow } from "date-fns";
@@ -21,10 +24,11 @@ type props = {
   resume: Resume;
   onDelete: (id: string) => void;
   onDuplicate: (id: string) => void;
+  onNameChange: (id: string, nextValue: string) => void;
 };
 
 function ResumeItem(props: props) {
-  const { resume, onDelete, onDuplicate, ...rest } = props;
+  const { resume, onDelete, onDuplicate, onNameChange, ...rest } = props;
 
   function handleOnDuplicate(
     id: string,
@@ -84,9 +88,23 @@ function ResumeItem(props: props) {
                     data-cy="resume_more_options_btn"
                   />
                 </PopoverTrigger>
-                <PopoverContent width="unset">
+                <PopoverContent
+                  width="260px"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <PopoverBody>
                     <Flex flexDirection="column">
+                      <Editable
+                        mb="2"
+                        value={resume.name}
+                        onSubmit={onClose}
+                        onChange={(nextValue) =>
+                          onNameChange(resume.id, nextValue)
+                        }
+                      >
+                        <EditablePreview />
+                        <EditableInput />
+                      </Editable>
                       <Button
                         size="sm"
                         leftIcon={<Copy size={20} />}
