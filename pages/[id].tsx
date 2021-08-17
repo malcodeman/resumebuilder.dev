@@ -205,8 +205,9 @@ function Builder() {
   function handleOnSubmit(data: { label: string; type: Section }) {
     onClose();
     switch (data.type) {
-      case "standard":
+      case "standardSection":
         return appendSection({
+          name: "standardSection",
           label: data.label,
           nested: [
             {
@@ -220,8 +221,9 @@ function Builder() {
             },
           ],
         });
-      case "tagList":
+      case "tagListSection":
         return appendSection({
+          name: "tagListSection",
           label: data.label,
           tags: "",
         });

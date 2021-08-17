@@ -73,7 +73,7 @@ function SectionHeader(props: props) {
                 label={TOOLTIP_MORE_LABEL}
                 aria-label={TOOLTIP_MORE_LABEL}
               >
-                <Box>
+                <Flex>
                   <PopoverTrigger>
                     <IconButton
                       size="xs"
@@ -84,7 +84,7 @@ function SectionHeader(props: props) {
                       onClick={(e) => e.stopPropagation()}
                     />
                   </PopoverTrigger>
-                </Box>
+                </Flex>
               </Tooltip>
               <PopoverContent
                 width="260px"
