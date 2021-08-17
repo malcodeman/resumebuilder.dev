@@ -18,9 +18,11 @@ type Fields = {
   city: string;
   country: string;
   summary: string;
-  standardSection: {
+  section: {
+    name: "standardSection" | "tagListSection";
     label: string;
-    nested: {
+    tags?: string;
+    nested?: {
       title: string;
       subtitle: string;
       website: string;
@@ -29,10 +31,6 @@ type Fields = {
       endDate: string;
       description: string;
     }[];
-  }[];
-  tagListSection: {
-    label: string;
-    tags: string;
   }[];
 };
 type Resume = {

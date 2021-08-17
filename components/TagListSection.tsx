@@ -49,10 +49,10 @@ function TagListSection(props: props) {
     >
       <SectionHeader
         defaultLabel={defaultLabel}
-        labelRegister={register(`tagListSection.${nestIndex}.label` as const)}
-        title={getValues(`tagListSection.${nestIndex}.label` as const)}
+        labelRegister={register(`section.${nestIndex}.label` as const)}
+        title={getValues(`section.${nestIndex}.label` as const)}
         onRemove={() => remove(nestIndex)}
-        onDuplicate={() => append(getValues(`tagListSection.${nestIndex}`))}
+        onDuplicate={() => append(getValues(`section.${nestIndex}`))}
       />
       <AccordionPanel>
         <Grid templateColumns="1fr 1fr" gap="4">
@@ -60,7 +60,7 @@ function TagListSection(props: props) {
             <FormControl>
               <Textarea
                 size="sm"
-                {...register(`tagListSection.${nestIndex}.tags` as const)}
+                {...register(`section.${nestIndex}.tags` as const)}
               />
               <FormHelperText>Add one item on each line</FormHelperText>
             </FormControl>

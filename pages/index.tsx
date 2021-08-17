@@ -48,8 +48,9 @@ function Home() {
         city: "",
         country: "",
         summary: "",
-        standardSection: [
+        section: [
           {
+            name: "standardSection" as const,
             label: "Employment History",
             nested: [
               {
@@ -64,6 +65,7 @@ function Home() {
             ],
           },
           {
+            name: "standardSection" as const,
             label: "Education",
             nested: [
               {
@@ -77,13 +79,13 @@ function Home() {
               },
             ],
           },
-        ],
-        tagListSection: [
           {
+            name: "tagListSection" as const,
             label: "Skills",
             tags: "",
           },
           {
+            name: "tagListSection" as const,
             label: "Hobbies",
             tags: "",
           },

@@ -1,4 +1,5 @@
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import * as R from "ramda";
 
 import { Fields } from "../types";
 
@@ -121,9 +122,16 @@ function TokyoTemplate(props: Fields) {
     city,
     country,
     summary,
-    standardSection,
-    tagListSection,
+    section,
   } = props;
+  const tagListSection = R.filter(
+    (item) => item.name === "tagListSection",
+    section
+  );
+  const standardSection = R.filter(
+    (item) => item.name === "standardSection",
+    section
+  );
 
   return (
     <Document>

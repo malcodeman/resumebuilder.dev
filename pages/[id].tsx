@@ -68,8 +68,7 @@ const defaultResume = {
     city: "",
     country: "",
     summary: "",
-    standardSection: [],
-    tagListSection: [],
+    section: [],
   },
 };
 const defaultValues = {
@@ -81,8 +80,7 @@ const defaultValues = {
   city: "",
   country: "",
   summary: "",
-  standardSection: [],
-  tagListSection: [],
+  section: [],
 };
 const toastId = "onSave";
 
@@ -95,23 +93,15 @@ function Builder() {
     defaultValues,
   });
   const {
-    fields: standardSectionFields,
-    append: appendStandardSection,
-    remove: removeStandardSection,
-    swap: swapStandardSection,
+    fields: sectionFields,
+    append: appendSection,
+    remove: removeSection,
+    swap: swapSection,
   } = useFieldArray({
     control,
-    name: "standardSection",
+    name: "section",
   });
-  const {
-    fields: tagListSectionFields,
-    append: appendTagListSection,
-    remove: removeTagListSection,
-    swap: swapTagListSection,
-  } = useFieldArray({
-    control,
-    name: "tagListSection",
-  });
+
   const fields = watch();
   const document = getTemplate(resume.template, fields);
   const [keyboardJs, setKeyboardJs] = React.useState(null);
@@ -216,7 +206,7 @@ function Builder() {
     onClose();
     switch (data.type) {
       case "standard":
-        return appendStandardSection({
+        return appendSection({
           label: data.label,
           nested: [
             {
@@ -231,7 +221,7 @@ function Builder() {
           ],
         });
       case "tagList":
-        return appendTagListSection({
+        return appendSection({
           label: data.label,
           tags: "",
         });
@@ -241,20 +231,9 @@ function Builder() {
   function handleDragEndStandard(event: DragEndEvent) {
     const { active, over } = event;
     if (active.id !== over.id) {
-      const from = R.findIndex(R.propEq("id", active.id))(
-        standardSectionFields
-      );
-      const to = R.findIndex(R.propEq("id", over.id))(standardSectionFields);
-      swapStandardSection(from, to);
-    }
-  }
-
-  function handleDragEndTagList(event: DragEndEvent) {
-    const { active, over } = event;
-    if (active.id !== over.id) {
-      const from = R.findIndex(R.propEq("id", active.id))(tagListSectionFields);
-      const to = R.findIndex(R.propEq("id", over.id))(tagListSectionFields);
-      swapTagListSection(from, to);
+      const from = R.findIndex(R.propEq("id", active.id))(sectionFields);
+      const to = R.findIndex(R.propEq("id", over.id))(sectionFields);
+      swapSection(from, to);
     }
   }
 
@@ -306,41 +285,38 @@ function Builder() {
                 <PersonalDetailsSection register={register} />
                 <DndContext sensors={sensors} onDragEnd={handleDragEndStandard}>
                   <SortableContext
-                    items={standardSectionFields}
+                    items={sectionFields}
                     strategy={verticalListSortingStrategy}
                   >
-                    {standardSectionFields.map((item, index) => (
-                      <StandardSection
-                        key={item.id}
-                        id={item.id}
-                        nestIndex={index}
-                        control={control}
-                        defaultLabel={item.label}
-                        getValues={getValues}
-                        register={register}
-                        remove={removeStandardSection}
-                        append={appendStandardSection}
-                      />
-                    ))}
-                  </SortableContext>
-                </DndContext>
-                <DndContext sensors={sensors} onDragEnd={handleDragEndTagList}>
-                  <SortableContext
-                    items={tagListSectionFields}
-                    strategy={verticalListSortingStrategy}
-                  >
-                    {tagListSectionFields.map((item, index) => (
-                      <TagListSection
-                        key={item.id}
-                        id={item.id}
-                        nestIndex={index}
-                        defaultLabel={item.label}
-                        getValues={getValues}
-                        register={register}
-                        remove={removeTagListSection}
-                        append={appendTagListSection}
-                      />
-                    ))}
+                    {sectionFields.map((item, index) => {
+                      if (item.name === "standardSection") {
+                        return (
+                          <StandardSection
+                            key={item.id}
+                            id={item.id}
+                            nestIndex={index}
+                            control={control}
+                            defaultLabel={item.label}
+                            getValues={getValues}
+                            register={register}
+                            remove={removeSection}
+                            append={appendSection}
+                          />
+                        );
+                      }
+                      return (
+                        <TagListSection
+                          key={item.id}
+                          id={item.id}
+                          nestIndex={index}
+                          defaultLabel={item.label}
+                          getValues={getValues}
+                          register={register}
+                          remove={removeSection}
+                          append={appendSection}
+                        />
+                      );
+                    })}
                   </SortableContext>
                 </DndContext>
               </Accordion>

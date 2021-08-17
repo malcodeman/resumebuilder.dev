@@ -97,8 +97,7 @@ function BerlinTemplate(props: Fields) {
     city,
     country,
     summary,
-    standardSection,
-    tagListSection,
+    section,
   } = props;
 
   return (
@@ -122,28 +121,28 @@ function BerlinTemplate(props: Fields) {
             </Text>
           ))}
         </View>
-        {standardSection.map((sectionItem, index) => {
-          return (
-            <View key={index} style={styles.section}>
-              <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>
-              {sectionItem.nested.map((item, index) => {
-                return (
-                  <View key={index} style={styles.sectionItem}>
-                    <Text style={styles.sectionHeading}>{item.title}</Text>
-                    <Text style={styles.text}>
-                      {item.subtitle} | {item.city} | {item.startDate} -{" "}
-                      {item.endDate}
-                    </Text>
-                    <Text style={styles.sectionDescription}>
-                      {item.description}
-                    </Text>
-                  </View>
-                );
-              })}
-            </View>
-          );
-        })}
-        {tagListSection.map((sectionItem, index) => {
+        {section.map((sectionItem, index) => {
+          if (sectionItem.name === "standardSection") {
+            return (
+              <View key={index} style={styles.section}>
+                <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>
+                {sectionItem.nested.map((item, index) => {
+                  return (
+                    <View key={index} style={styles.sectionItem}>
+                      <Text style={styles.sectionHeading}>{item.title}</Text>
+                      <Text style={styles.text}>
+                        {item.subtitle} | {item.city} | {item.startDate} -{" "}
+                        {item.endDate}
+                      </Text>
+                      <Text style={styles.sectionDescription}>
+                        {item.description}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </View>
+            );
+          }
           return (
             <View key={index} style={styles.section}>
               <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>

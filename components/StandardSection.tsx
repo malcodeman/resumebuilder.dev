@@ -57,7 +57,7 @@ function StandardSection(props: props) {
     append: appendNested,
   } = useFieldArray({
     control,
-    name: `standardSection.${nestIndex}.nested` as const,
+    name: `section.${nestIndex}.nested` as const,
   });
   const { attributes, listeners, transform, transition, setNodeRef } =
     useSortable({ id });
@@ -67,9 +67,7 @@ function StandardSection(props: props) {
   };
 
   function onDuplicate(index: number) {
-    appendNested(
-      getValues(`standardSection.${nestIndex}.nested.${index}` as const)
-    );
+    appendNested(getValues(`section.${nestIndex}.nested.${index}` as const));
   }
 
   function onAppend() {
@@ -95,11 +93,11 @@ function StandardSection(props: props) {
     >
       <SectionHeader
         defaultLabel={defaultLabel}
-        labelRegister={register(`standardSection.${nestIndex}.label` as const)}
-        title={getValues(`standardSection.${nestIndex}.label` as const)}
+        labelRegister={register(`section.${nestIndex}.label` as const)}
+        title={getValues(`section.${nestIndex}.label` as const)}
         onAppend={onAppend}
         onRemove={() => remove(nestIndex)}
-        onDuplicate={() => append(getValues(`standardSection.${nestIndex}`))}
+        onDuplicate={() => append(getValues(`section.${nestIndex}`))}
       />
       <AccordionPanel>
         {R.isEmpty(fields) ? (
@@ -124,7 +122,7 @@ function StandardSection(props: props) {
                   defaultLabel=""
                   title={
                     getValues(
-                      `standardSection.${nestIndex}.nested.${index}.title` as const
+                      `section.${nestIndex}.nested.${index}.title` as const
                     ) || "Untitled"
                   }
                   onAppend={onAppend}
@@ -139,7 +137,7 @@ function StandardSection(props: props) {
                         <Input
                           size="sm"
                           {...register(
-                            `standardSection.${nestIndex}.nested.${index}.title` as const
+                            `section.${nestIndex}.nested.${index}.title` as const
                           )}
                         />
                       </FormControl>
@@ -150,7 +148,7 @@ function StandardSection(props: props) {
                         <Input
                           size="sm"
                           {...register(
-                            `standardSection.${nestIndex}.nested.${index}.subtitle` as const
+                            `section.${nestIndex}.nested.${index}.subtitle` as const
                           )}
                         />
                       </FormControl>
@@ -160,7 +158,7 @@ function StandardSection(props: props) {
                       <Input
                         size="sm"
                         {...register(
-                          `standardSection.${nestIndex}.nested.${index}.website` as const
+                          `section.${nestIndex}.nested.${index}.website` as const
                         )}
                       />
                     </FormControl>
@@ -169,7 +167,7 @@ function StandardSection(props: props) {
                       <Input
                         size="sm"
                         {...register(
-                          `standardSection.${nestIndex}.nested.${index}.city` as const
+                          `section.${nestIndex}.nested.${index}.city` as const
                         )}
                       />
                     </FormControl>
@@ -178,7 +176,7 @@ function StandardSection(props: props) {
                       <Input
                         size="sm"
                         {...register(
-                          `standardSection.${nestIndex}.nested.${index}.startDate` as const
+                          `section.${nestIndex}.nested.${index}.startDate` as const
                         )}
                       />
                     </FormControl>
@@ -187,7 +185,7 @@ function StandardSection(props: props) {
                       <Input
                         size="sm"
                         {...register(
-                          `standardSection.${nestIndex}.nested.${index}.endDate` as const
+                          `section.${nestIndex}.nested.${index}.endDate` as const
                         )}
                       />
                     </FormControl>
@@ -197,7 +195,7 @@ function StandardSection(props: props) {
                         <Textarea
                           size="sm"
                           {...register(
-                            `standardSection.${nestIndex}.nested.${index}.description` as const
+                            `section.${nestIndex}.nested.${index}.description` as const
                           )}
                         />
                       </FormControl>
