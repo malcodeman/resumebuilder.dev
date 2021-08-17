@@ -29,6 +29,18 @@ import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
 import { useDebounce, useLocalStorage } from "react-use";
 import { useToast } from "@chakra-ui/react";
+import {
+  DndContext,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import * as R from "ramda";
 
 import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/PersonalDetailsSection";
@@ -40,7 +52,7 @@ import AddSectionModal from "../components/AddSectionModal";
 import { TEMPLATES } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
 
-import { Resume, Template, Section } from "../types";
+import { Resume, Template, Section, Fields } from "../types";
 
 const defaultResume = {
   id: "",
@@ -79,13 +91,14 @@ function Builder() {
   const { id } = router.query;
   const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
   const resume = resumes.find((item) => item.id === id) || defaultResume;
-  const { register, watch, reset, getValues, control } = useForm({
+  const { register, watch, reset, getValues, control } = useForm<Fields>({
     defaultValues,
   });
   const {
     fields: standardSectionFields,
     append: appendStandardSection,
     remove: removeStandardSection,
+    swap: swapStandardSection,
   } = useFieldArray({
     control,
     name: "standardSection",
@@ -94,6 +107,7 @@ function Builder() {
     fields: tagListSectionFields,
     append: appendTagListSection,
     remove: removeTagListSection,
+    swap: swapTagListSection,
   } = useFieldArray({
     control,
     name: "tagListSection",
@@ -104,6 +118,13 @@ function Builder() {
   const toast = useToast();
   const templateBgColor = useColorModeValue("gray.300", "gray.600");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
 
   function handleOnSave(event: React.KeyboardEvent) {
     event.preventDefault();
@@ -217,6 +238,26 @@ function Builder() {
     }
   }
 
+  function handleDragEndStandard(event: DragEndEvent) {
+    const { active, over } = event;
+    if (active.id !== over.id) {
+      const from = R.findIndex(R.propEq("id", active.id))(
+        standardSectionFields
+      );
+      const to = R.findIndex(R.propEq("id", over.id))(standardSectionFields);
+      swapStandardSection(from, to);
+    }
+  }
+
+  function handleDragEndTagList(event: DragEndEvent) {
+    const { active, over } = event;
+    if (active.id !== over.id) {
+      const from = R.findIndex(R.propEq("id", active.id))(tagListSectionFields);
+      const to = R.findIndex(R.propEq("id", over.id))(tagListSectionFields);
+      swapTagListSection(from, to);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -263,29 +304,45 @@ function Builder() {
             <TabPanel padding="0">
               <Accordion defaultIndex={[0]} allowToggle marginBottom="20px">
                 <PersonalDetailsSection register={register} />
-                {tagListSectionFields.map((item, index) => (
-                  <TagListSection
-                    key={item.id}
-                    nestIndex={index}
-                    defaultLabel={item.label}
-                    getValues={getValues}
-                    register={register}
-                    remove={removeTagListSection}
-                    append={appendTagListSection}
-                  />
-                ))}
-                {standardSectionFields.map((item, index) => (
-                  <StandardSection
-                    key={item.id}
-                    nestIndex={index}
-                    control={control}
-                    defaultLabel={item.label}
-                    getValues={getValues}
-                    register={register}
-                    remove={removeStandardSection}
-                    append={appendStandardSection}
-                  />
-                ))}
+                <DndContext sensors={sensors} onDragEnd={handleDragEndStandard}>
+                  <SortableContext
+                    items={standardSectionFields}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    {standardSectionFields.map((item, index) => (
+                      <StandardSection
+                        key={item.id}
+                        id={item.id}
+                        nestIndex={index}
+                        control={control}
+                        defaultLabel={item.label}
+                        getValues={getValues}
+                        register={register}
+                        remove={removeStandardSection}
+                        append={appendStandardSection}
+                      />
+                    ))}
+                  </SortableContext>
+                </DndContext>
+                <DndContext sensors={sensors} onDragEnd={handleDragEndTagList}>
+                  <SortableContext
+                    items={tagListSectionFields}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    {tagListSectionFields.map((item, index) => (
+                      <TagListSection
+                        key={item.id}
+                        id={item.id}
+                        nestIndex={index}
+                        defaultLabel={item.label}
+                        getValues={getValues}
+                        register={register}
+                        remove={removeTagListSection}
+                        append={appendTagListSection}
+                      />
+                    ))}
+                  </SortableContext>
+                </DndContext>
               </Accordion>
               <Box
                 paddingInlineStart="4"

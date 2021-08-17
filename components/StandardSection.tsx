@@ -19,12 +19,15 @@ import {
   FieldArrayMethodProps,
 } from "react-hook-form";
 import * as R from "ramda";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 import SectionHeader from "./SectionHeader";
 
 import { Register, Fields } from "../types";
 
 type props = {
+  id: string;
   nestIndex: number;
   control: Control<Fields>;
   defaultLabel: string;
@@ -39,6 +42,7 @@ type props = {
 
 function StandardSection(props: props) {
   const {
+    id,
     nestIndex,
     control,
     defaultLabel,
@@ -55,6 +59,12 @@ function StandardSection(props: props) {
     control,
     name: `standardSection.${nestIndex}.nested` as const,
   });
+  const { attributes, listeners, transform, transition, setNodeRef } =
+    useSortable({ id });
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  };
 
   function onDuplicate(index: number) {
     appendNested(
@@ -75,7 +85,14 @@ function StandardSection(props: props) {
   }
 
   return (
-    <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
+    <AccordionItem
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      borderTopWidth="0"
+      _last={{ borderBottomWidth: 0 }}
+    >
       <SectionHeader
         defaultLabel={defaultLabel}
         labelRegister={register(`standardSection.${nestIndex}.label` as const)}
