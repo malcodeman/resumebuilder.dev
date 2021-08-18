@@ -202,12 +202,12 @@ function Builder() {
     saveAs(blob, `${resume.name}.json`);
   }
 
-  function handleOnSubmit(data: { label: string; type: Section }) {
+  function handleOnSubmit(data: { label: string; name: Section }) {
     onClose();
-    switch (data.type) {
+    switch (data.name) {
       case "standardSection":
         return appendSection({
-          name: "standardSection",
+          name: data.name,
           label: data.label,
           nested: [
             {
@@ -223,7 +223,7 @@ function Builder() {
         });
       case "tagListSection":
         return appendSection({
-          name: "tagListSection",
+          name: data.name,
           label: data.label,
           tags: "",
         });

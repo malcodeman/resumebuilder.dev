@@ -25,7 +25,7 @@ type props = {
 
 const defaultValues = {
   label: "Custom section",
-  type: "standard",
+  name: "standardSection",
 };
 
 function AddSectionModal(props: props) {
@@ -52,17 +52,17 @@ function AddSectionModal(props: props) {
             </FormControl>
             <FormControl>
               <FormLabel>Section type</FormLabel>
-              <RadioGroup defaultValue="standard">
+              <RadioGroup defaultValue={defaultValues.name}>
                 <Stack direction="row">
                   <Radio
-                    value="standard"
-                    {...register("type", { required: true })}
+                    value={defaultValues.name}
+                    {...register("name", { required: true })}
                   >
                     Standard
                   </Radio>
                   <Radio
-                    value="tagList"
-                    {...register("type", { required: true })}
+                    value="tagListSection"
+                    {...register("name", { required: true })}
                   >
                     Tag List
                   </Radio>
