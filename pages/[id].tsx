@@ -116,18 +116,6 @@ function Builder() {
     })
   );
 
-  function handleOnSave(event: React.KeyboardEvent) {
-    event.preventDefault();
-    if (!toast.isActive(toastId)) {
-      toast({
-        id: toastId,
-        description: "We save your work automatically.",
-        duration: 1000,
-        isClosable: true,
-      });
-    }
-  }
-
   React.useEffect(() => {
     import("keyboardjs").then((k) => setKeyboardJs(k.default || k));
   }, []);
@@ -136,11 +124,24 @@ function Builder() {
     if (!keyboardJs) {
       return;
     }
+
+    function handleOnSave(event: React.KeyboardEvent) {
+      event.preventDefault();
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          description: "We save your work automatically.",
+          duration: 1000,
+          isClosable: true,
+        });
+      }
+    }
+
     keyboardJs.bind(`ctrl + s`, handleOnSave);
     return () => {
       keyboardJs.unbind(`ctrl + s`, handleOnSave);
     };
-  }, [keyboardJs]);
+  }, [keyboardJs, toast]);
 
   React.useEffect(() => {
     if (resume.id) {
