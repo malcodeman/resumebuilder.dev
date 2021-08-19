@@ -18,10 +18,10 @@ function TagListSectionBody(props: props) {
   const { nestIndex, register } = props;
 
   return (
-    <AccordionPanel>
+    <AccordionPanel onPointerDown={(e) => e.stopPropagation()}>
       <Grid templateColumns="1fr 1fr" gap="4">
         <GridItem colSpan={2}>
-          <FormControl onPointerDown={(e) => e.stopPropagation()}>
+          <FormControl>
             <Textarea
               size="sm"
               {...register(`section.${nestIndex}.tags` as const)}

@@ -58,10 +58,10 @@ function StandardSectionBody(props: props) {
           onRemove={() => onRemove(index)}
           onDuplicate={() => onDuplicate(index)}
         />
-        <AccordionPanel>
+        <AccordionPanel onPointerDown={onPointerDownHanlder}>
           <Grid templateColumns="1fr 1fr" gap="4">
             <GridItem colSpan={2}>
-              <FormControl onPointerDown={onPointerDownHanlder}>
+              <FormControl>
                 <FormLabel>Title</FormLabel>
                 <Input
                   size="sm"
@@ -72,7 +72,7 @@ function StandardSectionBody(props: props) {
               </FormControl>
             </GridItem>
             <GridItem colSpan={2}>
-              <FormControl onPointerDown={onPointerDownHanlder}>
+              <FormControl>
                 <FormLabel>Subtitle</FormLabel>
                 <Input
                   size="sm"
@@ -82,7 +82,7 @@ function StandardSectionBody(props: props) {
                 />
               </FormControl>
             </GridItem>
-            <FormControl onPointerDown={onPointerDownHanlder}>
+            <FormControl>
               <FormLabel>Website</FormLabel>
               <Input
                 size="sm"
@@ -91,7 +91,7 @@ function StandardSectionBody(props: props) {
                 )}
               />
             </FormControl>
-            <FormControl onPointerDown={onPointerDownHanlder}>
+            <FormControl>
               <FormLabel>City</FormLabel>
               <Input
                 size="sm"
@@ -100,7 +100,7 @@ function StandardSectionBody(props: props) {
                 )}
               />
             </FormControl>
-            <FormControl onPointerDown={onPointerDownHanlder}>
+            <FormControl>
               <FormLabel>Start date</FormLabel>
               <Input
                 size="sm"
@@ -109,7 +109,7 @@ function StandardSectionBody(props: props) {
                 )}
               />
             </FormControl>
-            <FormControl onPointerDown={onPointerDownHanlder}>
+            <FormControl>
               <FormLabel>End date</FormLabel>
               <Input
                 size="sm"
@@ -119,7 +119,7 @@ function StandardSectionBody(props: props) {
               />
             </FormControl>
             <GridItem colSpan={2}>
-              <FormControl onPointerDown={onPointerDownHanlder}>
+              <FormControl>
                 <FormLabel>Description</FormLabel>
                 <Textarea
                   size="sm"
