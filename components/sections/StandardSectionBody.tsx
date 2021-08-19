@@ -15,7 +15,7 @@ import { CSS } from "@dnd-kit/utilities";
 
 import SectionHeader from "./SectionHeader";
 
-import { Fields, Register } from "../types";
+import { Fields, Register } from "../../types";
 
 type props = {
   id: string;

@@ -1,6 +1,6 @@
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
-import { Fields } from "../types";
+import { Fields } from "../../types";
 
 const styles = StyleSheet.create({
   page: {

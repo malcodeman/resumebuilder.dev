@@ -1,19 +1,12 @@
-import {
-  Grid,
-  AccordionItem,
-  AccordionPanel,
-  GridItem,
-  Textarea,
-  FormControl,
-  FormHelperText,
-} from "@chakra-ui/react";
+import { AccordionItem } from "@chakra-ui/react";
 import { UseFormGetValues, FieldArrayMethodProps } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import SectionHeader from "./SectionHeader";
+import TagListSectionBody from "./TagListSectionBody";
 
-import { Register, Fields } from "../types";
+import { Register, Fields } from "../../types";
 
 type props = {
   id: string;
@@ -54,19 +47,7 @@ function TagListSection(props: props) {
         onRemove={() => remove(nestIndex)}
         onDuplicate={() => append(getValues(`section.${nestIndex}`))}
       />
-      <AccordionPanel>
-        <Grid templateColumns="1fr 1fr" gap="4">
-          <GridItem colSpan={2}>
-            <FormControl>
-              <Textarea
-                size="sm"
-                {...register(`section.${nestIndex}.tags` as const)}
-              />
-              <FormHelperText>Add one item on each line</FormHelperText>
-            </FormControl>
-          </GridItem>
-        </Grid>
-      </AccordionPanel>
+      <TagListSectionBody nestIndex={nestIndex} register={register} />
     </AccordionItem>
   );
 }

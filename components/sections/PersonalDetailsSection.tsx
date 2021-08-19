@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { Mail, Phone } from "react-feather";
 
-import { Register } from "../types";
+import { Register } from "../../types";
 
 type props = {
   register: Register;

@@ -37,11 +37,11 @@ import * as R from "ramda";
 import { motion } from "framer-motion";
 
 import Logo from "../components/Logo";
-import PersonalDetailsSection from "../components/PersonalDetailsSection";
-import TagListSection from "../components/TagListSection";
-import StandardSection from "../components/StandardSection";
+import PersonalDetailsSection from "../components/sections/PersonalDetailsSection";
+import TagListSection from "../components/sections/TagListSection";
+import StandardSection from "../components/sections/StandardSection";
 import EditableName from "../components/EditableName";
-import AddSectionModal from "../components/AddSectionModal";
+import AddSectionModal from "../components/sections/AddSectionModal";
 import HeaderPopover from "../components/HeaderPopover";
 
 import { TEMPLATES } from "../lib/constants";

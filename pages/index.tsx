@@ -21,8 +21,8 @@ import { useRouter } from "next/router";
 import * as R from "ramda";
 
 import Header from "../components/Header";
-import NewResumeModal from "../components/NewResumeModal";
-import ResumeItem from "../components/ResumeItem";
+import NewResumeModal from "../components/resumes/NewResumeModal";
+import ResumeItem from "../components/resumes/ResumeItem";
 
 import { Resume, Template } from "../types";
 

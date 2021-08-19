@@ -1,5 +1,5 @@
-import BerlinTemplate from "../components/BerlinTemplate";
-import TokyoTemplate from "../components/TokyoTemplate";
+import BerlinTemplate from "../components/templates/BerlinTemplate";
+import TokyoTemplate from "../components/templates/TokyoTemplate";
 
 import { Fields, Template } from "../types";
 

@@ -16,9 +16,9 @@ import { Copy, MoreHorizontal, Trash2 } from "react-feather";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 
-import getTemplate from "../lib/getTemplate";
+import getTemplate from "../../lib/getTemplate";
 
-import { Resume } from "../types";
+import { Resume } from "../../types";
 
 type props = {
   resume: Resume;

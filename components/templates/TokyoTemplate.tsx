@@ -1,7 +1,7 @@
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import * as R from "ramda";
 
-import { Fields } from "../types";
+import { Fields } from "../../types";
 
 const styles = StyleSheet.create({
   page: {

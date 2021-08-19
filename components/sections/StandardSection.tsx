@@ -24,7 +24,7 @@ import {
 import SectionHeader from "./SectionHeader";
 import StandardSectionBody from "./StandardSectionBody";
 
-import { Register, Fields } from "../types";
+import { Register, Fields } from "../../types";
 
 type props = {
   id: string;
