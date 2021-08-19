@@ -187,9 +187,11 @@ function TokyoTemplate(props: Fields) {
                           {item.subtitle} | {item.city} | {item.startDate} -{" "}
                           {item.endDate}
                         </Text>
-                        <Text style={styles.sectionText}>
-                          {item.description}
-                        </Text>
+                        {item.description.split("\n").map((item, index) => (
+                          <Text key={index} style={styles.sectionText}>
+                            {item}
+                          </Text>
+                        ))}
                       </View>
                     );
                   })}
