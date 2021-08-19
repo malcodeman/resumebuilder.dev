@@ -67,11 +67,12 @@ function SectionHeader(props: props) {
           {title}
         </Box>
         <Popover>
-          {({ onClose }) => (
+          {({ onClose, isOpen }) => (
             <>
               <Tooltip
                 label={TOOLTIP_MORE_LABEL}
                 aria-label={TOOLTIP_MORE_LABEL}
+                isDisabled={isOpen}
               >
                 <Flex>
                   <PopoverTrigger>
