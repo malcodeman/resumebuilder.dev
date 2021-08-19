@@ -12,6 +12,9 @@ import {
   TabPanel,
   Tab,
   SimpleGrid,
+  Editable,
+  EditableInput,
+  EditablePreview,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -40,7 +43,6 @@ import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/sections/PersonalDetailsSection";
 import TagListSection from "../components/sections/TagListSection";
 import StandardSection from "../components/sections/StandardSection";
-import EditableName from "../components/EditableName";
 import AddSectionModal from "../components/sections/AddSectionModal";
 import HeaderPopover from "../components/HeaderPopover";
 
@@ -244,7 +246,10 @@ function Builder() {
       <Box as="header" padding="20px">
         <Flex as="nav" justifyContent="space-between">
           <Logo />
-          <EditableName value={resume.name} onChange={handleOnNameChange} />
+          <Editable value={resume.name} onChange={handleOnNameChange}>
+            <EditablePreview />
+            <EditableInput />
+          </Editable>
           <Flex>
             <Button mr="2" size="sm" onClick={handleOnPdfExport}>
               Export PDF
