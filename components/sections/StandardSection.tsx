@@ -60,8 +60,14 @@ function StandardSection(props: props) {
     control,
     name: `section.${nestIndex}.nested` as const,
   });
-  const { attributes, listeners, transform, transition, setNodeRef } =
-    useSortable({ id });
+  const {
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+    setNodeRef,
+  } = useSortable({ id });
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
@@ -110,6 +116,7 @@ function StandardSection(props: props) {
       {...attributes}
       {...listeners}
       borderTopWidth="0"
+      opacity={isDragging ? "0.5" : "initial"}
       _last={{ borderBottomWidth: 0 }}
     >
       <SectionHeader

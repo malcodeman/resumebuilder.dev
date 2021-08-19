@@ -24,8 +24,14 @@ type props = {
 function TagListSection(props: props) {
   const { id, nestIndex, defaultLabel, getValues, register, remove, append } =
     props;
-  const { attributes, listeners, transform, transition, setNodeRef } =
-    useSortable({ id });
+  const {
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+    setNodeRef,
+  } = useSortable({ id });
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
@@ -38,6 +44,7 @@ function TagListSection(props: props) {
       {...attributes}
       {...listeners}
       borderTopWidth="0"
+      opacity={isDragging ? "0.5" : "initial"}
       _last={{ borderBottomWidth: 0 }}
     >
       <SectionHeader

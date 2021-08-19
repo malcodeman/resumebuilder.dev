@@ -30,8 +30,14 @@ type props = {
 function StandardSectionBody(props: props) {
   const { id, nestIndex, index, getValues, register, onRemove, onDuplicate } =
     props;
-  const { attributes, listeners, transform, transition, setNodeRef } =
-    useSortable({ id });
+  const {
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+    setNodeRef,
+  } = useSortable({ id });
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
@@ -47,6 +53,7 @@ function StandardSectionBody(props: props) {
       style={style}
       {...attributes}
       {...listeners}
+      opacity={isDragging ? "0.5" : "initial"}
       allowToggle
     >
       <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
