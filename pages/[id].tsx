@@ -13,16 +13,9 @@ import {
   Tab,
   SimpleGrid,
   useColorModeValue,
-  ButtonGroup,
-  IconButton,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
-  Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { MoreVertical, Plus } from "react-feather";
+import { Plus } from "react-feather";
 import { useRouter } from "next/router";
 import { useForm, useFieldArray } from "react-hook-form";
 import { pdf } from "@react-pdf/renderer";
@@ -41,6 +34,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import * as R from "ramda";
+import { motion } from "framer-motion";
 
 import Logo from "../components/Logo";
 import PersonalDetailsSection from "../components/PersonalDetailsSection";
@@ -48,6 +42,7 @@ import TagListSection from "../components/TagListSection";
 import StandardSection from "../components/StandardSection";
 import EditableName from "../components/EditableName";
 import AddSectionModal from "../components/AddSectionModal";
+import HeaderPopover from "../components/HeaderPopover";
 
 import { TEMPLATES } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
@@ -115,6 +110,7 @@ function Builder() {
       },
     })
   );
+  const [isFullWidth, setIsFullWidth] = useLocalStorage("isFullWidth", false);
 
   React.useEffect(() => {
     import("keyboardjs").then((k) => setKeyboardJs(k.default || k));
@@ -191,12 +187,12 @@ function Builder() {
     updateInLocalStorage(nextResume);
   }
 
-  async function handleDownload() {
+  async function handleOnPdfExport() {
     const blob = await pdf(document).toBlob();
     saveAs(blob, resume.name);
   }
 
-  function handleJsonDownload() {
+  function handleOnJsonExport() {
     const blob = new Blob([JSON.stringify(resume)], {
       type: "application/json",
     });
@@ -249,26 +245,17 @@ function Builder() {
         <Flex as="nav" justifyContent="space-between">
           <Logo />
           <EditableName value={resume.name} onChange={handleOnNameChange} />
-          <ButtonGroup size="sm" isAttached>
-            <Button mr="-px" onClick={handleDownload}>
-              Download PDF
+          <Flex>
+            <Button mr="2" size="sm" onClick={handleOnPdfExport}>
+              Export PDF
             </Button>
-            <Popover>
-              <PopoverTrigger>
-                <IconButton
-                  aria-label="More options"
-                  icon={<MoreVertical size={20} />}
-                />
-              </PopoverTrigger>
-              <PopoverContent width="unset">
-                <PopoverBody>
-                  <Text cursor="pointer" onClick={handleJsonDownload}>
-                    Download JSON
-                  </Text>
-                </PopoverBody>
-              </PopoverContent>
-            </Popover>
-          </ButtonGroup>
+            <HeaderPopover
+              isFullWidth={isFullWidth}
+              setIsFullWidth={setIsFullWidth}
+              onPdfExport={handleOnPdfExport}
+              onJsonExport={handleOnJsonExport}
+            />
+          </Flex>
         </Flex>
       </Box>
       <Grid
@@ -360,7 +347,13 @@ function Builder() {
             </TabPanel>
           </TabPanels>
         </Tabs>
-        <Box>{document}</Box>
+        <Box
+          as={motion.div}
+          margin="0 auto"
+          animate={{ width: isFullWidth ? "100%" : "900px" }}
+        >
+          {document}
+        </Box>
       </Grid>
       <AddSectionModal
         isOpen={isOpen}
