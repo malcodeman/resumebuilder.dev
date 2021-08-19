@@ -1,17 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  AccordionItem,
-  AccordionPanel,
-  Input,
-  GridItem,
-  Textarea,
-  FormControl,
-  FormLabel,
-  Accordion,
-  Text,
-  Box,
-} from "@chakra-ui/react";
+import { AccordionItem, AccordionPanel, Text, Box } from "@chakra-ui/react";
 import {
   useFieldArray,
   UseFormGetValues,
@@ -19,10 +7,22 @@ import {
   FieldArrayMethodProps,
 } from "react-hook-form";
 import * as R from "ramda";
-import { useSortable } from "@dnd-kit/sortable";
+import {
+  useSortable,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import {
+  DndContext,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
 
 import SectionHeader from "./SectionHeader";
+import StandardSectionBody from "./StandardSectionBody";
 
 import { Register, Fields } from "../types";
 
@@ -52,9 +52,10 @@ function StandardSection(props: props) {
     append,
   } = props;
   const {
-    fields,
+    fields: fieldsNested,
     remove: removeNested,
     append: appendNested,
+    swap: swapNested,
   } = useFieldArray({
     control,
     name: `section.${nestIndex}.nested` as const,
@@ -65,12 +66,23 @@ function StandardSection(props: props) {
     transform: CSS.Translate.toString(transform),
     transition,
   };
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
 
-  function onDuplicate(index: number) {
+  function handleOnDuplicate(index: number) {
     appendNested(getValues(`section.${nestIndex}.nested.${index}` as const));
   }
 
-  function onAppend() {
+  function handleOnRemove(index: number) {
+    removeNested(index);
+  }
+
+  function handleOnAppend() {
     appendNested({
       title: "",
       subtitle: "",
@@ -80,6 +92,15 @@ function StandardSection(props: props) {
       endDate: "",
       description: "",
     });
+  }
+
+  function handleOnDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (active.id !== over.id) {
+      const from = R.findIndex(R.propEq("id", active.id))(fieldsNested);
+      const to = R.findIndex(R.propEq("id", over.id))(fieldsNested);
+      swapNested(from, to);
+    }
   }
 
   return (
@@ -95,12 +116,12 @@ function StandardSection(props: props) {
         defaultLabel={defaultLabel}
         labelRegister={register(`section.${nestIndex}.label` as const)}
         title={getValues(`section.${nestIndex}.label` as const)}
-        onAppend={onAppend}
+        onAppend={handleOnAppend}
         onRemove={() => remove(nestIndex)}
         onDuplicate={() => append(getValues(`section.${nestIndex}`))}
       />
       <AccordionPanel>
-        {R.isEmpty(fields) ? (
+        {R.isEmpty(fieldsNested) ? (
           <Box
             paddingY="2"
             paddingInlineStart="calc(1.5rem + 20px)"
@@ -111,101 +132,27 @@ function StandardSection(props: props) {
         ) : (
           <></>
         )}
-        {fields.map((item, index) => {
-          return (
-            <Accordion key={item.id} allowToggle>
-              <AccordionItem
-                borderTopWidth="0"
-                _last={{ borderBottomWidth: 0 }}
-              >
-                <SectionHeader
-                  defaultLabel=""
-                  title={
-                    getValues(
-                      `section.${nestIndex}.nested.${index}.title` as const
-                    ) || "Untitled"
-                  }
-                  onAppend={onAppend}
-                  onRemove={() => removeNested(index)}
-                  onDuplicate={() => onDuplicate(index)}
+        <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
+          <SortableContext
+            items={fieldsNested}
+            strategy={verticalListSortingStrategy}
+          >
+            {fieldsNested.map((item, index) => {
+              return (
+                <StandardSectionBody
+                  key={item.id}
+                  id={item.id}
+                  nestIndex={nestIndex}
+                  index={index}
+                  getValues={getValues}
+                  register={register}
+                  onDuplicate={handleOnDuplicate}
+                  onRemove={handleOnRemove}
                 />
-                <AccordionPanel>
-                  <Grid templateColumns="1fr 1fr" gap="4">
-                    <GridItem colSpan={2}>
-                      <FormControl>
-                        <FormLabel>Title</FormLabel>
-                        <Input
-                          size="sm"
-                          {...register(
-                            `section.${nestIndex}.nested.${index}.title` as const
-                          )}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                      <FormControl>
-                        <FormLabel>Subtitle</FormLabel>
-                        <Input
-                          size="sm"
-                          {...register(
-                            `section.${nestIndex}.nested.${index}.subtitle` as const
-                          )}
-                        />
-                      </FormControl>
-                    </GridItem>
-                    <FormControl>
-                      <FormLabel>Website</FormLabel>
-                      <Input
-                        size="sm"
-                        {...register(
-                          `section.${nestIndex}.nested.${index}.website` as const
-                        )}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>City</FormLabel>
-                      <Input
-                        size="sm"
-                        {...register(
-                          `section.${nestIndex}.nested.${index}.city` as const
-                        )}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Start date</FormLabel>
-                      <Input
-                        size="sm"
-                        {...register(
-                          `section.${nestIndex}.nested.${index}.startDate` as const
-                        )}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>End date</FormLabel>
-                      <Input
-                        size="sm"
-                        {...register(
-                          `section.${nestIndex}.nested.${index}.endDate` as const
-                        )}
-                      />
-                    </FormControl>
-                    <GridItem colSpan={2}>
-                      <FormControl>
-                        <FormLabel>Description</FormLabel>
-                        <Textarea
-                          size="sm"
-                          {...register(
-                            `section.${nestIndex}.nested.${index}.description` as const
-                          )}
-                        />
-                      </FormControl>
-                    </GridItem>
-                  </Grid>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          );
-        })}
+              );
+            })}
+          </SortableContext>
+        </DndContext>
       </AccordionPanel>
     </AccordionItem>
   );

@@ -19,7 +19,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import * as R from "ramda";
 
 type props = {
-  defaultLabel: string;
+  defaultLabel?: string;
   title: string;
   labelRegister?: UseFormRegisterReturn;
   onAppend?: () => void;
@@ -39,7 +39,7 @@ function SectionHeader(props: props) {
     onDuplicate,
     onRemove,
   } = props;
-  const isNested = R.isEmpty(defaultLabel);
+  const isNested = R.isNil(defaultLabel);
   const isTagList = R.isNil(labelRegister)
     ? false
     : R.includes("tagList", labelRegister.name);

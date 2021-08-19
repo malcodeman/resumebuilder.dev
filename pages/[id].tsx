@@ -227,7 +227,7 @@ function Builder() {
     }
   }
 
-  function handleDragEndStandard(event: DragEndEvent) {
+  function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active.id !== over.id) {
       const from = R.findIndex(R.propEq("id", active.id))(sectionFields);
@@ -273,7 +273,7 @@ function Builder() {
             <TabPanel padding="0">
               <Accordion defaultIndex={[0]} allowToggle marginBottom="20px">
                 <PersonalDetailsSection register={register} />
-                <DndContext sensors={sensors} onDragEnd={handleDragEndStandard}>
+                <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
                   <SortableContext
                     items={sectionFields}
                     strategy={verticalListSortingStrategy}
