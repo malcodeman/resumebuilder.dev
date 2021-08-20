@@ -25,7 +25,7 @@ import * as R from "ramda";
 import Header from "../components/Header";
 import NewResumeModal from "../components/resumes/NewResumeModal";
 import ResumeItem from "../components/resumes/ResumeItem";
-import ImportModal from "../components/ImportModal";
+import ImportDataModal from "../components/ImportDataModal";
 
 import { Resume, Template, Fields } from "../types";
 
@@ -217,7 +217,7 @@ function Home() {
         onClose={onNewResumeModalClose}
         onSubmit={handleOnSubmit}
       />
-      <ImportModal
+      <ImportDataModal
         isOpen={isImportDataModalOpen}
         onClose={onImporDataModalClose}
         onImport={handleOnImport}

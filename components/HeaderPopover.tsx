@@ -16,7 +16,7 @@ import {
 import { Download, Link, MoreHorizontal, Upload } from "react-feather";
 import { useCopyToClipboard } from "react-use";
 
-import ImportModal from "./ImportModal";
+import ImportDataModal from "./ImportDataModal";
 
 import { Fields } from "../types";
 
@@ -134,7 +134,7 @@ function HeaderPopover(props: props) {
           </>
         )}
       </Popover>
-      <ImportModal isOpen={isOpen} onClose={onClose} onImport={onImport} />
+      <ImportDataModal isOpen={isOpen} onClose={onClose} onImport={onImport} />
     </>
   );
 }

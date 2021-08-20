@@ -9,6 +9,7 @@ import {
   Text,
   Grid,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import * as R from "ramda";
 import { ChevronLeft } from "react-feather";
@@ -35,10 +36,11 @@ const IMPORTS = [
   { label: "GitHub", value: "github", isDisabled: true },
 ];
 
-function ImportModal(props: props) {
+function ImportDataModal(props: props) {
   const { isOpen, onClose, onImport } = props;
   const [source, setSource] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const toast = useToast();
 
   React.useEffect(() => {
     if (!isOpen) {
@@ -62,7 +64,11 @@ function ImportModal(props: props) {
       onImport(fields);
       onClose();
     } catch (error) {
-      console.error(error);
+      toast({
+        description: "Something went wrong.",
+        status: "error",
+        isClosable: true,
+      });
     } finally {
       setIsLoading(false);
     }
@@ -117,4 +123,4 @@ function ImportModal(props: props) {
     </Modal>
   );
 }
-export default ImportModal;
+export default ImportDataModal;
