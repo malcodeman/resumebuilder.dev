@@ -238,6 +238,10 @@ function Builder() {
     }
   }
 
+  function handleOnImport(fields: Fields) {
+    reset({ ...fields });
+  }
+
   return (
     <>
       <Head>
@@ -259,6 +263,7 @@ function Builder() {
               setIsFullWidth={setIsFullWidth}
               onPdfExport={handleOnPdfExport}
               onJsonExport={handleOnJsonExport}
+              onImport={handleOnImport}
             />
           </Flex>
         </Flex>
