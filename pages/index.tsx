@@ -189,27 +189,31 @@ function Home() {
               />
             </ButtonGroup>
           </Flex>
-          {resumes.length === 0 && (
+          {R.isEmpty(resumes) ? (
             <Flex flexDirection="column" alignItems="center" padding="4">
               <Text>No Resumes</Text>
               <Text fontSize="small">Create a new resume to get started.</Text>
             </Flex>
+          ) : (
+            <Grid
+              gap="4"
+              gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
+              data-cy="resumes_grid"
+            >
+              {R.map(
+                (item) => (
+                  <ResumeItem
+                    key={item.id}
+                    resume={item}
+                    onDelete={handleOnDelete}
+                    onDuplicate={handleOnDuplicate}
+                    onNameChange={handleOnNameChange}
+                  />
+                ),
+                resumes
+              )}
+            </Grid>
           )}
-          <Grid
-            gap="4"
-            gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
-            data-cy="resumes_grid"
-          >
-            {resumes.map((item) => (
-              <ResumeItem
-                key={item.id}
-                resume={item}
-                onDelete={handleOnDelete}
-                onDuplicate={handleOnDuplicate}
-                onNameChange={handleOnNameChange}
-              />
-            ))}
-          </Grid>
         </Container>
       </Box>
       <NewResumeModal
