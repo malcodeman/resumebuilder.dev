@@ -38,6 +38,7 @@ const IMPORTS = [
 function ImportModal(props: props) {
   const { isOpen, onClose, onImport } = props;
   const [source, setSource] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (!isOpen) {
@@ -54,6 +55,7 @@ function ImportModal(props: props) {
 
   async function onDropHandler(acceptedFiles: File[]) {
     try {
+      setIsLoading(true);
       const result = await utils.readAsTextAsync(acceptedFiles[0]);
       const text = result instanceof ArrayBuffer ? "" : result;
       const fields = getFields(text);
@@ -61,6 +63,8 @@ function ImportModal(props: props) {
       onClose();
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -106,7 +110,7 @@ function ImportModal(props: props) {
               </Grid>
             </>
           ) : (
-            <FileUploader onDrop={onDropHandler} />
+            <FileUploader onDrop={onDropHandler} isLoading={isLoading} />
           )}
         </ModalBody>
       </ModalContent>

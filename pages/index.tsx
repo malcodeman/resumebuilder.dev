@@ -13,8 +13,10 @@ import {
   PopoverBody,
   Text,
   Kbd,
+  ButtonGroup,
+  IconButton,
 } from "@chakra-ui/react";
-import { Plus } from "react-feather";
+import { Upload } from "react-feather";
 import { nanoid } from "nanoid";
 import { useKeyPressEvent, useLocalStorage } from "react-use";
 import { useRouter } from "next/router";
@@ -23,15 +25,25 @@ import * as R from "ramda";
 import Header from "../components/Header";
 import NewResumeModal from "../components/resumes/NewResumeModal";
 import ResumeItem from "../components/resumes/ResumeItem";
+import ImportModal from "../components/ImportModal";
 
-import { Resume, Template } from "../types";
+import { Resume, Template, Fields } from "../types";
 
 function Home() {
   const router = useRouter();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isNewResumeModalOpen,
+    onOpen: onNewResumeModalOpen,
+    onClose: onNewResumeModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isImportDataModalOpen,
+    onOpen: onImportDataModalOpen,
+    onClose: onImporDataModalClose,
+  } = useDisclosure();
   const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
 
-  useKeyPressEvent("n", () => {}, onOpen);
+  useKeyPressEvent("n", () => {}, onNewResumeModalOpen);
 
   function handleOnSubmit(data: { name: string }) {
     const resume = {
@@ -93,7 +105,7 @@ function Home() {
       },
     };
     setResumes([...resumes, resume]);
-    onClose();
+    onNewResumeModalClose();
     router.push(`/${resume.id}`);
   }
 
@@ -107,8 +119,8 @@ function Home() {
     const value = {
       ...resume,
       id: nanoid(),
-      name: `${resume.name} copy`,
       updated: Date.now(),
+      name: `${resume.name} copy`,
     };
     setResumes([...resumes, value]);
   }
@@ -127,6 +139,19 @@ function Home() {
     setResumes(nextResumes);
   }
 
+  function handleOnImport(fields: Fields) {
+    const resume = {
+      id: nanoid(),
+      updated: Date.now(),
+      name: "Untitled",
+      template: Template.berlin,
+      fields,
+    };
+    setResumes([...resumes, resume]);
+    onImporDataModalClose();
+    router.push(`/${resume.id}`);
+  }
+
   return (
     <>
       <Head>
@@ -137,26 +162,32 @@ function Home() {
       <Box as="main" mt="140px">
         <Container maxW="container.lg">
           <Flex justifyContent="flex-end" mb="4">
-            <Popover trigger="hover">
-              <PopoverTrigger>
-                <Button
-                  size="sm"
-                  leftIcon={<Plus size={20} />}
-                  onClick={onOpen}
-                  data-cy="new_resume_btn"
-                >
-                  New
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent width="unset">
-                <PopoverBody display="inline-flex" alignItems="center">
-                  <Text marginInlineEnd="2" fontSize="sm">
-                    Press
-                  </Text>
-                  <Kbd>N</Kbd>
-                </PopoverBody>
-              </PopoverContent>
-            </Popover>
+            <ButtonGroup size="sm" isAttached>
+              <Popover trigger="hover">
+                <PopoverTrigger>
+                  <Button
+                    mr="-px"
+                    data-cy="new_resume_btn"
+                    onClick={onNewResumeModalOpen}
+                  >
+                    New
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent width="unset">
+                  <PopoverBody display="inline-flex" alignItems="center">
+                    <Text marginInlineEnd="2" fontSize="sm">
+                      Press
+                    </Text>
+                    <Kbd>N</Kbd>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+              <IconButton
+                aria-label="Import"
+                onClick={onImportDataModalOpen}
+                icon={<Upload size={20} />}
+              />
+            </ButtonGroup>
           </Flex>
           {resumes.length === 0 && (
             <Flex flexDirection="column" alignItems="center" padding="4">
@@ -182,9 +213,14 @@ function Home() {
         </Container>
       </Box>
       <NewResumeModal
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={isNewResumeModalOpen}
+        onClose={onNewResumeModalClose}
         onSubmit={handleOnSubmit}
+      />
+      <ImportModal
+        isOpen={isImportDataModalOpen}
+        onClose={onImporDataModalClose}
+        onImport={handleOnImport}
       />
     </>
   );
