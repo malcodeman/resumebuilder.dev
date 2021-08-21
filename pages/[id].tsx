@@ -85,7 +85,7 @@ function Builder() {
   const router = useRouter();
   const { id } = router.query;
   const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
-  const resume = resumes.find((item) => item.id === id) || defaultResume;
+  const resume = R.find((item) => item.id === id, resumes) || defaultResume;
   const { register, watch, reset, getValues, control } = useForm<Fields>({
     defaultValues,
   });
@@ -162,12 +162,12 @@ function Builder() {
   );
 
   function updateInLocalStorage(nextResume: Resume) {
-    const nextResumes = resumes.map((item) => {
+    const nextResumes = R.map((item) => {
       if (item.id === id) {
         return nextResume;
       }
       return item;
-    });
+    }, resumes);
     setResumes(nextResumes);
   }
 
@@ -338,21 +338,24 @@ function Builder() {
             </TabPanel>
             <TabPanel>
               <SimpleGrid templateColumns="1fr 1fr" spacing="20px">
-                {TEMPLATES.map((item) => (
-                  <Flex
-                    key={item}
-                    height="200px"
-                    alignItems="center"
-                    justifyContent="center"
-                    cursor="pointer"
-                    backgroundColor={templateBgColor}
-                    borderRadius="lg"
-                    color="#999"
-                    onClick={() => handleOnTemplateChange(item)}
-                  >
-                    {item}
-                  </Flex>
-                ))}
+                {R.map(
+                  (item) => (
+                    <Flex
+                      key={item}
+                      height="200px"
+                      alignItems="center"
+                      justifyContent="center"
+                      cursor="pointer"
+                      backgroundColor={templateBgColor}
+                      borderRadius="lg"
+                      color="#999"
+                      onClick={() => handleOnTemplateChange(item)}
+                    >
+                      {item}
+                    </Flex>
+                  ),
+                  TEMPLATES
+                )}
               </SimpleGrid>
             </TabPanel>
           </TabPanels>
