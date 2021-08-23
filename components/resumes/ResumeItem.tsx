@@ -68,7 +68,9 @@ function ResumeItem(props: props) {
         </Box>
         <Flex justifyContent="space-between" alignItems="center">
           <Box>
-            <Text>{resume.name}</Text>
+            <Text noOfLines={2} overflowWrap="anywhere">
+              {resume.name}
+            </Text>
             <Text opacity="0.5">
               Edited{" "}
               {formatDistanceToNow(resume.updated, {
@@ -102,7 +104,10 @@ function ResumeItem(props: props) {
                           onNameChange(resume.id, nextValue)
                         }
                       >
-                        <EditablePreview />
+                        <EditablePreview
+                          noOfLines={1}
+                          overflowWrap="anywhere"
+                        />
                         <EditableInput />
                       </Editable>
                       <Button

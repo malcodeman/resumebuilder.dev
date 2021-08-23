@@ -257,8 +257,12 @@ function Builder() {
       <Box as="header" padding="20px">
         <Flex as="nav" justifyContent="space-between">
           <Logo />
-          <Editable value={resume.name} onChange={handleOnNameChange}>
-            <EditablePreview />
+          <Editable
+            value={resume.name}
+            onChange={handleOnNameChange}
+            maxWidth="256px"
+          >
+            <EditablePreview noOfLines={1} overflowWrap="anywhere" />
             <EditableInput />
           </Editable>
           <Flex>

@@ -63,7 +63,7 @@ function SectionHeader(props: props) {
     <h2>
       <AccordionButton role="group" height="42.5px">
         <AccordionIcon mr="2" />
-        <Box flex="1" textAlign="left">
+        <Box flex="1" textAlign="left" isTruncated>
           {title}
         </Box>
         <Popover>
@@ -99,6 +99,8 @@ function SectionHeader(props: props) {
                       <Editable
                         onSubmit={onClose}
                         defaultValue={defaultLabel}
+                        noOfLines={1}
+                        overflowWrap="anywhere"
                         mb="2"
                       >
                         <EditablePreview />
