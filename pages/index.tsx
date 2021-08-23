@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { Upload } from "react-feather";
 import { nanoid } from "nanoid";
-import { useKeyPressEvent, useLocalStorage } from "react-use";
+import { useKeyboardEvent, useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
 import * as R from "ramda";
 
@@ -41,9 +41,18 @@ function Home() {
     onOpen: onImportDataModalOpen,
     onClose: onImporDataModalClose,
   } = useDisclosure();
-  const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
+  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
+    initializeWithStorageValue: false,
+  });
 
-  useKeyPressEvent("n", () => {}, onNewResumeModalOpen);
+  useKeyboardEvent(
+    "n",
+    () => {
+      onNewResumeModalOpen();
+    },
+    [],
+    { event: "keyup" }
+  );
 
   function handleOnSubmit(data: { name: string }) {
     const resume = {
@@ -189,7 +198,7 @@ function Home() {
               />
             </ButtonGroup>
           </Flex>
-          {R.isEmpty(resumes) ? (
+          {R.isEmpty(resumes) || R.isNil(resumes) ? (
             <Flex flexDirection="column" alignItems="center" padding="4">
               <Text>No Resumes</Text>
               <Text fontSize="small">Create a new resume to get started.</Text>

@@ -992,6 +992,15 @@
     prop-types "^15.7.2"
     tslib "^2.1.0"
 
+"@react-hookz/web@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@react-hookz/web/-/web-7.0.0.tgz#d8fb038e5b274ca8399ebb64873062e33c8592c0"
+  integrity sha512-RlVxSQFxrUJ5FhlKD7M8Vi6igKIphLObsudTTmco9UZ4PMl5vXdsW/ePajdpj9RxWA+RIAugSy8NLxP1LmK+Rg==
+  dependencies:
+    "@types/js-cookie" "^2.2.7"
+    "@types/react" "^17.0.15"
+    "@types/react-dom" "^17.0.9"
+
 "@react-pdf/font@^2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@react-pdf/font/-/font-2.0.3.tgz#b580c9df76a9851056394e35df5eec41ec67c5f4"
@@ -1156,6 +1165,11 @@
   resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.2.6.tgz#f1a1cb35aff47bc5cfb05cb0c441ca91e914c26f"
   integrity sha512-+oY0FDTO2GYKEV0YPvSshGq9t7YozVkgvXLty7zogQNuCxBhT9/3INX9Q7H1aRZ4SUDRXAKlJuA4EA5nTt7SNw==
 
+"@types/js-cookie@^2.2.7":
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.2.7.tgz#226a9e31680835a6188e887f3988e60c04d3f6a3"
+  integrity sha512-aLkWa0C0vO5b4Sr798E26QgOkss68Un0bLjs7u9qxzPT5CG+8DuNTffWES58YzJs3hrVAOs1wonycqEBqNJubA==
+
 "@types/keyboardjs@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@types/keyboardjs/-/keyboardjs-2.5.0.tgz#8ab3ac77a1e413e64b80c51b8d6c20e6c79da3f5"
@@ -1199,6 +1213,22 @@
   integrity sha512-SlEHKcLG36PlU+rLJwp8p4dpC9Hp/LiH6n0REX2m4iEB15PWe1qKQzgNSZrYKhTHDFvkeEM/F2gcYwfighsEuQ==
   dependencies:
     ts-toolbelt "^6.15.1"
+
+"@types/react-dom@^17.0.9":
+  version "17.0.9"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.9.tgz#441a981da9d7be117042e1a6fd3dac4b30f55add"
+  integrity sha512-wIvGxLfgpVDSAMH5utdL9Ngm5Owu0VsGmldro3ORLXV8CShrL8awVj06NuEXFQ5xyaYfdca7Sgbk/50Ri1GdPg==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^17.0.15":
+  version "17.0.19"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.19.tgz#8f2a85e8180a43b57966b237d26a29481dacc991"
+  integrity sha512-sX1HisdB1/ZESixMTGnMxH9TDe8Sk709734fEQZzCV/4lSu9kJCPbo2PbTRoZM+53Pp0P10hYVyReUueGwUi4A==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
 
 "@types/react@^17.0.17":
   version "17.0.17"
