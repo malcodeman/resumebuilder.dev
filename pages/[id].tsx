@@ -23,7 +23,7 @@ import { useRouter } from "next/router";
 import { useForm, useFieldArray } from "react-hook-form";
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
-import { useDebounce, useLocalStorage } from "react-use";
+import { useDebouncedCallback, useLocalStorageValue } from "@react-hookz/web";
 import { useToast } from "@chakra-ui/react";
 import {
   DndContext,
@@ -84,9 +84,13 @@ const toastId = "onSave";
 function Builder() {
   const router = useRouter();
   const { id } = router.query;
-  const [resumes, setResumes] = useLocalStorage<Resume[]>("resumes", []);
-  const resume = R.find((item) => item.id === id, resumes) || defaultResume;
-  const { register, watch, reset, getValues, control } = useForm<Fields>({
+  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
+    initializeWithStorageValue: false,
+  });
+  const resume = R.isNil(resumes)
+    ? defaultResume
+    : R.find((item) => item.id === id, resumes) || defaultResume;
+  const { register, reset, getValues, control } = useForm<Fields>({
     defaultValues,
   });
   const {
@@ -99,8 +103,7 @@ function Builder() {
     name: "section",
   });
 
-  const fields = watch();
-  const document = getTemplate(resume.template, fields);
+  const document = getTemplate(resume.template, resume.fields);
   const [keyboardJs, setKeyboardJs] = React.useState(null);
   const toast = useToast();
   const templateBgColor = useColorModeValue("gray.300", "gray.600");
@@ -112,7 +115,11 @@ function Builder() {
       },
     })
   );
-  const [isFullWidth, setIsFullWidth] = useLocalStorage("isFullWidth", false);
+  const [isFullWidth, setIsFullWidth] = useLocalStorageValue(
+    "isFullWidth",
+    false,
+    { initializeWithStorageValue: false }
+  );
 
   React.useEffect(() => {
     import("keyboardjs").then((k) => setKeyboardJs(k.default || k));
@@ -147,20 +154,6 @@ function Builder() {
     }
   }, [resume.id]);
 
-  const [, cancel] = useDebounce(
-    () => {
-      const nextResume = {
-        ...resume,
-        fields,
-        updated: Date.now(),
-      };
-      updateInLocalStorage(nextResume);
-      cancel();
-    },
-    1000,
-    [fields]
-  );
-
   function updateInLocalStorage(nextResume: Resume) {
     const nextResumes = R.map((item) => {
       if (item.id === id) {
@@ -183,8 +176,8 @@ function Builder() {
   function handleOnTemplateChange(nextTemplate: Template) {
     const nextResume = {
       ...resume,
-      template: nextTemplate,
       updated: Date.now(),
+      template: nextTemplate,
     };
     updateInLocalStorage(nextResume);
   }
@@ -242,6 +235,20 @@ function Builder() {
     reset({ ...fields });
   }
 
+  const handleOnChange = useDebouncedCallback(
+    () => {
+      const nextResume = {
+        ...resume,
+        updated: Date.now(),
+        fields: getValues(),
+      };
+      updateInLocalStorage(nextResume);
+    },
+    [resume.id],
+    500,
+    1000
+  );
+
   return (
     <>
       <Head>
@@ -282,20 +289,34 @@ function Builder() {
           <TabPanels>
             <TabPanel padding="0">
               <Accordion defaultIndex={[0]} allowToggle marginBottom="20px">
-                <PersonalDetailsSection register={register} />
-                <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
-                  <SortableContext
-                    items={sectionFields}
-                    strategy={verticalListSortingStrategy}
-                  >
-                    {sectionFields.map((item, index) => {
-                      if (item.name === "standardSection") {
+                <form onChange={handleOnChange}>
+                  <PersonalDetailsSection register={register} />
+                  <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
+                    <SortableContext
+                      items={sectionFields}
+                      strategy={verticalListSortingStrategy}
+                    >
+                      {sectionFields.map((item, index) => {
+                        if (item.name === "standardSection") {
+                          return (
+                            <StandardSection
+                              key={item.id}
+                              id={item.id}
+                              nestIndex={index}
+                              control={control}
+                              defaultLabel={item.label}
+                              getValues={getValues}
+                              register={register}
+                              remove={removeSection}
+                              append={appendSection}
+                            />
+                          );
+                        }
                         return (
-                          <StandardSection
+                          <TagListSection
                             key={item.id}
                             id={item.id}
                             nestIndex={index}
-                            control={control}
                             defaultLabel={item.label}
                             getValues={getValues}
                             register={register}
@@ -303,22 +324,10 @@ function Builder() {
                             append={appendSection}
                           />
                         );
-                      }
-                      return (
-                        <TagListSection
-                          key={item.id}
-                          id={item.id}
-                          nestIndex={index}
-                          defaultLabel={item.label}
-                          getValues={getValues}
-                          register={register}
-                          remove={removeSection}
-                          append={appendSection}
-                        />
-                      );
-                    })}
-                  </SortableContext>
-                </DndContext>
+                      })}
+                    </SortableContext>
+                  </DndContext>
+                </form>
               </Accordion>
               <Box
                 paddingInlineStart="4"
