@@ -54,7 +54,7 @@ function TagListSection(props: props) {
         onRemove={() => remove(nestIndex)}
         onDuplicate={() => append(getValues(`section.${nestIndex}`))}
       />
-      <TagListSectionBody nestIndex={nestIndex} register={register} />
+      <TagListSectionBody index={nestIndex} />
     </AccordionItem>
   );
 }

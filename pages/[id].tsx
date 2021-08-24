@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useRouter } from "next/router";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, FormProvider } from "react-hook-form";
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
 import { useDebouncedCallback, useLocalStorageValue } from "@react-hookz/web";
@@ -90,7 +90,7 @@ function Builder() {
   const resume = R.isNil(resumes)
     ? defaultResume
     : R.find((item) => item.id === id, resumes) || defaultResume;
-  const { register, reset, getValues, control } = useForm<Fields>({
+  const form = useForm<Fields>({
     defaultValues,
   });
   const {
@@ -99,7 +99,7 @@ function Builder() {
     remove: removeSection,
     swap: swapSection,
   } = useFieldArray({
-    control,
+    control: form.control,
     name: "section",
   });
 
@@ -150,7 +150,7 @@ function Builder() {
 
   React.useEffect(() => {
     if (resume.id) {
-      reset({ ...resume.fields });
+      form.reset({ ...resume.fields });
     }
   }, [resume.id]);
 
@@ -232,7 +232,7 @@ function Builder() {
   }
 
   function handleOnImport(fields: Fields) {
-    reset({ ...fields });
+    form.reset({ ...fields });
   }
 
   const handleOnChange = useDebouncedCallback(
@@ -240,7 +240,7 @@ function Builder() {
       const nextResume = {
         ...resume,
         updated: Date.now(),
-        fields: getValues(),
+        fields: form.getValues(),
       };
       updateInLocalStorage(nextResume);
     },
@@ -293,45 +293,47 @@ function Builder() {
           <TabPanels>
             <TabPanel padding="0">
               <Accordion defaultIndex={[0]} allowToggle marginBottom="20px">
-                <form onChange={handleOnChange}>
-                  <PersonalDetailsSection register={register} />
-                  <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
-                    <SortableContext
-                      items={sectionFields}
-                      strategy={verticalListSortingStrategy}
-                    >
-                      {sectionFields.map((item, index) => {
-                        if (item.name === "standardSection") {
+                <FormProvider {...form}>
+                  <form onChange={handleOnChange}>
+                    <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
+                      <PersonalDetailsSection />
+                      <SortableContext
+                        items={sectionFields}
+                        strategy={verticalListSortingStrategy}
+                      >
+                        {sectionFields.map((item, index) => {
+                          if (item.name === "standardSection") {
+                            return (
+                              <StandardSection
+                                key={item.id}
+                                id={item.id}
+                                nestIndex={index}
+                                control={form.control}
+                                defaultLabel={item.label}
+                                getValues={form.getValues}
+                                register={form.register}
+                                remove={removeSection}
+                                append={appendSection}
+                              />
+                            );
+                          }
                           return (
-                            <StandardSection
+                            <TagListSection
                               key={item.id}
                               id={item.id}
                               nestIndex={index}
-                              control={control}
                               defaultLabel={item.label}
-                              getValues={getValues}
-                              register={register}
+                              getValues={form.getValues}
+                              register={form.register}
                               remove={removeSection}
                               append={appendSection}
                             />
                           );
-                        }
-                        return (
-                          <TagListSection
-                            key={item.id}
-                            id={item.id}
-                            nestIndex={index}
-                            defaultLabel={item.label}
-                            getValues={getValues}
-                            register={register}
-                            remove={removeSection}
-                            append={appendSection}
-                          />
-                        );
-                      })}
-                    </SortableContext>
-                  </DndContext>
-                </form>
+                        })}
+                      </SortableContext>
+                    </DndContext>
+                  </form>
+                </FormProvider>
               </Accordion>
               <Box
                 paddingInlineStart="4"

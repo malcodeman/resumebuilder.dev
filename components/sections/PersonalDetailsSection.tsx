@@ -14,15 +14,10 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import { Mail, Phone } from "react-feather";
+import { useFormContext } from "react-hook-form";
 
-import { Register } from "../../types";
-
-type props = {
-  register: Register;
-};
-
-function PersonalDetailsSection(props: props) {
-  const { register } = props;
+function PersonalDetailsSection() {
+  const { register } = useFormContext();
 
   return (
     <AccordionItem borderTopWidth="0">

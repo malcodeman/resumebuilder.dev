@@ -6,16 +6,15 @@ import {
   FormControl,
   FormHelperText,
 } from "@chakra-ui/react";
-
-import { Register } from "../../types";
+import { useFormContext } from "react-hook-form";
 
 type props = {
-  nestIndex: number;
-  register: Register;
+  index: number;
 };
 
 function TagListSectionBody(props: props) {
-  const { nestIndex, register } = props;
+  const { index } = props;
+  const { register } = useFormContext();
 
   return (
     <AccordionPanel onPointerDown={(e) => e.stopPropagation()}>
@@ -24,7 +23,7 @@ function TagListSectionBody(props: props) {
           <FormControl>
             <Textarea
               size="sm"
-              {...register(`section.${nestIndex}.tags` as const)}
+              {...register(`section.${index}.tags` as const)}
             />
             <FormHelperText>Add one item on each line</FormHelperText>
           </FormControl>
