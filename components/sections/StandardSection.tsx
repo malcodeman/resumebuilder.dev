@@ -2,9 +2,8 @@ import React from "react";
 import { AccordionItem, AccordionPanel, Text, Box } from "@chakra-ui/react";
 import {
   useFieldArray,
-  UseFormGetValues,
-  Control,
   FieldArrayMethodProps,
+  useFormContext,
 } from "react-hook-form";
 import * as R from "ramda";
 import {
@@ -24,15 +23,10 @@ import {
 import SectionHeader from "./SectionHeader";
 import StandardSectionBody from "./StandardSectionBody";
 
-import { Register, Fields } from "../../types";
-
 type props = {
   id: string;
-  nestIndex: number;
-  control: Control<Fields>;
-  defaultLabel: string;
-  getValues: UseFormGetValues<Fields>;
-  register: Register;
+  index: number;
+  label: string;
   remove: (index: number) => void;
   append: (
     value: Partial<any> | Partial<any>[],
@@ -41,16 +35,8 @@ type props = {
 };
 
 function StandardSection(props: props) {
-  const {
-    id,
-    nestIndex,
-    control,
-    defaultLabel,
-    getValues,
-    register,
-    remove,
-    append,
-  } = props;
+  const { id, index, label, remove, append } = props;
+  const { control, getValues } = useFormContext();
   const {
     fields: fieldsNested,
     remove: removeNested,
@@ -58,7 +44,7 @@ function StandardSection(props: props) {
     swap: swapNested,
   } = useFieldArray({
     control,
-    name: `section.${nestIndex}.nested` as const,
+    name: `section.${index}.nested` as const,
   });
   const {
     attributes,
@@ -80,12 +66,12 @@ function StandardSection(props: props) {
     })
   );
 
-  function handleOnDuplicate(index: number) {
-    appendNested(getValues(`section.${nestIndex}.nested.${index}` as const));
+  function handleOnDuplicate(nestIndex: number) {
+    appendNested(getValues(`section.${index}.nested.${nestIndex}` as const));
   }
 
-  function handleOnRemove(index: number) {
-    removeNested(index);
+  function handleOnRemove(nestIndex: number) {
+    removeNested(nestIndex);
   }
 
   function handleOnAppend() {
@@ -120,12 +106,10 @@ function StandardSection(props: props) {
       _last={{ borderBottomWidth: 0 }}
     >
       <SectionHeader
-        defaultLabel={defaultLabel}
-        labelRegister={register(`section.${nestIndex}.label` as const)}
-        title={getValues(`section.${nestIndex}.label` as const)}
+        label={label}
         onAppend={handleOnAppend}
-        onRemove={() => remove(nestIndex)}
-        onDuplicate={() => append(getValues(`section.${nestIndex}`))}
+        onRemove={() => remove(index)}
+        onDuplicate={() => append(getValues(`section.${index}`))}
       />
       <AccordionPanel>
         {R.isEmpty(fieldsNested) ? (
@@ -144,15 +128,14 @@ function StandardSection(props: props) {
             items={fieldsNested}
             strategy={verticalListSortingStrategy}
           >
-            {fieldsNested.map((item, index) => {
+            {fieldsNested.map((item, nestIndex) => {
               return (
                 <StandardSectionBody
                   key={item.id}
                   id={item.id}
-                  nestIndex={nestIndex}
                   index={index}
-                  getValues={getValues}
-                  register={register}
+                  label={item.title}
+                  nestIndex={nestIndex}
                   onDuplicate={handleOnDuplicate}
                   onRemove={handleOnRemove}
                 />

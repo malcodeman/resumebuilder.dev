@@ -30,7 +30,9 @@ const defaultValues = {
 
 function AddSectionModal(props: props) {
   const { isOpen, onClose, onSubmit } = props;
-  const { register, handleSubmit, reset } = useForm({ defaultValues });
+  const { register, getValues, reset } = useForm({
+    defaultValues,
+  });
 
   React.useEffect(() => {
     if (!isOpen) {
@@ -38,13 +40,24 @@ function AddSectionModal(props: props) {
     }
   }, [isOpen, reset]);
 
+  // TODO: Investigate why this is necessary in order for append to work properly
+  // react-hook-form handleSubmit appears to be the issue
+  function handleOnSubmit(e) {
+    e.preventDefault();
+    const values = getValues();
+    onSubmit({
+      name: values.name,
+      label: values.label,
+    });
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add a section</ModalHeader>
         <ModalCloseButton />
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleOnSubmit}>
           <ModalBody>
             <FormControl mb="4">
               <FormLabel>Section label</FormLabel>

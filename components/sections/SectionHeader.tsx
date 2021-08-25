@@ -6,22 +6,16 @@ import {
   IconButton,
   Button,
   Flex,
-  Editable,
-  EditablePreview,
-  EditableInput,
   AccordionButton,
   AccordionIcon,
   Box,
   Tooltip,
 } from "@chakra-ui/react";
 import { MoreHorizontal, Copy, Trash2, Plus } from "react-feather";
-import { UseFormRegisterReturn } from "react-hook-form";
 import * as R from "ramda";
 
 type props = {
-  defaultLabel?: string;
-  title: string;
-  labelRegister?: UseFormRegisterReturn;
+  label: string;
   onAppend?: () => void;
   onDuplicate: () => void;
   onRemove: () => void;
@@ -31,18 +25,8 @@ const TOOLTIP_ADD_LABEL = "Add an item";
 const TOOLTIP_MORE_LABEL = "Delete, duplicate, and more...";
 
 function SectionHeader(props: props) {
-  const {
-    defaultLabel,
-    title,
-    labelRegister,
-    onAppend,
-    onDuplicate,
-    onRemove,
-  } = props;
-  const isNested = R.isNil(defaultLabel);
-  const isTagList = R.isNil(labelRegister)
-    ? false
-    : R.includes("tagList", labelRegister.name);
+  const { label, onAppend, onDuplicate, onRemove } = props;
+  const isTagList = R.isNil(onAppend);
 
   function handleOnDuplicate(onClose: () => void) {
     onClose();
@@ -64,7 +48,7 @@ function SectionHeader(props: props) {
       <AccordionButton role="group" height="42.5px">
         <AccordionIcon mr="2" />
         <Box flex="1" textAlign="left" isTruncated>
-          {title}
+          {label || "Untitled"}
         </Box>
         <Popover>
           {({ onClose, isOpen }) => (
@@ -93,20 +77,6 @@ function SectionHeader(props: props) {
               >
                 <PopoverBody>
                   <Flex flexDirection="column">
-                    {isNested ? (
-                      <></>
-                    ) : (
-                      <Editable
-                        onSubmit={onClose}
-                        defaultValue={defaultLabel}
-                        noOfLines={1}
-                        overflowWrap="anywhere"
-                        mb="2"
-                      >
-                        <EditablePreview />
-                        <EditableInput {...labelRegister} />
-                      </Editable>
-                    )}
                     <Button
                       size="sm"
                       mb="2"
@@ -130,7 +100,7 @@ function SectionHeader(props: props) {
             </>
           )}
         </Popover>
-        {isNested || isTagList ? (
+        {isTagList ? (
           <></>
         ) : (
           <Tooltip label={TOOLTIP_ADD_LABEL} aria-label={TOOLTIP_ADD_LABEL}>

@@ -9,27 +9,23 @@ import {
   FormLabel,
   Accordion,
 } from "@chakra-ui/react";
-import { UseFormGetValues } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import SectionHeader from "./SectionHeader";
 
-import { Fields, Register } from "../../types";
-
 type props = {
   id: string;
-  nestIndex: number;
   index: number;
-  getValues: UseFormGetValues<Fields>;
-  register: Register;
+  label: string;
+  nestIndex: number;
   onDuplicate: (index: number) => void;
   onRemove: (index: number) => void;
 };
 
 function StandardSectionBody(props: props) {
-  const { id, nestIndex, index, getValues, register, onRemove, onDuplicate } =
-    props;
+  const { id, index, label, nestIndex, onRemove, onDuplicate } = props;
   const {
     attributes,
     listeners,
@@ -38,6 +34,7 @@ function StandardSectionBody(props: props) {
     isDragging,
     setNodeRef,
   } = useSortable({ id });
+  const { register } = useFormContext();
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
@@ -58,12 +55,9 @@ function StandardSectionBody(props: props) {
     >
       <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
         <SectionHeader
-          title={
-            getValues(`section.${nestIndex}.nested.${index}.title` as const) ||
-            "Untitled"
-          }
-          onRemove={() => onRemove(index)}
-          onDuplicate={() => onDuplicate(index)}
+          label={label}
+          onRemove={() => onRemove(nestIndex)}
+          onDuplicate={() => onDuplicate(nestIndex)}
         />
         <AccordionPanel onPointerDown={onPointerDownHanlder}>
           <Grid templateColumns="1fr 1fr" gap="4">
@@ -73,7 +67,7 @@ function StandardSectionBody(props: props) {
                 <Input
                   size="sm"
                   {...register(
-                    `section.${nestIndex}.nested.${index}.title` as const
+                    `section.${index}.nested.${nestIndex}.title` as const
                   )}
                 />
               </FormControl>
@@ -84,7 +78,7 @@ function StandardSectionBody(props: props) {
                 <Input
                   size="sm"
                   {...register(
-                    `section.${nestIndex}.nested.${index}.subtitle` as const
+                    `section.${index}.nested.${nestIndex}.subtitle` as const
                   )}
                 />
               </FormControl>
@@ -94,7 +88,7 @@ function StandardSectionBody(props: props) {
               <Input
                 size="sm"
                 {...register(
-                  `section.${nestIndex}.nested.${index}.website` as const
+                  `section.${index}.nested.${nestIndex}.website` as const
                 )}
               />
             </FormControl>
@@ -103,7 +97,7 @@ function StandardSectionBody(props: props) {
               <Input
                 size="sm"
                 {...register(
-                  `section.${nestIndex}.nested.${index}.city` as const
+                  `section.${index}.nested.${nestIndex}.city` as const
                 )}
               />
             </FormControl>
@@ -112,7 +106,7 @@ function StandardSectionBody(props: props) {
               <Input
                 size="sm"
                 {...register(
-                  `section.${nestIndex}.nested.${index}.startDate` as const
+                  `section.${index}.nested.${nestIndex}.startDate` as const
                 )}
               />
             </FormControl>
@@ -121,7 +115,7 @@ function StandardSectionBody(props: props) {
               <Input
                 size="sm"
                 {...register(
-                  `section.${nestIndex}.nested.${index}.endDate` as const
+                  `section.${index}.nested.${nestIndex}.endDate` as const
                 )}
               />
             </FormControl>
@@ -131,7 +125,7 @@ function StandardSectionBody(props: props) {
                 <Textarea
                   size="sm"
                   {...register(
-                    `section.${nestIndex}.nested.${index}.description` as const
+                    `section.${index}.nested.${nestIndex}.description` as const
                   )}
                 />
               </FormControl>

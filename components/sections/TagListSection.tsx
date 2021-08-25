@@ -1,19 +1,15 @@
 import { AccordionItem } from "@chakra-ui/react";
-import { UseFormGetValues, FieldArrayMethodProps } from "react-hook-form";
+import { FieldArrayMethodProps, useFormContext } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import SectionHeader from "./SectionHeader";
 import TagListSectionBody from "./TagListSectionBody";
 
-import { Register, Fields } from "../../types";
-
 type props = {
   id: string;
-  nestIndex: number;
-  defaultLabel: string;
-  getValues: UseFormGetValues<Fields>;
-  register: Register;
+  index: number;
+  label: string;
   remove: (index: number) => void;
   append: (
     value: Partial<any> | Partial<any>[],
@@ -22,8 +18,7 @@ type props = {
 };
 
 function TagListSection(props: props) {
-  const { id, nestIndex, defaultLabel, getValues, register, remove, append } =
-    props;
+  const { id, index, label, remove, append } = props;
   const {
     attributes,
     listeners,
@@ -32,6 +27,7 @@ function TagListSection(props: props) {
     isDragging,
     setNodeRef,
   } = useSortable({ id });
+  const { getValues } = useFormContext();
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
@@ -48,13 +44,11 @@ function TagListSection(props: props) {
       _last={{ borderBottomWidth: 0 }}
     >
       <SectionHeader
-        defaultLabel={defaultLabel}
-        labelRegister={register(`section.${nestIndex}.label` as const)}
-        title={getValues(`section.${nestIndex}.label` as const)}
-        onRemove={() => remove(nestIndex)}
-        onDuplicate={() => append(getValues(`section.${nestIndex}`))}
+        label={label}
+        onRemove={() => remove(index)}
+        onDuplicate={() => append(getValues(`section.${index}`))}
       />
-      <TagListSectionBody index={nestIndex} />
+      <TagListSectionBody index={index} />
     </AccordionItem>
   );
 }

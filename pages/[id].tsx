@@ -120,6 +120,26 @@ function Builder() {
     false,
     { initializeWithStorageValue: false }
   );
+  const handleOnChange = useDebouncedCallback(
+    () => {
+      const nextResume = {
+        ...resume,
+        updated: Date.now(),
+        fields: form.getValues(),
+      };
+      updateInLocalStorage(nextResume);
+    },
+    [resume.id],
+    500,
+    1000
+  );
+
+  React.useEffect(() => {
+    const subscription = form.watch(() => handleOnChange());
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [form, handleOnChange]);
 
   React.useEffect(() => {
     import("keyboardjs").then((k) => setKeyboardJs(k.default || k));
@@ -235,20 +255,6 @@ function Builder() {
     form.reset({ ...fields });
   }
 
-  const handleOnChange = useDebouncedCallback(
-    () => {
-      const nextResume = {
-        ...resume,
-        updated: Date.now(),
-        fields: form.getValues(),
-      };
-      updateInLocalStorage(nextResume);
-    },
-    [resume.id],
-    500,
-    1000
-  );
-
   return (
     <>
       <Head>
@@ -294,45 +300,29 @@ function Builder() {
             <TabPanel padding="0">
               <Accordion defaultIndex={[0]} allowToggle marginBottom="20px">
                 <FormProvider {...form}>
-                  <form onChange={handleOnChange}>
-                    <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
-                      <PersonalDetailsSection />
-                      <SortableContext
-                        items={sectionFields}
-                        strategy={verticalListSortingStrategy}
-                      >
-                        {sectionFields.map((item, index) => {
-                          if (item.name === "standardSection") {
-                            return (
-                              <StandardSection
-                                key={item.id}
-                                id={item.id}
-                                nestIndex={index}
-                                control={form.control}
-                                defaultLabel={item.label}
-                                getValues={form.getValues}
-                                register={form.register}
-                                remove={removeSection}
-                                append={appendSection}
-                              />
-                            );
-                          }
-                          return (
-                            <TagListSection
-                              key={item.id}
-                              id={item.id}
-                              nestIndex={index}
-                              defaultLabel={item.label}
-                              getValues={form.getValues}
-                              register={form.register}
-                              remove={removeSection}
-                              append={appendSection}
-                            />
-                          );
-                        })}
-                      </SortableContext>
-                    </DndContext>
-                  </form>
+                  <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
+                    <PersonalDetailsSection />
+                    <SortableContext
+                      items={sectionFields}
+                      strategy={verticalListSortingStrategy}
+                    >
+                      {sectionFields.map((item, index) => {
+                        const props = {
+                          index,
+                          key: item.id,
+                          id: item.id,
+                          label: item.label,
+                          remove: removeSection,
+                          append: appendSection,
+                        };
+                        return item.name === "standardSection" ? (
+                          <StandardSection {...props} />
+                        ) : (
+                          <TagListSection {...props} />
+                        );
+                      })}
+                    </SortableContext>
+                  </DndContext>
                 </FormProvider>
               </Accordion>
               <Box
