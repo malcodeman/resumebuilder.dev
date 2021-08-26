@@ -14,7 +14,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Download, Link, MoreHorizontal, Upload } from "react-feather";
-import { useCopyToClipboard } from "react-use";
 
 import ImportDataModal from "./ImportDataModal";
 
@@ -33,8 +32,15 @@ const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 function HeaderPopover(props: props) {
   const { isFullWidth, setIsFullWidth, onPdfExport, onJsonExport, onImport } =
     props;
-  const [{}, copyToClipboard] = useCopyToClipboard();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  function handleCopyToClipboard() {
+    try {
+      navigator.clipboard.writeText(window.location.href);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <>
@@ -97,7 +103,7 @@ function HeaderPopover(props: props) {
                     mb="2"
                     justifyContent="flex-start"
                     leftIcon={<Link size={20} />}
-                    onClick={() => copyToClipboard(window.location.href)}
+                    onClick={handleCopyToClipboard}
                   >
                     Copy link
                   </Button>
