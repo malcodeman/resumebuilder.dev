@@ -72,7 +72,13 @@ function HeaderPopover(props: props) {
                     justifyContent="space-between"
                     isDisabled={true}
                   >
-                    <FormLabel htmlFor="is-small-text" mb="0" width="100%">
+                    <FormLabel
+                      htmlFor="is-small-text"
+                      mb="0"
+                      width="100%"
+                      marginInlineEnd="0"
+                      paddingInlineEnd="3"
+                    >
                       Small text
                     </FormLabel>
                     <Switch isDisabled={true} id="is-small-text" />
@@ -88,6 +94,8 @@ function HeaderPopover(props: props) {
                       mb="0"
                       width="100%"
                       cursor="pointer"
+                      marginInlineEnd="0"
+                      paddingInlineEnd="3"
                     >
                       Full width
                     </FormLabel>
