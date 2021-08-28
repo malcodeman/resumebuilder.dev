@@ -20,7 +20,7 @@ function PersonalDetailsSection() {
   const { register } = useFormContext();
 
   return (
-    <AccordionItem borderTopWidth="0">
+    <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
       <h2>
         <AccordionButton>
           <AccordionIcon mr="2" />
