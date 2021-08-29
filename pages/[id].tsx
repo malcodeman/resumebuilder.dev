@@ -45,6 +45,7 @@ import TagListSection from "../components/sections/TagListSection";
 import StandardSection from "../components/sections/StandardSection";
 import AddSectionModal from "../components/sections/AddSectionModal";
 import HeaderPopover from "../components/HeaderPopover";
+import ExportResumeModal from "../components/templates/ExportResumeModal";
 
 import { TEMPLATES } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
@@ -108,6 +109,11 @@ function Builder() {
   const toast = useToast();
   const templateBgColor = useColorModeValue("gray.300", "gray.600");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isExportResumeModalOpen,
+    onOpen: onExportResumeModalOpen,
+    onClose: onExportResumeModalClose,
+  } = useDisclosure();
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -278,8 +284,7 @@ function Builder() {
             <HeaderPopover
               isFullWidth={isFullWidth}
               setIsFullWidth={setIsFullWidth}
-              onPdfExport={handleOnPdfExport}
-              onJsonExport={handleOnJsonExport}
+              onExportResumeModalOpen={onExportResumeModalOpen}
               onImport={handleOnImport}
             />
           </Flex>
@@ -377,6 +382,12 @@ function Builder() {
         isOpen={isOpen}
         onSubmit={handleOnSubmit}
         onClose={onClose}
+      />
+      <ExportResumeModal
+        isOpen={isExportResumeModalOpen}
+        onClose={onExportResumeModalClose}
+        onPdfExport={handleOnPdfExport}
+        onJsonExport={handleOnJsonExport}
       />
     </>
   );

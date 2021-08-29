@@ -42,6 +42,7 @@ type ChakraThemeConfig = {
   useSystemColorMode: boolean;
 };
 type Register = UseFormRegister<Fields>;
+type Export = "pdf" | "json";
 
-export type { Resume, ChakraThemeConfig, Register, Fields, Section };
+export type { Resume, ChakraThemeConfig, Register, Fields, Section, Export };
 export { Template };

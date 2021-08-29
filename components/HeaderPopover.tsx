@@ -22,15 +22,14 @@ import { Fields } from "../types";
 type props = {
   isFullWidth: boolean;
   setIsFullWidth: (nextValue: boolean) => void;
-  onPdfExport: () => void;
-  onJsonExport: () => void;
+  onExportResumeModalOpen: () => void;
   onImport: (fields: Fields) => void;
 };
 
 const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
 function HeaderPopover(props: props) {
-  const { isFullWidth, setIsFullWidth, onPdfExport, onJsonExport, onImport } =
+  const { isFullWidth, setIsFullWidth, onExportResumeModalOpen, onImport } =
     props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -127,20 +126,11 @@ function HeaderPopover(props: props) {
                   </Button>
                   <Button
                     size="sm"
-                    mb="2"
                     justifyContent="flex-start"
                     leftIcon={<Download size={20} />}
-                    onClick={onPdfExport}
+                    onClick={onExportResumeModalOpen}
                   >
-                    Export PDF
-                  </Button>
-                  <Button
-                    size="sm"
-                    justifyContent="flex-start"
-                    leftIcon={<Download size={20} />}
-                    onClick={onJsonExport}
-                  >
-                    Export JSON
+                    Export
                   </Button>
                 </Flex>
               </PopoverBody>
