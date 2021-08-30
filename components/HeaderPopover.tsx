@@ -13,7 +13,7 @@ import {
   Divider,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Download, Link, MoreHorizontal, Upload } from "react-feather";
+import { Download, Link, MoreHorizontal, Upload, Trash2 } from "react-feather";
 
 import ImportDataModal from "./ImportDataModal";
 
@@ -24,13 +24,19 @@ type props = {
   setIsFullWidth: (nextValue: boolean) => void;
   onExportResumeModalOpen: () => void;
   onImport: (fields: Fields) => void;
+  onDelete: () => void;
 };
 
 const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
 function HeaderPopover(props: props) {
-  const { isFullWidth, setIsFullWidth, onExportResumeModalOpen, onImport } =
-    props;
+  const {
+    isFullWidth,
+    setIsFullWidth,
+    onExportResumeModalOpen,
+    onImport,
+    onDelete,
+  } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function handleCopyToClipboard() {
@@ -113,6 +119,15 @@ function HeaderPopover(props: props) {
                     onClick={handleCopyToClipboard}
                   >
                     Copy link
+                  </Button>
+                  <Button
+                    size="sm"
+                    mb="2"
+                    justifyContent="flex-start"
+                    leftIcon={<Trash2 size={20} />}
+                    onClick={onDelete}
+                  >
+                    Delete
                   </Button>
                   <Divider marginY="2" />
                   <Button

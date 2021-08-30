@@ -46,6 +46,7 @@ import StandardSection from "../components/sections/StandardSection";
 import AddSectionModal from "../components/sections/AddSectionModal";
 import HeaderPopover from "../components/HeaderPopover";
 import ExportResumeModal from "../components/templates/ExportResumeModal";
+import DeleteResumeModal from "../components/resumes/DeleteResumeModal";
 
 import { TEMPLATES } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
@@ -113,6 +114,11 @@ function Builder() {
     isOpen: isExportResumeModalOpen,
     onOpen: onExportResumeModalOpen,
     onClose: onExportResumeModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isDeleteResumeModalOpen,
+    onOpen: onDeleteResumeModalOpen,
+    onClose: onDeleteResumeModalClose,
   } = useDisclosure();
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -261,6 +267,12 @@ function Builder() {
     form.reset({ ...fields });
   }
 
+  function handleOnDelete() {
+    const nextResumes = R.filter((item) => item.id !== id, resumes);
+    setResumes(nextResumes);
+    router.push("/");
+  }
+
   return (
     <>
       <Head>
@@ -286,6 +298,7 @@ function Builder() {
               setIsFullWidth={setIsFullWidth}
               onExportResumeModalOpen={onExportResumeModalOpen}
               onImport={handleOnImport}
+              onDelete={onDeleteResumeModalOpen}
             />
           </Flex>
         </Flex>
@@ -388,6 +401,11 @@ function Builder() {
         onClose={onExportResumeModalClose}
         onPdfExport={handleOnPdfExport}
         onJsonExport={handleOnJsonExport}
+      />
+      <DeleteResumeModal
+        isOpen={isDeleteResumeModalOpen}
+        onClose={onDeleteResumeModalClose}
+        onSubmit={handleOnDelete}
       />
     </>
   );
