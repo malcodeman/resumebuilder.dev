@@ -8,6 +8,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head lang="en">
+          <link rel="icon" href="/favicon.ico" />
           <meta charSet="utf-8" />
           <meta
             name="og:description"

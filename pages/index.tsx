@@ -1,8 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import {
-  Box,
-  Container,
   Flex,
   Button,
   useDisclosure,
@@ -22,7 +20,7 @@ import { useKeyboardEvent, useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
 import * as R from "ramda";
 
-import Header from "../components/Header";
+import Layout from "../components/Layout";
 import NewResumeModal from "../components/resumes/NewResumeModal";
 import ResumeItem from "../components/resumes/ResumeItem";
 import ImportDataModal from "../components/ImportDataModal";
@@ -165,66 +163,62 @@ function Home() {
     <>
       <Head>
         <title>resumebuilder.dev</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <Box as="main" mt="140px">
-        <Container maxW="container.lg">
-          <Flex justifyContent="flex-end" mb="4">
-            <ButtonGroup size="sm" isAttached>
-              <Popover trigger="hover">
-                <PopoverTrigger>
-                  <Button
-                    mr="-px"
-                    data-cy="new_resume_btn"
-                    onClick={onNewResumeModalOpen}
-                  >
-                    New
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent width="unset">
-                  <PopoverBody display="inline-flex" alignItems="center">
-                    <Text marginInlineEnd="2" fontSize="sm">
-                      Press
-                    </Text>
-                    <Kbd>N</Kbd>
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
-              <IconButton
-                aria-label="Import"
-                onClick={onImportDataModalOpen}
-                icon={<Upload size={20} />}
-              />
-            </ButtonGroup>
+      <Layout>
+        <Flex justifyContent="flex-end" mb="4">
+          <ButtonGroup size="sm" isAttached>
+            <Popover trigger="hover">
+              <PopoverTrigger>
+                <Button
+                  mr="-px"
+                  data-cy="new_resume_btn"
+                  onClick={onNewResumeModalOpen}
+                >
+                  New
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent width="unset">
+                <PopoverBody display="inline-flex" alignItems="center">
+                  <Text marginInlineEnd="2" fontSize="sm">
+                    Press
+                  </Text>
+                  <Kbd>N</Kbd>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+            <IconButton
+              aria-label="Import"
+              onClick={onImportDataModalOpen}
+              icon={<Upload size={20} />}
+            />
+          </ButtonGroup>
+        </Flex>
+        {R.isEmpty(resumes) || R.isNil(resumes) ? (
+          <Flex flexDirection="column" alignItems="center" padding="4">
+            <Text>No Resumes</Text>
+            <Text fontSize="small">Create a new resume to get started.</Text>
           </Flex>
-          {R.isEmpty(resumes) || R.isNil(resumes) ? (
-            <Flex flexDirection="column" alignItems="center" padding="4">
-              <Text>No Resumes</Text>
-              <Text fontSize="small">Create a new resume to get started.</Text>
-            </Flex>
-          ) : (
-            <Grid
-              gap="4"
-              gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
-              data-cy="resumes_grid"
-            >
-              {R.map(
-                (item) => (
-                  <ResumeItem
-                    key={item.id}
-                    resume={item}
-                    onDelete={handleOnDelete}
-                    onDuplicate={handleOnDuplicate}
-                    onNameChange={handleOnNameChange}
-                  />
-                ),
-                resumes
-              )}
-            </Grid>
-          )}
-        </Container>
-      </Box>
+        ) : (
+          <Grid
+            gap="4"
+            gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
+            data-cy="resumes_grid"
+          >
+            {R.map(
+              (item) => (
+                <ResumeItem
+                  key={item.id}
+                  resume={item}
+                  onDelete={handleOnDelete}
+                  onDuplicate={handleOnDuplicate}
+                  onNameChange={handleOnNameChange}
+                />
+              ),
+              resumes
+            )}
+          </Grid>
+        )}
+      </Layout>
       <NewResumeModal
         isOpen={isNewResumeModalOpen}
         onClose={onNewResumeModalClose}
