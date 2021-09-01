@@ -16,6 +16,7 @@ import {
 import { MoreVertical } from "react-feather";
 
 import Logo from "./Logo";
+import NavLink from "./misc/NavLink";
 
 function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -25,11 +26,15 @@ function Header() {
       <Container maxW="container.lg">
         <Flex as="nav" justifyContent="space-between">
           <Flex alignItems="center">
-            <Logo />
-            <Text ml="20px" mr="20px">
-              Resumes
-            </Text>
-            <Text mr="20px">Templates</Text>
+            <Box mr="4">
+              <Logo />
+            </Box>
+            <NavLink href="/">
+              <Text mr="4">Resumes</Text>
+            </NavLink>
+            <NavLink href="/templates">
+              <Text mr="4">Templates</Text>
+            </NavLink>
           </Flex>
           <Popover>
             <PopoverTrigger>
