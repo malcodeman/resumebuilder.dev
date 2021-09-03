@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 type props = {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { name: string }) => void;
+  onSubmit: (data: { title: string }) => void;
 };
 
 function NewResumeModal(props: props) {
@@ -40,11 +40,11 @@ function NewResumeModal(props: props) {
         <ModalBody>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
-              <FormLabel>Resume name</FormLabel>
+              <FormLabel>Resume title</FormLabel>
               <Input
                 size="sm"
-                {...register("name", { required: true })}
-                data-cy="resume_name_input"
+                {...register("title", { required: true })}
+                data-cy="resume_title_input"
                 ref={initialRef}
               />
             </FormControl>

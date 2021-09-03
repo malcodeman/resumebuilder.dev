@@ -25,6 +25,8 @@ import NewResumeModal from "../components/resumes/NewResumeModal";
 import ResumeItem from "../components/resumes/ResumeItem";
 import ImportDataModal from "../components/ImportDataModal";
 
+import { DEFAULT_VALUES } from "../lib/constants";
+
 import { Resume, Template, Fields } from "../types";
 
 function Home() {
@@ -52,64 +54,11 @@ function Home() {
     { event: "keyup" }
   );
 
-  function handleOnSubmit(data: { name: string }) {
+  function handleOnSubmit(data: { title: string }) {
     const resume = {
+      ...DEFAULT_VALUES,
       id: nanoid(),
-      updated: Date.now(),
-      name: data.name,
-      template: Template.berlin,
-      fields: {
-        title: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        city: "",
-        country: "",
-        summary: "",
-        section: [
-          {
-            name: "standardSection" as const,
-            label: "Employment History",
-            nested: [
-              {
-                title: "",
-                subtitle: "",
-                website: "",
-                city: "",
-                startDate: "",
-                endDate: "",
-                description: "",
-              },
-            ],
-          },
-          {
-            name: "standardSection" as const,
-            label: "Education",
-            nested: [
-              {
-                title: "",
-                subtitle: "",
-                website: "",
-                city: "",
-                startDate: "",
-                endDate: "",
-                description: "",
-              },
-            ],
-          },
-          {
-            name: "tagListSection" as const,
-            label: "Skills",
-            tags: "",
-          },
-          {
-            name: "tagListSection" as const,
-            label: "Hobbies",
-            tags: "",
-          },
-        ],
-      },
+      title: data.title,
     };
     setResumes([...resumes, resume]);
     onNewResumeModalClose();
@@ -126,8 +75,9 @@ function Home() {
     const value = {
       ...resume,
       id: nanoid(),
-      updated: Date.now(),
-      name: `${resume.name} copy`,
+      title: `${resume.title} copy`,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     };
     setResumes([...resumes, value]);
   }
@@ -137,8 +87,8 @@ function Home() {
       if (item.id === id) {
         return {
           ...item,
-          name: nextValue,
-          updated: Date.now(),
+          title: nextValue,
+          updatedAt: Date.now(),
         };
       }
       return item;
@@ -148,11 +98,14 @@ function Home() {
 
   function handleOnImport(fields: Fields) {
     const resume = {
+      ...fields,
       id: nanoid(),
-      updated: Date.now(),
-      name: "Untitled",
-      template: Template.berlin,
-      fields,
+      title: "Untitled",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      meta: {
+        template: Template.berlin,
+      },
     };
     setResumes([...resumes, resume]);
     onImporDataModalClose();

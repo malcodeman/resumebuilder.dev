@@ -45,7 +45,7 @@ function SectionHeader(props: props) {
 
   return (
     <h2>
-      <AccordionButton role="group" height="42.5px">
+      <AccordionButton as="div" role="group" height="42.5px">
         <AccordionIcon mr="2" />
         <Box flex="1" textAlign="left" isTruncated>
           {label || "Untitled"}

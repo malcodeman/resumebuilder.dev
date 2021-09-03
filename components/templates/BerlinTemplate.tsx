@@ -88,34 +88,24 @@ const styles = StyleSheet.create({
 });
 
 function BerlinTemplate(props: Fields) {
-  const {
-    title,
-    firstName,
-    lastName,
-    email,
-    phone,
-    city,
-    country,
-    summary,
-    section,
-  } = props;
+  const { about, section } = props;
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.initials}>
-          <Text>{firstName[0]}</Text>
-          <Text>{lastName[0]}</Text>
+          <Text>{about.firstName[0]}</Text>
+          <Text>{about.lastName[0]}</Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.name}>
-            {firstName} {lastName}
+            {about.firstName} {about.lastName}
           </Text>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{about.title}</Text>
           <Text style={styles.text}>
-            {city}, {country} | {email} | {phone}
+            {about.city}, {about.country} | {about.email} | {about.phone}
           </Text>
-          {summary.split("\n").map((item, index) => (
+          {about.summary.split("\n").map((item, index) => (
             <Text key={index} style={styles.text}>
               {item}
             </Text>

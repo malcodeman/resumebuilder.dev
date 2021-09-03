@@ -6,7 +6,7 @@ describe("Resumes", () => {
   it("create new resume", () => {
     cy.get("[data-cy=new_resume_btn]").click();
 
-    cy.get("[data-cy=resume_name_input]")
+    cy.get("[data-cy=resume_title_input]")
       .type("Cypress resume")
       .should("have.value", "Cypress resume");
 
@@ -17,7 +17,7 @@ describe("Resumes", () => {
   it("delete a resume", () => {
     cy.get("[data-cy=new_resume_btn]").click();
 
-    cy.get("[data-cy=resume_name_input]")
+    cy.get("[data-cy=resume_title_input]")
       .type("Cypress resume")
       .should("have.value", "Cypress resume");
 
@@ -34,7 +34,7 @@ describe("Resumes", () => {
   it("duplicate a resume", () => {
     cy.get("[data-cy=new_resume_btn]").click();
 
-    cy.get("[data-cy=resume_name_input]")
+    cy.get("[data-cy=resume_title_input]")
       .type("Cypress resume")
       .should("have.value", "Cypress resume");
 

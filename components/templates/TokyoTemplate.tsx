@@ -113,17 +113,7 @@ function SectionTitle(props: {
 }
 
 function TokyoTemplate(props: Fields) {
-  const {
-    title,
-    firstName,
-    lastName,
-    email,
-    phone,
-    city,
-    country,
-    summary,
-    section,
-  } = props;
+  const { about, section } = props;
   const tagListSection = R.filter(
     (item) => item.name === "tagListSection",
     section
@@ -138,10 +128,10 @@ function TokyoTemplate(props: Fields) {
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text style={styles.name}>
-            {firstName} {lastName}
+            {about.firstName} {about.lastName}
           </Text>
-          <Text style={styles.title}>{title}</Text>
-          {summary.split("\n").map((item, index) => (
+          <Text style={styles.title}>{about.title}</Text>
+          {about.summary.split("\n").map((item, index) => (
             <Text key={index} style={styles.summary}>
               {item}
             </Text>
@@ -152,10 +142,10 @@ function TokyoTemplate(props: Fields) {
             <View style={styles.contactInfo}>
               <SectionTitle>Contact Info</SectionTitle>
               <Text style={styles.text}>
-                {city}, {country}
+                {about.city}, {about.country}
               </Text>
-              <Text style={styles.text}>{email}</Text>
-              <Text style={styles.text}>{phone}</Text>
+              <Text style={styles.text}>{about.email}</Text>
+              <Text style={styles.text}>{about.phone}</Text>
             </View>
             {tagListSection.map((sectionItem, index) => {
               return (

@@ -34,16 +34,16 @@ function PersonalDetailsSection() {
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>Title</FormLabel>
-              <Input size="sm" {...register("title")} />
+              <Input size="sm" {...register("about.title")} />
             </FormControl>
           </GridItem>
           <FormControl>
             <FormLabel>First name</FormLabel>
-            <Input size="sm" {...register("firstName")} />
+            <Input size="sm" {...register("about.firstName")} />
           </FormControl>
           <FormControl>
             <FormLabel>Last name</FormLabel>
-            <Input size="sm" {...register("lastName")} />
+            <Input size="sm" {...register("about.lastName")} />
           </FormControl>
           <FormControl>
             <FormLabel>Email</FormLabel>
@@ -51,7 +51,7 @@ function PersonalDetailsSection() {
               <InputLeftElement pointerEvents="none">
                 <Mail size={20} />
               </InputLeftElement>
-              <Input {...register("email")} />
+              <Input {...register("about.email")} />
             </InputGroup>
           </FormControl>
           <FormControl>
@@ -60,21 +60,21 @@ function PersonalDetailsSection() {
               <InputLeftElement pointerEvents="none">
                 <Phone size={20} />
               </InputLeftElement>
-              <Input {...register("phone")} />
+              <Input {...register("about.phone")} />
             </InputGroup>
           </FormControl>
           <FormControl>
             <FormLabel>City</FormLabel>
-            <Input size="sm" {...register("city")} />
+            <Input size="sm" {...register("about.city")} />
           </FormControl>
           <FormControl>
             <FormLabel>Country</FormLabel>
-            <Input size="sm" {...register("country")} />
+            <Input size="sm" {...register("about.country")} />
           </FormControl>
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>Summary</FormLabel>
-              <Textarea size="sm" {...register("summary")} />
+              <Textarea size="sm" {...register("about.summary")} />
             </FormControl>
           </GridItem>
         </Grid>

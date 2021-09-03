@@ -7,14 +7,16 @@ enum Template {
 }
 type Section = "standardSection" | "tagListSection";
 type Fields = {
-  title: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  city: string;
-  country: string;
-  summary: string;
+  about: {
+    title: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    city: string;
+    country: string;
+    summary: string;
+  };
   section: {
     name: Section;
     label: string;
@@ -32,10 +34,36 @@ type Fields = {
 };
 type Resume = {
   id: string;
-  name: string;
-  updated: number;
-  template: Template;
-  fields: Fields;
+  title: string;
+  createdAt: number;
+  updatedAt: number;
+  meta: {
+    template: Template;
+  };
+  about: {
+    title: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    city: string;
+    country: string;
+    summary: string;
+  };
+  section: {
+    name: Section;
+    label: string;
+    tags?: string;
+    nested?: {
+      title: string;
+      subtitle: string;
+      website: string;
+      city: string;
+      startDate: string;
+      endDate: string;
+      description: string;
+    }[];
+  }[];
 };
 type ChakraThemeConfig = {
   initialColorMode: ColorMode;

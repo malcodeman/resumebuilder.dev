@@ -20,10 +20,15 @@ import {
 } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useRouter } from "next/router";
-import { useForm, useFieldArray, FormProvider } from "react-hook-form";
+import {
+  useForm,
+  useFieldArray,
+  FormProvider,
+  useWatch,
+} from "react-hook-form";
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
-import { useDebouncedCallback, useLocalStorageValue } from "@react-hookz/web";
+import { useDebouncedEffect, useLocalStorageValue } from "@react-hookz/web";
 import { useToast } from "@chakra-ui/react";
 import {
   DndContext,
@@ -48,39 +53,63 @@ import HeaderPopover from "../components/HeaderPopover";
 import ExportResumeModal from "../components/templates/ExportResumeModal";
 import DeleteResumeModal from "../components/resumes/DeleteResumeModal";
 
-import { TEMPLATES } from "../lib/constants";
+import { TEMPLATES, DEFAULT_VALUES } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
 
-import { Resume, Template, Section, Fields } from "../types";
+import { Resume, Section, Fields } from "../types";
 
-const defaultResume = {
-  id: "",
-  name: "",
-  updated: Date.now(),
-  template: Template.berlin,
-  fields: {
-    title: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    city: "",
-    country: "",
-    summary: "",
-    section: [],
-  },
-};
-const defaultValues = {
-  title: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-  city: "",
-  country: "",
-  summary: "",
-  section: [],
-};
+function ResumeTitle({ control, setValue }) {
+  const value = useWatch({
+    control,
+    name: "title",
+    defaultValue: "",
+  });
+  return (
+    <Editable
+      value={value}
+      onChange={(nextValue) => setValue("title", nextValue)}
+      maxWidth="256px"
+    >
+      <EditablePreview noOfLines={1} overflowWrap="anywhere" />
+      <EditableInput />
+    </Editable>
+  );
+}
+
+function Document({ control, isFullWidth, onChange }) {
+  const watch = useWatch({
+    control,
+    name: "",
+    defaultValue: DEFAULT_VALUES,
+  });
+  const fields = {
+    about: watch.about,
+    section: watch.section,
+  };
+  const document = getTemplate(watch.meta.template, fields);
+
+  useDebouncedEffect(
+    () => {
+      if (watch.id) {
+        onChange();
+      }
+    },
+    [watch],
+    200,
+    500
+  );
+
+  return (
+    <Box
+      as={motion.div}
+      margin="0 auto"
+      animate={{ width: isFullWidth ? "100%" : "900px" }}
+    >
+      {document}
+    </Box>
+  );
+}
+
 const toastId = "onSave";
 
 function Builder() {
@@ -90,11 +119,9 @@ function Builder() {
     initializeWithStorageValue: false,
   });
   const resume = R.isNil(resumes)
-    ? defaultResume
-    : R.find((item) => item.id === id, resumes) || defaultResume;
-  const form = useForm<Fields>({
-    defaultValues,
-  });
+    ? DEFAULT_VALUES
+    : R.find((item) => item.id === id, resumes) || DEFAULT_VALUES;
+  const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
   const {
     fields: sectionFields,
     append: appendSection,
@@ -104,8 +131,6 @@ function Builder() {
     control: form.control,
     name: "section",
   });
-
-  const document = getTemplate(resume.template, resume.fields);
   const [keyboardJs, setKeyboardJs] = React.useState(null);
   const toast = useToast();
   const templateBgColor = useColorModeValue("gray.300", "gray.600");
@@ -132,26 +157,6 @@ function Builder() {
     false,
     { initializeWithStorageValue: false }
   );
-  const handleOnChange = useDebouncedCallback(
-    () => {
-      const nextResume = {
-        ...resume,
-        updated: Date.now(),
-        fields: form.getValues(),
-      };
-      updateInLocalStorage(nextResume);
-    },
-    [resume.id],
-    500,
-    1000
-  );
-
-  React.useEffect(() => {
-    const subscription = form.watch(() => handleOnChange());
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [form, handleOnChange]);
 
   React.useEffect(() => {
     import("keyboardjs").then((k) => setKeyboardJs(k.default || k));
@@ -182,9 +187,17 @@ function Builder() {
 
   React.useEffect(() => {
     if (resume.id) {
-      form.reset({ ...resume.fields });
+      form.reset({ ...resume });
     }
   }, [resume.id]);
+
+  function handleOnChange() {
+    const nextResume = {
+      ...form.getValues(),
+      updatedAt: Date.now(),
+    };
+    updateInLocalStorage(nextResume);
+  }
 
   function updateInLocalStorage(nextResume: Resume) {
     const nextResumes = R.map((item) => {
@@ -196,34 +209,21 @@ function Builder() {
     setResumes(nextResumes);
   }
 
-  function handleOnNameChange(nextValue: string) {
-    const nextResume = {
-      ...resume,
-      name: nextValue,
-      updated: Date.now(),
-    };
-    updateInLocalStorage(nextResume);
-  }
-
-  function handleOnTemplateChange(nextTemplate: Template) {
-    const nextResume = {
-      ...resume,
-      updated: Date.now(),
-      template: nextTemplate,
-    };
-    updateInLocalStorage(nextResume);
-  }
-
   async function handleOnPdfExport() {
+    const fields = {
+      about: resume.about,
+      section: resume.section,
+    };
+    const document = getTemplate(resume.meta.template, fields);
     const blob = await pdf(document).toBlob();
-    saveAs(blob, resume.name);
+    saveAs(blob, resume.title);
   }
 
   function handleOnJsonExport() {
     const blob = new Blob([JSON.stringify(resume)], {
       type: "application/json",
     });
-    saveAs(blob, `${resume.name}.json`);
+    saveAs(blob, `${resume.title}.json`);
   }
 
   function handleOnSubmit(data: { label: string; name: Section }) {
@@ -264,7 +264,12 @@ function Builder() {
   }
 
   function handleOnImport(fields: Fields) {
-    form.reset({ ...fields });
+    const values = {
+      ...resume,
+      about: fields.about,
+      section: fields.section,
+    };
+    form.reset(values);
   }
 
   function handleOnDelete() {
@@ -276,19 +281,12 @@ function Builder() {
   return (
     <>
       <Head>
-        <title>{resume.name} - resumebuilder.dev</title>
+        <title>{resume.title} - resumebuilder.dev</title>
       </Head>
       <Box as="header" padding="20px">
         <Flex as="nav" justifyContent="space-between">
           <Logo />
-          <Editable
-            value={resume.name}
-            onChange={handleOnNameChange}
-            maxWidth="256px"
-          >
-            <EditablePreview noOfLines={1} overflowWrap="anywhere" />
-            <EditableInput />
-          </Editable>
+          <ResumeTitle control={form.control} setValue={form.setValue} />
           <Flex>
             <Button mr="2" size="sm" onClick={handleOnPdfExport}>
               Export PDF
@@ -372,7 +370,7 @@ function Builder() {
                       backgroundColor={templateBgColor}
                       borderRadius="lg"
                       color="#999"
-                      onClick={() => handleOnTemplateChange(item)}
+                      onClick={() => form.setValue("meta.template", item)}
                     >
                       {item}
                     </Flex>
@@ -383,13 +381,11 @@ function Builder() {
             </TabPanel>
           </TabPanels>
         </Tabs>
-        <Box
-          as={motion.div}
-          margin="0 auto"
-          animate={{ width: isFullWidth ? "100%" : "900px" }}
-        >
-          {document}
-        </Box>
+        <Document
+          control={form.control}
+          isFullWidth={isFullWidth}
+          onChange={handleOnChange}
+        />
       </Grid>
       <AddSectionModal
         isOpen={isOpen}

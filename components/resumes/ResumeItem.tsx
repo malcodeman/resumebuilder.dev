@@ -64,16 +64,19 @@ function ResumeItem(props: props) {
           borderRadius="lg"
           overflow="hidden"
         >
-          {getTemplate(resume.template, resume.fields)}
+          {getTemplate(resume.meta.template, {
+            about: resume.about,
+            section: resume.section,
+          })}
         </Box>
         <Flex justifyContent="space-between" alignItems="center">
           <Box>
             <Text noOfLines={2} overflowWrap="anywhere">
-              {resume.name}
+              {resume.title}
             </Text>
             <Text opacity="0.5">
               Edited{" "}
-              {formatDistanceToNow(resume.updated, {
+              {formatDistanceToNow(resume.updatedAt, {
                 addSuffix: true,
               })}
             </Text>
@@ -98,7 +101,7 @@ function ResumeItem(props: props) {
                     <Flex flexDirection="column">
                       <Editable
                         mb="2"
-                        value={resume.name}
+                        value={resume.title}
                         onSubmit={onClose}
                         onChange={(nextValue) =>
                           onNameChange(resume.id, nextValue)
