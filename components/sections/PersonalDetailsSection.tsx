@@ -1,8 +1,5 @@
 import {
-  Box,
   Grid,
-  AccordionButton,
-  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Input,
@@ -16,19 +13,14 @@ import {
 import { Mail, Phone } from "react-feather";
 import { useFormContext } from "react-hook-form";
 
+import SectionHeader from "./SectionHeader";
+
 function PersonalDetailsSection() {
   const { register } = useFormContext();
 
   return (
     <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
-      <h2>
-        <AccordionButton>
-          <AccordionIcon mr="2" />
-          <Box flex="1" textAlign="left">
-            Personal details
-          </Box>
-        </AccordionButton>
-      </h2>
+      <SectionHeader label="Personal details" />
       <AccordionPanel>
         <Grid templateColumns="1fr 1fr" gap="4">
           <GridItem colSpan={2}>
