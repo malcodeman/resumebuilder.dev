@@ -314,7 +314,12 @@ function Builder() {
           </TabList>
           <TabPanels>
             <TabPanel padding="0">
-              <Accordion defaultIndex={[0]} allowToggle marginBottom="20px">
+              <Accordion
+                defaultIndex={[0]}
+                allowToggle
+                reduceMotion
+                marginBottom="20px"
+              >
                 <FormProvider {...form}>
                   <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
                     <PersonalDetailsSection />

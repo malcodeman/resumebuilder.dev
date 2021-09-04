@@ -52,6 +52,7 @@ function StandardSectionBody(props: props) {
       {...listeners}
       opacity={isDragging ? "0.5" : "initial"}
       allowToggle
+      reduceMotion
     >
       <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
         <SectionHeader

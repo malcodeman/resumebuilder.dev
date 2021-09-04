@@ -105,45 +105,53 @@ function StandardSection(props: props) {
       opacity={isDragging ? "0.5" : "initial"}
       _last={{ borderBottomWidth: 0 }}
     >
-      <SectionHeader
-        label={label}
-        onAppend={handleOnAppend}
-        onRemove={() => remove(index)}
-        onDuplicate={() => append(getValues(`section.${index}`))}
-      />
-      <AccordionPanel>
-        {R.isEmpty(fieldsNested) ? (
-          <Box
-            paddingY="2"
-            paddingInlineStart="calc(1.5rem + 20px)"
-            paddingInlineEnd="4"
-          >
-            <Text>No items inside</Text>
-          </Box>
-        ) : (
-          <></>
-        )}
-        <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
-          <SortableContext
-            items={fieldsNested}
-            strategy={verticalListSortingStrategy}
-          >
-            {fieldsNested.map((item, nestIndex) => {
-              return (
-                <StandardSectionBody
-                  key={item.id}
-                  id={item.id}
-                  index={index}
-                  label={item.title}
-                  nestIndex={nestIndex}
-                  onDuplicate={handleOnDuplicate}
-                  onRemove={handleOnRemove}
-                />
-              );
-            })}
-          </SortableContext>
-        </DndContext>
-      </AccordionPanel>
+      {({ isExpanded }) => (
+        <>
+          <SectionHeader
+            label={label}
+            onAppend={handleOnAppend}
+            onRemove={() => remove(index)}
+            onDuplicate={() => append(getValues(`section.${index}`))}
+          />
+          {isExpanded ? (
+            <AccordionPanel>
+              {R.isEmpty(fieldsNested) ? (
+                <Box
+                  paddingY="2"
+                  paddingInlineStart="calc(1.5rem + 20px)"
+                  paddingInlineEnd="4"
+                >
+                  <Text>No items inside</Text>
+                </Box>
+              ) : (
+                <></>
+              )}
+              <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
+                <SortableContext
+                  items={fieldsNested}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {fieldsNested.map((item, nestIndex) => {
+                    return (
+                      <StandardSectionBody
+                        key={item.id}
+                        id={item.id}
+                        index={index}
+                        label={item.title}
+                        nestIndex={nestIndex}
+                        onDuplicate={handleOnDuplicate}
+                        onRemove={handleOnRemove}
+                      />
+                    );
+                  })}
+                </SortableContext>
+              </DndContext>
+            </AccordionPanel>
+          ) : (
+            <></>
+          )}
+        </>
+      )}
     </AccordionItem>
   );
 }
