@@ -9,7 +9,7 @@ import {
   FormLabel,
   Accordion,
 } from "@chakra-ui/react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -34,11 +34,16 @@ function StandardSectionBody(props: props) {
     isDragging,
     setNodeRef,
   } = useSortable({ id });
-  const { register } = useFormContext();
+  const { control, register } = useFormContext();
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
   };
+  const title = useWatch({
+    control,
+    name: `section.${index}.nested.${nestIndex}.title`,
+    defaultValue: label,
+  });
 
   function onPointerDownHanlder(e: React.PointerEvent<HTMLDivElement>) {
     e.stopPropagation();
@@ -56,7 +61,7 @@ function StandardSectionBody(props: props) {
     >
       <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
         <SectionHeader
-          label={label}
+          label={title}
           onRemove={() => onRemove(nestIndex)}
           onDuplicate={() => onDuplicate(nestIndex)}
         />

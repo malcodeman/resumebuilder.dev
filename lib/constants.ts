@@ -2,6 +2,15 @@ import { Template } from "../types";
 
 const IS_PROD = process.env.NODE_ENV === "production";
 const TEMPLATES: Template[] = Object.values(Template);
+const STANDARD_SECTION_DEFAULT_VALUES = {
+  title: "",
+  subtitle: "",
+  website: "",
+  city: "",
+  startDate: "",
+  endDate: "",
+  description: "",
+};
 const DEFAULT_VALUES = {
   id: "",
   title: "",
@@ -24,32 +33,12 @@ const DEFAULT_VALUES = {
     {
       name: "standardSection" as const,
       label: "Employment History",
-      nested: [
-        {
-          title: "",
-          subtitle: "",
-          website: "",
-          city: "",
-          startDate: "",
-          endDate: "",
-          description: "",
-        },
-      ],
+      nested: [STANDARD_SECTION_DEFAULT_VALUES],
     },
     {
       name: "standardSection" as const,
       label: "Education",
-      nested: [
-        {
-          title: "",
-          subtitle: "",
-          website: "",
-          city: "",
-          startDate: "",
-          endDate: "",
-          description: "",
-        },
-      ],
+      nested: [STANDARD_SECTION_DEFAULT_VALUES],
     },
     {
       name: "tagListSection" as const,
@@ -64,4 +53,4 @@ const DEFAULT_VALUES = {
   ],
 };
 
-export { IS_PROD, TEMPLATES, DEFAULT_VALUES };
+export { IS_PROD, TEMPLATES, STANDARD_SECTION_DEFAULT_VALUES, DEFAULT_VALUES };

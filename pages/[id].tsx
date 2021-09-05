@@ -53,7 +53,11 @@ import HeaderPopover from "../components/HeaderPopover";
 import ExportResumeModal from "../components/templates/ExportResumeModal";
 import DeleteResumeModal from "../components/resumes/DeleteResumeModal";
 
-import { TEMPLATES, DEFAULT_VALUES } from "../lib/constants";
+import {
+  TEMPLATES,
+  DEFAULT_VALUES,
+  STANDARD_SECTION_DEFAULT_VALUES,
+} from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
 
 import { Resume, Section, Fields } from "../types";
@@ -233,17 +237,7 @@ function Builder() {
         return appendSection({
           name: data.name,
           label: data.label,
-          nested: [
-            {
-              title: "",
-              subtitle: "",
-              website: "",
-              city: "",
-              startDate: "",
-              endDate: "",
-              description: "",
-            },
-          ],
+          nested: [STANDARD_SECTION_DEFAULT_VALUES],
         });
       case "tagListSection":
         return appendSection({
@@ -319,6 +313,7 @@ function Builder() {
                 allowToggle
                 reduceMotion
                 marginBottom="20px"
+                onChange={() => form.reset({ ...form.getValues() })}
               >
                 <FormProvider {...form}>
                   <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>

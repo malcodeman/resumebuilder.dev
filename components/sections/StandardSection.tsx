@@ -23,6 +23,10 @@ import {
 import SectionHeader from "./SectionHeader";
 import StandardSectionBody from "./StandardSectionBody";
 
+import { STANDARD_SECTION_DEFAULT_VALUES } from "../../lib/constants";
+
+import { Resume } from "../../types";
+
 type props = {
   id: string;
   index: number;
@@ -36,7 +40,7 @@ type props = {
 
 function StandardSection(props: props) {
   const { id, index, label, remove, append } = props;
-  const { control, getValues } = useFormContext();
+  const { control, getValues } = useFormContext<Resume>();
   const {
     fields: fieldsNested,
     remove: removeNested,
@@ -66,26 +70,6 @@ function StandardSection(props: props) {
     })
   );
 
-  function handleOnDuplicate(nestIndex: number) {
-    appendNested(getValues(`section.${index}.nested.${nestIndex}` as const));
-  }
-
-  function handleOnRemove(nestIndex: number) {
-    removeNested(nestIndex);
-  }
-
-  function handleOnAppend() {
-    appendNested({
-      title: "",
-      subtitle: "",
-      website: "",
-      city: "",
-      startDate: "",
-      endDate: "",
-      description: "",
-    });
-  }
-
   function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active.id !== over.id) {
@@ -109,7 +93,7 @@ function StandardSection(props: props) {
         <>
           <SectionHeader
             label={label}
-            onAppend={handleOnAppend}
+            onAppend={() => appendNested(STANDARD_SECTION_DEFAULT_VALUES)}
             onRemove={() => remove(index)}
             onDuplicate={() => append(getValues(`section.${index}`))}
           />
@@ -139,8 +123,12 @@ function StandardSection(props: props) {
                         index={index}
                         label={item.title}
                         nestIndex={nestIndex}
-                        onDuplicate={handleOnDuplicate}
-                        onRemove={handleOnRemove}
+                        onDuplicate={() =>
+                          appendNested(
+                            getValues(`section.${index}.nested.${nestIndex}`)
+                          )
+                        }
+                        onRemove={() => removeNested(nestIndex)}
                       />
                     );
                   })}
