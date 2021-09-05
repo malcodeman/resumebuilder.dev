@@ -45,6 +45,7 @@ function TagListSection(props: props) {
     >
       <SectionHeader
         label={label}
+        index={index}
         onRemove={() => remove(index)}
         onDuplicate={() => append(getValues(`section.${index}`))}
       />

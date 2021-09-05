@@ -93,6 +93,7 @@ function StandardSection(props: props) {
         <>
           <SectionHeader
             label={label}
+            index={index}
             onAppend={() => appendNested(STANDARD_SECTION_DEFAULT_VALUES)}
             onRemove={() => remove(index)}
             onDuplicate={() => append(getValues(`section.${index}`))}
