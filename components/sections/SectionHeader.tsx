@@ -9,7 +9,9 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Input,
+  Editable,
+  EditablePreview,
+  EditableInput,
 } from "@chakra-ui/react";
 import { MoreHorizontal, Copy, Trash2, Plus, Edit } from "react-feather";
 import * as R from "ramda";
@@ -23,27 +25,6 @@ type props = {
   onRemove?: () => void;
 };
 
-function SectionLabel({ index, onSubmit }) {
-  const { reset, getValues, register } = useFormContext();
-
-  function handleOnSubmit() {
-    reset({ ...getValues() });
-    onSubmit();
-  }
-
-  return (
-    <form onSubmit={handleOnSubmit}>
-      <Input
-        size="sm"
-        autoFocus
-        onClick={(e) => e.stopPropagation()}
-        {...register(`section.${index}.label` as const)}
-        onBlur={handleOnSubmit}
-      />
-    </form>
-  );
-}
-
 const TOOLTIP_ADD_LABEL = "Add an item";
 const TOOLTIP_MORE_LABEL = "Delete, duplicate, and more...";
 
@@ -56,24 +37,45 @@ function SectionHeader(props: props) {
     R.isNil(onDuplicate) &&
     R.isNil(onRemove);
   const isNested = R.isNil(index);
-  const [isEditable, setIsEditable] = React.useState(false);
+  const isEditable = !isAbout && !isNested;
+  const ref = React.useRef<HTMLSpanElement>(null);
+  const { register } = useFormContext();
 
   function handleOnAppend(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.stopPropagation();
     onAppend();
   }
 
+  function handleOnFocus(event: React.FocusEvent<HTMLDivElement>) {
+    if (
+      event.relatedTarget &&
+      event.relatedTarget["dataset"]["action"] === "rename"
+    ) {
+      return event;
+    }
+    return event.preventDefault();
+  }
+
   return (
     <h2>
       <AccordionButton as="div" role="group">
         <AccordionIcon mr="2" />
-        <Box flex="1" isTruncated>
-          {isEditable ? (
-            <SectionLabel index={index} onSubmit={() => setIsEditable(false)} />
-          ) : (
-            label || "Untitled"
-          )}
-        </Box>
+        {isEditable ? (
+          <Editable defaultValue={label} flex="1" mr="2">
+            <EditablePreview
+              ref={ref}
+              noOfLines={1}
+              cursor="inherit"
+              overflowWrap="anywhere"
+              onFocus={handleOnFocus}
+            />
+            <EditableInput {...register(`section.${index}.label` as const)} />
+          </Editable>
+        ) : (
+          <Box isTruncated flex="1" mr="2">
+            {label || "Untitled"}
+          </Box>
+        )}
         {isAbout ? (
           <></>
         ) : (
@@ -106,7 +108,8 @@ function SectionHeader(props: props) {
                     <></>
                   ) : (
                     <MenuItem
-                      onClick={() => setIsEditable(true)}
+                      data-action="rename"
+                      onClick={() => ref.current.focus()}
                       icon={<Edit size={20} />}
                     >
                       Rename

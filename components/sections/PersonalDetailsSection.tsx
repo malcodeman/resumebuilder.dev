@@ -19,7 +19,11 @@ function PersonalDetailsSection() {
   const { register } = useFormContext();
 
   return (
-    <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
+    <AccordionItem
+      borderTopWidth="0"
+      cursor="pointer"
+      _last={{ borderBottomWidth: 0 }}
+    >
       <SectionHeader label="Personal details" />
       <AccordionPanel>
         <Grid templateColumns="1fr 1fr" gap="4">
