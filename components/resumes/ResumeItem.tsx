@@ -15,6 +15,7 @@ import {
 import { Copy, MoreHorizontal, Trash2, Edit } from "react-feather";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 
 import getTemplate from "../../lib/getTemplate";
 
@@ -24,12 +25,13 @@ type props = {
   resume: Resume;
   onDelete: (id: string) => void;
   onDuplicate: (id: string) => void;
-  onNameChange: (id: string, nextValue: string) => void;
+  onTitleChange: (id: string, nextValue: string) => void;
 };
 
 function ResumeItem(props: props) {
-  const { resume, onDelete, onDuplicate, onNameChange, ...rest } = props;
+  const { resume, onDelete, onDuplicate, onTitleChange, ...rest } = props;
   const ref = React.useRef<HTMLSpanElement>(null);
+  const form = useForm({ defaultValues: { title: "" } });
 
   return (
     <Link href={`/${resume.id}`} passHref>
@@ -53,15 +55,15 @@ function ResumeItem(props: props) {
         >
           <Box>
             <Editable
-              value={resume.title}
-              onChange={(nextValue) => onNameChange(resume.id, nextValue)}
+              defaultValue={resume.title}
+              onSubmit={(nextValue) => onTitleChange(resume.id, nextValue)}
             >
               <EditablePreview
                 ref={ref}
                 noOfLines={1}
                 overflowWrap="anywhere"
               />
-              <EditableInput />
+              <EditableInput {...form.register("title")} />
             </Editable>
             <Text opacity="0.5">
               Edited{" "}
@@ -70,7 +72,7 @@ function ResumeItem(props: props) {
               })}
             </Text>
           </Box>
-          <Menu>
+          <Menu isLazy>
             <MenuButton
               as={IconButton}
               size="sm"

@@ -29,26 +29,17 @@ import { DEFAULT_VALUES } from "../lib/constants";
 
 import { Resume, Template, Fields } from "../types";
 
-function Home() {
+function ResumeNewButton() {
   const router = useRouter();
-  const {
-    isOpen: isNewResumeModalOpen,
-    onOpen: onNewResumeModalOpen,
-    onClose: onNewResumeModalClose,
-  } = useDisclosure();
-  const {
-    isOpen: isImportDataModalOpen,
-    onOpen: onImportDataModalOpen,
-    onClose: onImporDataModalClose,
-  } = useDisclosure();
   const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
     initializeWithStorageValue: false,
   });
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useKeyboardEvent(
     "n",
     () => {
-      onNewResumeModalOpen();
+      onOpen();
     },
     [],
     { event: "keyup" }
@@ -61,9 +52,79 @@ function Home() {
       title: data.title,
     };
     setResumes([...resumes, resume]);
-    onNewResumeModalClose();
+    onClose();
     router.push(`/${resume.id}`);
   }
+
+  return (
+    <>
+      <Popover trigger="hover">
+        <PopoverTrigger>
+          <Button mr="-px" data-cy="new_resume_btn" onClick={onOpen}>
+            New
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent width="unset">
+          <PopoverBody display="inline-flex" alignItems="center">
+            <Text marginInlineEnd="2" fontSize="sm">
+              Press
+            </Text>
+            <Kbd>N</Kbd>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+      <NewResumeModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={handleOnSubmit}
+      />
+    </>
+  );
+}
+
+function ImportDataButton() {
+  const router = useRouter();
+  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
+    initializeWithStorageValue: false,
+  });
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  function handleOnImport(fields: Fields) {
+    const resume = {
+      ...fields,
+      id: nanoid(),
+      title: "Untitled",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      meta: {
+        template: Template.berlin,
+      },
+    };
+    setResumes([...resumes, resume]);
+    onClose();
+    router.push(`/${resume.id}`);
+  }
+
+  return (
+    <>
+      <IconButton
+        aria-label="Import"
+        onClick={onOpen}
+        icon={<Upload size={20} />}
+      />
+      <ImportDataModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onImport={handleOnImport}
+      />
+    </>
+  );
+}
+
+function ResumeGrid() {
+  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
+    initializeWithStorageValue: false,
+  });
 
   function handleOnDelete(id: string) {
     const nextResumes = resumes.filter((item) => item.id !== id);
@@ -82,7 +143,7 @@ function Home() {
     setResumes([...resumes, value]);
   }
 
-  function handleOnNameChange(id: string, nextValue: string) {
+  function handleOnTitleChange(id: string, nextValue: string) {
     const nextResumes = R.map((item) => {
       if (item.id === id) {
         return {
@@ -96,22 +157,37 @@ function Home() {
     setResumes(nextResumes);
   }
 
-  function handleOnImport(fields: Fields) {
-    const resume = {
-      ...fields,
-      id: nanoid(),
-      title: "Untitled",
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-      meta: {
-        template: Template.berlin,
-      },
-    };
-    setResumes([...resumes, resume]);
-    onImporDataModalClose();
-    router.push(`/${resume.id}`);
+  if (R.isEmpty(resumes) || R.isNil(resumes)) {
+    return (
+      <Flex flexDirection="column" alignItems="center" padding="4">
+        <Text>No Resumes</Text>
+        <Text fontSize="small">Create a new resume to get started.</Text>
+      </Flex>
+    );
   }
+  return (
+    <Grid
+      gap="4"
+      gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
+      data-cy="resumes_grid"
+    >
+      {R.map(
+        (item) => (
+          <ResumeItem
+            key={item.id}
+            resume={item}
+            onDelete={handleOnDelete}
+            onDuplicate={handleOnDuplicate}
+            onTitleChange={handleOnTitleChange}
+          />
+        ),
+        resumes
+      )}
+    </Grid>
+  );
+}
 
+function Home() {
   return (
     <>
       <Head>
@@ -120,68 +196,12 @@ function Home() {
       <Layout>
         <Flex justifyContent="flex-end" mb="4">
           <ButtonGroup size="sm" isAttached>
-            <Popover trigger="hover">
-              <PopoverTrigger>
-                <Button
-                  mr="-px"
-                  data-cy="new_resume_btn"
-                  onClick={onNewResumeModalOpen}
-                >
-                  New
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent width="unset">
-                <PopoverBody display="inline-flex" alignItems="center">
-                  <Text marginInlineEnd="2" fontSize="sm">
-                    Press
-                  </Text>
-                  <Kbd>N</Kbd>
-                </PopoverBody>
-              </PopoverContent>
-            </Popover>
-            <IconButton
-              aria-label="Import"
-              onClick={onImportDataModalOpen}
-              icon={<Upload size={20} />}
-            />
+            <ResumeNewButton />
+            <ImportDataButton />
           </ButtonGroup>
         </Flex>
-        {R.isEmpty(resumes) || R.isNil(resumes) ? (
-          <Flex flexDirection="column" alignItems="center" padding="4">
-            <Text>No Resumes</Text>
-            <Text fontSize="small">Create a new resume to get started.</Text>
-          </Flex>
-        ) : (
-          <Grid
-            gap="4"
-            gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
-            data-cy="resumes_grid"
-          >
-            {R.map(
-              (item) => (
-                <ResumeItem
-                  key={item.id}
-                  resume={item}
-                  onDelete={handleOnDelete}
-                  onDuplicate={handleOnDuplicate}
-                  onNameChange={handleOnNameChange}
-                />
-              ),
-              resumes
-            )}
-          </Grid>
-        )}
+        <ResumeGrid />
       </Layout>
-      <NewResumeModal
-        isOpen={isNewResumeModalOpen}
-        onClose={onNewResumeModalClose}
-        onSubmit={handleOnSubmit}
-      />
-      <ImportDataModal
-        isOpen={isImportDataModalOpen}
-        onClose={onImporDataModalClose}
-        onImport={handleOnImport}
-      />
     </>
   );
 }
