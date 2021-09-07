@@ -9,7 +9,7 @@ import {
   FormLabel,
   Accordion,
 } from "@chakra-ui/react";
-import { useFormContext, useController } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -22,6 +22,21 @@ type props = {
   onDuplicate: (index: number) => void;
   onRemove: (index: number) => void;
 };
+
+function Header({ index, nestIndex, onRemove, onDuplicate }) {
+  const { control } = useFormContext();
+  const label = useWatch({
+    control,
+    name: `section.${index}.nested.${nestIndex}.title`,
+  });
+  return (
+    <SectionHeader
+      label={label}
+      onRemove={onRemove}
+      onDuplicate={onDuplicate}
+    />
+  );
+}
 
 function StandardSectionBody(props: props) {
   const { id, index, nestIndex, onRemove, onDuplicate } = props;
@@ -38,9 +53,6 @@ function StandardSectionBody(props: props) {
     transform: CSS.Translate.toString(transform),
     transition,
   };
-  const { field } = useController({
-    name: `section.${index}.nested.${nestIndex}.title`,
-  });
 
   function onPointerDownHanlder(e: React.PointerEvent<HTMLDivElement>) {
     e.stopPropagation();
@@ -57,8 +69,9 @@ function StandardSectionBody(props: props) {
       reduceMotion
     >
       <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
-        <SectionHeader
-          label={field.value}
+        <Header
+          index={index}
+          nestIndex={nestIndex}
           onRemove={() => onRemove(nestIndex)}
           onDuplicate={() => onDuplicate(nestIndex)}
         />
@@ -67,7 +80,10 @@ function StandardSectionBody(props: props) {
             <GridItem colSpan={2}>
               <FormControl>
                 <FormLabel>Title</FormLabel>
-                <Input size="sm" {...field} />
+                <Input
+                  size="sm"
+                  {...register(`section.${index}.nested.${nestIndex}.title`)}
+                />
               </FormControl>
             </GridItem>
             <GridItem colSpan={2}>

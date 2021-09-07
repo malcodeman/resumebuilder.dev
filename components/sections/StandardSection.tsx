@@ -40,7 +40,7 @@ type props = {
 
 function StandardSection(props: props) {
   const { id, index, label, remove, append } = props;
-  const { control, getValues } = useFormContext<Resume>();
+  const { control, getValues, reset } = useFormContext<Resume>();
   const {
     fields: fieldsNested,
     remove: removeNested,
@@ -79,6 +79,12 @@ function StandardSection(props: props) {
     }
   }
 
+  function handleOnDuplicate() {
+    // Each useFieldArray holds it's own reference, if you want to copy nested field array, then you need to use nested field array's method or reset the form
+    append(getValues(`section.${index}`));
+    reset({ ...getValues() });
+  }
+
   return (
     <AccordionItem
       ref={setNodeRef}
@@ -96,7 +102,7 @@ function StandardSection(props: props) {
             index={index}
             onAppend={() => appendNested(STANDARD_SECTION_DEFAULT_VALUES)}
             onRemove={() => remove(index)}
-            onDuplicate={() => append(getValues(`section.${index}`))}
+            onDuplicate={handleOnDuplicate}
           />
           {isExpanded ? (
             <AccordionPanel>
