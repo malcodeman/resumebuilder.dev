@@ -12,6 +12,7 @@ import {
   Button,
   Divider,
   useDisclosure,
+  useClipboard,
 } from "@chakra-ui/react";
 import { Download, Link, MoreHorizontal, Upload, Trash2 } from "react-feather";
 import { useRouter } from "next/router";
@@ -62,6 +63,21 @@ function FullWidth() {
         id="is-full-width"
       />
     </FormControl>
+  );
+}
+
+function CopyLink() {
+  const { hasCopied, onCopy } = useClipboard(window.location.href);
+  return (
+    <Button
+      size="sm"
+      mb="2"
+      justifyContent="flex-start"
+      leftIcon={<Link size={20} />}
+      onClick={onCopy}
+    >
+      {hasCopied ? "Copied" : "Copy link"}
+    </Button>
   );
 }
 
@@ -137,15 +153,6 @@ function ExportResume() {
 
 function HeaderPopover(props: props) {
   const { onImport } = props;
-
-  function handleCopyToClipboard() {
-    try {
-      navigator.clipboard.writeText(window.location.href);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   return (
     <Popover>
       {({ isOpen }) => (
@@ -188,15 +195,7 @@ function HeaderPopover(props: props) {
                 </FormControl>
                 <FullWidth />
                 <Divider marginY="2" />
-                <Button
-                  size="sm"
-                  mb="2"
-                  justifyContent="flex-start"
-                  leftIcon={<Link size={20} />}
-                  onClick={handleCopyToClipboard}
-                >
-                  Copy link
-                </Button>
+                <CopyLink />
                 <DeleteResume />
                 <Divider marginY="2" />
                 <ImportData onImport={onImport} />
