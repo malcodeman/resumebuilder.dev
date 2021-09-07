@@ -79,7 +79,7 @@ function SectionHeader(props: props) {
         {isAbout ? (
           <></>
         ) : (
-          <Menu>
+          <Menu isLazy>
             {({ isOpen }) => (
               <>
                 <Tooltip

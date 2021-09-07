@@ -14,30 +14,129 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Download, Link, MoreHorizontal, Upload, Trash2 } from "react-feather";
+import { useRouter } from "next/router";
+import { useLocalStorageValue } from "@react-hookz/web";
 
 import ImportDataModal from "./ImportDataModal";
+import ExportResumeModal from "./templates/ExportResumeModal";
+import DeleteResumeModal from "./resumes/DeleteResumeModal";
+
+import utils from "../lib/utils";
+import useResume from "../hooks/useResume";
 
 import { Fields } from "../types";
 
-type props = {
-  isFullWidth: boolean;
-  setIsFullWidth: (nextValue: boolean) => void;
-  onExportResumeModalOpen: () => void;
-  onImport: (fields: Fields) => void;
-  onDelete: () => void;
-};
-
 const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
-function HeaderPopover(props: props) {
-  const {
-    isFullWidth,
-    setIsFullWidth,
-    onExportResumeModalOpen,
-    onImport,
-    onDelete,
-  } = props;
+type props = {
+  onImport: (fields: Fields) => void;
+};
+
+function FullWidth() {
+  const [isFullWidth, setIsFullWidth] = useLocalStorageValue(
+    "isFullWidth",
+    false,
+    { initializeWithStorageValue: false }
+  );
+
+  return (
+    <FormControl
+      mb="2"
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <FormLabel
+        htmlFor="is-full-width"
+        mb="0"
+        width="100%"
+        cursor="pointer"
+        marginInlineEnd="0"
+        paddingInlineEnd="3"
+      >
+        Full width
+      </FormLabel>
+      <Switch
+        isChecked={isFullWidth}
+        onChange={() => setIsFullWidth(!isFullWidth)}
+        id="is-full-width"
+      />
+    </FormControl>
+  );
+}
+
+function DeleteResume() {
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [_resume, _setResume, removeResume] = useResume();
+
+  function handleOnDelete() {
+    removeResume();
+    router.push("/");
+  }
+  return (
+    <>
+      <Button
+        size="sm"
+        mb="2"
+        justifyContent="flex-start"
+        leftIcon={<Trash2 size={20} />}
+        onClick={onOpen}
+      >
+        Delete
+      </Button>
+      <DeleteResumeModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={handleOnDelete}
+      />
+    </>
+  );
+}
+
+function ImportData({ onImport }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <Button
+        size="sm"
+        mb="2"
+        justifyContent="flex-start"
+        leftIcon={<Upload size={20} />}
+        onClick={onOpen}
+      >
+        Import
+      </Button>
+      <ImportDataModal isOpen={isOpen} onClose={onClose} onImport={onImport} />
+    </>
+  );
+}
+
+function ExportResume() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [resume] = useResume();
+  return (
+    <>
+      <Button
+        size="sm"
+        justifyContent="flex-start"
+        leftIcon={<Download size={20} />}
+        onClick={onOpen}
+      >
+        Export
+      </Button>
+      <ExportResumeModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onPdfExport={() => utils.exportAsPdf(resume)}
+        onJsonExport={() => utils.exportAsJson(resume)}
+      />
+    </>
+  );
+}
+
+function HeaderPopover(props: props) {
+  const { onImport } = props;
 
   function handleCopyToClipboard() {
     try {
@@ -48,113 +147,66 @@ function HeaderPopover(props: props) {
   }
 
   return (
-    <>
-      <Popover>
-        {({ isOpen }) => (
-          <>
-            <Tooltip
-              label={TOOLTIP_MORE_LABEL}
-              aria-label={TOOLTIP_MORE_LABEL}
-              isDisabled={isOpen}
-            >
-              <Flex>
-                <PopoverTrigger>
-                  <IconButton
-                    size="sm"
-                    aria-label={TOOLTIP_MORE_LABEL}
-                    icon={<MoreHorizontal size={20} />}
-                  />
-                </PopoverTrigger>
+    <Popover>
+      {({ isOpen }) => (
+        <>
+          <Tooltip
+            label={TOOLTIP_MORE_LABEL}
+            aria-label={TOOLTIP_MORE_LABEL}
+            isDisabled={isOpen}
+          >
+            <Flex>
+              <PopoverTrigger>
+                <IconButton
+                  size="sm"
+                  aria-label={TOOLTIP_MORE_LABEL}
+                  icon={<MoreHorizontal size={20} />}
+                />
+              </PopoverTrigger>
+            </Flex>
+          </Tooltip>
+          <PopoverContent width="222px">
+            <PopoverBody>
+              <Flex flexDirection="column">
+                <FormControl
+                  mb="2"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  isDisabled={true}
+                >
+                  <FormLabel
+                    htmlFor="is-small-text"
+                    mb="0"
+                    width="100%"
+                    marginInlineEnd="0"
+                    paddingInlineEnd="3"
+                  >
+                    Small text
+                  </FormLabel>
+                  <Switch isDisabled={true} id="is-small-text" />
+                </FormControl>
+                <FullWidth />
+                <Divider marginY="2" />
+                <Button
+                  size="sm"
+                  mb="2"
+                  justifyContent="flex-start"
+                  leftIcon={<Link size={20} />}
+                  onClick={handleCopyToClipboard}
+                >
+                  Copy link
+                </Button>
+                <DeleteResume />
+                <Divider marginY="2" />
+                <ImportData onImport={onImport} />
+                <ExportResume />
               </Flex>
-            </Tooltip>
-            <PopoverContent width="222px">
-              <PopoverBody>
-                <Flex flexDirection="column">
-                  <FormControl
-                    mb="2"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    isDisabled={true}
-                  >
-                    <FormLabel
-                      htmlFor="is-small-text"
-                      mb="0"
-                      width="100%"
-                      marginInlineEnd="0"
-                      paddingInlineEnd="3"
-                    >
-                      Small text
-                    </FormLabel>
-                    <Switch isDisabled={true} id="is-small-text" />
-                  </FormControl>
-                  <FormControl
-                    mb="2"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <FormLabel
-                      htmlFor="is-full-width"
-                      mb="0"
-                      width="100%"
-                      cursor="pointer"
-                      marginInlineEnd="0"
-                      paddingInlineEnd="3"
-                    >
-                      Full width
-                    </FormLabel>
-                    <Switch
-                      isChecked={isFullWidth}
-                      onChange={() => setIsFullWidth(!isFullWidth)}
-                      id="is-full-width"
-                    />
-                  </FormControl>
-                  <Divider marginY="2" />
-                  <Button
-                    size="sm"
-                    mb="2"
-                    justifyContent="flex-start"
-                    leftIcon={<Link size={20} />}
-                    onClick={handleCopyToClipboard}
-                  >
-                    Copy link
-                  </Button>
-                  <Button
-                    size="sm"
-                    mb="2"
-                    justifyContent="flex-start"
-                    leftIcon={<Trash2 size={20} />}
-                    onClick={onDelete}
-                  >
-                    Delete
-                  </Button>
-                  <Divider marginY="2" />
-                  <Button
-                    size="sm"
-                    mb="2"
-                    justifyContent="flex-start"
-                    leftIcon={<Upload size={20} />}
-                    onClick={onOpen}
-                  >
-                    Import
-                  </Button>
-                  <Button
-                    size="sm"
-                    justifyContent="flex-start"
-                    leftIcon={<Download size={20} />}
-                    onClick={onExportResumeModalOpen}
-                  >
-                    Export
-                  </Button>
-                </Flex>
-              </PopoverBody>
-            </PopoverContent>
-          </>
-        )}
-      </Popover>
-      <ImportDataModal isOpen={isOpen} onClose={onClose} onImport={onImport} />
-    </>
+            </PopoverBody>
+          </PopoverContent>
+        </>
+      )}
+    </Popover>
   );
 }
 
