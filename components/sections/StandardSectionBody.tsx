@@ -69,83 +69,93 @@ function StandardSectionBody(props: props) {
       reduceMotion
     >
       <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
-        <Header
-          index={index}
-          nestIndex={nestIndex}
-          onRemove={() => onRemove(nestIndex)}
-          onDuplicate={() => onDuplicate(nestIndex)}
-        />
-        <AccordionPanel onPointerDown={onPointerDownHanlder}>
-          <Grid templateColumns="1fr 1fr" gap="4">
-            <GridItem colSpan={2}>
-              <FormControl>
-                <FormLabel>Title</FormLabel>
-                <Input
-                  size="sm"
-                  {...register(`section.${index}.nested.${nestIndex}.title`)}
-                />
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={2}>
-              <FormControl>
-                <FormLabel>Subtitle</FormLabel>
-                <Input
-                  size="sm"
-                  {...register(
-                    `section.${index}.nested.${nestIndex}.subtitle` as const
-                  )}
-                />
-              </FormControl>
-            </GridItem>
-            <FormControl>
-              <FormLabel>Website</FormLabel>
-              <Input
-                size="sm"
-                {...register(
-                  `section.${index}.nested.${nestIndex}.website` as const
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>City</FormLabel>
-              <Input
-                size="sm"
-                {...register(
-                  `section.${index}.nested.${nestIndex}.city` as const
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Start date</FormLabel>
-              <Input
-                size="sm"
-                {...register(
-                  `section.${index}.nested.${nestIndex}.startDate` as const
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>End date</FormLabel>
-              <Input
-                size="sm"
-                {...register(
-                  `section.${index}.nested.${nestIndex}.endDate` as const
-                )}
-              />
-            </FormControl>
-            <GridItem colSpan={2}>
-              <FormControl>
-                <FormLabel>Description</FormLabel>
-                <Textarea
-                  size="sm"
-                  {...register(
-                    `section.${index}.nested.${nestIndex}.description` as const
-                  )}
-                />
-              </FormControl>
-            </GridItem>
-          </Grid>
-        </AccordionPanel>
+        {({ isExpanded }) => (
+          <>
+            <Header
+              index={index}
+              nestIndex={nestIndex}
+              onRemove={() => onRemove(nestIndex)}
+              onDuplicate={() => onDuplicate(nestIndex)}
+            />
+            {isExpanded ? (
+              <AccordionPanel onPointerDown={onPointerDownHanlder}>
+                <Grid templateColumns="1fr 1fr" gap="4">
+                  <GridItem colSpan={2}>
+                    <FormControl>
+                      <FormLabel>Title</FormLabel>
+                      <Input
+                        size="sm"
+                        {...register(
+                          `section.${index}.nested.${nestIndex}.title`
+                        )}
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem colSpan={2}>
+                    <FormControl>
+                      <FormLabel>Subtitle</FormLabel>
+                      <Input
+                        size="sm"
+                        {...register(
+                          `section.${index}.nested.${nestIndex}.subtitle` as const
+                        )}
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <FormControl>
+                    <FormLabel>Website</FormLabel>
+                    <Input
+                      size="sm"
+                      {...register(
+                        `section.${index}.nested.${nestIndex}.website` as const
+                      )}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>City</FormLabel>
+                    <Input
+                      size="sm"
+                      {...register(
+                        `section.${index}.nested.${nestIndex}.city` as const
+                      )}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Start date</FormLabel>
+                    <Input
+                      size="sm"
+                      {...register(
+                        `section.${index}.nested.${nestIndex}.startDate` as const
+                      )}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>End date</FormLabel>
+                    <Input
+                      size="sm"
+                      {...register(
+                        `section.${index}.nested.${nestIndex}.endDate` as const
+                      )}
+                    />
+                  </FormControl>
+                  <GridItem colSpan={2}>
+                    <FormControl>
+                      <FormLabel>Description</FormLabel>
+                      <Textarea
+                        size="sm"
+                        {...register(
+                          `section.${index}.nested.${nestIndex}.description` as const
+                        )}
+                      />
+                    </FormControl>
+                  </GridItem>
+                </Grid>
+              </AccordionPanel>
+            ) : (
+              <></>
+            )}
+          </>
+        )}
       </AccordionItem>
     </Accordion>
   );
