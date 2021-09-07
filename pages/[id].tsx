@@ -34,7 +34,7 @@ import useAutoSaveToast from "../hooks/useAutoSaveToast";
 import { Resume, Fields } from "../types";
 
 function ResumeTitle() {
-  const [resume, setResume] = useResume();
+  const [resume, setResume] = useResume({ isolated: true });
   const form = useForm({ defaultValues: { title: "" } });
 
   function handleOnSubmit(nextValue: string) {
@@ -65,7 +65,7 @@ function Document(props: { form: UseFormReturn<Resume, object> }) {
   const [isFullWidth] = useLocalStorageValue("isFullWidth", false, {
     initializeWithStorageValue: false,
   });
-  const [resume, setResume] = useResume();
+  const [resume, setResume] = useResume({ isolated: true });
   const watch = useWatch({
     control: form.control,
     name: ["id", "meta.template", "about", "section"],

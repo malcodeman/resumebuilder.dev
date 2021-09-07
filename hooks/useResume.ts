@@ -4,14 +4,32 @@ import * as R from "ramda";
 
 import { Resume } from "../types";
 
-function useResume(): [Resume, (nextResume: Resume) => void, () => void] {
+type props = {
+  isolated?: boolean;
+  handleStorageEvent?: boolean;
+  storeDefaultValue?: boolean;
+  initializeWithStorageValue?: boolean;
+};
+
+function useResume(
+  props: props = {}
+): [Resume, (nextResume: Resume) => void, () => void] {
+  const {
+    isolated = false,
+    handleStorageEvent = true,
+    storeDefaultValue = false,
+    initializeWithStorageValue = false,
+  } = props;
   const router = useRouter();
   const { id } = router.query;
   const [resumes, setResumes] = useLocalStorageValue<Resume[] | null>(
     "resumes",
     [],
     {
-      initializeWithStorageValue: false,
+      isolated,
+      handleStorageEvent,
+      storeDefaultValue,
+      initializeWithStorageValue,
     }
   );
   const resume = R.isNil(resumes)

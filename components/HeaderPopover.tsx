@@ -67,7 +67,9 @@ function FullWidth() {
 }
 
 function CopyLink() {
-  const { hasCopied, onCopy } = useClipboard(window.location.href);
+  const { hasCopied, onCopy } = useClipboard(
+    utils.isBrowser ? window.location.href : ""
+  );
   return (
     <Button
       size="sm"

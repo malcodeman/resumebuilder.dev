@@ -5,6 +5,11 @@ import getTemplate from "./getTemplate";
 
 import { Resume } from "../types";
 
+const isBrowser =
+  typeof window !== "undefined" &&
+  typeof navigator !== "undefined" &&
+  typeof document !== "undefined";
+
 function readAsTextAsync(file: File): Promise<string | ArrayBuffer> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -34,6 +39,7 @@ function exportAsJson(resume: Resume) {
 }
 
 const EXPORTS = {
+  isBrowser,
   readAsTextAsync,
   exportAsPdf,
   exportAsJson,
