@@ -122,7 +122,6 @@ function StandardSection(props: props) {
                         key={item.id}
                         id={item.id}
                         index={index}
-                        label={item.title}
                         nestIndex={nestIndex}
                         onDuplicate={() =>
                           appendNested(

@@ -9,7 +9,7 @@ import {
   FormLabel,
   Accordion,
 } from "@chakra-ui/react";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext, useController } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -18,14 +18,13 @@ import SectionHeader from "./SectionHeader";
 type props = {
   id: string;
   index: number;
-  label: string;
   nestIndex: number;
   onDuplicate: (index: number) => void;
   onRemove: (index: number) => void;
 };
 
 function StandardSectionBody(props: props) {
-  const { id, index, label, nestIndex, onRemove, onDuplicate } = props;
+  const { id, index, nestIndex, onRemove, onDuplicate } = props;
   const {
     attributes,
     listeners,
@@ -34,15 +33,13 @@ function StandardSectionBody(props: props) {
     isDragging,
     setNodeRef,
   } = useSortable({ id });
-  const { control, register } = useFormContext();
+  const { register } = useFormContext();
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
   };
-  const title = useWatch({
-    control,
+  const { field } = useController({
     name: `section.${index}.nested.${nestIndex}.title`,
-    defaultValue: label,
   });
 
   function onPointerDownHanlder(e: React.PointerEvent<HTMLDivElement>) {
@@ -61,7 +58,7 @@ function StandardSectionBody(props: props) {
     >
       <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
         <SectionHeader
-          label={title}
+          label={field.value}
           onRemove={() => onRemove(nestIndex)}
           onDuplicate={() => onDuplicate(nestIndex)}
         />
@@ -70,12 +67,7 @@ function StandardSectionBody(props: props) {
             <GridItem colSpan={2}>
               <FormControl>
                 <FormLabel>Title</FormLabel>
-                <Input
-                  size="sm"
-                  {...register(
-                    `section.${index}.nested.${nestIndex}.title` as const
-                  )}
-                />
+                <Input size="sm" {...field} />
               </FormControl>
             </GridItem>
             <GridItem colSpan={2}>

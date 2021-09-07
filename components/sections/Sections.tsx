@@ -91,7 +91,6 @@ function Sections(props: props) {
       const from = R.findIndex(R.propEq("id", active.id))(sectionFields);
       const to = R.findIndex(R.propEq("id", over.id))(sectionFields);
       swapSection(from, to);
-      form.reset({ ...form.getValues() });
     }
   }
 

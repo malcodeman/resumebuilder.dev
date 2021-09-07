@@ -95,9 +95,13 @@ function SectionHeader(props: props) {
                     _groupHover={{ display: "inline-flex" }}
                     icon={<MoreHorizontal size={20} />}
                     onClick={(e) => e.stopPropagation()}
+                    onPointerDown={(e) => e.preventDefault()}
                   />
                 </Tooltip>
-                <MenuList onClick={(e) => e.stopPropagation()}>
+                <MenuList
+                  onClick={(e) => e.stopPropagation()}
+                  onPointerDown={(e) => e.preventDefault()}
+                >
                   <MenuItem onClick={onRemove} icon={<Trash2 size={20} />}>
                     Delete
                   </MenuItem>
@@ -130,6 +134,7 @@ function SectionHeader(props: props) {
               _groupHover={{ display: "inline-flex" }}
               icon={<Plus size={20} />}
               onClick={(e) => handleOnAppend(e)}
+              onPointerDown={(e) => e.preventDefault()}
             />
           </Tooltip>
         ) : (
