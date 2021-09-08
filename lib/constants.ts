@@ -14,6 +14,7 @@ const STANDARD_SECTION_DEFAULT_VALUES = {
 const DEFAULT_VALUES = {
   id: "",
   title: "",
+  icon: "",
   createdAt: Date.now(),
   updatedAt: Date.now(),
   meta: {

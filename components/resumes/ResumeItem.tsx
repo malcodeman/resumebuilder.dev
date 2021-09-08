@@ -17,6 +17,8 @@ import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
+import EmojiPicker from "../misc/EmojiPicker";
+
 import getTemplate from "../../lib/getTemplate";
 
 import { Resume } from "../../types";
@@ -26,10 +28,18 @@ type props = {
   onDelete: (id: string) => void;
   onDuplicate: (id: string) => void;
   onTitleChange: (id: string, nextValue: string) => void;
+  onIconChange: (id: string, emoji: string) => void;
 };
 
 function ResumeItem(props: props) {
-  const { resume, onDelete, onDuplicate, onTitleChange, ...rest } = props;
+  const {
+    resume,
+    onDelete,
+    onDuplicate,
+    onTitleChange,
+    onIconChange,
+    ...rest
+  } = props;
   const ref = React.useRef<HTMLSpanElement>(null);
   const form = useForm({ defaultValues: { title: "" } });
 
@@ -54,17 +64,24 @@ function ResumeItem(props: props) {
           onClick={(e) => e.stopPropagation()}
         >
           <Box>
-            <Editable
-              defaultValue={resume.title}
-              onSubmit={(nextValue) => onTitleChange(resume.id, nextValue)}
-            >
-              <EditablePreview
-                ref={ref}
-                noOfLines={1}
-                overflowWrap="anywhere"
+            <Flex>
+              <EmojiPicker
+                emoji={resume.icon}
+                onSelect={(emoji) => onIconChange(resume.id, emoji)}
               />
-              <EditableInput {...form.register("title")} />
-            </Editable>
+              <Editable
+                defaultValue={resume.title}
+                onSubmit={(nextValue) => onTitleChange(resume.id, nextValue)}
+                ml="2"
+              >
+                <EditablePreview
+                  ref={ref}
+                  noOfLines={1}
+                  overflowWrap="anywhere"
+                />
+                <EditableInput {...form.register("title")} />
+              </Editable>
+            </Flex>
             <Text opacity="0.5">
               Edited{" "}
               {formatDistanceToNow(resume.updatedAt, {

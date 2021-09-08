@@ -44,6 +44,7 @@ type Fields = {
 type Resume = {
   id: string;
   title: string;
+  icon: string;
   createdAt: number;
   updatedAt: number;
   meta: {

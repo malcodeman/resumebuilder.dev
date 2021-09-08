@@ -24,6 +24,7 @@ import Logo from "../components/Logo";
 import HeaderPopover from "../components/HeaderPopover";
 import Sections from "../components/sections/Sections";
 import Templates from "../components/templates/Templates";
+import EmojiPicker from "../components/misc/EmojiPicker";
 
 import { DEFAULT_VALUES } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
@@ -37,7 +38,15 @@ function ResumeTitle() {
   const [resume, setResume] = useResume({ isolated: true });
   const form = useForm({ defaultValues: { title: "" } });
 
-  function handleOnSubmit(nextValue: string) {
+  function handleOnIconChange(emoji: string) {
+    setResume({
+      ...resume,
+      updatedAt: Date.now(),
+      icon: emoji,
+    });
+  }
+
+  function handleOnTitleChange(nextValue: string) {
     setResume({
       ...resume,
       updatedAt: Date.now(),
@@ -47,14 +56,21 @@ function ResumeTitle() {
 
   if (resume) {
     return (
-      <Editable
-        defaultValue={resume.title}
-        maxWidth="256px"
-        onSubmit={(nextValue) => handleOnSubmit(nextValue)}
-      >
-        <EditablePreview noOfLines={1} overflowWrap="anywhere" />
-        <EditableInput {...form.register("title")} />
-      </Editable>
+      <Flex>
+        <EmojiPicker
+          emoji={resume.icon}
+          onSelect={(emoji) => handleOnIconChange(emoji)}
+        />
+        <Editable
+          defaultValue={resume.title}
+          onSubmit={(nextValue) => handleOnTitleChange(nextValue)}
+          ml="2"
+          maxWidth="256px"
+        >
+          <EditablePreview noOfLines={1} overflowWrap="anywhere" />
+          <EditableInput {...form.register("title")} />
+        </Editable>
+      </Flex>
     );
   }
   return <></>;

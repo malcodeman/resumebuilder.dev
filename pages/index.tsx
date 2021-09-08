@@ -94,6 +94,7 @@ function ImportDataButton() {
       ...fields,
       id: nanoid(),
       title: "Untitled",
+      icon: "",
       createdAt: Date.now(),
       updatedAt: Date.now(),
       meta: {
@@ -157,6 +158,20 @@ function ResumeGrid() {
     setResumes(nextResumes);
   }
 
+  function handleOnIconChange(id: string, emoji: string) {
+    const nextResumes = R.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          icon: emoji,
+          updatedAt: Date.now(),
+        };
+      }
+      return item;
+    }, resumes);
+    setResumes(nextResumes);
+  }
+
   if (R.isEmpty(resumes) || R.isNil(resumes)) {
     return (
       <Flex flexDirection="column" alignItems="center" padding="4">
@@ -179,6 +194,7 @@ function ResumeGrid() {
             onDelete={handleOnDelete}
             onDuplicate={handleOnDuplicate}
             onTitleChange={handleOnTitleChange}
+            onIconChange={handleOnIconChange}
           />
         ),
         resumes
