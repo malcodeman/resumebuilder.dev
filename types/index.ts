@@ -5,7 +5,16 @@ enum Template {
   berlin = "berlin",
   tokyo = "tokyo",
 }
-type Section = "standardSection" | "tagListSection";
+type Section =
+  | "standardSection"
+  | "employmentSection"
+  | "educationSection"
+  | "projectsSection"
+  | "tagListSection"
+  | "skillsSection"
+  | "hobbiesSection"
+  | "languagesSection";
+
 type Fields = {
   about: {
     title: string;

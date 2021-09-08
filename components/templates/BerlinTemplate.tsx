@@ -1,5 +1,7 @@
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
+import utils from "../../lib/utils";
+
 import { Fields } from "../../types";
 
 const styles = StyleSheet.create({
@@ -112,7 +114,7 @@ function BerlinTemplate(props: Fields) {
           ))}
         </View>
         {section.map((sectionItem, index) => {
-          if (sectionItem.name === "standardSection") {
+          if (utils.isStandardSection(sectionItem.name)) {
             return (
               <View key={index} style={styles.section}>
                 <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>

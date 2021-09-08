@@ -6,10 +6,13 @@ import { CSS } from "@dnd-kit/utilities";
 import SectionHeader from "./SectionHeader";
 import TagListSectionBody from "./TagListSectionBody";
 
+import { Section } from "../../types";
+
 type props = {
   id: string;
   index: number;
   label: string;
+  name: Section;
   remove: (index: number) => void;
   append: (
     value: Partial<any> | Partial<any>[],
@@ -18,7 +21,7 @@ type props = {
 };
 
 function TagListSection(props: props) {
-  const { id, index, label, remove, append } = props;
+  const { id, index, label, name, remove, append } = props;
   const {
     attributes,
     listeners,
@@ -49,7 +52,7 @@ function TagListSection(props: props) {
         onRemove={() => remove(index)}
         onDuplicate={() => append(getValues(`section.${index}`))}
       />
-      <TagListSectionBody index={index} />
+      <TagListSectionBody index={index} name={name} />
     </AccordionItem>
   );
 }

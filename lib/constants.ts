@@ -31,22 +31,22 @@ const DEFAULT_VALUES = {
   },
   section: [
     {
-      name: "standardSection" as const,
+      name: "employmentSection" as const,
       label: "Employment History",
       nested: [STANDARD_SECTION_DEFAULT_VALUES],
     },
     {
-      name: "standardSection" as const,
+      name: "educationSection" as const,
       label: "Education",
       nested: [STANDARD_SECTION_DEFAULT_VALUES],
     },
     {
-      name: "tagListSection" as const,
+      name: "skillsSection" as const,
       label: "Skills",
       tags: "",
     },
     {
-      name: "tagListSection" as const,
+      name: "hobbiesSection" as const,
       label: "Hobbies",
       tags: "",
     },

@@ -1,6 +1,8 @@
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import * as R from "ramda";
 
+import utils from "../../lib/utils";
+
 import { Fields } from "../../types";
 
 const styles = StyleSheet.create({
@@ -119,7 +121,7 @@ function TokyoTemplate(props: Fields) {
     section
   );
   const standardSection = R.filter(
-    (item) => item.name === "standardSection",
+    (item) => utils.isStandardSection(item.name),
     section
   );
 

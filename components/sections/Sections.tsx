@@ -21,6 +21,7 @@ import StandardSection from "../../components/sections/StandardSection";
 import AddSectionModal from "./AddSectionModal";
 
 import { STANDARD_SECTION_DEFAULT_VALUES } from "../../lib/constants";
+import utils from "../../lib/utils";
 import useResume from "../../hooks/useResume";
 
 import { Resume, Section } from "../../types";
@@ -95,19 +96,19 @@ function Sections(props: props) {
   }
 
   function handleOnSubmit(data: { label: string; name: Section }) {
-    switch (data.name) {
-      case "standardSection":
-        return appendSection({
-          name: data.name,
-          label: data.label,
-          nested: [STANDARD_SECTION_DEFAULT_VALUES],
-        });
-      case "tagListSection":
-        return appendSection({
-          name: data.name,
-          label: data.label,
-          tags: "",
-        });
+    if (utils.isStandardSection(data.name)) {
+      appendSection({
+        name: data.name,
+        label: data.label,
+        nested: [STANDARD_SECTION_DEFAULT_VALUES],
+      });
+      form.reset({ ...form.getValues() });
+    } else {
+      appendSection({
+        name: data.name,
+        label: data.label,
+        tags: "",
+      });
     }
   }
 
@@ -127,10 +128,11 @@ function Sections(props: props) {
                   key: item.id,
                   id: item.id,
                   label: item.label,
+                  name: item.name,
                   remove: removeSection,
                   append: appendSection,
                 };
-                return item.name === "standardSection" ? (
+                return utils.isStandardSection(item.name) ? (
                   <StandardSection {...props} />
                 ) : (
                   <TagListSection {...props} />

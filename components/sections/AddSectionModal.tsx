@@ -6,50 +6,40 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  RadioGroup,
-  Stack,
-  Radio,
-  ModalFooter,
   Button,
-  FormControl,
-  FormLabel,
-  Input,
+  Grid,
+  Text,
 } from "@chakra-ui/react";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import * as R from "ramda";
+
+import { Section } from "../../types";
+
+const COMMON_SECTIONS = [
+  {
+    label: "Employment",
+    value: "employmentSection" as const,
+    isDisabled: false,
+  },
+  { label: "Education", value: "educationSection" as const, isDisabled: false },
+  { label: "Skills", value: "skillsSection" as const, isDisabled: false },
+  { label: "Hobbies", value: "hobbiesSection" as const, isDisabled: false },
+  { label: "Languages", value: "languagesSection" as const, isDisabled: false },
+  { label: "Projects", value: "projectsSection" as const, isDisabled: true },
+];
+
+const CUSTOM_SECTIONS = [
+  { label: "Standard", value: "standardSection" as const, isDisabled: false },
+  { label: "Tag List", value: "tagListSection" as const, isDisabled: false },
+];
 
 type props = {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: SubmitHandler<FieldValues>;
-};
-
-const defaultValues = {
-  label: "Custom section",
-  name: "standardSection",
+  onSubmit: (data: { label: string; name: Section }) => void;
 };
 
 function AddSectionModal(props: props) {
   const { isOpen, onClose, onSubmit } = props;
-  const { register, getValues, reset } = useForm({
-    defaultValues,
-  });
-
-  React.useEffect(() => {
-    if (!isOpen) {
-      reset();
-    }
-  }, [isOpen, reset]);
-
-  // TODO: Investigate why this is necessary in order for append to work properly
-  // react-hook-form handleSubmit appears to be the issue
-  function handleOnSubmit(e) {
-    e.preventDefault();
-    const values = getValues();
-    onSubmit({
-      name: values.name,
-      label: values.label,
-    });
-  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -57,38 +47,44 @@ function AddSectionModal(props: props) {
       <ModalContent>
         <ModalHeader>Add a section</ModalHeader>
         <ModalCloseButton />
-        <form onSubmit={handleOnSubmit}>
-          <ModalBody>
-            <FormControl mb="4">
-              <FormLabel>Section label</FormLabel>
-              <Input size="sm" {...register("label", { required: true })} />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Section type</FormLabel>
-              <RadioGroup defaultValue={defaultValues.name}>
-                <Stack direction="row">
-                  <Radio
-                    value={defaultValues.name}
-                    {...register("name", { required: true })}
-                  >
-                    Standard
-                  </Radio>
-                  <Radio
-                    value="tagListSection"
-                    {...register("name", { required: true })}
-                  >
-                    Tag List
-                  </Radio>
-                </Stack>
-              </RadioGroup>
-            </FormControl>
-          </ModalBody>
-          <ModalFooter>
-            <Button size="sm" type="submit">
-              Add section
-            </Button>
-          </ModalFooter>
-        </form>
+        <ModalBody>
+          <Text mb="2">Common sections</Text>
+          <Grid mb="4" gridTemplateColumns="1fr 1fr 1fr" gap="4">
+            {R.map((item) => {
+              return (
+                <Button
+                  key={item.label}
+                  variant="outline"
+                  size="sm"
+                  isDisabled={item.isDisabled}
+                  onClick={() =>
+                    onSubmit({ label: item.label, name: item.value })
+                  }
+                >
+                  {item.label}
+                </Button>
+              );
+            }, COMMON_SECTIONS)}
+          </Grid>
+          <Text mb="2">Custom sections</Text>
+          <Grid gridTemplateColumns="1fr 1fr 1fr" gap="4">
+            {R.map((item) => {
+              return (
+                <Button
+                  key={item.label}
+                  variant="outline"
+                  size="sm"
+                  isDisabled={item.isDisabled}
+                  onClick={() =>
+                    onSubmit({ label: item.label, name: item.value })
+                  }
+                >
+                  {item.label}
+                </Button>
+              );
+            }, CUSTOM_SECTIONS)}
+          </Grid>
+        </ModalBody>
       </ModalContent>
     </Modal>
   );

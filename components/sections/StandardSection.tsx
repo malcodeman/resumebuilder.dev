@@ -25,12 +25,13 @@ import StandardSectionBody from "./StandardSectionBody";
 
 import { STANDARD_SECTION_DEFAULT_VALUES } from "../../lib/constants";
 
-import { Resume } from "../../types";
+import { Resume, Section } from "../../types";
 
 type props = {
   id: string;
   index: number;
   label: string;
+  name: Section;
   remove: (index: number) => void;
   append: (
     value: Partial<any> | Partial<any>[],
@@ -39,7 +40,7 @@ type props = {
 };
 
 function StandardSection(props: props) {
-  const { id, index, label, remove, append } = props;
+  const { id, index, label, name, remove, append } = props;
   const { control, getValues, reset } = useFormContext<Resume>();
   const {
     fields: fieldsNested,
@@ -129,6 +130,7 @@ function StandardSection(props: props) {
                         id={item.id}
                         index={index}
                         nestIndex={nestIndex}
+                        name={name}
                         onDuplicate={() =>
                           appendNested(
                             getValues(`section.${index}.nested.${nestIndex}`)

@@ -3,7 +3,7 @@ import { saveAs } from "file-saver";
 
 import getTemplate from "./getTemplate";
 
-import { Resume } from "../types";
+import { Resume, Section } from "../types";
 
 const isBrowser =
   typeof window !== "undefined" &&
@@ -38,11 +38,31 @@ function exportAsJson(resume: Resume) {
   saveAs(blob, `${resume.title}.json`);
 }
 
+function isStandardSection(name: Section) {
+  return (
+    name === "standardSection" ||
+    name === "employmentSection" ||
+    name === "educationSection" ||
+    name === "projectsSection"
+  );
+}
+
+function isTagListSection(name: Section) {
+  return (
+    name === "tagListSection" ||
+    name === "skillsSection" ||
+    name === "hobbiesSection" ||
+    name === "languagesSection"
+  );
+}
+
 const EXPORTS = {
   isBrowser,
   readAsTextAsync,
   exportAsPdf,
   exportAsJson,
+  isStandardSection,
+  isTagListSection,
 };
 
 export default EXPORTS;

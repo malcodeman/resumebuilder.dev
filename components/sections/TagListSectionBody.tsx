@@ -8,12 +8,28 @@ import {
 } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
 
+import { Section } from "../../types";
+
 type props = {
   index: number;
+  name: Section;
 };
 
+function getHelperText(name: Section) {
+  switch (name) {
+    case "skillsSection":
+      return "Add one skill on each line";
+    case "hobbiesSection":
+      return "Add one hobbie on each line";
+    case "languagesSection":
+      return "Add one language on each line";
+    default:
+      return "Add one item on each line";
+  }
+}
+
 function TagListSectionBody(props: props) {
-  const { index } = props;
+  const { index, name } = props;
   const { register } = useFormContext();
 
   return (
@@ -25,7 +41,7 @@ function TagListSectionBody(props: props) {
               size="sm"
               {...register(`section.${index}.tags` as const)}
             />
-            <FormHelperText>Add one item on each line</FormHelperText>
+            <FormHelperText>{getHelperText(name)}</FormHelperText>
           </FormControl>
         </GridItem>
       </Grid>

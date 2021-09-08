@@ -15,10 +15,13 @@ import { CSS } from "@dnd-kit/utilities";
 
 import SectionHeader from "./SectionHeader";
 
+import { Section } from "../../types";
+
 type props = {
   id: string;
   index: number;
   nestIndex: number;
+  name: Section;
   onDuplicate: (index: number) => void;
   onRemove: (index: number) => void;
 };
@@ -38,8 +41,30 @@ function Header({ index, nestIndex, onRemove, onDuplicate }) {
   );
 }
 
+function getTitleLabel(name: Section) {
+  switch (name) {
+    case "employmentSection":
+      return "Company";
+    case "educationSection":
+      return "School";
+    default:
+      return "Title";
+  }
+}
+
+function getSubtitleLabel(name: Section) {
+  switch (name) {
+    case "employmentSection":
+      return "Job title";
+    case "educationSection":
+      return "Degree";
+    default:
+      return "Subtitle";
+  }
+}
+
 function StandardSectionBody(props: props) {
-  const { id, index, nestIndex, onRemove, onDuplicate } = props;
+  const { id, index, nestIndex, name, onRemove, onDuplicate } = props;
   const {
     attributes,
     listeners,
@@ -82,7 +107,7 @@ function StandardSectionBody(props: props) {
                 <Grid templateColumns="1fr 1fr" gap="4">
                   <GridItem colSpan={2}>
                     <FormControl>
-                      <FormLabel>Title</FormLabel>
+                      <FormLabel>{getTitleLabel(name)}</FormLabel>
                       <Input
                         size="sm"
                         {...register(
@@ -93,7 +118,7 @@ function StandardSectionBody(props: props) {
                   </GridItem>
                   <GridItem colSpan={2}>
                     <FormControl>
-                      <FormLabel>Subtitle</FormLabel>
+                      <FormLabel>{getSubtitleLabel(name)}</FormLabel>
                       <Input
                         size="sm"
                         {...register(
