@@ -117,7 +117,7 @@ function SectionTitle(props: {
 function TokyoTemplate(props: Fields) {
   const { about, section } = props;
   const tagListSection = R.filter(
-    (item) => item.name === "tagListSection",
+    (item) => utils.isTagListSection(item.name),
     section
   );
   const standardSection = R.filter(

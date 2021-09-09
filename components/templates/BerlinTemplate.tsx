@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   list: {
     display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap",
   },
   listItem: {
     color: "#323336",

@@ -116,7 +116,7 @@ function Sections(props: props) {
     <>
       <Accordion defaultIndex={[0]} allowToggle reduceMotion mb="4">
         <FormProvider {...form}>
-          <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
+          <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
             <PersonalDetailsSection />
             <SortableContext
               items={sectionFields}

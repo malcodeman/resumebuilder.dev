@@ -29,7 +29,7 @@ type props = {
 
 const IMPORTS = [
   { label: "JSON Resume", value: "jsonResume", isDisabled: false },
-  { label: "JSON", value: "json", isDisabled: true },
+  { label: "JSON", value: "json", isDisabled: false },
   { label: "CSV", value: "csv", isDisabled: true },
   { label: "XML", value: "xml", isDisabled: true },
   { label: "PDF", value: "pdf", isDisabled: true },
@@ -52,6 +52,8 @@ function ImportDataModal(props: props) {
     switch (source) {
       case "jsonResume":
         return parser.parseJsonResume(text);
+      case "json":
+        return JSON.parse(text);
     }
   }
 
