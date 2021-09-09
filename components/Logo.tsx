@@ -6,7 +6,7 @@ function Logo() {
   return (
     <Link href="/" passHref>
       <Flex alignItems="center" _hover={{ cursor: "pointer" }}>
-        <Box marginRight="20px">
+        <Box marginRight="2">
           <FileText size={20} />
         </Box>
         <Text>resumebuilder.dev</Text>
