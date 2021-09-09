@@ -12,12 +12,13 @@ type props = {
 function Layout(props: props) {
   const { children } = props;
   const isWide = useMediaQuery("(min-width: 768px)");
+  const paddingTop = isWide ? "calc(2rem + 48px)" : "8";
   const paddingBottom = isWide ? "8" : "calc(2rem + 54px)";
 
   return (
     <>
       {isWide ? <Header /> : <HeaderMobile />}
-      <Box as="main" paddingTop="8" paddingBottom={paddingBottom}>
+      <Box as="main" paddingTop={paddingTop} paddingBottom={paddingBottom}>
         <Container maxW="container.lg">{children}</Container>
       </Box>
     </>
