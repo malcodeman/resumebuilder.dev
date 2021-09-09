@@ -13,6 +13,7 @@ import {
   Editable,
   EditableInput,
   EditablePreview,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useForm, useWatch, UseFormReturn } from "react-hook-form";
 import { useDebouncedEffect, useLocalStorageValue } from "@react-hookz/web";
@@ -76,6 +77,50 @@ function ResumeTitle() {
   return <></>;
 }
 
+function Header(props: { form: UseFormReturn<Resume, object> }) {
+  const { form } = props;
+  const [resume] = useResume();
+  const backgroundColor = useColorModeValue("white", "gray.800");
+  const boxShadow = useColorModeValue(
+    "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
+    "rgba(255, 255, 255, 0.03) 0px 2px 0px 0px"
+  );
+
+  function handleOnImport(fields: Fields) {
+    const values = {
+      ...resume,
+      about: fields.about,
+      section: fields.section,
+    };
+    form.reset(values);
+  }
+
+  return (
+    <Box
+      backgroundColor={backgroundColor}
+      boxShadow={boxShadow}
+      as="header"
+      padding="2"
+      position="fixed"
+      left="0"
+      top="0"
+      right="0"
+      zIndex="3"
+    >
+      <Flex as="nav" justifyContent="space-between">
+        <Logo />
+        <ResumeTitle />
+        <Flex>
+          <Button mr="2" size="sm" onClick={() => utils.exportAsPdf(resume)}>
+            Export PDF
+          </Button>
+          <HeaderPopover onImport={handleOnImport} />
+        </Flex>
+      </Flex>
+    </Box>
+  );
+}
+
 function Document(props: { form: UseFormReturn<Resume, object> }) {
   const { form } = props;
   const [isFullWidth] = useLocalStorageValue("isFullWidth", false, {
@@ -110,8 +155,9 @@ function Document(props: { form: UseFormReturn<Resume, object> }) {
   return (
     <Box
       as={motion.div}
-      margin="0 auto"
       animate={{ width: isFullWidth ? "100%" : "900px" }}
+      margin="0 auto"
+      backgroundColor="#fff"
     >
       {document}
     </Box>
@@ -123,39 +169,20 @@ function Builder() {
   const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
   useAutoSaveToast({});
 
-  function handleOnImport(fields: Fields) {
-    const values = {
-      ...resume,
-      about: fields.about,
-      section: fields.section,
-    };
-    form.reset(values);
-  }
-
   return (
     <>
       <Head>
         <title>{resume?.title} - resumebuilder.dev</title>
       </Head>
-      <Box as="header" padding="4">
-        <Flex as="nav" justifyContent="space-between">
-          <Logo />
-          <ResumeTitle />
-          <Flex>
-            <Button mr="2" size="sm" onClick={() => utils.exportAsPdf(resume)}>
-              Export PDF
-            </Button>
-            <HeaderPopover onImport={handleOnImport} />
-          </Flex>
-        </Flex>
-      </Box>
+      <Header form={form} />
       <Grid
         as="main"
         templateColumns="340px 1fr"
+        paddingTop="calc(2rem + 48px)"
+        paddingBottom="8"
         height="100vh"
-        overflowY="auto"
       >
-        <Tabs overflowY="auto">
+        <Tabs>
           <TabList>
             <Tab>Sections</Tab>
             <Tab>Templates</Tab>
