@@ -79,7 +79,6 @@ function ResumeTitle() {
 
 function Header(props: { form: UseFormReturn<Resume, object> }) {
   const { form } = props;
-  const [resume] = useResume();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
@@ -87,12 +86,8 @@ function Header(props: { form: UseFormReturn<Resume, object> }) {
   );
 
   function handleOnImport(fields: Fields) {
-    const values = {
-      ...resume,
-      about: fields.about,
-      section: fields.section,
-    };
-    form.reset(values);
+    form.setValue("about", fields.about);
+    form.setValue("section", fields.section);
   }
 
   return (
@@ -111,7 +106,11 @@ function Header(props: { form: UseFormReturn<Resume, object> }) {
         <Logo />
         <ResumeTitle />
         <Flex>
-          <Button mr="2" size="sm" onClick={() => utils.exportAsPdf(resume)}>
+          <Button
+            mr="2"
+            size="sm"
+            onClick={() => utils.exportAsPdf(form.getValues())}
+          >
             Export PDF
           </Button>
           <HeaderPopover onImport={handleOnImport} />
@@ -126,7 +125,7 @@ function Document(props: { form: UseFormReturn<Resume, object> }) {
   const [isFullWidth] = useLocalStorageValue("isFullWidth", false, {
     initializeWithStorageValue: false,
   });
-  const [resume, setResume] = useResume({ isolated: true });
+  const [_resume, setResume] = useResume({ isolated: true });
   const watch = useWatch({
     control: form.control,
     name: ["id", "meta.template", "about", "section"],
@@ -141,7 +140,6 @@ function Document(props: { form: UseFormReturn<Resume, object> }) {
     () => {
       if (watch[0]) {
         setResume({
-          ...resume,
           ...form.getValues(),
           updatedAt: Date.now(),
         });

@@ -1,4 +1,3 @@
-import React from "react";
 import { Accordion, Box, Button, useDisclosure } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useFieldArray, FormProvider, UseFormReturn } from "react-hook-form";
@@ -13,6 +12,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { useUpdateEffect } from "@react-hookz/web";
 import * as R from "ramda";
 
 import PersonalDetailsSection from "../../components/sections/PersonalDetailsSection";
@@ -63,12 +63,7 @@ type props = {
 function Sections(props: props) {
   const { form } = props;
   const [resume] = useResume();
-  const {
-    fields: sectionFields,
-    append: appendSection,
-    remove: removeSection,
-    swap: swapSection,
-  } = useFieldArray({
+  const fieldArray = useFieldArray({
     control: form.control,
     name: "section",
   });
@@ -80,31 +75,29 @@ function Sections(props: props) {
     })
   );
 
-  React.useEffect(() => {
-    if (resume?.id && !form.getValues().id) {
-      form.reset({ ...resume });
-    }
-  }, [resume?.id, form, resume]);
+  useUpdateEffect(() => {
+    form.reset({ ...resume });
+  }, [resume?.id]);
 
   function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active.id !== over.id) {
-      const from = R.findIndex(R.propEq("id", active.id))(sectionFields);
-      const to = R.findIndex(R.propEq("id", over.id))(sectionFields);
-      swapSection(from, to);
+      const from = R.findIndex(R.propEq("id", active.id))(fieldArray.fields);
+      const to = R.findIndex(R.propEq("id", over.id))(fieldArray.fields);
+      fieldArray.swap(from, to);
     }
   }
 
   function handleOnSubmit(data: { label: string; name: Section }) {
     if (utils.isStandardSection(data.name)) {
-      appendSection({
+      fieldArray.append({
         name: data.name,
         label: data.label,
         nested: [STANDARD_SECTION_DEFAULT_VALUES],
       });
       form.reset({ ...form.getValues() });
     } else {
-      appendSection({
+      fieldArray.append({
         name: data.name,
         label: data.label,
         tags: "",
@@ -119,18 +112,18 @@ function Sections(props: props) {
           <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
             <PersonalDetailsSection />
             <SortableContext
-              items={sectionFields}
+              items={fieldArray.fields}
               strategy={verticalListSortingStrategy}
             >
-              {sectionFields.map((item, index) => {
+              {fieldArray.fields.map((item, index) => {
                 const props = {
                   index,
                   key: item.id,
                   id: item.id,
                   label: item.label,
                   name: item.name,
-                  remove: removeSection,
-                  append: appendSection,
+                  remove: fieldArray.remove,
+                  append: fieldArray.append,
                 };
                 return utils.isStandardSection(item.name) ? (
                   <StandardSection {...props} />
