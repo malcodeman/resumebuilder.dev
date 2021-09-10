@@ -35,11 +35,16 @@ import useAutoSaveToast from "../hooks/useAutoSaveToast";
 
 import { Resume, Fields } from "../types";
 
-function ResumeTitle() {
+type props = {
+  form: UseFormReturn<Resume, object>;
+};
+
+function ResumeTitle(props: props) {
+  const { form } = props;
   const [resume, setResume] = useResume({ isolated: true });
-  const form = useForm({ defaultValues: { title: "" } });
 
   function handleOnIconChange(emoji: string) {
+    form.setValue("icon", emoji);
     setResume({
       ...resume,
       updatedAt: Date.now(),
@@ -48,6 +53,7 @@ function ResumeTitle() {
   }
 
   function handleOnTitleChange(nextValue: string) {
+    form.setValue("title", nextValue);
     setResume({
       ...resume,
       updatedAt: Date.now(),
@@ -77,7 +83,7 @@ function ResumeTitle() {
   return <></>;
 }
 
-function Header(props: { form: UseFormReturn<Resume, object> }) {
+function Header(props: props) {
   const { form } = props;
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
@@ -104,7 +110,7 @@ function Header(props: { form: UseFormReturn<Resume, object> }) {
     >
       <Flex as="nav" justifyContent="space-between">
         <Logo />
-        <ResumeTitle />
+        <ResumeTitle form={form} />
         <Flex>
           <Button
             mr="2"
@@ -120,7 +126,7 @@ function Header(props: { form: UseFormReturn<Resume, object> }) {
   );
 }
 
-function Document(props: { form: UseFormReturn<Resume, object> }) {
+function Document(props: props) {
   const { form } = props;
   const [isFullWidth] = useLocalStorageValue("isFullWidth", false, {
     initializeWithStorageValue: false,
@@ -130,6 +136,7 @@ function Document(props: { form: UseFormReturn<Resume, object> }) {
     control: form.control,
     name: ["id", "meta.template", "about", "section"],
   });
+  const id = watch[0];
   const fields = {
     about: watch[2],
     section: watch[3],
@@ -138,7 +145,7 @@ function Document(props: { form: UseFormReturn<Resume, object> }) {
 
   useDebouncedEffect(
     () => {
-      if (watch[0]) {
+      if (id) {
         setResume({
           ...form.getValues(),
           updatedAt: Date.now(),
@@ -150,16 +157,19 @@ function Document(props: { form: UseFormReturn<Resume, object> }) {
     500
   );
 
-  return (
-    <Box
-      as={motion.div}
-      animate={{ width: isFullWidth ? "100%" : "900px" }}
-      margin="0 auto"
-      backgroundColor="#fff"
-    >
-      {document}
-    </Box>
-  );
+  if (id) {
+    return (
+      <Box
+        as={motion.div}
+        animate={{ width: isFullWidth ? "100%" : "900px" }}
+        margin="0 auto"
+        backgroundColor="#fff"
+      >
+        {document}
+      </Box>
+    );
+  }
+  return <></>;
 }
 
 function Builder() {
