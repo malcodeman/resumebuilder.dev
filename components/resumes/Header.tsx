@@ -16,8 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { MoreVertical } from "react-feather";
 
-import Logo from "./Logo";
-import NavLink from "./misc/NavLink";
+import Logo from "../Logo";
+import NavLink from "../misc/NavLink";
 
 function Header() {
   const { colorMode, toggleColorMode } = useColorMode();

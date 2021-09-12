@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { FileText, Layers, MoreVertical } from "react-feather";
 
-import NavLink from "./misc/NavLink";
+import NavLink from "../misc/NavLink";
 
 function HeaderMobile() {
   const { colorMode, toggleColorMode } = useColorMode();
