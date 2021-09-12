@@ -18,14 +18,14 @@ import { Download, Link, MoreHorizontal, Upload, Trash2 } from "react-feather";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
 
-import ImportDataModal from "./ImportDataModal";
-import ExportResumeModal from "./templates/ExportResumeModal";
-import DeleteResumeModal from "./resumes/DeleteResumeModal";
+import ImportDataModal from "../ImportDataModal";
+import ExportResumeModal from "../templates/ExportResumeModal";
+import DeleteResumeModal from "../resumes/DeleteResumeModal";
 
-import utils from "../lib/utils";
-import useResume from "../hooks/useResume";
+import utils from "../../lib/utils";
+import useResume from "../../hooks/useResume";
 
-import { Fields } from "../types";
+import { Fields } from "../../types";
 
 const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
@@ -43,7 +43,7 @@ function FullWidth() {
   return (
     <FormControl
       mb="2"
-      display="flex"
+      display={{ base: "none", lg: "flex" }}
       alignItems="center"
       justifyContent="space-between"
     >

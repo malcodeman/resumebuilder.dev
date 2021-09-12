@@ -1,199 +1,66 @@
 import React from "react";
 import Head from "next/head";
 import {
-  Box,
-  Button,
-  Flex,
   Grid,
   Tabs,
   TabList,
   TabPanels,
   TabPanel,
   Tab,
-  Editable,
-  EditableInput,
-  EditablePreview,
-  useColorModeValue,
 } from "@chakra-ui/react";
-import { useForm, useWatch, UseFormReturn } from "react-hook-form";
-import { useDebouncedEffect, useLocalStorageValue } from "@react-hookz/web";
+import { useForm } from "react-hook-form";
+import { useMediaQuery } from "@react-hookz/web";
 
-import { motion } from "framer-motion";
-
-import Logo from "../components/Logo";
-
-import HeaderPopover from "../components/HeaderPopover";
 import Sections from "../components/sections/Sections";
 import Templates from "../components/templates/Templates";
-import EmojiPicker from "../components/misc/EmojiPicker";
+import Header from "../components/builder/Header";
+import HeaderMobile from "../components/builder/HeaderMobile";
+import Document from "../components/builder/Document";
+import DocumentMobile from "../components/builder/DocumentMobile";
 
 import { DEFAULT_VALUES } from "../lib/constants";
-import getTemplate from "../lib/getTemplate";
-import utils from "../lib/utils";
 import useResume from "../hooks/useResume";
 import useAutoSaveToast from "../hooks/useAutoSaveToast";
 
-import { Resume, Fields } from "../types";
-
-type props = {
-  form: UseFormReturn<Resume, object>;
-};
-
-function ResumeTitle(props: props) {
-  const { form } = props;
-  const [resume, setResume] = useResume({ isolated: true });
-
-  function handleOnIconChange(emoji: string) {
-    form.setValue("icon", emoji);
-    setResume({
-      ...resume,
-      updatedAt: Date.now(),
-      icon: emoji,
-    });
-  }
-
-  function handleOnTitleChange(nextValue: string) {
-    form.setValue("title", nextValue);
-    setResume({
-      ...resume,
-      updatedAt: Date.now(),
-      title: nextValue,
-    });
-  }
-
-  if (resume) {
-    return (
-      <Flex>
-        <EmojiPicker
-          emoji={resume.icon}
-          onSelect={(emoji) => handleOnIconChange(emoji)}
-        />
-        <Editable
-          defaultValue={resume.title}
-          onSubmit={(nextValue) => handleOnTitleChange(nextValue)}
-          ml="2"
-          maxWidth="256px"
-        >
-          <EditablePreview noOfLines={1} overflowWrap="anywhere" />
-          <EditableInput {...form.register("title")} />
-        </Editable>
-      </Flex>
-    );
-  }
-  return <></>;
-}
-
-function Header(props: props) {
-  const { form } = props;
-  const backgroundColor = useColorModeValue("white", "gray.800");
-  const boxShadow = useColorModeValue(
-    "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
-    "rgba(255, 255, 255, 0.03) 0px 2px 0px 0px"
-  );
-
-  function handleOnImport(fields: Fields) {
-    form.setValue("about", fields.about);
-    form.setValue("section", fields.section);
-  }
-
-  return (
-    <Box
-      backgroundColor={backgroundColor}
-      boxShadow={boxShadow}
-      as="header"
-      padding="2"
-      position="fixed"
-      left="0"
-      top="0"
-      right="0"
-      zIndex="3"
-    >
-      <Flex as="nav" justifyContent="space-between">
-        <Logo />
-        <ResumeTitle form={form} />
-        <Flex>
-          <Button
-            mr="2"
-            size="sm"
-            onClick={() => utils.exportAsPdf(form.getValues())}
-          >
-            Export PDF
-          </Button>
-          <HeaderPopover onImport={handleOnImport} />
-        </Flex>
-      </Flex>
-    </Box>
-  );
-}
-
-function Document(props: props) {
-  const { form } = props;
-  const [isFullWidth] = useLocalStorageValue("isFullWidth", false, {
-    initializeWithStorageValue: false,
-  });
-  const [_resume, setResume] = useResume({ isolated: true });
-  const watch = useWatch({
-    control: form.control,
-    name: ["id", "meta.template", "about", "section"],
-  });
-  const id = watch[0];
-  const fields = {
-    about: watch[2],
-    section: watch[3],
-  };
-  const document = getTemplate(watch[1], fields);
-
-  useDebouncedEffect(
-    () => {
-      if (id) {
-        setResume({
-          ...form.getValues(),
-          updatedAt: Date.now(),
-        });
-      }
-    },
-    [watch],
-    200,
-    500
-  );
-
-  if (id) {
-    return (
-      <Box
-        as={motion.div}
-        animate={{ width: isFullWidth ? "100%" : "900px" }}
-        margin="0 auto"
-        backgroundColor="#fff"
-      >
-        {document}
-      </Box>
-    );
-  }
-  return <></>;
-}
+import { Resume } from "../types";
 
 function Builder() {
   const [resume] = useResume();
   const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
+  const [tabIndex, setTabIndex] = React.useState(0);
+  const isWide = useMediaQuery("(min-width: 62em)");
+
   useAutoSaveToast({});
+
+  React.useLayoutEffect(() => {
+    if (isWide) {
+      setTabIndex(0);
+    }
+  }, [isWide]);
 
   return (
     <>
       <Head>
         <title>{resume?.title} - resumebuilder.dev</title>
       </Head>
-      <Header form={form} />
+      <Header form={form} display={{ base: "none", lg: "block" }} />
       <Grid
         as="main"
-        templateColumns="340px 1fr"
-        paddingTop="calc(2rem + 48px)"
-        paddingBottom="8"
+        templateColumns={{ base: "1fr", lg: "340px 1fr" }}
+        paddingTop={{ base: "8", lg: "calc(2rem + 48px)" }}
+        paddingBottom={{ base: "calc(2rem + 54px)", lg: "8" }}
         height="100vh"
       >
-        <Tabs>
+        <Tabs
+          isLazy
+          isFitted
+          index={tabIndex}
+          onChange={(index) => setTabIndex(index)}
+        >
           <TabList>
             <Tab>Sections</Tab>
             <Tab>Templates</Tab>
+            <Tab display={{ base: "flex", lg: "none" }}>Preview</Tab>
           </TabList>
           <TabPanels>
             <TabPanel padding="0">
@@ -202,10 +69,14 @@ function Builder() {
             <TabPanel>
               <Templates form={form} />
             </TabPanel>
+            <TabPanel display={{ base: "block", lg: "none" }}>
+              <DocumentMobile form={form} />
+            </TabPanel>
           </TabPanels>
         </Tabs>
         <Document form={form} />
       </Grid>
+      <HeaderMobile form={form} display={{ base: "block", lg: "none" }} />
     </>
   );
 }
