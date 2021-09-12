@@ -17,10 +17,11 @@ function Layout(props: props) {
 
   return (
     <>
-      {isWide ? <Header /> : <HeaderMobile />}
+      {isWide ? <Header /> : <></>}
       <Box as="main" paddingTop={paddingTop} paddingBottom={paddingBottom}>
         <Container maxW="container.lg">{children}</Container>
       </Box>
+      {isWide ? <></> : <HeaderMobile />}
     </>
   );
 }
