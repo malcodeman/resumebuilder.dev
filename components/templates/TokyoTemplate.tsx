@@ -1,4 +1,4 @@
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import { StyleSheet } from "@react-pdf/renderer";
 import * as R from "ramda";
 
 import utils from "../../lib/utils";
@@ -59,24 +59,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginBottom: 36,
   },
-  sectionTitle: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 18,
-  },
-  shortLine: {
-    height: 2,
-    width: 12,
-    marginRight: 4,
-    backgroundColor: "#e36e60",
-  },
-  longLine: {
-    height: 2,
-    width: 36,
-    marginRight: 4,
-    backgroundColor: "#e36e60",
-  },
   sectionTitleText: {
     fontSize: 10,
     color: "#e36e60",
@@ -99,21 +81,6 @@ const styles = StyleSheet.create({
   },
 });
 
-function SectionTitle(props: {
-  lineWidth?: "short" | "long";
-  children: React.ReactNode;
-}) {
-  const { lineWidth, children } = props;
-  const lineStyle = lineWidth === "long" ? styles.longLine : styles.shortLine;
-
-  return (
-    <View style={styles.sectionTitle}>
-      <View style={lineStyle} />
-      <Text style={styles.sectionTitleText}>{children}</Text>
-    </View>
-  );
-}
-
 function TokyoTemplate(props: Fields) {
   const { about, section } = props;
   const tagListSection = R.filter(
@@ -126,74 +93,70 @@ function TokyoTemplate(props: Fields) {
   );
 
   return (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.name}>
-            {about.firstName} {about.lastName}
-          </Text>
-          <Text style={styles.title}>{about.title}</Text>
-          {about.summary.split("\n").map((item, index) => (
-            <Text key={index} style={styles.summary}>
-              {item}
-            </Text>
-          ))}
-        </View>
-        <View style={styles.main}>
-          <View style={styles.columnA}>
-            <View style={styles.contactInfo}>
-              <SectionTitle>Contact Info</SectionTitle>
-              <Text style={styles.text}>
-                {about.city}, {about.country}
-              </Text>
-              <Text style={styles.text}>{about.email}</Text>
-              <Text style={styles.text}>{about.phone}</Text>
-            </View>
-            {tagListSection.map((sectionItem, index) => {
-              return (
-                <View key={index} style={styles.section}>
-                  <SectionTitle>{sectionItem.label}</SectionTitle>
-                  {sectionItem.tags?.split("\n").map((item, index) => {
-                    return (
-                      <Text key={index} style={styles.text}>
-                        {item}
-                      </Text>
-                    );
-                  })}
-                </View>
-              );
-            })}
-          </View>
-          <View style={styles.columnB}>
-            {standardSection.map((sectionItem, index) => {
-              return (
-                <View key={index} style={styles.section}>
-                  <SectionTitle lineWidth="long">
-                    {sectionItem.label}
-                  </SectionTitle>
-                  {sectionItem.nested.map((item, index) => {
-                    return (
-                      <View key={index} style={styles.sectionItem}>
-                        <Text style={styles.sectionHeading}>{item.title}</Text>
-                        <Text style={styles.text}>
-                          {item.subtitle} | {item.city} | {item.startDate} -{" "}
-                          {item.endDate}
-                        </Text>
-                        {item.description.split("\n").map((item, index) => (
-                          <Text key={index} style={styles.sectionText}>
-                            {item}
-                          </Text>
-                        ))}
-                      </View>
-                    );
-                  })}
-                </View>
-              );
-            })}
-          </View>
-        </View>
-      </Page>
-    </Document>
+    <div style={styles.page}>
+      <div style={styles.section}>
+        <p style={styles.name}>
+          {about.firstName} {about.lastName}
+        </p>
+        <p style={styles.title}>{about.title}</p>
+        {about.summary.split("\n").map((item, index) => (
+          <p key={index} style={styles.summary}>
+            {item}
+          </p>
+        ))}
+      </div>
+      <div style={styles.main}>
+        <div style={styles.columnA}>
+          <div style={styles.contactInfo}>
+            <p style={styles.sectionTitleText}>Contact Info</p>
+            <p style={styles.text}>
+              {about.city}, {about.country}
+            </p>
+            <p style={styles.text}>{about.email}</p>
+            <p style={styles.text}>{about.phone}</p>
+          </div>
+          {tagListSection.map((sectionItem, index) => {
+            return (
+              <div key={index} style={styles.section}>
+                <p style={styles.sectionTitleText}>{sectionItem.label}</p>
+                {sectionItem.tags?.split("\n").map((item, index) => {
+                  return (
+                    <p key={index} style={styles.text}>
+                      {item}
+                    </p>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+        <div style={styles.columnB}>
+          {standardSection.map((sectionItem, index) => {
+            return (
+              <div key={index} style={styles.section}>
+                <p style={styles.sectionTitleText}>{sectionItem.label}</p>
+                {sectionItem.nested.map((item, index) => {
+                  return (
+                    <div key={index} style={styles.sectionItem}>
+                      <p style={styles.sectionHeading}>{item.title}</p>
+                      <p style={styles.text}>
+                        {item.subtitle} | {item.city} | {item.startDate} -{" "}
+                        {item.endDate}
+                      </p>
+                      {item.description.split("\n").map((item, index) => (
+                        <p key={index} style={styles.sectionText}>
+                          {item}
+                        </p>
+                      ))}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 }
 

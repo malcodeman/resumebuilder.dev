@@ -1,4 +1,4 @@
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import { StyleSheet } from "@react-pdf/renderer";
 
 import utils from "../../lib/utils";
 
@@ -94,67 +94,65 @@ function BerlinTemplate(props: Fields) {
   const { about, section } = props;
 
   return (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.initials}>
-          <Text>{about.firstName[0]}</Text>
-          <Text>{about.lastName[0]}</Text>
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.name}>
-            {about.firstName} {about.lastName}
-          </Text>
-          <Text style={styles.title}>{about.title}</Text>
-          <Text style={styles.text}>
-            {about.city}, {about.country} | {about.email} | {about.phone}
-          </Text>
-          {about.summary.split("\n").map((item, index) => (
-            <Text key={index} style={styles.text}>
-              {item}
-            </Text>
-          ))}
-        </View>
-        {section.map((sectionItem, index) => {
-          if (utils.isStandardSection(sectionItem.name)) {
-            return (
-              <View key={index} style={styles.section}>
-                <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>
-                {sectionItem.nested.map((item, index) => {
-                  return (
-                    <View key={index} style={styles.sectionItem}>
-                      <Text style={styles.sectionHeading}>{item.title}</Text>
-                      <Text style={styles.text}>
-                        {item.subtitle} | {item.city} | {item.startDate} -{" "}
-                        {item.endDate}
-                      </Text>
-                      {item.description.split("\n").map((item, index) => (
-                        <Text key={index} style={styles.sectionDescription}>
-                          {item}
-                        </Text>
-                      ))}
-                    </View>
-                  );
-                })}
-              </View>
-            );
-          }
+    <div style={styles.page}>
+      <div style={styles.initials}>
+        <p>{about.firstName[0]}</p>
+        <p>{about.lastName[0]}</p>
+      </div>
+      <div style={styles.section}>
+        <p style={styles.name}>
+          {about.firstName} {about.lastName}
+        </p>
+        <p style={styles.title}>{about.title}</p>
+        <p style={styles.text}>
+          {about.city}, {about.country} | {about.email} | {about.phone}
+        </p>
+        {about.summary.split("\n").map((item, index) => (
+          <p key={index} style={styles.text}>
+            {item}
+          </p>
+        ))}
+      </div>
+      {section.map((sectionItem, index) => {
+        if (utils.isStandardSection(sectionItem.name)) {
           return (
-            <View key={index} style={styles.section}>
-              <Text style={styles.sectionTitleText}>{sectionItem.label}</Text>
-              <View style={styles.list}>
-                {sectionItem.tags?.split("\n").map((item, index) => {
-                  return (
-                    <Text key={index} style={styles.listItem}>
-                      {item}
-                    </Text>
-                  );
-                })}
-              </View>
-            </View>
+            <div key={index} style={styles.section}>
+              <p style={styles.sectionTitleText}>{sectionItem.label}</p>
+              {sectionItem.nested.map((item, index) => {
+                return (
+                  <div key={index} style={styles.sectionItem}>
+                    <p style={styles.sectionHeading}>{item.title}</p>
+                    <p style={styles.text}>
+                      {item.subtitle} | {item.city} | {item.startDate} -{" "}
+                      {item.endDate}
+                    </p>
+                    {item.description.split("\n").map((item, index) => (
+                      <p key={index} style={styles.sectionDescription}>
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
           );
-        })}
-      </Page>
-    </Document>
+        }
+        return (
+          <div key={index} style={styles.section}>
+            <p style={styles.sectionTitleText}>{sectionItem.label}</p>
+            <div style={styles.list}>
+              {sectionItem.tags?.split("\n").map((item, index) => {
+                return (
+                  <p key={index} style={styles.listItem}>
+                    {item}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
