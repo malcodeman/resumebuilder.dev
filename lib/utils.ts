@@ -23,7 +23,7 @@ function readAsTextAsync(file: File): Promise<string | ArrayBuffer> {
   });
 }
 
-type Type = "div" | "p";
+type Type = "div" | "p" | "a";
 
 function parseDocument(document) {
   function getType(type: Type) {
@@ -32,11 +32,13 @@ function parseDocument(document) {
         return "VIEW";
       case "p":
         return "TEXT";
+      case "a":
+        return "LINK";
     }
   }
 
   function isHtmlType(type: Type) {
-    return type === "div" || type === "p";
+    return type === "div" || type === "p" || type === "a";
   }
 
   function parseType(type: Type) {

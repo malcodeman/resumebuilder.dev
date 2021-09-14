@@ -138,7 +138,19 @@ function TokyoTemplate(props: Fields) {
                 {sectionItem.nested.map((item, index) => {
                   return (
                     <div key={index} style={styles.sectionItem}>
-                      <p style={styles.sectionHeading}>{item.title}</p>
+                      <p style={styles.sectionHeading}>
+                        {item.website ? (
+                          <a
+                            href={item.website}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {item.title}
+                          </a>
+                        ) : (
+                          item.title
+                        )}
+                      </p>
                       <p style={styles.text}>
                         {item.subtitle} | {item.city} | {item.startDate} -{" "}
                         {item.endDate}
