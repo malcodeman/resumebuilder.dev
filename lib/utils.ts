@@ -1,9 +1,7 @@
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
-import * as R from "ramda";
 
 import getTemplate from "./getTemplate";
-import renderer from "./renderer";
 
 import { Resume, Section } from "../types";
 
@@ -23,58 +21,13 @@ function readAsTextAsync(file: File): Promise<string | ArrayBuffer> {
   });
 }
 
-type Type = "div" | "p" | "a";
-
-function parseDocument(document) {
-  function getType(type: Type) {
-    switch (type) {
-      case "div":
-        return "VIEW";
-      case "p":
-        return "TEXT";
-      case "a":
-        return "LINK";
-    }
-  }
-
-  function isHtmlType(type: Type) {
-    return type === "div" || type === "p" || type === "a";
-  }
-
-  function parseType(type: Type) {
-    return isHtmlType(type) ? getType(type) : type;
-  }
-
-  function traverse(document) {
-    if (R.is(Array, document)) {
-      return R.map((item) => traverse(item), document);
-    }
-    if (R.isNil(document?.type)) {
-      return document;
-    }
-    return {
-      ...document,
-      type: parseType(document.type),
-      props: {
-        ...document.props,
-        children: traverse(document.props.children),
-      },
-    };
-  }
-
-  return traverse(document);
-}
-
 async function exportAsPdf(resume: Resume) {
   const fields = {
     about: resume.about,
     section: resume.section,
   };
-  const element = getTemplate(resume.meta.template, fields);
-  const document = element.type(element.props);
-  const parsedDoc = parseDocument(document);
-  const render = renderer(parsedDoc);
-  const blob = await pdf(render).toBlob();
+  const element = getTemplate(resume.meta.template, fields, true);
+  const blob = await pdf(element).toBlob();
   saveAs(blob, resume.title);
 }
 
@@ -103,6 +56,13 @@ function isTagListSection(name: Section) {
   );
 }
 
+function pt2px(pt: number, suffix = true) {
+  if (suffix) {
+    return `${(pt * 96) / 72}px`;
+  }
+  return (pt * 96) / 72;
+}
+
 const EXPORTS = {
   isBrowser,
   readAsTextAsync,
@@ -110,6 +70,7 @@ const EXPORTS = {
   exportAsJson,
   isStandardSection,
   isTagListSection,
+  pt2px,
 };
 
 export default EXPORTS;
