@@ -9,7 +9,7 @@ import {
   Tab,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { useMediaQuery } from "@react-hookz/web";
+import { useMediaQuery, useIsomorphicLayoutEffect } from "@react-hookz/web";
 
 import Sections from "../components/sections/Sections";
 import Templates from "../components/templates/Templates";
@@ -32,7 +32,7 @@ function Builder() {
 
   useAutoSaveToast({});
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (isWide) {
       setTabIndex(0);
     }

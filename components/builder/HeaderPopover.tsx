@@ -39,7 +39,6 @@ function FullWidth() {
     false,
     { initializeWithStorageValue: false }
   );
-
   return (
     <FormControl
       mb="2"
@@ -61,6 +60,40 @@ function FullWidth() {
         isChecked={isFullWidth}
         onChange={() => setIsFullWidth(!isFullWidth)}
         id="is-full-width"
+      />
+    </FormControl>
+  );
+}
+
+function PdfViewer() {
+  const [isPdfViewer, setIsPdfViewer] = useLocalStorageValue(
+    "isPdfViewer",
+    false,
+    {
+      initializeWithStorageValue: false,
+    }
+  );
+  return (
+    <FormControl
+      mb="2"
+      display={{ base: "none", lg: "flex" }}
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <FormLabel
+        htmlFor="is-pdf-viewer"
+        mb="0"
+        width="100%"
+        cursor="pointer"
+        marginInlineEnd="0"
+        paddingInlineEnd="3"
+      >
+        PDF Viwer
+      </FormLabel>
+      <Switch
+        isChecked={isPdfViewer}
+        onChange={() => setIsPdfViewer(!isPdfViewer)}
+        id="is-pdf-viewer"
       />
     </FormControl>
   );
@@ -196,6 +229,8 @@ function HeaderPopover(props: props) {
                   <Switch isDisabled={true} id="is-small-text" />
                 </FormControl>
                 <FullWidth />
+                <Divider marginY="2" />
+                <PdfViewer />
                 <Divider marginY="2" />
                 <CopyLink />
                 <DeleteResume />

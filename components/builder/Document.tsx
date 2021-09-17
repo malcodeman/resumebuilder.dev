@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { useWatch, UseFormReturn } from "react-hook-form";
 import { useDebouncedEffect, useLocalStorageValue } from "@react-hookz/web";
 import { motion } from "framer-motion";
+import { PDFViewer } from "@react-pdf/renderer";
 
 import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
@@ -23,17 +24,21 @@ function Document(props: props) {
   const [isFullWidth] = useLocalStorageValue("isFullWidth", false, {
     initializeWithStorageValue: false,
   });
+  const [isPdfViewer] = useLocalStorageValue("isPdfViewer", false, {
+    initializeWithStorageValue: false,
+  });
   const [_resume, setResume] = useResume({ isolated: true });
   const watch = useWatch({
     control: form.control,
     name: ["id", "meta.template", "about", "section"],
+    disabled: isPdfViewer,
   });
   const id = watch[0];
   const fields = {
     about: watch[2],
     section: watch[3],
   };
-  const document = getTemplate(watch[1], fields);
+  const document = getTemplate(watch[1], fields, isPdfViewer);
 
   useDebouncedEffect(
     () => {
@@ -49,22 +54,28 @@ function Document(props: props) {
     500
   );
 
+  const boxProps = {
+    as: motion.div,
+    width: "100%",
+    margin: "0 auto",
+    overflow: "hidden",
+    backgroundColor: "#fff",
+    display: { base: "none", lg: "block" },
+    height: utils.pt2px(PAGE_SIZE.HEIGHT),
+    maxWidth: isFullWidth ? "100%" : utils.pt2px(PAGE_SIZE.WIDTH),
+  };
+
   if (id) {
-    return (
-      <Box
-        as={motion.div}
-        layout
-        width="100%"
-        maxWidth={isFullWidth ? "100%" : utils.pt2px(PAGE_SIZE.WIDTH)}
-        height={utils.pt2px(PAGE_SIZE.HEIGHT)}
-        margin="0 auto"
-        backgroundColor="#fff"
-        display={{ base: "none", lg: "block" }}
-        overflow="hidden"
-      >
-        {document}
-      </Box>
-    );
+    if (isPdfViewer) {
+      return (
+        <Box {...boxProps}>
+          <PDFViewer height="100%" width="100%">
+            {document}
+          </PDFViewer>
+        </Box>
+      );
+    }
+    return <Box {...boxProps}>{document}</Box>;
   }
   return <></>;
 }
