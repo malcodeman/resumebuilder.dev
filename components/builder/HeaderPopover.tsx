@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
 
 import ImportDataModal from "../ImportDataModal";
-import ExportResumeModal from "../templates/ExportResumeModal";
+import ExportResumeModal from "./ExportResumeModal";
 import DeleteResumeModal from "../resumes/DeleteResumeModal";
 
 import utils from "../../lib/utils";
@@ -181,6 +181,7 @@ function ExportResume() {
         onClose={onClose}
         onPdfExport={() => utils.exportAsPdf(resume)}
         onJsonExport={() => utils.exportAsJson(resume)}
+        onHtmlExport={() => utils.exportAsHtml(resume)}
       />
     </>
   );

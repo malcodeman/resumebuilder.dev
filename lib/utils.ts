@@ -1,5 +1,7 @@
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
+import ReactDOMServer from "react-dom/server";
+import CSSReset from "@chakra-ui/css-reset";
 
 import getTemplate from "./getTemplate";
 
@@ -38,6 +40,21 @@ function exportAsJson(resume: Resume) {
   saveAs(blob, `${resume.title}.json`);
 }
 
+function exportAsHtml(resume: Resume) {
+  const fields = {
+    about: resume.about,
+    section: resume.section,
+  };
+  const element = getTemplate(resume.meta.template, fields);
+  const markup = ReactDOMServer.renderToStaticMarkup(element);
+  const cssReset = CSSReset().props.styles;
+  const data = `<style>${cssReset}</style>${markup}`;
+  const blob = new Blob([data], {
+    type: "text/plain;charset=utf-8",
+  });
+  saveAs(blob, `${resume.title}.html`);
+}
+
 function isStandardSection(name: Section) {
   return (
     name === "standardSection" ||
@@ -68,6 +85,7 @@ const EXPORTS = {
   readAsTextAsync,
   exportAsPdf,
   exportAsJson,
+  exportAsHtml,
   isStandardSection,
   isTagListSection,
   pt2px,
