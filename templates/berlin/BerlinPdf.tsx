@@ -8,6 +8,7 @@ import {
 } from "@react-pdf/renderer";
 
 import utils from "../../lib/utils";
+import theme from "../theme";
 
 import { Fields } from "../../types";
 
@@ -16,10 +17,11 @@ function BerlinPdf(props: Fields) {
   const styles = StyleSheet.create({
     page: {
       lineHeight: 1,
+      height: "100%",
       color: "#323336",
       position: "relative",
       backgroundColor: "#fff",
-      fontSize: 12,
+      fontSize: theme.fontSize.md,
       paddingTop: 40,
       paddingRight: 80,
       paddingBottom: 40,
@@ -44,7 +46,7 @@ function BerlinPdf(props: Fields) {
       marginBottom: 8,
     },
     name: {
-      fontSize: 21,
+      fontSize: theme.fontSize["2xl"],
       marginBottom: 20,
       textTransform: "uppercase",
       fontWeight: 600,
@@ -57,7 +59,7 @@ function BerlinPdf(props: Fields) {
       marginBottom: 4,
     },
     sectionLabel: {
-      fontSize: 9,
+      fontSize: theme.fontSize.xs,
       color: "#707678",
       textTransform: "uppercase",
       marginBottom: 22,
@@ -70,7 +72,7 @@ function BerlinPdf(props: Fields) {
     },
     sectionTitle: {
       textTransform: "uppercase",
-      fontSize: 13.5,
+      fontSize: theme.fontSize.lg,
       letterSpacing: 0.06,
       fontWeight: 600,
       marginBottom: 8,
@@ -82,7 +84,7 @@ function BerlinPdf(props: Fields) {
     },
     listItem: {
       backgroundColor: "#f1f5f7",
-      fontSize: 10.5,
+      fontSize: theme.fontSize.sm,
       marginRight: 4,
       marginBottom: 4,
       paddingLeft: 12,

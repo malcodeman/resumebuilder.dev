@@ -1,4 +1,5 @@
 import utils from "../../lib/utils";
+import theme from "../theme";
 
 import { Fields } from "../../types";
 
@@ -7,10 +8,11 @@ function BerlinReact(props: Fields) {
   const styles = {
     page: {
       lineHeight: 1,
+      height: "100%",
       color: "#323336",
       position: "relative",
       backgroundColor: "#fff",
-      fontSize: utils.pt2px(12),
+      fontSize: utils.pt2px(theme.fontSize.md),
       paddingTop: utils.pt2px(40),
       paddingRight: utils.pt2px(80),
       paddingBottom: utils.pt2px(40),
@@ -35,7 +37,7 @@ function BerlinReact(props: Fields) {
       marginBottom: utils.pt2px(8),
     },
     name: {
-      fontSize: utils.pt2px(21),
+      fontSize: utils.pt2px(theme.fontSize["2xl"]),
       marginBottom: utils.pt2px(20),
       textTransform: "uppercase",
       fontWeight: 600,
@@ -48,7 +50,7 @@ function BerlinReact(props: Fields) {
       marginBottom: utils.pt2px(4),
     },
     sectionLabel: {
-      fontSize: utils.pt2px(9),
+      fontSize: utils.pt2px(theme.fontSize.xs),
       color: "#707678",
       textTransform: "uppercase",
       marginBottom: utils.pt2px(22),
@@ -61,7 +63,7 @@ function BerlinReact(props: Fields) {
     },
     sectionTitle: {
       textTransform: "uppercase",
-      fontSize: utils.pt2px(13.5),
+      fontSize: utils.pt2px(theme.fontSize.lg),
       letterSpacing: 0.06,
       fontWeight: 600,
       marginBottom: utils.pt2px(8),
@@ -73,7 +75,7 @@ function BerlinReact(props: Fields) {
     },
     listItem: {
       backgroundColor: "#f1f5f7",
-      fontSize: utils.pt2px(10.5),
+      fontSize: utils.pt2px(theme.fontSize.sm),
       marginRight: utils.pt2px(4),
       marginBottom: utils.pt2px(4),
       paddingLeft: utils.pt2px(12),
