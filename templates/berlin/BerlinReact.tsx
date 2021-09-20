@@ -131,7 +131,7 @@ function BerlinReact(props: Fields) {
                       {item.endDate || "end date"}
                     </p>
                     {item.description.split("\n").map((item, index) => (
-                      <p key={index}>{item || "description"}</p>
+                      <p key={index}>{item}</p>
                     ))}
                   </div>
                 );

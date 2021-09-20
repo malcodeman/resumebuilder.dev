@@ -151,7 +151,7 @@ function BerlinPdf(props: Fields) {
                         {item.endDate || "end date"}
                       </Text>
                       {item.description.split("\n").map((item, index) => (
-                        <Text key={index}>{item || "description"}</Text>
+                        <Text key={index}>{item}</Text>
                       ))}
                     </View>
                   );
