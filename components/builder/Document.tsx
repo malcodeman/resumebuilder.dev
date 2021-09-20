@@ -31,7 +31,6 @@ function Document(props: props) {
   const watch = useWatch({
     control: form.control,
     name: ["id", "meta.template", "about", "section"],
-    disabled: isPdfViewer,
   });
   const id = watch[0];
   const fields = {
@@ -39,6 +38,8 @@ function Document(props: props) {
     section: watch[3],
   };
   const document = getTemplate(watch[1], fields, isPdfViewer);
+  const delay = isPdfViewer ? 2000 : 200;
+  const maxWait = isPdfViewer ? 5000 : 500;
 
   useDebouncedEffect(
     () => {
@@ -50,8 +51,8 @@ function Document(props: props) {
       }
     },
     [watch],
-    200,
-    500
+    delay,
+    maxWait
   );
 
   const boxProps = {
