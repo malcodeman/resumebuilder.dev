@@ -28,7 +28,7 @@ function BerlinPdf(props: Fields) {
       position: "relative",
       fontFamily: "Roboto",
       backgroundColor: "#fff",
-      fontSize: theme.fontSize.md,
+      fontSize: theme.fontSize.xs,
       paddingTop: 40,
       paddingRight: 80,
       paddingBottom: 40,
@@ -47,54 +47,60 @@ function BerlinPdf(props: Fields) {
       paddingRight: 8,
       paddingBottom: 5,
     },
-    section: {
-      display: "flex",
-      flexDirection: "column",
-      marginBottom: 22,
+    header: {
+      marginBottom: 16,
     },
     name: {
       fontSize: theme.fontSize["2xl"],
       marginBottom: 20,
       textTransform: "uppercase",
-      fontWeight: 400,
+      fontWeight: 700,
     },
     title: {
-      marginBottom: 6,
+      marginBottom: 10,
+    },
+    details: {
+      color: "#707678",
+      marginBottom: 10,
     },
     summary: {
       lineHeight: 1.4,
-    },
-    text: {
       color: "#707678",
-      marginBottom: 4,
     },
     sectionLabel: {
-      fontSize: theme.fontSize.xs,
       color: "#707678",
       textTransform: "uppercase",
-      marginBottom: 22,
+      marginBottom: 10,
       letterSpacing: 1,
+      fontWeight: 700,
     },
     sectionItem: {
       display: "flex",
       flexDirection: "column",
-      marginBottom: 22,
+      marginBottom: 16,
     },
     sectionTitle: {
       textTransform: "uppercase",
-      fontSize: theme.fontSize.lg,
+      fontSize: theme.fontSize.sm,
       letterSpacing: 0.06,
-      fontWeight: 400,
+      fontWeight: 700,
       marginBottom: 8,
+    },
+    subtitle: {
+      color: "#707678",
+      marginBottom: 8,
+    },
+    description: {
+      lineHeight: 1.4,
     },
     list: {
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
+      marginBottom: 16,
     },
     listItem: {
       backgroundColor: "#f1f5f7",
-      fontSize: theme.fontSize.sm,
       marginRight: 4,
       marginBottom: 4,
       paddingLeft: 12,
@@ -111,12 +117,12 @@ function BerlinPdf(props: Fields) {
           <Text>{about.firstName[0] || "f"}</Text>
           <Text>{about.lastName[0] || "l"}</Text>
         </View>
-        <View style={styles.section}>
+        <View style={styles.header}>
           <Text style={styles.name}>
             {about.firstName || "first name"} {about.lastName || "last name"}
           </Text>
           <Text style={styles.title}>{about.title || "title"}</Text>
-          <Text style={styles.text}>
+          <Text style={styles.details}>
             {about.city || "city"}, {about.country || "country"} |{" "}
             {about.email || "email"} | {about.phone || "phone"}
           </Text>
@@ -129,7 +135,7 @@ function BerlinPdf(props: Fields) {
         {section.map((sectionItem, index) => {
           if (utils.isStandardSection(sectionItem.name)) {
             return (
-              <View key={index} style={styles.section}>
+              <View key={index}>
                 <Text style={styles.sectionLabel}>
                   {sectionItem.label || "label"}
                 </Text>
@@ -145,13 +151,15 @@ function BerlinPdf(props: Fields) {
                           item.title || "Untitled"
                         )}
                       </Text>
-                      <Text style={styles.text}>
+                      <Text style={styles.subtitle}>
                         {item.subtitle || "subtitle"} | {item.city || "city"} |{" "}
                         {item.startDate || "start date"} -{" "}
                         {item.endDate || "end date"}
                       </Text>
                       {item.description.split("\n").map((item, index) => (
-                        <Text key={index}>{item}</Text>
+                        <Text key={index} style={styles.description}>
+                          {item}
+                        </Text>
                       ))}
                     </View>
                   );
@@ -160,7 +168,7 @@ function BerlinPdf(props: Fields) {
             );
           }
           return (
-            <View key={index} style={styles.section}>
+            <View key={index}>
               <Text style={styles.sectionLabel}>
                 {sectionItem.label || "label"}
               </Text>
