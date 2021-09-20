@@ -11,6 +11,7 @@ function BerlinReact(props: Fields) {
       height: "100%",
       color: "#323336",
       position: "relative",
+      fontFamily: `'Roboto', sans-serif`,
       backgroundColor: "#fff",
       fontSize: utils.pt2px(theme.fontSize.md),
       paddingTop: utils.pt2px(40),
@@ -23,7 +24,7 @@ function BerlinReact(props: Fields) {
       color: "#000",
       textTransform: "uppercase",
       backgroundColor: "#43f398",
-      fontWeight: 600,
+      fontWeight: 400,
       left: utils.pt2px(20),
       top: utils.pt2px(20),
       paddingTop: utils.pt2px(5),
@@ -34,16 +35,19 @@ function BerlinReact(props: Fields) {
     section: {
       display: "flex",
       flexDirection: "column",
-      marginBottom: utils.pt2px(8),
+      marginBottom: utils.pt2px(22),
     },
     name: {
       fontSize: utils.pt2px(theme.fontSize["2xl"]),
       marginBottom: utils.pt2px(20),
       textTransform: "uppercase",
-      fontWeight: 600,
+      fontWeight: 400,
     },
     title: {
       marginBottom: utils.pt2px(6),
+    },
+    summary: {
+      lineHeight: 1.4,
     },
     text: {
       color: "#707678",
@@ -59,13 +63,13 @@ function BerlinReact(props: Fields) {
     sectionItem: {
       display: "flex",
       flexDirection: "column",
-      marginBottom: utils.pt2px(2),
+      marginBottom: utils.pt2px(22),
     },
     sectionTitle: {
       textTransform: "uppercase",
       fontSize: utils.pt2px(theme.fontSize.lg),
       letterSpacing: 0.06,
-      fontWeight: 600,
+      fontWeight: 400,
       marginBottom: utils.pt2px(8),
     },
     list: {
@@ -88,20 +92,21 @@ function BerlinReact(props: Fields) {
   return (
     <div style={styles.page}>
       <div style={styles.initials}>
-        <p>{about.firstName[0]}</p>
-        <p>{about.lastName[0]}</p>
+        <p>{about.firstName[0] || "f"}</p>
+        <p>{about.lastName[0] || "l"}</p>
       </div>
       <div style={styles.section}>
         <p style={styles.name}>
-          {about.firstName} {about.lastName}
+          {about.firstName || "first name"} {about.lastName || "last name"}
         </p>
-        <p style={styles.title}>{about.title}</p>
+        <p style={styles.title}>{about.title || "title"}</p>
         <p style={styles.text}>
-          {about.city}, {about.country} | {about.email} | {about.phone}
+          {about.city || "city"}, {about.country || "country"} |{" "}
+          {about.email || "email"} | {about.phone || "phone"}
         </p>
         {about.summary.split("\n").map((item, index) => (
-          <p key={index} style={styles.text}>
-            {item}
+          <p key={index} style={styles.summary}>
+            {item || "summary"}
           </p>
         ))}
       </div>
@@ -109,23 +114,24 @@ function BerlinReact(props: Fields) {
         if (utils.isStandardSection(sectionItem.name)) {
           return (
             <div key={index} style={styles.section}>
-              <p style={styles.sectionLabel}>{sectionItem.label}</p>
+              <p style={styles.sectionLabel}>{sectionItem.label || "label"}</p>
               {sectionItem.nested.map((item, index) => {
                 return (
                   <div key={index} style={styles.sectionItem}>
                     <p style={styles.sectionTitle}>
                       {item.website ? (
-                        <a href={item.website}>{item.title}</a>
+                        <a href={item.website}>{item.title || "Untitled"}</a>
                       ) : (
-                        item.title
+                        item.title || "Untitled"
                       )}
                     </p>
                     <p style={styles.text}>
-                      {item.subtitle} | {item.city} | {item.startDate} -{" "}
-                      {item.endDate}
+                      {item.subtitle || "subtitle"} | {item.city || "city"} |{" "}
+                      {item.startDate || "start date"} -{" "}
+                      {item.endDate || "end date"}
                     </p>
                     {item.description.split("\n").map((item, index) => (
-                      <p key={index}>{item}</p>
+                      <p key={index}>{item || "description"}</p>
                     ))}
                   </div>
                 );
@@ -135,12 +141,12 @@ function BerlinReact(props: Fields) {
         }
         return (
           <div key={index} style={styles.section}>
-            <p style={styles.sectionLabel}>{sectionItem.label}</p>
+            <p style={styles.sectionLabel}>{sectionItem.label || "label"}</p>
             <div style={styles.list}>
               {sectionItem.tags?.split("\n").map((item, index) => {
                 return (
                   <p key={index} style={styles.listItem}>
-                    {item}
+                    {item || "item"}
                   </p>
                 );
               })}

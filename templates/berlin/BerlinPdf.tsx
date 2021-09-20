@@ -1,4 +1,5 @@
 import {
+  Font,
   StyleSheet,
   Document,
   Page,
@@ -6,6 +7,11 @@ import {
   Text,
   Link,
 } from "@react-pdf/renderer";
+
+Font.register({
+  family: "Roboto",
+  src: "https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Me5Q.ttf",
+});
 
 import utils from "../../lib/utils";
 import theme from "../theme";
@@ -20,6 +26,7 @@ function BerlinPdf(props: Fields) {
       height: "100%",
       color: "#323336",
       position: "relative",
+      fontFamily: "Roboto",
       backgroundColor: "#fff",
       fontSize: theme.fontSize.md,
       paddingTop: 40,
@@ -32,7 +39,7 @@ function BerlinPdf(props: Fields) {
       color: "#000",
       textTransform: "uppercase",
       backgroundColor: "#43f398",
-      fontWeight: 600,
+      fontWeight: 400,
       left: 20,
       top: 20,
       paddingTop: 5,
@@ -43,16 +50,19 @@ function BerlinPdf(props: Fields) {
     section: {
       display: "flex",
       flexDirection: "column",
-      marginBottom: 8,
+      marginBottom: 22,
     },
     name: {
       fontSize: theme.fontSize["2xl"],
       marginBottom: 20,
       textTransform: "uppercase",
-      fontWeight: 600,
+      fontWeight: 400,
     },
     title: {
       marginBottom: 6,
+    },
+    summary: {
+      lineHeight: 1.4,
     },
     text: {
       color: "#707678",
@@ -68,13 +78,13 @@ function BerlinPdf(props: Fields) {
     sectionItem: {
       display: "flex",
       flexDirection: "column",
-      marginBottom: 2,
+      marginBottom: 22,
     },
     sectionTitle: {
       textTransform: "uppercase",
       fontSize: theme.fontSize.lg,
       letterSpacing: 0.06,
-      fontWeight: 600,
+      fontWeight: 400,
       marginBottom: 8,
     },
     list: {
@@ -98,20 +108,21 @@ function BerlinPdf(props: Fields) {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.initials}>
-          <Text>{about.firstName[0]}</Text>
-          <Text>{about.lastName[0]}</Text>
+          <Text>{about.firstName[0] || "f"}</Text>
+          <Text>{about.lastName[0] || "l"}</Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.name}>
-            {about.firstName} {about.lastName}
+            {about.firstName || "first name"} {about.lastName || "last name"}
           </Text>
-          <Text style={styles.title}>{about.title}</Text>
+          <Text style={styles.title}>{about.title || "title"}</Text>
           <Text style={styles.text}>
-            {about.city}, {about.country} | {about.email} | {about.phone}
+            {about.city || "city"}, {about.country || "country"} |{" "}
+            {about.email || "email"} | {about.phone || "phone"}
           </Text>
           {about.summary.split("\n").map((item, index) => (
-            <Text key={index} style={styles.text}>
-              {item}
+            <Text key={index} style={styles.summary}>
+              {item || "summary"}
             </Text>
           ))}
         </View>
@@ -119,23 +130,28 @@ function BerlinPdf(props: Fields) {
           if (utils.isStandardSection(sectionItem.name)) {
             return (
               <View key={index} style={styles.section}>
-                <Text style={styles.sectionLabel}>{sectionItem.label}</Text>
+                <Text style={styles.sectionLabel}>
+                  {sectionItem.label || "label"}
+                </Text>
                 {sectionItem.nested.map((item, index) => {
                   return (
                     <View key={index} style={styles.sectionItem}>
                       <Text style={styles.sectionTitle}>
                         {item.website ? (
-                          <Link src={item.website}>{item.title}</Link>
+                          <Link src={item.website}>
+                            {item.title || "Untitled"}
+                          </Link>
                         ) : (
-                          item.title
+                          item.title || "Untitled"
                         )}
                       </Text>
                       <Text style={styles.text}>
-                        {item.subtitle} | {item.city} | {item.startDate} -{" "}
-                        {item.endDate}
+                        {item.subtitle || "subtitle"} | {item.city || "city"} |{" "}
+                        {item.startDate || "start date"} -{" "}
+                        {item.endDate || "end date"}
                       </Text>
                       {item.description.split("\n").map((item, index) => (
-                        <Text key={index}>{item}</Text>
+                        <Text key={index}>{item || "description"}</Text>
                       ))}
                     </View>
                   );
@@ -145,12 +161,14 @@ function BerlinPdf(props: Fields) {
           }
           return (
             <View key={index} style={styles.section}>
-              <Text style={styles.sectionLabel}>{sectionItem.label}</Text>
+              <Text style={styles.sectionLabel}>
+                {sectionItem.label || "label"}
+              </Text>
               <View style={styles.list}>
                 {sectionItem.tags?.split("\n").map((item, index) => {
                   return (
                     <Text key={index} style={styles.listItem}>
-                      {item}
+                      {item || "item"}
                     </Text>
                   );
                 })}
