@@ -96,7 +96,7 @@ function BerlinReact(props: Fields) {
   } as const;
 
   return (
-    <div style={styles.page}>
+    <div style={styles.page} id="berlin">
       <div style={styles.initials}>
         <p>{about.firstName[0] || "f"}</p>
         <p>{about.lastName[0] || "l"}</p>

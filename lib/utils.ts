@@ -2,11 +2,14 @@ import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
 import ReactDOMServer from "react-dom/server";
 import CSSReset from "@chakra-ui/css-reset";
+import * as htmlToImage from "html-to-image";
+import { createStandaloneToast } from "@chakra-ui/react";
 
 import getTemplate from "./getTemplate";
 
 import { Resume, Section } from "../types";
 
+const toast = createStandaloneToast();
 const isBrowser =
   typeof window !== "undefined" &&
   typeof navigator !== "undefined" &&
@@ -55,6 +58,21 @@ function exportAsHtml(resume: Resume) {
   saveAs(blob, `${resume.title}.html`);
 }
 
+async function exportAsPng(resume: Resume) {
+  try {
+    const blob = await htmlToImage.toBlob(
+      document.getElementById(resume.meta.template)
+    );
+    saveAs(blob, `${resume.title}.png`);
+  } catch (error) {
+    toast({
+      description: error.message,
+      status: "error",
+      isClosable: true,
+    });
+  }
+}
+
 function isStandardSection(name: Section) {
   return (
     name === "standardSection" ||
@@ -86,6 +104,7 @@ const EXPORTS = {
   exportAsPdf,
   exportAsJson,
   exportAsHtml,
+  exportAsPng,
   isStandardSection,
   isTagListSection,
   pt2px,

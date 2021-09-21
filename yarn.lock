@@ -3265,6 +3265,11 @@ hsl-to-rgb-for-reals@^1.1.0:
   resolved "https://registry.yarnpkg.com/hsl-to-rgb-for-reals/-/hsl-to-rgb-for-reals-1.1.1.tgz#e1eb23f6b78016e3722431df68197e6dcdc016d9"
   integrity sha512-LgOWAkrN0rFaQpfdWBQlv/VhkOxb5AsBjk6NQVx4yEzWS923T07X0M1Y0VNko2H52HeSpZrZNNMJ0aFqsdVzQg==
 
+html-to-image@^1.8.5:
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/html-to-image/-/html-to-image-1.8.5.tgz#cbdca590911c817248af68715199367d44ed7cc5"
+  integrity sha512-W+QV4LFLkK5pEZhmAOXrLWwuNGqa/eVLTVVFAghhZmAfBNjxw53wDX/sw+tGMT2n6Z7lRQxzh0dzrtM7nsUC0g==
+
 http-errors@1.7.3:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.7.3.tgz#6c619e4f9c60308c38519498c14fbb10aacebb06"

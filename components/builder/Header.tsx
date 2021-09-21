@@ -56,7 +56,13 @@ function Header(props: props) {
           >
             Export PDF
           </Button>
-          <HeaderPopover onImport={handleOnImport} />
+          <HeaderPopover
+            onImport={handleOnImport}
+            onPdfExport={() => utils.exportAsPdf(form.getValues())}
+            onJsonExport={() => utils.exportAsJson(form.getValues())}
+            onHtmlExport={() => utils.exportAsHtml(form.getValues())}
+            onPngExport={() => utils.exportAsPng(form.getValues())}
+          />
         </Flex>
       </Flex>
     </Box>

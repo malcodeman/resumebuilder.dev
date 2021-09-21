@@ -20,16 +20,25 @@ type props = {
   onPdfExport: () => void;
   onJsonExport: () => void;
   onHtmlExport: () => void;
+  onPngExport: () => void;
 };
 
 const EXPORTS = [
   { label: "JSON", value: "json" as const, isDisabled: false },
   { label: "PDF", value: "pdf" as const, isDisabled: false },
   { label: "HTML", value: "html" as const, isDisabled: false },
+  { label: "PNG", value: "png" as const, isDisabled: false },
 ];
 
 function ExportResumeModal(props: props) {
-  const { isOpen, onClose, onPdfExport, onJsonExport, onHtmlExport } = props;
+  const {
+    isOpen,
+    onClose,
+    onPdfExport,
+    onJsonExport,
+    onHtmlExport,
+    onPngExport,
+  } = props;
 
   function handleOnSubmit(format: Export) {
     switch (format) {
@@ -40,6 +49,8 @@ function ExportResumeModal(props: props) {
         return onJsonExport();
       case "html":
         return onHtmlExport();
+      case "png":
+        return onPngExport();
     }
   }
 

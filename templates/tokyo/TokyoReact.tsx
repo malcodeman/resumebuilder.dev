@@ -82,7 +82,7 @@ function TokyoReact(props: Fields) {
   } as const;
 
   return (
-    <div style={styles.page}>
+    <div style={styles.page} id="tokyo">
       <div style={styles.header}>
         <p style={styles.name}>
           {about.firstName || "first name"} {about.lastName || "last name"}

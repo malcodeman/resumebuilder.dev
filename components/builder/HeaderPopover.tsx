@@ -31,6 +31,10 @@ const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
 type props = {
   onImport: (fields: Fields) => void;
+  onPdfExport: () => void;
+  onJsonExport: () => void;
+  onHtmlExport: () => void;
+  onPngExport: () => void;
 };
 
 function FullWidth() {
@@ -145,7 +149,8 @@ function DeleteResume() {
   );
 }
 
-function ImportData({ onImport }) {
+function ImportData(props: { onImport: (fields: Fields) => void }) {
+  const { onImport } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -163,9 +168,14 @@ function ImportData({ onImport }) {
   );
 }
 
-function ExportResume() {
+function ExportResume(props: {
+  onPdfExport: () => void;
+  onJsonExport: () => void;
+  onHtmlExport: () => void;
+  onPngExport: () => void;
+}) {
+  const { onPdfExport, onJsonExport, onHtmlExport, onPngExport } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [resume] = useResume();
   return (
     <>
       <Button
@@ -179,16 +189,18 @@ function ExportResume() {
       <ExportResumeModal
         isOpen={isOpen}
         onClose={onClose}
-        onPdfExport={() => utils.exportAsPdf(resume)}
-        onJsonExport={() => utils.exportAsJson(resume)}
-        onHtmlExport={() => utils.exportAsHtml(resume)}
+        onPdfExport={onPdfExport}
+        onJsonExport={onJsonExport}
+        onHtmlExport={onHtmlExport}
+        onPngExport={onPngExport}
       />
     </>
   );
 }
 
 function HeaderPopover(props: props) {
-  const { onImport } = props;
+  const { onImport, onPdfExport, onJsonExport, onHtmlExport, onPngExport } =
+    props;
   return (
     <Popover>
       {({ isOpen }) => (
@@ -237,7 +249,12 @@ function HeaderPopover(props: props) {
                 <DeleteResume />
                 <Divider marginY="2" />
                 <ImportData onImport={onImport} />
-                <ExportResume />
+                <ExportResume
+                  onPdfExport={onPdfExport}
+                  onJsonExport={onJsonExport}
+                  onHtmlExport={onHtmlExport}
+                  onPngExport={onPngExport}
+                />
               </Flex>
             </PopoverBody>
           </PopoverContent>
