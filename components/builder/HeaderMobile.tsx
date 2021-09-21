@@ -13,6 +13,8 @@ import NavLink from "../misc/NavLink";
 import HeaderPopover from "./HeaderPopover";
 import ResumeTitle from "./ResumeTitle";
 
+import utils from "../../lib/utils";
+
 import { Resume, Fields } from "../../types";
 
 type props = HTMLChakraProps<"div"> & {
@@ -54,7 +56,13 @@ function HeaderMobile(props: props) {
             </Flex>
           </NavLink>
           <ResumeTitle form={form} marginX="2" />
-          <HeaderPopover onImport={handleOnImport} />
+          <HeaderPopover
+            onImport={handleOnImport}
+            onPdfExport={() => utils.exportAsPdf(form.getValues())}
+            onJsonExport={() => utils.exportAsJson(form.getValues())}
+            onHtmlExport={() => utils.exportAsHtml(form.getValues())}
+            onPngExport={() => utils.exportAsPng(form.getValues())}
+          />
         </Flex>
       </Container>
     </Box>
