@@ -52,6 +52,7 @@ function Builder() {
         height="100vh"
       >
         <Tabs
+          isLazy
           isFitted
           index={tabIndex}
           onChange={(index) => setTabIndex(index)}

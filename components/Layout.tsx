@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Container } from "@chakra-ui/react";
-import { useMediaQuery } from "@react-hookz/web";
 
 import Header from "./resumes/Header";
 import HeaderMobile from "./resumes/HeaderMobile";
@@ -11,17 +10,17 @@ type props = {
 
 function Layout(props: props) {
   const { children } = props;
-  const isWide = useMediaQuery("(min-width: 768px)");
-  const paddingTop = isWide ? "calc(2rem + 48px)" : "8";
-  const paddingBottom = isWide ? "8" : "calc(2rem + 54px)";
-
   return (
     <>
-      {isWide ? <Header /> : <></>}
-      <Box as="main" paddingTop={paddingTop} paddingBottom={paddingBottom}>
+      <Header display={{ base: "none", lg: "block" }} />
+      <Box
+        as="main"
+        paddingTop={{ base: "8", lg: "calc(2rem + 48px)" }}
+        paddingBottom={{ base: "calc(2rem + 54px)", lg: "8" }}
+      >
         <Container maxW="container.lg">{children}</Container>
       </Box>
-      {isWide ? <></> : <HeaderMobile />}
+      <HeaderMobile display={{ base: "block", lg: "none" }} />
     </>
   );
 }

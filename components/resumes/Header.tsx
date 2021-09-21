@@ -11,6 +11,7 @@ import {
   FormControl,
   FormLabel,
   Switch,
+  LayoutProps,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -19,7 +20,7 @@ import { MoreVertical } from "react-feather";
 import Logo from "../Logo";
 import NavLink from "../misc/NavLink";
 
-function Header() {
+function Header(props: LayoutProps) {
   const { colorMode, toggleColorMode } = useColorMode();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
@@ -29,6 +30,7 @@ function Header() {
 
   return (
     <Box
+      {...props}
       backgroundColor={backgroundColor}
       boxShadow={boxShadow}
       as="header"

@@ -11,6 +11,7 @@ import {
   FormControl,
   FormLabel,
   Switch,
+  LayoutProps,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -18,7 +19,7 @@ import { FileText, Layers, MoreVertical } from "react-feather";
 
 import NavLink from "../misc/NavLink";
 
-function HeaderMobile() {
+function HeaderMobile(props: LayoutProps) {
   const { colorMode, toggleColorMode } = useColorMode();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
@@ -28,6 +29,7 @@ function HeaderMobile() {
 
   return (
     <Box
+      {...props}
       backgroundColor={backgroundColor}
       boxShadow={boxShadow}
       as="header"
