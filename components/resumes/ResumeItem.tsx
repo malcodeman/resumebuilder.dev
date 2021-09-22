@@ -16,6 +16,8 @@ import { Copy, MoreHorizontal, Trash2, Edit } from "react-feather";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 import EmojiPicker from "../misc/EmojiPicker";
 
@@ -42,11 +44,31 @@ function ResumeItem(props: props) {
   } = props;
   const ref = React.useRef<HTMLSpanElement>(null);
   const form = useForm({ defaultValues: { title: "" } });
+  const {
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+    setNodeRef,
+  } = useSortable({ id: resume.id });
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  };
 
   return (
-    <Link href={`/${resume.id}`} passHref>
-      <Flex {...rest} direction="column">
+    <Flex
+      {...rest}
+      style={style}
+      opacity={isDragging ? "0.5" : "initial"}
+      direction="column"
+    >
+      <Link href={`/${resume.id}`} passHref>
         <Box
+          ref={setNodeRef}
+          {...listeners}
+          {...attributes}
           height="360px"
           mb="2"
           borderRadius="lg"
@@ -58,66 +80,62 @@ function ResumeItem(props: props) {
             section: resume.section,
           })}
         </Box>
-        <Box onClick={(e) => e.stopPropagation()}>
-          <Flex>
-            <EmojiPicker
-              emoji={resume.icon}
-              onSelect={(emoji) => onIconChange(resume.id, emoji)}
+      </Link>
+      <Box>
+        <Flex>
+          <EmojiPicker
+            emoji={resume.icon}
+            onSelect={(emoji) => onIconChange(resume.id, emoji)}
+          />
+          <Editable
+            defaultValue={resume.title}
+            onSubmit={(nextValue) => onTitleChange(resume.id, nextValue)}
+            marginX="2"
+            width="100%"
+          >
+            <EditablePreview ref={ref} noOfLines={1} overflowWrap="anywhere" />
+            <EditableInput {...form.register("title")} />
+          </Editable>
+          <Menu isLazy>
+            <MenuButton
+              as={IconButton}
+              size="sm"
+              aria-label="More options"
+              data-cy="resume_more_options_btn"
+              icon={<MoreHorizontal size={20} />}
             />
-            <Editable
-              defaultValue={resume.title}
-              onSubmit={(nextValue) => onTitleChange(resume.id, nextValue)}
-              marginX="2"
-              width="100%"
-            >
-              <EditablePreview
-                ref={ref}
-                noOfLines={1}
-                overflowWrap="anywhere"
-              />
-              <EditableInput {...form.register("title")} />
-            </Editable>
-            <Menu isLazy>
-              <MenuButton
-                as={IconButton}
-                size="sm"
-                aria-label="More options"
-                data-cy="resume_more_options_btn"
-                icon={<MoreHorizontal size={20} />}
-              />
-              <MenuList>
-                <MenuItem
-                  icon={<Trash2 size={20} />}
-                  onClick={() => onDelete(resume.id)}
-                  data-cy="delete_resume_btn"
-                >
-                  Delete
-                </MenuItem>
-                <MenuItem
-                  icon={<Copy size={20} />}
-                  onClick={() => onDuplicate(resume.id)}
-                  data-cy="duplicate_resume_btn"
-                >
-                  Duplicate
-                </MenuItem>
-                <MenuItem
-                  icon={<Edit size={20} />}
-                  onClick={() => ref.current.focus()}
-                >
-                  Rename
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          </Flex>
-          <Text opacity="0.5">
-            Edited{" "}
-            {formatDistanceToNow(resume.updatedAt, {
-              addSuffix: true,
-            })}
-          </Text>
-        </Box>
-      </Flex>
-    </Link>
+            <MenuList>
+              <MenuItem
+                icon={<Trash2 size={20} />}
+                onClick={() => onDelete(resume.id)}
+                data-cy="delete_resume_btn"
+              >
+                Delete
+              </MenuItem>
+              <MenuItem
+                icon={<Copy size={20} />}
+                onClick={() => onDuplicate(resume.id)}
+                data-cy="duplicate_resume_btn"
+              >
+                Duplicate
+              </MenuItem>
+              <MenuItem
+                icon={<Edit size={20} />}
+                onClick={() => ref.current.focus()}
+              >
+                Rename
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
+        <Text opacity="0.5">
+          Edited{" "}
+          {formatDistanceToNow(resume.updatedAt, {
+            addSuffix: true,
+          })}
+        </Text>
+      </Box>
+    </Flex>
   );
 }
 

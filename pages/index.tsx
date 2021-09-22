@@ -19,6 +19,14 @@ import { nanoid } from "nanoid";
 import { useKeyboardEvent, useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
 import * as R from "ramda";
+import {
+  DndContext,
+  PointerSensor,
+  DragEndEvent,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { SortableContext } from "@dnd-kit/sortable";
 
 import Layout from "../components/Layout";
 import NewResumeModal from "../components/resumes/NewResumeModal";
@@ -126,6 +134,13 @@ function ResumeGrid() {
   const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
     initializeWithStorageValue: false,
   });
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
 
   function handleOnDelete(id: string) {
     const nextResumes = resumes.filter((item) => item.id !== id);
@@ -172,6 +187,16 @@ function ResumeGrid() {
     setResumes(nextResumes);
   }
 
+  function handleOnDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (active.id !== over.id) {
+      const from = R.findIndex(R.propEq("id", active.id))(resumes);
+      const to = R.findIndex(R.propEq("id", over.id))(resumes);
+      const nextResumes = R.move(from, to, resumes);
+      setResumes(nextResumes);
+    }
+  }
+
   if (R.isEmpty(resumes) || R.isNil(resumes)) {
     return (
       <Flex flexDirection="column" alignItems="center" padding="4">
@@ -182,23 +207,27 @@ function ResumeGrid() {
   }
   return (
     <Grid
-      gap="4"
+      gap="8"
       gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
       data-cy="resumes_grid"
     >
-      {R.map(
-        (item) => (
-          <ResumeItem
-            key={item.id}
-            resume={item}
-            onDelete={handleOnDelete}
-            onDuplicate={handleOnDuplicate}
-            onTitleChange={handleOnTitleChange}
-            onIconChange={handleOnIconChange}
-          />
-        ),
-        resumes
-      )}
+      <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
+        <SortableContext items={resumes}>
+          {R.map(
+            (item) => (
+              <ResumeItem
+                key={item.id}
+                resume={item}
+                onDelete={handleOnDelete}
+                onDuplicate={handleOnDuplicate}
+                onTitleChange={handleOnTitleChange}
+                onIconChange={handleOnIconChange}
+              />
+            ),
+            resumes
+          )}
+        </SortableContext>
+      </DndContext>
     </Grid>
   );
 }

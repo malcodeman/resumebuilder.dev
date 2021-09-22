@@ -35,7 +35,7 @@ function EmojiPicker(props: props) {
   }
 
   return (
-    <Popover>
+    <Popover isLazy>
       {({ onClose }) => (
         <>
           <Tooltip label={TOOLTIP_LABEL} aria-label={TOOLTIP_LABEL}>
