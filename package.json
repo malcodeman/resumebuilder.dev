@@ -19,6 +19,7 @@
     "@react-pdf/renderer": "^2.0.6",
     "date-fns": "^2.23.0",
     "emoji-mart": "^3.0.1",
+    "fathom-client": "^3.2.0",
     "file-saver": "^2.0.5",
     "framer-motion": "^4.1.17",
     "html-to-image": "^1.8.5",
