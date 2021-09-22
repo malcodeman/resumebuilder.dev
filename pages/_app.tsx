@@ -6,7 +6,7 @@ import "emoji-mart/css/emoji-mart.css";
 
 function App({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
-    Fathom.load(process.env.FATHOM_SITE_ID, {
+    Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID, {
       includedDomains: ["resumebuilder.dev", "wwww.resumebuilder.dev"],
     });
   }, []);
