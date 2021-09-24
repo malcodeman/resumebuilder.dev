@@ -95,10 +95,18 @@ function ResumeItem(props: props) {
     utils.isBrowser ? `${window.location.href}${resume.id}` : ""
   );
 
-  function onCopyLink() {
+  function handleOnCopyLink() {
     onCopy();
     toast({
       description: "Link copied.",
+      isClosable: true,
+    });
+  }
+
+  function handleOnDelete() {
+    onDelete(resume.id);
+    toast({
+      description: "Resume deleted.",
       isClosable: true,
     });
   }
@@ -167,10 +175,13 @@ function ResumeItem(props: props) {
               >
                 Duplicate
               </MenuItem>
-              <MenuItem icon={<IconLink size={20} />} onClick={onCopyLink}>
+              <MenuItem
+                icon={<IconLink size={20} />}
+                onClick={handleOnCopyLink}
+              >
                 Copy link
               </MenuItem>
-              <DeleteResume onDelete={() => onDelete(resume.id)} />
+              <DeleteResume onDelete={handleOnDelete} />
             </MenuList>
           </Menu>
           <IconButton
