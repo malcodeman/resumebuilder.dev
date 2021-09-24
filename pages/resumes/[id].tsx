@@ -10,7 +10,6 @@ import {
   Text,
   Center,
   Button,
-  Spinner,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useMediaQuery, useIsomorphicLayoutEffect } from "@react-hookz/web";
@@ -31,7 +30,7 @@ import useAutoSaveToast from "../../hooks/useAutoSaveToast";
 import { Resume } from "../../types";
 
 function Builder() {
-  const [resume, isLoading] = useResume();
+  const [resume] = useResume();
   const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
   const [tabIndex, setTabIndex] = React.useState(0);
   const isWide = useMediaQuery("(min-width: 62em)");
@@ -43,14 +42,6 @@ function Builder() {
       setTabIndex(0);
     }
   }, [isWide]);
-
-  if (isLoading) {
-    return (
-      <Center flexDirection="column" height="100vh" padding="4">
-        <Spinner />
-      </Center>
-    );
-  }
 
   if (R.isNil(resume)) {
     return (
@@ -112,6 +103,10 @@ function Builder() {
       <HeaderMobile form={form} display={{ base: "block", lg: "none" }} />
     </>
   );
+}
+
+export async function getServerSideProps() {
+  return { props: {} };
 }
 
 export default Builder;
