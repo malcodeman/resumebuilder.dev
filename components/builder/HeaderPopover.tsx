@@ -129,6 +129,7 @@ function DeleteResume() {
     removeResume();
     router.push("/");
   }
+
   return (
     <>
       <Button

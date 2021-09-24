@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogFooter,
   Button,
   Text,
-  ModalFooter,
 } from "@chakra-ui/react";
 
 type props = {
@@ -19,28 +19,39 @@ type props = {
 
 function DeleteResumeModal(props: props) {
   const { isOpen, onClose, onSubmit } = props;
+  const cancelRef = React.useRef();
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Delete resume</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
+    <AlertDialog
+      leastDestructiveRef={cancelRef}
+      isOpen={isOpen}
+      onClose={onClose}
+    >
+      <AlertDialogOverlay />
+      <AlertDialogContent>
+        <AlertDialogHeader>Delete resume</AlertDialogHeader>
+        <AlertDialogCloseButton />
+        <AlertDialogBody>
           <Text mb="2">
             Are you sure you want to delete this resume permanently?
           </Text>
-        </ModalBody>
-        <ModalFooter>
-          <Button size="sm" mr="2" variant="ghost" onClick={onClose}>
+        </AlertDialogBody>
+        <AlertDialogFooter>
+          <Button
+            ref={cancelRef}
+            size="sm"
+            mr="2"
+            variant="ghost"
+            onClick={onClose}
+          >
             Cancel
           </Button>
           <Button size="sm" colorScheme="pink" onClick={onSubmit}>
             Yes. Delete this resume
           </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
 

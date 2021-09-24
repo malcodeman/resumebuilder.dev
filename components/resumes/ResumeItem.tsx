@@ -13,6 +13,7 @@ import {
   EditableInput,
   useToast,
   useClipboard,
+  useDisclosure,
 } from "@chakra-ui/react";
 import {
   Copy,
@@ -29,11 +30,34 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import EmojiPicker from "../misc/EmojiPicker";
+import DeleteResumeModal from "./DeleteResumeModal";
 
 import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
 
 import { Resume } from "../../types";
+
+function DeleteResume(props: { onDelete: () => void }) {
+  const { onDelete } = props;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <MenuItem
+        icon={<Trash2 size={20} />}
+        onClick={onOpen}
+        data-cy="delete_resume_btn"
+        color="pink"
+      >
+        Delete
+      </MenuItem>
+      <DeleteResumeModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={onDelete}
+      />
+    </>
+  );
+}
 
 type props = {
   resume: Resume;
@@ -118,7 +142,7 @@ function ResumeItem(props: props) {
             <EditablePreview ref={ref} noOfLines={1} overflowWrap="anywhere" />
             <EditableInput {...form.register("title")} />
           </Editable>
-          <Menu isLazy>
+          <Menu>
             <MenuButton
               as={IconButton}
               size="sm"
@@ -131,11 +155,10 @@ function ResumeItem(props: props) {
             />
             <MenuList>
               <MenuItem
-                icon={<Trash2 size={20} />}
-                onClick={() => onDelete(resume.id)}
-                data-cy="delete_resume_btn"
+                icon={<Edit size={20} />}
+                onClick={() => ref.current.focus()}
               >
-                Delete
+                Rename
               </MenuItem>
               <MenuItem
                 icon={<Copy size={20} />}
@@ -144,15 +167,10 @@ function ResumeItem(props: props) {
               >
                 Duplicate
               </MenuItem>
-              <MenuItem
-                icon={<Edit size={20} />}
-                onClick={() => ref.current.focus()}
-              >
-                Rename
-              </MenuItem>
               <MenuItem icon={<IconLink size={20} />} onClick={onCopyLink}>
                 Copy link
               </MenuItem>
+              <DeleteResume onDelete={() => onDelete(resume.id)} />
             </MenuList>
           </Menu>
           <IconButton
