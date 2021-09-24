@@ -11,8 +11,17 @@ import {
   Editable,
   EditablePreview,
   EditableInput,
+  useToast,
+  useClipboard,
 } from "@chakra-ui/react";
-import { Copy, MoreHorizontal, Trash2, Edit, Move } from "react-feather";
+import {
+  Copy,
+  MoreHorizontal,
+  Trash2,
+  Edit,
+  Move,
+  Link as IconLink,
+} from "react-feather";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -22,6 +31,7 @@ import { CSS } from "@dnd-kit/utilities";
 import EmojiPicker from "../misc/EmojiPicker";
 
 import getTemplate from "../../lib/getTemplate";
+import utils from "../../lib/utils";
 
 import { Resume } from "../../types";
 
@@ -56,6 +66,18 @@ function ResumeItem(props: props) {
     transform: CSS.Translate.toString(transform),
     transition,
   };
+  const toast = useToast();
+  const { onCopy } = useClipboard(
+    utils.isBrowser ? `${window.location.href}${resume.id}` : ""
+  );
+
+  function onCopyLink() {
+    onCopy();
+    toast({
+      description: "Link copied.",
+      isClosable: true,
+    });
+  }
 
   return (
     <Flex
@@ -127,6 +149,9 @@ function ResumeItem(props: props) {
                 onClick={() => ref.current.focus()}
               >
                 Rename
+              </MenuItem>
+              <MenuItem icon={<IconLink size={20} />} onClick={onCopyLink}>
+                Copy link
               </MenuItem>
             </MenuList>
           </Menu>
