@@ -12,7 +12,7 @@ import {
   EditablePreview,
   EditableInput,
 } from "@chakra-ui/react";
-import { Copy, MoreHorizontal, Trash2, Edit } from "react-feather";
+import { Copy, MoreHorizontal, Trash2, Edit, Move } from "react-feather";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -60,19 +60,19 @@ function ResumeItem(props: props) {
   return (
     <Flex
       {...rest}
+      ref={setNodeRef}
       style={style}
       opacity={isDragging ? "0.5" : "initial"}
       direction="column"
+      role="group"
     >
       <Link href={`/${resume.id}`} passHref>
         <Box
-          ref={setNodeRef}
-          {...listeners}
-          {...attributes}
           height="360px"
           mb="2"
           borderRadius="lg"
           overflow="hidden"
+          userSelect="none"
           _hover={{ cursor: "pointer" }}
         >
           {getTemplate(resume.meta.template, {
@@ -103,6 +103,9 @@ function ResumeItem(props: props) {
               aria-label="More options"
               data-cy="resume_more_options_btn"
               icon={<MoreHorizontal size={20} />}
+              mr="2"
+              display="none"
+              _groupHover={{ display: "inline-flex" }}
             />
             <MenuList>
               <MenuItem
@@ -127,6 +130,15 @@ function ResumeItem(props: props) {
               </MenuItem>
             </MenuList>
           </Menu>
+          <IconButton
+            {...attributes}
+            {...listeners}
+            size="sm"
+            aria-label="Drag"
+            display="none"
+            icon={<Move size={20} />}
+            _groupHover={{ display: "inline-flex" }}
+          />
         </Flex>
         <Text opacity="0.5">
           Edited{" "}
