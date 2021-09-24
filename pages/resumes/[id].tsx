@@ -7,25 +7,31 @@ import {
   TabPanels,
   TabPanel,
   Tab,
+  Text,
+  Center,
+  Button,
+  Spinner,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useMediaQuery, useIsomorphicLayoutEffect } from "@react-hookz/web";
+import * as R from "ramda";
+import Link from "next/link";
 
-import Sections from "../components/sections/Sections";
-import Templates from "../components/templates/Templates";
-import Header from "../components/builder/Header";
-import HeaderMobile from "../components/builder/HeaderMobile";
-import Document from "../components/builder/Document";
-import DocumentMobile from "../components/builder/DocumentMobile";
+import Sections from "../../components/sections/Sections";
+import Templates from "../../components/templates/Templates";
+import Header from "../../components/builder/Header";
+import HeaderMobile from "../../components/builder/HeaderMobile";
+import Document from "../../components/builder/Document";
+import DocumentMobile from "../../components/builder/DocumentMobile";
 
-import { DEFAULT_VALUES } from "../lib/constants";
-import useResume from "../hooks/useResume";
-import useAutoSaveToast from "../hooks/useAutoSaveToast";
+import { DEFAULT_VALUES } from "../../lib/constants";
+import useResume from "../../hooks/useResume";
+import useAutoSaveToast from "../../hooks/useAutoSaveToast";
 
-import { Resume } from "../types";
+import { Resume } from "../../types";
 
 function Builder() {
-  const [resume] = useResume();
+  const [resume, isLoading] = useResume();
   const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
   const [tabIndex, setTabIndex] = React.useState(0);
   const isWide = useMediaQuery("(min-width: 62em)");
@@ -38,10 +44,37 @@ function Builder() {
     }
   }, [isWide]);
 
+  if (isLoading) {
+    return (
+      <Center flexDirection="column" height="100vh" padding="4">
+        <Spinner />
+      </Center>
+    );
+  }
+
+  if (R.isNil(resume)) {
+    return (
+      <>
+        <Head>
+          <title>Resume not found - resumebuilder.dev</title>
+        </Head>
+        <Center flexDirection="column" height="100vh" padding="4">
+          <Text mb="2" fontSize="4xl">
+            404
+          </Text>
+          <Text marginBottom="4">We’re sorry. This resume was not found.</Text>
+          <Link href="/" passHref>
+            <Button>Return home</Button>
+          </Link>
+        </Center>
+      </>
+    );
+  }
+
   return (
     <>
       <Head>
-        <title>{resume?.title} - resumebuilder.dev</title>
+        <title>{resume.title} - resumebuilder.dev</title>
       </Head>
       <Header form={form} display={{ base: "none", lg: "block" }} />
       <Grid

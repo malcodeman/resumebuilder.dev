@@ -92,7 +92,7 @@ function ResumeItem(props: props) {
   };
   const toast = useToast();
   const { onCopy } = useClipboard(
-    utils.isBrowser ? `${window.location.href}${resume.id}` : ""
+    utils.isBrowser ? `${window.location.href}resumes/${resume.id}` : ""
   );
 
   function handleOnCopyLink() {
@@ -120,7 +120,7 @@ function ResumeItem(props: props) {
       direction="column"
       role="group"
     >
-      <Link href={`/${resume.id}`} passHref>
+      <Link href={`/resumes/${resume.id}`} passHref>
         <Box
           height="360px"
           mb="2"

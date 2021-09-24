@@ -1,3 +1,4 @@
+import React from "react";
 import { useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
 import * as R from "ramda";
@@ -13,7 +14,7 @@ type props = {
 
 function useResume(
   props: props = {}
-): [Resume, (nextResume: Resume) => void, () => void] {
+): [Resume, boolean, (nextResume: Resume) => void, () => void] {
   const {
     isolated = false,
     handleStorageEvent = true,
@@ -35,6 +36,7 @@ function useResume(
   const resume = R.isNil(resumes)
     ? undefined
     : R.find((item) => item.id === id, resumes);
+  const isLoading = R.isNil(id) || R.isNil(resumes);
 
   function setResume(nextResume: Resume) {
     const nextResumes = R.map((item) => {
@@ -51,7 +53,7 @@ function useResume(
     setResumes(nextResumes);
   }
 
-  return [resume, setResume, removeResume];
+  return [resume, isLoading, setResume, removeResume];
 }
 
 export default useResume;

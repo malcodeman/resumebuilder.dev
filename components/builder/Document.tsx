@@ -27,7 +27,7 @@ function Document(props: props) {
   const [isPdfViewer] = useLocalStorageValue("isPdfViewer", false, {
     initializeWithStorageValue: false,
   });
-  const [_resume, setResume] = useResume({ isolated: true });
+  const [_resume, _isLoading, setResume] = useResume({ isolated: true });
   const watch = useWatch({
     control: form.control,
     name: ["id", "meta.template", "about", "section"],

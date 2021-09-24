@@ -64,7 +64,7 @@ function ResumeNewButton() {
     };
     setResumes([...resumes, resume]);
     onClose();
-    router.push(`/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
   }
 
   return (
@@ -114,7 +114,7 @@ function ImportDataButton() {
     };
     setResumes([...resumes, resume]);
     onClose();
-    router.push(`/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
   }
 
   return (

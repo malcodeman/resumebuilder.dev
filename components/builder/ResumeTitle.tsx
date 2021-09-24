@@ -19,7 +19,7 @@ type props = HTMLChakraProps<"div"> & {
 
 function ResumeTitle(props: props) {
   const { form } = props;
-  const [resume, setResume] = useResume({ isolated: true });
+  const [resume, _isLoading, setResume] = useResume({ isolated: true });
 
   function handleOnIconChange(emoji: string) {
     form.setValue("icon", emoji);

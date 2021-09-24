@@ -123,7 +123,7 @@ function CopyLink() {
 function DeleteResume() {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [_resume, _setResume, removeResume] = useResume();
+  const [_resume, _isLoading, _setResume, removeResume] = useResume();
 
   function handleOnDelete() {
     removeResume();
