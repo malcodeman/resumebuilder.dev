@@ -46,8 +46,11 @@ function ResumeNewButton() {
 
   useKeyboardEvent(
     "n",
-    () => {
-      onOpen();
+    (e) => {
+      const isBody = e.target["tagName"] === "BODY";
+      if (isBody) {
+        onOpen();
+      }
     },
     [],
     { event: "keyup" }
