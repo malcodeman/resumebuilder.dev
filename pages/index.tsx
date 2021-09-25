@@ -42,7 +42,6 @@ import { SortableContext } from "@dnd-kit/sortable";
 import { useController, useForm } from "react-hook-form";
 
 import Layout from "../components/Layout";
-import NewResumeModal from "../components/resumes/NewResumeModal";
 import ResumeItem from "../components/resumes/ResumeItem";
 import ImportDataModal from "../components/ImportDataModal";
 
@@ -55,54 +54,45 @@ function ResumeNewButton() {
   const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
     initializeWithStorageValue: false,
   });
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useKeyboardEvent(
     "n",
     (e) => {
       const isBody = e.target["tagName"] === "BODY";
       if (isBody) {
-        onOpen();
+        handleOnSubmit();
       }
     },
     [],
     { event: "keyup" }
   );
 
-  function handleOnSubmit(data: { title: string }) {
+  function handleOnSubmit() {
     const resume = {
       ...DEFAULT_VALUES,
       id: nanoid(),
-      title: data.title,
+      title: "Untitled resume",
     };
     setResumes([...resumes, resume]);
-    onClose();
     router.push(`/resumes/${resume.id}`);
   }
 
   return (
-    <>
-      <Popover trigger="hover">
-        <PopoverTrigger>
-          <Button mr="-px" data-cy="new_resume_btn" onClick={onOpen}>
-            New
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent width="unset">
-          <PopoverBody display="inline-flex" alignItems="center">
-            <Text marginInlineEnd="2" fontSize="sm">
-              Press
-            </Text>
-            <Kbd>N</Kbd>
-          </PopoverBody>
-        </PopoverContent>
-      </Popover>
-      <NewResumeModal
-        isOpen={isOpen}
-        onClose={onClose}
-        onSubmit={handleOnSubmit}
-      />
-    </>
+    <Popover trigger="hover">
+      <PopoverTrigger>
+        <Button mr="-px" data-cy="new_resume_btn" onClick={handleOnSubmit}>
+          New
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent width="unset">
+        <PopoverBody display="inline-flex" alignItems="center">
+          <Text marginInlineEnd="2" fontSize="sm">
+            Press
+          </Text>
+          <Kbd>N</Kbd>
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
   );
 }
 
