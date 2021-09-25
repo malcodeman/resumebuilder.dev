@@ -13,6 +13,8 @@ import {
   Kbd,
   ButtonGroup,
   IconButton,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { Upload } from "react-feather";
 import { nanoid } from "nanoid";
@@ -200,7 +202,15 @@ function ResumeGrid() {
     }
   }
 
-  if (R.isEmpty(resumes) || R.isNil(resumes)) {
+  if (R.isNil(resumes)) {
+    return (
+      <Center>
+        <Spinner />
+      </Center>
+    );
+  }
+
+  if (R.isEmpty(resumes)) {
     return (
       <Flex flexDirection="column" alignItems="center" padding="4">
         <Text>No Resumes</Text>
@@ -208,6 +218,7 @@ function ResumeGrid() {
       </Flex>
     );
   }
+
   return (
     <Grid
       gap="8"
