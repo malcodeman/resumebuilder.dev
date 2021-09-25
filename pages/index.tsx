@@ -3,7 +3,6 @@ import Head from "next/head";
 import {
   Flex,
   Button,
-  useDisclosure,
   Grid,
   Popover,
   PopoverTrigger,
@@ -15,8 +14,19 @@ import {
   IconButton,
   Center,
   Spinner,
+  InputGroup,
+  InputLeftElement,
+  Input,
+  InputRightElement,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { Upload } from "react-feather";
+import {
+  Search,
+  Upload,
+  Grid as IconGrid,
+  List as IconList,
+  X as IconX,
+} from "react-feather";
 import { nanoid } from "nanoid";
 import { useKeyboardEvent, useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
@@ -29,6 +39,7 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
+import { useController, useForm } from "react-hook-form";
 
 import Layout from "../components/Layout";
 import NewResumeModal from "../components/resumes/NewResumeModal";
@@ -146,6 +157,25 @@ function ResumeGrid() {
       },
     })
   );
+  const form = useForm({
+    defaultValues: {
+      search: "",
+    },
+  });
+  const { field } = useController({ name: "search", control: form.control });
+  const searchInputRef = React.useRef(null);
+
+  useKeyboardEvent(
+    "s",
+    (e) => {
+      const isBody = e.target["tagName"] === "BODY";
+      if (isBody && searchInputRef.current) {
+        searchInputRef.current.focus();
+      }
+    },
+    [],
+    { event: "keyup" }
+  );
 
   function handleOnDelete(id: string) {
     const nextResumes = resumes.filter((item) => item.id !== id);
@@ -219,30 +249,86 @@ function ResumeGrid() {
     );
   }
 
+  const filteredResumes = R.filter(
+    (item) => R.includes(R.toLower(field.value), R.toLower(item.title)),
+    resumes
+  );
+
   return (
-    <Grid
-      gap="8"
-      gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
-      data-cy="resumes_grid"
-    >
-      <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
-        <SortableContext items={resumes}>
-          {R.map(
-            (item) => (
-              <ResumeItem
-                key={item.id}
-                resume={item}
-                onDelete={handleOnDelete}
-                onDuplicate={handleOnDuplicate}
-                onTitleChange={handleOnTitleChange}
-                onIconChange={handleOnIconChange}
+    <>
+      <Flex mb="4">
+        <InputGroup size="sm">
+          <InputLeftElement>
+            <Search size={16} />
+          </InputLeftElement>
+          <Input
+            {...field}
+            ref={searchInputRef}
+            placeholder={`Search ${resumes.length} resumes...`}
+            borderRadius="md"
+            variant="filled"
+          />
+          <InputRightElement>
+            {R.isEmpty(field.value) ? (
+              <Kbd>S</Kbd>
+            ) : (
+              <IconButton
+                size="xs"
+                aria-label="Clear"
+                icon={
+                  <IconX
+                    size={16}
+                    onClick={() => form.setValue("search", "")}
+                  />
+                }
               />
-            ),
-            resumes
-          )}
-        </SortableContext>
-      </DndContext>
-    </Grid>
+            )}
+          </InputRightElement>
+        </InputGroup>
+        <IconButton
+          display={["none", "inline-flex"]}
+          size="sm"
+          aria-label="Grid view"
+          ml="4"
+          mr="2"
+          icon={<IconGrid size={20} />}
+        />
+        <IconButton
+          isDisabled={true}
+          display={["none", "inline-flex"]}
+          size="sm"
+          aria-label="List view"
+          icon={<IconList size={20} />}
+        />
+      </Flex>
+      {R.isEmpty(filteredResumes) ? (
+        <Text>No resumes found</Text>
+      ) : (
+        <Grid
+          gap="8"
+          gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
+          data-cy="resumes_grid"
+        >
+          <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
+            <SortableContext items={filteredResumes}>
+              {R.map(
+                (item) => (
+                  <ResumeItem
+                    key={item.id}
+                    resume={item}
+                    onDelete={handleOnDelete}
+                    onDuplicate={handleOnDuplicate}
+                    onTitleChange={handleOnTitleChange}
+                    onIconChange={handleOnIconChange}
+                  />
+                ),
+                filteredResumes
+              )}
+            </SortableContext>
+          </DndContext>
+        </Grid>
+      )}
+    </>
   );
 }
 
