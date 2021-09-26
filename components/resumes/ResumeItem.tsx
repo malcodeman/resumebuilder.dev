@@ -14,6 +14,7 @@ import {
   useToast,
   useClipboard,
   useDisclosure,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import {
   Copy,
@@ -94,6 +95,10 @@ function ResumeItem(props: props) {
   const { onCopy } = useClipboard(
     utils.isBrowser ? `${window.location.href}resumes/${resume.id}` : ""
   );
+  const boxShadow = useColorModeValue(
+    "rgba(0, 0, 0, 0.05) 0 0 0 2px",
+    "rgba(255, 255, 255, 0.05) 0 0 0 2px"
+  );
 
   function handleOnCopyLink() {
     onCopy();
@@ -127,6 +132,7 @@ function ResumeItem(props: props) {
           borderRadius="lg"
           overflow="hidden"
           userSelect="none"
+          boxShadow={boxShadow}
           _hover={{ cursor: "pointer" }}
         >
           {getTemplate(resume.meta.template, {
