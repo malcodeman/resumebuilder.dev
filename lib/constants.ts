@@ -54,4 +54,28 @@ const DEFAULT_VALUES = {
   ],
 };
 
-export { IS_PROD, TEMPLATES, STANDARD_SECTION_DEFAULT_VALUES, DEFAULT_VALUES };
+const TEMPLATES_LIST = [
+  {
+    title: "Berlin",
+    template: Template.berlin,
+    description: "A clean and flexible resume template.",
+    src: "/templates/berlin.png",
+    tags: ["all", "creative"],
+  },
+  {
+    title: "Tokyo",
+    template: Template.tokyo,
+    description:
+      "Present your skills and experience with this minimal resume template.",
+    src: "/templates/tokyo.png",
+    tags: ["all", "simple", "professional"],
+  },
+];
+
+export {
+  IS_PROD,
+  TEMPLATES,
+  STANDARD_SECTION_DEFAULT_VALUES,
+  DEFAULT_VALUES,
+  TEMPLATES_LIST,
+};

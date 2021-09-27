@@ -18,27 +18,10 @@ import * as R from "ramda";
 
 import Layout from "../components/Layout";
 
-import { DEFAULT_VALUES } from "../lib/constants";
+import { DEFAULT_VALUES, TEMPLATES_LIST } from "../lib/constants";
 
 import { Resume, Template } from "../types";
 
-const TEMPLTES = [
-  {
-    title: "Berlin",
-    template: Template.berlin,
-    description: "A clean and flexible resume template.",
-    src: "/templates/berlin.png",
-    tags: ["all", "creative"],
-  },
-  {
-    title: "Tokyo",
-    template: Template.tokyo,
-    description:
-      "Present your skills and experience with this minimal resume template.",
-    src: "/templates/tokyo.png",
-    tags: ["all", "simple", "professional"],
-  },
-];
 const FILTERS = [
   {
     value: "all",
@@ -70,7 +53,7 @@ function Templates() {
   const [filter, setFilter] = React.useState(FILTERS[0].value);
   const filteredResumes = R.filter(
     (item) => R.includes(filter, item.tags),
-    TEMPLTES
+    TEMPLATES_LIST
   );
 
   function handleOnSubmit(template: Template) {
