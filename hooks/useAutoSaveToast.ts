@@ -40,8 +40,10 @@ function useAutoSaveToast(props: props) {
     }
 
     keyboardJs.bind(`ctrl + s`, handleOnSave);
+    keyboardJs.bind(`command + s`, handleOnSave);
     return () => {
       keyboardJs.unbind(`ctrl + s`, handleOnSave);
+      keyboardJs.bind(`command + s`, handleOnSave);
     };
   }, [keyboardJs, toast, description, duration, isClosable]);
 }
