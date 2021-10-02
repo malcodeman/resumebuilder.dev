@@ -81,6 +81,15 @@ type ChakraThemeConfig = {
 };
 type Register = UseFormRegister<Fields>;
 type Export = "pdf" | "json" | "html" | "png";
+type View = "grid" | "list";
 
-export type { Resume, ChakraThemeConfig, Register, Fields, Section, Export };
+export type {
+  Resume,
+  ChakraThemeConfig,
+  Register,
+  Fields,
+  Section,
+  Export,
+  View,
+};
 export { Template };

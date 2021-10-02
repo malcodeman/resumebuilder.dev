@@ -72,10 +72,16 @@ const TEMPLATES_LIST = [
   },
 ];
 
+const VIEWS = {
+  GRID: "grid",
+  LIST: "list",
+};
+
 export {
   IS_PROD,
   TEMPLATES,
   STANDARD_SECTION_DEFAULT_VALUES,
   DEFAULT_VALUES,
   TEMPLATES_LIST,
+  VIEWS,
 };

@@ -26,9 +26,14 @@ import {
   Grid as IconGrid,
   List as IconList,
   X as IconX,
+  Link as IconLink,
 } from "react-feather";
 import { nanoid } from "nanoid";
-import { useKeyboardEvent, useLocalStorageValue } from "@react-hookz/web";
+import {
+  useKeyboardEvent,
+  useLocalStorageValue,
+  useMediaQuery,
+} from "@react-hookz/web";
 import { useRouter } from "next/router";
 import * as R from "ramda";
 import {
@@ -40,14 +45,18 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import { useController, useForm } from "react-hook-form";
+import { formatDistanceToNow } from "date-fns";
+import Link from "next/link";
+import { Cell } from "react-table";
 
 import Layout from "../components/Layout";
 import ResumeItem from "../components/resumes/ResumeItem";
 import ImportDataModal from "../components/ImportDataModal";
+import Table from "../components/misc/Table";
 
 import { DEFAULT_VALUES } from "../lib/constants";
 
-import { Resume, Template, Fields } from "../types";
+import { Resume, Template, Fields, View } from "../types";
 
 function ResumeNewButton() {
   const router = useRouter();
@@ -154,6 +163,43 @@ function ResumeGrid() {
   });
   const { field } = useController({ name: "search", control: form.control });
   const searchInputRef = React.useRef(null);
+  const [view, setView] = React.useState<View>("grid");
+  const [hiddenColumns, setHiddenColumns] = React.useState([]);
+  const isSmallDevice = useMediaQuery("only screen and (max-width: 30em)");
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Title",
+        accessor: "title",
+      },
+      {
+        Header: "Edited",
+        accessor: "updatedAt",
+        Cell: function updatedAtCell(props: Cell) {
+          return (
+            <>
+              {formatDistanceToNow(props.value, {
+                addSuffix: true,
+              })}
+            </>
+          );
+        },
+      },
+      {
+        accessor: "id",
+        Cell: function idCell(props: Cell) {
+          return (
+            <Link href={`/resumes/${props.value}`} passHref>
+              <Button size="sm" leftIcon={<IconLink size={16} />}>
+                Open
+              </Button>
+            </Link>
+          );
+        },
+      },
+    ],
+    []
+  );
 
   useKeyboardEvent(
     "s",
@@ -166,6 +212,17 @@ function ResumeGrid() {
     [],
     { event: "keyup" }
   );
+
+  React.useEffect(() => {
+    if (isSmallDevice && view === "grid") {
+      setView("list");
+    }
+    if (isSmallDevice && view === "list") {
+      setHiddenColumns(["updatedAt"]);
+    } else {
+      setHiddenColumns([]);
+    }
+  }, [isSmallDevice, view]);
 
   function handleOnDelete(id: string) {
     const nextResumes = resumes.filter((item) => item.id !== id);
@@ -244,6 +301,46 @@ function ResumeGrid() {
     resumes
   );
 
+  function renderResumes() {
+    if (R.isEmpty(filteredResumes)) {
+      return <Text>No resumes found</Text>;
+    }
+    if (view === "grid") {
+      return (
+        <Grid
+          gap="8"
+          gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
+          data-cy="resumes_grid"
+        >
+          <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
+            <SortableContext items={filteredResumes}>
+              {R.map(
+                (item) => (
+                  <ResumeItem
+                    key={item.id}
+                    resume={item}
+                    onDelete={handleOnDelete}
+                    onDuplicate={handleOnDuplicate}
+                    onTitleChange={handleOnTitleChange}
+                    onIconChange={handleOnIconChange}
+                  />
+                ),
+                filteredResumes
+              )}
+            </SortableContext>
+          </DndContext>
+        </Grid>
+      );
+    }
+    return (
+      <Table
+        data={filteredResumes}
+        columns={columns}
+        hiddenColumns={hiddenColumns}
+      />
+    );
+  }
+
   return (
     <>
       <Flex mb="4">
@@ -282,42 +379,19 @@ function ResumeGrid() {
           ml="4"
           mr="2"
           icon={<IconGrid size={20} />}
+          onClick={() => setView("grid")}
+          isActive={view === "grid"}
         />
         <IconButton
-          isDisabled={true}
           display={["none", "inline-flex"]}
           size="sm"
           aria-label="List view"
           icon={<IconList size={20} />}
+          onClick={() => setView("list")}
+          isActive={view === "list"}
         />
       </Flex>
-      {R.isEmpty(filteredResumes) ? (
-        <Text>No resumes found</Text>
-      ) : (
-        <Grid
-          gap="8"
-          gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
-          data-cy="resumes_grid"
-        >
-          <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
-            <SortableContext items={filteredResumes}>
-              {R.map(
-                (item) => (
-                  <ResumeItem
-                    key={item.id}
-                    resume={item}
-                    onDelete={handleOnDelete}
-                    onDuplicate={handleOnDuplicate}
-                    onTitleChange={handleOnTitleChange}
-                    onIconChange={handleOnIconChange}
-                  />
-                ),
-                filteredResumes
-              )}
-            </SortableContext>
-          </DndContext>
-        </Grid>
-      )}
+      {renderResumes()}
     </>
   );
 }
