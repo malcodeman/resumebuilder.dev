@@ -1,4 +1,4 @@
-import { Accordion, Box, Button, useDisclosure } from "@chakra-ui/react";
+import { Accordion, Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useFieldArray, FormProvider, UseFormReturn } from "react-hook-form";
 import {
@@ -36,13 +36,19 @@ function SectionNewButton({ onSubmit }) {
 
   return (
     <>
-      <Box mb="4" paddingInlineStart="4" paddingInlineEnd="4">
+      <Box
+        marginTop={{ lg: "auto" }}
+        paddingInlineStart="4"
+        paddingInlineEnd="4"
+        paddingY="4"
+      >
         <Button
           size="sm"
           width="100%"
           variant="ghost"
           leftIcon={<Plus size={20} />}
           onClick={onOpen}
+          justifyContent="flex-start"
         >
           New section
         </Button>
@@ -106,8 +112,15 @@ function Sections(props: props) {
   }
 
   return (
-    <>
-      <Accordion defaultIndex={[0]} allowToggle reduceMotion mb="4">
+    <Flex flexDirection="column" overflowY="hidden">
+      <Accordion
+        defaultIndex={[0]}
+        allowToggle
+        reduceMotion
+        overflowY="auto"
+        paddingTop={{ base: "8" }}
+        style={{ scrollbarWidth: "thin" }}
+      >
         <FormProvider {...form}>
           <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
             <PersonalDetailsSection />
@@ -136,7 +149,7 @@ function Sections(props: props) {
         </FormProvider>
       </Accordion>
       <SectionNewButton onSubmit={handleOnSubmit} />
-    </>
+    </Flex>
   );
 }
 
