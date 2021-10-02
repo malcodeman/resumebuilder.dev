@@ -30,47 +30,75 @@ function PersonalDetailsSection() {
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>Title</FormLabel>
-              <Input size="sm" {...register("about.title")} />
+              <Input variant="filled" size="sm" {...register("about.title")} />
             </FormControl>
           </GridItem>
-          <FormControl>
-            <FormLabel>First name</FormLabel>
-            <Input size="sm" {...register("about.firstName")} />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Last name</FormLabel>
-            <Input size="sm" {...register("about.lastName")} />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Email</FormLabel>
-            <InputGroup size="sm">
-              <InputLeftElement pointerEvents="none">
-                <Mail size={20} />
-              </InputLeftElement>
-              <Input {...register("about.email")} />
-            </InputGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Phone</FormLabel>
-            <InputGroup size="sm">
-              <InputLeftElement pointerEvents="none">
-                <Phone size={20} />
-              </InputLeftElement>
-              <Input {...register("about.phone")} />
-            </InputGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>City</FormLabel>
-            <Input size="sm" {...register("about.city")} />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Country</FormLabel>
-            <Input size="sm" {...register("about.country")} />
-          </FormControl>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>First name</FormLabel>
+              <Input
+                variant="filled"
+                size="sm"
+                {...register("about.firstName")}
+              />
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>Last name</FormLabel>
+              <Input
+                variant="filled"
+                size="sm"
+                {...register("about.lastName")}
+              />
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <InputGroup size="sm">
+                <InputLeftElement>
+                  <Mail size={20} />
+                </InputLeftElement>
+                <Input variant="filled" {...register("about.email")} />
+              </InputGroup>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>Phone</FormLabel>
+              <InputGroup size="sm">
+                <InputLeftElement>
+                  <Phone size={20} />
+                </InputLeftElement>
+                <Input variant="filled" {...register("about.phone")} />
+              </InputGroup>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>City</FormLabel>
+              <Input variant="filled" size="sm" {...register("about.city")} />
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>Country</FormLabel>
+              <Input
+                variant="filled"
+                size="sm"
+                {...register("about.country")}
+              />
+            </FormControl>
+          </GridItem>
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>Summary</FormLabel>
-              <Textarea size="sm" {...register("about.summary")} />
+              <Textarea
+                variant="filled"
+                size="sm"
+                {...register("about.summary")}
+              />
             </FormControl>
           </GridItem>
         </Grid>

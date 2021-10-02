@@ -38,6 +38,7 @@ function TagListSectionBody(props: props) {
         <GridItem colSpan={2}>
           <FormControl>
             <Textarea
+              variant="filled"
               size="sm"
               {...register(`section.${index}.tags` as const)}
             />

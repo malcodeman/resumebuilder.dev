@@ -81,7 +81,7 @@ function StandardSectionBody(props: props) {
     transition,
   };
 
-  function onPointerDownHanlder(e: React.PointerEvent<HTMLDivElement>) {
+  function onPointerDownHandler(e: React.PointerEvent<HTMLDivElement>) {
     e.stopPropagation();
   }
 
@@ -105,12 +105,13 @@ function StandardSectionBody(props: props) {
               onDuplicate={() => onDuplicate(nestIndex)}
             />
             {isExpanded ? (
-              <AccordionPanel onPointerDown={onPointerDownHanlder}>
+              <AccordionPanel onPointerDown={onPointerDownHandler}>
                 <Grid templateColumns="1fr 1fr" gap="4">
                   <GridItem colSpan={2}>
                     <FormControl>
                       <FormLabel>{getTitleLabel(name)}</FormLabel>
                       <Input
+                        variant="filled"
                         size="sm"
                         {...register(
                           `section.${index}.nested.${nestIndex}.title`
@@ -122,6 +123,7 @@ function StandardSectionBody(props: props) {
                     <FormControl>
                       <FormLabel>{getSubtitleLabel(name)}</FormLabel>
                       <Input
+                        variant="filled"
                         size="sm"
                         {...register(
                           `section.${index}.nested.${nestIndex}.subtitle` as const
@@ -129,46 +131,59 @@ function StandardSectionBody(props: props) {
                       />
                     </FormControl>
                   </GridItem>
-                  <FormControl>
-                    <FormLabel>Website</FormLabel>
-                    <Input
-                      size="sm"
-                      {...register(
-                        `section.${index}.nested.${nestIndex}.website` as const
-                      )}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>City</FormLabel>
-                    <Input
-                      size="sm"
-                      {...register(
-                        `section.${index}.nested.${nestIndex}.city` as const
-                      )}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Start date</FormLabel>
-                    <Input
-                      size="sm"
-                      {...register(
-                        `section.${index}.nested.${nestIndex}.startDate` as const
-                      )}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>End date</FormLabel>
-                    <Input
-                      size="sm"
-                      {...register(
-                        `section.${index}.nested.${nestIndex}.endDate` as const
-                      )}
-                    />
-                  </FormControl>
+                  <GridItem colSpan={{ base: 2, md: 1 }}>
+                    <FormControl>
+                      <FormLabel>Website</FormLabel>
+                      <Input
+                        variant="filled"
+                        size="sm"
+                        {...register(
+                          `section.${index}.nested.${nestIndex}.website` as const
+                        )}
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem colSpan={{ base: 2, md: 1 }}>
+                    <FormControl>
+                      <FormLabel>City</FormLabel>
+                      <Input
+                        variant="filled"
+                        size="sm"
+                        {...register(
+                          `section.${index}.nested.${nestIndex}.city` as const
+                        )}
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem colSpan={{ base: 2, md: 1 }}>
+                    <FormControl>
+                      <FormLabel>Start date</FormLabel>
+                      <Input
+                        variant="filled"
+                        size="sm"
+                        {...register(
+                          `section.${index}.nested.${nestIndex}.startDate` as const
+                        )}
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem colSpan={{ base: 2, md: 1 }}>
+                    <FormControl>
+                      <FormLabel>End date</FormLabel>
+                      <Input
+                        variant="filled"
+                        size="sm"
+                        {...register(
+                          `section.${index}.nested.${nestIndex}.endDate` as const
+                        )}
+                      />
+                    </FormControl>
+                  </GridItem>
                   <GridItem colSpan={2}>
                     <FormControl>
                       <FormLabel>Description</FormLabel>
                       <Textarea
+                        variant="filled"
                         size="sm"
                         {...register(
                           `section.${index}.nested.${nestIndex}.description` as const
