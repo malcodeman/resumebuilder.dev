@@ -15,6 +15,7 @@ import {
   useClipboard,
   useDisclosure,
   useColorModeValue,
+  useInterval,
 } from "@chakra-ui/react";
 import {
   Copy,
@@ -29,6 +30,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useRerender } from "@react-hookz/web";
 
 import EmojiPicker from "../misc/EmojiPicker";
 import DeleteResumeModal from "./DeleteResumeModal";
@@ -57,6 +59,24 @@ function DeleteResume(props: { onDelete: () => void }) {
         onSubmit={onDelete}
       />
     </>
+  );
+}
+
+function UpdatedAtText(props: { updatedAt: number }) {
+  const { updatedAt } = props;
+  const rerender = useRerender();
+
+  useInterval(() => {
+    rerender();
+  }, 60000);
+
+  return (
+    <Text opacity="0.5">
+      Edited{" "}
+      {formatDistanceToNow(updatedAt, {
+        addSuffix: true,
+      })}
+    </Text>
   );
 }
 
@@ -200,12 +220,7 @@ function ResumeItem(props: props) {
             _groupHover={{ display: "inline-flex" }}
           />
         </Flex>
-        <Text opacity="0.5">
-          Edited{" "}
-          {formatDistanceToNow(resume.updatedAt, {
-            addSuffix: true,
-          })}
-        </Text>
+        <UpdatedAtText updatedAt={resume.updatedAt} />
       </Box>
     </Flex>
   );
