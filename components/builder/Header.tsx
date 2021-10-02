@@ -4,20 +4,49 @@ import {
   Flex,
   HTMLChakraProps,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { UseFormReturn } from "react-hook-form";
+import { Layers as IconLayers } from "react-feather";
 
 import Logo from "../Logo";
 import HeaderPopover from "./HeaderPopover";
 import ResumeTitle from "./ResumeTitle";
+import TemplatesModal from "./TemplatesModal";
 
 import utils from "../../lib/utils";
 
-import { Resume, Fields } from "../../types";
+import { Resume, Fields, Template } from "../../types";
 
 type props = HTMLChakraProps<"div"> & {
   form: UseFormReturn<Resume, object>;
 };
+
+function ShowTemplates(props: {
+  values: Resume;
+  onChangeTemplate: (nextTemplate: Template) => void;
+}) {
+  const { values, onChangeTemplate } = props;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <Button
+        mr="2"
+        size="sm"
+        leftIcon={<IconLayers size={20} />}
+        onClick={onOpen}
+      >
+        Templates
+      </Button>
+      <TemplatesModal
+        isOpen={isOpen}
+        values={values}
+        onClose={onClose}
+        onChange={onChangeTemplate}
+      />
+    </>
+  );
+}
 
 function Header(props: props) {
   const { form } = props;
@@ -30,6 +59,10 @@ function Header(props: props) {
   function handleOnImport(fields: Fields) {
     form.setValue("about", fields.about);
     form.setValue("section", fields.section);
+  }
+
+  function handleOnChangeTemplate(nextTemplate: Template) {
+    form.setValue("meta.template", nextTemplate);
   }
 
   return (
@@ -49,6 +82,10 @@ function Header(props: props) {
         <Logo />
         <ResumeTitle form={form} />
         <Flex>
+          <ShowTemplates
+            values={form.getValues()}
+            onChangeTemplate={handleOnChangeTemplate}
+          />
           <Button
             mr="2"
             size="sm"
@@ -57,7 +94,9 @@ function Header(props: props) {
             Export PDF
           </Button>
           <HeaderPopover
+            values={form.getValues()}
             onImport={handleOnImport}
+            onChangeTemplate={handleOnChangeTemplate}
             onPdfExport={() => utils.exportAsPdf(form.getValues())}
             onJsonExport={() => utils.exportAsJson(form.getValues())}
             onHtmlExport={() => utils.exportAsHtml(form.getValues())}

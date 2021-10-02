@@ -14,23 +14,33 @@ import {
   useDisclosure,
   useClipboard,
 } from "@chakra-ui/react";
-import { Download, Link, MoreHorizontal, Upload, Trash2 } from "react-feather";
+import {
+  Download,
+  Link,
+  MoreHorizontal,
+  Upload,
+  Trash2,
+  Layers as IconLayers,
+} from "react-feather";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
 
 import ImportDataModal from "../ImportDataModal";
 import ExportResumeModal from "./ExportResumeModal";
 import DeleteResumeModal from "../resumes/DeleteResumeModal";
+import TemplatesModal from "./TemplatesModal";
 
 import utils from "../../lib/utils";
 import useResume from "../../hooks/useResume";
 
-import { Fields } from "../../types";
+import { Fields, Resume, Template } from "../../types";
 
 const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
 type props = {
+  values: Resume;
   onImport: (fields: Fields) => void;
+  onChangeTemplate: (nextTemplate: Template) => void;
   onPdfExport: () => void;
   onJsonExport: () => void;
   onHtmlExport: () => void;
@@ -100,6 +110,33 @@ function PdfViewer() {
         id="is-pdf-viewer"
       />
     </FormControl>
+  );
+}
+
+function ShowTemplates(props: {
+  values: Resume;
+  onChangeTemplate: (nextTemplate: Template) => void;
+}) {
+  const { values, onChangeTemplate } = props;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <Button
+        size="sm"
+        mb="2"
+        justifyContent="flex-start"
+        leftIcon={<IconLayers size={20} />}
+        onClick={onOpen}
+      >
+        Templates
+      </Button>
+      <TemplatesModal
+        isOpen={isOpen}
+        values={values}
+        onClose={onClose}
+        onChange={onChangeTemplate}
+      />
+    </>
   );
 }
 
@@ -200,8 +237,15 @@ function ExportResume(props: {
 }
 
 function HeaderPopover(props: props) {
-  const { onImport, onPdfExport, onJsonExport, onHtmlExport, onPngExport } =
-    props;
+  const {
+    values,
+    onImport,
+    onPdfExport,
+    onJsonExport,
+    onHtmlExport,
+    onPngExport,
+    onChangeTemplate,
+  } = props;
   return (
     <Popover>
       {({ isOpen }) => (
@@ -245,7 +289,14 @@ function HeaderPopover(props: props) {
                 <FullWidth />
                 <Divider marginY="2" />
                 <PdfViewer />
-                <Divider marginY="2" />
+                <Divider
+                  marginY="2"
+                  display={{ base: "none", lg: "initial" }}
+                />
+                <ShowTemplates
+                  values={values}
+                  onChangeTemplate={onChangeTemplate}
+                />
                 <CopyLink />
                 <DeleteResume />
                 <Divider marginY="2" />

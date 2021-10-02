@@ -66,6 +66,7 @@ function Builder() {
         <Box
           overflowY="auto"
           display={{ base: "none", lg: "block" }}
+          paddingTop={{ base: "8" }}
           style={{ scrollbarWidth: "thin" }}
         >
           <Document form={form} />

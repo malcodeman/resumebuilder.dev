@@ -15,7 +15,7 @@ import ResumeTitle from "./ResumeTitle";
 
 import utils from "../../lib/utils";
 
-import { Resume, Fields } from "../../types";
+import { Resume, Fields, Template } from "../../types";
 
 type props = HTMLChakraProps<"div"> & {
   form: UseFormReturn<Resume, object>;
@@ -32,6 +32,10 @@ function HeaderMobile(props: props) {
   function handleOnImport(fields: Fields) {
     form.setValue("about", fields.about);
     form.setValue("section", fields.section);
+  }
+
+  function handleOnChangeTemplate(nextTemplate: Template) {
+    form.setValue("meta.template", nextTemplate);
   }
 
   return (
@@ -57,7 +61,9 @@ function HeaderMobile(props: props) {
           </NavLink>
           <ResumeTitle form={form} marginX="2" />
           <HeaderPopover
+            values={form.getValues()}
             onImport={handleOnImport}
+            onChangeTemplate={handleOnChangeTemplate}
             onPdfExport={() => utils.exportAsPdf(form.getValues())}
             onJsonExport={() => utils.exportAsJson(form.getValues())}
             onHtmlExport={() => utils.exportAsHtml(form.getValues())}
