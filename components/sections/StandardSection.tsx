@@ -32,6 +32,7 @@ type props = {
   index: number;
   label: string;
   name: Section;
+  isDragDisabled: boolean;
   remove: (index: number) => void;
   append: (
     value: Partial<any> | Partial<any>[],
@@ -40,7 +41,7 @@ type props = {
 };
 
 function StandardSection(props: props) {
-  const { id, index, label, name, remove, append } = props;
+  const { id, index, label, name, isDragDisabled, remove, append } = props;
   const { control, getValues, reset } = useFormContext<Resume>();
   const {
     fields: fieldsNested,
@@ -58,7 +59,7 @@ function StandardSection(props: props) {
     transition,
     isDragging,
     setNodeRef,
-  } = useSortable({ id });
+  } = useSortable({ id, disabled: isDragDisabled });
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
@@ -131,6 +132,7 @@ function StandardSection(props: props) {
                         index={index}
                         nestIndex={nestIndex}
                         name={name}
+                        isDragDisabled={isDragDisabled}
                         onDuplicate={() =>
                           appendNested(
                             getValues(`section.${index}.nested.${nestIndex}`)

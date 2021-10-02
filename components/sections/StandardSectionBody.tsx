@@ -22,6 +22,7 @@ type props = {
   index: number;
   nestIndex: number;
   name: Section;
+  isDragDisabled: boolean;
   onDuplicate: (index: number) => void;
   onRemove: (index: number) => void;
 };
@@ -64,7 +65,8 @@ function getSubtitleLabel(name: Section) {
 }
 
 function StandardSectionBody(props: props) {
-  const { id, index, nestIndex, name, onRemove, onDuplicate } = props;
+  const { id, index, nestIndex, name, isDragDisabled, onDuplicate, onRemove } =
+    props;
   const {
     attributes,
     listeners,
@@ -72,7 +74,7 @@ function StandardSectionBody(props: props) {
     transition,
     isDragging,
     setNodeRef,
-  } = useSortable({ id });
+  } = useSortable({ id, disabled: isDragDisabled });
   const { register } = useFormContext();
   const style = {
     transform: CSS.Translate.toString(transform),

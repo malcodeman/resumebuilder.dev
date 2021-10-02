@@ -12,7 +12,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useUpdateEffect } from "@react-hookz/web";
+import { useUpdateEffect, useMediaQuery } from "@react-hookz/web";
 import * as R from "ramda";
 
 import PersonalDetailsSection from "../../components/sections/PersonalDetailsSection";
@@ -80,6 +80,7 @@ function Sections(props: props) {
       },
     })
   );
+  const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
 
   useUpdateEffect(() => {
     form.reset({ ...resume });
@@ -135,6 +136,7 @@ function Sections(props: props) {
                   id: item.id,
                   label: item.label,
                   name: item.name,
+                  isDragDisabled: isSmallDevice,
                   remove: fieldArray.remove,
                   append: fieldArray.append,
                 };

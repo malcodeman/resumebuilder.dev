@@ -13,6 +13,7 @@ type props = {
   index: number;
   label: string;
   name: Section;
+  isDragDisabled: boolean;
   remove: (index: number) => void;
   append: (
     value: Partial<any> | Partial<any>[],
@@ -21,7 +22,7 @@ type props = {
 };
 
 function TagListSection(props: props) {
-  const { id, index, label, name, remove, append } = props;
+  const { id, index, label, name, isDragDisabled, remove, append } = props;
   const {
     attributes,
     listeners,
@@ -29,7 +30,7 @@ function TagListSection(props: props) {
     transition,
     isDragging,
     setNodeRef,
-  } = useSortable({ id });
+  } = useSortable({ id, disabled: isDragDisabled });
   const { getValues } = useFormContext();
   const style = {
     transform: CSS.Translate.toString(transform),
