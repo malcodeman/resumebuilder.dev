@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import * as R from "ramda";
+import { useMediaQuery } from "@react-hookz/web";
 
 import { Export } from "../../types";
 
@@ -39,6 +40,7 @@ function ExportResumeModal(props: props) {
     onHtmlExport,
     onPngExport,
   } = props;
+  const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
 
   function handleOnSubmit(format: Export) {
     switch (format) {
@@ -54,6 +56,13 @@ function ExportResumeModal(props: props) {
     }
   }
 
+  function getIsDisabled(item: Export) {
+    if (item === "png" && isSmallDevice) {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -65,12 +74,13 @@ function ExportResumeModal(props: props) {
             <Text mb="2">Choose export format.</Text>
             <Grid gridTemplateColumns="1fr 1fr" gap="4">
               {R.map((item) => {
+                const isDisabled = getIsDisabled(item.value);
                 return (
                   <Button
                     key={item.label}
                     variant="outline"
                     size="sm"
-                    isDisabled={item.isDisabled}
+                    isDisabled={isDisabled}
                     onClick={() => handleOnSubmit(item.value)}
                   >
                     {item.label}
