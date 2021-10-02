@@ -14,12 +14,12 @@ import {
 import * as R from "ramda";
 import { ChevronLeft } from "react-feather";
 
-import FileUploader from "./misc/FileUploader";
+import FileUploader from "../misc/FileUploader";
 
-import parser from "../lib/parser";
-import utils from "../lib/utils";
+import parser from "../../lib/parser";
+import utils from "../../lib/utils";
 
-import { Fields } from "../types";
+import { Fields } from "../../types";
 
 type props = {
   isOpen: boolean;

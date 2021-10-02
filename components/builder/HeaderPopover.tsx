@@ -25,7 +25,7 @@ import {
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
 
-import ImportDataModal from "../ImportDataModal";
+import ImportDataModal from "../resumes/ImportDataModal";
 import ExportResumeModal from "./ExportResumeModal";
 import DeleteResumeModal from "../resumes/DeleteResumeModal";
 import TemplatesModal from "./TemplatesModal";

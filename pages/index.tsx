@@ -51,7 +51,7 @@ import { Cell } from "react-table";
 
 import Layout from "../components/Layout";
 import ResumeItem from "../components/resumes/ResumeItem";
-import ImportDataModal from "../components/ImportDataModal";
+import ImportDataModal from "../components/resumes/ImportDataModal";
 import Table from "../components/misc/Table";
 
 import { DEFAULT_VALUES } from "../lib/constants";
