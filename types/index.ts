@@ -41,15 +41,17 @@ type Fields = {
     }[];
   }[];
 };
+type Design = {
+  template: Template;
+  spacing: number;
+};
 type Resume = {
   id: string;
   title: string;
   icon: string;
   createdAt: number;
   updatedAt: number;
-  meta: {
-    template: Template;
-  };
+  design: Design;
   about: {
     title: string;
     firstName: string;
@@ -91,5 +93,6 @@ export type {
   Section,
   Export,
   View,
+  Design,
 };
 export { Template };

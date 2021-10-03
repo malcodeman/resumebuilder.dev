@@ -120,8 +120,9 @@ function ImportDataButton() {
       icon: "",
       createdAt: Date.now(),
       updatedAt: Date.now(),
-      meta: {
+      design: {
         template: Template.berlin,
+        spacing: 1,
       },
     };
     setResumes([...resumes, resume]);

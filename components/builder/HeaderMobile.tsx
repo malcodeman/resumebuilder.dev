@@ -35,7 +35,7 @@ function HeaderMobile(props: props) {
   }
 
   function handleOnChangeTemplate(nextTemplate: Template) {
-    form.setValue("meta.template", nextTemplate);
+    form.setValue("design.template", nextTemplate);
   }
 
   return (

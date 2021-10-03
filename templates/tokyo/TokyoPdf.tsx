@@ -22,57 +22,63 @@ Font.register({
 import utils from "../../lib/utils";
 import theme from "../theme";
 
-import { Fields } from "../../types";
+import { Design, Fields } from "../../types";
 
-function TokyoPdf(props: Fields) {
-  const { about, section } = props;
+type props = {
+  design: Design;
+  fields: Fields;
+};
+
+function TokyoPdf(props: props) {
+  const { design, fields } = props;
+  const { about, section } = fields;
   const styles = StyleSheet.create({
     page: {
       lineHeight: 1,
       height: "100%",
-      paddingTop: 20,
-      paddingLeft: 40,
-      paddingRight: 40,
-      paddingBottom: 20,
+      paddingTop: 20 * design.spacing,
+      paddingLeft: 40 * design.spacing,
+      paddingRight: 40 * design.spacing,
+      paddingBottom: 20 * design.spacing,
       color: "#323336",
       fontFamily: "Roboto",
       backgroundColor: "#fff",
-      fontSize: theme.fontSize.xs,
+      fontSize: theme.fontSize.xs * design.spacing,
     },
     header: {
-      marginBottom: 40,
+      marginBottom: 40 * design.spacing,
       textAlign: "center",
       textTransform: "uppercase",
     },
     name: {
       fontWeight: 700,
-      marginBottom: 20,
+      marginBottom: 20 * design.spacing,
       textTransform: "uppercase",
-      fontSize: theme.fontSize["2xl"],
+      fontSize: theme.fontSize["2xl"] * design.spacing,
     },
     text: {
-      marginBottom: 4,
+      marginBottom: 4 * design.spacing,
     },
     container: {
       display: "flex",
       flexDirection: "row",
     },
     leftColumn: {
-      width: 200,
-      paddingRight: 20,
+      width: 200 * design.spacing,
+      paddingRight: 20 * design.spacing,
       textAlign: "center",
     },
     rightColumn: {
       width: "100%",
     },
     profile: {
-      marginBottom: 16,
+      marginBottom: 16 * design.spacing,
     },
     sectionLabel: {
       fontWeight: 700,
-      marginBottom: 10,
+      marginBottom: 10 * design.spacing,
       textTransform: "uppercase",
-      fontSize: theme.fontSize.xs,
+      fontSize: theme.fontSize.xs * design.spacing,
     },
     summary: {
       lineHeight: 1.4,
@@ -80,25 +86,25 @@ function TokyoPdf(props: Fields) {
     sectionItem: {
       display: "flex",
       flexDirection: "column",
-      marginBottom: 16,
+      marginBottom: 16 * design.spacing,
     },
     sectionTitle: {
       fontWeight: 700,
-      marginBottom: 8,
-      fontSize: theme.fontSize.sm,
+      marginBottom: 8 * design.spacing,
+      fontSize: theme.fontSize.sm * design.spacing,
     },
     date: {
-      marginBottom: 8,
+      marginBottom: 8 * design.spacing,
       color: "#707678",
     },
     description: {
       lineHeight: 1.4,
     },
     list: {
-      marginBottom: 16,
+      marginBottom: 16 * design.spacing,
     },
     listItem: {
-      marginBottom: 8,
+      marginBottom: 8 * design.spacing,
     },
   });
 

@@ -1,10 +1,16 @@
 import utils from "../../lib/utils";
 import theme from "../theme";
 
-import { Fields } from "../../types";
+import { Design, Fields } from "../../types";
 
-function BerlinReact(props: Fields) {
-  const { about, section } = props;
+type props = {
+  design: Design;
+  fields: Fields;
+};
+
+function BerlinReact(props: props) {
+  const { design, fields } = props;
+  const { about, section } = fields;
   const styles = {
     page: {
       lineHeight: 1,
@@ -13,11 +19,11 @@ function BerlinReact(props: Fields) {
       position: "relative",
       fontFamily: `'Roboto', sans-serif`,
       backgroundColor: "#fff",
-      fontSize: utils.pt2px(theme.fontSize.xs),
-      paddingTop: utils.pt2px(40),
-      paddingRight: utils.pt2px(80),
-      paddingBottom: utils.pt2px(40),
-      paddingLeft: utils.pt2px(80),
+      fontSize: utils.pt2px(theme.fontSize.xs * design.spacing),
+      paddingTop: utils.pt2px(40 * design.spacing),
+      paddingRight: utils.pt2px(80 * design.spacing),
+      paddingBottom: utils.pt2px(40 * design.spacing),
+      paddingLeft: utils.pt2px(80 * design.spacing),
     },
     initials: {
       position: "absolute",
@@ -25,28 +31,28 @@ function BerlinReact(props: Fields) {
       textTransform: "uppercase",
       backgroundColor: "#43f398",
       fontWeight: 400,
-      left: utils.pt2px(20),
-      top: utils.pt2px(20),
-      paddingTop: utils.pt2px(5),
-      paddingLeft: utils.pt2px(8),
-      paddingRight: utils.pt2px(8),
-      paddingBottom: utils.pt2px(5),
+      left: utils.pt2px(20 * design.spacing),
+      top: utils.pt2px(20 * design.spacing),
+      paddingTop: utils.pt2px(5 * design.spacing),
+      paddingLeft: utils.pt2px(8 * design.spacing),
+      paddingRight: utils.pt2px(8 * design.spacing),
+      paddingBottom: utils.pt2px(5 * design.spacing),
     },
     header: {
-      marginBottom: utils.pt2px(16),
+      marginBottom: utils.pt2px(16 * design.spacing),
     },
     name: {
-      fontSize: utils.pt2px(theme.fontSize["2xl"]),
-      marginBottom: utils.pt2px(20),
+      fontSize: utils.pt2px(theme.fontSize["2xl"] * design.spacing),
+      marginBottom: utils.pt2px(20 * design.spacing),
       textTransform: "uppercase",
       fontWeight: 700,
     },
     title: {
-      marginBottom: utils.pt2px(10),
+      marginBottom: utils.pt2px(10 * design.spacing),
     },
     details: {
       color: "#707678",
-      marginBottom: utils.pt2px(10),
+      marginBottom: utils.pt2px(10 * design.spacing),
     },
     summary: {
       lineHeight: 1.4,
@@ -55,25 +61,25 @@ function BerlinReact(props: Fields) {
     sectionLabel: {
       color: "#707678",
       textTransform: "uppercase",
-      marginBottom: utils.pt2px(10),
-      letterSpacing: 1,
+      marginBottom: utils.pt2px(10 * design.spacing),
+      letterSpacing: 1 * design.spacing,
       fontWeight: 700,
     },
     sectionItem: {
       display: "flex",
       flexDirection: "column",
-      marginBottom: utils.pt2px(16),
+      marginBottom: utils.pt2px(16 * design.spacing),
     },
     sectionTitle: {
       textTransform: "uppercase",
-      fontSize: utils.pt2px(theme.fontSize.sm),
-      letterSpacing: 0.06,
+      fontSize: utils.pt2px(theme.fontSize.sm * design.spacing),
+      letterSpacing: 0.06 * design.spacing,
       fontWeight: 700,
-      marginBottom: utils.pt2px(8),
+      marginBottom: utils.pt2px(8 * design.spacing),
     },
     subtitle: {
       color: "#707678",
-      marginBottom: utils.pt2px(8),
+      marginBottom: utils.pt2px(8 * design.spacing),
     },
     description: {
       lineHeight: 1.4,
@@ -82,16 +88,16 @@ function BerlinReact(props: Fields) {
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
-      marginBottom: utils.pt2px(16),
+      marginBottom: utils.pt2px(16 * design.spacing),
     },
     listItem: {
       backgroundColor: "#f1f5f7",
-      marginRight: utils.pt2px(4),
-      marginBottom: utils.pt2px(4),
-      paddingLeft: utils.pt2px(12),
-      paddingTop: utils.pt2px(6),
-      paddingRight: utils.pt2px(12),
-      paddingBottom: utils.pt2px(6),
+      marginRight: utils.pt2px(4 * design.spacing),
+      marginBottom: utils.pt2px(4 * design.spacing),
+      paddingLeft: utils.pt2px(12 * design.spacing),
+      paddingTop: utils.pt2px(6 * design.spacing),
+      paddingRight: utils.pt2px(12 * design.spacing),
+      paddingBottom: utils.pt2px(6 * design.spacing),
     },
   } as const;
 

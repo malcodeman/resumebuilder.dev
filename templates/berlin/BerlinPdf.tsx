@@ -16,10 +16,16 @@ Font.register({
 import utils from "../../lib/utils";
 import theme from "../theme";
 
-import { Fields } from "../../types";
+import { Design, Fields } from "../../types";
 
-function BerlinPdf(props: Fields) {
-  const { about, section } = props;
+type props = {
+  design: Design;
+  fields: Fields;
+};
+
+function BerlinPdf(props: props) {
+  const { design, fields } = props;
+  const { about, section } = fields;
   const styles = StyleSheet.create({
     page: {
       lineHeight: 1,
@@ -28,11 +34,11 @@ function BerlinPdf(props: Fields) {
       position: "relative",
       fontFamily: "Roboto",
       backgroundColor: "#fff",
-      fontSize: theme.fontSize.xs,
-      paddingTop: 40,
-      paddingRight: 80,
-      paddingBottom: 40,
-      paddingLeft: 80,
+      fontSize: theme.fontSize.xs * design.spacing,
+      paddingTop: 40 * design.spacing,
+      paddingRight: 80 * design.spacing,
+      paddingBottom: 40 * design.spacing,
+      paddingLeft: 80 * design.spacing,
     },
     initials: {
       position: "absolute",
@@ -40,28 +46,28 @@ function BerlinPdf(props: Fields) {
       textTransform: "uppercase",
       backgroundColor: "#43f398",
       fontWeight: 400,
-      left: 20,
-      top: 20,
-      paddingTop: 5,
-      paddingLeft: 8,
-      paddingRight: 8,
-      paddingBottom: 5,
+      left: 20 * design.spacing,
+      top: 20 * design.spacing,
+      paddingTop: 5 * design.spacing,
+      paddingLeft: 8 * design.spacing,
+      paddingRight: 8 * design.spacing,
+      paddingBottom: 5 * design.spacing,
     },
     header: {
-      marginBottom: 16,
+      marginBottom: 16 * design.spacing,
     },
     name: {
-      fontSize: theme.fontSize["2xl"],
-      marginBottom: 20,
+      fontSize: theme.fontSize["2xl"] * design.spacing,
+      marginBottom: 20 * design.spacing,
       textTransform: "uppercase",
       fontWeight: 700,
     },
     title: {
-      marginBottom: 10,
+      marginBottom: 10 * design.spacing,
     },
     details: {
       color: "#707678",
-      marginBottom: 10,
+      marginBottom: 10 * design.spacing,
     },
     summary: {
       lineHeight: 1.4,
@@ -70,25 +76,25 @@ function BerlinPdf(props: Fields) {
     sectionLabel: {
       color: "#707678",
       textTransform: "uppercase",
-      marginBottom: 10,
-      letterSpacing: 1,
+      marginBottom: 10 * design.spacing,
+      letterSpacing: 1 * design.spacing,
       fontWeight: 700,
     },
     sectionItem: {
       display: "flex",
       flexDirection: "column",
-      marginBottom: 16,
+      marginBottom: 16 * design.spacing,
     },
     sectionTitle: {
       textTransform: "uppercase",
-      fontSize: theme.fontSize.sm,
-      letterSpacing: 0.06,
+      fontSize: theme.fontSize.sm * design.spacing,
+      letterSpacing: 0.06 * design.spacing,
       fontWeight: 700,
-      marginBottom: 8,
+      marginBottom: 8 * design.spacing,
     },
     subtitle: {
       color: "#707678",
-      marginBottom: 8,
+      marginBottom: 8 * design.spacing,
     },
     description: {
       lineHeight: 1.4,
@@ -97,16 +103,16 @@ function BerlinPdf(props: Fields) {
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
-      marginBottom: 16,
+      marginBottom: 16 * design.spacing,
     },
     listItem: {
       backgroundColor: "#f1f5f7",
-      marginRight: 4,
-      marginBottom: 4,
-      paddingLeft: 12,
-      paddingTop: 6,
-      paddingRight: 12,
-      paddingBottom: 6,
+      marginRight: 4 * design.spacing,
+      marginBottom: 4 * design.spacing,
+      paddingLeft: 12 * design.spacing,
+      paddingTop: 6 * design.spacing,
+      paddingRight: 12 * design.spacing,
+      paddingBottom: 6 * design.spacing,
     },
   });
 

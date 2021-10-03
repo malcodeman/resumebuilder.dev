@@ -31,7 +31,7 @@ async function exportAsPdf(resume: Resume) {
     about: resume.about,
     section: resume.section,
   };
-  const element = getTemplate(resume.meta.template, fields, true);
+  const element = getTemplate(resume.design, fields, true);
   const blob = await pdf(element).toBlob();
   saveAs(blob, resume.title);
 }
@@ -48,7 +48,7 @@ function exportAsHtml(resume: Resume) {
     about: resume.about,
     section: resume.section,
   };
-  const element = getTemplate(resume.meta.template, fields);
+  const element = getTemplate(resume.design, fields);
   const markup = ReactDOMServer.renderToStaticMarkup(element);
   const cssReset = CSSReset().props.styles;
   const data = `<style>${cssReset}</style>${markup}`;
@@ -61,7 +61,7 @@ function exportAsHtml(resume: Resume) {
 async function exportAsPng(resume: Resume) {
   try {
     const blob = await htmlToImage.toBlob(
-      document.getElementById(resume.meta.template)
+      document.getElementById(resume.design.template)
     );
     saveAs(blob, `${resume.title}.png`);
   } catch (error) {

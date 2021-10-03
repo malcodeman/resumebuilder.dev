@@ -62,10 +62,13 @@ function TemplatesModal(props: props) {
                   _hover={{ cursor: "pointer" }}
                   onClick={() => handleOnClick(item.template)}
                 >
-                  {getTemplate(item.template, {
-                    about: values.about,
-                    section: values.section,
-                  })}
+                  {getTemplate(
+                    { template: item.template, spacing: 0.6 },
+                    {
+                      about: values.about,
+                      section: values.section,
+                    }
+                  )}
                 </Box>
               );
             }, TEMPLATES_LIST)}

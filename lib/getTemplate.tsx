@@ -3,15 +3,23 @@ import BerlinPdf from "../templates/berlin/BerlinPdf";
 import TokyoReact from "../templates/tokyo/TokyoReact";
 import TokyoPdf from "../templates/tokyo/TokyoPdf";
 
-import { Fields, Template } from "../types";
+import { Design, Fields, Template } from "../types";
 
-function getTemplate(name: Template, fields: Fields, pdf?: boolean) {
-  switch (name) {
+function getTemplate(design: Design, fields: Fields, pdf?: boolean) {
+  switch (design.template) {
     default:
     case Template.berlin:
-      return pdf ? <BerlinPdf {...fields} /> : <BerlinReact {...fields} />;
+      return pdf ? (
+        <BerlinPdf design={design} fields={fields} />
+      ) : (
+        <BerlinReact design={design} fields={fields} />
+      );
     case Template.tokyo:
-      return pdf ? <TokyoPdf {...fields} /> : <TokyoReact {...fields} />;
+      return pdf ? (
+        <TokyoPdf design={design} fields={fields} />
+      ) : (
+        <TokyoReact design={design} fields={fields} />
+      );
   }
 }
 

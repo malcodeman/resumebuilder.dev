@@ -30,7 +30,7 @@ function Document(props: props) {
   const [_resume, _isLoading, setResume] = useResume({ isolated: true });
   const watch = useWatch({
     control: form.control,
-    name: ["id", "meta.template", "about", "section"],
+    name: ["id", "design", "about", "section"],
   });
   const id = watch[0];
   const fields = {

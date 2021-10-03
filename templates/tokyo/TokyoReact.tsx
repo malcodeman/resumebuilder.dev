@@ -1,57 +1,63 @@
 import utils from "../../lib/utils";
 import theme from "../theme";
 
-import { Fields } from "../../types";
+import { Design, Fields } from "../../types";
 
-function TokyoReact(props: Fields) {
-  const { about, section } = props;
+type props = {
+  design: Design;
+  fields: Fields;
+};
+
+function TokyoReact(props: props) {
+  const { design, fields } = props;
+  const { about, section } = fields;
   const styles = {
     page: {
       lineHeight: 1,
       height: "100%",
-      paddingTop: utils.pt2px(20),
-      paddingLeft: utils.pt2px(40),
-      paddingRight: utils.pt2px(40),
-      paddingBottom: utils.pt2px(20),
+      paddingTop: utils.pt2px(20 * design.spacing),
+      paddingLeft: utils.pt2px(40 * design.spacing),
+      paddingRight: utils.pt2px(40 * design.spacing),
+      paddingBottom: utils.pt2px(20 * design.spacing),
       color: "#323336",
       fontFamily: `'Roboto', sans-serif`,
       backgroundColor: "#fff",
-      fontSize: utils.pt2px(theme.fontSize.xs),
+      fontSize: utils.pt2px(theme.fontSize.xs * design.spacing),
     },
     header: {
-      marginBottom: utils.pt2px(40),
+      marginBottom: utils.pt2px(40 * design.spacing),
       textAlign: "center",
       textTransform: "uppercase",
     },
     name: {
       fontWeight: 700,
-      marginBottom: utils.pt2px(20),
+      marginBottom: utils.pt2px(20 * design.spacing),
       textTransform: "uppercase",
-      fontSize: utils.pt2px(theme.fontSize["2xl"]),
+      fontSize: utils.pt2px(theme.fontSize["2xl"] * design.spacing),
     },
     text: {
-      marginBottom: utils.pt2px(4),
+      marginBottom: utils.pt2px(4 * design.spacing),
     },
     container: {
       display: "flex",
       flexDirection: "row",
     },
     leftColumn: {
-      width: utils.pt2px(200),
-      paddingRight: utils.pt2px(20),
+      width: utils.pt2px(200 * design.spacing),
+      paddingRight: utils.pt2px(20 * design.spacing),
       textAlign: "center",
     },
     rightColumn: {
       width: "100%",
     },
     profile: {
-      marginBottom: utils.pt2px(16),
+      marginBottom: utils.pt2px(16 * design.spacing),
     },
     sectionLabel: {
       fontWeight: 700,
-      marginBottom: utils.pt2px(10),
+      marginBottom: utils.pt2px(10 * design.spacing),
       textTransform: "uppercase",
-      fontSize: utils.pt2px(theme.fontSize.xs),
+      fontSize: utils.pt2px(theme.fontSize.xs * design.spacing),
     },
     summary: {
       lineHeight: 1.4,
@@ -59,25 +65,25 @@ function TokyoReact(props: Fields) {
     sectionItem: {
       display: "flex",
       flexDirection: "column",
-      marginBottom: utils.pt2px(16),
+      marginBottom: utils.pt2px(16 * design.spacing),
     },
     sectionTitle: {
       fontWeight: 700,
-      marginBottom: utils.pt2px(8),
-      fontSize: utils.pt2px(theme.fontSize.sm),
+      marginBottom: utils.pt2px(8 * design.spacing),
+      fontSize: utils.pt2px(theme.fontSize.sm * design.spacing),
     },
     date: {
-      marginBottom: utils.pt2px(8),
+      marginBottom: utils.pt2px(8 * design.spacing),
       color: "#707678",
     },
     description: {
       lineHeight: 1.4,
     },
     list: {
-      marginBottom: utils.pt2px(16),
+      marginBottom: utils.pt2px(16 * design.spacing),
     },
     listItem: {
-      marginBottom: utils.pt2px(8),
+      marginBottom: utils.pt2px(8 * design.spacing),
     },
   } as const;
 

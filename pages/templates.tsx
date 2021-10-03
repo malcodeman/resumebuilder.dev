@@ -61,8 +61,8 @@ function Templates() {
       ...DEFAULT_VALUES,
       id: nanoid(),
       title: "Untitled resume",
-      meta: {
-        ...DEFAULT_VALUES.meta,
+      design: {
+        ...DEFAULT_VALUES.design,
         template,
       },
     };
