@@ -5,6 +5,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  ModalFooter,
   Grid,
   Button,
   Text,
@@ -89,6 +90,7 @@ function ExportResumeModal(props: props) {
             </Grid>
           </>
         </ModalBody>
+        <ModalFooter />
       </ModalContent>
     </Modal>
   );

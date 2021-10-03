@@ -6,6 +6,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  ModalFooter,
   Text,
   Grid,
   Button,
@@ -121,6 +122,7 @@ function ImportDataModal(props: props) {
             <FileUploader onDrop={onDropHandler} isLoading={isLoading} />
           )}
         </ModalBody>
+        <ModalFooter />
       </ModalContent>
     </Modal>
   );

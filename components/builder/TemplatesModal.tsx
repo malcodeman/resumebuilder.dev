@@ -5,6 +5,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  ModalFooter,
   Box,
   Grid,
   useColorModeValue,
@@ -74,6 +75,7 @@ function TemplatesModal(props: props) {
             }, TEMPLATES_LIST)}
           </Grid>
         </ModalBody>
+        <ModalFooter />
       </ModalContent>
     </Modal>
   );

@@ -6,6 +6,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
+  ModalFooter,
   Button,
   Grid,
   Text,
@@ -85,6 +86,7 @@ function AddSectionModal(props: props) {
             }, CUSTOM_SECTIONS)}
           </Grid>
         </ModalBody>
+        <ModalFooter />
       </ModalContent>
     </Modal>
   );
