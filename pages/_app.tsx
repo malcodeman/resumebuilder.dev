@@ -7,7 +7,7 @@ import "emoji-mart/css/emoji-mart.css";
 function App({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
     Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID, {
-      url: "warbler.resumebuilder.dev",
+      url: "https://warbler.resumebuilder.dev/script.js",
       includedDomains: ["resumebuilder.dev", "www.resumebuilder.dev"],
     });
   }, []);
