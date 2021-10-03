@@ -57,11 +57,9 @@ function Document(props: props) {
 
   const boxProps = {
     as: motion.div,
+    layout: true,
     width: "100%",
     margin: "0 auto",
-    overflow: "hidden",
-    backgroundColor: "#fff",
-    display: { base: "none", lg: "block" },
     height: utils.pt2px(PAGE_SIZE.HEIGHT),
     maxWidth: isFullWidth ? "100%" : utils.pt2px(PAGE_SIZE.WIDTH),
   };
