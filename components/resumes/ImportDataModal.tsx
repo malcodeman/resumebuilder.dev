@@ -84,7 +84,10 @@ function ImportDataModal(props: props) {
       setIsLoading(true);
       const username = values.username;
       const user = await axios.get(`https://api.github.com/users/${username}`);
-      const fields = parser.parseGithub(user.data);
+      const repos = await axios.get(
+        `https://api.github.com/users/${username}/repos`
+      );
+      const fields = parser.parseGithub({ user: user.data, repos: repos.data });
       onImport(fields);
       onClose();
     } catch (err) {

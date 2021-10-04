@@ -135,22 +135,42 @@ function parseJsonResume(text: string): Fields {
 }
 
 function parseGithub(data: {
-  name: string;
-  bio: string;
-  blog: string;
+  user: {
+    name: string | null;
+    company: string | null;
+    blog: string | null;
+    location: string | null;
+    email: string | null;
+    hireable: boolean | null;
+    bio: string | null;
+    twitter_username: string | null;
+  };
+  repos: { language: string | null }[];
 }): Fields {
+  const skills = R.uniq(
+    R.filter(
+      (item) => !R.isNil(item),
+      R.map((item) => item.language, data.repos)
+    )
+  );
   const fields = {
     about: {
       title: "Developer",
-      firstName: R.split(" ", data.name)[0],
-      lastName: R.split(" ", data.name)[1],
-      email: "",
+      firstName: data.user.name || "",
+      lastName: "",
+      email: data.user.email || "",
       phone: "",
-      city: "",
+      city: data.user.location || "",
       country: "",
-      summary: data.bio || "",
+      summary: data.user.bio || "",
     },
-    section: [],
+    section: [
+      {
+        name: "tagListSection" as const,
+        label: "Skills",
+        tags: R.join("\n", skills),
+      },
+    ],
   };
   return fields;
 }
