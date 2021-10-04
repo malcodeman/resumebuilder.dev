@@ -134,8 +134,30 @@ function parseJsonResume(text: string): Fields {
   return fields;
 }
 
+function parseGithub(data: {
+  name: string;
+  bio: string;
+  blog: string;
+}): Fields {
+  const fields = {
+    about: {
+      title: "Developer",
+      firstName: R.split(" ", data.name)[0],
+      lastName: R.split(" ", data.name)[1],
+      email: "",
+      phone: "",
+      city: "",
+      country: "",
+      summary: data.bio || "",
+    },
+    section: [],
+  };
+  return fields;
+}
+
 const EXPORTS = {
   parseJsonResume,
+  parseGithub,
 };
 
 export default EXPORTS;

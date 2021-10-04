@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.3.0",
     "@react-hookz/web": "^7.0.0",
     "@react-pdf/renderer": "^2.0.6",
+    "axios": "^0.22.0",
     "date-fns": "^2.23.0",
     "emoji-mart": "^3.0.1",
     "fathom-client": "^3.2.0",

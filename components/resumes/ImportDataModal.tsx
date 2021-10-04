@@ -14,8 +14,10 @@ import {
 } from "@chakra-ui/react";
 import * as R from "ramda";
 import { ChevronLeft } from "react-feather";
+import axios from "axios";
 
 import FileUploader from "../misc/FileUploader";
+import ImportFromGithub from "./importFromGithub";
 
 import parser from "../../lib/parser";
 import utils from "../../lib/utils";
@@ -31,10 +33,10 @@ type props = {
 const IMPORTS = [
   { label: "JSON Resume", value: "jsonResume", isDisabled: false },
   { label: "JSON", value: "json", isDisabled: false },
+  { label: "GitHub", value: "github", isDisabled: false },
   { label: "CSV", value: "csv", isDisabled: true },
   { label: "XML", value: "xml", isDisabled: true },
   { label: "PDF", value: "pdf", isDisabled: true },
-  { label: "GitHub", value: "github", isDisabled: true },
 ];
 
 function ImportDataModal(props: props) {
@@ -49,7 +51,7 @@ function ImportDataModal(props: props) {
     }
   }, [isOpen]);
 
-  function getFields(text: string) {
+  function getFields(text: string): Fields {
     switch (source) {
       case "jsonResume":
         return parser.parseJsonResume(text);
@@ -77,6 +79,56 @@ function ImportDataModal(props: props) {
     }
   }
 
+  async function onGithubSubmit(values: { username: string }) {
+    try {
+      setIsLoading(true);
+      const username = values.username;
+      const user = await axios.get(`https://api.github.com/users/${username}`);
+      const fields = parser.parseGithub(user.data);
+      onImport(fields);
+      onClose();
+    } catch (err) {
+      toast({
+        description: "Something went wrong.",
+        status: "error",
+        isClosable: true,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function renderBody() {
+    if (R.isEmpty(source)) {
+      return (
+        <>
+          <Text mb="2">Choose one of the below sources to get started.</Text>
+          <Grid gridTemplateColumns="1fr 1fr 1fr" gap="4">
+            {R.map((item) => {
+              return (
+                <Button
+                  key={item.label}
+                  variant="outline"
+                  size="sm"
+                  isDisabled={item.isDisabled}
+                  onClick={() => setSource(item.value)}
+                >
+                  {item.label}
+                </Button>
+              );
+            }, IMPORTS)}
+          </Grid>
+        </>
+      );
+    }
+    if (source === "github") {
+      return (
+        <ImportFromGithub onSubmit={onGithubSubmit} isLoading={isLoading} />
+      );
+    }
+    return <FileUploader onDrop={onDropHandler} isLoading={isLoading} />;
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -96,32 +148,7 @@ function ImportDataModal(props: props) {
           )}
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          {R.isEmpty(source) ? (
-            <>
-              <Text mb="2">
-                Choose one of the below sources to get started.
-              </Text>
-              <Grid gridTemplateColumns="1fr 1fr 1fr" gap="4">
-                {R.map((item) => {
-                  return (
-                    <Button
-                      key={item.label}
-                      variant="outline"
-                      size="sm"
-                      isDisabled={item.isDisabled}
-                      onClick={() => setSource(item.value)}
-                    >
-                      {item.label}
-                    </Button>
-                  );
-                }, IMPORTS)}
-              </Grid>
-            </>
-          ) : (
-            <FileUploader onDrop={onDropHandler} isLoading={isLoading} />
-          )}
-        </ModalBody>
+        <ModalBody>{renderBody()}</ModalBody>
         <ModalFooter />
       </ModalContent>
     </Modal>
