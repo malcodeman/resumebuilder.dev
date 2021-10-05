@@ -79,7 +79,7 @@ function Header(props: props) {
       zIndex="3"
     >
       <Flex as="nav" justifyContent="space-between">
-        <Logo />
+        <Logo href="/resumes" />
         <ResumeTitle form={form} />
         <Flex>
           <ShowTemplates

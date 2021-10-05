@@ -2,9 +2,14 @@ import { Text, Flex, Box } from "@chakra-ui/react";
 import { FileText } from "react-feather";
 import Link from "next/link";
 
-function Logo() {
+type props = {
+  href: string;
+};
+
+function Logo(props: props) {
+  const { href } = props;
   return (
-    <Link href="/" passHref>
+    <Link href={href} passHref>
       <Flex alignItems="center" _hover={{ cursor: "pointer" }}>
         <Box marginRight="2">
           <FileText size={20} />
