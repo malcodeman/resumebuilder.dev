@@ -4,6 +4,7 @@ import { Grid, Box, Text, Center, Button, Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import * as R from "ramda";
 import Link from "next/link";
+import { useLocalStorageValue, useMountEffect } from "@react-hookz/web";
 
 import Sections from "../../components/sections/Sections";
 import Header from "../../components/builder/Header";
@@ -19,6 +20,17 @@ import { Resume } from "../../types";
 function Builder() {
   const [resume, isLoading] = useResume();
   const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
+  const [_showDashboard, setShowDashboard] = useLocalStorageValue(
+    "showDashboard",
+    false,
+    {
+      initializeWithStorageValue: false,
+    }
+  );
+
+  useMountEffect(() => {
+    setShowDashboard(true);
+  });
 
   useAutoSaveToast({});
 
