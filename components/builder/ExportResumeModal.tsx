@@ -72,7 +72,7 @@ function ExportResumeModal(props: props) {
         <ModalBody>
           <>
             <Text mb="2">Choose export format.</Text>
-            <Grid gridTemplateColumns="1fr 1fr" gap="4">
+            <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gap="4">
               {R.map((item) => {
                 const isDisabled = getIsDisabled(item.value);
                 return (

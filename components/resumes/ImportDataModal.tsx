@@ -106,7 +106,7 @@ function ImportDataModal(props: props) {
       return (
         <>
           <Text mb="2">Choose one of the below sources to get started.</Text>
-          <Grid gridTemplateColumns="1fr 1fr 1fr" gap="4">
+          <Grid gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]} gap="4">
             {R.map((item) => {
               return (
                 <Button

@@ -50,7 +50,11 @@ function AddSectionModal(props: props) {
         <ModalCloseButton />
         <ModalBody>
           <Text mb="2">Common sections</Text>
-          <Grid mb="4" gridTemplateColumns="1fr 1fr 1fr" gap="4">
+          <Grid
+            mb="4"
+            gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]}
+            gap="4"
+          >
             {R.map((item) => {
               return (
                 <Button
@@ -68,7 +72,7 @@ function AddSectionModal(props: props) {
             }, COMMON_SECTIONS)}
           </Grid>
           <Text mb="2">Custom sections</Text>
-          <Grid gridTemplateColumns="1fr 1fr 1fr" gap="4">
+          <Grid gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]} gap="4">
             {R.map((item) => {
               return (
                 <Button
