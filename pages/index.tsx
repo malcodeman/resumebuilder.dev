@@ -8,6 +8,7 @@ import {
   Text,
   Divider,
   Flex,
+  Center,
   useColorModeValue,
   useBreakpointValue,
 } from "@chakra-ui/react";
@@ -23,7 +24,12 @@ import Layout from "../components/Layout";
 import { DEFAULT_VALUES, LANDING_RESUMES_LIST } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
 
-import { Resume } from "../types";
+import { Resume, Template } from "../types";
+
+const ARROW_RIGHT_VARIANTS = {
+  mouseenter: { x: 5 },
+  mouseleave: { x: 0 },
+};
 
 function Landing() {
   const [_showDashboard, setShowDashboard] = useLocalStorageValue(
@@ -47,11 +53,16 @@ function Landing() {
     setShowDashboard(false);
   });
 
-  function handleOnSubmit() {
+  function handleOnSubmit(data?: { template: Template }) {
+    const { template = Template.berlin } = data;
     const resume = {
       ...DEFAULT_VALUES,
       id: nanoid(),
       title: "Untitled resume",
+      design: {
+        ...DEFAULT_VALUES.design,
+        template,
+      },
     };
     setResumes([...resumes, resume]);
     router.push(`/resumes/${resume.id}`);
@@ -67,7 +78,12 @@ function Landing() {
           <Box>
             <Heading mb="4">Free resume builder</Heading>
             <Text mb="4">Resume for everyone.</Text>
-            <Button colorScheme="blue" onClick={handleOnSubmit}>
+            <Button
+              as={motion.button}
+              whileHover={{ scale: 1.1 }}
+              colorScheme="blue"
+              onClick={() => handleOnSubmit()}
+            >
               Build resume
             </Button>
           </Box>
@@ -82,9 +98,15 @@ function Landing() {
             </Text>
             <Link href="/templates" passHref>
               <Button
+                as={motion.button}
+                whileHover="mouseenter"
                 variant="outline"
-                mb="4"
-                rightIcon={<ArrowRight size={20} />}
+                mb="8"
+                rightIcon={
+                  <motion.div variants={ARROW_RIGHT_VARIANTS}>
+                    <ArrowRight size={20} />
+                  </motion.div>
+                }
               >
                 See all templates
               </Button>
@@ -105,6 +127,7 @@ function Landing() {
                   as={motion.div}
                   whileHover={{ scale: 1.1 }}
                   flexDirection="column"
+                  role="group"
                 >
                   <Box
                     mb="2"
@@ -112,6 +135,7 @@ function Landing() {
                     overflow="hidden"
                     userSelect="none"
                     borderRadius="lg"
+                    position="relative"
                     boxShadow={boxShadow}
                     _hover={{ cursor: "pointer" }}
                   >
@@ -125,6 +149,26 @@ function Landing() {
                         section: item.section,
                       }
                     )}
+                    <Center
+                      as={motion.div}
+                      whileHover={{ opacity: 1 }}
+                      position="absolute"
+                      left="0"
+                      top="0"
+                      right="0"
+                      bottom="0"
+                      opacity="0"
+                      backgroundColor="rgba(0, 0, 0, 0.05)"
+                    >
+                      <Button
+                        colorScheme="blue"
+                        onClick={() =>
+                          handleOnSubmit({ template: item.design.template })
+                        }
+                      >
+                        Use template
+                      </Button>
+                    </Center>
                   </Box>
                   <Text>{R.toUpper(item.design.template)}</Text>
                 </Flex>
