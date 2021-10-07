@@ -53,6 +53,9 @@ function Header(props: LayoutProps) {
             <NavLink href="/templates">
               <Text mr="4">Templates</Text>
             </NavLink>
+            <NavLink href="/downloads">
+              <Text mr="4">Downloads</Text>
+            </NavLink>
           </Flex>
           <Popover>
             <PopoverTrigger>
