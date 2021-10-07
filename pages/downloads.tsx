@@ -55,9 +55,11 @@ function Downloads() {
       </Head>
       <Layout>
         <Center mb="4">
-          <Heading>resumebuilder.dev for Mac & Windows</Heading>
+          <Heading overflowWrap="anywhere">
+            resumebuilder.dev for Mac & Windows
+          </Heading>
         </Center>
-        <Container maxW="container.md">
+        <Container maxW="container.md" paddingInline="0">
           <Grid templateColumns={["1fr", "1fr 1fr"]} gap="8">
             {R.map(
               (item) => (
@@ -65,7 +67,7 @@ function Downloads() {
                   <Flex flexDirection="column">
                     <Box
                       padding="4"
-                      borderTopRadius="lg"
+                      borderTopRadius="md"
                       backgroundSize="cover"
                       backgroundPosition="center"
                       backgroundImage={item.backgroundImage}
