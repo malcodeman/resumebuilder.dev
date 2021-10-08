@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import * as R from "ramda";
 import { ArrowRight } from "react-feather";
 import { motion } from "framer-motion";
+import { Emoji } from "emoji-mart";
 
 import Layout from "../components/Layout";
 
@@ -30,6 +31,23 @@ const ARROW_RIGHT_VARIANTS = {
   mouseenter: { x: 5 },
   mouseleave: { x: 0 },
 };
+const FEATURES = [
+  {
+    title: "Privacy first",
+    text: "Own and manage your own database.",
+    emoji: <Emoji emoji="lock" size={48} />,
+  },
+  {
+    title: "Free forever",
+    text: "Anyone can build resumes.",
+    emoji: <Emoji emoji="money_with_wings" size={48} />,
+  },
+  {
+    title: "Fast",
+    text: "Statically-rendered pages.",
+    emoji: <Emoji emoji="rocket" size={48} />,
+  },
+];
 
 function Landing() {
   const [_showDashboard, setShowDashboard] = useLocalStorageValue(
@@ -88,7 +106,7 @@ function Landing() {
             </Button>
           </Box>
         </Grid>
-        <Divider marginY="8" />
+        <Divider marginY="16" />
         <Box as="section">
           <Box width={["100%", "100%", "50%"]}>
             <Heading mb="4">Start with a template.</Heading>
@@ -176,7 +194,26 @@ function Landing() {
               LANDING_RESUMES_LIST
             )}
           </Grid>
+          <Divider marginY="16" />
+          <Box as="section">
+            <Center mb="16">
+              <Heading>Privacy-focused and login-free.</Heading>
+            </Center>
+            <Grid templateColumns={["1fr", "1fr 1fr 1fr"]} gap="8">
+              {R.map(
+                (item) => (
+                  <Center key={item.title} flexDirection="column">
+                    {item.emoji}
+                    <Heading mb="4">{item.title}</Heading>
+                    <Text>{item.text}</Text>
+                  </Center>
+                ),
+                FEATURES
+              )}
+            </Grid>
+          </Box>
         </Box>
+        <Divider marginY="16" />
       </Layout>
     </>
   );
