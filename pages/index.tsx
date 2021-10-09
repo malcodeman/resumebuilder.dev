@@ -71,8 +71,8 @@ function Landing() {
     setShowDashboard(false);
   });
 
-  function handleOnSubmit(data?: { template: Template }) {
-    const { template = Template.berlin } = data;
+  function handleOnSubmit(data = { template: Template.berlin }) {
+    const { template } = data;
     const resume = {
       ...DEFAULT_VALUES,
       id: nanoid(),
