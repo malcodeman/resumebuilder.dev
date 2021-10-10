@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 import { Emoji } from "emoji-mart";
 
 import Layout from "../components/Layout";
+import Faq from "../components/landing/Faq";
 
 import { DEFAULT_VALUES, LANDING_RESUMES_LIST } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
@@ -214,6 +215,7 @@ function Landing() {
           </Box>
         </Box>
         <Divider marginY="16" />
+        <Faq />
       </Layout>
     </>
   );
