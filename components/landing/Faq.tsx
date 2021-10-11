@@ -36,6 +36,20 @@ const FAQ = [
     ),
   },
   {
+    question: "What analytics tools do you use?",
+    answer: (
+      <>
+        <Text>
+          We use{" "}
+          <ChakraLink href="https://usefathom.com/">
+            Fathom Analytics
+          </ChakraLink>
+          , which is privacy-focused and GDPR compliant.
+        </Text>
+      </>
+    ),
+  },
+  {
     question: "Which imports are support?",
     answer: (
       <>
