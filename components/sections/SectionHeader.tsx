@@ -2,7 +2,6 @@ import React from "react";
 import {
   IconButton,
   AccordionButton,
-  AccordionIcon,
   Box,
   Tooltip,
   Menu,
@@ -12,8 +11,17 @@ import {
   Editable,
   EditablePreview,
   EditableInput,
+  useAccordionItemState,
 } from "@chakra-ui/react";
-import { MoreHorizontal, Copy, Trash2, Plus, Edit } from "react-feather";
+import {
+  MoreHorizontal,
+  Copy,
+  Trash2,
+  Plus,
+  Edit,
+  ChevronDown,
+  ChevronUp,
+} from "react-feather";
 import * as R from "ramda";
 import { useFormContext } from "react-hook-form";
 
@@ -40,6 +48,7 @@ function SectionHeader(props: props) {
   const isEditable = !isAbout && !isNested;
   const ref = React.useRef<HTMLSpanElement>(null);
   const { register } = useFormContext();
+  const { isOpen } = useAccordionItemState();
 
   function handleOnAppend(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.stopPropagation();
@@ -59,7 +68,11 @@ function SectionHeader(props: props) {
   return (
     <h2>
       <AccordionButton as="div" role="group">
-        <AccordionIcon mr="2" />
+        {isOpen ? (
+          <ChevronUp size={16} style={{ marginRight: "0.5rem" }} />
+        ) : (
+          <ChevronDown size={16} style={{ marginRight: "0.5rem" }} />
+        )}
         {isEditable ? (
           <Editable defaultValue={label} flex="1" mr="2">
             <EditablePreview

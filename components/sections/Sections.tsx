@@ -1,17 +1,18 @@
+import React from "react";
 import { Accordion, Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
 import { Plus } from "react-feather";
 import { useFieldArray, FormProvider, UseFormReturn } from "react-hook-form";
 import {
   DndContext,
   PointerSensor,
+  DragOverlay,
+  DragStartEvent,
+  DragEndEvent,
+  closestCenter,
   useSensor,
   useSensors,
-  DragEndEvent,
 } from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
+import { SortableContext } from "@dnd-kit/sortable";
 import { useUpdateEffect, useMediaQuery } from "@react-hookz/web";
 import * as R from "ramda";
 
@@ -19,6 +20,7 @@ import PersonalDetailsSection from "../../components/sections/PersonalDetailsSec
 import TagListSection from "../../components/sections/TagListSection";
 import StandardSection from "../../components/sections/StandardSection";
 import AddSectionModal from "./AddSectionModal";
+import DraggableItem from "./DraggableItem";
 
 import { STANDARD_SECTION_DEFAULT_VALUES } from "../../lib/constants";
 import utils from "../../lib/utils";
@@ -81,10 +83,19 @@ function Sections(props: props) {
     })
   );
   const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
+  const [activeLabel, setActiveLabel] = React.useState("");
 
   useUpdateEffect(() => {
     form.reset({ ...resume });
   }, [resume?.id]);
+
+  function handleOnDragStart(event: DragStartEvent) {
+    const item = R.find(
+      (item) => item.id === event.active.id,
+      fieldArray.fields
+    );
+    setActiveLabel(item.label);
+  }
 
   function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -112,6 +123,10 @@ function Sections(props: props) {
     }
   }
 
+  function disableSortingStrategy() {
+    return null;
+  }
+
   return (
     <Flex flexDirection="column" overflowY="hidden">
       <Accordion
@@ -121,13 +136,20 @@ function Sections(props: props) {
         overflowY="auto"
         paddingTop={{ base: "8" }}
         style={{ scrollbarWidth: "thin" }}
+        userSelect="none"
       >
         <FormProvider {...form}>
-          <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
+          <DndContext
+            id="dnd"
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragStart={handleOnDragStart}
+            onDragEnd={handleOnDragEnd}
+          >
             <PersonalDetailsSection />
             <SortableContext
               items={fieldArray.fields}
-              strategy={verticalListSortingStrategy}
+              strategy={disableSortingStrategy}
             >
               {fieldArray.fields.map((item, index) => {
                 const props = {
@@ -147,6 +169,11 @@ function Sections(props: props) {
                 );
               })}
             </SortableContext>
+            <DragOverlay>
+              {R.isEmpty(activeLabel) ? null : (
+                <DraggableItem>{activeLabel}</DraggableItem>
+              )}
+            </DragOverlay>
           </DndContext>
         </FormProvider>
       </Accordion>

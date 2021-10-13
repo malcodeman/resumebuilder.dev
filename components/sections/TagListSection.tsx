@@ -2,6 +2,7 @@ import { AccordionItem } from "@chakra-ui/react";
 import { FieldArrayMethodProps, useFormContext } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import * as R from "ramda";
 
 import SectionHeader from "./SectionHeader";
 import TagListSectionBody from "./TagListSectionBody";
@@ -29,6 +30,7 @@ function TagListSection(props: props) {
     transform,
     transition,
     isDragging,
+    overIndex,
     setNodeRef,
   } = useSortable({ id, disabled: isDragDisabled });
   const { getValues } = useFormContext();
@@ -36,6 +38,7 @@ function TagListSection(props: props) {
     transform: CSS.Translate.toString(transform),
     transition,
   };
+  const isOver = R.and(R.not(isDragging), R.equals(overIndex, index));
 
   return (
     <AccordionItem
@@ -45,6 +48,7 @@ function TagListSection(props: props) {
       {...listeners}
       borderTopWidth="0"
       opacity={isDragging ? "0.5" : "initial"}
+      backgroundColor={isOver ? "rgba(0, 0, 0, 0.1)" : "initial"}
       _last={{ borderBottomWidth: 0 }}
     >
       <SectionHeader

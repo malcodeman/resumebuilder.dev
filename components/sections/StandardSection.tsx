@@ -6,22 +6,22 @@ import {
   useFormContext,
 } from "react-hook-form";
 import * as R from "ramda";
-import {
-  useSortable,
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
+import { useSortable, SortableContext } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
   DndContext,
   PointerSensor,
+  DragOverlay,
+  DragStartEvent,
+  DragEndEvent,
+  closestCenter,
   useSensor,
   useSensors,
-  DragEndEvent,
 } from "@dnd-kit/core";
 
 import SectionHeader from "./SectionHeader";
 import StandardSectionBody from "./StandardSectionBody";
+import DraggableItem from "./DraggableItem";
 
 import { STANDARD_SECTION_DEFAULT_VALUES } from "../../lib/constants";
 
@@ -58,6 +58,7 @@ function StandardSection(props: props) {
     transform,
     transition,
     isDragging,
+    overIndex,
     setNodeRef,
   } = useSortable({ id, disabled: isDragDisabled });
   const style = {
@@ -71,6 +72,13 @@ function StandardSection(props: props) {
       },
     })
   );
+  const [activeLabel, setActiveLabel] = React.useState({});
+  const isOver = R.and(R.not(isDragging), R.equals(overIndex, index));
+
+  function handleOnDragStart(event: DragStartEvent) {
+    const item = R.find((item) => item.id === event.active.id, fieldsNested);
+    setActiveLabel(item.title || "Untitled");
+  }
 
   function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -87,6 +95,10 @@ function StandardSection(props: props) {
     reset({ ...getValues() });
   }
 
+  function disableSortingStrategy() {
+    return null;
+  }
+
   return (
     <AccordionItem
       ref={setNodeRef}
@@ -95,6 +107,7 @@ function StandardSection(props: props) {
       {...listeners}
       borderTopWidth="0"
       opacity={isDragging ? "0.5" : "initial"}
+      backgroundColor={isOver ? "rgba(0, 0, 0, 0.1)" : "initial"}
       _last={{ borderBottomWidth: 0 }}
     >
       {({ isExpanded }) => (
@@ -119,10 +132,15 @@ function StandardSection(props: props) {
               ) : (
                 <></>
               )}
-              <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragStart={handleOnDragStart}
+                onDragEnd={handleOnDragEnd}
+              >
                 <SortableContext
                   items={fieldsNested}
-                  strategy={verticalListSortingStrategy}
+                  strategy={disableSortingStrategy}
                 >
                   {fieldsNested.map((item, nestIndex) => {
                     return (
@@ -143,6 +161,11 @@ function StandardSection(props: props) {
                     );
                   })}
                 </SortableContext>
+                <DragOverlay>
+                  {R.isEmpty(activeLabel) ? null : (
+                    <DraggableItem>{activeLabel}</DraggableItem>
+                  )}
+                </DragOverlay>
               </DndContext>
             </AccordionPanel>
           ) : (

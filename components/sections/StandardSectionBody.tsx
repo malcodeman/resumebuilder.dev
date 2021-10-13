@@ -12,6 +12,7 @@ import {
 import { useFormContext, useWatch } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import * as R from "ramda";
 
 import SectionHeader from "./SectionHeader";
 
@@ -73,6 +74,7 @@ function StandardSectionBody(props: props) {
     transform,
     transition,
     isDragging,
+    overIndex,
     setNodeRef,
   } = useSortable({ id, disabled: isDragDisabled });
   const { register } = useFormContext();
@@ -80,6 +82,7 @@ function StandardSectionBody(props: props) {
     transform: CSS.Translate.toString(transform),
     transition,
   };
+  const isOver = R.and(R.not(isDragging), R.equals(overIndex, nestIndex));
 
   function onPointerDownHandler(e: React.PointerEvent<HTMLDivElement>) {
     e.stopPropagation();
@@ -92,6 +95,7 @@ function StandardSectionBody(props: props) {
       {...attributes}
       {...listeners}
       opacity={isDragging ? "0.5" : "initial"}
+      backgroundColor={isOver ? "rgba(0, 0, 0, 0.1)" : "initial"}
       allowToggle
       reduceMotion
     >
