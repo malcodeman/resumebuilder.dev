@@ -49,6 +49,8 @@ function getTitleLabel(name: Section) {
       return "Company";
     case "educationSection":
       return "School";
+    case "projectsSection":
+      return "Name";
     default:
       return "Title";
   }
@@ -60,6 +62,8 @@ function getSubtitleLabel(name: Section) {
       return "Job title";
     case "educationSection":
       return "Degree";
+    case "projectsSection":
+      return "Role";
     default:
       return "Subtitle";
   }
