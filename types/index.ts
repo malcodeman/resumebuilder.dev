@@ -8,38 +8,41 @@ enum Template {
 type Section =
   | "standardSection"
   | "employmentSection"
+  | "internshipsSection"
   | "educationSection"
   | "projectsSection"
   | "tagListSection"
   | "skillsSection"
   | "hobbiesSection"
   | "languagesSection";
-
-type Fields = {
-  about: {
+type AboutField = {
+  title: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  website: string;
+  city: string;
+  country: string;
+  summary: string;
+};
+type SectionField = {
+  name: Section;
+  label: string;
+  tags?: string;
+  nested?: {
     title: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
+    subtitle: string;
+    website: string;
     city: string;
-    country: string;
-    summary: string;
-  };
-  section: {
-    name: Section;
-    label: string;
-    tags?: string;
-    nested?: {
-      title: string;
-      subtitle: string;
-      website: string;
-      city: string;
-      startDate: string;
-      endDate: string;
-      description: string;
-    }[];
+    startDate: string;
+    endDate: string;
+    description: string;
   }[];
+};
+type Fields = {
+  about: AboutField;
+  section: SectionField[];
 };
 type Design = {
   template: Template;
@@ -52,30 +55,8 @@ type Resume = {
   createdAt: number;
   updatedAt: number;
   design: Design;
-  about: {
-    title: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    city: string;
-    country: string;
-    summary: string;
-  };
-  section: {
-    name: Section;
-    label: string;
-    tags?: string;
-    nested?: {
-      title: string;
-      subtitle: string;
-      website: string;
-      city: string;
-      startDate: string;
-      endDate: string;
-      description: string;
-    }[];
-  }[];
+  about: AboutField;
+  section: SectionField[];
 };
 type ChakraThemeConfig = {
   initialColorMode: ColorMode;

@@ -43,7 +43,7 @@ function TokyoReact(props: props) {
       flexDirection: "row",
     },
     leftColumn: {
-      width: utils.pt2px(200 * design.spacing),
+      width: utils.pt2px(222 * design.spacing),
       paddingRight: utils.pt2px(20 * design.spacing),
       textAlign: "center",
     },
@@ -106,6 +106,9 @@ function TokyoReact(props: props) {
             <p style={styles.text}>{about.country || "country"}</p>
             <p style={styles.text}>{about.phone || "phone"}</p>
             <p style={styles.text}>{about.email || "email"}</p>
+            <a style={styles.text} href={about.website}>
+              {about.website || "website"}
+            </a>
           </div>
           {section.map((sectionItem, index) => {
             if (utils.isTagListSection(sectionItem.name)) {

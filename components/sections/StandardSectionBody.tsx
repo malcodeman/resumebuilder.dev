@@ -46,6 +46,7 @@ function Header({ index, nestIndex, onRemove, onDuplicate }) {
 function getTitleLabel(name: Section) {
   switch (name) {
     case "employmentSection":
+    case "internshipsSection":
       return "Company";
     case "educationSection":
       return "School";
@@ -59,6 +60,7 @@ function getTitleLabel(name: Section) {
 function getSubtitleLabel(name: Section) {
   switch (name) {
     case "employmentSection":
+    case "internshipsSection":
       return "Job title";
     case "educationSection":
       return "Degree";

@@ -78,7 +78,8 @@ function isStandardSection(name: Section) {
     name === "standardSection" ||
     name === "employmentSection" ||
     name === "educationSection" ||
-    name === "projectsSection"
+    name === "projectsSection" ||
+    name === "internshipsSection"
   );
 }
 

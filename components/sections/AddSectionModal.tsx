@@ -26,6 +26,11 @@ const COMMON_SECTIONS = [
   { label: "Hobbies", value: "hobbiesSection" as const, isDisabled: false },
   { label: "Languages", value: "languagesSection" as const, isDisabled: false },
   { label: "Projects", value: "projectsSection" as const, isDisabled: false },
+  {
+    label: "Internships",
+    value: "internshipsSection" as const,
+    isDisabled: false,
+  },
 ];
 
 const CUSTOM_SECTIONS = [

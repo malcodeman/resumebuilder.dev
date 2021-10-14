@@ -64,7 +64,7 @@ function TokyoPdf(props: props) {
       flexDirection: "row",
     },
     leftColumn: {
-      width: 200 * design.spacing,
+      width: 222 * design.spacing,
       paddingRight: 20 * design.spacing,
       textAlign: "center",
     },
@@ -128,6 +128,9 @@ function TokyoPdf(props: props) {
               <Text style={styles.text}>{about.country || "country"}</Text>
               <Text style={styles.text}>{about.phone || "phone"}</Text>
               <Text style={styles.text}>{about.email || "email"}</Text>
+              <Link style={styles.text} src={about.website}>
+                {about.website || "website"}
+              </Link>
             </View>
             {section.map((sectionItem, index) => {
               if (utils.isTagListSection(sectionItem.name)) {

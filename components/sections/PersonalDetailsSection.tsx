@@ -75,6 +75,16 @@ function PersonalDetailsSection() {
               </InputGroup>
             </FormControl>
           </GridItem>
+          <GridItem colSpan={2}>
+            <FormControl>
+              <FormLabel>Website</FormLabel>
+              <Input
+                variant="filled"
+                size="sm"
+                {...register("about.website")}
+              />
+            </FormControl>
+          </GridItem>
           <GridItem colSpan={{ base: 2, md: 1 }}>
             <FormControl>
               <FormLabel>City</FormLabel>

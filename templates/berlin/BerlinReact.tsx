@@ -114,6 +114,7 @@ function BerlinReact(props: props) {
         <p style={styles.title}>{about.title || "title"}</p>
         <p style={styles.details}>
           {about.city || "city"}, {about.country || "country"} |{" "}
+          <a href={about.website}>{about.website || "website"}</a> |{" "}
           {about.email || "email"} | {about.phone || "phone"}
         </p>
         {about.summary.split("\n").map((item, index) => (
