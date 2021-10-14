@@ -113,7 +113,7 @@ function ResumeItem(props: props) {
   };
   const toast = useToast();
   const { onCopy } = useClipboard(
-    utils.isBrowser ? `${window.location.href}resumes/${resume.id}` : ""
+    utils.isBrowser ? `${window.location.href}/${resume.id}` : ""
   );
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
