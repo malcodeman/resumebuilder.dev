@@ -50,7 +50,7 @@ const FAQ = [
     ),
   },
   {
-    question: "Which imports are support?",
+    question: "Which imports are supported?",
     answer: (
       <>
         <Text>Currently we support</Text>
@@ -91,7 +91,7 @@ const FAQ = [
     ),
   },
   {
-    question: "Which exports are support?",
+    question: "Which exports are supported?",
     answer: (
       <>
         <Text>Currently we support</Text>
