@@ -22,6 +22,7 @@ import { Emoji } from "emoji-mart";
 
 import Layout from "../components/Layout";
 import Faq from "../components/landing/Faq";
+import DeveloperIllustration from "../illustrations/Developer";
 
 import { DEFAULT_VALUES, LANDING_RESUMES_LIST } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
@@ -67,6 +68,11 @@ function Landing() {
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"
   );
   const spacing = useBreakpointValue({ base: 0.6, md: 0.8 });
+  const fill = useColorModeValue(
+    "var(--chakra-colors-blue-500)",
+    "var(--chakra-colors-blue-200)"
+  );
+  const stroke = useColorModeValue("currentColor", "#fff");
 
   useMountEffect(() => {
     setShowDashboard(false);
@@ -93,7 +99,12 @@ function Landing() {
         <title>resumebuilder.dev</title>
       </Head>
       <Layout>
-        <Grid as="section" templateColumns={["1fr", "1fr", "repeat(2, 1fr)"]}>
+        <Grid
+          as="section"
+          templateColumns={["1fr", "1fr", "repeat(2, 1fr)"]}
+          gap="8"
+          marginBottom="16"
+        >
           <Box>
             <Heading mb="4">Free resume builder</Heading>
             <Text mb="4">Resume for everyone.</Text>
@@ -106,8 +117,8 @@ function Landing() {
               Build resume
             </Button>
           </Box>
+          <DeveloperIllustration fill={fill} stroke={stroke} />
         </Grid>
-        <Divider marginY="16" />
         <Box as="section">
           <Box width={["100%", "100%", "50%"]}>
             <Heading mb="4">Start with a template.</Heading>
