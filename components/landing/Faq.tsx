@@ -127,7 +127,7 @@ const FAQ = [
 
 function Faq() {
   return (
-    <Box as="section" marginY="16">
+    <Box as="section" marginBottom="16">
       <Heading mb="4">Frequently asked questions</Heading>
       <Accordion defaultIndex={[0]}>
         {R.map(
