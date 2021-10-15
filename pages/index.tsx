@@ -23,6 +23,7 @@ import { Emoji } from "emoji-mart";
 import Layout from "../components/Layout";
 import Faq from "../components/landing/Faq";
 import DeveloperIllustration from "../illustrations/Developer";
+import Footer from "../components/landing/Footer";
 
 import { DEFAULT_VALUES, LANDING_RESUMES_LIST } from "../lib/constants";
 import getTemplate from "../lib/getTemplate";
@@ -227,6 +228,7 @@ function Landing() {
         </Box>
         <Divider marginY="16" />
         <Faq />
+        <Footer onSubmit={handleOnSubmit} />
       </Layout>
     </>
   );
