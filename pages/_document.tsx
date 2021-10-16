@@ -6,8 +6,8 @@ import theme from "../theme";
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
-        <Head lang="en">
+      <Html lang="en">
+        <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta charSet="utf-8" />
           <meta

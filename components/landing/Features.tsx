@@ -1,22 +1,25 @@
 import { Heading, Grid, Box, Text, Center } from "@chakra-ui/react";
-import { Emoji } from "emoji-mart";
 import * as R from "ramda";
+
+import Rocket from "../../emoji/Rocket";
+import MoneyWithWings from "../../emoji/MoneyWithWings";
+import Lock from "../../emoji/Lock";
 
 const FEATURES = [
   {
     title: "Privacy first",
     text: "Own and manage your own database.",
-    emoji: <Emoji emoji="lock" size={48} />,
+    emoji: <Lock size={48} />,
   },
   {
     title: "Free forever",
     text: "Anyone can build resumes.",
-    emoji: <Emoji emoji="money_with_wings" size={48} />,
+    emoji: <MoneyWithWings size={48} />,
   },
   {
     title: "Fast",
     text: "Statically-rendered pages.",
-    emoji: <Emoji emoji="rocket" size={48} />,
+    emoji: <Rocket size={48} />,
   },
 ];
 
