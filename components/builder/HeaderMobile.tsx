@@ -53,7 +53,7 @@ function HeaderMobile(props: props) {
     >
       <Container maxW="container.lg">
         <Flex as="nav" justifyContent="space-between" alignItems="center">
-          <NavLink href="/">
+          <NavLink href="/resumes">
             <Flex flexDirection="column" alignItems="center">
               <Home size={20} />
               <Text fontSize="xs">Home</Text>
