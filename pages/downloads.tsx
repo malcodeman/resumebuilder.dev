@@ -12,7 +12,8 @@ import {
 } from "@chakra-ui/react";
 import Head from "next/head";
 import * as R from "ramda";
-import SimpleIcons from "simple-icons";
+import AppleIcon from "simple-icons/icons/apple";
+import MicrosoftIcon from "simple-icons/icons/microsoft";
 
 import Layout from "../components/Layout";
 import SimpleIcon from "../components/misc/SimpleIcon";
@@ -23,26 +24,14 @@ function Downloads() {
     {
       backgroundImage:
         colorMode === "dark" ? "/macos_dark.jpg" : "/macos_light.jpg",
-      icon: (
-        <SimpleIcon
-          color="#fff"
-          size={48}
-          path={SimpleIcons.Get("apple").path}
-        />
-      ),
+      icon: <SimpleIcon color="#fff" size={48} path={AppleIcon.path} />,
       title: "MacOS",
       text: "Download for MacOS",
       isDisabled: true,
     },
     {
       backgroundImage: "/windows.jpg",
-      icon: (
-        <SimpleIcon
-          color="#fff"
-          size={48}
-          path={SimpleIcons.Get("microsoft").path}
-        />
-      ),
+      icon: <SimpleIcon color="#fff" size={48} path={MicrosoftIcon.path} />,
       title: "Windows",
       text: "Download for Windows",
       isDisabled: true,
