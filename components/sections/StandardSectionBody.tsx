@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Grid,
   AccordionItem,
@@ -8,6 +9,7 @@ import {
   FormControl,
   FormLabel,
   Accordion,
+  useAccordionItemState,
 } from "@chakra-ui/react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
@@ -28,12 +30,20 @@ type props = {
   onRemove: (index: number) => void;
 };
 
-function Header({ index, nestIndex, onRemove, onDuplicate }) {
+function Header({ index, nestIndex, isDragging, onRemove, onDuplicate }) {
   const { control } = useFormContext();
   const label = useWatch({
     control,
     name: `section.${index}.nested.${nestIndex}.title`,
   });
+  const { isOpen, onClose } = useAccordionItemState();
+
+  React.useEffect(() => {
+    if (R.and(isOpen, isDragging)) {
+      onClose();
+    }
+  }, [isOpen, isDragging, onClose]);
+
   return (
     <SectionHeader
       label={label}
@@ -111,6 +121,7 @@ function StandardSectionBody(props: props) {
             <Header
               index={index}
               nestIndex={nestIndex}
+              isDragging={isDragging}
               onRemove={() => onRemove(nestIndex)}
               onDuplicate={() => onDuplicate(nestIndex)}
             />
