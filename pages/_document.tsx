@@ -9,14 +9,15 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="icon" href="/favicon.ico" />
+          <link rel="manifest" href="/manifest.json" />
           <meta charSet="utf-8" />
           <meta
             name="og:description"
-            content="resumebuilder.dev - resume builder for developers"
+            content="resumebuilder.dev - resume builder for everyone"
           />
           <meta
             name="description"
-            content="resumebuilder.dev - resume builder for developers"
+            content="resumebuilder.dev - resume builder for everyone"
           />
           <meta property="og:image" content="opengraph.png"></meta>
         </Head>
