@@ -1,4 +1,3 @@
-import React from "react";
 import { useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
 import * as R from "ramda";

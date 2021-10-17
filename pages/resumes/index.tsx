@@ -53,6 +53,7 @@ import { Cell } from "react-table";
 import Layout from "../../components/Layout";
 import ResumeItem from "../../components/resumes/ResumeItem";
 import ImportDataModal from "../../components/resumes/ImportDataModal";
+import EmptyResumes from "../../components/resumes/EmptyResumes";
 import Table from "../../components/misc/Table";
 
 import { DEFAULT_VALUES } from "../../lib/constants";
@@ -290,12 +291,7 @@ function ResumeGrid() {
   }
 
   if (R.isEmpty(resumes)) {
-    return (
-      <Flex flexDirection="column" alignItems="center" padding="4">
-        <Text>No Resumes</Text>
-        <Text fontSize="small">Create a new resume to get started.</Text>
-      </Flex>
-    );
+    return <EmptyResumes />;
   }
 
   const filteredResumes = R.filter(

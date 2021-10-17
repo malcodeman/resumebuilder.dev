@@ -25,6 +25,7 @@ function Layout(props: props) {
       )}
       <Box
         as="main"
+        overflow="hidden"
         paddingTop={{ base: "8", lg: "calc(2rem + 48px)" }}
         paddingBottom={{ base: "calc(2rem + 54px)", lg: "8" }}
       >
