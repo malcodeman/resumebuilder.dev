@@ -99,7 +99,7 @@ function pt2px(pt: number, suffix = true) {
   return (pt * 96) / 72;
 }
 
-function getUrlHost(url: string | URL) {
+function getUrlHost(url: string) {
   try {
     const host = new URL(url).host;
     const pathname = new URL(url).pathname;
