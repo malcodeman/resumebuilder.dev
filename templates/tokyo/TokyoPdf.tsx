@@ -78,7 +78,6 @@ function TokyoPdf(props: props) {
       fontWeight: 700,
       marginBottom: 10 * design.spacing,
       textTransform: "uppercase",
-      fontSize: theme.fontSize.xs * design.spacing,
     },
     summary: {
       lineHeight: 1.4,

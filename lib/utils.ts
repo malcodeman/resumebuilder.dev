@@ -99,6 +99,16 @@ function pt2px(pt: number, suffix = true) {
   return (pt * 96) / 72;
 }
 
+function getUrlHost(url: string | URL) {
+  try {
+    const host = new URL(url).host;
+    const pathname = new URL(url).pathname;
+    return `${host}${pathname}`;
+  } catch {
+    return "";
+  }
+}
+
 const EXPORTS = {
   isBrowser,
   readAsTextAsync,
@@ -109,6 +119,7 @@ const EXPORTS = {
   isStandardSection,
   isTagListSection,
   pt2px,
+  getUrlHost,
 };
 
 export default EXPORTS;

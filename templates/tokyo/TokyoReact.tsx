@@ -57,7 +57,6 @@ function TokyoReact(props: props) {
       fontWeight: 700,
       marginBottom: utils.pt2px(10 * design.spacing),
       textTransform: "uppercase",
-      fontSize: utils.pt2px(theme.fontSize.xs * design.spacing),
     },
     summary: {
       lineHeight: 1.4,

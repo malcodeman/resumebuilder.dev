@@ -109,6 +109,14 @@ const LANDING_RESUMES_LIST = [
       template: Template.tokyo,
     },
   },
+  {
+    ...DEFAULT_VALUES_LANDING,
+    id: nanoid(),
+    design: {
+      ...DEFAULT_VALUES_LANDING.design,
+      template: Template.london,
+    },
+  },
 ];
 const TEMPLATES_LIST = [
   {
@@ -125,6 +133,13 @@ const TEMPLATES_LIST = [
       "Present your skills and experience with this minimal resume template.",
     src: "/templates/tokyo.png",
     tags: ["all", "simple", "professional"],
+  },
+  {
+    title: "London",
+    template: Template.london,
+    description: "Modern, contemporary, and a good mood all around.",
+    src: "/templates/london.png",
+    tags: ["all", "simple", "creative"],
   },
 ];
 

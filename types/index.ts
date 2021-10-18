@@ -4,6 +4,7 @@ import { UseFormRegister } from "react-hook-form";
 enum Template {
   berlin = "berlin",
   tokyo = "tokyo",
+  london = "london",
 }
 type Section =
   | "standardSection"
@@ -75,5 +76,6 @@ export type {
   Export,
   View,
   Design,
+  AboutField,
 };
 export { Template };
