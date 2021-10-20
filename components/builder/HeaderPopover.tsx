@@ -13,6 +13,7 @@ import {
   Divider,
   useDisclosure,
   useClipboard,
+  useToast,
 } from "@chakra-ui/react";
 import {
   Download,
@@ -161,10 +162,15 @@ function DeleteResume() {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [_resume, _isLoading, _setResume, removeResume] = useResume();
+  const toast = useToast();
 
   function handleOnDelete() {
     removeResume();
-    router.push("/");
+    router.push("/resumes");
+    toast({
+      description: "Resume deleted.",
+      isClosable: true,
+    });
   }
 
   return (
