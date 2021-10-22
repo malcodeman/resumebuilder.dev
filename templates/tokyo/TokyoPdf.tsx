@@ -64,12 +64,12 @@ function TokyoPdf(props: props) {
       flexDirection: "row",
     },
     leftColumn: {
-      width: 222 * design.spacing,
-      paddingRight: 20 * design.spacing,
+      width: "25%",
       textAlign: "center",
+      paddingRight: 20 * design.spacing,
     },
     rightColumn: {
-      width: "100%",
+      width: "75%",
     },
     profile: {
       marginBottom: 16 * design.spacing,

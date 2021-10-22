@@ -23,6 +23,7 @@ function TokyoReact(props: props) {
       fontFamily: `'Roboto', sans-serif`,
       backgroundColor: "#fff",
       fontSize: utils.pt2px(theme.fontSize.xs * design.spacing),
+      overflowWrap: "break-word",
     },
     header: {
       marginBottom: utils.pt2px(40 * design.spacing),
@@ -43,12 +44,12 @@ function TokyoReact(props: props) {
       flexDirection: "row",
     },
     leftColumn: {
-      width: utils.pt2px(222 * design.spacing),
-      paddingRight: utils.pt2px(20 * design.spacing),
+      width: "25%",
       textAlign: "center",
+      paddingRight: utils.pt2px(20 * design.spacing),
     },
     rightColumn: {
-      width: "100%",
+      width: "75%",
     },
     profile: {
       marginBottom: utils.pt2px(16 * design.spacing),

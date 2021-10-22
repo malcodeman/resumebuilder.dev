@@ -19,6 +19,7 @@ function LondonReact(props: props) {
       height: "100%",
       color: "#222831",
       backgroundColor: "#fff",
+      overflowWrap: "break-word",
       fontFamily: `'Roboto', sans-serif`,
       paddingTop: utils.pt2px(20 * design.spacing),
       paddingLeft: utils.pt2px(40 * design.spacing),
@@ -65,13 +66,13 @@ function LondonReact(props: props) {
       marginBottom: utils.pt2px(16 * design.spacing),
     },
     leftColumn: {
+      width: "25%",
       color: "#586880",
-      minWidth: utils.pt2px(148 * design.spacing),
       paddingRight: utils.pt2px(20 * design.spacing),
       fontSize: utils.pt2px(theme.fontSize.sm * design.spacing),
     },
     rightColumn: {
-      width: "100%",
+      width: "75%",
       display: "flex",
       flexDirection: "column",
     },

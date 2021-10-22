@@ -85,13 +85,13 @@ function LondonPdf(props: props) {
       marginBottom: 16 * design.spacing,
     },
     leftColumn: {
+      width: "25%",
       color: "#586880",
-      minWidth: 148 * design.spacing,
       paddingRight: 20 * design.spacing,
       fontSize: theme.fontSize.sm * design.spacing,
     },
     rightColumn: {
-      width: "100%",
+      width: "75%",
       display: "flex",
       flexDirection: "column",
     },
