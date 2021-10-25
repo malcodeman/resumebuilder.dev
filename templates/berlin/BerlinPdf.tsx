@@ -7,6 +7,7 @@ import {
   Text,
   Link,
 } from "@react-pdf/renderer";
+import * as R from "ramda";
 
 Font.register({
   family: "Roboto",
@@ -116,6 +117,13 @@ function BerlinPdf(props: props) {
     },
   });
 
+  function renderDate(item: { startDate: string; endDate: string }) {
+    if (R.and(R.isEmpty(item.startDate), R.isEmpty(item.endDate))) {
+      return null;
+    }
+    return `${item.startDate} - ${item.endDate}`;
+  }
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -160,8 +168,7 @@ function BerlinPdf(props: props) {
                       </Text>
                       <Text style={styles.subtitle}>
                         {item.subtitle || "subtitle"} | {item.city || "city"} |{" "}
-                        {item.startDate || "start date"} -{" "}
-                        {item.endDate || "end date"}
+                        {renderDate(item)}
                       </Text>
                       {item.description.split("\n").map((item, index) => (
                         <Text key={index} style={styles.description}>

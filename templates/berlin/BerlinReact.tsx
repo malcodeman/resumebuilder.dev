@@ -1,3 +1,5 @@
+import * as R from "ramda";
+
 import utils from "../../lib/utils";
 import theme from "../theme";
 
@@ -101,6 +103,13 @@ function BerlinReact(props: props) {
     },
   } as const;
 
+  function renderDate(item: { startDate: string; endDate: string }) {
+    if (R.and(R.isEmpty(item.startDate), R.isEmpty(item.endDate))) {
+      return null;
+    }
+    return `${item.startDate} - ${item.endDate}`;
+  }
+
   return (
     <div style={styles.page} id="berlin">
       <div style={styles.initials}>
@@ -140,8 +149,7 @@ function BerlinReact(props: props) {
                     </p>
                     <p style={styles.subtitle}>
                       {item.subtitle || "subtitle"} | {item.city || "city"} |{" "}
-                      {item.startDate || "start date"} -{" "}
-                      {item.endDate || "end date"}
+                      {renderDate(item)}
                     </p>
                     {item.description.split("\n").map((item, index) => (
                       <p key={index} style={styles.description}>

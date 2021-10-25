@@ -1,3 +1,5 @@
+import * as R from "ramda";
+
 import utils from "../../lib/utils";
 import theme from "../theme";
 
@@ -87,6 +89,17 @@ function TokyoReact(props: props) {
     },
   } as const;
 
+  function renderDate(item: { startDate: string; endDate: string }) {
+    if (R.and(R.isEmpty(item.startDate), R.isEmpty(item.endDate))) {
+      return null;
+    }
+    return (
+      <p style={styles.date}>
+        {item.startDate} - {item.endDate}
+      </p>
+    );
+  }
+
   return (
     <div style={styles.page} id="tokyo">
       <div style={styles.header}>
@@ -162,10 +175,7 @@ function TokyoReact(props: props) {
                           )}
                           , {item.city || "city"}
                         </p>
-                        <p style={styles.date}>
-                          {item.startDate || "start date"} -{" "}
-                          {item.endDate || "end date"}
-                        </p>
+                        {renderDate(item)}
                         {item.description.split("\n").map((item, index) => (
                           <p key={index} style={styles.description}>
                             {item}
