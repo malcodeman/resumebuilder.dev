@@ -130,7 +130,7 @@ function BerlinPdf(props: props) {
           <Text style={styles.title}>{about.title || "title"}</Text>
           <Text style={styles.details}>
             {about.city || "city"}, {about.country || "country"} |{" "}
-            <Link src={about.website}>{about.website || "website"}</Link> |{" "}
+            <Link src={about.website}>{utils.getUrlHost(about.website)}</Link> |{" "}
             {about.email || "email"} | {about.phone || "phone"}
           </Text>
           {about.summary.split("\n").map((item, index) => (

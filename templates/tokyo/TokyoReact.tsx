@@ -107,7 +107,7 @@ function TokyoReact(props: props) {
             <p style={styles.text}>{about.phone || "phone"}</p>
             <p style={styles.text}>{about.email || "email"}</p>
             <a style={styles.text} href={about.website}>
-              {about.website || "website"}
+              {utils.getUrlHost(about.website)}
             </a>
           </div>
           {section.map((sectionItem, index) => {

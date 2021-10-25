@@ -128,7 +128,7 @@ function TokyoPdf(props: props) {
               <Text style={styles.text}>{about.phone || "phone"}</Text>
               <Text style={styles.text}>{about.email || "email"}</Text>
               <Link style={styles.text} src={about.website}>
-                {about.website || "website"}
+                {utils.getUrlHost(about.website)}
               </Link>
             </View>
             {section.map((sectionItem, index) => {
