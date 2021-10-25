@@ -4,10 +4,11 @@ import ReactDOMServer from "react-dom/server";
 import CSSReset from "@chakra-ui/css-reset";
 import * as htmlToImage from "html-to-image";
 import { createStandaloneToast } from "@chakra-ui/react";
+import faker from "faker";
 
 import getTemplate from "./getTemplate";
 
-import { Resume, Section } from "../types";
+import { Resume, Section, Fields } from "../types";
 
 const toast = createStandaloneToast();
 const isBrowser =
@@ -109,6 +110,49 @@ function getUrlHost(url: string) {
   }
 }
 
+function generateFakeResume(): Fields {
+  const fields = {
+    about: {
+      title: faker.name.jobTitle(),
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      email: faker.internet.email(),
+      phone: faker.phone.phoneNumberFormat(),
+      website: faker.internet.url(),
+      city: faker.address.city(),
+      country: faker.address.country(),
+      summary: faker.lorem.paragraphs(1),
+    },
+    section: [
+      {
+        name: "employmentSection" as const,
+        label: "Employment History",
+        nested: [
+          {
+            title: faker.company.companyName(),
+            subtitle: faker.name.jobTitle(),
+            website: faker.internet.url(),
+            city: faker.address.city(),
+            startDate: faker.date.past().toDateString(),
+            endDate: "Current",
+            description: faker.lorem.paragraphs(2),
+          },
+          {
+            title: faker.company.companyName(),
+            subtitle: faker.name.jobTitle(),
+            website: faker.internet.url(),
+            city: faker.address.city(),
+            startDate: faker.date.past().toDateString(),
+            endDate: faker.date.past().toDateString(),
+            description: faker.lorem.paragraphs(2),
+          },
+        ],
+      },
+    ],
+  };
+  return fields;
+}
+
 const EXPORTS = {
   isBrowser,
   readAsTextAsync,
@@ -120,6 +164,7 @@ const EXPORTS = {
   isTagListSection,
   pt2px,
   getUrlHost,
+  generateFakeResume,
 };
 
 export default EXPORTS;

@@ -22,6 +22,7 @@ import {
   Upload,
   Trash2,
   Layers as IconLayers,
+  Database,
 } from "react-feather";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
@@ -155,6 +156,23 @@ function CopyLink() {
     >
       {hasCopied ? "Copied" : "Copy link"}
     </Button>
+  );
+}
+
+function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
+  const { onImport } = props;
+  return (
+    <>
+      <Button
+        size="sm"
+        mb="2"
+        justifyContent="flex-start"
+        leftIcon={<Database size={20} />}
+        onClick={() => onImport(utils.generateFakeResume())}
+      >
+        Generate Fake Data
+      </Button>
+    </>
   );
 }
 
@@ -305,6 +323,7 @@ function HeaderPopover(props: props) {
                   onChangeTemplate={onChangeTemplate}
                 />
                 <CopyLink />
+                <GenerateFakeData onImport={onImport} />
                 <DeleteResume />
                 <Divider marginY="2" />
                 <ImportData onImport={onImport} />

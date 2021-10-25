@@ -21,6 +21,7 @@
     "axios": "^0.22.0",
     "date-fns": "^2.23.0",
     "emoji-mart": "^3.0.1",
+    "faker": "^5.5.3",
     "fathom-client": "^3.2.0",
     "file-saver": "^2.0.5",
     "framer-motion": "^4.1.17",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@types/emoji-mart": "^3.0.5",
+    "@types/faker": "^5.5.9",
     "@types/file-saver": "^2.0.2",
     "@types/keyboardjs": "^2.5.0",
     "@types/node": "^16.6.1",
