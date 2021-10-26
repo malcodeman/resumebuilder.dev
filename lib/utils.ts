@@ -5,6 +5,7 @@ import CSSReset from "@chakra-ui/css-reset";
 import * as htmlToImage from "html-to-image";
 import { createStandaloneToast } from "@chakra-ui/react";
 import faker from "faker";
+import * as R from "ramda";
 
 import getTemplate from "./getTemplate";
 
@@ -110,6 +111,12 @@ function getUrlHost(url: string) {
   }
 }
 
+function getRandomInt(min: number, max: number) {
+  const minNumber = Math.ceil(min);
+  const maxNumber = Math.floor(max);
+  return Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
+}
+
 function generateFakeResume(): Fields {
   const fields = {
     about: {
@@ -147,6 +154,22 @@ function generateFakeResume(): Fields {
             description: faker.lorem.paragraphs(2),
           },
         ],
+      },
+      {
+        name: "skillsSection" as const,
+        label: "Skills",
+        tags: R.join(
+          "\n",
+          R.split(" ", faker.lorem.words(getRandomInt(1, 10)))
+        ),
+      },
+      {
+        name: "hobbiesSection" as const,
+        label: "Hobbies",
+        tags: R.join(
+          "\n",
+          R.split(" ", faker.lorem.words(getRandomInt(1, 10)))
+        ),
       },
     ],
   };
