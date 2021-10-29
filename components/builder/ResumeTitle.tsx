@@ -6,6 +6,7 @@ import {
   HTMLChakraProps,
 } from "@chakra-ui/react";
 import { UseFormReturn } from "react-hook-form";
+import { useDocumentTitle } from "@react-hookz/web";
 
 import EmojiPicker from "../misc/EmojiPicker";
 
@@ -20,6 +21,8 @@ type props = HTMLChakraProps<"div"> & {
 function ResumeTitle(props: props) {
   const { form } = props;
   const [resume, _isLoading, setResume] = useResume({ isolated: true });
+
+  useDocumentTitle(`${resume?.title} - resumebuilder.dev`);
 
   function handleOnIconChange(emoji: string) {
     form.setValue("icon", emoji);
