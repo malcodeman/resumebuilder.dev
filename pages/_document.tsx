@@ -13,11 +13,11 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta
             name="og:description"
-            content="resumebuilder.dev - resume builder for everyone"
+            content="resumebuilder.dev - resume builder for developers"
           />
           <meta
             name="description"
-            content="resumebuilder.dev - resume builder for everyone"
+            content="resumebuilder.dev - resume builder for developers"
           />
           <meta property="og:image" content="opengraph.png"></meta>
         </Head>

@@ -76,7 +76,7 @@ function Landing() {
         >
           <Box>
             <Heading mb="4">Free resume builder</Heading>
-            <Text mb="4">Resume for everyone.</Text>
+            <Text mb="4">Resume for developers.</Text>
             <Button
               as={motion.button}
               whileHover={{ scale: 1.1 }}
