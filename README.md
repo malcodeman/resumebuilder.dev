@@ -5,6 +5,8 @@
 
 Resume builder for developers.
 
+![Screenshot](readme/screenshot.png)
+
 ## Getting started
 
 ```
