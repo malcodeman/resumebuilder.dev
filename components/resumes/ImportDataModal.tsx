@@ -12,7 +12,7 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import * as R from "ramda";
+import { isEmpty, map } from "ramda";
 import { ChevronLeft } from "react-feather";
 import axios from "axios";
 
@@ -102,12 +102,12 @@ function ImportDataModal(props: props) {
   }
 
   function renderBody() {
-    if (R.isEmpty(source)) {
+    if (isEmpty(source)) {
       return (
         <>
           <Text mb="2">Choose one of the below sources to get started.</Text>
           <Grid gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]} gap="4">
-            {R.map((item) => {
+            {map((item) => {
               return (
                 <Button
                   key={item.label}
@@ -137,7 +137,7 @@ function ImportDataModal(props: props) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          {R.isEmpty(source) ? (
+          {isEmpty(source) ? (
             <Text>Import data</Text>
           ) : (
             <Button

@@ -7,7 +7,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Layers, Plus, Upload } from "react-feather";
-import * as R from "ramda";
+import { map } from "ramda";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
@@ -90,7 +90,7 @@ function EmptyResumes() {
         gap="8"
         templateColumns={["1fr", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
       >
-        {R.map(
+        {map(
           (item) => (
             <Flex
               as={motion.div}

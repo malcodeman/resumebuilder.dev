@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { EmojiData, Picker, Emoji } from "emoji-mart";
 import { FileText } from "react-feather";
-import * as R from "ramda";
+import { isNil, isEmpty, or } from "ramda";
 
 const TOOLTIP_LABEL = "Change icon";
 
@@ -22,12 +22,11 @@ type props = {
 function EmojiPicker(props: props) {
   const { emoji, onSelect } = props;
   const { colorMode } = useColorMode();
-  const icon =
-    R.isNil(emoji) || R.isEmpty(emoji) ? (
-      <FileText size={20} />
-    ) : (
-      <Emoji size={20} emoji={emoji} />
-    );
+  const icon = or(isNil(emoji), isEmpty(emoji)) ? (
+    <FileText size={20} />
+  ) : (
+    <Emoji size={20} emoji={emoji} />
+  );
 
   function handleOnSelect(emoji: EmojiData, onClose: () => void) {
     onSelect(emoji.colons);

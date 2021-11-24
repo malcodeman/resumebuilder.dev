@@ -14,7 +14,7 @@ import {
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { CheckCircle, Circle } from "react-feather";
-import * as R from "ramda";
+import { map } from "ramda";
 
 const FAQ = [
   {
@@ -130,7 +130,7 @@ function Faq() {
     <Box as="section" marginBottom="16">
       <Heading mb="4">Frequently asked questions</Heading>
       <Accordion defaultIndex={[0]}>
-        {R.map(
+        {map(
           (item) => (
             <AccordionItem key={item.question}>
               <h2>

@@ -22,7 +22,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "react-feather";
-import * as R from "ramda";
+import { isNil } from "ramda";
 import { useFormContext } from "react-hook-form";
 
 type props = {
@@ -38,13 +38,10 @@ const TOOLTIP_MORE_LABEL = "Delete, duplicate, and more...";
 
 function SectionHeader(props: props) {
   const { label, index, onAppend, onDuplicate, onRemove } = props;
-  const isStandardSection = !R.isNil(onAppend);
+  const isStandardSection = !isNil(onAppend);
   const isAbout =
-    R.isNil(index) &&
-    R.isNil(onAppend) &&
-    R.isNil(onDuplicate) &&
-    R.isNil(onRemove);
-  const isNested = R.isNil(index);
+    isNil(index) && isNil(onAppend) && isNil(onDuplicate) && isNil(onRemove);
+  const isNested = isNil(index);
   const isEditable = !isAbout && !isNested;
   const ref = React.useRef<HTMLSpanElement>(null);
   const { register } = useFormContext();

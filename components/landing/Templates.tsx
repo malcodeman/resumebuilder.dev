@@ -10,7 +10,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import * as R from "ramda";
+import { map, toUpper } from "ramda";
 import { ArrowRight } from "react-feather";
 import { motion } from "framer-motion";
 
@@ -67,7 +67,7 @@ function Templates(props: props) {
         ]}
         gap="8"
       >
-        {R.map(
+        {map(
           (item) => (
             <Flex
               key={item.id}
@@ -115,7 +115,7 @@ function Templates(props: props) {
                   </Button>
                 </Center>
               </Box>
-              <Text>{R.toUpper(item.design.template)}</Text>
+              <Text>{toUpper(item.design.template)}</Text>
             </Flex>
           ),
           LANDING_RESUMES_LIST

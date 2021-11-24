@@ -10,7 +10,7 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
-import * as R from "ramda";
+import { map } from "ramda";
 import { useMediaQuery } from "@react-hookz/web";
 
 import { Export } from "../../types";
@@ -73,7 +73,7 @@ function ExportResumeModal(props: props) {
           <>
             <Text mb="2">Choose export format.</Text>
             <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gap="4">
-              {R.map((item) => {
+              {map((item) => {
                 const isDisabled = getIsDisabled(item.value);
                 return (
                   <Button

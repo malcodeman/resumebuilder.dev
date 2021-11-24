@@ -1,5 +1,5 @@
 import { Heading, Grid, Box, Text, Center } from "@chakra-ui/react";
-import * as R from "ramda";
+import { map } from "ramda";
 
 import Rocket from "../../emoji/Rocket";
 import MoneyWithWings from "../../emoji/MoneyWithWings";
@@ -30,7 +30,7 @@ function Features() {
         <Heading>Privacy-focused and login-free.</Heading>
       </Center>
       <Grid templateColumns={["1fr", "1fr 1fr 1fr"]} gap="8">
-        {R.map(
+        {map(
           (item) => (
             <Center key={item.title} flexDirection="column">
               {item.emoji}

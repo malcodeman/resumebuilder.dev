@@ -8,7 +8,7 @@ import {
   Tbody,
   Td,
 } from "@chakra-ui/react";
-import * as R from "ramda";
+import { map } from "ramda";
 
 type props = {
   size?: "sm" | "md" | "lg";
@@ -41,13 +41,13 @@ function Table(props: props) {
   return (
     <ChakraTable size={size} {...getTableProps()}>
       <Thead>
-        {R.map(
+        {map(
           (group) => (
             <Tr
               {...group.getHeaderGroupProps()}
               key={group.getHeaderGroupProps().key}
             >
-              {R.map(
+              {map(
                 (column) => (
                   <Th
                     {...column.getHeaderProps()}
@@ -64,11 +64,11 @@ function Table(props: props) {
         )}
       </Thead>
       <Tbody {...getTableBodyProps()}>
-        {R.map((row) => {
+        {map((row) => {
           prepareRow(row);
           return (
             <Tr {...row.getRowProps()} key={row.getRowProps().key}>
-              {R.map((cell) => {
+              {map((cell) => {
                 return (
                   <Td {...cell.getCellProps()} key={cell.getCellProps().key}>
                     {cell.render("Cell")}

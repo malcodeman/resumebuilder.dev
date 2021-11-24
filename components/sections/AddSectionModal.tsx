@@ -11,7 +11,7 @@ import {
   Grid,
   Text,
 } from "@chakra-ui/react";
-import * as R from "ramda";
+import { map } from "ramda";
 
 import { Section } from "../../types";
 
@@ -60,7 +60,7 @@ function AddSectionModal(props: props) {
             gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]}
             gap="4"
           >
-            {R.map((item) => {
+            {map((item) => {
               return (
                 <Button
                   key={item.label}
@@ -78,7 +78,7 @@ function AddSectionModal(props: props) {
           </Grid>
           <Text mb="2">Custom sections</Text>
           <Grid gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]} gap="4">
-            {R.map((item) => {
+            {map((item) => {
               return (
                 <Button
                   key={item.label}

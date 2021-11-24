@@ -10,7 +10,7 @@ import {
   Grid,
   useColorModeValue,
 } from "@chakra-ui/react";
-import * as R from "ramda";
+import { map } from "ramda";
 
 import { TEMPLATES_LIST } from "../../lib/constants";
 import getTemplate from "../../lib/getTemplate";
@@ -51,7 +51,7 @@ function TemplatesModal(props: props) {
               lg: "1fr 1fr 1fr",
             }}
           >
-            {R.map((item) => {
+            {map((item) => {
               return (
                 <Box
                   key={item.title}
