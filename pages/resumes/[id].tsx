@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { Grid, Box, Text, Center, Button, Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import * as R from "ramda";
+import { isNil } from "ramda";
 import Link from "next/link";
 import { useLocalStorageValue, useMountEffect } from "@react-hookz/web";
 
@@ -42,7 +42,7 @@ function Builder() {
     );
   }
 
-  if (R.isNil(resume)) {
+  if (isNil(resume)) {
     return (
       <>
         <Head>

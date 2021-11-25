@@ -14,7 +14,7 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import { useUpdateEffect, useMediaQuery } from "@react-hookz/web";
-import * as R from "ramda";
+import { findIndex, propEq, isEmpty, find } from "ramda";
 
 import PersonalDetailsSection from "../../components/sections/PersonalDetailsSection";
 import TagListSection from "../../components/sections/TagListSection";
@@ -90,18 +90,15 @@ function Sections(props: props) {
   }, [resume?.id]);
 
   function handleOnDragStart(event: DragStartEvent) {
-    const item = R.find(
-      (item) => item.id === event.active.id,
-      fieldArray.fields
-    );
+    const item = find((item) => item.id === event.active.id, fieldArray.fields);
     setActiveLabel(item.label);
   }
 
   function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active.id !== over.id) {
-      const from = R.findIndex(R.propEq("id", active.id))(fieldArray.fields);
-      const to = R.findIndex(R.propEq("id", over.id))(fieldArray.fields);
+      const from = findIndex(propEq("id", active.id))(fieldArray.fields);
+      const to = findIndex(propEq("id", over.id))(fieldArray.fields);
       fieldArray.swap(from, to);
     }
   }
@@ -170,7 +167,7 @@ function Sections(props: props) {
               })}
             </SortableContext>
             <DragOverlay>
-              {R.isEmpty(activeLabel) ? null : (
+              {isEmpty(activeLabel) ? null : (
                 <DraggableItem>{activeLabel}</DraggableItem>
               )}
             </DragOverlay>

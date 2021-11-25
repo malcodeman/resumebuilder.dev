@@ -1,4 +1,4 @@
-import * as R from "ramda";
+import { and, isEmpty, split } from "ramda";
 
 import utils from "../../lib/utils";
 import theme from "../theme";
@@ -104,7 +104,7 @@ function LondonReact(props: props) {
   } as const;
 
   function renderLocation(about: AboutField) {
-    if (R.and(R.isEmpty(about.city), R.isEmpty(about.country))) {
+    if (and(isEmpty(about.city), isEmpty(about.country))) {
       return null;
     }
     return (
@@ -115,7 +115,7 @@ function LondonReact(props: props) {
   }
 
   function renderDate(item: { startDate: string; endDate: string }) {
-    if (R.and(R.isEmpty(item.startDate), R.isEmpty(item.endDate))) {
+    if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
     }
     return (
@@ -134,10 +134,10 @@ function LondonReact(props: props) {
     endDate: string;
     description: string;
   }) {
-    if (R.and(R.isEmpty(item.title), R.isEmpty(item.subtitle))) {
+    if (and(isEmpty(item.title), isEmpty(item.subtitle))) {
       return null;
     }
-    if (R.isEmpty(item.website)) {
+    if (isEmpty(item.website)) {
       return (
         <p style={styles.sectionTitle}>
           {item.title}, {item.subtitle}
@@ -167,7 +167,7 @@ function LondonReact(props: props) {
         <p style={styles.name}>
           {about.firstName} {about.lastName}
         </p>
-        {R.split("\n", about.summary).map((item, index) => (
+        {split("\n", about.summary).map((item, index) => (
           <p key={index} style={styles.summary}>
             {item}
           </p>
@@ -185,7 +185,7 @@ function LondonReact(props: props) {
                       <div style={styles.leftColumn}>{renderDate(item)}</div>
                       <div style={styles.rightColumn}>
                         {renderTitle(item)}
-                        {R.split("\n", item.description).map((item, index) => (
+                        {split("\n", item.description).map((item, index) => (
                           <p key={index} style={styles.sectionDescription}>
                             {item}
                           </p>
@@ -200,9 +200,9 @@ function LondonReact(props: props) {
           return (
             <div key={index}>
               <p style={styles.sectionLabel}>{sectionItem.label}</p>
-              {R.isEmpty(sectionItem.tags) ? null : (
+              {isEmpty(sectionItem.tags) ? null : (
                 <div style={styles.list}>
-                  {R.split("\n", sectionItem.tags).map((item, index) => (
+                  {split("\n", sectionItem.tags).map((item, index) => (
                     <p key={index} style={styles.listItem}>
                       {item}
                     </p>

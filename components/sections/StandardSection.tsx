@@ -5,7 +5,7 @@ import {
   FieldArrayMethodProps,
   useFormContext,
 } from "react-hook-form";
-import * as R from "ramda";
+import { findIndex, propEq, and, equals, not, find, isEmpty } from "ramda";
 import { useSortable, SortableContext } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
@@ -73,18 +73,18 @@ function StandardSection(props: props) {
     })
   );
   const [activeLabel, setActiveLabel] = React.useState({});
-  const isOver = R.and(R.not(isDragging), R.equals(overIndex, index));
+  const isOver = and(not(isDragging), equals(overIndex, index));
 
   function handleOnDragStart(event: DragStartEvent) {
-    const item = R.find((item) => item.id === event.active.id, fieldsNested);
+    const item = find((item) => item.id === event.active.id, fieldsNested);
     setActiveLabel(item.title || "Untitled");
   }
 
   function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active.id !== over.id) {
-      const from = R.findIndex(R.propEq("id", active.id))(fieldsNested);
-      const to = R.findIndex(R.propEq("id", over.id))(fieldsNested);
+      const from = findIndex(propEq("id", active.id))(fieldsNested);
+      const to = findIndex(propEq("id", over.id))(fieldsNested);
       swapNested(from, to);
     }
   }
@@ -121,7 +121,7 @@ function StandardSection(props: props) {
           />
           {isExpanded ? (
             <AccordionPanel>
-              {R.isEmpty(fieldsNested) ? (
+              {isEmpty(fieldsNested) ? (
                 <Box
                   paddingY="2"
                   paddingInlineStart="calc(1.5rem + 20px)"
@@ -162,7 +162,7 @@ function StandardSection(props: props) {
                   })}
                 </SortableContext>
                 <DragOverlay>
-                  {R.isEmpty(activeLabel) ? null : (
+                  {isEmpty(activeLabel) ? null : (
                     <DraggableItem>{activeLabel}</DraggableItem>
                   )}
                 </DragOverlay>

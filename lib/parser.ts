@@ -1,4 +1,4 @@
-import * as R from "ramda";
+import { map, join, split, uniq, filter, isNil } from "ramda";
 
 import { Fields } from "../types";
 
@@ -8,8 +8,8 @@ function parseJsonResume(text: string): Fields {
   const fields = {
     about: {
       title: basics.label,
-      firstName: R.split(" ", basics.name)[0],
-      lastName: R.split(" ", basics.name)[1],
+      firstName: split(" ", basics.name)[0],
+      lastName: split(" ", basics.name)[1],
       email: basics.email,
       phone: basics.phone,
       website: basics.url,
@@ -21,7 +21,7 @@ function parseJsonResume(text: string): Fields {
       {
         name: "standardSection" as const,
         label: "Work",
-        nested: R.map(
+        nested: map(
           (item) => ({
             title: item.name,
             subtitle: item.position,
@@ -37,7 +37,7 @@ function parseJsonResume(text: string): Fields {
       {
         name: "standardSection" as const,
         label: "Volunteer",
-        nested: R.map(
+        nested: map(
           (item) => ({
             title: item.organization,
             subtitle: item.position,
@@ -53,7 +53,7 @@ function parseJsonResume(text: string): Fields {
       {
         name: "standardSection" as const,
         label: "Education",
-        nested: R.map(
+        nested: map(
           (item) => ({
             title: item.institution,
             subtitle: item.studyType,
@@ -69,15 +69,15 @@ function parseJsonResume(text: string): Fields {
       {
         name: "tagListSection" as const,
         label: "Awards",
-        tags: R.join(
+        tags: join(
           "\n",
-          R.map((item) => item.title, json.awards)
+          map((item) => item.title, json.awards)
         ),
       },
       {
         name: "standardSection" as const,
         label: "Publications",
-        nested: R.map(
+        nested: map(
           (item) => ({
             title: item.name,
             subtitle: item.publisher,
@@ -93,31 +93,31 @@ function parseJsonResume(text: string): Fields {
       {
         name: "tagListSection" as const,
         label: "Skills",
-        tags: R.join(
+        tags: join(
           "\n",
-          R.map((item) => item.name, json.skills)
+          map((item) => item.name, json.skills)
         ),
       },
       {
         name: "tagListSection" as const,
         label: "Languages",
-        tags: R.join(
+        tags: join(
           "\n",
-          R.map((item) => item.language, json.languages)
+          map((item) => item.language, json.languages)
         ),
       },
       {
         name: "tagListSection" as const,
         label: "Interests",
-        tags: R.join(
+        tags: join(
           "\n",
-          R.map((item) => item.name, json.interests)
+          map((item) => item.name, json.interests)
         ),
       },
       {
         name: "standardSection" as const,
         label: "Projects",
-        nested: R.map(
+        nested: map(
           (item) => ({
             title: item.name,
             subtitle: item.description,
@@ -148,10 +148,10 @@ function parseGithub(data: {
   };
   repos: { language: string | null }[];
 }): Fields {
-  const skills = R.uniq(
-    R.filter(
-      (item) => !R.isNil(item),
-      R.map((item) => item.language, data.repos)
+  const skills = uniq(
+    filter(
+      (item) => !isNil(item),
+      map((item) => item.language, data.repos)
     )
   );
   const fields = {
@@ -170,7 +170,7 @@ function parseGithub(data: {
       {
         name: "tagListSection" as const,
         label: "Skills",
-        tags: R.join("\n", skills),
+        tags: join("\n", skills),
       },
     ],
   };

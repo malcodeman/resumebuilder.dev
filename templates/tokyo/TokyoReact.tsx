@@ -1,4 +1,4 @@
-import * as R from "ramda";
+import { and, isEmpty } from "ramda";
 
 import utils from "../../lib/utils";
 import theme from "../theme";
@@ -90,7 +90,7 @@ function TokyoReact(props: props) {
   } as const;
 
   function renderDate(item: { startDate: string; endDate: string }) {
-    if (R.and(R.isEmpty(item.startDate), R.isEmpty(item.endDate))) {
+    if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
     }
     return (

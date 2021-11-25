@@ -11,7 +11,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import Head from "next/head";
-import * as R from "ramda";
+import { map } from "ramda";
 import AppleIcon from "simple-icons/icons/apple";
 import MicrosoftIcon from "simple-icons/icons/microsoft";
 
@@ -50,7 +50,7 @@ function Downloads() {
         </Center>
         <Container maxW="container.md" paddingInline="0">
           <Grid templateColumns={["1fr", "1fr 1fr"]} gap="8">
-            {R.map(
+            {map(
               (item) => (
                 <Tooltip key={item.title} label="Coming Soon">
                   <Flex flexDirection="column">

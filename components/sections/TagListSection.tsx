@@ -2,7 +2,7 @@ import { AccordionItem } from "@chakra-ui/react";
 import { FieldArrayMethodProps, useFormContext } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import * as R from "ramda";
+import { and, not, equals } from "ramda";
 
 import SectionHeader from "./SectionHeader";
 import TagListSectionBody from "./TagListSectionBody";
@@ -38,7 +38,7 @@ function TagListSection(props: props) {
     transform: CSS.Translate.toString(transform),
     transition,
   };
-  const isOver = R.and(R.not(isDragging), R.equals(overIndex, index));
+  const isOver = and(not(isDragging), equals(overIndex, index));
 
   return (
     <AccordionItem

@@ -1,6 +1,6 @@
 import { useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
-import * as R from "ramda";
+import { isNil, find, map, filter } from "ramda";
 
 import { Resume } from "../types";
 
@@ -32,13 +32,13 @@ function useResume(
       initializeWithStorageValue,
     }
   );
-  const resume = R.isNil(resumes)
+  const resume = isNil(resumes)
     ? undefined
-    : R.find((item) => item.id === id, resumes);
-  const isLoading = R.isNil(id) || R.isNil(resumes);
+    : find((item) => item.id === id, resumes);
+  const isLoading = isNil(id) || isNil(resumes);
 
   function setResume(nextResume: Resume) {
-    const nextResumes = R.map((item) => {
+    const nextResumes = map((item) => {
       if (item.id === id) {
         return nextResume;
       }
@@ -48,7 +48,7 @@ function useResume(
   }
 
   function removeResume() {
-    const nextResumes = R.filter((item) => item.id !== id, resumes);
+    const nextResumes = filter((item) => item.id !== id, resumes);
     setResumes(nextResumes);
   }
 

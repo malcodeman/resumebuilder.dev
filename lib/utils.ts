@@ -5,7 +5,7 @@ import CSSReset from "@chakra-ui/css-reset";
 import * as htmlToImage from "html-to-image";
 import { createStandaloneToast } from "@chakra-ui/react";
 import faker from "faker";
-import * as R from "ramda";
+import { join, split } from "ramda";
 
 import getTemplate from "./getTemplate";
 
@@ -158,18 +158,12 @@ function generateFakeResume(): Fields {
       {
         name: "skillsSection" as const,
         label: "Skills",
-        tags: R.join(
-          "\n",
-          R.split(" ", faker.lorem.words(getRandomInt(1, 10)))
-        ),
+        tags: join("\n", split(" ", faker.lorem.words(getRandomInt(1, 10)))),
       },
       {
         name: "hobbiesSection" as const,
         label: "Hobbies",
-        tags: R.join(
-          "\n",
-          R.split(" ", faker.lorem.words(getRandomInt(1, 10)))
-        ),
+        tags: join("\n", split(" ", faker.lorem.words(getRandomInt(1, 10)))),
       },
     ],
   };

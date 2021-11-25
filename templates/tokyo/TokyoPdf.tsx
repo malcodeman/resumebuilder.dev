@@ -7,7 +7,7 @@ import {
   Text,
   Link,
 } from "@react-pdf/renderer";
-import * as R from "ramda";
+import { and, isEmpty } from "ramda";
 
 Font.register({
   family: "Roboto",
@@ -109,7 +109,7 @@ function TokyoPdf(props: props) {
   });
 
   function renderDate(item: { startDate: string; endDate: string }) {
-    if (R.and(R.isEmpty(item.startDate), R.isEmpty(item.endDate))) {
+    if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
     }
     return (

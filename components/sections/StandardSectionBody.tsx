@@ -14,7 +14,7 @@ import {
 import { useFormContext, useWatch } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import * as R from "ramda";
+import { and, not, equals } from "ramda";
 
 import SectionHeader from "./SectionHeader";
 
@@ -39,7 +39,7 @@ function Header({ index, nestIndex, isDragging, onRemove, onDuplicate }) {
   const { isOpen, onClose } = useAccordionItemState();
 
   React.useEffect(() => {
-    if (R.and(isOpen, isDragging)) {
+    if (and(isOpen, isDragging)) {
       onClose();
     }
   }, [isOpen, isDragging, onClose]);
@@ -98,7 +98,7 @@ function StandardSectionBody(props: props) {
     transform: CSS.Translate.toString(transform),
     transition,
   };
-  const isOver = R.and(R.not(isDragging), R.equals(overIndex, nestIndex));
+  const isOver = and(not(isDragging), equals(overIndex, nestIndex));
 
   function onPointerDownHandler(e: React.PointerEvent<HTMLDivElement>) {
     e.stopPropagation();

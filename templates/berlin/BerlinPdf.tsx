@@ -7,7 +7,7 @@ import {
   Text,
   Link,
 } from "@react-pdf/renderer";
-import * as R from "ramda";
+import { isEmpty, and } from "ramda";
 
 Font.register({
   family: "Roboto",
@@ -118,7 +118,7 @@ function BerlinPdf(props: props) {
   });
 
   function renderDate(item: { startDate: string; endDate: string }) {
-    if (R.and(R.isEmpty(item.startDate), R.isEmpty(item.endDate))) {
+    if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
     }
     return `${item.startDate} - ${item.endDate}`;

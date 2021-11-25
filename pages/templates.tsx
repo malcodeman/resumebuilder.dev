@@ -14,7 +14,7 @@ import Head from "next/head";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
-import * as R from "ramda";
+import { includes, map, filter } from "ramda";
 
 import Layout from "../components/Layout";
 
@@ -50,9 +50,9 @@ function Templates() {
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"
   );
-  const [filter, setFilter] = React.useState(FILTERS[0].value);
-  const filteredResumes = R.filter(
-    (item) => R.includes(filter, item.tags),
+  const [activeFilter, setActiveFilter] = React.useState(FILTERS[0].value);
+  const filteredResumes = filter(
+    (item) => includes(activeFilter, item.tags),
     TEMPLATES_LIST
   );
 
@@ -73,16 +73,16 @@ function Templates() {
   return (
     <>
       <Head>
-        <title>Templates - resumebuilder.dev</title>
+        <title>Templates - resumebuildedev</title>
       </Head>
       <Layout>
         <ButtonGroup size="sm" mb="4" variant="ghost">
-          {R.map(
+          {map(
             (item) => (
               <Button
                 key={item.value}
-                isActive={filter === item.value}
-                onClick={() => setFilter(item.value)}
+                isActive={activeFilter === item.value}
+                onClick={() => setActiveFilter(item.value)}
               >
                 {item.label}
               </Button>
@@ -94,7 +94,7 @@ function Templates() {
           gap="8"
           gridTemplateColumns="repeat(auto-fill, minmax(288px, 1fr))"
         >
-          {R.map(
+          {map(
             (item) => (
               <Box key={item.template}>
                 <Image

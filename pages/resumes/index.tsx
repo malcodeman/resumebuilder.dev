@@ -36,7 +36,17 @@ import {
   useMountEffect,
 } from "@react-hookz/web";
 import { useRouter } from "next/router";
-import * as R from "ramda";
+import {
+  map,
+  filter,
+  propEq,
+  findIndex,
+  isNil,
+  move,
+  isEmpty,
+  toLower,
+  includes,
+} from "ramda";
 import {
   DndContext,
   PointerSensor,
@@ -245,7 +255,7 @@ function ResumeGrid() {
   }
 
   function handleOnTitleChange(id: string, nextValue: string) {
-    const nextResumes = R.map((item) => {
+    const nextResumes = map((item) => {
       if (item.id === id) {
         return {
           ...item,
@@ -259,7 +269,7 @@ function ResumeGrid() {
   }
 
   function handleOnIconChange(id: string, emoji: string) {
-    const nextResumes = R.map((item) => {
+    const nextResumes = map((item) => {
       if (item.id === id) {
         return {
           ...item,
@@ -275,14 +285,14 @@ function ResumeGrid() {
   function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active.id !== over.id) {
-      const from = R.findIndex(R.propEq("id", active.id))(resumes);
-      const to = R.findIndex(R.propEq("id", over.id))(resumes);
-      const nextResumes = R.move(from, to, resumes);
+      const from = findIndex(propEq("id", active.id))(resumes);
+      const to = findIndex(propEq("id", over.id))(resumes);
+      const nextResumes = move(from, to, resumes);
       setResumes(nextResumes);
     }
   }
 
-  if (R.isNil(resumes)) {
+  if (isNil(resumes)) {
     return (
       <Center>
         <Spinner />
@@ -290,17 +300,17 @@ function ResumeGrid() {
     );
   }
 
-  if (R.isEmpty(resumes)) {
+  if (isEmpty(resumes)) {
     return <EmptyResumes />;
   }
 
-  const filteredResumes = R.filter(
-    (item) => R.includes(R.toLower(field.value), R.toLower(item.title)),
+  const filteredResumes = filter(
+    (item) => includes(toLower(field.value), toLower(item.title)),
     resumes
   );
 
   function renderResumes() {
-    if (R.isEmpty(filteredResumes)) {
+    if (isEmpty(filteredResumes)) {
       return <Text>No resumes found</Text>;
     }
     if (view === "grid") {
@@ -312,7 +322,7 @@ function ResumeGrid() {
         >
           <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
             <SortableContext items={filteredResumes}>
-              {R.map(
+              {map(
                 (item) => (
                   <ResumeItem
                     key={item.id}
@@ -354,7 +364,7 @@ function ResumeGrid() {
             variant="filled"
           />
           <InputRightElement>
-            {R.isEmpty(field.value) ? (
+            {isEmpty(field.value) ? (
               <Kbd>S</Kbd>
             ) : (
               <IconButton

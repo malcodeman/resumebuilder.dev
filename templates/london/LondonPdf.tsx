@@ -7,7 +7,7 @@ import {
   Document,
   StyleSheet,
 } from "@react-pdf/renderer";
-import * as R from "ramda";
+import { and, isEmpty, split } from "ramda";
 
 import utils from "../../lib/utils";
 import theme from "../theme";
@@ -123,7 +123,7 @@ function LondonPdf(props: props) {
   });
 
   function renderLocation(about: AboutField) {
-    if (R.and(R.isEmpty(about.city), R.isEmpty(about.country))) {
+    if (and(isEmpty(about.city), isEmpty(about.country))) {
       return null;
     }
     return (
@@ -134,7 +134,7 @@ function LondonPdf(props: props) {
   }
 
   function renderDate(item: { startDate: string; endDate: string }) {
-    if (R.and(R.isEmpty(item.startDate), R.isEmpty(item.endDate))) {
+    if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
     }
     return (
@@ -153,10 +153,10 @@ function LondonPdf(props: props) {
     endDate: string;
     description: string;
   }) {
-    if (R.and(R.isEmpty(item.title), R.isEmpty(item.subtitle))) {
+    if (and(isEmpty(item.title), isEmpty(item.subtitle))) {
       return null;
     }
-    if (R.isEmpty(item.website)) {
+    if (isEmpty(item.website)) {
       return (
         <Text style={styles.sectionTitle}>
           {item.title}, {item.subtitle}
@@ -187,7 +187,7 @@ function LondonPdf(props: props) {
           <Text style={styles.name}>
             {about.firstName} {about.lastName}
           </Text>
-          {R.split("\n", about.summary).map((item, index) => (
+          {split("\n", about.summary).map((item, index) => (
             <Text key={index} style={styles.summary}>
               {item}
             </Text>
@@ -207,16 +207,11 @@ function LondonPdf(props: props) {
                         </View>
                         <View style={styles.rightColumn}>
                           {renderTitle(item)}
-                          {R.split("\n", item.description).map(
-                            (item, index) => (
-                              <Text
-                                key={index}
-                                style={styles.sectionDescription}
-                              >
-                                {item}
-                              </Text>
-                            )
-                          )}
+                          {split("\n", item.description).map((item, index) => (
+                            <Text key={index} style={styles.sectionDescription}>
+                              {item}
+                            </Text>
+                          ))}
                         </View>
                       </View>
                     );
@@ -227,9 +222,9 @@ function LondonPdf(props: props) {
             return (
               <View key={index}>
                 <Text style={styles.sectionLabel}>{sectionItem.label}</Text>
-                {R.isEmpty(sectionItem.tags) ? null : (
+                {isEmpty(sectionItem.tags) ? null : (
                   <View style={styles.list}>
-                    {R.split("\n", sectionItem.tags).map((item, index) => (
+                    {split("\n", sectionItem.tags).map((item, index) => (
                       <Text key={index} style={styles.listItem}>
                         {item}
                       </Text>
