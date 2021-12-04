@@ -8,12 +8,14 @@ import {
 } from "@chakra-ui/react";
 import { UseFormReturn } from "react-hook-form";
 import { Layers as IconLayers } from "react-feather";
+import { trackGoal } from "fathom-client";
 
 import Logo from "../Logo";
 import HeaderPopover from "./HeaderPopover";
 import ResumeTitle from "./ResumeTitle";
 import TemplatesModal from "./TemplatesModal";
 
+import { FATHOM_EVENTS } from "../../lib/constants";
 import utils from "../../lib/utils";
 
 import { Resume, Fields, Template } from "../../types";
@@ -65,6 +67,11 @@ function Header(props: props) {
     form.setValue("design.template", nextTemplate);
   }
 
+  function handleOnExportAsPdf() {
+    utils.exportAsPdf(form.getValues());
+    trackGoal(FATHOM_EVENTS.EXPORT_AS_PDF, 0);
+  }
+
   return (
     <Box
       {...props}
@@ -86,18 +93,14 @@ function Header(props: props) {
             values={form.getValues()}
             onChangeTemplate={handleOnChangeTemplate}
           />
-          <Button
-            mr="2"
-            size="sm"
-            onClick={() => utils.exportAsPdf(form.getValues())}
-          >
+          <Button mr="2" size="sm" onClick={handleOnExportAsPdf}>
             Export PDF
           </Button>
           <HeaderPopover
             values={form.getValues()}
             onImport={handleOnImport}
             onChangeTemplate={handleOnChangeTemplate}
-            onPdfExport={() => utils.exportAsPdf(form.getValues())}
+            onPdfExport={handleOnExportAsPdf}
             onJsonExport={() => utils.exportAsJson(form.getValues())}
             onHtmlExport={() => utils.exportAsHtml(form.getValues())}
             onPngExport={() => utils.exportAsPng(form.getValues())}

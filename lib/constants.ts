@@ -142,10 +142,13 @@ const TEMPLATES_LIST = [
     tags: ["all", "simple", "creative"],
   },
 ];
-
 const VIEWS = {
   GRID: "grid",
   LIST: "list",
+};
+const FATHOM_SITE_ID = "ZMOHRXZI";
+const FATHOM_EVENTS = {
+  EXPORT_AS_PDF: "0UNUBD1E",
 };
 
 export {
@@ -156,4 +159,6 @@ export {
   LANDING_RESUMES_LIST,
   TEMPLATES_LIST,
   VIEWS,
+  FATHOM_SITE_ID,
+  FATHOM_EVENTS,
 };

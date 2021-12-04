@@ -8,11 +8,13 @@ import {
 } from "@chakra-ui/react";
 import { Home } from "react-feather";
 import { UseFormReturn } from "react-hook-form";
+import { trackGoal } from "fathom-client";
 
 import NavLink from "../misc/NavLink";
 import HeaderPopover from "./HeaderPopover";
 import ResumeTitle from "./ResumeTitle";
 
+import { FATHOM_EVENTS } from "../../lib/constants";
 import utils from "../../lib/utils";
 
 import { Resume, Fields, Template } from "../../types";
@@ -36,6 +38,11 @@ function HeaderMobile(props: props) {
 
   function handleOnChangeTemplate(nextTemplate: Template) {
     form.setValue("design.template", nextTemplate);
+  }
+
+  function handleOnExportAsPdf() {
+    utils.exportAsPdf(form.getValues());
+    trackGoal(FATHOM_EVENTS.EXPORT_AS_PDF, 0);
   }
 
   return (
@@ -64,7 +71,7 @@ function HeaderMobile(props: props) {
             values={form.getValues()}
             onImport={handleOnImport}
             onChangeTemplate={handleOnChangeTemplate}
-            onPdfExport={() => utils.exportAsPdf(form.getValues())}
+            onPdfExport={handleOnExportAsPdf}
             onJsonExport={() => utils.exportAsJson(form.getValues())}
             onHtmlExport={() => utils.exportAsHtml(form.getValues())}
             onPngExport={() => utils.exportAsPng(form.getValues())}
