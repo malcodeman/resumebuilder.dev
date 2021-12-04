@@ -41,12 +41,28 @@ const FAQ = [
       <>
         <Text>
           We use{" "}
-          <ChakraLink href="https://usefathom.com/">
+          <ChakraLink href="https://usefathom.com/" color="blue.400" isExternal>
             Fathom Analytics
           </ChakraLink>
           , which is privacy-focused and GDPR compliant.
         </Text>
       </>
+    ),
+  },
+  {
+    question: "Is resumebuilder.dev open source?",
+    answer: (
+      <Text>
+        Yes, you can find the source code{" "}
+        <ChakraLink
+          href="https://github.com/malcodeman/resumebuilder.dev"
+          color="blue.400"
+          isExternal
+        >
+          here
+        </ChakraLink>
+        .
+      </Text>
     ),
   },
   {
@@ -57,7 +73,13 @@ const FAQ = [
         <List>
           <ListItem>
             <ListIcon as={CheckCircle} color="green.500" />
-            <ChakraLink href="https://jsonresume.org/">JSON Resume</ChakraLink>
+            <ChakraLink
+              href="https://jsonresume.org/"
+              color="blue.400"
+              isExternal
+            >
+              JSON Resume
+            </ChakraLink>
           </ListItem>
           <ListItem>
             <ListIcon as={CheckCircle} color="green.500" />
@@ -117,7 +139,13 @@ const FAQ = [
         <List>
           <ListItem>
             <ListIcon as={Circle} />
-            <ChakraLink href="https://jsonresume.org/">JSON Resume</ChakraLink>
+            <ChakraLink
+              href="https://jsonresume.org/"
+              color="blue.400"
+              isExternal
+            >
+              JSON Resume
+            </ChakraLink>
           </ListItem>
         </List>
       </>
@@ -129,7 +157,7 @@ function Faq() {
   return (
     <Box as="section" marginBottom="16">
       <Heading mb="4">Frequently asked questions</Heading>
-      <Accordion defaultIndex={[0]}>
+      <Accordion defaultIndex={[0]} allowMultiple>
         {map(
           (item) => (
             <AccordionItem key={item.question}>
