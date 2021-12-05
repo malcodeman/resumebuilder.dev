@@ -10,8 +10,21 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Check } from "react-feather";
+import { map } from "ramda";
 
 import WorkspaceIllustration from "../../illustrations/Workspace";
+
+const LIST = [
+  {
+    text: "Unlimited resumes",
+  },
+  {
+    text: "Unlimited sections",
+  },
+  {
+    text: "Unlimited downloads",
+  },
+];
 
 type props = {
   onSubmit: () => void;
@@ -37,15 +50,20 @@ function Footer(props: props) {
       >
         Build for free
       </Button>
-      <Grid templateColumns={["1fr", "1fr 1fr"]} gap="2" mb="16">
-        <Flex alignItems="center">
-          <Check size={16} style={{ marginRight: "0.5rem" }} />
-          <Text mr="2">Unlimited resumes</Text>
-        </Flex>
-        <Flex alignItems="center">
-          <Check size={16} style={{ marginRight: "0.5rem" }} />
-          <Text mr="2">Unlimited sections</Text>
-        </Flex>
+      <Grid
+        templateColumns={["1fr", `repeat(${LIST.length}, 1fr)`]}
+        gap="2"
+        mb="16"
+      >
+        {map(
+          (item) => (
+            <Flex alignItems="center">
+              <Check size={16} style={{ marginRight: "0.5rem" }} />
+              <Text mr="2">{item.text}</Text>
+            </Flex>
+          ),
+          LIST
+        )}
       </Grid>
       <Container maxW="container.sm" paddingInline="0">
         <WorkspaceIllustration fill={fill} stroke={stroke} />
