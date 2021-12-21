@@ -1,25 +1,22 @@
 import { Heading, Grid, Box, Text, Center } from "@chakra-ui/react";
 import { map } from "ramda";
-
-import Rocket from "../../emoji/Rocket";
-import MoneyWithWings from "../../emoji/MoneyWithWings";
-import Lock from "../../emoji/Lock";
+import { Lock, Gift, FastForward } from "react-feather";
 
 const FEATURES = [
   {
     title: "Privacy first",
     text: "Own and manage your own database.",
-    emoji: <Lock size={48} />,
+    icon: <Lock size={48} color="#f82b60" />,
   },
   {
     title: "Free forever",
     text: "Anyone can build resumes.",
-    emoji: <MoneyWithWings size={48} />,
+    icon: <Gift size={48} color="#ff6f2c" />,
   },
   {
     title: "Fast",
     text: "Statically-rendered pages.",
-    emoji: <Rocket size={48} />,
+    icon: <FastForward size={48} color="#fcb400" />,
   },
 ];
 
@@ -33,7 +30,7 @@ function Features() {
         {map(
           (item) => (
             <Center key={item.title} flexDirection="column">
-              {item.emoji}
+              {item.icon}
               <Heading mb="4">{item.title}</Heading>
               <Text>{item.text}</Text>
             </Center>
