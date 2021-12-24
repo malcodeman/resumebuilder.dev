@@ -57,7 +57,7 @@ function Footer(props: props) {
       >
         {map(
           (item) => (
-            <Flex alignItems="center">
+            <Flex key={item.text} alignItems="center">
               <Check size={16} style={{ marginRight: "0.5rem" }} />
               <Text mr="2">{item.text}</Text>
             </Flex>

@@ -53,13 +53,13 @@ const FAQ = [
     question: "Is resumebuilder.dev open source?",
     answer: (
       <Text>
-        Yes, you can find the source code{" "}
+        Yes, you can find the source code on{" "}
         <ChakraLink
           href="https://github.com/malcodeman/resumebuilder.dev"
           color="blue.400"
           isExternal
         >
-          here
+          GitHub
         </ChakraLink>
         .
       </Text>
