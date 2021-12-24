@@ -37,14 +37,14 @@ function Header(props: LayoutProps) {
             <Box mr="4">
               <Logo href="/" />
             </Box>
-            <NavLink href="/">
-              <Text mr="4">Home</Text>
+            <NavLink href="/" mr="4">
+              <Text>Home</Text>
             </NavLink>
-            <NavLink href="/templates">
-              <Text mr="4">Templates</Text>
+            <NavLink href="/templates" mr="4">
+              <Text>Templates</Text>
             </NavLink>
-            <NavLink href="/downloads">
-              <Text mr="4">Downloads</Text>
+            <NavLink href="/downloads" mr="4">
+              <Text>Downloads</Text>
             </NavLink>
           </Flex>
           <Link href="/resumes" passHref>
