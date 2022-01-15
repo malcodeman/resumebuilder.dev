@@ -81,6 +81,7 @@ function Landing() {
               as={motion.button}
               whileHover={{ scale: 1.1 }}
               colorScheme="blue"
+              data-cy="build-resume-button"
               onClick={() => handleOnSubmit()}
             >
               Build resume
