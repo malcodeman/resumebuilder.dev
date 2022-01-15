@@ -82,6 +82,7 @@ function Templates() {
               <Button
                 key={item.value}
                 isActive={activeFilter === item.value}
+                data-cy={`template-filters-${item.value}`}
                 onClick={() => setActiveFilter(item.value)}
               >
                 {item.label}
@@ -93,6 +94,7 @@ function Templates() {
         <Grid
           gap="8"
           gridTemplateColumns="repeat(auto-fill, minmax(288px, 1fr))"
+          data-cy="templates-grid"
         >
           {map(
             (item) => (
