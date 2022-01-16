@@ -4,8 +4,6 @@ beforeEach(() => {
 
 describe("Landing page", () => {
   it("Build resume button", () => {
-    expect(JSON.parse(localStorage.getItem("showDashboard"))).to.be.false;
-    expect(localStorage.getItem("resumes")).to.be.null;
     cy.get("[data-cy=build-resume-button]")
       .click()
       .should(() => {
@@ -19,8 +17,6 @@ describe("Landing page", () => {
     cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
   });
   it("Build for free button", () => {
-    expect(JSON.parse(localStorage.getItem("showDashboard"))).to.be.false;
-    expect(localStorage.getItem("resumes")).to.be.null;
     cy.get("[data-cy=build-for-free]")
       .click()
       .should(() => {

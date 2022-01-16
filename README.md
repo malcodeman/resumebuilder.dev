@@ -17,6 +17,17 @@ cd resumebuilder.dev
 yarn install && yarn dev
 ```
 
+## Testing
+
+Project contains both unit(`jest`) and e2e(`cypress`) tests.
+
+```
+"test": "jest --watch",
+"test:ci": "jest --ci",
+"cypress:open": "cypress open",
+"cypress:ci": "cypress run --headless"
+```
+
 ## License
 
 [MIT](./LICENSE)

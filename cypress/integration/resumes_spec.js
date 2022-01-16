@@ -4,8 +4,6 @@ beforeEach(() => {
 
 describe("Resumes page", () => {
   it("Start from scratch button", () => {
-    expect(JSON.parse(localStorage.getItem("showDashboard"))).to.be.true;
-    expect(localStorage.getItem("resumes")).to.be.null;
     cy.get("[data-cy=start-from-scratch]")
       .click()
       .should(() => {
