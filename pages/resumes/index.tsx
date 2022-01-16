@@ -318,7 +318,7 @@ function ResumeGrid() {
         <Grid
           gap="8"
           gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
-          data-cy="resumes_grid"
+          data-cy="resumes-grid"
         >
           <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
             <SortableContext items={filteredResumes}>

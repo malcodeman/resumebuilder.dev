@@ -38,13 +38,15 @@ function EmptyResumes() {
       icon: <Plus size={36} color={green} />,
       heading: "Start from scratch",
       text: "Create a new blank resume with custom sections and templates.",
+      dataCy: "start-from-scratch",
       onClick: () => handleOnNew(),
     },
     {
       color: blue,
       icon: <Upload size={36} color={blue} />,
-      heading: "Quicky upload",
+      heading: "Quickly upload",
       text: "Easily migrate your existing data in just a few seconds.",
+      dataCy: "quickly-upload",
       onClick: () => onOpen(),
     },
     {
@@ -52,6 +54,7 @@ function EmptyResumes() {
       icon: <Layers size={36} color={purple} />,
       heading: "Start with templates",
       text: "Select a template to get started and customize as you go.",
+      dataCy: "start-with-templates",
       onClick: () => router.push("/templates"),
     },
   ];
@@ -104,6 +107,7 @@ function EmptyResumes() {
               alignItems="center"
               flexDirection="column"
               boxShadow={boxShadow}
+              data-cy={item.dataCy}
               onClick={item.onClick}
             >
               <Flex
