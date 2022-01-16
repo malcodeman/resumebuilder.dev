@@ -29,6 +29,7 @@ function ImportFromGithub(props: props) {
           <Input
             variant="filled"
             borderRadius="md"
+            data-cy="import-github-username"
             {...form.register("username")}
           />
           <InputRightElement>
@@ -39,6 +40,7 @@ function ImportFromGithub(props: props) {
                 type="submit"
                 size="xs"
                 aria-label="Import"
+                data-cy="import-github-submit"
                 icon={<IconLink size={16} />}
               />
             )}

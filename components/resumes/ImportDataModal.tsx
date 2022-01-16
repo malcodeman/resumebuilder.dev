@@ -114,6 +114,7 @@ function ImportDataModal(props: props) {
                   variant="outline"
                   size="sm"
                   isDisabled={item.isDisabled}
+                  data-cy={`import-${item.value}`}
                   onClick={() => setSource(item.value)}
                 >
                   {item.label}

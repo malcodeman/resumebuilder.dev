@@ -17,4 +17,16 @@ describe("Resumes page", () => {
     cy.get("[data-cy=start-with-templates]").click();
     cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
   });
+  it("Import from GitHub", () => {
+    cy.get("[data-cy=import-button]").click();
+    cy.get("[data-cy=import-github]").click();
+    cy.get("[data-cy=import-github-username]").type("malcodeman");
+    cy.get("[data-cy=import-github-submit]")
+      .click()
+      .should(() => {
+        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
+      });
+    cy.get("[data-cy=resumes-grid]").children().should("have.length", 1);
+    cy.url().should("include", "/resumes/");
+  });
 });

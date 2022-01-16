@@ -56,7 +56,7 @@ function ResumeTitle(props: props) {
           maxWidth="256px"
         >
           <EditablePreview noOfLines={1} overflowWrap="anywhere" />
-          <EditableInput {...form.register("title")} />
+          <EditableInput data-cy="resume-title" {...form.register("title")} />
         </Editable>
       </Flex>
     );

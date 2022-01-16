@@ -146,6 +146,7 @@ function ImportDataButton() {
     <>
       <IconButton
         aria-label="Import"
+        data-cy="import-button"
         onClick={onOpen}
         icon={<IconUpload size={20} />}
       />
