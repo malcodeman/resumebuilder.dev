@@ -11,7 +11,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import Head from "next/head";
-import { map } from "ramda";
+import { map, toLower } from "ramda";
 import AppleIcon from "simple-icons/icons/apple";
 import MicrosoftIcon from "simple-icons/icons/microsoft";
 
@@ -68,7 +68,11 @@ function Downloads() {
                         {item.icon}
                       </Center>
                     </Box>
-                    <Button borderTopRadius="none" isDisabled={item.isDisabled}>
+                    <Button
+                      borderTopRadius="none"
+                      data-cy={`downloads-${toLower(item.title)}`}
+                      isDisabled={item.isDisabled}
+                    >
                       {item.text}
                     </Button>
                   </Flex>
