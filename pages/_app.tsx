@@ -1,10 +1,26 @@
 import type { AppProps } from "next/app";
 import React from "react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { load } from "fathom-client";
 import "emoji-mart/css/emoji-mart.css";
 
 import { FATHOM_SITE_ID } from "../lib/constants";
+
+const THEME = extendTheme({
+  styles: {
+    global: {
+      html: {
+        scrollbarWidth: "thin",
+      },
+      "html::-webkit-scrollbar": {
+        width: "8px",
+      },
+      "html::-webkit-scrollbar-thumb": {
+        backgroundColor: "#72757b",
+      },
+    },
+  },
+});
 
 function App({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
@@ -14,7 +30,7 @@ function App({ Component, pageProps }: AppProps) {
     });
   }, []);
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={THEME}>
       <Component {...pageProps} />
     </ChakraProvider>
   );
