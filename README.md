@@ -12,9 +12,10 @@ Resume builder for developers.
 ## Getting started
 
 ```
-git clone https://github.com/malcodeman/resumebuilder.dev.git resumebuilder.dev
+git clone https://github.com/malcodeman/resumebuilder.dev.git
 cd resumebuilder.dev
-yarn install && yarn dev
+yarn install
+yarn dev
 ```
 
 ## Testing
