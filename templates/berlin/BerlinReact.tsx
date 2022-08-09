@@ -107,7 +107,13 @@ function BerlinReact(props: props) {
     if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
     }
-    return `${item.startDate} - ${item.endDate}`;
+    if (isEmpty(item.startDate)) {
+      return ` | ${item.endDate}`;
+    }
+    if (isEmpty(item.endDate)) {
+      return ` | ${item.startDate}`;
+    }
+    return ` | ${item.startDate} - ${item.endDate}`;
   }
 
   return (
@@ -148,7 +154,8 @@ function BerlinReact(props: props) {
                       )}
                     </p>
                     <p style={styles.subtitle}>
-                      {item.subtitle || "subtitle"} | {item.city || "city"} |{" "}
+                      {isEmpty(item.subtitle) ? "" : item.subtitle}
+                      {isEmpty(item.city) ? "" : ` | ${item.city}`}
                       {renderDate(item)}
                     </p>
                     {item.description.split("\n").map((item, index) => (

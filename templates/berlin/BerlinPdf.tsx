@@ -121,7 +121,13 @@ function BerlinPdf(props: props) {
     if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
     }
-    return `${item.startDate} - ${item.endDate}`;
+    if (isEmpty(item.startDate)) {
+      return ` | ${item.endDate}`;
+    }
+    if (isEmpty(item.endDate)) {
+      return ` | ${item.startDate}`;
+    }
+    return ` | ${item.startDate} - ${item.endDate}`;
   }
 
   return (
@@ -167,7 +173,8 @@ function BerlinPdf(props: props) {
                         )}
                       </Text>
                       <Text style={styles.subtitle}>
-                        {item.subtitle || "subtitle"} | {item.city || "city"} |{" "}
+                        {isEmpty(item.subtitle) ? "" : item.subtitle}
+                        {isEmpty(item.city) ? "" : ` | ${item.city}`}
                         {renderDate(item)}
                       </Text>
                       {item.description.split("\n").map((item, index) => (

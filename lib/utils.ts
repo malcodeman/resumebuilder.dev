@@ -103,9 +103,7 @@ function pt2px(pt: number, suffix = true) {
 
 function getUrlHost(url: string) {
   try {
-    const host = new URL(url).host;
-    const pathname = new URL(url).pathname;
-    return `${host}${pathname}`;
+    return new URL(url).host;
   } catch {
     return "";
   }
