@@ -9,6 +9,7 @@ import {
 import { Home } from "react-feather";
 import { UseFormReturn } from "react-hook-form";
 import { trackGoal } from "fathom-client";
+import { useLocalStorageValue } from "@react-hookz/web";
 
 import NavLink from "../misc/NavLink";
 import HeaderPopover from "./HeaderPopover";
@@ -30,6 +31,9 @@ function HeaderMobile(props: props) {
     "rgba(0, 0, 0, 0.03) 0px -2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0 -2px 0 0"
   );
+  const [devTools] = useLocalStorageValue("devTools", false, {
+    initializeWithStorageValue: false,
+  });
 
   function handleOnImport(fields: Fields) {
     form.setValue("about", fields.about);
@@ -69,6 +73,7 @@ function HeaderMobile(props: props) {
           <ResumeTitle form={form} marginX="2" />
           <HeaderPopover
             values={form.getValues()}
+            devTools={devTools}
             onImport={handleOnImport}
             onChangeTemplate={handleOnChangeTemplate}
             onPdfExport={handleOnExportAsPdf}

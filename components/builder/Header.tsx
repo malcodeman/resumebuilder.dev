@@ -9,6 +9,7 @@ import {
 import { UseFormReturn } from "react-hook-form";
 import { Layers as IconLayers } from "react-feather";
 import { trackGoal } from "fathom-client";
+import { useLocalStorageValue } from "@react-hookz/web";
 
 import Logo from "../Logo";
 import HeaderPopover from "./HeaderPopover";
@@ -57,6 +58,9 @@ function Header(props: props) {
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0px 2px 0px 0px"
   );
+  const [devTools] = useLocalStorageValue("devTools", false, {
+    initializeWithStorageValue: false,
+  });
 
   function handleOnImport(fields: Fields) {
     form.setValue("about", fields.about);
@@ -98,6 +102,7 @@ function Header(props: props) {
           </Button>
           <HeaderPopover
             values={form.getValues()}
+            devTools={devTools}
             onImport={handleOnImport}
             onChangeTemplate={handleOnChangeTemplate}
             onPdfExport={handleOnExportAsPdf}

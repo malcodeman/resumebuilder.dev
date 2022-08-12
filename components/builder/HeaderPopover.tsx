@@ -41,6 +41,7 @@ const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
 type props = {
   values: Resume;
+  devTools: boolean;
   onImport: (fields: Fields) => void;
   onChangeTemplate: (nextTemplate: Template) => void;
   onPdfExport: () => void;
@@ -264,6 +265,7 @@ function ExportResume(props: {
 function HeaderPopover(props: props) {
   const {
     values,
+    devTools,
     onImport,
     onPdfExport,
     onJsonExport,
@@ -323,7 +325,7 @@ function HeaderPopover(props: props) {
                   onChangeTemplate={onChangeTemplate}
                 />
                 <CopyLink />
-                <GenerateFakeData onImport={onImport} />
+                {devTools ? <GenerateFakeData onImport={onImport} /> : null}
                 <DeleteResume />
                 <Divider marginY="2" />
                 <ImportData onImport={onImport} />
