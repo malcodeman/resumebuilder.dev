@@ -3,25 +3,15 @@ import {
   Flex,
   Box,
   Container,
-  Popover,
-  PopoverTrigger,
-  IconButton,
-  PopoverContent,
-  PopoverBody,
-  FormControl,
-  FormLabel,
-  Switch,
   LayoutProps,
-  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { MoreVertical } from "react-feather";
 
 import Logo from "../Logo";
 import NavLink from "../misc/NavLink";
+import UserMenu from "./UserMenu";
 
 function Header(props: LayoutProps) {
-  const { colorMode, toggleColorMode } = useColorMode();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
@@ -57,26 +47,7 @@ function Header(props: LayoutProps) {
               <Text>Downloads</Text>
             </NavLink>
           </Flex>
-          <Popover>
-            <PopoverTrigger>
-              <IconButton
-                size="sm"
-                aria-label="More options"
-                icon={<MoreVertical size={20} />}
-              />
-            </PopoverTrigger>
-            <PopoverContent width="unset">
-              <PopoverBody>
-                <FormControl display="flex" alignItems="center">
-                  <FormLabel mb="0">Dark mode</FormLabel>
-                  <Switch
-                    isChecked={colorMode === "dark"}
-                    onChange={toggleColorMode}
-                  />
-                </FormControl>
-              </PopoverBody>
-            </PopoverContent>
-          </Popover>
+          <UserMenu />
         </Flex>
       </Container>
     </Box>
