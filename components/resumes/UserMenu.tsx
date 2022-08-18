@@ -20,7 +20,7 @@ function UserMenu() {
       <MenuList>
         <MenuItem
           onClick={toggleColorMode}
-          icon={equals(colorMode, "dark") ? <Sun /> : <Moon />}
+          icon={equals(colorMode, "dark") ? <Moon /> : <Sun />}
         >
           {equals(colorMode, "dark") ? "Dark mode" : "Light mode"}
         </MenuItem>

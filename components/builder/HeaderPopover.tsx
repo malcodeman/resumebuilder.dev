@@ -14,6 +14,7 @@ import {
   useDisclosure,
   useClipboard,
   useToast,
+  useColorMode,
 } from "@chakra-ui/react";
 import {
   Download,
@@ -26,6 +27,7 @@ import {
 } from "react-feather";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
+import { equals } from "ramda";
 
 import ImportDataModal from "../resumes/ImportDataModal";
 import ExportResumeModal from "./ExportResumeModal";
@@ -77,6 +79,34 @@ function FullWidth() {
         isChecked={isFullWidth}
         onChange={() => setIsFullWidth(!isFullWidth)}
         id="is-full-width"
+      />
+    </FormControl>
+  );
+}
+
+function DarkModeToggle() {
+  const { colorMode, toggleColorMode } = useColorMode();
+  return (
+    <FormControl
+      mb="2"
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <FormLabel
+        htmlFor="is-dark-mode"
+        mb="0"
+        width="100%"
+        cursor="pointer"
+        marginInlineEnd="0"
+        paddingInlineEnd="3"
+      >
+        Dark mode
+      </FormLabel>
+      <Switch
+        isChecked={equals(colorMode, "dark")}
+        onChange={toggleColorMode}
+        id="is-dark-mode"
       />
     </FormControl>
   );
@@ -314,6 +344,7 @@ function HeaderPopover(props: props) {
                   <Switch isDisabled={true} id="is-small-text" />
                 </FormControl>
                 <FullWidth />
+                <DarkModeToggle />
                 <Divider marginY="2" />
                 <PdfViewer />
                 <Divider
