@@ -228,7 +228,6 @@ function DeleteResume() {
         size="sm"
         mb="2"
         justifyContent="flex-start"
-        color="pink"
         leftIcon={<Trash2 size={20} />}
         onClick={onOpen}
       >

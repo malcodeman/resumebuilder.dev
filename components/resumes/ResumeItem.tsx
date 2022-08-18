@@ -49,7 +49,6 @@ function DeleteResume(props: { onDelete: () => void }) {
         icon={<Trash2 size={20} />}
         onClick={onOpen}
         data-cy="delete_resume_btn"
-        color="pink"
       >
         Delete
       </MenuItem>

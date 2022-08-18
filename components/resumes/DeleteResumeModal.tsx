@@ -46,7 +46,7 @@ function DeleteResumeModal(props: props) {
           >
             Cancel
           </Button>
-          <Button size="sm" colorScheme="pink" onClick={onSubmit}>
+          <Button size="sm" colorScheme="red" onClick={onSubmit}>
             Yes. Delete this resume
           </Button>
         </AlertDialogFooter>
