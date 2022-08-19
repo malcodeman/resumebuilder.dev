@@ -7,7 +7,7 @@ import {
   Text,
   Link,
 } from "@react-pdf/renderer";
-import { isEmpty, and } from "ramda";
+import { isEmpty, and, split } from "ramda";
 
 Font.register({
   family: "Roboto",
@@ -190,17 +190,15 @@ function BerlinPdf(props: props) {
           }
           return (
             <View key={index}>
-              <Text style={styles.sectionLabel}>
-                {sectionItem.label || "label"}
-              </Text>
+              <Text style={styles.sectionLabel}>{sectionItem.label}</Text>
               <View style={styles.list}>
-                {sectionItem.tags?.split("\n").map((item, index) => {
-                  return (
-                    <Text key={index} style={styles.listItem}>
-                      {item || "item"}
-                    </Text>
-                  );
-                })}
+                {isEmpty(sectionItem.tags)
+                  ? null
+                  : split("\n", sectionItem.tags).map((item, index) => (
+                      <Text key={index} style={styles.listItem}>
+                        {item}
+                      </Text>
+                    ))}
               </View>
             </View>
           );

@@ -1,4 +1,4 @@
-import { and, isEmpty } from "ramda";
+import { and, isEmpty, split } from "ramda";
 
 import utils from "../../lib/utils";
 import theme from "../theme";
@@ -171,15 +171,15 @@ function BerlinReact(props: props) {
         }
         return (
           <div key={index}>
-            <p style={styles.sectionLabel}>{sectionItem.label || "label"}</p>
+            <p style={styles.sectionLabel}>{sectionItem.label}</p>
             <div style={styles.list}>
-              {sectionItem.tags?.split("\n").map((item, index) => {
-                return (
-                  <p key={index} style={styles.listItem}>
-                    {item || "item"}
-                  </p>
-                );
-              })}
+              {isEmpty(sectionItem.tags)
+                ? null
+                : split("\n", sectionItem.tags).map((item, index) => (
+                    <p key={index} style={styles.listItem}>
+                      {item}
+                    </p>
+                  ))}
             </div>
           </div>
         );
