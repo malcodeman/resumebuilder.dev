@@ -46,6 +46,8 @@ import {
   isEmpty,
   toLower,
   includes,
+  equals,
+  and,
 } from "ramda";
 import {
   DndContext,
@@ -228,10 +230,10 @@ function ResumeGrid() {
   );
 
   React.useEffect(() => {
-    if (isSmallDevice && view === "grid") {
+    if (and(isSmallDevice, equals(view, "grid"))) {
       setView("list");
     }
-    if (isSmallDevice && view === "list") {
+    if (and(isSmallDevice, equals(view, "list"))) {
       setHiddenColumns(["updatedAt"]);
     } else {
       setHiddenColumns([]);
@@ -257,7 +259,7 @@ function ResumeGrid() {
 
   function handleOnTitleChange(id: string, nextValue: string) {
     const nextResumes = map((item) => {
-      if (item.id === id) {
+      if (equals(item.id, id)) {
         return {
           ...item,
           title: nextValue,
@@ -271,7 +273,7 @@ function ResumeGrid() {
 
   function handleOnIconChange(id: string, emoji: string) {
     const nextResumes = map((item) => {
-      if (item.id === id) {
+      if (equals(item.id, id)) {
         return {
           ...item,
           icon: emoji,
@@ -353,7 +355,7 @@ function ResumeGrid() {
   return (
     <>
       <Flex mb="4">
-        <InputGroup size="sm">
+        <InputGroup mr="2" size="sm">
           <InputLeftElement>
             <IconSearch size={16} />
           </InputLeftElement>
@@ -381,24 +383,28 @@ function ResumeGrid() {
             )}
           </InputRightElement>
         </InputGroup>
-        <IconButton
-          display={["none", "inline-flex"]}
-          size="sm"
-          aria-label="Grid view"
-          ml="4"
-          mr="2"
-          icon={<IconGrid size={20} />}
-          onClick={() => setView("grid")}
-          isActive={view === "grid"}
-        />
-        <IconButton
-          display={["none", "inline-flex"]}
-          size="sm"
-          aria-label="List view"
-          icon={<IconList size={20} />}
-          onClick={() => setView("list")}
-          isActive={view === "list"}
-        />
+        <ButtonGroup mr="2" size="sm" isAttached>
+          <IconButton
+            display={["none", "inline-flex"]}
+            size="sm"
+            aria-label="Grid view"
+            icon={<IconGrid size={20} />}
+            onClick={() => setView("grid")}
+            isActive={equals(view, "grid")}
+          />
+          <IconButton
+            display={["none", "inline-flex"]}
+            size="sm"
+            aria-label="List view"
+            icon={<IconList size={20} />}
+            onClick={() => setView("list")}
+            isActive={equals(view, "list")}
+          />
+        </ButtonGroup>
+        <ButtonGroup size="sm" isAttached>
+          <ResumeNewButton />
+          <ImportDataButton />
+        </ButtonGroup>
       </Flex>
       {renderResumes()}
     </>
@@ -424,12 +430,6 @@ function Dashboard() {
         <title>resumebuilder.dev</title>
       </Head>
       <Layout>
-        <Flex justifyContent="flex-end" mb="4">
-          <ButtonGroup size="sm" isAttached>
-            <ResumeNewButton />
-            <ImportDataButton />
-          </ButtonGroup>
-        </Flex>
         <ResumeGrid />
       </Layout>
     </>
