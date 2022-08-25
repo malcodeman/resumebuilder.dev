@@ -14,18 +14,12 @@ import {
   IconButton,
   Center,
   Spinner,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  InputRightElement,
   useDisclosure,
 } from "@chakra-ui/react";
 import {
-  Search as IconSearch,
   Upload as IconUpload,
   Grid as IconGrid,
   List as IconList,
-  X as IconX,
   Link as IconLink,
 } from "react-feather";
 import { nanoid } from "nanoid";
@@ -48,6 +42,7 @@ import {
   includes,
   equals,
   and,
+  length,
 } from "ramda";
 import {
   DndContext,
@@ -57,7 +52,6 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
-import { useController, useForm } from "react-hook-form";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { Cell } from "react-table";
@@ -71,6 +65,8 @@ import Table from "../../components/misc/Table";
 import { DEFAULT_VALUES } from "../../lib/constants";
 
 import { Resume, Template, Fields, View } from "../../types";
+
+import SearchInput from "../../components/misc/SearchInput";
 
 function ResumeNewButton() {
   const router = useRouter();
@@ -172,13 +168,7 @@ function ResumeGrid() {
       },
     })
   );
-  const form = useForm({
-    defaultValues: {
-      search: "",
-    },
-  });
-  const { field } = useController({ name: "search", control: form.control });
-  const searchInputRef = React.useRef(null);
+  const [search, setSearch] = React.useState("");
   const [view, setView] = React.useState<View>("grid");
   const [hiddenColumns, setHiddenColumns] = React.useState([]);
   const isSmallDevice = useMediaQuery("only screen and (max-width: 30em)");
@@ -217,18 +207,6 @@ function ResumeGrid() {
     []
   );
 
-  useKeyboardEvent(
-    "s",
-    (e) => {
-      const isBody = e.target["tagName"] === "BODY";
-      if (isBody && searchInputRef.current) {
-        searchInputRef.current.focus();
-      }
-    },
-    [],
-    { event: "keyup" }
-  );
-
   React.useEffect(() => {
     if (and(isSmallDevice, equals(view, "grid"))) {
       setView("list");
@@ -246,7 +224,7 @@ function ResumeGrid() {
   }
 
   function handleOnDuplicate(id: string) {
-    const resume = resumes.find((item) => item.id === id);
+    const resume = resumes.find((item) => equals(item.id, id));
     const value = {
       ...resume,
       id: nanoid(),
@@ -308,7 +286,7 @@ function ResumeGrid() {
   }
 
   const filteredResumes = filter(
-    (item) => includes(toLower(field.value), toLower(item.title)),
+    (item) => includes(toLower(search), toLower(item.title)),
     resumes
   );
 
@@ -316,7 +294,7 @@ function ResumeGrid() {
     if (isEmpty(filteredResumes)) {
       return <Text>No resumes found</Text>;
     }
-    if (view === "grid") {
+    if (equals(view, "grid")) {
       return (
         <Grid
           gap="8"
@@ -355,34 +333,13 @@ function ResumeGrid() {
   return (
     <>
       <Flex mb="4">
-        <InputGroup mr="2" size="sm">
-          <InputLeftElement>
-            <IconSearch size={16} />
-          </InputLeftElement>
-          <Input
-            {...field}
-            ref={searchInputRef}
-            placeholder={`Search ${resumes.length} resumes...`}
-            borderRadius="md"
-            variant="filled"
-          />
-          <InputRightElement>
-            {isEmpty(field.value) ? (
-              <Kbd>S</Kbd>
-            ) : (
-              <IconButton
-                size="xs"
-                aria-label="Clear"
-                icon={
-                  <IconX
-                    size={16}
-                    onClick={() => form.setValue("search", "")}
-                  />
-                }
-              />
-            )}
-          </InputRightElement>
-        </InputGroup>
+        <SearchInput
+          mr="2"
+          placeholder={`Search ${length(resumes)} resumes...`}
+          value={search}
+          onChangeValue={(nextValue) => setSearch(nextValue)}
+          onClear={() => setSearch("")}
+        />
         <ButtonGroup mr="2" size="sm" isAttached>
           <IconButton
             display={["none", "inline-flex"]}

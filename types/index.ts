@@ -66,6 +66,10 @@ type ChakraThemeConfig = {
 type Register = UseFormRegister<Fields>;
 type Export = "pdf" | "json" | "html" | "png";
 type View = "grid" | "list";
+type Phrase = {
+  id: string;
+  phrase: string;
+};
 
 export type {
   Resume,
@@ -77,5 +81,6 @@ export type {
   View,
   Design,
   AboutField,
+  Phrase,
 };
 export { Template };

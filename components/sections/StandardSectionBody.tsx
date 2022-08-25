@@ -10,15 +10,20 @@ import {
   FormLabel,
   Accordion,
   useAccordionItemState,
+  FormHelperText,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { and, not, equals } from "ramda";
-
-import SectionHeader from "./SectionHeader";
+import { and, not, equals, replace, concat } from "ramda";
 
 import { Section } from "../../types";
+
+import phrases from "../../lib/phrases";
+
+import SectionHeader from "./SectionHeader";
+import PreWrittenPhrasesModal from "./PreWrittenPhrasesModal";
 
 type props = {
   id: string;
@@ -50,6 +55,57 @@ function Header({ index, nestIndex, isDragging, onRemove, onDuplicate }) {
       onRemove={onRemove}
       onDuplicate={onDuplicate}
     />
+  );
+}
+
+function Description({ index, nestIndex, isEmployment }) {
+  const { control, register, getValues, setValue } = useFormContext();
+  const inputName = `section.${index}.nested.${nestIndex}.description`;
+  const description = useWatch({
+    control,
+    name: inputName,
+  });
+  const phrasesModal = useDisclosure();
+
+  function handleOnPhraseChange(phrase: string, isChecked: boolean) {
+    const currentValue: string = getValues(inputName);
+    const point = `• ${phrase}\n`;
+    if (isChecked) {
+      setValue(inputName, replace(point, "", currentValue));
+    } else {
+      setValue(inputName, concat(currentValue, point));
+    }
+  }
+
+  return (
+    <>
+      <GridItem colSpan={2}>
+        <FormControl>
+          <FormLabel>Description</FormLabel>
+          <Textarea
+            variant="filled"
+            size="sm"
+            {...register(
+              `section.${index}.nested.${nestIndex}.description` as const
+            )}
+          />
+          {isEmployment ? (
+            <FormHelperText onClick={phrasesModal.onOpen}>
+              Add pre-written phrases
+            </FormHelperText>
+          ) : null}
+        </FormControl>
+      </GridItem>
+      {isEmployment ? (
+        <PreWrittenPhrasesModal
+          isOpen={phrasesModal.isOpen}
+          value={description}
+          phrases={phrases.EMPLOYMENT}
+          onClose={phrasesModal.onClose}
+          onChange={handleOnPhraseChange}
+        />
+      ) : null}
+    </>
   );
 }
 
@@ -200,18 +256,11 @@ function StandardSectionBody(props: props) {
                       />
                     </FormControl>
                   </GridItem>
-                  <GridItem colSpan={2}>
-                    <FormControl>
-                      <FormLabel>Description</FormLabel>
-                      <Textarea
-                        variant="filled"
-                        size="sm"
-                        {...register(
-                          `section.${index}.nested.${nestIndex}.description` as const
-                        )}
-                      />
-                    </FormControl>
-                  </GridItem>
+                  <Description
+                    index={index}
+                    nestIndex={nestIndex}
+                    isEmployment={equals(name, "employmentSection")}
+                  />
                 </Grid>
               </AccordionPanel>
             ) : (
