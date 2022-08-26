@@ -8,12 +8,4 @@ module.exports = withPWA({
     disable: process.env.NODE_ENV === "development",
   },
   productionBrowserSourceMaps: true,
-  async rewrites() {
-    return [
-      {
-        source: "/resumes/:id",
-        destination: "/resumes/[id].html",
-      },
-    ];
-  },
 });
