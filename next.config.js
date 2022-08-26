@@ -11,7 +11,7 @@ module.exports = withPWA({
   async rewrites() {
     return [
       {
-        source: "/resumes/*",
+        source: "/resumes/:id",
         destination: "/resumes/[id].html",
       },
     ];
