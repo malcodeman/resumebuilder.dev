@@ -1,5 +1,3 @@
-import { nanoid } from "nanoid";
-
 import { Template } from "../types";
 
 const IS_PROD = process.env.NODE_ENV === "production";
@@ -57,67 +55,6 @@ const DEFAULT_VALUES = {
     },
   ],
 };
-const DEFAULT_VALUES_LANDING = {
-  id: "",
-  title: "",
-  icon: "",
-  createdAt: Date.now(),
-  updatedAt: Date.now(),
-  design: {
-    template: Template.berlin,
-    spacing: 1,
-  },
-  about: {
-    title: "Programmer",
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@gmail.com",
-    phone: "(912) 555-4321",
-    website: "https://johndoe.com",
-    city: "San Francisco",
-    country: "US",
-    summary: "A summary of John Doe…",
-  },
-  section: [
-    {
-      name: "employmentSection" as const,
-      label: "Employment History",
-      nested: [
-        {
-          title: "Company",
-          subtitle: "President",
-          website: "https://company.com",
-          city: "San Francisco",
-          startDate: "2013-01-01",
-          endDate: "2014-01-01",
-          description: "Description…",
-        },
-      ],
-    },
-  ],
-};
-const LANDING_RESUMES_LIST = [
-  {
-    ...DEFAULT_VALUES_LANDING,
-    id: nanoid(),
-  },
-  {
-    ...DEFAULT_VALUES_LANDING,
-    id: nanoid(),
-    design: {
-      ...DEFAULT_VALUES_LANDING.design,
-      template: Template.tokyo,
-    },
-  },
-  {
-    ...DEFAULT_VALUES_LANDING,
-    id: nanoid(),
-    design: {
-      ...DEFAULT_VALUES_LANDING.design,
-      template: Template.london,
-    },
-  },
-];
 const TEMPLATES_LIST = [
   {
     title: "Berlin",
@@ -156,7 +93,6 @@ export {
   TEMPLATES,
   STANDARD_SECTION_DEFAULT_VALUES,
   DEFAULT_VALUES,
-  LANDING_RESUMES_LIST,
   TEMPLATES_LIST,
   VIEWS,
   FATHOM_SITE_ID,

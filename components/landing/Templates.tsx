@@ -6,16 +6,14 @@ import {
   Box,
   Text,
   Flex,
-  Center,
+  Image,
   useColorModeValue,
-  useBreakpointValue,
 } from "@chakra-ui/react";
-import { map, toUpper } from "ramda";
+import { map } from "ramda";
 import { ArrowRight } from "react-feather";
 import { motion } from "framer-motion";
 
-import { LANDING_RESUMES_LIST } from "../../lib/constants";
-import getTemplate from "../../lib/getTemplate";
+import { TEMPLATES_LIST } from "../../lib/constants";
 
 import { Template } from "../../types";
 
@@ -34,7 +32,6 @@ function Templates(props: props) {
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"
   );
-  const spacing = useBreakpointValue({ base: 0.6, md: 0.8 });
   return (
     <Box as="section">
       <Box width={["100%", "100%", "50%"]}>
@@ -70,56 +67,30 @@ function Templates(props: props) {
       >
         {map(
           (item) => (
-            <Flex
-              key={item.id}
-              as={motion.div}
-              whileHover={{ scale: 1.1 }}
-              flexDirection="column"
-              role="group"
-            >
-              <Box
+            <Box key={item.template}>
+              <Image
+                src={item.src}
+                alt=""
                 mb="2"
-                height="360px"
-                overflow="hidden"
-                userSelect="none"
                 borderRadius="lg"
-                position="relative"
                 boxShadow={boxShadow}
-                _hover={{ cursor: "pointer" }}
-              >
-                {getTemplate(
-                  {
-                    ...item.design,
-                    spacing: spacing || item.design.spacing,
-                  },
-                  {
-                    about: item.about,
-                    section: item.section,
-                  }
-                )}
-                <Center
+              />
+              <Flex mb="2" alignItems="center" justifyContent="space-between">
+                <Heading fontSize="md">{item.title}</Heading>
+                <Button
                   as={motion.div}
-                  whileHover={{ opacity: 1 }}
-                  position="absolute"
-                  left="0"
-                  top="0"
-                  right="0"
-                  bottom="0"
-                  opacity="0"
-                  backgroundColor="rgba(0, 0, 0, 0.05)"
+                  whileHover={{ scale: 1.1 }}
+                  colorScheme="blue"
+                  size="sm"
+                  cursor="pointer"
+                  onClick={() => onSubmit({ template: item.template })}
                 >
-                  <Button
-                    colorScheme="blue"
-                    onClick={() => onSubmit({ template: item.design.template })}
-                  >
-                    Use template
-                  </Button>
-                </Center>
-              </Box>
-              <Text>{toUpper(item.design.template)}</Text>
-            </Flex>
+                  Use template
+                </Button>
+              </Flex>
+            </Box>
           ),
-          LANDING_RESUMES_LIST
+          TEMPLATES_LIST
         )}
       </Grid>
     </Box>

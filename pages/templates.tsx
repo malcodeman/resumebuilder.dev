@@ -107,9 +107,7 @@ function Templates() {
                   boxShadow={boxShadow}
                 />
                 <Flex mb="2" alignItems="center" justifyContent="space-between">
-                  <Box>
-                    <Heading fontSize="md">{item.title}</Heading>
-                  </Box>
+                  <Heading fontSize="md">{item.title}</Heading>
                   <Button
                     colorScheme="blue"
                     size="sm"
