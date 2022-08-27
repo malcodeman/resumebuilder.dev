@@ -4,7 +4,6 @@ import {
   Flex,
   Button,
   Text,
-  Container,
   Grid,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -66,9 +65,9 @@ function Footer(props: props) {
           LIST
         )}
       </Grid>
-      <Container maxW="container.sm" paddingInline="0">
+      <Center maxW="container.sm">
         <WorkspaceIllustration fill={fill} stroke={stroke} />
-      </Container>
+      </Center>
     </Center>
   );
 }
