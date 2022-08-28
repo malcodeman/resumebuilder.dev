@@ -7,7 +7,6 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  Button,
   Stack,
   Checkbox,
   Text,
@@ -66,11 +65,7 @@ function PreWrittenPhrasesModal(props: Props) {
             }, filteredPhrases)}
           </Stack>
         </ModalBody>
-        <ModalFooter>
-          <Button size="sm" variant="ghost" onClick={onClose}>
-            Cancel
-          </Button>
-        </ModalFooter>
+        <ModalFooter />
       </ModalContent>
     </Modal>
   );
