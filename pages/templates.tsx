@@ -14,13 +14,15 @@ import Head from "next/head";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
-import { includes, map, filter } from "ramda";
+import { includes, map, filter, length, toLower, isEmpty } from "ramda";
 
 import Layout from "../components/Layout";
 
 import { DEFAULT_VALUES, TEMPLATES_LIST } from "../lib/constants";
 
 import { Resume, Template } from "../types";
+
+import SearchInput from "../components/misc/SearchInput";
 
 const FILTERS = [
   {
@@ -51,9 +53,14 @@ function Templates() {
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"
   );
   const [activeFilter, setActiveFilter] = React.useState(FILTERS[0].value);
-  const filteredResumes = filter(
+  const [template, setTemplate] = React.useState("");
+  const filteredResumesByTags = filter(
     (item) => includes(activeFilter, item.tags),
     TEMPLATES_LIST
+  );
+  const filteredResumesBySearch = filter(
+    (item) => includes(toLower(template), toLower(item.title)),
+    filteredResumesByTags
   );
 
   function handleOnSubmit(template: Template) {
@@ -76,6 +83,13 @@ function Templates() {
         <title>Templates - resumebuildedev</title>
       </Head>
       <Layout>
+        <SearchInput
+          mb="4"
+          value={template}
+          placeholder={`Search ${length(filteredResumesByTags)} templates...`}
+          onChangeValue={(nextValue) => setTemplate(nextValue)}
+          onClear={() => setTemplate("")}
+        />
         <ButtonGroup size="sm" mb="4" variant="ghost">
           {map(
             (item) => (
@@ -91,6 +105,11 @@ function Templates() {
             FILTERS
           )}
         </ButtonGroup>
+        {isEmpty(filteredResumesBySearch) ? (
+          <Text>No templates found</Text>
+        ) : (
+          <></>
+        )}
         <Grid
           gap="8"
           gridTemplateColumns="repeat(auto-fill, minmax(288px, 1fr))"
@@ -119,7 +138,7 @@ function Templates() {
                 <Text opacity="0.5">{item.description}</Text>
               </Box>
             ),
-            filteredResumes
+            filteredResumesBySearch
           )}
         </Grid>
       </Layout>
