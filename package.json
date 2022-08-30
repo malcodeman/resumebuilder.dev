@@ -22,6 +22,7 @@
     "@emotion/styled": "11.6.0",
     "@react-hookz/web": "^7.0.0",
     "@react-pdf/renderer": "^2.0.6",
+    "@tanstack/react-table": "^8.5.11",
     "axios": "^0.22.0",
     "date-fns": "^2.23.0",
     "emoji-mart": "^3.0.1",
@@ -40,7 +41,6 @@
     "react-dropzone": "^11.3.4",
     "react-feather": "^2.0.9",
     "react-hook-form": "^7.17.4",
-    "react-table": "^7.7.0",
     "simple-icons": "^5.17.0"
   },
   "devDependencies": {
@@ -53,7 +53,6 @@
     "@types/node": "^16.6.1",
     "@types/ramda": "^0.27.44",
     "@types/react": "^17.0.17",
-    "@types/react-table": "^7.7.5",
     "@types/simple-icons": "^5.8.0",
     "babel-jest": "^27.3.1",
     "cypress": "^7.2.0",

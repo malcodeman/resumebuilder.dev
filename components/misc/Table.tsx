@@ -1,5 +1,11 @@
-import React from "react";
-import { useTable } from "react-table";
+import {
+  ColumnDef,
+  OnChangeFn,
+  VisibilityState,
+  getCoreRowModel,
+  flexRender,
+  useReactTable,
+} from "@tanstack/react-table";
 import {
   Table as ChakraTable,
   Thead,
@@ -8,76 +14,62 @@ import {
   Tbody,
   Td,
 } from "@chakra-ui/react";
-import { map } from "ramda";
 
 type props = {
   size?: "sm" | "md" | "lg";
-  columns: any;
-  data: any;
-  hiddenColumns?: string[];
+  columns: ColumnDef<any, any>[];
+  data: any[];
+  columnVisibility?: VisibilityState;
+  onColumnVisibilityChange?: OnChangeFn<VisibilityState>;
 };
 
 function Table(props: props) {
-  const { size = "sm", columns, data, hiddenColumns = [] } = props;
   const {
-    getTableProps,
-    getTableBodyProps,
-    prepareRow,
-    setHiddenColumns,
-    headerGroups,
-    rows,
-  } = useTable({
+    size = "sm",
     columns,
     data,
-    initialState: {
-      hiddenColumns,
+    columnVisibility = {},
+    onColumnVisibilityChange,
+  } = props;
+
+  const table = useReactTable({
+    data,
+    columns,
+    state: {
+      columnVisibility,
     },
+    onColumnVisibilityChange,
+    getCoreRowModel: getCoreRowModel(),
   });
 
-  React.useEffect(() => {
-    setHiddenColumns(hiddenColumns);
-  }, [hiddenColumns, setHiddenColumns]);
-
   return (
-    <ChakraTable size={size} {...getTableProps()}>
+    <ChakraTable size={size}>
       <Thead>
-        {map(
-          (group) => (
-            <Tr
-              {...group.getHeaderGroupProps()}
-              key={group.getHeaderGroupProps().key}
-            >
-              {map(
-                (column) => (
-                  <Th
-                    {...column.getHeaderProps()}
-                    key={column.getHeaderProps().key}
-                  >
-                    {column.render("Header")}
-                  </Th>
-                ),
-                group.headers
-              )}
-            </Tr>
-          ),
-          headerGroups
-        )}
+        {table.getHeaderGroups().map((headerGroup) => (
+          <Tr key={headerGroup.id}>
+            {headerGroup.headers.map((header) => (
+              <Th key={header.id}>
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+              </Th>
+            ))}
+          </Tr>
+        ))}
       </Thead>
-      <Tbody {...getTableBodyProps()}>
-        {map((row) => {
-          prepareRow(row);
-          return (
-            <Tr {...row.getRowProps()} key={row.getRowProps().key}>
-              {map((cell) => {
-                return (
-                  <Td {...cell.getCellProps()} key={cell.getCellProps().key}>
-                    {cell.render("Cell")}
-                  </Td>
-                );
-              }, row.cells)}
-            </Tr>
-          );
-        }, rows)}
+      <Tbody>
+        {table.getRowModel().rows.map((row) => (
+          <Tr key={row.id}>
+            {row.getVisibleCells().map((cell) => (
+              <Td key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </Td>
+            ))}
+          </Tr>
+        ))}
       </Tbody>
     </ChakraTable>
   );

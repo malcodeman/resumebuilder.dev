@@ -54,7 +54,7 @@ import {
 import { SortableContext } from "@dnd-kit/sortable";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
-import { Cell } from "react-table";
+import { createColumnHelper, VisibilityState } from "@tanstack/react-table";
 
 import Layout from "../../components/Layout";
 import ResumeItem from "../../components/resumes/ResumeItem";
@@ -170,41 +170,34 @@ function ResumeGrid() {
   );
   const [search, setSearch] = React.useState("");
   const [view, setView] = React.useState<View>("grid");
-  const [hiddenColumns, setHiddenColumns] = React.useState([]);
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
   const isSmallDevice = useMediaQuery("only screen and (max-width: 30em)");
+  const columnHelper = createColumnHelper<Resume>();
   const columns = React.useMemo(
     () => [
-      {
-        Header: "Title",
-        accessor: "title",
-      },
-      {
-        Header: "Edited",
-        accessor: "updatedAt",
-        Cell: function updatedAtCell(props: Cell) {
-          return (
-            <>
-              {formatDistanceToNow(props.value, {
-                addSuffix: true,
-              })}
-            </>
-          );
-        },
-      },
-      {
-        accessor: "id",
-        Cell: function idCell(props: Cell) {
-          return (
-            <Link href={`/resumes/${props.value}`} passHref>
-              <Button size="sm" leftIcon={<IconLink size={16} />}>
-                Open
-              </Button>
-            </Link>
-          );
-        },
-      },
+      columnHelper.accessor("title", {
+        cell: (info) => info.getValue(),
+      }),
+      columnHelper.accessor("updatedAt", {
+        header: "Edited",
+        cell: (info) =>
+          formatDistanceToNow(info.getValue(), {
+            addSuffix: true,
+          }),
+      }),
+      columnHelper.accessor("id", {
+        header: "",
+        cell: (info) => (
+          <Link href={`/resumes/${info.getValue()}`} passHref>
+            <Button size="sm" leftIcon={<IconLink size={16} />}>
+              Open
+            </Button>
+          </Link>
+        ),
+      }),
     ],
-    []
+    [columnHelper]
   );
 
   React.useEffect(() => {
@@ -212,9 +205,9 @@ function ResumeGrid() {
       setView("list");
     }
     if (and(isSmallDevice, equals(view, "list"))) {
-      setHiddenColumns(["updatedAt"]);
+      setColumnVisibility({ updatedAt: false });
     } else {
-      setHiddenColumns([]);
+      setColumnVisibility({});
     }
   }, [isSmallDevice, view]);
 
@@ -325,7 +318,8 @@ function ResumeGrid() {
       <Table
         data={filteredResumes}
         columns={columns}
-        hiddenColumns={hiddenColumns}
+        columnVisibility={columnVisibility}
+        onColumnVisibilityChange={setColumnVisibility}
       />
     );
   }
