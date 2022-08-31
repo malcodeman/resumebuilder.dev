@@ -4,12 +4,7 @@ import {
   Flex,
   Button,
   Grid,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
   Text,
-  Kbd,
   ButtonGroup,
   IconButton,
   Center,
@@ -19,11 +14,9 @@ import {
   MenuList,
   MenuItem,
   Stack,
-  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import {
-  Upload as IconUpload,
   Grid as IconGrid,
   List as IconList,
   Link as IconLink,
@@ -31,12 +24,10 @@ import {
   Copy as IconCopy,
 } from "react-feather";
 import {
-  useKeyboardEvent,
   useLocalStorageValue,
   useMediaQuery,
   useMountEffect,
 } from "@react-hookz/web";
-import { useRouter } from "next/router";
 import {
   map,
   filter,
@@ -62,84 +53,16 @@ import { createColumnHelper, VisibilityState } from "@tanstack/react-table";
 
 import Layout from "../../components/Layout";
 import ResumeItem from "../../components/resumes/ResumeItem";
-import ImportDataModal from "../../components/resumes/ImportDataModal";
 import EmptyResumes from "../../components/resumes/EmptyResumes";
 import Table from "../../components/misc/Table";
 
 import useResumes from "../../hooks/useResumes";
 
-import { Resume, Fields, View } from "../../types";
+import { Resume, View } from "../../types";
 
 import SearchInput from "../../components/misc/SearchInput";
 import DeleteResumeMenuItem from "../../components/resumes/DeleteResumeMenuItem";
-
-function ResumeNewButton() {
-  const router = useRouter();
-  const { createNew } = useResumes({ initializeWithStorageValue: false });
-
-  useKeyboardEvent(
-    "n",
-    (e) => {
-      const isBody = e.target["tagName"] === "BODY";
-      if (isBody) {
-        handleOnSubmit();
-      }
-    },
-    [],
-    { event: "keyup" }
-  );
-
-  function handleOnSubmit() {
-    const resume = createNew();
-    router.push(`/resumes/${resume.id}`);
-  }
-
-  return (
-    <Popover trigger="hover">
-      <PopoverTrigger>
-        <Button mr="-px" data-cy="new_resume_btn" onClick={handleOnSubmit}>
-          New
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent width="unset">
-        <PopoverBody display="inline-flex" alignItems="center">
-          <Text marginInlineEnd="2" fontSize="sm">
-            Press
-          </Text>
-          <Kbd>N</Kbd>
-        </PopoverBody>
-      </PopoverContent>
-    </Popover>
-  );
-}
-
-function ImportDataButton() {
-  const router = useRouter();
-  const { createNew } = useResumes({ initializeWithStorageValue: false });
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  function handleOnImport(fields: Fields) {
-    const resume = createNew(fields);
-    onClose();
-    router.push(`/resumes/${resume.id}`);
-  }
-
-  return (
-    <>
-      <IconButton
-        aria-label="Import"
-        data-cy="import-button"
-        onClick={onOpen}
-        icon={<IconUpload size={20} />}
-      />
-      <ImportDataModal
-        isOpen={isOpen}
-        onClose={onClose}
-        onImport={handleOnImport}
-      />
-    </>
-  );
-}
+import CreateNewResumeButtonGroup from "../../components/resumes/CreateNewResumeButtonGroup";
 
 function ResumeGrid() {
   const { resumes, duplicate, remove, changeTitle, changeIcon, move } =
@@ -324,10 +247,7 @@ function ResumeGrid() {
             isActive={equals(view, "list")}
           />
         </ButtonGroup>
-        <ButtonGroup size="sm" isAttached>
-          <ResumeNewButton />
-          <ImportDataButton />
-        </ButtonGroup>
+        <CreateNewResumeButtonGroup />
       </Flex>
       {renderResumes()}
     </>
