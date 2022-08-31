@@ -18,7 +18,7 @@ import useAutoSaveToast from "../../hooks/useAutoSaveToast";
 import { Resume } from "../../types";
 
 function Builder() {
-  const [resume, isLoading] = useResume();
+  const { resume, isLoading } = useResume();
   const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
   const [_showDashboard, setShowDashboard] = useLocalStorageValue(
     "showDashboard",

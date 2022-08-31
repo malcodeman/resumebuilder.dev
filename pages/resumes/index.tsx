@@ -14,15 +14,22 @@ import {
   IconButton,
   Center,
   Spinner,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Stack,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import {
   Upload as IconUpload,
   Grid as IconGrid,
   List as IconList,
   Link as IconLink,
+  MoreHorizontal as IconMoreHorizontal,
+  Copy as IconCopy,
 } from "react-feather";
-import { nanoid } from "nanoid";
 import {
   useKeyboardEvent,
   useLocalStorageValue,
@@ -33,10 +40,7 @@ import { useRouter } from "next/router";
 import {
   map,
   filter,
-  propEq,
-  findIndex,
   isNil,
-  move,
   isEmpty,
   toLower,
   includes,
@@ -62,17 +66,16 @@ import ImportDataModal from "../../components/resumes/ImportDataModal";
 import EmptyResumes from "../../components/resumes/EmptyResumes";
 import Table from "../../components/misc/Table";
 
-import { DEFAULT_VALUES } from "../../lib/constants";
+import useResumes from "../../hooks/useResumes";
 
-import { Resume, Template, Fields, View } from "../../types";
+import { Resume, Fields, View } from "../../types";
 
 import SearchInput from "../../components/misc/SearchInput";
+import DeleteResumeMenuItem from "../../components/resumes/DeleteResumeMenuItem";
 
 function ResumeNewButton() {
   const router = useRouter();
-  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
-    initializeWithStorageValue: false,
-  });
+  const { createNew } = useResumes({ initializeWithStorageValue: false });
 
   useKeyboardEvent(
     "n",
@@ -87,12 +90,7 @@ function ResumeNewButton() {
   );
 
   function handleOnSubmit() {
-    const resume = {
-      ...DEFAULT_VALUES,
-      id: nanoid(),
-      title: "Untitled resume",
-    };
-    setResumes([...resumes, resume]);
+    const resume = createNew();
     router.push(`/resumes/${resume.id}`);
   }
 
@@ -117,25 +115,11 @@ function ResumeNewButton() {
 
 function ImportDataButton() {
   const router = useRouter();
-  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
-    initializeWithStorageValue: false,
-  });
+  const { createNew } = useResumes({ initializeWithStorageValue: false });
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function handleOnImport(fields: Fields) {
-    const resume = {
-      ...fields,
-      id: nanoid(),
-      title: "Untitled",
-      icon: "",
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-      design: {
-        template: Template.berlin,
-        spacing: 1,
-      },
-    };
-    setResumes([...resumes, resume]);
+    const resume = createNew(fields);
     onClose();
     router.push(`/resumes/${resume.id}`);
   }
@@ -158,9 +142,8 @@ function ImportDataButton() {
 }
 
 function ResumeGrid() {
-  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
-    initializeWithStorageValue: false,
-  });
+  const { resumes, duplicate, remove, changeTitle, changeIcon, move } =
+    useResumes({ initializeWithStorageValue: false });
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -174,6 +157,17 @@ function ResumeGrid() {
     React.useState<VisibilityState>({});
   const isSmallDevice = useMediaQuery("only screen and (max-width: 30em)");
   const columnHelper = createColumnHelper<Resume>();
+  const toast = useToast();
+  const handleOnDelete = React.useCallback(
+    (id: string) => {
+      remove(id);
+      toast({
+        description: "Resume deleted.",
+        isClosable: true,
+      });
+    },
+    [remove, toast]
+  );
   const columns = React.useMemo(
     () => [
       columnHelper.accessor("title", {
@@ -189,15 +183,41 @@ function ResumeGrid() {
       columnHelper.accessor("id", {
         header: "",
         cell: (info) => (
-          <Link href={`/resumes/${info.getValue()}`} passHref>
-            <Button size="sm" leftIcon={<IconLink size={16} />}>
-              Open
-            </Button>
-          </Link>
+          <Stack spacing="2" direction="row">
+            <Link href={`/resumes/${info.getValue()}`} passHref>
+              <Button display={["none", "inline-flex"]} size="sm">
+                Open
+              </Button>
+            </Link>
+            <Menu>
+              <MenuButton as={Button} size="sm">
+                <IconMoreHorizontal size="20" />
+              </MenuButton>
+              <MenuList>
+                <Link href={`/resumes/${info.getValue()}`} passHref>
+                  <MenuItem
+                    display={["flex", "none"]}
+                    icon={<IconLink size="20" />}
+                  >
+                    Open
+                  </MenuItem>
+                </Link>
+                <MenuItem
+                  onClick={() => duplicate(info.getValue())}
+                  icon={<IconCopy size="20" />}
+                >
+                  Duplicate
+                </MenuItem>
+                <DeleteResumeMenuItem
+                  onDelete={() => handleOnDelete(info.getValue())}
+                />
+              </MenuList>
+            </Menu>
+          </Stack>
         ),
       }),
     ],
-    [columnHelper]
+    [columnHelper, duplicate, handleOnDelete]
   );
 
   React.useEffect(() => {
@@ -211,58 +231,10 @@ function ResumeGrid() {
     }
   }, [isSmallDevice, view]);
 
-  function handleOnDelete(id: string) {
-    const nextResumes = resumes.filter((item) => item.id !== id);
-    setResumes(nextResumes);
-  }
-
-  function handleOnDuplicate(id: string) {
-    const resume = resumes.find((item) => equals(item.id, id));
-    const value = {
-      ...resume,
-      id: nanoid(),
-      title: `${resume.title} copy`,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-    };
-    setResumes([...resumes, value]);
-  }
-
-  function handleOnTitleChange(id: string, nextValue: string) {
-    const nextResumes = map((item) => {
-      if (equals(item.id, id)) {
-        return {
-          ...item,
-          title: nextValue,
-          updatedAt: Date.now(),
-        };
-      }
-      return item;
-    }, resumes);
-    setResumes(nextResumes);
-  }
-
-  function handleOnIconChange(id: string, emoji: string) {
-    const nextResumes = map((item) => {
-      if (equals(item.id, id)) {
-        return {
-          ...item,
-          icon: emoji,
-          updatedAt: Date.now(),
-        };
-      }
-      return item;
-    }, resumes);
-    setResumes(nextResumes);
-  }
-
   function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active.id !== over.id) {
-      const from = findIndex(propEq("id", active.id))(resumes);
-      const to = findIndex(propEq("id", over.id))(resumes);
-      const nextResumes = move(from, to, resumes);
-      setResumes(nextResumes);
+      move(active.id, over.id);
     }
   }
 
@@ -302,9 +274,9 @@ function ResumeGrid() {
                     key={item.id}
                     resume={item}
                     onDelete={handleOnDelete}
-                    onDuplicate={handleOnDuplicate}
-                    onTitleChange={handleOnTitleChange}
-                    onIconChange={handleOnIconChange}
+                    onDuplicate={(id) => duplicate(id)}
+                    onTitleChange={(id, title) => changeTitle(id, title)}
+                    onIconChange={(id, icon) => changeIcon(id, icon)}
                   />
                 ),
                 filteredResumes

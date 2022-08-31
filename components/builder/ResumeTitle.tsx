@@ -20,26 +20,18 @@ type props = HTMLChakraProps<"div"> & {
 
 function ResumeTitle(props: props) {
   const { form } = props;
-  const [resume, _isLoading, setResume] = useResume({ isolated: true });
+  const { resume, changeIcon, changeTitle } = useResume({ isolated: true });
 
   useDocumentTitle(`${resume?.title} - resumebuilder.dev`);
 
-  function handleOnIconChange(emoji: string) {
-    form.setValue("icon", emoji);
-    setResume({
-      ...resume,
-      updatedAt: Date.now(),
-      icon: emoji,
-    });
+  function handleOnIconChange(icon: string) {
+    form.setValue("icon", icon);
+    changeIcon(icon);
   }
 
-  function handleOnTitleChange(nextValue: string) {
-    form.setValue("title", nextValue);
-    setResume({
-      ...resume,
-      updatedAt: Date.now(),
-      title: nextValue,
-    });
+  function handleOnTitleChange(title: string) {
+    form.setValue("title", title);
+    changeTitle(title);
   }
 
   if (resume) {

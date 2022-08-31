@@ -70,7 +70,7 @@ type props = {
 
 function Sections(props: props) {
   const { form } = props;
-  const [resume] = useResume();
+  const { resume } = useResume();
   const fieldArray = useFieldArray({
     control: form.control,
     name: "section",

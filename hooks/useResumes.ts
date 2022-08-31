@@ -1,0 +1,117 @@
+import { useLocalStorageValue } from "@react-hookz/web";
+import { nanoid } from "nanoid";
+import {
+  equals,
+  filter,
+  find,
+  findIndex,
+  map,
+  propEq,
+  move as ramdaMove,
+} from "ramda";
+
+import { DEFAULT_VALUES } from "../lib/constants";
+
+import { Fields, Resume } from "../types";
+
+type props = {
+  isolated?: boolean;
+  handleStorageEvent?: boolean;
+  storeDefaultValue?: boolean;
+  initializeWithStorageValue?: boolean;
+};
+
+function useResumes(props: props = {}) {
+  const {
+    isolated = false,
+    handleStorageEvent = true,
+    storeDefaultValue = false,
+    initializeWithStorageValue = false,
+  } = props;
+  const [resumes, setResumes] = useLocalStorageValue<Resume[] | null>(
+    "resumes",
+    [],
+    {
+      isolated,
+      handleStorageEvent,
+      storeDefaultValue,
+      initializeWithStorageValue,
+    }
+  );
+
+  function remove(id: string) {
+    const nextResumes = filter((item) => item.id !== id, resumes);
+    setResumes(nextResumes);
+  }
+
+  function duplicate(id: string) {
+    const resume = find((item) => equals(item.id, id), resumes);
+    const value = {
+      ...resume,
+      id: nanoid(),
+      title: `${resume.title} copy`,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
+    setResumes([...resumes, value]);
+  }
+
+  function changeTitle(id: string, title: string) {
+    const nextResumes = map((item) => {
+      if (equals(item.id, id)) {
+        return {
+          ...item,
+          title,
+          updatedAt: Date.now(),
+        };
+      }
+      return item;
+    }, resumes);
+    setResumes(nextResumes);
+  }
+
+  function changeIcon(id: string, icon: string) {
+    const nextResumes = map((item) => {
+      if (equals(item.id, id)) {
+        return {
+          ...item,
+          icon,
+          updatedAt: Date.now(),
+        };
+      }
+      return item;
+    }, resumes);
+    setResumes(nextResumes);
+  }
+
+  function createNew(fields?: Fields) {
+    const resume = {
+      ...DEFAULT_VALUES,
+      ...fields,
+      id: nanoid(),
+      title: "Untitled resume",
+    };
+    setResumes([...resumes, resume]);
+    return resume;
+  }
+
+  function move(fromId: string, toId: string) {
+    const fromIndex = findIndex(propEq("id", fromId))(resumes);
+    const toIndex = findIndex(propEq("id", toId))(resumes);
+    const nextResumes = ramdaMove(fromIndex, toIndex, resumes);
+    setResumes(nextResumes);
+  }
+
+  return {
+    resumes,
+    setResumes,
+    remove,
+    duplicate,
+    changeTitle,
+    changeIcon,
+    createNew,
+    move,
+  };
+}
+
+export default useResumes;

@@ -13,14 +13,12 @@ import {
   EditableInput,
   useToast,
   useClipboard,
-  useDisclosure,
   useColorModeValue,
   useInterval,
 } from "@chakra-ui/react";
 import {
   Copy,
   MoreHorizontal,
-  Trash2,
   Edit,
   Move,
   Link as IconLink,
@@ -33,33 +31,12 @@ import { CSS } from "@dnd-kit/utilities";
 import { useRerender } from "@react-hookz/web";
 
 import EmojiPicker from "../misc/EmojiPicker";
-import DeleteResumeModal from "./DeleteResumeModal";
+import DeleteResumeMenuItem from "./DeleteResumeMenuItem";
 
 import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
 
 import { Resume } from "../../types";
-
-function DeleteResume(props: { onDelete: () => void }) {
-  const { onDelete } = props;
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
-    <>
-      <MenuItem
-        icon={<Trash2 size={20} />}
-        onClick={onOpen}
-        data-cy="delete_resume_btn"
-      >
-        Delete
-      </MenuItem>
-      <DeleteResumeModal
-        isOpen={isOpen}
-        onClose={onClose}
-        onSubmit={onDelete}
-      />
-    </>
-  );
-}
 
 function UpdatedAtText(props: { updatedAt: number }) {
   const { updatedAt } = props;
@@ -123,14 +100,6 @@ function ResumeItem(props: props) {
     onCopy();
     toast({
       description: "Link copied.",
-      isClosable: true,
-    });
-  }
-
-  function handleOnDelete() {
-    onDelete(resume.id);
-    toast({
-      description: "Resume deleted.",
       isClosable: true,
     });
   }
@@ -209,7 +178,7 @@ function ResumeItem(props: props) {
               >
                 Copy link
               </MenuItem>
-              <DeleteResume onDelete={handleOnDelete} />
+              <DeleteResumeMenuItem onDelete={() => onDelete(resume.id)} />
             </MenuList>
           </Menu>
           <IconButton

@@ -1,6 +1,6 @@
 import { useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
-import { isNil, find, map, filter } from "ramda";
+import { isNil, find, map, filter, equals, or } from "ramda";
 
 import { Resume } from "../types";
 
@@ -11,9 +11,7 @@ type props = {
   initializeWithStorageValue?: boolean;
 };
 
-function useResume(
-  props: props = {}
-): [Resume, boolean, (nextResume: Resume) => void, () => void] {
+function useResume(props: props = {}) {
   const {
     isolated = false,
     handleStorageEvent = true,
@@ -34,12 +32,12 @@ function useResume(
   );
   const resume = isNil(resumes)
     ? undefined
-    : find((item) => item.id === id, resumes);
-  const isLoading = isNil(id) || isNil(resumes);
+    : find((item) => equals(item.id, id), resumes);
+  const isLoading = or(isNil(id), isNil(resumes));
 
   function setResume(nextResume: Resume) {
     const nextResumes = map((item) => {
-      if (item.id === id) {
+      if (equals(item.id, id)) {
         return nextResume;
       }
       return item;
@@ -47,12 +45,28 @@ function useResume(
     setResumes(nextResumes);
   }
 
-  function removeResume() {
+  function remove() {
     const nextResumes = filter((item) => item.id !== id, resumes);
     setResumes(nextResumes);
   }
 
-  return [resume, isLoading, setResume, removeResume];
+  function changeTitle(title: string) {
+    setResume({
+      ...resume,
+      title,
+      updatedAt: Date.now(),
+    });
+  }
+
+  function changeIcon(icon: string) {
+    setResume({
+      ...resume,
+      icon,
+      updatedAt: Date.now(),
+    });
+  }
+
+  return { resume, isLoading, setResume, remove, changeTitle, changeIcon };
 }
 
 export default useResume;

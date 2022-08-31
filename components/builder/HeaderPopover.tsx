@@ -210,11 +210,11 @@ function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
 function DeleteResume() {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [_resume, _isLoading, _setResume, removeResume] = useResume();
+  const { remove } = useResume();
   const toast = useToast();
 
   function handleOnDelete() {
-    removeResume();
+    remove();
     router.push("/resumes");
     toast({
       description: "Resume deleted.",
