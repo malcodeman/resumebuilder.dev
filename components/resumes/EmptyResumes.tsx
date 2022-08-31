@@ -8,16 +8,14 @@ import {
 } from "@chakra-ui/react";
 import { Layers, Plus, Upload } from "react-feather";
 import { map } from "ramda";
-import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
-import { useLocalStorageValue } from "@react-hookz/web";
 import { motion } from "framer-motion";
 
 import ImportDataModal from "./ImportDataModal";
 
-import { DEFAULT_VALUES } from "../../lib/constants";
+import { Fields } from "../../types";
 
-import { Fields, Resume, Template } from "../../types";
+import useResumes from "../../hooks/useResumes";
 
 function EmptyResumes() {
   const boxShadow = useColorModeValue(
@@ -29,9 +27,7 @@ function EmptyResumes() {
   const purple = useColorModeValue("#6724de", "#9a6dd7");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
-  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
-    initializeWithStorageValue: false,
-  });
+  const { createNew } = useResumes();
   const ITEMS = [
     {
       color: green,
@@ -60,29 +56,12 @@ function EmptyResumes() {
   ];
 
   function handleOnNew() {
-    const resume = {
-      ...DEFAULT_VALUES,
-      id: nanoid(),
-      title: "Untitled resume",
-    };
-    setResumes([...resumes, resume]);
+    const resume = createNew();
     router.push(`/resumes/${resume.id}`);
   }
 
   function handleOnImport(fields: Fields) {
-    const resume = {
-      ...fields,
-      id: nanoid(),
-      title: "Untitled",
-      icon: "",
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-      design: {
-        template: Template.berlin,
-        spacing: 1,
-      },
-    };
-    setResumes([...resumes, resume]);
+    const resume = createNew(fields);
     onClose();
     router.push(`/resumes/${resume.id}`);
   }
