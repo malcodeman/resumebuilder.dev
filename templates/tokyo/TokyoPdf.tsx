@@ -35,6 +35,7 @@ function TokyoPdf(props: props) {
   const { about, section } = fields;
   const styles = StyleSheet.create({
     page: {
+      width: "100%",
       lineHeight: 1,
       height: "100%",
       paddingTop: 20 * design.spacing,

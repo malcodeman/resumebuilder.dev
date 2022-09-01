@@ -15,6 +15,7 @@ function LondonReact(props: props) {
   const { about, section } = fields;
   const styles = {
     page: {
+      width: "100%",
       lineHeight: 1,
       height: "100%",
       color: "#222831",

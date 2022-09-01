@@ -11,6 +11,7 @@ import {
   Editable,
   EditablePreview,
   EditableInput,
+  AspectRatio,
   useToast,
   useClipboard,
   useColorModeValue,
@@ -114,23 +115,23 @@ function ResumeItem(props: props) {
       role="group"
     >
       <Link href={`/resumes/${resume.id}`} passHref>
-        <Box
-          height="360px"
-          mb="2"
-          borderRadius="lg"
-          overflow="hidden"
-          userSelect="none"
-          boxShadow={boxShadow}
-          _hover={{ cursor: "pointer" }}
-        >
-          {getTemplate(
-            { ...resume.design, spacing: 0.6 },
-            {
-              about: resume.about,
-              section: resume.section,
-            }
-          )}
-        </Box>
+        <AspectRatio mb="2" ratio={1.618 / 2 / 1}>
+          <Box
+            borderRadius="lg"
+            overflow="hidden"
+            userSelect="none"
+            boxShadow={boxShadow}
+            _hover={{ cursor: "pointer" }}
+          >
+            {getTemplate(
+              { ...resume.design, spacing: 0.6 },
+              {
+                about: resume.about,
+                section: resume.section,
+              }
+            )}
+          </Box>
+        </AspectRatio>
       </Link>
       <Box>
         <Flex>

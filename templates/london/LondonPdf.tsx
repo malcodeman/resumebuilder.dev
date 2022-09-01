@@ -35,6 +35,7 @@ function LondonPdf(props: props) {
   const { about, section } = fields;
   const styles = StyleSheet.create({
     page: {
+      width: "100%",
       lineHeight: 1,
       height: "100%",
       color: "#222831",

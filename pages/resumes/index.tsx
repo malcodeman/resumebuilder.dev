@@ -78,7 +78,7 @@ function ResumeGrid() {
   const [view, setView] = React.useState<View>("grid");
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-  const isSmallDevice = useMediaQuery("only screen and (max-width: 30em)");
+  const isSmallDevice = useMediaQuery("(max-width: 48em)");
   const columnHelper = createColumnHelper<Resume>();
   const toast = useToast();
   const handleOnDelete = React.useCallback(
@@ -144,9 +144,6 @@ function ResumeGrid() {
   );
 
   React.useEffect(() => {
-    if (and(isSmallDevice, equals(view, "grid"))) {
-      setView("list");
-    }
     if (and(isSmallDevice, equals(view, "list"))) {
       setColumnVisibility({ updatedAt: false });
     } else {
@@ -186,7 +183,7 @@ function ResumeGrid() {
       return (
         <Grid
           gap="8"
-          gridTemplateColumns="repeat(auto-fill, minmax(270px, 1fr))"
+          gridTemplateColumns={["1fr", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
           data-cy="resumes-grid"
         >
           <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
@@ -231,7 +228,6 @@ function ResumeGrid() {
         />
         <ButtonGroup mr="2" size="sm" isAttached>
           <IconButton
-            display={["none", "inline-flex"]}
             size="sm"
             aria-label="Grid view"
             icon={<IconGrid size={20} />}
@@ -239,7 +235,6 @@ function ResumeGrid() {
             isActive={equals(view, "grid")}
           />
           <IconButton
-            display={["none", "inline-flex"]}
             size="sm"
             aria-label="List view"
             icon={<IconList size={20} />}
