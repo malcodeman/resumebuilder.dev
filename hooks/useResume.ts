@@ -66,7 +66,28 @@ function useResume(props: props = {}) {
     });
   }
 
-  return { resume, isLoading, setResume, remove, changeTitle, changeIcon };
+  function changeSlug(slug: string) {
+    const taken = find((item) => equals(item.id, slug), resumes);
+    if (!taken) {
+      const nextResume = {
+        ...resume,
+        id: slug,
+      };
+      setResume(nextResume);
+      return nextResume;
+    }
+    return undefined;
+  }
+
+  return {
+    resume,
+    isLoading,
+    setResume,
+    remove,
+    changeTitle,
+    changeIcon,
+    changeSlug,
+  };
 }
 
 export default useResume;

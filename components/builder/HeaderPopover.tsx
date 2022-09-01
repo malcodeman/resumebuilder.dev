@@ -24,6 +24,7 @@ import {
   Trash2,
   Layers as IconLayers,
   Database,
+  Edit,
 } from "react-feather";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
@@ -33,6 +34,7 @@ import ImportDataModal from "../resumes/ImportDataModal";
 import ExportResumeModal from "./ExportResumeModal";
 import DeleteResumeModal from "../resumes/DeleteResumeModal";
 import TemplatesModal from "./TemplatesModal";
+import ChangeSlugModal from "./ChangeSlugModal";
 
 import utils from "../../lib/utils";
 import useResume from "../../hooks/useResume";
@@ -187,6 +189,24 @@ function CopyLink() {
     >
       {hasCopied ? "Copied" : "Copy link"}
     </Button>
+  );
+}
+
+function ChangeSlug() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <Button
+        size="sm"
+        mb="2"
+        justifyContent="flex-start"
+        leftIcon={<Edit size={20} />}
+        onClick={onOpen}
+      >
+        Change slug
+      </Button>
+      <ChangeSlugModal isOpen={isOpen} onClose={onClose} />
+    </>
   );
 }
 
@@ -355,6 +375,7 @@ function HeaderPopover(props: props) {
                   onChangeTemplate={onChangeTemplate}
                 />
                 <CopyLink />
+                <ChangeSlug />
                 {devTools ? <GenerateFakeData onImport={onImport} /> : null}
                 <DeleteResume />
                 <Divider marginY="2" />
