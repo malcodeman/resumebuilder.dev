@@ -11,8 +11,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useKeyboardEvent } from "@react-hookz/web";
-import { Upload } from "react-feather";
+import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
+import { Plus, Upload } from "react-feather";
 
 import { Fields } from "../../types";
 
@@ -23,6 +23,7 @@ import ImportDataModal from "./ImportDataModal";
 function NewButton() {
   const router = useRouter();
   const { createNew } = useResumes();
+  const isMediumDevice = useMediaQuery("(min-width: 30em)");
 
   useKeyboardEvent(
     "n",
@@ -44,9 +45,18 @@ function NewButton() {
   return (
     <Popover trigger="hover">
       <PopoverTrigger>
-        <Button mr="-px" data-cy="new_resume_btn" onClick={handleOnCreateNew}>
-          New
-        </Button>
+        {isMediumDevice ? (
+          <Button mr="-px" data-cy="new_resume_btn" onClick={handleOnCreateNew}>
+            New
+          </Button>
+        ) : (
+          <IconButton
+            mr="-px"
+            aria-label="Create new"
+            onClick={handleOnCreateNew}
+            icon={<Plus size={20} />}
+          />
+        )}
       </PopoverTrigger>
       <PopoverContent width="unset">
         <PopoverBody display="flex" alignItems="center">
