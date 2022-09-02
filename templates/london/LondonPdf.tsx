@@ -73,11 +73,10 @@ function LondonPdf(props: props) {
     },
     summary: {
       color: "#677180",
-      fontSize: theme.fontSize["2xl"] * design.spacing,
+      lineHeight: 1.4,
     },
     sectionLabel: {
       fontWeight: 700,
-      color: "#00ADB5",
       marginBottom: 10 * design.spacing,
     },
     sectionItem: {
@@ -109,11 +108,10 @@ function LondonPdf(props: props) {
       display: "flex",
       flexWrap: "wrap",
       flexDirection: "row",
-      marginBottom: 16 * design.spacing,
     },
     listItem: {
       color: "#fff",
-      backgroundColor: "#00ADB5",
+      backgroundColor: "#845ec2",
       paddingTop: 6 * design.spacing,
       marginRight: 4 * design.spacing,
       marginBottom: 4 * design.spacing,
@@ -187,6 +185,7 @@ function LondonPdf(props: props) {
           </View>
           <Text style={styles.name}>
             {about.firstName} {about.lastName}
+            {isEmpty(about.title) ? null : `, ${about.title}`}
           </Text>
           {split("\n", about.summary).map((item, index) => (
             <Text key={index} style={styles.summary}>
@@ -224,12 +223,17 @@ function LondonPdf(props: props) {
               <View key={index}>
                 <Text style={styles.sectionLabel}>{sectionItem.label}</Text>
                 {isEmpty(sectionItem.tags) ? null : (
-                  <View style={styles.list}>
-                    {split("\n", sectionItem.tags).map((item, index) => (
-                      <Text key={index} style={styles.listItem}>
-                        {item}
-                      </Text>
-                    ))}
+                  <View style={styles.sectionItem}>
+                    <View style={styles.leftColumn} />
+                    <View style={styles.rightColumn}>
+                      <View style={styles.list}>
+                        {split("\n", sectionItem.tags).map((item, index) => (
+                          <Text key={index} style={styles.listItem}>
+                            {item}
+                          </Text>
+                        ))}
+                      </View>
+                    </View>
                   </View>
                 )}
               </View>

@@ -54,11 +54,10 @@ function LondonReact(props: props) {
     },
     summary: {
       color: "#677180",
-      fontSize: utils.pt2px(theme.fontSize["2xl"] * design.spacing),
+      lineHeight: 1.4,
     },
     sectionLabel: {
       fontWeight: 700,
-      color: "#00ADB5",
       marginBottom: utils.pt2px(10 * design.spacing),
     },
     sectionItem: {
@@ -90,11 +89,10 @@ function LondonReact(props: props) {
       display: "flex",
       flexWrap: "wrap",
       flexDirection: "row",
-      marginBottom: utils.pt2px(16 * design.spacing),
     },
     listItem: {
       color: "#fff",
-      backgroundColor: "#00ADB5",
+      backgroundColor: "#845ec2",
       paddingTop: utils.pt2px(6 * design.spacing),
       marginRight: utils.pt2px(4 * design.spacing),
       marginBottom: utils.pt2px(4 * design.spacing),
@@ -167,6 +165,7 @@ function LondonReact(props: props) {
         </div>
         <p style={styles.name}>
           {about.firstName} {about.lastName}
+          {isEmpty(about.title) ? null : `, ${about.title}`}
         </p>
         {split("\n", about.summary).map((item, index) => (
           <p key={index} style={styles.summary}>
@@ -202,12 +201,17 @@ function LondonReact(props: props) {
             <div key={index}>
               <p style={styles.sectionLabel}>{sectionItem.label}</p>
               {isEmpty(sectionItem.tags) ? null : (
-                <div style={styles.list}>
-                  {split("\n", sectionItem.tags).map((item, index) => (
-                    <p key={index} style={styles.listItem}>
-                      {item}
-                    </p>
-                  ))}
+                <div style={styles.sectionItem}>
+                  <div style={styles.leftColumn} />
+                  <div style={styles.rightColumn}>
+                    <div style={styles.list}>
+                      {split("\n", sectionItem.tags).map((item, index) => (
+                        <p key={index} style={styles.listItem}>
+                          {item}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
