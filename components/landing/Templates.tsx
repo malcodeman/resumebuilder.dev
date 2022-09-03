@@ -16,7 +16,7 @@ const ARROW_RIGHT_VARIANTS = {
 };
 
 type props = {
-  onSubmit: (data: { template: TemplateType }) => void;
+  onSubmit: (template: TemplateType) => void;
 };
 
 function Templates(props: props) {
@@ -59,7 +59,7 @@ function Templates(props: props) {
             <Template
               key={item.template}
               id={item.template}
-              onUseTemplate={(template) => onSubmit({ template })}
+              onUseTemplate={(template) => onSubmit(template)}
             />
           ),
           TEMPLATES_LIST

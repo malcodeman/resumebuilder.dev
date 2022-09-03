@@ -48,8 +48,7 @@ function Landing() {
     setShowDashboard(false);
   });
 
-  function handleOnSubmit(data = { template: Template.berlin }) {
-    const { template } = data;
+  function handleOnSubmit(template?: Template) {
     const design = {
       ...DEFAULT_VALUES.design,
       template,
