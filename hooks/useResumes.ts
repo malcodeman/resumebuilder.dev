@@ -12,7 +12,7 @@ import {
 
 import { DEFAULT_VALUES } from "../lib/constants";
 
-import { Fields, Resume } from "../types";
+import { Design, Fields, Resume } from "../types";
 
 type props = {
   isolated?: boolean;
@@ -84,12 +84,16 @@ function useResumes(props: props = {}) {
     setResumes(nextResumes);
   }
 
-  function createNew(fields?: Fields) {
+  function createNew(data?: { fields?: Fields; design?: Design }) {
     const resume = {
       ...DEFAULT_VALUES,
-      ...fields,
+      ...data.fields,
       id: nanoid(),
       title: "Untitled resume",
+      design: {
+        ...DEFAULT_VALUES.design,
+        ...data.design,
+      },
     };
     setResumes([...resumes, resume]);
     return resume;

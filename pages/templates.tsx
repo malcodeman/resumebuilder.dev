@@ -1,9 +1,7 @@
 import React from "react";
 import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
 import Head from "next/head";
-import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
-import { useLocalStorageValue } from "@react-hookz/web";
 import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
 
 import Layout from "../components/Layout";
@@ -14,16 +12,16 @@ import {
   TEMPLATES_FILTERS,
 } from "../lib/constants";
 
-import { Resume, Template as TemplateType } from "../types";
+import { Template as TemplateType } from "../types";
 
 import SearchInput from "../components/misc/SearchInput";
 import Template from "../components/templates/Template";
 
+import useResumes from "../hooks/useResumes";
+
 function Templates() {
   const router = useRouter();
-  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
-    initializeWithStorageValue: false,
-  });
+  const { createNew } = useResumes();
   const [activeFilter, setActiveFilter] = React.useState(
     TEMPLATES_FILTERS[0].value
   );
@@ -38,16 +36,11 @@ function Templates() {
   );
 
   function handleOnUseTemplate(template: TemplateType) {
-    const resume = {
-      ...DEFAULT_VALUES,
-      id: nanoid(),
-      title: "Untitled resume",
-      design: {
-        ...DEFAULT_VALUES.design,
-        template,
-      },
+    const design = {
+      ...DEFAULT_VALUES.design,
+      template,
     };
-    setResumes([...resumes, resume]);
+    const resume = createNew({ design });
     router.push(`/resumes/${resume.id}`);
   }
 

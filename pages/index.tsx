@@ -13,7 +13,6 @@ import {
   ListIcon,
 } from "@chakra-ui/react";
 import { useLocalStorageValue, useMountEffect } from "@react-hookz/web";
-import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { CheckCircle } from "react-feather";
@@ -28,7 +27,9 @@ import Poser12 from "../illustrations/Poser12";
 
 import { DEFAULT_VALUES } from "../lib/constants";
 
-import { Resume, Template } from "../types";
+import { Template } from "../types";
+
+import useResumes from "../hooks/useResumes";
 
 const ATS_TOOLTIP = "Applicant Tracking System";
 
@@ -41,9 +42,7 @@ function Landing() {
     }
   );
   const router = useRouter();
-  const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
-    initializeWithStorageValue: false,
-  });
+  const { createNew } = useResumes();
 
   useMountEffect(() => {
     setShowDashboard(false);
@@ -51,16 +50,11 @@ function Landing() {
 
   function handleOnSubmit(data = { template: Template.berlin }) {
     const { template } = data;
-    const resume = {
-      ...DEFAULT_VALUES,
-      id: nanoid(),
-      title: "Untitled resume",
-      design: {
-        ...DEFAULT_VALUES.design,
-        template,
-      },
+    const design = {
+      ...DEFAULT_VALUES.design,
+      template,
     };
-    setResumes([...resumes, resume]);
+    const resume = createNew({ design });
     router.push(`/resumes/${resume.id}`);
   }
 

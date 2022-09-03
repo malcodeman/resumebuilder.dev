@@ -76,7 +76,7 @@ function ImportButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function onImport(fields: Fields) {
-    const resume = createNew(fields);
+    const resume = createNew({ fields });
     onClose();
     router.push(`/resumes/${resume.id}`);
   }

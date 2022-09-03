@@ -61,7 +61,7 @@ function EmptyResumes() {
   }
 
   function handleOnImport(fields: Fields) {
-    const resume = createNew(fields);
+    const resume = createNew({ fields });
     onClose();
     router.push(`/resumes/${resume.id}`);
   }
