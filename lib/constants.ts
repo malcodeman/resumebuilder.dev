@@ -2,6 +2,24 @@ import { Template } from "../types";
 
 const IS_PROD = process.env.NODE_ENV === "production";
 const TEMPLATES: Template[] = Object.values(Template);
+const TEMPLATES_FILTERS = [
+  {
+    value: "all",
+    label: "All",
+  },
+  {
+    value: "simple",
+    label: "Simple",
+  },
+  {
+    value: "creative",
+    label: "Creative",
+  },
+  {
+    value: "professional",
+    label: "Professional",
+  },
+];
 const STANDARD_SECTION_DEFAULT_VALUES = {
   title: "",
   subtitle: "",
@@ -91,6 +109,7 @@ const FATHOM_EVENTS = {
 export {
   IS_PROD,
   TEMPLATES,
+  TEMPLATES_FILTERS,
   STANDARD_SECTION_DEFAULT_VALUES,
   DEFAULT_VALUES,
   TEMPLATES_LIST,

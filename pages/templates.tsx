@@ -1,69 +1,43 @@
 import React from "react";
-import {
-  Grid,
-  Box,
-  Flex,
-  Image,
-  Heading,
-  Text,
-  ButtonGroup,
-  Button,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
 import Head from "next/head";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
-import { includes, map, filter, length, toLower, isEmpty } from "ramda";
+import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
 
 import Layout from "../components/Layout";
 
-import { DEFAULT_VALUES, TEMPLATES_LIST } from "../lib/constants";
+import {
+  DEFAULT_VALUES,
+  TEMPLATES_LIST,
+  TEMPLATES_FILTERS,
+} from "../lib/constants";
 
-import { Resume, Template } from "../types";
+import { Resume, Template as TemplateType } from "../types";
 
 import SearchInput from "../components/misc/SearchInput";
-
-const FILTERS = [
-  {
-    value: "all",
-    label: "All",
-  },
-  {
-    value: "simple",
-    label: "Simple",
-  },
-  {
-    value: "creative",
-    label: "Creative",
-  },
-  {
-    value: "professional",
-    label: "Professional",
-  },
-];
+import Template from "../components/templates/Template";
 
 function Templates() {
   const router = useRouter();
   const [resumes, setResumes] = useLocalStorageValue<Resume[]>("resumes", [], {
     initializeWithStorageValue: false,
   });
-  const boxShadow = useColorModeValue(
-    "rgba(0, 0, 0, 0.05) 0 0 0 2px",
-    "rgba(255, 255, 255, 0.05) 0 0 0 2px"
+  const [activeFilter, setActiveFilter] = React.useState(
+    TEMPLATES_FILTERS[0].value
   );
-  const [activeFilter, setActiveFilter] = React.useState(FILTERS[0].value);
   const [template, setTemplate] = React.useState("");
-  const filteredResumesByTags = filter(
+  const filteredTemplatesByTags = filter(
     (item) => includes(activeFilter, item.tags),
     TEMPLATES_LIST
   );
-  const filteredResumesBySearch = filter(
+  const filteredTemplatesBySearch = filter(
     (item) => includes(toLower(template), toLower(item.title)),
-    filteredResumesByTags
+    filteredTemplatesByTags
   );
 
-  function handleOnSubmit(template: Template) {
+  function handleOnUseTemplate(template: TemplateType) {
     const resume = {
       ...DEFAULT_VALUES,
       id: nanoid(),
@@ -86,7 +60,7 @@ function Templates() {
         <SearchInput
           mb="4"
           value={template}
-          placeholder={`Search ${length(filteredResumesByTags)} templates...`}
+          placeholder={`Search ${length(filteredTemplatesByTags)} templates...`}
           onChangeValue={(nextValue) => setTemplate(nextValue)}
           onClear={() => setTemplate("")}
         />
@@ -95,17 +69,17 @@ function Templates() {
             (item) => (
               <Button
                 key={item.value}
-                isActive={activeFilter === item.value}
+                isActive={equals(activeFilter, item.value)}
                 data-cy={`template-filters-${item.value}`}
                 onClick={() => setActiveFilter(item.value)}
               >
                 {item.label}
               </Button>
             ),
-            FILTERS
+            TEMPLATES_FILTERS
           )}
         </ButtonGroup>
-        {isEmpty(filteredResumesBySearch) ? (
+        {isEmpty(filteredTemplatesBySearch) ? (
           <Text>No templates found</Text>
         ) : (
           <></>
@@ -117,28 +91,13 @@ function Templates() {
         >
           {map(
             (item) => (
-              <Box key={item.template}>
-                <Image
-                  src={item.src}
-                  alt=""
-                  mb="2"
-                  borderRadius="lg"
-                  boxShadow={boxShadow}
-                />
-                <Flex mb="2" alignItems="center" justifyContent="space-between">
-                  <Heading fontSize="md">{item.title}</Heading>
-                  <Button
-                    colorScheme="blue"
-                    size="sm"
-                    onClick={() => handleOnSubmit(item.template)}
-                  >
-                    Use template
-                  </Button>
-                </Flex>
-                <Text opacity="0.5">{item.description}</Text>
-              </Box>
+              <Template
+                key={item.template}
+                id={item.template}
+                onUseTemplate={(template) => handleOnUseTemplate(template)}
+              />
             ),
-            filteredResumesBySearch
+            filteredTemplatesBySearch
           )}
         </Grid>
       </Layout>

@@ -14,7 +14,7 @@ import { useLocalStorageValue } from "@react-hookz/web";
 import Logo from "../Logo";
 import HeaderPopover from "./HeaderPopover";
 import ResumeTitle from "./ResumeTitle";
-import TemplatesModal from "./TemplatesModal";
+import TemplatesModal from "../templates/TemplatesModal";
 
 import { FATHOM_EVENTS } from "../../lib/constants";
 import utils from "../../lib/utils";

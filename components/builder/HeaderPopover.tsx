@@ -33,7 +33,7 @@ import { equals } from "ramda";
 import ImportDataModal from "../resumes/ImportDataModal";
 import ExportResumeModal from "./ExportResumeModal";
 import DeleteResumeModal from "../resumes/DeleteResumeModal";
-import TemplatesModal from "./TemplatesModal";
+import TemplatesModal from "../templates/TemplatesModal";
 import ChangeSlugModal from "./ChangeSlugModal";
 
 import utils from "../../lib/utils";
