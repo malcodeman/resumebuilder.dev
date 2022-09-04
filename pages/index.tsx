@@ -12,7 +12,7 @@ import {
   ListItem,
   ListIcon,
 } from "@chakra-ui/react";
-import { useLocalStorageValue, useMountEffect } from "@react-hookz/web";
+import { useMountEffect } from "@react-hookz/web";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { CheckCircle } from "react-feather";
@@ -30,22 +30,17 @@ import { DEFAULT_VALUES } from "../lib/constants";
 import { Template } from "../types";
 
 import useResumes from "../hooks/useResumes";
+import useDashboard from "../hooks/useDashboard";
 
 const ATS_TOOLTIP = "Applicant Tracking System";
 
 function Landing() {
-  const [_showDashboard, setShowDashboard] = useLocalStorageValue(
-    "showDashboard",
-    false,
-    {
-      initializeWithStorageValue: false,
-    }
-  );
+  const { setDashboard } = useDashboard();
   const router = useRouter();
   const { createNew } = useResumes();
 
   useMountEffect(() => {
-    setShowDashboard(false);
+    setDashboard(false);
   });
 
   function handleOnSubmit(template?: Template) {

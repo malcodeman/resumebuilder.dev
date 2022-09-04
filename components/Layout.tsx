@@ -1,11 +1,12 @@
 import React from "react";
 import { Box, Container } from "@chakra-ui/react";
-import { useLocalStorageValue } from "@react-hookz/web";
 
 import HeaderDashboard from "./resumes/Header";
 import HeaderDashboardMobile from "./resumes/HeaderMobile";
 import HeaderLanding from "./landing/Header";
 import HeaderLandingMobile from "./landing/HeaderMobile";
+
+import useDashboard from "../hooks/useDashboard";
 
 type props = {
   children: React.ReactNode;
@@ -13,12 +14,10 @@ type props = {
 
 function Layout(props: props) {
   const { children } = props;
-  const [showDashboard] = useLocalStorageValue("showDashboard", false, {
-    initializeWithStorageValue: false,
-  });
+  const { dashboard } = useDashboard();
   return (
     <>
-      {showDashboard ? (
+      {dashboard ? (
         <HeaderDashboard display={{ base: "none", lg: "block" }} />
       ) : (
         <HeaderLanding display={{ base: "none", lg: "block" }} />
@@ -31,7 +30,7 @@ function Layout(props: props) {
       >
         <Container maxW="container.lg">{children}</Container>
       </Box>
-      {showDashboard ? (
+      {dashboard ? (
         <HeaderDashboardMobile display={{ base: "block", lg: "none" }} />
       ) : (
         <HeaderLandingMobile display={{ base: "block", lg: "none" }} />

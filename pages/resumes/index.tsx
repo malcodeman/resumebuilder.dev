@@ -23,11 +23,7 @@ import {
   MoreHorizontal as IconMoreHorizontal,
   Copy as IconCopy,
 } from "react-feather";
-import {
-  useLocalStorageValue,
-  useMediaQuery,
-  useMountEffect,
-} from "@react-hookz/web";
+import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import {
   map,
   filter,
@@ -57,6 +53,7 @@ import EmptyResumes from "../../components/resumes/EmptyResumes";
 import Table from "../../components/misc/Table";
 
 import useResumes from "../../hooks/useResumes";
+import useDashboard from "../../hooks/useDashboard";
 
 import { Resume, View } from "../../types";
 
@@ -250,16 +247,10 @@ function ResumeGrid() {
 }
 
 function Dashboard() {
-  const [_showDashboard, setShowDashboard] = useLocalStorageValue(
-    "showDashboard",
-    false,
-    {
-      initializeWithStorageValue: false,
-    }
-  );
+  const { setDashboard } = useDashboard();
 
   useMountEffect(() => {
-    setShowDashboard(true);
+    setDashboard(true);
   });
 
   return (
