@@ -6,6 +6,8 @@ import "emoji-mart/css/emoji-mart.css";
 
 import { FATHOM_SITE_ID } from "../lib/constants";
 
+import ErrorBoundary from "../components/misc/ErrorBoundary";
+
 const THEME = extendTheme({
   styles: {
     global: {
@@ -31,7 +33,9 @@ function App({ Component, pageProps }: AppProps) {
   }, []);
   return (
     <ChakraProvider theme={THEME}>
-      <Component {...pageProps} />
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
     </ChakraProvider>
   );
 }
