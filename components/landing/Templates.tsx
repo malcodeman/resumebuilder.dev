@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Heading, Button, Grid, Box, Text } from "@chakra-ui/react";
-import { map } from "ramda";
+import { map, slice } from "ramda";
 import { ArrowRight } from "react-feather";
 import { motion } from "framer-motion";
 
@@ -54,15 +54,19 @@ function Templates(props: props) {
         ]}
         gap="8"
       >
-        {map(
-          (item) => (
-            <Template
-              key={item.template}
-              id={item.template}
-              onUseTemplate={(template) => onSubmit(template)}
-            />
-          ),
-          TEMPLATES_LIST
+        {slice(
+          0,
+          3,
+          map(
+            (item) => (
+              <Template
+                key={item.template}
+                id={item.template}
+                onUseTemplate={(template) => onSubmit(template)}
+              />
+            ),
+            TEMPLATES_LIST
+          )
         )}
       </Grid>
     </Box>

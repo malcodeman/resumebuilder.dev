@@ -5,6 +5,7 @@ enum Template {
   berlin = "berlin",
   tokyo = "tokyo",
   london = "london",
+  rio = "rio",
 }
 type Section =
   | "standardSection"

@@ -96,6 +96,14 @@ const TEMPLATES_LIST = [
     src: "/templates/london.png",
     tags: ["all", "simple", "creative"],
   },
+  {
+    title: "Rio",
+    template: Template.rio,
+    description:
+      "Rio is a perfect choice for the majority of job applications.",
+    src: "/templates/rio.png",
+    tags: ["all", "simple", "professional"],
+  },
 ];
 const VIEWS = {
   GRID: "grid",
