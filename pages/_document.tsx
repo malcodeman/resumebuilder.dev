@@ -19,7 +19,7 @@ class MyDocument extends Document {
             name="description"
             content="resumebuilder.dev - free resume builder for developers"
           />
-          <meta property="og:image" content="opengraph.png"></meta>
+          <meta property="og:image" content="opengraph/index.png"></meta>
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
