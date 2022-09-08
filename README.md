@@ -5,7 +5,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/malcodeman/resumebuilder.dev/blob/master/LICENSE)
 
-Resume builder for developers.
+Free resume builder for developers.
 
 ![Screenshot](readme/screenshot.png)
 

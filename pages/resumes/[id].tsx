@@ -60,7 +60,7 @@ function Builder() {
   return (
     <>
       <Head>
-        <title>{resume.title} - resumebuilder.dev</title>
+        <title>{resume.title} | resumebuilder.dev</title>
       </Head>
       <Header form={form} display={{ base: "none", lg: "block" }} />
       <Grid

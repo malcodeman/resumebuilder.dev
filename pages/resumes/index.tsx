@@ -256,7 +256,7 @@ function Dashboard() {
   return (
     <>
       <Head>
-        <title>resumebuilder.dev</title>
+        <title>Dashboard | resumebuilder.dev</title>
       </Head>
       <Layout>
         <ResumeGrid />

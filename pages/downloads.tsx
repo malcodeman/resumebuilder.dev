@@ -40,7 +40,7 @@ function Downloads() {
   return (
     <>
       <Head>
-        <title>Downloads - resumebuilder.dev</title>
+        <title>Downloads | resumebuilder.dev</title>
       </Head>
       <Layout>
         <Center mb="4">

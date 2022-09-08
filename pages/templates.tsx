@@ -47,7 +47,7 @@ function Templates() {
   return (
     <>
       <Head>
-        <title>Templates - resumebuildedev</title>
+        <title>Templates | resumebuilder.dev</title>
       </Head>
       <Layout>
         <SearchInput

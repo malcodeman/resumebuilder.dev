@@ -55,7 +55,7 @@ function Landing() {
   return (
     <>
       <Head>
-        <title>resumebuilder.dev</title>
+        <title>Free Resume Builder for Developers | resumebuilder.dev</title>
       </Head>
       <Layout>
         <Grid
