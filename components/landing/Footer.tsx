@@ -5,11 +5,12 @@ import {
   Button,
   Text,
   Grid,
+  Container,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Check } from "react-feather";
-import { map } from "ramda";
+import { length, map } from "ramda";
 
 import WorkspaceIllustration from "../../illustrations/Workspace";
 
@@ -51,7 +52,7 @@ function Footer(props: props) {
         Build for free
       </Button>
       <Grid
-        templateColumns={["1fr", `repeat(${LIST.length}, 1fr)`]}
+        templateColumns={["1fr", `repeat(${length(LIST)}, 1fr)`]}
         gap="2"
         mb="16"
       >
@@ -65,9 +66,9 @@ function Footer(props: props) {
           LIST
         )}
       </Grid>
-      <Center maxW="container.sm">
+      <Container maxW="container.sm" padding="0">
         <WorkspaceIllustration fill={fill} stroke={stroke} />
-      </Center>
+      </Container>
     </Center>
   );
 }
