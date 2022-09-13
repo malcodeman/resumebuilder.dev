@@ -323,13 +323,14 @@ function HeaderPopover(props: props) {
     onChangeTemplate,
   } = props;
   return (
-    <Popover>
+    <Popover placement="bottom-start">
       {({ isOpen }) => (
         <>
           <Tooltip
             label={TOOLTIP_MORE_LABEL}
             aria-label={TOOLTIP_MORE_LABEL}
             isDisabled={isOpen}
+            placement="bottom-start"
           >
             <Flex>
               <PopoverTrigger>
