@@ -26,3 +26,5 @@ describe("Landing page", () => {
     cy.url().should("include", "/resumes/");
   });
 });
+
+export {};

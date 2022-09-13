@@ -47,7 +47,7 @@ function Footer(props: props) {
         colorScheme="blue"
         mb="4"
         data-cy="build-for-free"
-        onClick={onSubmit}
+        onClick={() => onSubmit()}
       >
         Build for free
       </Button>

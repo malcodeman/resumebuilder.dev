@@ -57,7 +57,7 @@
     "@types/react": "^17.0.17",
     "@types/simple-icons": "^5.8.0",
     "babel-jest": "^27.3.1",
-    "cypress": "^7.2.0",
+    "cypress": "^10.7.0",
     "eslint": "7.32.0",
     "eslint-config-next": "^12.2.5",
     "identity-obj-proxy": "^3.0.0",

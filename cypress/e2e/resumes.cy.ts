@@ -16,7 +16,7 @@ describe("Resumes page", () => {
     cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
   });
   it("Import from GitHub", () => {
-    cy.get("[data-cy=import-button]").click();
+    cy.get("[data-cy=quickly-upload]").click();
     cy.get("[data-cy=import-github]").click();
     cy.get("[data-cy=import-github-username]").type("malcodeman");
     cy.get("[data-cy=import-github-submit]")
@@ -28,3 +28,5 @@ describe("Resumes page", () => {
     cy.url().should("include", "/resumes/");
   });
 });
+
+export {};

@@ -10,3 +10,5 @@ describe("Downloads page", () => {
     cy.get(`[data-cy=downloads-windows]`).should("be.disabled");
   });
 });
+
+export {};
