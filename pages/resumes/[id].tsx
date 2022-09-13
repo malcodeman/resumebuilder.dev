@@ -74,7 +74,8 @@ function Builder() {
         <Box
           overflowY="auto"
           display={{ base: "none", lg: "block" }}
-          paddingTop={{ base: "8" }}
+          padding="8"
+          backgroundColor="var(--chakra-colors-blackAlpha-50)"
           style={{ scrollbarWidth: "thin" }}
         >
           <Document form={form} />
