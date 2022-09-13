@@ -87,12 +87,12 @@ function useResumes(props: props = {}) {
   function createNew(data?: { fields?: Fields; design?: Design }) {
     const resume = {
       ...DEFAULT_VALUES,
-      ...data.fields,
+      ...data?.fields,
       id: nanoid(),
       title: "Untitled resume",
       design: {
         ...DEFAULT_VALUES.design,
-        ...data.design,
+        ...data?.design,
       },
     };
     setResumes([...resumes, resume]);
