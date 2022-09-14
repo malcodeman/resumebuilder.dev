@@ -201,6 +201,7 @@ function ChangeSlug() {
         size="sm"
         mb="2"
         justifyContent="flex-start"
+        data-cy="change-slug-button"
         leftIcon={<Edit size={20} />}
         onClick={onOpen}
       >
@@ -358,6 +359,7 @@ function HeaderPopover(props: props) {
               <PopoverTrigger>
                 <IconButton
                   size="sm"
+                  data-cy="more-button"
                   aria-label={TOOLTIP_MORE_LABEL}
                   icon={<MoreHorizontal size={20} />}
                 />

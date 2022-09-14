@@ -4,7 +4,7 @@ import { Grid, Box, Text, Center, Button, Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { isNil } from "ramda";
 import Link from "next/link";
-import { useMountEffect } from "@react-hookz/web";
+import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 
 import Sections from "../../components/sections/Sections";
 import Header from "../../components/builder/Header";
@@ -23,6 +23,7 @@ function Builder() {
   const { resume, isLoading } = useResume();
   const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
   const { setDashboard } = useDashboard();
+  const isLargeDevice = useMediaQuery("(min-width: 62em)");
 
   useMountEffect(() => {
     setDashboard(true);
@@ -62,7 +63,7 @@ function Builder() {
       <Head>
         <title>{resume.title} | resumebuilder.dev</title>
       </Head>
-      <Header form={form} display={{ base: "none", lg: "block" }} />
+      {isLargeDevice ? <Header form={form} /> : null}
       <Grid
         as="main"
         templateColumns={{ base: "1fr", lg: "340px 1fr" }}
@@ -81,7 +82,7 @@ function Builder() {
           <Document form={form} />
         </Box>
       </Grid>
-      <HeaderMobile form={form} display={{ base: "block", lg: "none" }} />
+      {isLargeDevice ? null : <HeaderMobile form={form} />}
     </>
   );
 }

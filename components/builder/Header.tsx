@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  HTMLChakraProps,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -21,7 +20,7 @@ import utils from "../../lib/utils";
 
 import { Resume, Fields, Template } from "../../types";
 
-type props = HTMLChakraProps<"div"> & {
+type props = {
   form: UseFormReturn<Resume, object>;
 };
 

@@ -22,4 +22,12 @@ describe("Builder page", () => {
   it("Page title", () => {
     cy.title().should("eq", `${TITLE} | resumebuilder.dev`);
   });
+  it("Change slug", () => {
+    cy.get("[data-cy=more-button]").click();
+    cy.get("[data-cy=change-slug-button]").click();
+    cy.get("[data-cy=slug-input]").clear().type("malcodeman");
+    cy.get("[data-cy=change-button]").click();
+    cy.contains("Slug changed");
+    cy.url().should("eq", `${Cypress.config().baseUrl}/resumes/malcodeman`);
+  });
 });

@@ -3,7 +3,6 @@ import {
   Flex,
   Box,
   Container,
-  HTMLChakraProps,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Home } from "react-feather";
@@ -20,7 +19,7 @@ import utils from "../../lib/utils";
 
 import { Resume, Fields, Template } from "../../types";
 
-type props = HTMLChakraProps<"div"> & {
+type props = {
   form: UseFormReturn<Resume, object>;
 };
 
