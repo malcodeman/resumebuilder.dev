@@ -82,6 +82,7 @@ export type {
   View,
   Design,
   AboutField,
+  SectionField,
   Phrase,
 };
 export { Template };

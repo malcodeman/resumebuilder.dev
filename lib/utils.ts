@@ -5,11 +5,21 @@ import CSSReset from "@chakra-ui/css-reset";
 import * as htmlToImage from "html-to-image";
 import { createStandaloneToast } from "@chakra-ui/react";
 import faker from "faker";
-import { join, split } from "ramda";
+import {
+  join,
+  split,
+  length,
+  map,
+  filter,
+  isNil,
+  flatten,
+  sum,
+  isEmpty,
+} from "ramda";
 
 import getTemplate from "./getTemplate";
 
-import { Resume, Section, Fields } from "../types";
+import { Resume, Section, Fields, SectionField } from "../types";
 
 const toast = createStandaloneToast();
 const isBrowser =
@@ -168,6 +178,18 @@ function generateFakeResume(): Fields {
   return fields;
 }
 
+function countWords(summary: string, section: SectionField[]) {
+  const summaryCount = isEmpty(summary) ? 0 : length(split(" ", summary));
+  const standardSections = filter((item) => !isNil(item.nested), section);
+  const nested = flatten(map((item) => item.nested, standardSections));
+  const descriptionCount = map(
+    (item) =>
+      isEmpty(item.description) ? 0 : length(split(" ", item.description)),
+    nested
+  );
+  return sum([summaryCount, ...descriptionCount]);
+}
+
 const EXPORTS = {
   isBrowser,
   readAsTextAsync,
@@ -180,6 +202,7 @@ const EXPORTS = {
   pt2px,
   getUrlHost,
   generateFakeResume,
+  countWords,
 };
 
 export default EXPORTS;

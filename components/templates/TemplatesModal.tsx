@@ -16,14 +16,13 @@ import { equals, filter, includes, isEmpty, length, map, toLower } from "ramda";
 
 import { TEMPLATES_LIST, TEMPLATES_FILTERS } from "../../lib/constants";
 
-import { Resume, Template as TemplateType } from "../../types";
+import { Template as TemplateType } from "../../types";
 
 import SearchInput from "../misc/SearchInput";
 import Template from "./Template";
 
 type props = {
   isOpen: boolean;
-  values: Resume;
   onClose: () => void;
   onChange: (nextTemplate: TemplateType) => void;
 };

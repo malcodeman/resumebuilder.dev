@@ -11,6 +11,8 @@ import {
   Switch,
   Button,
   Divider,
+  Text,
+  Box,
   useDisclosure,
   useClipboard,
   useToast,
@@ -29,6 +31,8 @@ import {
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
 import { equals } from "ramda";
+import { formatDistanceToNow } from "date-fns";
+import { useFormContext, useWatch } from "react-hook-form";
 
 import ImportDataModal from "../resumes/ImportDataModal";
 import ExportResumeModal from "./ExportResumeModal";
@@ -44,7 +48,6 @@ import { Fields, Resume, Template } from "../../types";
 const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
 type props = {
-  values: Resume;
   devTools: boolean;
   onImport: (fields: Fields) => void;
   onChangeTemplate: (nextTemplate: Template) => void;
@@ -149,10 +152,9 @@ function PdfViewer() {
 }
 
 function ShowTemplates(props: {
-  values: Resume;
   onChangeTemplate: (nextTemplate: Template) => void;
 }) {
-  const { values, onChangeTemplate } = props;
+  const { onChangeTemplate } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -167,7 +169,6 @@ function ShowTemplates(props: {
       </Button>
       <TemplatesModal
         isOpen={isOpen}
-        values={values}
         onClose={onClose}
         onChange={onChangeTemplate}
       />
@@ -246,7 +247,6 @@ function DeleteResume() {
     <>
       <Button
         size="sm"
-        mb="2"
         justifyContent="flex-start"
         leftIcon={<Trash2 size={20} />}
         onClick={onOpen}
@@ -311,9 +311,31 @@ function ExportResume(props: {
   );
 }
 
+function Info() {
+  const { control } = useFormContext<Resume>();
+  const watch = useWatch({
+    control,
+    name: ["updatedAt", "about.summary", "section"],
+  });
+  const updatedAt = watch[0];
+  const wordCount = utils.countWords(watch[1], watch[2]);
+  return (
+    <Box>
+      <Text fontSize="xs" opacity="0.5" mb="2">
+        Word count: {wordCount}
+      </Text>
+      <Text fontSize="xs" opacity="0.5">
+        Edited{" "}
+        {formatDistanceToNow(updatedAt, {
+          addSuffix: true,
+        })}
+      </Text>
+    </Box>
+  );
+}
+
 function HeaderPopover(props: props) {
   const {
-    values,
     devTools,
     onImport,
     onPdfExport,
@@ -345,36 +367,14 @@ function HeaderPopover(props: props) {
           <PopoverContent width="222px">
             <PopoverBody>
               <Flex flexDirection="column">
-                <FormControl
-                  mb="2"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  isDisabled={true}
-                >
-                  <FormLabel
-                    htmlFor="is-small-text"
-                    mb="0"
-                    width="100%"
-                    marginInlineEnd="0"
-                    paddingInlineEnd="3"
-                  >
-                    Small text
-                  </FormLabel>
-                  <Switch isDisabled={true} id="is-small-text" />
-                </FormControl>
                 <FullWidth />
                 <DarkModeToggle />
-                <Divider marginY="2" />
                 <PdfViewer />
                 <Divider
                   marginY="2"
                   display={{ base: "none", lg: "initial" }}
                 />
-                <ShowTemplates
-                  values={values}
-                  onChangeTemplate={onChangeTemplate}
-                />
+                <ShowTemplates onChangeTemplate={onChangeTemplate} />
                 <CopyLink />
                 <ChangeSlug />
                 {devTools ? <GenerateFakeData onImport={onImport} /> : null}
@@ -387,6 +387,8 @@ function HeaderPopover(props: props) {
                   onHtmlExport={onHtmlExport}
                   onPngExport={onPngExport}
                 />
+                <Divider marginY="2" />
+                <Info />
               </Flex>
             </PopoverBody>
           </PopoverContent>

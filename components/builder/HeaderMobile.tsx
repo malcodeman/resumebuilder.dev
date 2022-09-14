@@ -7,7 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Home } from "react-feather";
-import { UseFormReturn } from "react-hook-form";
+import { FormProvider, UseFormReturn } from "react-hook-form";
 import { trackGoal } from "fathom-client";
 import { useLocalStorageValue } from "@react-hookz/web";
 
@@ -36,11 +36,13 @@ function HeaderMobile(props: props) {
   });
 
   function handleOnImport(fields: Fields) {
+    form.setValue("updatedAt", Date.now());
     form.setValue("about", fields.about);
     form.setValue("section", fields.section);
   }
 
   function handleOnChangeTemplate(nextTemplate: Template) {
+    form.setValue("updatedAt", Date.now());
     form.setValue("design.template", nextTemplate);
   }
 
@@ -71,16 +73,17 @@ function HeaderMobile(props: props) {
             </Flex>
           </NavLink>
           <ResumeTitle form={form} marginX="2" />
-          <HeaderPopover
-            values={form.getValues()}
-            devTools={devTools}
-            onImport={handleOnImport}
-            onChangeTemplate={handleOnChangeTemplate}
-            onPdfExport={handleOnExportAsPdf}
-            onJsonExport={() => utils.exportAsJson(form.getValues())}
-            onHtmlExport={() => utils.exportAsHtml(form.getValues())}
-            onPngExport={() => utils.exportAsPng(form.getValues())}
-          />
+          <FormProvider {...form}>
+            <HeaderPopover
+              devTools={devTools}
+              onImport={handleOnImport}
+              onChangeTemplate={handleOnChangeTemplate}
+              onPdfExport={handleOnExportAsPdf}
+              onJsonExport={() => utils.exportAsJson(form.getValues())}
+              onHtmlExport={() => utils.exportAsHtml(form.getValues())}
+              onPngExport={() => utils.exportAsPng(form.getValues())}
+            />
+          </FormProvider>
         </Flex>
       </Container>
     </Box>

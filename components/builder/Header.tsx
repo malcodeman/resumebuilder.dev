@@ -6,7 +6,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { UseFormReturn } from "react-hook-form";
+import { FormProvider, UseFormReturn } from "react-hook-form";
 import { Layers as IconLayers } from "react-feather";
 import { trackGoal } from "fathom-client";
 import { useLocalStorageValue } from "@react-hookz/web";
@@ -26,10 +26,9 @@ type props = HTMLChakraProps<"div"> & {
 };
 
 function ShowTemplates(props: {
-  values: Resume;
   onChangeTemplate: (nextTemplate: Template) => void;
 }) {
-  const { values, onChangeTemplate } = props;
+  const { onChangeTemplate } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -43,7 +42,6 @@ function ShowTemplates(props: {
       </Button>
       <TemplatesModal
         isOpen={isOpen}
-        values={values}
         onClose={onClose}
         onChange={onChangeTemplate}
       />
@@ -63,11 +61,13 @@ function Header(props: props) {
   });
 
   function handleOnImport(fields: Fields) {
+    form.setValue("updatedAt", Date.now());
     form.setValue("about", fields.about);
     form.setValue("section", fields.section);
   }
 
   function handleOnChangeTemplate(nextTemplate: Template) {
+    form.setValue("updatedAt", Date.now());
     form.setValue("design.template", nextTemplate);
   }
 
@@ -93,23 +93,21 @@ function Header(props: props) {
         <Logo href="/resumes" />
         <ResumeTitle form={form} />
         <Flex>
-          <ShowTemplates
-            values={form.getValues()}
-            onChangeTemplate={handleOnChangeTemplate}
-          />
+          <ShowTemplates onChangeTemplate={handleOnChangeTemplate} />
           <Button mr="2" size="sm" onClick={handleOnExportAsPdf}>
             Export PDF
           </Button>
-          <HeaderPopover
-            values={form.getValues()}
-            devTools={devTools}
-            onImport={handleOnImport}
-            onChangeTemplate={handleOnChangeTemplate}
-            onPdfExport={handleOnExportAsPdf}
-            onJsonExport={() => utils.exportAsJson(form.getValues())}
-            onHtmlExport={() => utils.exportAsHtml(form.getValues())}
-            onPngExport={() => utils.exportAsPng(form.getValues())}
-          />
+          <FormProvider {...form}>
+            <HeaderPopover
+              devTools={devTools}
+              onImport={handleOnImport}
+              onChangeTemplate={handleOnChangeTemplate}
+              onPdfExport={handleOnExportAsPdf}
+              onJsonExport={() => utils.exportAsJson(form.getValues())}
+              onHtmlExport={() => utils.exportAsHtml(form.getValues())}
+              onPngExport={() => utils.exportAsPng(form.getValues())}
+            />
+          </FormProvider>
         </Flex>
       </Flex>
     </Box>
