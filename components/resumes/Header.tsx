@@ -54,7 +54,9 @@ function Header() {
             <UserMenu />
           ) : (
             <Link href="/resumes" passHref>
-              <Button size="sm">Dashboard</Button>
+              <Button size="sm" data-cy="dashboard-button">
+                Dashboard
+              </Button>
             </Link>
           )}
         </Flex>

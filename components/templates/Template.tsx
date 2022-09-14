@@ -44,6 +44,7 @@ function Template(props: props) {
           colorScheme="blue"
           size="sm"
           cursor="pointer"
+          data-cy="use-template-button"
           onClick={() => onUseTemplate(template.template)}
         >
           Use template

@@ -46,7 +46,7 @@ function Footer(props: props) {
         whileHover={{ scale: 1.1 }}
         colorScheme="blue"
         mb="4"
-        data-cy="build-for-free"
+        data-cy="build-for-free-button"
         onClick={() => onSubmit()}
       >
         Build for free

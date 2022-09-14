@@ -35,7 +35,7 @@ function Templates(props: props) {
             whileHover="mouseenter"
             variant="outline"
             mb="8"
-            data-cy="see-all-templates"
+            data-cy="see-all-templates-button"
             rightIcon={
               <motion.div variants={ARROW_RIGHT_VARIANTS}>
                 <ArrowRight size={20} />
