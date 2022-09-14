@@ -1,12 +1,9 @@
 import React from "react";
 import { Box, Container } from "@chakra-ui/react";
+import { useMediaQuery } from "@react-hookz/web";
 
-import HeaderDashboard from "./resumes/Header";
-import HeaderDashboardMobile from "./resumes/HeaderMobile";
-import HeaderLanding from "./landing/Header";
-import HeaderLandingMobile from "./landing/HeaderMobile";
-
-import useDashboard from "../hooks/useDashboard";
+import Header from "./resumes/Header";
+import HeaderMobile from "./resumes/HeaderMobile";
 
 type props = {
   children: React.ReactNode;
@@ -14,14 +11,10 @@ type props = {
 
 function Layout(props: props) {
   const { children } = props;
-  const { dashboard } = useDashboard();
+  const isLargeDevice = useMediaQuery("(min-width: 62em)");
   return (
     <>
-      {dashboard ? (
-        <HeaderDashboard display={{ base: "none", lg: "block" }} />
-      ) : (
-        <HeaderLanding display={{ base: "none", lg: "block" }} />
-      )}
+      {isLargeDevice ? <Header /> : null}
       <Box
         as="main"
         overflow="hidden"
@@ -30,11 +23,7 @@ function Layout(props: props) {
       >
         <Container maxW="container.lg">{children}</Container>
       </Box>
-      {dashboard ? (
-        <HeaderDashboardMobile display={{ base: "block", lg: "none" }} />
-      ) : (
-        <HeaderLandingMobile display={{ base: "block", lg: "none" }} />
-      )}
+      {isLargeDevice ? null : <HeaderMobile />}
     </>
   );
 }

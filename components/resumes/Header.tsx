@@ -3,24 +3,27 @@ import {
   Flex,
   Box,
   Container,
-  LayoutProps,
+  Button,
   useColorModeValue,
 } from "@chakra-ui/react";
+import Link from "next/link";
+
+import useDashboard from "../../hooks/useDashboard";
 
 import Logo from "../Logo";
 import NavLink from "../misc/NavLink";
 import UserMenu from "./UserMenu";
 
-function Header(props: LayoutProps) {
+function Header() {
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0px 2px 0px 0px"
   );
-
+  const { dashboard } = useDashboard();
+  const homeHref = dashboard ? "/resumes" : "/";
   return (
     <Box
-      {...props}
       backgroundColor={backgroundColor}
       boxShadow={boxShadow}
       as="header"
@@ -35,9 +38,9 @@ function Header(props: LayoutProps) {
         <Flex as="nav" justifyContent="space-between">
           <Flex alignItems="center">
             <Box mr="4">
-              <Logo href="/resumes" />
+              <Logo href={homeHref} />
             </Box>
-            <NavLink href="/resumes" mr="4">
+            <NavLink href={homeHref} mr="4">
               <Text>Home</Text>
             </NavLink>
             <NavLink href="/templates" mr="4">
@@ -47,7 +50,13 @@ function Header(props: LayoutProps) {
               <Text>Downloads</Text>
             </NavLink>
           </Flex>
-          <UserMenu />
+          {dashboard ? (
+            <UserMenu />
+          ) : (
+            <Link href="/resumes" passHref>
+              <Button size="sm">Dashboard</Button>
+            </Link>
+          )}
         </Flex>
       </Container>
     </Box>

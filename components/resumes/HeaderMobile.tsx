@@ -3,24 +3,25 @@ import {
   Flex,
   Box,
   Container,
-  LayoutProps,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Home, Layers } from "react-feather";
+import { FileText, Home, Layers } from "react-feather";
+
+import useDashboard from "../../hooks/useDashboard";
 
 import NavLink from "../misc/NavLink";
 import UserMenu from "./UserMenu";
 
-function HeaderMobile(props: LayoutProps) {
+function HeaderMobile() {
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px -2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0 -2px 0 0"
   );
-
+  const { dashboard } = useDashboard();
+  const homeHref = dashboard ? "/resumes" : "/";
   return (
     <Box
-      {...props}
       backgroundColor={backgroundColor}
       boxShadow={boxShadow}
       as="header"
@@ -33,7 +34,7 @@ function HeaderMobile(props: LayoutProps) {
     >
       <Container maxW="container.lg">
         <Flex as="nav" justifyContent="space-between" alignItems="center">
-          <NavLink href="/resumes">
+          <NavLink href={homeHref}>
             <Flex flexDirection="column" alignItems="center">
               <Home size={20} />
               <Text fontSize="xs">Home</Text>
@@ -45,7 +46,16 @@ function HeaderMobile(props: LayoutProps) {
               <Text fontSize="xs">Templates</Text>
             </Flex>
           </NavLink>
-          <UserMenu />
+          {dashboard ? (
+            <UserMenu />
+          ) : (
+            <NavLink href="/resumes">
+              <Flex flexDirection="column" alignItems="center">
+                <FileText size={20} />
+                <Text fontSize="xs">Dashboard</Text>
+              </Flex>
+            </NavLink>
+          )}
         </Flex>
       </Container>
     </Box>
