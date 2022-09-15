@@ -44,6 +44,7 @@ function Document(props: props) {
   useDebouncedEffect(
     () => {
       if (id) {
+        form.setValue("updatedAt", Date.now());
         setResume({
           ...form.getValues(),
           updatedAt: Date.now(),
