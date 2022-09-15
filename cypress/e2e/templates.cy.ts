@@ -35,4 +35,13 @@ describe("Templates page", () => {
     );
     cy.get("[data-cy=templates-grid]").children().should("have.length", count);
   });
+  it("Use berlin template", () => {
+    cy.get("[data-cy=use-template-button]")
+      .first()
+      .click()
+      .should(() => {
+        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
+      });
+    cy.url().should("include", "/resumes/");
+  });
 });
