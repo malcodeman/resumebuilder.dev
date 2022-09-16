@@ -201,6 +201,7 @@ const EXPORTS = {
   isTagListSection,
   pt2px,
   getUrlHost,
+  getRandomInt,
   generateFakeResume,
   countWords,
 };

@@ -1,5 +1,8 @@
 import React from "react";
 import { useToast } from "@chakra-ui/toast";
+import { length } from "ramda";
+
+import utils from "../lib/utils";
 
 const TOAST_ID = "onSave";
 
@@ -10,8 +13,13 @@ type props = {
 };
 
 function useAutoSaveToast(props: props) {
+  const saveMessages = [
+    "Your work is saved automatically.",
+    "💾 No need to hit save. Your changes are saved automatically.",
+    "Don't worry about this save stuff. We got you. 💪",
+  ];
   const {
-    description = "We save your work automatically.",
+    description = saveMessages[utils.getRandomInt(0, length(saveMessages))],
     duration = 1000,
     isClosable = true,
   } = props;
