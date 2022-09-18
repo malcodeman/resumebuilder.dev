@@ -131,26 +131,35 @@ function BerlinPdf(props: props) {
     return ` | ${item.startDate} - ${item.endDate}`;
   }
 
+  function renderInitials() {
+    if (and(about.firstName[0], about.lastName[0])) {
+      return (
+        <View style={styles.initials}>
+          <Text>{about.firstName[0]}</Text>
+          <Text>{about.lastName[0]}</Text>
+        </View>
+      );
+    }
+    return null;
+  }
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <View style={styles.initials}>
-          <Text>{about.firstName[0] || "f"}</Text>
-          <Text>{about.lastName[0] || "l"}</Text>
-        </View>
+        {renderInitials()}
         <View style={styles.header}>
           <Text style={styles.name}>
-            {about.firstName || "first name"} {about.lastName || "last name"}
+            {about.firstName} {about.lastName}
           </Text>
-          <Text style={styles.title}>{about.title || "title"}</Text>
+          <Text style={styles.title}>{about.title}</Text>
           <Text style={styles.details}>
-            {about.city || "city"}, {about.country || "country"} |{" "}
+            {about.city}, {about.country} |{" "}
             <Link src={about.website}>{utils.getUrlHost(about.website)}</Link> |{" "}
-            {about.email || "email"} | {about.phone || "phone"}
+            {about.email} | {about.phone}
           </Text>
           {about.summary.split("\n").map((item, index) => (
             <Text key={index} style={styles.summary}>
-              {item || "summary"}
+              {item}
             </Text>
           ))}
         </View>
@@ -158,19 +167,15 @@ function BerlinPdf(props: props) {
           if (utils.isStandardSection(sectionItem.name)) {
             return (
               <View key={index}>
-                <Text style={styles.sectionLabel}>
-                  {sectionItem.label || "label"}
-                </Text>
+                <Text style={styles.sectionLabel}>{sectionItem.label}</Text>
                 {sectionItem.nested.map((item, index) => {
                   return (
                     <View key={index} style={styles.sectionItem}>
                       <Text style={styles.sectionTitle}>
                         {item.website ? (
-                          <Link src={item.website}>
-                            {item.title || "Untitled"}
-                          </Link>
+                          <Link src={item.website}>{item.title}</Link>
                         ) : (
-                          item.title || "Untitled"
+                          item.title
                         )}
                       </Text>
                       <Text style={styles.subtitle}>

@@ -117,25 +117,34 @@ function BerlinReact(props: props) {
     return ` | ${item.startDate} - ${item.endDate}`;
   }
 
+  function renderInitials() {
+    if (and(about.firstName[0], about.lastName[0])) {
+      return (
+        <div style={styles.initials}>
+          <p>{about.firstName[0]}</p>
+          <p>{about.lastName[0]}</p>
+        </div>
+      );
+    }
+    return null;
+  }
+
   return (
     <div style={styles.page} id="berlin">
-      <div style={styles.initials}>
-        <p>{about.firstName[0] || "f"}</p>
-        <p>{about.lastName[0] || "l"}</p>
-      </div>
+      {renderInitials()}
       <div style={styles.header}>
         <p style={styles.name}>
-          {about.firstName || "first name"} {about.lastName || "last name"}
+          {about.firstName} {about.lastName}
         </p>
-        <p style={styles.title}>{about.title || "title"}</p>
+        <p style={styles.title}>{about.title}</p>
         <p style={styles.details}>
-          {about.city || "city"}, {about.country || "country"} |{" "}
+          {about.city}, {about.country} |{" "}
           <a href={about.website}>{utils.getUrlHost(about.website)}</a> |{" "}
-          {about.email || "email"} | {about.phone || "phone"}
+          {about.email} | {about.phone}
         </p>
         {about.summary.split("\n").map((item, index) => (
           <p key={index} style={styles.summary}>
-            {item || "summary"}
+            {item}
           </p>
         ))}
       </div>
@@ -143,15 +152,15 @@ function BerlinReact(props: props) {
         if (utils.isStandardSection(sectionItem.name)) {
           return (
             <div key={index}>
-              <p style={styles.sectionLabel}>{sectionItem.label || "label"}</p>
+              <p style={styles.sectionLabel}>{sectionItem.label}</p>
               {sectionItem.nested.map((item, index) => {
                 return (
                   <div key={index} style={styles.sectionItem}>
                     <p style={styles.sectionTitle}>
                       {item.website ? (
-                        <a href={item.website}>{item.title || "Untitled"}</a>
+                        <a href={item.website}>{item.title}</a>
                       ) : (
-                        item.title || "Untitled"
+                        item.title
                       )}
                     </p>
                     <p style={styles.subtitle}>
