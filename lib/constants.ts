@@ -104,6 +104,14 @@ const TEMPLATES_LIST = [
     src: "/templates/rio.png",
     tags: ["all", "simple", "professional"],
   },
+  {
+    title: "Nairobi",
+    template: Template.nairobi,
+    description:
+      "Modern resume template for those seeking a simple and clean resume.",
+    src: "/templates/nairobi.png",
+    tags: ["all", "simple", "professional"],
+  },
 ];
 const VIEWS = {
   GRID: "grid",
