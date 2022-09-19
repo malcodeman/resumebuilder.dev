@@ -1,4 +1,4 @@
-import { and, isEmpty } from "ramda";
+import { and, equals, isEmpty } from "ramda";
 
 import utils from "../../lib/utils";
 import theme from "../theme";
@@ -101,25 +101,40 @@ function TokyoReact(props: props) {
     );
   }
 
+  function renderProfile() {
+    if (isEmpty(about.summary)) {
+      return null;
+    }
+    return (
+      <div style={styles.profile}>
+        <p style={styles.sectionLabel}>Profile</p>
+        {about.summary.split("\n").map((item, index) => (
+          <p key={index} style={styles.summary}>
+            {item}
+          </p>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div style={styles.page} id="tokyo">
       <div style={styles.header}>
         <p style={styles.name}>
-          {about.firstName || "first name"} {about.lastName || "last name"}
+          {about.firstName} {about.lastName}
         </p>
         <p>
-          {about.title || "title"} {about.city || "city"},{" "}
-          {about.country || "country"} {about.phone || "phone"}
+          {about.title} {about.city}, {about.country} {about.phone}
         </p>
       </div>
       <div style={styles.container}>
         <div style={styles.leftColumn}>
           <div style={styles.list}>
             <p style={styles.sectionLabel}>Details</p>
-            <p style={styles.text}>{about.city || "city"} </p>
-            <p style={styles.text}>{about.country || "country"}</p>
-            <p style={styles.text}>{about.phone || "phone"}</p>
-            <p style={styles.text}>{about.email || "email"}</p>
+            <p style={styles.text}>{about.city} </p>
+            <p style={styles.text}>{about.country}</p>
+            <p style={styles.text}>{about.phone}</p>
+            <p style={styles.text}>{about.email}</p>
             <a style={styles.text} href={about.website}>
               {utils.getUrlHost(about.website)}
             </a>
@@ -128,13 +143,11 @@ function TokyoReact(props: props) {
             if (utils.isTagListSection(sectionItem.name)) {
               return (
                 <div key={index} style={styles.list}>
-                  <p style={styles.sectionLabel}>
-                    {sectionItem.label || "label"}
-                  </p>
+                  <p style={styles.sectionLabel}>{sectionItem.label}</p>
                   {sectionItem.tags?.split("\n").map((item, index) => {
                     return (
                       <p key={index} style={styles.listItem}>
-                        {item || "item"}
+                        {item}
                       </p>
                     );
                   })}
@@ -144,37 +157,26 @@ function TokyoReact(props: props) {
           })}
         </div>
         <div style={styles.rightColumn}>
-          <div style={styles.profile}>
-            <p style={styles.sectionLabel}>Profile</p>
-            {about.summary.split("\n").map((item, index) => (
-              <p key={index} style={styles.summary}>
-                {item || "summary"}
-              </p>
-            ))}
-          </div>
+          {renderProfile()}
           {section.map((sectionItem, index) => {
             if (utils.isStandardSection(sectionItem.name)) {
               return (
                 <div key={index}>
-                  <p style={styles.sectionLabel}>
-                    {sectionItem.label || "label"}
-                  </p>
+                  <p style={styles.sectionLabel}>{sectionItem.label}</p>
                   {sectionItem.nested.map((item, index) => {
                     return (
                       <div key={index} style={styles.sectionItem}>
                         <p style={styles.sectionTitle}>
-                          {item.subtitle || "subtitle"}
-                          {sectionItem.name === "employmentSection"
+                          {item.subtitle}
+                          {equals(sectionItem.name, "employmentSection")
                             ? " at "
                             : ", "}
                           {item.website ? (
-                            <a href={item.website}>
-                              {item.title || "Untitled"}
-                            </a>
+                            <a href={item.website}>{item.title}</a>
                           ) : (
-                            item.title || "Untitled"
+                            item.title
                           )}
-                          , {item.city || "city"}
+                          , {item.city}
                         </p>
                         {renderDate(item)}
                         {item.description.split("\n").map((item, index) => (

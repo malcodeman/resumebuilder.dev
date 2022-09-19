@@ -7,7 +7,7 @@ import {
   Text,
   Link,
 } from "@react-pdf/renderer";
-import { and, isEmpty } from "ramda";
+import { and, equals, isEmpty } from "ramda";
 
 Font.register({
   family: "Roboto",
@@ -120,26 +120,41 @@ function TokyoPdf(props: props) {
     );
   }
 
+  function renderProfile() {
+    if (isEmpty(about.summary)) {
+      return null;
+    }
+    return (
+      <View style={styles.profile}>
+        <Text style={styles.sectionLabel}>Profile</Text>
+        {about.summary.split("\n").map((item, index) => (
+          <Text key={index} style={styles.summary}>
+            {item}
+          </Text>
+        ))}
+      </View>
+    );
+  }
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <Text style={styles.name}>
-            {about.firstName || "first name"} {about.lastName || "last name"}
+            {about.firstName} {about.lastName}
           </Text>
           <Text>
-            {about.title || "title"} {about.city || "city"},{" "}
-            {about.country || "country"} {about.phone || "phone"}
+            {about.title} {about.city}, {about.country} {about.phone}
           </Text>
         </View>
         <View style={styles.container}>
           <View style={styles.leftColumn}>
             <View style={styles.list}>
               <Text style={styles.sectionLabel}>Details</Text>
-              <Text style={styles.text}>{about.city || "city"} </Text>
-              <Text style={styles.text}>{about.country || "country"}</Text>
-              <Text style={styles.text}>{about.phone || "phone"}</Text>
-              <Text style={styles.text}>{about.email || "email"}</Text>
+              <Text style={styles.text}>{about.city} </Text>
+              <Text style={styles.text}>{about.country}</Text>
+              <Text style={styles.text}>{about.phone}</Text>
+              <Text style={styles.text}>{about.email}</Text>
               <Link style={styles.text} src={about.website}>
                 {utils.getUrlHost(about.website)}
               </Link>
@@ -148,13 +163,11 @@ function TokyoPdf(props: props) {
               if (utils.isTagListSection(sectionItem.name)) {
                 return (
                   <View key={index} style={styles.list}>
-                    <Text style={styles.sectionLabel}>
-                      {sectionItem.label || "label"}
-                    </Text>
+                    <Text style={styles.sectionLabel}>{sectionItem.label}</Text>
                     {sectionItem.tags?.split("\n").map((item, index) => {
                       return (
                         <Text key={index} style={styles.listItem}>
-                          {item || "item"}
+                          {item}
                         </Text>
                       );
                     })}
@@ -164,37 +177,26 @@ function TokyoPdf(props: props) {
             })}
           </View>
           <View style={styles.rightColumn}>
-            <View style={styles.profile}>
-              <Text style={styles.sectionLabel}>Profile</Text>
-              {about.summary.split("\n").map((item, index) => (
-                <Text key={index} style={styles.summary}>
-                  {item || "summary"}
-                </Text>
-              ))}
-            </View>
+            {renderProfile()}
             {section.map((sectionItem, index) => {
               if (utils.isStandardSection(sectionItem.name)) {
                 return (
                   <View key={index}>
-                    <Text style={styles.sectionLabel}>
-                      {sectionItem.label || "label"}
-                    </Text>
+                    <Text style={styles.sectionLabel}>{sectionItem.label}</Text>
                     {sectionItem.nested.map((item, index) => {
                       return (
                         <View key={index} style={styles.sectionItem}>
                           <Text style={styles.sectionTitle}>
-                            {item.subtitle || "subtitle"}
-                            {sectionItem.name === "employmentSection"
+                            {item.subtitle}
+                            {equals(sectionItem.name, "employmentSection")
                               ? " at "
                               : ", "}
                             {item.website ? (
-                              <Link src={item.website}>
-                                {item.title || "Untitled"}
-                              </Link>
+                              <Link src={item.website}>{item.title}</Link>
                             ) : (
-                              item.title || "Untitled"
+                              item.title
                             )}
-                            , {item.city || "city"}
+                            , {item.city}
                           </Text>
                           {renderDate(item)}
                           {item.description.split("\n").map((item, index) => (
