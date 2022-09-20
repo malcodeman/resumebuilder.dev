@@ -13,6 +13,7 @@ function Flex(props: props) {
   const { isPdf, style } = useStyles(props);
   const localStyle = {
     display: "flex" as const,
+    flexDirection: "row" as const,
     ...style,
   };
   return isPdf ? (

@@ -1,15 +1,15 @@
-import { useContext } from "react";
 import { Document, Page as ReactPdfPage } from "@react-pdf/renderer";
 import { PageSize } from "@react-pdf/types";
+
+import useStyles from "../useStyles";
 
 import utils from "../../lib/utils";
 import theme from "../theme";
 
-import TemplateContext from "./TemplateContext";
-
 import { Template } from "../../types";
+import { Style } from "../types";
 
-type props = {
+type props = Style & {
   id: Template;
   size?: PageSize;
   children: React.ReactNode;
@@ -17,31 +17,28 @@ type props = {
 
 function Page(props: props) {
   const { id, size = "A4", children } = props;
-  const { isPdf, spacing } = useContext(TemplateContext);
-  const style = {
+  const { isPdf, spacing, style } = useStyles(props);
+  const localStyle = {
+    ...style,
     width: "100%",
     lineHeight: 1,
-    height: "100%",
     color: "#222",
+    height: "100%",
     backgroundColor: "#FFF",
     position: "relative" as const,
     fontFamily: isPdf ? "Roboto" : `'Roboto', sans-serif`,
     fontSize: isPdf
       ? theme.fontSize.xs
       : utils.pt2px(theme.fontSize.xs * spacing),
-    paddingTop: isPdf ? 40 * spacing : utils.pt2px(40 * spacing),
-    paddingLeft: isPdf ? 80 * spacing : utils.pt2px(80 * spacing),
-    paddingRight: isPdf ? 80 * spacing : utils.pt2px(80 * spacing),
-    paddingBottom: isPdf ? 40 * spacing : utils.pt2px(40 * spacing),
   };
   return isPdf ? (
     <Document>
-      <ReactPdfPage size={size} style={style}>
+      <ReactPdfPage size={size} style={localStyle}>
         {children}
       </ReactPdfPage>
     </Document>
   ) : (
-    <div style={style} id={id}>
+    <div id={id} style={localStyle}>
       {children}
     </div>
   );

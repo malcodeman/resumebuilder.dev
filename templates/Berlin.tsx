@@ -88,7 +88,7 @@ function Berlin(props: props) {
 
   return (
     <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
-      <Page id={Template.berlin}>
+      <Page id={Template.berlin} pt={40} pr={80} pb={40} pl={80}>
         {renderInitials()}
         <Box mb={16}>
           <Text
