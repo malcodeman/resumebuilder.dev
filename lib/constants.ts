@@ -31,6 +31,7 @@ const STANDARD_SECTION_DEFAULT_VALUES = {
 };
 const DEFAULT_VALUES = {
   id: "",
+  version: "1.0.0",
   title: "",
   icon: "",
   createdAt: Date.now(),
@@ -52,22 +53,22 @@ const DEFAULT_VALUES = {
   },
   section: [
     {
-      name: "employmentSection" as const,
+      name: "employment" as const,
       label: "Employment History",
       nested: [STANDARD_SECTION_DEFAULT_VALUES],
     },
     {
-      name: "educationSection" as const,
+      name: "education" as const,
       label: "Education",
       nested: [STANDARD_SECTION_DEFAULT_VALUES],
     },
     {
-      name: "skillsSection" as const,
+      name: "skills" as const,
       label: "Skills",
       tags: "",
     },
     {
-      name: "hobbiesSection" as const,
+      name: "hobbies" as const,
       label: "Hobbies",
       tags: "",
     },

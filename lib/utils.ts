@@ -15,6 +15,7 @@ import {
   flatten,
   sum,
   isEmpty,
+  equals,
 } from "ramda";
 
 import getTemplate from "./getTemplate";
@@ -87,20 +88,20 @@ async function exportAsPng(resume: Resume) {
 
 function isStandardSection(name: Section) {
   return (
-    name === "standardSection" ||
-    name === "employmentSection" ||
-    name === "educationSection" ||
-    name === "projectsSection" ||
-    name === "internshipsSection"
+    equals(name, "standard") ||
+    equals(name, "employment") ||
+    equals(name, "education") ||
+    equals(name, "projects") ||
+    equals(name, "internships")
   );
 }
 
 function isTagListSection(name: Section) {
   return (
-    name === "tagListSection" ||
-    name === "skillsSection" ||
-    name === "hobbiesSection" ||
-    name === "languagesSection"
+    equals(name, "tagList") ||
+    equals(name, "skills") ||
+    equals(name, "hobbies") ||
+    equals(name, "languages")
   );
 }
 
@@ -140,7 +141,7 @@ function generateFakeResume(): Fields {
     },
     section: [
       {
-        name: "employmentSection" as const,
+        name: "employment" as const,
         label: "Employment History",
         nested: [
           {
@@ -164,12 +165,12 @@ function generateFakeResume(): Fields {
         ],
       },
       {
-        name: "skillsSection" as const,
+        name: "skills" as const,
         label: "Skills",
         tags: join("\n", split(" ", faker.lorem.words(getRandomInt(1, 10)))),
       },
       {
-        name: "hobbiesSection" as const,
+        name: "hobbies" as const,
         label: "Hobbies",
         tags: join("\n", split(" ", faker.lorem.words(getRandomInt(1, 10)))),
       },

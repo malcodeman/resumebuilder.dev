@@ -168,7 +168,7 @@ function TokyoReact(props: props) {
                       <div key={index} style={styles.sectionItem}>
                         <p style={styles.sectionTitle}>
                           {item.subtitle}
-                          {equals(sectionItem.name, "employmentSection")
+                          {equals(sectionItem.name, "employment")
                             ? " at "
                             : ", "}
                           {item.website ? (

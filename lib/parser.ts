@@ -19,7 +19,7 @@ function parseJsonResume(text: string): Fields {
     },
     section: [
       {
-        name: "standardSection" as const,
+        name: "standard" as const,
         label: "Work",
         nested: map(
           (item) => ({
@@ -35,7 +35,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "standardSection" as const,
+        name: "standard" as const,
         label: "Volunteer",
         nested: map(
           (item) => ({
@@ -51,7 +51,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "standardSection" as const,
+        name: "standard" as const,
         label: "Education",
         nested: map(
           (item) => ({
@@ -67,7 +67,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "tagListSection" as const,
+        name: "tagList" as const,
         label: "Awards",
         tags: join(
           "\n",
@@ -75,7 +75,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "standardSection" as const,
+        name: "standard" as const,
         label: "Publications",
         nested: map(
           (item) => ({
@@ -91,7 +91,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "tagListSection" as const,
+        name: "tagList" as const,
         label: "Skills",
         tags: join(
           "\n",
@@ -99,7 +99,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "tagListSection" as const,
+        name: "tagList" as const,
         label: "Languages",
         tags: join(
           "\n",
@@ -107,7 +107,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "tagListSection" as const,
+        name: "tagList" as const,
         label: "Interests",
         tags: join(
           "\n",
@@ -115,7 +115,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "standardSection" as const,
+        name: "standard" as const,
         label: "Projects",
         nested: map(
           (item) => ({
@@ -168,7 +168,7 @@ function parseGithub(data: {
     },
     section: [
       {
-        name: "tagListSection" as const,
+        name: "tagList" as const,
         label: "Skills",
         tags: join("\n", skills),
       },

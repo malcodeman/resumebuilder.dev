@@ -188,7 +188,7 @@ function TokyoPdf(props: props) {
                         <View key={index} style={styles.sectionItem}>
                           <Text style={styles.sectionTitle}>
                             {item.subtitle}
-                            {equals(sectionItem.name, "employmentSection")
+                            {equals(sectionItem.name, "employment")
                               ? " at "
                               : ", "}
                             {item.website ? (

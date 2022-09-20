@@ -17,11 +17,11 @@ type props = {
 
 function getHelperText(name: Section) {
   switch (name) {
-    case "skillsSection":
+    case "skills":
       return "Add one skill on each line";
-    case "hobbiesSection":
+    case "hobbies":
       return "Add one hobbie on each line";
-    case "languagesSection":
+    case "languages":
       return "Add one language on each line";
     default:
       return "Add one item on each line";

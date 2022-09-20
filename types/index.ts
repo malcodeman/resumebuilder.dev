@@ -9,15 +9,15 @@ enum Template {
   nairobi = "nairobi",
 }
 type Section =
-  | "standardSection"
-  | "employmentSection"
-  | "internshipsSection"
-  | "educationSection"
-  | "projectsSection"
-  | "tagListSection"
-  | "skillsSection"
-  | "hobbiesSection"
-  | "languagesSection";
+  | "standard"
+  | "employment"
+  | "internships"
+  | "education"
+  | "projects"
+  | "tagList"
+  | "skills"
+  | "hobbies"
+  | "languages";
 type AboutField = {
   title: string;
   firstName: string;
@@ -53,6 +53,7 @@ type Design = {
 };
 type Resume = {
   id: string;
+  version: string;
   title: string;
   icon: string;
   createdAt: number;

@@ -18,24 +18,24 @@ import { Section } from "../../types";
 const COMMON_SECTIONS = [
   {
     label: "Employment",
-    value: "employmentSection" as const,
+    value: "employment" as const,
     isDisabled: false,
   },
-  { label: "Education", value: "educationSection" as const, isDisabled: false },
-  { label: "Skills", value: "skillsSection" as const, isDisabled: false },
-  { label: "Hobbies", value: "hobbiesSection" as const, isDisabled: false },
-  { label: "Languages", value: "languagesSection" as const, isDisabled: false },
-  { label: "Projects", value: "projectsSection" as const, isDisabled: false },
+  { label: "Education", value: "education" as const, isDisabled: false },
+  { label: "Skills", value: "skills" as const, isDisabled: false },
+  { label: "Hobbies", value: "hobbies" as const, isDisabled: false },
+  { label: "Languages", value: "languages" as const, isDisabled: false },
+  { label: "Projects", value: "projects" as const, isDisabled: false },
   {
     label: "Internships",
-    value: "internshipsSection" as const,
+    value: "internships" as const,
     isDisabled: false,
   },
 ];
 
 const CUSTOM_SECTIONS = [
-  { label: "Standard", value: "standardSection" as const, isDisabled: false },
-  { label: "Tag List", value: "tagListSection" as const, isDisabled: false },
+  { label: "Standard", value: "standard" as const, isDisabled: false },
+  { label: "Tag List", value: "tagList" as const, isDisabled: false },
 ];
 
 type props = {

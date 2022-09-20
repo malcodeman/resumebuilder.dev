@@ -111,12 +111,12 @@ function Description({ index, nestIndex, isEmployment }) {
 
 function getTitleLabel(name: Section) {
   switch (name) {
-    case "employmentSection":
-    case "internshipsSection":
+    case "employment":
+    case "internships":
       return "Company";
-    case "educationSection":
+    case "education":
       return "School";
-    case "projectsSection":
+    case "projects":
       return "Name";
     default:
       return "Title";
@@ -125,12 +125,12 @@ function getTitleLabel(name: Section) {
 
 function getSubtitleLabel(name: Section) {
   switch (name) {
-    case "employmentSection":
-    case "internshipsSection":
+    case "employment":
+    case "internships":
       return "Job title";
-    case "educationSection":
+    case "education":
       return "Degree";
-    case "projectsSection":
+    case "projects":
       return "Role";
     default:
       return "Subtitle";
