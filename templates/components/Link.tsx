@@ -11,8 +11,8 @@ type props = Style & {
 };
 
 function Link(props: props) {
-  const { href, color, children } = props;
-  const { isPdf, style } = useStyles(props);
+  const { href, color, children, ...rest } = props;
+  const { isPdf, style } = useStyles(rest);
   const localStyle = {
     color: or(color, "#00A1F1"),
     textDecoration: "none" as const,

@@ -16,8 +16,8 @@ type props = Style & {
 };
 
 function Page(props: props) {
-  const { id, size = "A4", children } = props;
-  const { isPdf, spacing, style } = useStyles(props);
+  const { id, size = "A4", children, ...rest } = props;
+  const { isPdf, spacing, style } = useStyles(rest);
   const localStyle = {
     ...style,
     width: "100%",

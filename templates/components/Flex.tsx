@@ -9,8 +9,8 @@ type props = Style & {
 };
 
 function Flex(props: props) {
-  const { children } = props;
-  const { isPdf, style } = useStyles(props);
+  const { children, ...rest } = props;
+  const { isPdf, style } = useStyles(rest);
   const localStyle = {
     display: "flex" as const,
     flexDirection: "row" as const,

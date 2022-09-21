@@ -9,8 +9,8 @@ type props = Style & {
 };
 
 function Text(props: props) {
-  const { children } = props;
-  const { isPdf, style } = useStyles(props);
+  const { children, ...rest } = props;
+  const { isPdf, style } = useStyles(rest);
   return isPdf ? (
     <ReactPdfText style={style}>{children}</ReactPdfText>
   ) : (

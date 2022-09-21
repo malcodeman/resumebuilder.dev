@@ -27,6 +27,7 @@ function useStyles(props: Style) {
     pl,
     fontSize,
     letterSpacing,
+    borderBottomWidth,
   } = props;
   const { isPdf, spacing } = useContext(TemplateContext);
   const style = {
@@ -56,6 +57,10 @@ function useStyles(props: Style) {
       null
     ),
     letterSpacing: or(letterSpacing * spacing, null),
+    borderBottomWidth: or(
+      isPdf ? borderBottomWidth : utils.pt2px(borderBottomWidth),
+      null
+    ),
   };
   return { style, isPdf, spacing };
 }

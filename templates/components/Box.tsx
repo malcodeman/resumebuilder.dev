@@ -9,8 +9,8 @@ type props = Style & {
 };
 
 function Box(props: props) {
-  const { children } = props;
-  const { isPdf, style } = useStyles(props);
+  const { children, ...rest } = props;
+  const { isPdf, style } = useStyles(rest);
   return isPdf ? (
     <ReactPdfView style={style}>{children}</ReactPdfView>
   ) : (

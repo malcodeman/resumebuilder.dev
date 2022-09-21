@@ -3,8 +3,7 @@ import TokyoReact from "../templates/tokyo/TokyoReact";
 import TokyoPdf from "../templates/tokyo/TokyoPdf";
 import LondonReact from "../templates/london/LondonReact";
 import LondonPdf from "../templates/london/LondonPdf";
-import RioReact from "../templates/rio/RioReact";
-import RioPdf from "../templates/rio/RioPdf";
+import Rio from "../templates/Rio";
 import Nairobi from "../templates/Nairobi";
 
 import { Design, Fields, Template } from "../types";
@@ -27,11 +26,7 @@ function getTemplate(design: Design, fields: Fields, pdf?: boolean) {
         <LondonReact design={design} fields={fields} />
       );
     case Template.rio:
-      return pdf ? (
-        <RioPdf design={design} fields={fields} />
-      ) : (
-        <RioReact design={design} fields={fields} />
-      );
+      return <Rio isPdf={pdf} design={design} fields={fields} />;
     case Template.nairobi:
       return <Nairobi isPdf={pdf} design={design} fields={fields} />;
   }

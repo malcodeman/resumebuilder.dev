@@ -114,7 +114,7 @@ type Borders = {
   borderBottom?: number | string;
   borderBottomColor?: string;
   borderBottomStyle?: "dashed" | "dotted" | "solid";
-  borderBottomWidth?: number | string;
+  borderBottomWidth?: number;
   borderLeft?: number | string;
   borderLeftColor?: string;
   borderLeftStyle?: "dashed" | "dotted" | "solid";
