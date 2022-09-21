@@ -1,4 +1,4 @@
-import { Document, Page as ReactPdfPage } from "@react-pdf/renderer";
+import { Document, Font, Page as ReactPdfPage } from "@react-pdf/renderer";
 import { PageSize } from "@react-pdf/types";
 
 import useStyles from "../useStyles";
@@ -8,6 +8,17 @@ import theme from "../theme";
 
 import { Template } from "../../types";
 import { Style } from "../types";
+
+Font.register({
+  family: "Roboto",
+  fonts: [
+    { src: "https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Me5Q.ttf" },
+    {
+      src: "https://fonts.gstatic.com/s/roboto/v27/KFOlCnqEu92Fr1MmWUlvAw.ttf",
+      fontWeight: 700,
+    },
+  ],
+});
 
 type props = Style & {
   id: Template;

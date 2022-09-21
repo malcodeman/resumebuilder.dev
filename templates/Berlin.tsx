@@ -117,7 +117,7 @@ function Berlin(props: props) {
                 <SectionLabel>{sectionItem.label}</SectionLabel>
                 {sectionItem.nested.map((item, index) => {
                   return (
-                    <Flex key={index} mb={16} flexDirection="column">
+                    <Box key={index} mb={16}>
                       <Text
                         mb={8}
                         fontSize="sm"
@@ -141,7 +141,7 @@ function Berlin(props: props) {
                           {item}
                         </Text>
                       ))}
-                    </Flex>
+                    </Box>
                   );
                 })}
               </Box>
@@ -150,7 +150,7 @@ function Berlin(props: props) {
           return (
             <Box key={index}>
               <SectionLabel>{sectionItem.label}</SectionLabel>
-              <Flex mb={16} flexWrap="wrap" flexDirection="row">
+              <Flex mb={16} flexWrap="wrap">
                 {isEmpty(sectionItem.tags)
                   ? null
                   : split("\n", sectionItem.tags).map((item, index) => (
