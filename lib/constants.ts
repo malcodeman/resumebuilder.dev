@@ -78,7 +78,7 @@ const TEMPLATES_LIST = [
   {
     title: "Berlin",
     template: Template.berlin,
-    description: "A clean and flexible resume template.",
+    description: "Clean, neat template structure with stylish minimalism.",
     src: "/templates/berlin.png",
     tags: ["all", "creative"],
   },
@@ -86,14 +86,14 @@ const TEMPLATES_LIST = [
     title: "Tokyo",
     template: Template.tokyo,
     description:
-      "Present your skills and experience with this minimal resume template.",
+      "Efficient and elegant resume template with a timeline structure.",
     src: "/templates/tokyo.png",
     tags: ["all", "simple", "professional"],
   },
   {
     title: "London",
     template: Template.london,
-    description: "Modern, contemporary, and a good mood all around.",
+    description: "Robust modern resume template with bold section highlights.",
     src: "/templates/london.png",
     tags: ["all", "simple", "creative"],
   },
@@ -101,15 +101,14 @@ const TEMPLATES_LIST = [
     title: "Rio",
     template: Template.rio,
     description:
-      "Rio is a perfect choice for the majority of job applications.",
+      "Classically structured resume template, for a powerful career history.",
     src: "/templates/rio.png",
     tags: ["all", "simple", "professional"],
   },
   {
     title: "Nairobi",
     template: Template.nairobi,
-    description:
-      "Modern resume template for those seeking a simple and clean resume.",
+    description: "A touch of personality with a well-formed resume structure.",
     src: "/templates/nairobi.png",
     tags: ["all", "simple", "professional"],
   },

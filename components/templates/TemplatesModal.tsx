@@ -99,6 +99,7 @@ function TemplatesModal(props: props) {
                   key={item.template}
                   id={item.template}
                   onUseTemplate={(template) => handleOnUseTemplate(template)}
+                  renderDescription={false}
                 />
               ),
               filteredTemplatesBySearch
