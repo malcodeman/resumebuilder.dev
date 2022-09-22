@@ -5,14 +5,13 @@ import {
   Button,
   Text,
   Grid,
-  Container,
-  useColorModeValue,
+  Box,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Check } from "react-feather";
 import { length, map } from "ramda";
 
-import WorkspaceIllustration from "../../illustrations/Workspace";
+import Poser20 from "../../illustrations/Poser20";
 
 const LIST = [
   {
@@ -32,12 +31,6 @@ type props = {
 
 function Footer(props: props) {
   const { onSubmit } = props;
-  const fill = useColorModeValue(
-    "var(--chakra-colors-blue-500)",
-    "var(--chakra-colors-blue-200)"
-  );
-  const stroke = useColorModeValue("currentColor", "#fff");
-
   return (
     <Center as="section" flexDirection="column">
       <Heading mb="4">Get started with Resume Builder</Heading>
@@ -66,9 +59,11 @@ function Footer(props: props) {
           LIST
         )}
       </Grid>
-      <Container maxW="container.sm" padding="0">
-        <WorkspaceIllustration fill={fill} stroke={stroke} />
-      </Container>
+      <Box display={["none", "block"]} width="full">
+        <Box maxW="sm">
+          <Poser20 />
+        </Box>
+      </Box>
     </Center>
   );
 }

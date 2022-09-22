@@ -6,7 +6,6 @@ import {
   Box,
   Text,
   Divider,
-  Center,
   Tooltip,
   List,
   ListItem,
@@ -97,9 +96,9 @@ function Landing() {
               </ListItem>
             </List>
           </Box>
-          <Center maxW="sm">
+          <Box maxW="sm">
             <Poser12 />
-          </Center>
+          </Box>
         </Grid>
         <Templates onSubmit={handleOnSubmit} />
         <Divider marginY="16" />
