@@ -89,6 +89,9 @@ function London(props: props) {
             <Text>{about.lastName}</Text>
           </Box>
           <Box>
+            <Text mb={4} fontWeight={700}>
+              {about.title}
+            </Text>
             <Text mb={4}>
               {about.city} {about.country}
             </Text>
@@ -102,7 +105,7 @@ function London(props: props) {
           {section.map((sectionItem, index) => {
             if (utils.isStandardSection(sectionItem.name)) {
               return (
-                <Box key={index}>
+                <React.Fragment key={index}>
                   <SectionLabel>{sectionItem.label}</SectionLabel>
                   {sectionItem.nested.map((item, index) => {
                     return (
@@ -125,11 +128,11 @@ function London(props: props) {
                       </Box>
                     );
                   })}
-                </Box>
+                </React.Fragment>
               );
             }
             return (
-              <Box key={index}>
+              <React.Fragment key={index}>
                 <SectionLabel>{sectionItem.label}</SectionLabel>
                 <Flex mb={16} flexWrap="wrap">
                   {isEmpty(sectionItem.tags)
@@ -149,7 +152,7 @@ function London(props: props) {
                         </Text>
                       ))}
                 </Flex>
-              </Box>
+              </React.Fragment>
             );
           })}
         </Box>

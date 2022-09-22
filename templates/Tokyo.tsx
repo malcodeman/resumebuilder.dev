@@ -108,11 +108,11 @@ function Tokyo(props: props) {
             {section.map((sectionItem, index) => {
               if (utils.isStandardSection(sectionItem.name)) {
                 return (
-                  <Box key={index}>
+                  <React.Fragment key={index}>
                     <SectionLabel>{sectionItem.label}</SectionLabel>
                     {sectionItem.nested.map((item, index) => {
                       return (
-                        <Flex key={index} mb={16} flexDirection="column">
+                        <Box key={index} mb={16}>
                           <Text mb={8} fontSize="sm" fontWeight={700}>
                             {item.subtitle}
                             {equals(sectionItem.name, "employment")
@@ -131,10 +131,10 @@ function Tokyo(props: props) {
                               {item}
                             </Text>
                           ))}
-                        </Flex>
+                        </Box>
                       );
                     })}
-                  </Box>
+                  </React.Fragment>
                 );
               }
             })}

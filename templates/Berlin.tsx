@@ -113,7 +113,7 @@ function Berlin(props: props) {
         {section.map((sectionItem, index) => {
           if (utils.isStandardSection(sectionItem.name)) {
             return (
-              <Box key={index}>
+              <React.Fragment key={index}>
                 <SectionLabel>{sectionItem.label}</SectionLabel>
                 {sectionItem.nested.map((item, index) => {
                   return (
@@ -144,11 +144,11 @@ function Berlin(props: props) {
                     </Box>
                   );
                 })}
-              </Box>
+              </React.Fragment>
             );
           }
           return (
-            <Box key={index}>
+            <React.Fragment key={index}>
               <SectionLabel>{sectionItem.label}</SectionLabel>
               <Flex mb={16} flexWrap="wrap">
                 {isEmpty(sectionItem.tags)
@@ -168,7 +168,7 @@ function Berlin(props: props) {
                       </Text>
                     ))}
               </Flex>
-            </Box>
+            </React.Fragment>
           );
         })}
       </Page>
