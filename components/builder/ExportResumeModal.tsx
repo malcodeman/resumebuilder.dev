@@ -10,8 +10,8 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
-import { map } from "ramda";
-import { useMediaQuery } from "@react-hookz/web";
+import { and, equals, map, or } from "ramda";
+import { useLocalStorageValue, useMediaQuery } from "@react-hookz/web";
 
 import { Export } from "../../types";
 
@@ -25,10 +25,10 @@ type props = {
 };
 
 const EXPORTS = [
-  { label: "JSON", value: "json" as const, isDisabled: false },
-  { label: "PDF", value: "pdf" as const, isDisabled: false },
-  { label: "HTML", value: "html" as const, isDisabled: false },
-  { label: "PNG", value: "png" as const, isDisabled: false },
+  { label: "JSON", value: "json" as const },
+  { label: "PDF", value: "pdf" as const },
+  { label: "HTML", value: "html" as const },
+  { label: "PNG", value: "png" as const },
 ];
 
 function ExportResumeModal(props: props) {
@@ -41,6 +41,9 @@ function ExportResumeModal(props: props) {
     onPngExport,
   } = props;
   const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
+  const [isPdfViewer] = useLocalStorageValue("isPdfViewer", false, {
+    initializeWithStorageValue: false,
+  });
 
   function handleOnSubmit(format: Export) {
     switch (format) {
@@ -57,7 +60,7 @@ function ExportResumeModal(props: props) {
   }
 
   function getIsDisabled(item: Export) {
-    if (item === "png" && isSmallDevice) {
+    if (and(equals(item, "png"), or(isSmallDevice, isPdfViewer))) {
       return true;
     }
     return false;
@@ -70,25 +73,23 @@ function ExportResumeModal(props: props) {
         <ModalHeader>Export</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <>
-            <Text mb="2">Choose export format.</Text>
-            <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gap="4">
-              {map((item) => {
-                const isDisabled = getIsDisabled(item.value);
-                return (
-                  <Button
-                    key={item.label}
-                    variant="outline"
-                    size="sm"
-                    isDisabled={isDisabled}
-                    onClick={() => handleOnSubmit(item.value)}
-                  >
-                    {item.label}
-                  </Button>
-                );
-              }, EXPORTS)}
-            </Grid>
-          </>
+          <Text mb="2">Choose export format.</Text>
+          <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gap="4">
+            {map((item) => {
+              const isDisabled = getIsDisabled(item.value);
+              return (
+                <Button
+                  key={item.label}
+                  variant="outline"
+                  size="sm"
+                  isDisabled={isDisabled}
+                  onClick={() => handleOnSubmit(item.value)}
+                >
+                  {item.label}
+                </Button>
+              );
+            }, EXPORTS)}
+          </Grid>
         </ModalBody>
         <ModalFooter />
       </ModalContent>
