@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { Heading, Button, Grid, Box, Text } from "@chakra-ui/react";
+import {
+  Heading,
+  Button,
+  Grid,
+  Box,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { map, slice } from "ramda";
 import { ArrowRight } from "react-feather";
 import { motion } from "framer-motion";
@@ -21,6 +28,11 @@ type props = {
 
 function Templates(props: props) {
   const { onSubmit } = props;
+  const templateCount = useBreakpointValue({
+    base: 1,
+    sm: 4,
+    md: 3,
+  });
   return (
     <Box as="section">
       <Box width={["100%", "100%", "50%"]}>
@@ -56,7 +68,7 @@ function Templates(props: props) {
       >
         {slice(
           0,
-          3,
+          templateCount,
           map(
             (item) => (
               <Template
