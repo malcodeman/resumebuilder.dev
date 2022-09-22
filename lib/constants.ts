@@ -1,7 +1,9 @@
+import { equals, values } from "ramda";
+
 import { Template } from "../types";
 
-const IS_PROD = process.env.NODE_ENV === "production";
-const TEMPLATES: Template[] = Object.values(Template);
+const IS_PROD = equals(process.env.NEXT_PUBLIC_VERCEL_ENV, "production");
+const TEMPLATES: Template[] = values(Template);
 const TEMPLATES_FILTERS = [
   {
     value: "all",
