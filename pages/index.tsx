@@ -10,6 +10,7 @@ import {
   List,
   ListItem,
   ListIcon,
+  Center,
 } from "@chakra-ui/react";
 import { useMountEffect } from "@react-hookz/web";
 import { useRouter } from "next/router";
@@ -30,6 +31,8 @@ import { Template } from "../types";
 
 import useResumes from "../hooks/useResumes";
 import useDashboard from "../hooks/useDashboard";
+
+import Builder from "../components/landing/Builder";
 
 const ATS_TOOLTIP = "Applicant Tracking System";
 
@@ -96,13 +99,17 @@ function Landing() {
               </ListItem>
             </List>
           </Box>
-          <Box maxW="sm">
-            <Poser12 />
-          </Box>
+          <Center>
+            <Box maxW="sm" width="full">
+              <Poser12 />
+            </Box>
+          </Center>
         </Grid>
         <Templates onSubmit={handleOnSubmit} />
         <Divider marginY="16" />
         <Features />
+        <Divider marginY="16" />
+        <Builder />
         <Divider marginY="16" />
         <Faq />
         <Footer onSubmit={handleOnSubmit} />
