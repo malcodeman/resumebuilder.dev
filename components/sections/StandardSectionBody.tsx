@@ -259,7 +259,7 @@ function StandardSectionBody(props: props) {
                   <Description
                     index={index}
                     nestIndex={nestIndex}
-                    isEmployment={equals(name, "employmentSection")}
+                    isEmployment={equals(name, "employment")}
                   />
                 </Grid>
               </AccordionPanel>
