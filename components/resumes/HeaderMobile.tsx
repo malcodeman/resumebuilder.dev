@@ -5,7 +5,7 @@ import {
   Container,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FileText, Home, Layers } from "react-feather";
+import { FiFileText, FiHome, FiLayers } from "react-icons/fi";
 
 import useDashboard from "../../hooks/useDashboard";
 
@@ -36,13 +36,13 @@ function HeaderMobile() {
         <Flex as="nav" justifyContent="space-between" alignItems="center">
           <NavLink href={homeHref}>
             <Flex flexDirection="column" alignItems="center">
-              <Home size={20} />
+              <FiHome />
               <Text fontSize="xs">Home</Text>
             </Flex>
           </NavLink>
           <NavLink href="/templates">
             <Flex flexDirection="column" alignItems="center">
-              <Layers size={20} />
+              <FiLayers />
               <Text fontSize="xs">Templates</Text>
             </Flex>
           </NavLink>
@@ -51,7 +51,7 @@ function HeaderMobile() {
           ) : (
             <NavLink href="/resumes">
               <Flex flexDirection="column" alignItems="center">
-                <FileText size={20} />
+                <FiFileText />
                 <Text fontSize="xs">Dashboard</Text>
               </Flex>
             </NavLink>

@@ -1,22 +1,22 @@
 import { Heading, Grid, Box, Text, Center } from "@chakra-ui/react";
 import { map } from "ramda";
-import { Lock, Gift, FastForward } from "react-feather";
+import { FiLock, FiGift, FiFastForward } from "react-icons/fi";
 
 const FEATURES = [
   {
     title: "Privacy first",
     text: "Own and manage your own database.",
-    icon: <Lock size={48} color="#f82b60" />,
+    icon: <FiLock size={48} color="#f82b60" />,
   },
   {
     title: "Free forever",
     text: "Anyone can build resumes.",
-    icon: <Gift size={48} color="#ff6f2c" />,
+    icon: <FiGift size={48} color="#ff6f2c" />,
   },
   {
     title: "Fast",
     text: "Statically-rendered pages.",
-    icon: <FastForward size={48} color="#fcb400" />,
+    icon: <FiFastForward size={48} color="#fcb400" />,
   },
 ];
 

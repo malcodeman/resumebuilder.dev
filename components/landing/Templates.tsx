@@ -8,7 +8,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { map, slice } from "ramda";
-import { ArrowRight } from "react-feather";
+import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 import { TEMPLATES_LIST } from "../../lib/constants";
@@ -50,7 +50,7 @@ function Templates(props: props) {
             data-cy="see-all-templates-button"
             rightIcon={
               <motion.div variants={ARROW_RIGHT_VARIANTS}>
-                <ArrowRight size={20} />
+                <FiArrowRight />
               </motion.div>
             }
           >

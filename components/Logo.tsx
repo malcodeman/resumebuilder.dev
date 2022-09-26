@@ -1,5 +1,5 @@
 import { Text, Flex, Box } from "@chakra-ui/react";
-import { FileText } from "react-feather";
+import { FiFileText } from "react-icons/fi";
 import Link from "next/link";
 
 type props = {
@@ -12,7 +12,7 @@ function Logo(props: props) {
     <Link href={href} passHref>
       <Flex alignItems="center" _hover={{ cursor: "pointer" }}>
         <Box marginRight="2">
-          <FileText size={20} />
+          <FiFileText />
         </Box>
         <Text>resumebuilder.dev</Text>
       </Flex>

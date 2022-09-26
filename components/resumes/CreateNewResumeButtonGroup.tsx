@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
-import { Plus, Upload } from "react-feather";
+import { FiPlus, FiUpload } from "react-icons/fi";
 
 import { Fields } from "../../types";
 
@@ -54,7 +54,7 @@ function NewButton() {
             mr="-px"
             aria-label="Create new"
             onClick={handleOnCreateNew}
-            icon={<Plus size={20} />}
+            icon={<FiPlus />}
           />
         )}
       </PopoverTrigger>
@@ -87,7 +87,7 @@ function ImportButton() {
         aria-label="Import"
         data-cy="import-button"
         onClick={onOpen}
-        icon={<Upload size={20} />}
+        icon={<FiUpload />}
       />
       <ImportDataModal isOpen={isOpen} onClose={onClose} onImport={onImport} />
     </>

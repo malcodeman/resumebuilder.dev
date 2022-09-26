@@ -8,7 +8,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { Check } from "react-feather";
+import { FiCheck } from "react-icons/fi";
 import { length, map } from "ramda";
 
 import Poser20 from "../../illustrations/Poser20";
@@ -52,7 +52,7 @@ function Footer(props: props) {
         {map(
           (item) => (
             <Flex key={item.text} alignItems="center">
-              <Check size={16} style={{ marginRight: "0.5rem" }} />
+              <FiCheck style={{ marginRight: "0.5rem" }} />
               <Text mr="2">{item.text}</Text>
             </Flex>
           ),

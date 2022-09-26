@@ -6,7 +6,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
-import { Layers as IconLayers } from "react-feather";
+import { FiLayers } from "react-icons/fi";
 import { trackGoal } from "fathom-client";
 import { useLocalStorageValue } from "@react-hookz/web";
 
@@ -31,12 +31,7 @@ function ShowTemplates(props: {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button
-        mr="2"
-        size="sm"
-        leftIcon={<IconLayers size={20} />}
-        onClick={onOpen}
-      >
+      <Button mr="2" size="sm" leftIcon={<FiLayers />} onClick={onOpen}>
         Templates
       </Button>
       <TemplatesModal

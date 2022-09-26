@@ -6,7 +6,7 @@ import {
   InputRightElement,
   InputGroupProps,
 } from "@chakra-ui/react";
-import { Search, X } from "react-feather";
+import { FiSearch, FiX } from "react-icons/fi";
 
 type Props = {
   value: string;
@@ -20,7 +20,7 @@ function SearchInput(props: Props) {
   return (
     <InputGroup size="sm" {...rest}>
       <InputLeftElement pointerEvents="none">
-        <Icon as={Search} />
+        <Icon as={FiSearch} />
       </InputLeftElement>
       <Input
         variant="filled"
@@ -31,7 +31,7 @@ function SearchInput(props: Props) {
       />
       {value ? (
         <InputRightElement>
-          <Icon as={X} cursor="pointer" onClick={onClear} />
+          <Icon as={FiX} cursor="pointer" onClick={onClear} />
         </InputRightElement>
       ) : null}
     </InputGroup>

@@ -17,12 +17,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import {
-  Grid as IconGrid,
-  List as IconList,
-  Link as IconLink,
-  MoreHorizontal as IconMoreHorizontal,
-  Copy as IconCopy,
-} from "react-feather";
+  FiGrid,
+  FiList,
+  FiLink,
+  FiMoreHorizontal,
+  FiCopy,
+} from "react-icons/fi";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import {
   map,
@@ -110,21 +110,21 @@ function ResumeGrid() {
               </Button>
             </Link>
             <Menu>
-              <MenuButton as={Button} size="sm">
-                <IconMoreHorizontal size="20" />
-              </MenuButton>
+              <MenuButton
+                size="sm"
+                as={IconButton}
+                aria-label="More options"
+                icon={<FiMoreHorizontal />}
+              />
               <MenuList>
                 <Link href={`/resumes/${info.getValue()}`} passHref>
-                  <MenuItem
-                    display={["flex", "none"]}
-                    icon={<IconLink size="20" />}
-                  >
+                  <MenuItem display={["flex", "none"]} icon={<FiLink />}>
                     Open
                   </MenuItem>
                 </Link>
                 <MenuItem
                   onClick={() => duplicate(info.getValue())}
-                  icon={<IconCopy size="20" />}
+                  icon={<FiCopy />}
                 >
                   Duplicate
                 </MenuItem>
@@ -227,14 +227,14 @@ function ResumeGrid() {
           <IconButton
             size="sm"
             aria-label="Grid view"
-            icon={<IconGrid size={20} />}
+            icon={<FiGrid />}
             onClick={() => setView("grid")}
             isActive={equals(view, "grid")}
           />
           <IconButton
             size="sm"
             aria-label="List view"
-            icon={<IconList size={20} />}
+            icon={<FiList />}
             onClick={() => setView("list")}
             isActive={equals(view, "list")}
           />

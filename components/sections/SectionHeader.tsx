@@ -14,14 +14,14 @@ import {
   useAccordionItemState,
 } from "@chakra-ui/react";
 import {
-  MoreHorizontal,
-  Copy,
-  Trash2,
-  Plus,
-  Edit,
-  ChevronDown,
-  ChevronUp,
-} from "react-feather";
+  FiMoreHorizontal,
+  FiCopy,
+  FiTrash2,
+  FiPlus,
+  FiEdit,
+  FiChevronDown,
+  FiChevronUp,
+} from "react-icons/fi";
 import { isNil } from "ramda";
 import { useFormContext } from "react-hook-form";
 
@@ -66,9 +66,9 @@ function SectionHeader(props: props) {
     <h2>
       <AccordionButton as="div" role="group">
         {isOpen ? (
-          <ChevronUp size={16} style={{ marginRight: "0.5rem" }} />
+          <FiChevronUp style={{ marginRight: "0.5rem" }} />
         ) : (
-          <ChevronDown size={16} style={{ marginRight: "0.5rem" }} />
+          <FiChevronDown style={{ marginRight: "0.5rem" }} />
         )}
         {isEditable ? (
           <Editable defaultValue={label} flex="1" mr="2">
@@ -103,7 +103,7 @@ function SectionHeader(props: props) {
                     aria-label={TOOLTIP_MORE_LABEL}
                     display="none"
                     _groupHover={{ display: "inline-flex" }}
-                    icon={<MoreHorizontal size={20} />}
+                    icon={<FiMoreHorizontal />}
                     onClick={(e) => e.stopPropagation()}
                     onPointerDown={(e) => e.preventDefault()}
                   />
@@ -112,19 +112,18 @@ function SectionHeader(props: props) {
                   onClick={(e) => e.stopPropagation()}
                   onPointerDown={(e) => e.preventDefault()}
                 >
-                  <MenuItem onClick={onRemove} icon={<Trash2 size={20} />}>
+                  <MenuItem onClick={onRemove} icon={<FiTrash2 />}>
                     Delete
                   </MenuItem>
-                  <MenuItem onClick={onDuplicate} icon={<Copy size={20} />}>
+                  <MenuItem onClick={onDuplicate} icon={<FiCopy />}>
                     Duplicate
                   </MenuItem>
                   {isNested ? (
                     <></>
                   ) : (
                     <MenuItem
-                      data-action="rename"
                       onClick={() => ref.current.focus()}
-                      icon={<Edit size={20} />}
+                      icon={<FiEdit />}
                     >
                       Rename
                     </MenuItem>
@@ -142,7 +141,7 @@ function SectionHeader(props: props) {
               display="none"
               ml="2"
               _groupHover={{ display: "inline-flex" }}
-              icon={<Plus size={20} />}
+              icon={<FiPlus />}
               onClick={(e) => handleOnAppend(e)}
               onPointerDown={(e) => e.preventDefault()}
             />

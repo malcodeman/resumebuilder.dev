@@ -19,15 +19,15 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import {
-  Download,
-  Link,
-  MoreHorizontal,
-  Upload,
-  Trash2,
-  Layers as IconLayers,
-  Database,
-  Edit,
-} from "react-feather";
+  FiDownload,
+  FiLink,
+  FiMoreHorizontal,
+  FiUpload,
+  FiTrash2,
+  FiLayers,
+  FiDatabase,
+  FiEdit,
+} from "react-icons/fi";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
 import { equals } from "ramda";
@@ -162,7 +162,7 @@ function ShowTemplates(props: {
         size="sm"
         mb="2"
         justifyContent="flex-start"
-        leftIcon={<IconLayers size={20} />}
+        leftIcon={<FiLayers />}
         onClick={onOpen}
       >
         Templates
@@ -185,7 +185,7 @@ function CopyLink() {
       size="sm"
       mb="2"
       justifyContent="flex-start"
-      leftIcon={<Link size={20} />}
+      leftIcon={<FiLink />}
       onClick={onCopy}
     >
       {hasCopied ? "Copied" : "Copy link"}
@@ -202,7 +202,7 @@ function ChangeSlug() {
         mb="2"
         justifyContent="flex-start"
         data-cy="change-slug-button"
-        leftIcon={<Edit size={20} />}
+        leftIcon={<FiEdit />}
         onClick={onOpen}
       >
         Change slug
@@ -220,7 +220,7 @@ function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
         size="sm"
         mb="2"
         justifyContent="flex-start"
-        leftIcon={<Database size={20} />}
+        leftIcon={<FiDatabase />}
         onClick={() => onImport(utils.generateFakeResume())}
       >
         Generate Fake Data
@@ -249,7 +249,7 @@ function DeleteResume() {
       <Button
         size="sm"
         justifyContent="flex-start"
-        leftIcon={<Trash2 size={20} />}
+        leftIcon={<FiTrash2 />}
         onClick={onOpen}
       >
         Delete
@@ -272,7 +272,7 @@ function ImportData(props: { onImport: (fields: Fields) => void }) {
         size="sm"
         mb="2"
         justifyContent="flex-start"
-        leftIcon={<Upload size={20} />}
+        leftIcon={<FiUpload />}
         onClick={onOpen}
       >
         Import
@@ -295,7 +295,7 @@ function ExportResume(props: {
       <Button
         size="sm"
         justifyContent="flex-start"
-        leftIcon={<Download size={20} />}
+        leftIcon={<FiDownload />}
         onClick={onOpen}
       >
         Export
@@ -361,7 +361,7 @@ function HeaderPopover(props: props) {
                   size="sm"
                   data-cy="more-button"
                   aria-label={TOOLTIP_MORE_LABEL}
-                  icon={<MoreHorizontal size={20} />}
+                  icon={<FiMoreHorizontal />}
                 />
               </PopoverTrigger>
             </Flex>

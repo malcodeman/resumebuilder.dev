@@ -12,7 +12,7 @@ import {
   FormHelperText,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Mail, Phone } from "react-feather";
+import { FiMail, FiPhone } from "react-icons/fi";
 import { useFormContext, useWatch } from "react-hook-form";
 import { concat, replace } from "ramda";
 
@@ -105,7 +105,7 @@ function PersonalDetailsSection() {
               <FormLabel>Email</FormLabel>
               <InputGroup size="sm">
                 <InputLeftElement>
-                  <Mail size={20} />
+                  <FiMail />
                 </InputLeftElement>
                 <Input variant="filled" {...register("about.email")} />
               </InputGroup>
@@ -116,7 +116,7 @@ function PersonalDetailsSection() {
               <FormLabel>Phone</FormLabel>
               <InputGroup size="sm">
                 <InputLeftElement>
-                  <Phone size={20} />
+                  <FiPhone />
                 </InputLeftElement>
                 <Input variant="filled" {...register("about.phone")} />
               </InputGroup>

@@ -9,7 +9,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { EmojiData, Picker, Emoji } from "emoji-mart";
-import { FileText } from "react-feather";
+import { FiFileText } from "react-icons/fi";
 import { isNil, isEmpty, or } from "ramda";
 
 const TOOLTIP_LABEL = "Change icon";
@@ -23,9 +23,9 @@ function EmojiPicker(props: props) {
   const { emoji, onSelect } = props;
   const { colorMode } = useColorMode();
   const icon = or(isNil(emoji), isEmpty(emoji)) ? (
-    <FileText size={20} />
+    <FiFileText />
   ) : (
-    <Emoji size={20} emoji={emoji} />
+    <Emoji size={16} emoji={emoji} />
   );
 
   function handleOnSelect(emoji: EmojiData, onClose: () => void) {

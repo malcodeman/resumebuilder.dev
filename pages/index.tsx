@@ -15,7 +15,7 @@ import {
 import { useMountEffect } from "@react-hookz/web";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { CheckCircle } from "react-feather";
+import { FiCheckCircle } from "react-icons/fi";
 
 import Layout from "../components/Layout";
 import Faq from "../components/landing/Faq";
@@ -90,11 +90,11 @@ function Landing() {
             </Button>
             <List>
               <ListItem>
-                <ListIcon as={CheckCircle} color="green.500" />
+                <ListIcon as={FiCheckCircle} color="green.500" />
                 No credit card needed
               </ListItem>
               <ListItem>
-                <ListIcon as={CheckCircle} color="green.500" />
+                <ListIcon as={FiCheckCircle} color="green.500" />
                 No account needed
               </ListItem>
             </List>

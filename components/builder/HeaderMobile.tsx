@@ -5,7 +5,7 @@ import {
   Container,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Home } from "react-feather";
+import { FiHome } from "react-icons/fi";
 import { FormProvider, UseFormReturn } from "react-hook-form";
 import { trackGoal } from "fathom-client";
 import { useLocalStorageValue } from "@react-hookz/web";
@@ -67,7 +67,7 @@ function HeaderMobile(props: props) {
         <Flex as="nav" justifyContent="space-between" alignItems="center">
           <NavLink href="/resumes">
             <Flex flexDirection="column" alignItems="center">
-              <Home size={20} />
+              <FiHome />
               <Text fontSize="xs">Home</Text>
             </Flex>
           </NavLink>

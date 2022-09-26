@@ -1,5 +1,5 @@
 import { MenuItem, useDisclosure } from "@chakra-ui/react";
-import { Trash2 } from "react-feather";
+import { FiTrash2 } from "react-icons/fi";
 
 import DeleteResumeModal from "./DeleteResumeModal";
 
@@ -13,7 +13,7 @@ function DeleteResumeMenuItem(props: props) {
   return (
     <>
       <MenuItem
-        icon={<Trash2 size="20" />}
+        icon={<FiTrash2 />}
         onClick={onOpen}
         data-cy="delete_resume_btn"
       >

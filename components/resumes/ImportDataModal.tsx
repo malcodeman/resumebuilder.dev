@@ -13,7 +13,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { isEmpty, map } from "ramda";
-import { ChevronLeft } from "react-feather";
+import { FiChevronLeft } from "react-icons/fi";
 import axios from "axios";
 
 import FileUploader from "../misc/FileUploader";
@@ -144,7 +144,7 @@ function ImportDataModal(props: props) {
             <Button
               size="sm"
               variant="link"
-              leftIcon={<ChevronLeft size={20} />}
+              leftIcon={<FiChevronLeft />}
               onClick={() => setSource("")}
             >
               Back

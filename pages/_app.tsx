@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import React from "react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { load } from "fathom-client";
+import { IconContext } from "react-icons";
 import "emoji-mart/css/emoji-mart.css";
 
 import { FATHOM_SITE_ID, IS_PROD } from "../lib/constants";
@@ -36,7 +37,9 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={THEME}>
       <ErrorBoundary>
-        <Component {...pageProps} />
+        <IconContext.Provider value={{ size: "16" }}>
+          <Component {...pageProps} />
+        </IconContext.Provider>
       </ErrorBoundary>
     </ChakraProvider>
   );

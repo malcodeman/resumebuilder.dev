@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { ChevronDown } from "react-feather";
+import { FiChevronDown } from "react-icons/fi";
 
 type props = {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ function DraggableItem(props: props) {
       paddingBottom="2"
       alignItems="center"
     >
-      <ChevronDown size={16} style={{ marginRight: "0.5rem" }} />
+      <FiChevronDown style={{ marginRight: "0.5rem" }} />
       {children}
     </Flex>
   );

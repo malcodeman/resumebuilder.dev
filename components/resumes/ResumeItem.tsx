@@ -18,12 +18,12 @@ import {
   useInterval,
 } from "@chakra-ui/react";
 import {
-  Copy,
-  MoreHorizontal,
-  Edit,
-  Move,
-  Link as IconLink,
-} from "react-feather";
+  FiCopy,
+  FiMoreHorizontal,
+  FiEdit,
+  FiMove,
+  FiLink,
+} from "react-icons/fi";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -154,29 +154,23 @@ function ResumeItem(props: props) {
               size="sm"
               aria-label="More options"
               data-cy="resume_more_options_btn"
-              icon={<MoreHorizontal size={20} />}
+              icon={<FiMoreHorizontal />}
               mr="2"
               display="none"
               _groupHover={{ display: "inline-flex" }}
             />
             <MenuList>
-              <MenuItem
-                icon={<Edit size={20} />}
-                onClick={() => ref.current.focus()}
-              >
+              <MenuItem icon={<FiEdit />} onClick={() => ref.current.focus()}>
                 Rename
               </MenuItem>
               <MenuItem
-                icon={<Copy size={20} />}
+                icon={<FiCopy />}
                 onClick={() => onDuplicate(resume.id)}
                 data-cy="duplicate_resume_btn"
               >
                 Duplicate
               </MenuItem>
-              <MenuItem
-                icon={<IconLink size={20} />}
-                onClick={handleOnCopyLink}
-              >
+              <MenuItem icon={<FiLink />} onClick={handleOnCopyLink}>
                 Copy link
               </MenuItem>
               <DeleteResumeMenuItem onDelete={() => onDelete(resume.id)} />
@@ -188,7 +182,7 @@ function ResumeItem(props: props) {
             size="sm"
             aria-label="Drag"
             display="none"
-            icon={<Move size={20} />}
+            icon={<FiMove />}
             _groupHover={{ display: "inline-flex" }}
           />
         </Flex>

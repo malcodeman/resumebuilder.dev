@@ -6,7 +6,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Layers, Plus, Upload } from "react-feather";
+import { FiLayers, FiPlus, FiUpload } from "react-icons/fi";
 import { map } from "ramda";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
@@ -31,7 +31,7 @@ function EmptyResumes() {
   const ITEMS = [
     {
       color: green,
-      icon: <Plus size={36} color={green} />,
+      icon: <FiPlus size={48} color={green} />,
       heading: "Start from scratch",
       text: "Create a new blank resume with custom sections and templates.",
       dataCy: "start-from-scratch",
@@ -39,7 +39,7 @@ function EmptyResumes() {
     },
     {
       color: blue,
-      icon: <Upload size={36} color={blue} />,
+      icon: <FiUpload size={48} color={blue} />,
       heading: "Quickly upload",
       text: "Easily migrate your existing data in just a few seconds.",
       dataCy: "quickly-upload",
@@ -47,7 +47,7 @@ function EmptyResumes() {
     },
     {
       color: purple,
-      icon: <Layers size={36} color={purple} />,
+      icon: <FiLayers size={48} color={purple} />,
       heading: "Start with templates",
       text: "Select a template to get started and customize as you go.",
       dataCy: "start-with-templates",

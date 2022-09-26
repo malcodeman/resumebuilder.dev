@@ -10,7 +10,7 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { Link as IconLink } from "react-feather";
+import { FiLink } from "react-icons/fi";
 
 type props = {
   onSubmit: (values: { username: string }) => void;
@@ -41,7 +41,7 @@ function ImportFromGithub(props: props) {
                 size="xs"
                 aria-label="Import"
                 data-cy="import-github-submit"
-                icon={<IconLink size={16} />}
+                icon={<FiLink />}
               />
             )}
           </InputRightElement>
