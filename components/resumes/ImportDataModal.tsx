@@ -12,9 +12,8 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import { isEmpty, map } from "ramda";
+import { equals, isEmpty, map } from "ramda";
 import { FiChevronLeft } from "react-icons/fi";
-import axios from "axios";
 
 import FileUploader from "../misc/FileUploader";
 import ImportFromGithub from "./importFromGithub";
@@ -79,26 +78,9 @@ function ImportDataModal(props: props) {
     }
   }
 
-  async function onGithubSubmit(values: { username: string }) {
-    try {
-      setIsLoading(true);
-      const username = values.username;
-      const user = await axios.get(`https://api.github.com/users/${username}`);
-      const repos = await axios.get(
-        `https://api.github.com/users/${username}/repos`
-      );
-      const fields = parser.parseGithub({ user: user.data, repos: repos.data });
-      onImport(fields);
-      onClose();
-    } catch (err) {
-      toast({
-        description: "Something went wrong.",
-        status: "error",
-        isClosable: true,
-      });
-    } finally {
-      setIsLoading(false);
-    }
+  function onGithubImport(fields: Fields) {
+    onImport(fields);
+    onClose();
   }
 
   function renderBody() {
@@ -125,10 +107,8 @@ function ImportDataModal(props: props) {
         </>
       );
     }
-    if (source === "github") {
-      return (
-        <ImportFromGithub onSubmit={onGithubSubmit} isLoading={isLoading} />
-      );
+    if (equals(source, "github")) {
+      return <ImportFromGithub onImport={onGithubImport} />;
     }
     return <FileUploader onDrop={onDropHandler} isLoading={isLoading} />;
   }
