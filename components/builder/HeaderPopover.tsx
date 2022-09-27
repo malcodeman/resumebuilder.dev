@@ -151,6 +151,36 @@ function PdfViewer() {
   );
 }
 
+function DevToolsToggle() {
+  const [devTools, setDevTools] = useLocalStorageValue("devTools", false, {
+    initializeWithStorageValue: false,
+  });
+  return (
+    <FormControl
+      mb="2"
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <FormLabel
+        htmlFor="dev-tools"
+        mb="0"
+        width="100%"
+        cursor="pointer"
+        marginInlineEnd="0"
+        paddingInlineEnd="3"
+      >
+        Dev Tools
+      </FormLabel>
+      <Switch
+        isChecked={devTools}
+        onChange={() => setDevTools(!devTools)}
+        id="dev-tools"
+      />
+    </FormControl>
+  );
+}
+
 function ShowTemplates(props: {
   onChangeTemplate: (nextTemplate: Template) => void;
 }) {
@@ -223,7 +253,7 @@ function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
         leftIcon={<FiDatabase />}
         onClick={() => onImport(utils.generateFakeResume())}
       >
-        Generate Fake Data
+        Generate fake data
       </Button>
     </>
   );
@@ -372,6 +402,7 @@ function HeaderPopover(props: props) {
                 <FullWidth />
                 <DarkModeToggle />
                 <PdfViewer />
+                <DevToolsToggle />
                 <Divider
                   marginY="2"
                   display={{ base: "none", lg: "initial" }}
