@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { FiCheckCircle, FiCircle } from "react-icons/fi";
 import { map } from "ramda";
+import { useTranslation } from "next-i18next";
 
 const FAQ = [
   {
@@ -154,9 +155,10 @@ const FAQ = [
 ];
 
 function Faq() {
+  const { t } = useTranslation();
   return (
     <Box as="section" marginBottom="16">
-      <Heading mb="4">Frequently asked questions</Heading>
+      <Heading mb="4">{t("frequently_asked_questions")}</Heading>
       <Accordion defaultIndex={[0]} allowMultiple>
         {map(
           (item) => (

@@ -16,6 +16,8 @@ import { useMountEffect } from "@react-hookz/web";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { FiCheckCircle } from "react-icons/fi";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 import Layout from "../components/Layout";
 import Faq from "../components/landing/Faq";
@@ -40,6 +42,7 @@ function Landing() {
   const { setDashboard } = useDashboard();
   const router = useRouter();
   const { createNew } = useResumes();
+  const { t } = useTranslation();
 
   useMountEffect(() => {
     setDashboard(false);
@@ -68,7 +71,7 @@ function Landing() {
         >
           <Box>
             <Heading mb="4">
-              Create a job-ready resume for free in minutes.
+              {t("create_job_ready_resume_for_free_in_minutes")}
             </Heading>
             <Text mb="4">
               Creating an{" "}
@@ -86,16 +89,16 @@ function Landing() {
               data-cy="build-resume-button"
               onClick={() => handleOnSubmit()}
             >
-              Build resume
+              {t("build_resume")}
             </Button>
             <List>
               <ListItem>
                 <ListIcon as={FiCheckCircle} color="green.500" />
-                No credit card needed
+                {t("no_credit_card_needed")}
               </ListItem>
               <ListItem>
                 <ListIcon as={FiCheckCircle} color="green.500" />
-                No account needed
+                {t("no_account_needed")}
               </ListItem>
             </List>
           </Box>
@@ -116,6 +119,14 @@ function Landing() {
       </Layout>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }
 
 export default Landing;

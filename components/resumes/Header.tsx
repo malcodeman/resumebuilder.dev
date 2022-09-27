@@ -12,6 +12,7 @@ import useDashboard from "../../hooks/useDashboard";
 
 import Logo from "../Logo";
 import NavLink from "../misc/NavLink";
+import LanguageSelect from "../misc/LanguageSelect";
 import UserMenu from "./UserMenu";
 
 function Header() {
@@ -51,13 +52,19 @@ function Header() {
             </NavLink>
           </Flex>
           {dashboard ? (
-            <UserMenu />
+            <Flex>
+              <LanguageSelect mr="2" />
+              <UserMenu />
+            </Flex>
           ) : (
-            <Link href="/resumes" passHref>
-              <Button size="sm" data-cy="dashboard-button">
-                Dashboard
-              </Button>
-            </Link>
+            <Flex>
+              <LanguageSelect mr="2" />
+              <Link href="/resumes" passHref>
+                <Button size="sm" data-cy="dashboard-button">
+                  Dashboard
+                </Button>
+              </Link>
+            </Flex>
           )}
         </Flex>
       </Container>

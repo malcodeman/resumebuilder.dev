@@ -8,10 +8,12 @@ import {
   UnorderedList,
   ListItem,
 } from "@chakra-ui/react";
+import { useTranslation } from "next-i18next";
 
 import Poser16 from "../../illustrations/Poser16";
 
 function Builder() {
+  const { t } = useTranslation();
   return (
     <Box as="section">
       <Grid templateColumns={["1fr", "1fr 1fr"]} gap="8">
@@ -25,18 +27,20 @@ function Builder() {
             >
               Resume builder
             </Text>
-            <Heading mb="4">Powerful and easy-to-use</Heading>
+            <Heading mb="4">{t("powerful_and_easy_to_use")}</Heading>
             <Text mb="4">
-              The fastest way to build your Software Engineer resume.
+              {t("the_fastest_way_to_build_your_software_engineer_resume")}
             </Text>
             <UnorderedList>
               <ListItem mb="2">
-                Resume spell-checking, pre-generated phrases, all-set templates
-                and more.
+                {t(
+                  "resume_spell_checking_pre_generated_phrases_all_set_templates_and_more"
+                )}
               </ListItem>
               <ListItem>
-                Provide easy reading for hiring managers with elegant resume
-                formatting.
+                {t(
+                  "provide_easy_reading_for_hiring_managers_with_elegant_resume_formatting"
+                )}
               </ListItem>
             </UnorderedList>
           </Box>

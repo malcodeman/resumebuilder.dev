@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { isNil } from "ramda";
 import Link from "next/link";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import Sections from "../../components/sections/Sections";
 import Header from "../../components/builder/Header";
@@ -85,6 +86,14 @@ function Builder() {
       {isLargeDevice ? null : <HeaderMobile form={form} />}
     </>
   );
+}
+
+export async function getServerSideProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }
 
 export default Builder;

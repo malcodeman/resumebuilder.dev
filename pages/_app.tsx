@@ -3,6 +3,7 @@ import React from "react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { load } from "fathom-client";
 import { IconContext } from "react-icons";
+import { appWithTranslation } from "next-i18next";
 import "emoji-mart/css/emoji-mart.css";
 
 import { FATHOM_SITE_ID, IS_PROD } from "../lib/constants";
@@ -45,4 +46,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default App;
+export default appWithTranslation(App);

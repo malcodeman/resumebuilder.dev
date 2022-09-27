@@ -10,6 +10,7 @@ import {
 import { map, slice } from "ramda";
 import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { useTranslation } from "next-i18next";
 
 import { TEMPLATES_LIST } from "../../lib/constants";
 
@@ -33,13 +34,15 @@ function Templates(props: props) {
     sm: 4,
     md: 3,
   });
+  const { t } = useTranslation();
   return (
     <Box as="section">
       <Box width={["100%", "100%", "50%"]}>
-        <Heading mb="4">Start with a template.</Heading>
+        <Heading mb="4">{t("start_with_template")}</Heading>
         <Text mb="4">
-          Choose from any of our free templates that best fit your personal
-          style and professional needs.
+          {t(
+            "choose_from_any_of_our_free_templates_that_best_fit_your_personal_and_professional_needs"
+          )}
         </Text>
         <Link href="/templates" passHref>
           <Button
@@ -54,7 +57,7 @@ function Templates(props: props) {
               </motion.div>
             }
           >
-            See all templates
+            {t("see_all_templates")}
           </Button>
         </Link>
       </Box>

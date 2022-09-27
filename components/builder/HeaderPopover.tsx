@@ -39,6 +39,7 @@ import ExportResumeModal from "./ExportResumeModal";
 import DeleteResumeModal from "../resumes/DeleteResumeModal";
 import TemplatesModal from "../templates/TemplatesModal";
 import ChangeSlugModal from "./ChangeSlugModal";
+import LanguageSelect from "../misc/LanguageSelect";
 
 import utils from "../../lib/utils";
 import useResume from "../../hooks/useResume";
@@ -157,7 +158,6 @@ function DevToolsToggle() {
   });
   return (
     <FormControl
-      mb="2"
       display="flex"
       alignItems="center"
       justifyContent="space-between"
@@ -407,6 +407,7 @@ function HeaderPopover(props: props) {
                   marginY="2"
                   display={{ base: "none", lg: "initial" }}
                 />
+                <LanguageSelect mb="2" />
                 <ShowTemplates onChangeTemplate={onChangeTemplate} />
                 <CopyLink />
                 <ChangeSlug />

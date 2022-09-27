@@ -46,6 +46,7 @@ import { SortableContext } from "@dnd-kit/sortable";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { createColumnHelper, VisibilityState } from "@tanstack/react-table";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import Layout from "../../components/Layout";
 import ResumeItem from "../../components/resumes/ResumeItem";
@@ -263,6 +264,14 @@ function Dashboard() {
       </Layout>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }
 
 export default Dashboard;
