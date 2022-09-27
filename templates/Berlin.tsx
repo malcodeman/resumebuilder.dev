@@ -63,7 +63,7 @@ function Berlin(props: props) {
   }
 
   function renderInitials() {
-    if (and(about.firstName[0], about.lastName[0])) {
+    if (and(about.firstName, about.lastName)) {
       return (
         <Box
           pt={5}

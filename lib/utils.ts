@@ -16,6 +16,7 @@ import {
   sum,
   isEmpty,
   equals,
+  has,
 } from "ramda";
 
 import getTemplate from "./getTemplate";
@@ -191,6 +192,23 @@ function countWords(summary: string, section: SectionField[]) {
   return sum([summaryCount, ...descriptionCount]);
 }
 
+function checkResumeProperties(resume: Resume) {
+  if (
+    has("id", resume) &&
+    has("version", resume) &&
+    has("title", resume) &&
+    has("icon", resume) &&
+    has("createdAt", resume) &&
+    has("updatedAt", resume) &&
+    has("design", resume) &&
+    has("about", resume) &&
+    has("section", resume)
+  ) {
+    return true;
+  }
+  return false;
+}
+
 const EXPORTS = {
   isBrowser,
   readAsTextAsync,
@@ -205,6 +223,7 @@ const EXPORTS = {
   getRandomInt,
   generateFakeResume,
   countWords,
+  checkResumeProperties,
 };
 
 export default EXPORTS;

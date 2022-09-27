@@ -5,13 +5,10 @@ import {
   InputGroup,
   InputLeftAddon,
   Input,
-  InputRightElement,
-  IconButton,
-  Spinner,
   FormErrorMessage,
+  Button,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { FiLink } from "react-icons/fi";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -55,7 +52,7 @@ function ImportFromGithub(props: props) {
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
-      <FormControl isInvalid={Boolean(form.formState.errors.username)}>
+      <FormControl mb="4" isInvalid={Boolean(form.formState.errors.username)}>
         <FormLabel>Url</FormLabel>
         <InputGroup size="sm">
           <InputLeftAddon borderRadius="md">github.com/</InputLeftAddon>
@@ -65,24 +62,20 @@ function ImportFromGithub(props: props) {
             data-cy="import-github-username"
             {...form.register("username")}
           />
-          <InputRightElement>
-            {isLoading ? (
-              <Spinner size="xs" />
-            ) : (
-              <IconButton
-                type="submit"
-                size="xs"
-                aria-label="Import"
-                data-cy="import-github-submit"
-                icon={<FiLink />}
-              />
-            )}
-          </InputRightElement>
         </InputGroup>
         <FormErrorMessage>
           {form.formState.errors.username?.message}
         </FormErrorMessage>
       </FormControl>
+      <Button
+        isLoading={isLoading}
+        size="sm"
+        colorScheme="blue"
+        type="submit"
+        data-cy="import-github-submit"
+      >
+        Import
+      </Button>
     </form>
   );
 }

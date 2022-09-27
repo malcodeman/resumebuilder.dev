@@ -12,35 +12,45 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import { equals, isEmpty, map } from "ramda";
+import { isEmpty, map } from "ramda";
 import { FiChevronLeft } from "react-icons/fi";
 
 import FileUploader from "../misc/FileUploader";
 import ImportFromGithub from "./importFromGithub";
+import ImportFromPasteData from "./ImportFromPasteData";
 
 import parser from "../../lib/parser";
 import utils from "../../lib/utils";
 
 import { Fields } from "../../types";
 
-type props = {
+type Props = {
   isOpen: boolean;
   onClose: () => void;
   onImport: (fields: Fields) => void;
 };
+type Source =
+  | "jsonResume"
+  | "json"
+  | "github"
+  | "pasteData"
+  | "csv"
+  | "xml"
+  | "pdf";
 
-const IMPORTS = [
+const IMPORTS: { label: string; value: Source; isDisabled: boolean }[] = [
   { label: "JSON Resume", value: "jsonResume", isDisabled: false },
   { label: "JSON", value: "json", isDisabled: false },
   { label: "GitHub", value: "github", isDisabled: false },
+  { label: "Paste data", value: "pasteData", isDisabled: false },
   { label: "CSV", value: "csv", isDisabled: true },
   { label: "XML", value: "xml", isDisabled: true },
   { label: "PDF", value: "pdf", isDisabled: true },
 ];
 
-function ImportDataModal(props: props) {
+function ImportDataModal(props: Props) {
   const { isOpen, onClose, onImport } = props;
-  const [source, setSource] = React.useState("");
+  const [source, setSource] = React.useState<Source | "">("");
   const [isLoading, setIsLoading] = React.useState(false);
   const toast = useToast();
 
@@ -59,7 +69,7 @@ function ImportDataModal(props: props) {
     }
   }
 
-  async function onDropHandler(acceptedFiles: File[]) {
+  async function handleOnDrop(acceptedFiles: File[]) {
     try {
       setIsLoading(true);
       const result = await utils.readAsTextAsync(acceptedFiles[0]);
@@ -78,39 +88,48 @@ function ImportDataModal(props: props) {
     }
   }
 
-  function onGithubImport(fields: Fields) {
+  function handleOnImport(fields: Fields) {
     onImport(fields);
     onClose();
   }
 
   function renderBody() {
-    if (isEmpty(source)) {
-      return (
-        <>
-          <Text mb="2">Choose one of the below sources to get started.</Text>
-          <Grid gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]} gap="4">
-            {map((item) => {
-              return (
-                <Button
-                  key={item.label}
-                  variant="outline"
-                  size="sm"
-                  isDisabled={item.isDisabled}
-                  data-cy={`import-${item.value}`}
-                  onClick={() => setSource(item.value)}
-                >
-                  {item.label}
-                </Button>
-              );
-            }, IMPORTS)}
-          </Grid>
-        </>
-      );
+    switch (source) {
+      case "":
+        return (
+          <>
+            <Text mb="2">
+              You can import resume by uploading a file or copying and pasting
+              data directly. Choose one of the below sources to get started.
+            </Text>
+            <Grid
+              gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]}
+              gap="4"
+            >
+              {map((item) => {
+                return (
+                  <Button
+                    key={item.label}
+                    variant="outline"
+                    size="sm"
+                    isDisabled={item.isDisabled}
+                    data-cy={`import-${item.value}`}
+                    onClick={() => setSource(item.value)}
+                  >
+                    {item.label}
+                  </Button>
+                );
+              }, IMPORTS)}
+            </Grid>
+          </>
+        );
+      case "github":
+        return <ImportFromGithub onImport={handleOnImport} />;
+      case "pasteData":
+        return <ImportFromPasteData onImport={handleOnImport} />;
+      default:
+        return <FileUploader onDrop={handleOnDrop} isLoading={isLoading} />;
     }
-    if (equals(source, "github")) {
-      return <ImportFromGithub onImport={onGithubImport} />;
-    }
-    return <FileUploader onDrop={onDropHandler} isLoading={isLoading} />;
   }
 
   return (
