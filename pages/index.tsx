@@ -6,7 +6,6 @@ import {
   Box,
   Text,
   Divider,
-  Tooltip,
   List,
   ListItem,
   ListIcon,
@@ -35,8 +34,6 @@ import useResumes from "../hooks/useResumes";
 import useDashboard from "../hooks/useDashboard";
 
 import Builder from "../components/landing/Builder";
-
-const ATS_TOOLTIP = "Applicant Tracking System";
 
 function Landing() {
   const { setDashboard } = useDashboard();
@@ -70,17 +67,8 @@ function Landing() {
           marginBottom="16"
         >
           <Box>
-            <Heading mb="4">
-              {t("create_job_ready_resume_for_free_in_minutes")}
-            </Heading>
-            <Text mb="4">
-              Creating an{" "}
-              <Tooltip label={ATS_TOOLTIP} aria-label={ATS_TOOLTIP}>
-                ATS
-              </Tooltip>
-              -friendly tech resume that follows best practices and impresses
-              hiring managers has never been easier.
-            </Text>
+            <Heading mb="4">{t("hero_heading")}</Heading>
+            <Text mb="4">{t("hero_subheading")}</Text>
             <Button
               as={motion.button}
               whileHover={{ scale: 1.1 }}

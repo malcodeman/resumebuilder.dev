@@ -1,5 +1,6 @@
 {
-  "create_job_ready_resume_for_free_in_minutes": "Create a job-ready resume for free in minutes.",
+  "hero_heading": "Create a job-ready resume for free in minutes.",
+  "hero_subheading": "Creating an ATS-friendly tech resume that follows best practices and impresses hiring managers has never been easier.",
   "build_resume": "Build resume",
   "no_credit_card_needed": "No credit card needed",
   "no_account_needed": "No account needed",
@@ -17,5 +18,17 @@
   "the_fastest_way_to_build_your_software_engineer_resume": "The fastest way to build your Software Engineer resume.",
   "resume_spell_checking_pre_generated_phrases_all_set_templates_and_more": "Resume spell-checking, pre-generated phrases, all-set templates and more.",
   "provide_easy_reading_for_hiring_managers_with_elegant_resume_formatting": "Provide easy reading for hiring managers with elegant resume formatting.",
-  "frequently_asked_questions": "Frequently asked questions"
+  "frequently_asked_questions": "Frequently asked questions",
+  "faq_question_1": "Why is resumebuilder.dev free?",
+  "faq_answer_1": "Because everyone should have access to a great resume building software.",
+  "faq_question_2": "Where is my data stored?",
+  "faq_answer_2": "Inside browser <1>{{code}}</1>.",
+  "faq_question_3": "What analytics tools do you use?",
+  "faq_answer_3": "We use <1>{{link}}</1>, which is privacy-focused and GDPR compliant.",
+  "faq_question_4": "Is resumebuilder.dev open source?",
+  "faq_answer_4": "Yes, you can find the source code on <1>{{link}}</1>.",
+  "faq_question_5": "Which imports are supported?",
+  "currently_we_support": "Currently we support",
+  "working_on": "Working on",
+  "faq_question_6": "Which exports are supported?"
 }

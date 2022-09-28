@@ -1,5 +1,6 @@
 {
-  "create_job_ready_resume_for_free_in_minutes": "Erstellen Sie in wenigen Minuten kostenlos einen einsatzbereiten Lebenslauf.",
+  "hero_heading": "Erstellen Sie in wenigen Minuten kostenlos einen einsatzbereiten Lebenslauf.",
+  "hero_subheading": "Das Erstellen eines ATS-freundlichen technischen Lebenslaufs, der Best Practices folgt und Personalchefs beeindruckt, war noch nie so einfach.",
   "build_resume": "Lebenslauf erstellen",
   "no_credit_card_needed": "Keine Kreditkarte erforderlich",
   "no_account_needed": "Kein Konto erforderlich",
@@ -17,5 +18,17 @@
   "the_fastest_way_to_build_your_software_engineer_resume": "Der schnellste Weg, um Ihren Software Engineer-Lebenslauf zu erstellen.",
   "resume_spell_checking_pre_generated_phrases_all_set_templates_and_more": "Setzen Sie die Rechtschreibprüfung, vorgenerierte Sätze, fertige Vorlagen und mehr fort.",
   "provide_easy_reading_for_hiring_managers_with_elegant_resume_formatting": "Sorgen Sie mit eleganter Lebenslaufformatierung für eine einfache Lesbarkeit für Personalchefs.",
-  "frequently_asked_questions": "Häufig gestellte Fragen"
+  "frequently_asked_questions": "Häufig gestellte Fragen",
+  "faq_question_1": "Warum ist resumebuilder.dev kostenlos?",
+  "faq_answer_1": "Weil jeder Zugang zu einer großartigen Software zum Erstellen von Lebensläufen haben sollte.",
+  "faq_question_2": "Wo werden meine Daten gespeichert?",
+  "faq_answer_2": "Im Browser <1>{{code}}</1>.",
+  "faq_question_3": "Welche Analysetools verwenden Sie?",
+  "faq_answer_3": "Wir verwenden <1>{{link}}</1>, das datenschutzorientiert und DSGVO-konform ist.",
+  "faq_question_4": "Ist Resumebuilder.dev Open Source?",
+  "faq_answer_4": "Ja, Sie finden den Quellcode unter <1>{{link}}</1>.",
+  "faq_question_5": "Welche Importe werden unterstützt?",
+  "currently_we_support": "Aktuell unterstützen wir",
+  "working_on": "Arbeiten an",
+  "faq_question_6": "Welche Exporte werden unterstützt?"
 }
