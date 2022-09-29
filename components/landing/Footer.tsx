@@ -10,18 +10,19 @@ import {
 import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
 import { length, map } from "ramda";
+import { useTranslation } from "next-i18next";
 
 import Poser20 from "../../illustrations/Poser20";
 
 const LIST = [
   {
-    text: "Unlimited resumes",
+    textTransKey: "unlimited_resumes",
   },
   {
-    text: "Unlimited sections",
+    textTransKey: "unlimited_sections",
   },
   {
-    text: "Unlimited downloads",
+    textTransKey: "unlimited_downloads",
   },
 ];
 
@@ -31,9 +32,10 @@ type props = {
 
 function Footer(props: props) {
   const { onSubmit } = props;
+  const { t } = useTranslation();
   return (
     <Center as="section" flexDirection="column">
-      <Heading mb="4">Get started with Resume Builder</Heading>
+      <Heading mb="4">{t("get_started_with_resume_builder")}</Heading>
       <Button
         as={motion.button}
         whileHover={{ scale: 1.1 }}
@@ -42,7 +44,7 @@ function Footer(props: props) {
         data-cy="build-for-free-button"
         onClick={() => onSubmit()}
       >
-        Build for free
+        {t("build_for_free")}
       </Button>
       <Grid
         templateColumns={["1fr", `repeat(${length(LIST)}, 1fr)`]}
@@ -51,9 +53,9 @@ function Footer(props: props) {
       >
         {map(
           (item) => (
-            <Flex key={item.text} alignItems="center">
+            <Flex key={item.textTransKey} alignItems="center">
               <FiCheck style={{ marginRight: "0.5rem" }} />
-              <Text mr="2">{item.text}</Text>
+              <Text mr="2">{t(item.textTransKey)}</Text>
             </Flex>
           ),
           LIST
