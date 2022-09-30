@@ -23,7 +23,7 @@ import getTemplate from "./getTemplate";
 
 import { Resume, Section, Fields, SectionField } from "../types";
 
-const toast = createStandaloneToast();
+const { toast } = createStandaloneToast();
 const isBrowser =
   typeof window !== "undefined" &&
   typeof navigator !== "undefined" &&

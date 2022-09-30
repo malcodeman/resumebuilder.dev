@@ -45,12 +45,12 @@ function EmojiPicker(props: props) {
             </Flex>
           </Tooltip>
           <PopoverContent width="unset">
-            <Picker
+            {/* <Picker
               theme={colorMode}
               showPreview={false}
               showSkinTones={false}
               onSelect={(emoji) => handleOnSelect(emoji, onClose)}
-            />
+            /> */}
           </PopoverContent>
         </>
       )}

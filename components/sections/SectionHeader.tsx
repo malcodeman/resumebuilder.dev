@@ -82,7 +82,7 @@ function SectionHeader(props: props) {
             <EditableInput {...register(`section.${index}.label` as const)} />
           </Editable>
         ) : (
-          <Box isTruncated flex="1" mr="2">
+          <Box noOfLines={1} flex="1" mr="2">
             {label || "Untitled"}
           </Box>
         )}

@@ -5,7 +5,7 @@ import {
   FieldArrayMethodProps,
   useFormContext,
 } from "react-hook-form";
-import { findIndex, propEq, and, equals, not, find, isEmpty } from "ramda";
+import { findIndex, propEq, and, equals, not, find, isEmpty, or } from "ramda";
 import { useSortable, SortableContext } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
@@ -72,12 +72,12 @@ function StandardSection(props: props) {
       },
     })
   );
-  const [activeLabel, setActiveLabel] = React.useState({});
+  const [activeLabel, setActiveLabel] = React.useState("");
   const isOver = and(not(isDragging), equals(overIndex, index));
 
   function handleOnDragStart(event: DragStartEvent) {
-    const item = find((item) => item.id === event.active.id, fieldsNested);
-    setActiveLabel(item.title || "Untitled");
+    const item = find((item) => equals(item.id, event.active.id), fieldsNested);
+    setActiveLabel(or(item.title, "Untitled"));
   }
 
   function handleOnDragEnd(event: DragEndEvent) {
