@@ -1,4 +1,4 @@
-name: e2e tests
+name: E2E on Chrome
 
 on:
   push:
@@ -12,6 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v4.2.0
         with:
-          start: npm run dev
+          browser: chrome
+          build: yarn build
+          start: yarn start
+          wait-on: "http://localhost:3000"
