@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Container } from "@chakra-ui/react";
 import { useMediaQuery } from "@react-hookz/web";
+import { and, isNil, ifElse } from "ramda";
 
 import Header from "./resumes/Header";
 import HeaderMobile from "./resumes/HeaderMobile";
@@ -23,7 +24,11 @@ function Layout(props: props) {
       >
         <Container maxW="container.lg">{children}</Container>
       </Box>
-      {isLargeDevice ? null : <HeaderMobile />}
+      {ifElse(
+        () => and(!isNil(isLargeDevice), !isLargeDevice),
+        () => <HeaderMobile />,
+        () => null
+      )()}
     </>
   );
 }
