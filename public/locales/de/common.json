@@ -47,5 +47,9 @@
   "simple": "Einfach",
   "creative": "Kreativ",
   "professional": "Fachmann",
-  "search_n_templates": "Suche {{n}} Vorlagen..."
+  "search_n_templates": "Suche {{n}} Vorlagen...",
+  "resume_builder_for_mac_and_windows": "resumebuilder.dev für Mac & Windows",
+  "download_for_macos": "Download für MacOS",
+  "download_for_windows": "Download für Windows",
+  "coming_soon": "Demnächst"
 }
