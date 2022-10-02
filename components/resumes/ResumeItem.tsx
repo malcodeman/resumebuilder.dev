@@ -73,7 +73,6 @@ type props = {
 };
 
 function ResumeItem(props: props) {
-  const { t } = useTranslation();
   const {
     resume,
     onDelete,
@@ -82,6 +81,7 @@ function ResumeItem(props: props) {
     onIconChange,
     ...rest
   } = props;
+  const { t } = useTranslation();
   const ref = React.useRef<HTMLSpanElement>(null);
   const form = useForm({ defaultValues: { title: "" } });
   const {

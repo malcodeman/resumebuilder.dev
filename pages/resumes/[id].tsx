@@ -6,6 +6,7 @@ import { isNil } from "ramda";
 import Link from "next/link";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 import Sections from "../../components/sections/Sections";
 import Header from "../../components/builder/Header";
@@ -21,6 +22,7 @@ import useDashboard from "../../hooks/useDashboard";
 import { Resume } from "../../types";
 
 function Builder() {
+  const { t } = useTranslation();
   const { resume, isLoading } = useResume();
   const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
   const { setDashboard } = useDashboard();
@@ -50,9 +52,9 @@ function Builder() {
           <Text mb="2" fontSize="4xl">
             404
           </Text>
-          <Text marginBottom="4">We’re sorry. This resume was not found.</Text>
+          <Text marginBottom="4">{t("404_description")}</Text>
           <Link href="/" passHref>
-            <Button>Return home</Button>
+            <Button>{t("return_home")}</Button>
           </Link>
         </Center>
       </>

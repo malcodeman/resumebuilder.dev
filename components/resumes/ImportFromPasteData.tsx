@@ -20,8 +20,8 @@ type props = {
 };
 
 function ImportFromPasteData(props: props) {
-  const { t } = useTranslation();
   const { onImport } = props;
+  const { t } = useTranslation();
   const form = useForm({
     defaultValues: { data: "" },
     resolver: yupResolver(

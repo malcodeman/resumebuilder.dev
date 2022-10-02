@@ -50,8 +50,8 @@ const IMPORTS: { label: string; value: Source; isDisabled: boolean }[] = [
 ];
 
 function ImportDataModal(props: Props) {
-  const { t } = useTranslation();
   const { isOpen, onClose, onImport } = props;
+  const { t } = useTranslation();
   const [source, setSource] = React.useState<Source | "">("");
   const [isLoading, setIsLoading] = React.useState(false);
   const toast = useToast();

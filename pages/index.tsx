@@ -36,10 +36,10 @@ import useDashboard from "../hooks/useDashboard";
 import Builder from "../components/landing/Builder";
 
 function Landing() {
+  const { t } = useTranslation();
   const { setDashboard } = useDashboard();
   const router = useRouter();
   const { createNew } = useResumes();
-  const { t } = useTranslation();
 
   useMountEffect(() => {
     setDashboard(false);

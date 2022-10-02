@@ -9,8 +9,8 @@ type props = {
 };
 
 function DeleteResumeMenuItem(props: props) {
-  const { t } = useTranslation();
   const { onDelete } = props;
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>

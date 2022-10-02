@@ -13,6 +13,7 @@ import {
   ButtonGroup,
 } from "@chakra-ui/react";
 import { equals, filter, includes, isEmpty, length, map, toLower } from "ramda";
+import { useTranslation } from "next-i18next";
 
 import { TEMPLATES_LIST, TEMPLATES_FILTERS } from "../../lib/constants";
 
@@ -29,6 +30,7 @@ type props = {
 
 function TemplatesModal(props: props) {
   const { isOpen, onClose, onChange } = props;
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = React.useState(
     TEMPLATES_FILTERS[0].value
   );
@@ -57,15 +59,15 @@ function TemplatesModal(props: props) {
     <Modal size="6xl" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Template gallery</ModalHeader>
+        <ModalHeader>{t("template_gallery")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <SearchInput
             mb="4"
             value={template}
-            placeholder={`Search ${length(
-              filteredTemplatesByTags
-            )} templates...`}
+            placeholder={t("search_n_templates", {
+              n: length(filteredTemplatesByTags),
+            })}
             onChangeValue={(nextValue) => setTemplate(nextValue)}
             onClear={() => setTemplate("")}
           />
@@ -78,14 +80,14 @@ function TemplatesModal(props: props) {
                   data-cy={`template-filters-${item.value}`}
                   onClick={() => setActiveFilter(item.value)}
                 >
-                  {item.label}
+                  {t(item.labelTransKey)}
                 </Button>
               ),
               TEMPLATES_FILTERS
             )}
           </ButtonGroup>
           {isEmpty(filteredTemplatesBySearch) ? (
-            <Text>No templates found</Text>
+            <Text>{t("no_templates_found")}</Text>
           ) : (
             <></>
           )}

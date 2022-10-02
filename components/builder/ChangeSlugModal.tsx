@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { and, or } from "ramda";
+import { useTranslation } from "next-i18next";
 
 import useResume from "../../hooks/useResume";
 
@@ -32,6 +33,7 @@ type props = {
 
 function ChangeSlugModal(props: props) {
   const { isOpen, onClose } = props;
+  const { t } = useTranslation();
   const form = useForm({
     defaultValues: { slug: "" },
     resolver: yupResolver(
@@ -39,11 +41,11 @@ function ChangeSlugModal(props: props) {
         .object({
           slug: yup
             .string()
-            .required("Slug is required")
-            .max(21, "Slug is too long")
+            .required(t("slug_is_required"))
+            .max(21, t("slug_is_too_long"))
             .matches(
               /^[A-Za-z0-9_-]+$/,
-              `Slug must match the following: "A-Za-z0-9_-"`
+              t("slug_must_match_the_following_regex", { regex: "A-Za-z0-9_-" })
             ),
         })
         .required()
@@ -66,12 +68,12 @@ function ChangeSlugModal(props: props) {
     const resume = changeSlug(values.slug);
     if (resume) {
       toast({
-        description: "Slug changed",
+        description: t("slug_changed"),
         isClosable: true,
       });
       router.push(`/resumes/${resume.id}`);
     } else {
-      form.setError("slug", { message: "Slug taken" });
+      form.setError("slug", { message: t("slug_taken") });
     }
   }
 
@@ -80,11 +82,11 @@ function ChangeSlugModal(props: props) {
       <ModalOverlay />
       <ModalContent>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <ModalHeader>Change slug</ModalHeader>
+          <ModalHeader>{t("change_slug")}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl isInvalid={isInvalid}>
-              <FormLabel>Slug</FormLabel>
+              <FormLabel>{t("slug")}</FormLabel>
               <InputGroup size="sm">
                 <InputLeftAddon borderRadius="md">resumes/</InputLeftAddon>
                 <Input
@@ -102,7 +104,7 @@ function ChangeSlugModal(props: props) {
           </ModalBody>
           <ModalFooter>
             <Button size="sm" mr="2" variant="ghost" onClick={onClose}>
-              Cancel
+              {t("cancel")}
             </Button>
             <Button
               size="sm"
@@ -111,7 +113,7 @@ function ChangeSlugModal(props: props) {
               data-cy="change-button"
               isDisabled={or(!form.formState.isDirty, isInvalid)}
             >
-              Change
+              {t("change")}
             </Button>
           </ModalFooter>
         </form>

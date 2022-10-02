@@ -9,6 +9,7 @@ import { FormProvider, UseFormReturn } from "react-hook-form";
 import { FiLayers } from "react-icons/fi";
 import { trackGoal } from "fathom-client";
 import { useLocalStorageValue } from "@react-hookz/web";
+import { useTranslation } from "next-i18next";
 
 import Logo from "../Logo";
 import HeaderPopover from "./HeaderPopover";
@@ -28,11 +29,12 @@ function ShowTemplates(props: {
   onChangeTemplate: (nextTemplate: Template) => void;
 }) {
   const { onChangeTemplate } = props;
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Button mr="2" size="sm" leftIcon={<FiLayers />} onClick={onOpen}>
-        Templates
+        {t("templates")}
       </Button>
       <TemplatesModal
         isOpen={isOpen}
@@ -45,6 +47,7 @@ function ShowTemplates(props: {
 
 function Header(props: props) {
   const { form } = props;
+  const { t } = useTranslation();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
@@ -89,7 +92,7 @@ function Header(props: props) {
         <Flex>
           <ShowTemplates onChangeTemplate={handleOnChangeTemplate} />
           <Button mr="2" size="sm" onClick={handleOnExportAsPdf}>
-            Export PDF
+            {t("export_pdf")}
           </Button>
           <FormProvider {...form}>
             <HeaderPopover

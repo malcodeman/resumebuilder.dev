@@ -29,12 +29,12 @@ type props = {
 
 function Templates(props: props) {
   const { onSubmit } = props;
+  const { t } = useTranslation();
   const templateCount = useBreakpointValue({
     base: 1,
     sm: 4,
     md: 3,
   });
-  const { t } = useTranslation();
   return (
     <Box as="section">
       <Box width={["100%", "100%", "50%"]}>

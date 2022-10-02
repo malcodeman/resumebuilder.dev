@@ -22,8 +22,8 @@ type props = {
 };
 
 function Template(props: props) {
-  const { t } = useTranslation();
   const { id, renderDescription = true, onUseTemplate } = props;
+  const { t } = useTranslation();
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"

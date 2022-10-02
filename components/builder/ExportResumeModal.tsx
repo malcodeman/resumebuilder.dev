@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { and, equals, map, or } from "ramda";
 import { useLocalStorageValue, useMediaQuery } from "@react-hookz/web";
+import { useTranslation } from "next-i18next";
 
 import { Export } from "../../types";
 
@@ -40,6 +41,7 @@ function ExportResumeModal(props: props) {
     onHtmlExport,
     onPngExport,
   } = props;
+  const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
   const [isPdfViewer] = useLocalStorageValue("isPdfViewer", false, {
     initializeWithStorageValue: false,
@@ -70,10 +72,10 @@ function ExportResumeModal(props: props) {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Export</ModalHeader>
+        <ModalHeader>{t("export")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text mb="2">Choose export format.</Text>
+          <Text mb="2">{t("export_description")}</Text>
           <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gap="4">
             {map((item) => {
               const isDisabled = getIsDisabled(item.value);

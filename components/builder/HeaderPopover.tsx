@@ -33,6 +33,7 @@ import { useLocalStorageValue } from "@react-hookz/web";
 import { equals } from "ramda";
 import { formatDistanceToNow } from "date-fns";
 import { useFormContext, useWatch } from "react-hook-form";
+import { useTranslation } from "next-i18next";
 
 import ImportDataModal from "../resumes/ImportDataModal";
 import ExportResumeModal from "./ExportResumeModal";
@@ -43,6 +44,7 @@ import LanguageSelect from "../misc/LanguageSelect";
 
 import utils from "../../lib/utils";
 import useResume from "../../hooks/useResume";
+import useDateFnsLocale from "../../hooks/useDateFnsLocale";
 
 import { Fields, Resume, Template } from "../../types";
 
@@ -59,6 +61,7 @@ type props = {
 };
 
 function FullWidth() {
+  const { t } = useTranslation();
   const [isFullWidth, setIsFullWidth] = useLocalStorageValue(
     "isFullWidth",
     false,
@@ -79,7 +82,7 @@ function FullWidth() {
         marginInlineEnd="0"
         paddingInlineEnd="3"
       >
-        Full width
+        {t("full_width")}
       </FormLabel>
       <Switch
         isChecked={isFullWidth}
@@ -91,6 +94,7 @@ function FullWidth() {
 }
 
 function DarkModeToggle() {
+  const { t } = useTranslation();
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <FormControl
@@ -107,7 +111,7 @@ function DarkModeToggle() {
         marginInlineEnd="0"
         paddingInlineEnd="3"
       >
-        Dark mode
+        {t("dark_mode")}
       </FormLabel>
       <Switch
         isChecked={equals(colorMode, "dark")}
@@ -119,6 +123,7 @@ function DarkModeToggle() {
 }
 
 function PdfViewer() {
+  const { t } = useTranslation();
   const [isPdfViewer, setIsPdfViewer] = useLocalStorageValue(
     "isPdfViewer",
     false,
@@ -141,7 +146,7 @@ function PdfViewer() {
         marginInlineEnd="0"
         paddingInlineEnd="3"
       >
-        PDF Viwer
+        {t("pdf_viewer")}
       </FormLabel>
       <Switch
         isChecked={isPdfViewer}
@@ -153,6 +158,7 @@ function PdfViewer() {
 }
 
 function DevToolsToggle() {
+  const { t } = useTranslation();
   const [devTools, setDevTools] = useLocalStorageValue("devTools", false, {
     initializeWithStorageValue: false,
   });
@@ -170,7 +176,7 @@ function DevToolsToggle() {
         marginInlineEnd="0"
         paddingInlineEnd="3"
       >
-        Dev Tools
+        {t("dev_tools")}
       </FormLabel>
       <Switch
         isChecked={devTools}
@@ -185,6 +191,7 @@ function ShowTemplates(props: {
   onChangeTemplate: (nextTemplate: Template) => void;
 }) {
   const { onChangeTemplate } = props;
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -195,7 +202,7 @@ function ShowTemplates(props: {
         leftIcon={<FiLayers />}
         onClick={onOpen}
       >
-        Templates
+        {t("templates")}
       </Button>
       <TemplatesModal
         isOpen={isOpen}
@@ -207,6 +214,7 @@ function ShowTemplates(props: {
 }
 
 function CopyLink() {
+  const { t } = useTranslation();
   const { hasCopied, onCopy } = useClipboard(
     utils.isBrowser ? window.location.href : ""
   );
@@ -218,12 +226,13 @@ function CopyLink() {
       leftIcon={<FiLink />}
       onClick={onCopy}
     >
-      {hasCopied ? "Copied" : "Copy link"}
+      {hasCopied ? t("copied") : t("copy_link")}
     </Button>
   );
 }
 
 function ChangeSlug() {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -235,7 +244,7 @@ function ChangeSlug() {
         leftIcon={<FiEdit />}
         onClick={onOpen}
       >
-        Change slug
+        {t("change_slug")}
       </Button>
       <ChangeSlugModal isOpen={isOpen} onClose={onClose} />
     </>
@@ -244,6 +253,7 @@ function ChangeSlug() {
 
 function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
   const { onImport } = props;
+  const { t } = useTranslation();
   return (
     <>
       <Button
@@ -253,13 +263,14 @@ function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
         leftIcon={<FiDatabase />}
         onClick={() => onImport(utils.generateFakeResume())}
       >
-        Generate fake data
+        <Text noOfLines={1}>{t("generate_fake_data")}</Text>
       </Button>
     </>
   );
 }
 
 function DeleteResume() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { remove } = useResume();
@@ -269,7 +280,7 @@ function DeleteResume() {
     remove();
     router.push("/resumes");
     toast({
-      description: "Resume deleted.",
+      description: t("resume_deleted"),
       isClosable: true,
     });
   }
@@ -282,7 +293,7 @@ function DeleteResume() {
         leftIcon={<FiTrash2 />}
         onClick={onOpen}
       >
-        Delete
+        {t("delete")}
       </Button>
       <DeleteResumeModal
         isOpen={isOpen}
@@ -295,6 +306,7 @@ function DeleteResume() {
 
 function ImportData(props: { onImport: (fields: Fields) => void }) {
   const { onImport } = props;
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -305,7 +317,7 @@ function ImportData(props: { onImport: (fields: Fields) => void }) {
         leftIcon={<FiUpload />}
         onClick={onOpen}
       >
-        Import
+        {t("import")}
       </Button>
       <ImportDataModal isOpen={isOpen} onClose={onClose} onImport={onImport} />
     </>
@@ -319,6 +331,7 @@ function ExportResume(props: {
   onPngExport: () => void;
 }) {
   const { onPdfExport, onJsonExport, onHtmlExport, onPngExport } = props;
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -328,7 +341,7 @@ function ExportResume(props: {
         leftIcon={<FiDownload />}
         onClick={onOpen}
       >
-        Export
+        {t("export")}
       </Button>
       <ExportResumeModal
         isOpen={isOpen}
@@ -343,6 +356,7 @@ function ExportResume(props: {
 }
 
 function Info() {
+  const { t } = useTranslation();
   const { control } = useFormContext<Resume>();
   const watch = useWatch({
     control,
@@ -350,15 +364,18 @@ function Info() {
   });
   const updatedAt = watch[0];
   const wordCount = utils.countWords(watch[1], watch[2]);
+  const { locale } = useDateFnsLocale();
   return (
     <Box>
       <Text fontSize="xs" opacity="0.5" mb="2">
-        Word count: {wordCount}
+        {t("word_count_n", { n: wordCount })}
       </Text>
       <Text fontSize="xs" opacity="0.5">
-        Edited{" "}
-        {formatDistanceToNow(updatedAt, {
-          addSuffix: true,
+        {t("edited_time", {
+          time: formatDistanceToNow(updatedAt, {
+            addSuffix: true,
+            locale,
+          }),
         })}
       </Text>
     </Box>
@@ -375,12 +392,13 @@ function HeaderPopover(props: props) {
     onPngExport,
     onChangeTemplate,
   } = props;
+  const { t } = useTranslation();
   return (
     <Popover placement="bottom-start">
       {({ isOpen }) => (
         <>
           <Tooltip
-            label={TOOLTIP_MORE_LABEL}
+            label={t("style_export_and_more")}
             aria-label={TOOLTIP_MORE_LABEL}
             isDisabled={isOpen}
             placement="bottom-start"
