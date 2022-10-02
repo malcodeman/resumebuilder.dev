@@ -30,6 +30,7 @@ import { useForm } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useRerender } from "@react-hookz/web";
+import { useTranslation } from "next-i18next";
 
 import EmojiPicker from "../misc/EmojiPicker";
 import DeleteResumeMenuItem from "./DeleteResumeMenuItem";
@@ -37,11 +38,15 @@ import DeleteResumeMenuItem from "./DeleteResumeMenuItem";
 import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
 
+import useDateFnsLocale from "../../hooks/useDateFnsLocale";
+
 import { Resume } from "../../types";
 
 function UpdatedAtText(props: { updatedAt: number }) {
+  const { t } = useTranslation();
   const { updatedAt } = props;
   const rerender = useRerender();
+  const { locale } = useDateFnsLocale();
 
   useInterval(() => {
     rerender();
@@ -49,9 +54,11 @@ function UpdatedAtText(props: { updatedAt: number }) {
 
   return (
     <Text opacity="0.5">
-      Edited{" "}
-      {formatDistanceToNow(updatedAt, {
-        addSuffix: true,
+      {t("edited_time", {
+        time: formatDistanceToNow(updatedAt, {
+          addSuffix: true,
+          locale,
+        }),
       })}
     </Text>
   );
@@ -66,6 +73,7 @@ type props = {
 };
 
 function ResumeItem(props: props) {
+  const { t } = useTranslation();
   const {
     resume,
     onDelete,
@@ -100,7 +108,7 @@ function ResumeItem(props: props) {
   function handleOnCopyLink() {
     onCopy();
     toast({
-      description: "Link copied.",
+      description: t("link_copied"),
       isClosable: true,
     });
   }
@@ -161,17 +169,17 @@ function ResumeItem(props: props) {
             />
             <MenuList>
               <MenuItem icon={<FiEdit />} onClick={() => ref.current.focus()}>
-                Rename
+                {t("rename")}
               </MenuItem>
               <MenuItem
                 icon={<FiCopy />}
                 onClick={() => onDuplicate(resume.id)}
                 data-cy="duplicate_resume_btn"
               >
-                Duplicate
+                {t("duplicate")}
               </MenuItem>
               <MenuItem icon={<FiLink />} onClick={handleOnCopyLink}>
-                Copy link
+                {t("copy_link")}
               </MenuItem>
               <DeleteResumeMenuItem onDelete={() => onDelete(resume.id)} />
             </MenuList>

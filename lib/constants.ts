@@ -7,22 +7,18 @@ const TEMPLATES: Template[] = values(Template);
 const TEMPLATES_FILTERS = [
   {
     value: "all",
-    label: "All",
     labelTransKey: "all",
   },
   {
     value: "simple",
-    label: "Simple",
     labelTransKey: "simple",
   },
   {
     value: "creative",
-    label: "Creative",
     labelTransKey: "creative",
   },
   {
     value: "professional",
-    label: "Professional",
     labelTransKey: "professional",
   },
 ];
@@ -84,7 +80,6 @@ const TEMPLATES_LIST = [
   {
     title: "Berlin",
     template: Template.berlin,
-    description: "Clean, neat template structure with stylish minimalism.",
     descriptionTransKey: "berlin_description",
     src: "/templates/berlin.png",
     tags: ["all", "creative"],
@@ -92,8 +87,6 @@ const TEMPLATES_LIST = [
   {
     title: "Tokyo",
     template: Template.tokyo,
-    description:
-      "Efficient and elegant resume template with a timeline structure.",
     descriptionTransKey: "tokyo_description",
     src: "/templates/tokyo.png",
     tags: ["all", "simple", "professional"],
@@ -101,7 +94,6 @@ const TEMPLATES_LIST = [
   {
     title: "London",
     template: Template.london,
-    description: "Robust modern resume template with bold section highlights.",
     descriptionTransKey: "london_description",
     src: "/templates/london.png",
     tags: ["all", "simple", "creative"],
@@ -109,8 +101,6 @@ const TEMPLATES_LIST = [
   {
     title: "Rio",
     template: Template.rio,
-    description:
-      "Classically structured resume template, for a powerful career history.",
     descriptionTransKey: "rio_description",
     src: "/templates/rio.png",
     tags: ["all", "simple", "professional"],
@@ -118,7 +108,6 @@ const TEMPLATES_LIST = [
   {
     title: "Nairobi",
     template: Template.nairobi,
-    description: "A touch of personality with a well-formed resume structure.",
     descriptionTransKey: "nairobi_description",
     src: "/templates/nairobi.png",
     tags: ["all", "simple", "professional"],

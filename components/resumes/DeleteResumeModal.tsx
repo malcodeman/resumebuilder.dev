@@ -8,8 +8,8 @@ import {
   AlertDialogCloseButton,
   AlertDialogFooter,
   Button,
-  Text,
 } from "@chakra-ui/react";
+import { useTranslation } from "next-i18next";
 
 type props = {
   isOpen: boolean;
@@ -18,9 +18,9 @@ type props = {
 };
 
 function DeleteResumeModal(props: props) {
+  const { t } = useTranslation();
   const { isOpen, onClose, onSubmit } = props;
   const cancelRef = React.useRef();
-
   return (
     <AlertDialog
       leastDestructiveRef={cancelRef}
@@ -29,13 +29,9 @@ function DeleteResumeModal(props: props) {
     >
       <AlertDialogOverlay />
       <AlertDialogContent>
-        <AlertDialogHeader>Delete resume</AlertDialogHeader>
+        <AlertDialogHeader>{t("delete_resume")}</AlertDialogHeader>
         <AlertDialogCloseButton />
-        <AlertDialogBody>
-          <Text mb="2">
-            Are you sure you want to delete this resume permanently?
-          </Text>
-        </AlertDialogBody>
+        <AlertDialogBody>{t("delete_resume_description")}</AlertDialogBody>
         <AlertDialogFooter>
           <Button
             ref={cancelRef}
@@ -44,10 +40,10 @@ function DeleteResumeModal(props: props) {
             variant="ghost"
             onClick={onClose}
           >
-            Cancel
+            {t("cancel")}
           </Button>
           <Button size="sm" colorScheme="red" onClick={onSubmit}>
-            Yes. Delete this resume
+            {t("yes_delete_this_resume")}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

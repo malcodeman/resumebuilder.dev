@@ -13,6 +13,7 @@ import {
 import { useRouter } from "next/router";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
 import { FiPlus, FiUpload } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
 
 import { Fields } from "../../types";
 
@@ -21,6 +22,7 @@ import useResumes from "../../hooks/useResumes";
 import ImportDataModal from "./ImportDataModal";
 
 function NewButton() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { createNew } = useResumes();
   const isMediumDevice = useMediaQuery("(min-width: 30em)");
@@ -47,7 +49,7 @@ function NewButton() {
       <PopoverTrigger>
         {isMediumDevice ? (
           <Button mr="-px" data-cy="new_resume_btn" onClick={handleOnCreateNew}>
-            New
+            {t("new")}
           </Button>
         ) : (
           <IconButton
@@ -61,7 +63,7 @@ function NewButton() {
       <PopoverContent width="unset">
         <PopoverBody display="flex" alignItems="center">
           <Text mr="2" fontSize="sm">
-            Create a resume
+            {t("create_resume")}
           </Text>
           <Kbd>N</Kbd>
         </PopoverBody>

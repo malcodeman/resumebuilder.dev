@@ -10,6 +10,7 @@ import { FiLayers, FiPlus, FiUpload } from "react-icons/fi";
 import { map } from "ramda";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import { useTranslation } from "next-i18next";
 
 import ImportDataModal from "./ImportDataModal";
 
@@ -18,6 +19,7 @@ import { Fields } from "../../types";
 import useResumes from "../../hooks/useResumes";
 
 function EmptyResumes() {
+  const { t } = useTranslation();
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"
@@ -32,24 +34,24 @@ function EmptyResumes() {
     {
       color: green,
       icon: <FiPlus size={48} color={green} />,
-      heading: "Start from scratch",
-      text: "Create a new blank resume with custom sections and templates.",
+      headingTransKey: "start_from_scratch",
+      textTransKey: "start_from_scratch_description",
       dataCy: "start-from-scratch",
       onClick: () => handleOnNew(),
     },
     {
       color: blue,
       icon: <FiUpload size={48} color={blue} />,
-      heading: "Quickly upload",
-      text: "Easily migrate your existing data in just a few seconds.",
+      headingTransKey: "quickly_upload",
+      textTransKey: "quickly_upload_description",
       dataCy: "quickly-upload",
       onClick: () => onOpen(),
     },
     {
       color: purple,
       icon: <FiLayers size={48} color={purple} />,
-      heading: "Start with templates",
-      text: "Select a template to get started and customize as you go.",
+      headingTransKey: "start_with_templates",
+      textTransKey: "start_with_templates_description",
       dataCy: "start-with-templates",
       onClick: () => router.push("/templates"),
     },
@@ -77,7 +79,7 @@ function EmptyResumes() {
             <Flex
               as={motion.div}
               whileHover={{ scale: 1.1 }}
-              key={item.heading}
+              key={item.headingTransKey}
               paddingX="4"
               paddingY="8"
               cursor="pointer"
@@ -102,9 +104,9 @@ function EmptyResumes() {
                 {item.icon}
               </Flex>
               <Heading mb="2" fontSize="md">
-                {item.heading}
+                {t(item.headingTransKey)}
               </Heading>
-              <Text>{item.text}</Text>
+              <Text>{t(item.textTransKey)}</Text>
             </Flex>
           ),
           ITEMS

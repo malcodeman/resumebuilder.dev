@@ -47,6 +47,7 @@ import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { createColumnHelper, VisibilityState } from "@tanstack/react-table";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 import Layout from "../../components/Layout";
 import ResumeItem from "../../components/resumes/ResumeItem";
@@ -55,6 +56,7 @@ import Table from "../../components/misc/Table";
 
 import useResumes from "../../hooks/useResumes";
 import useDashboard from "../../hooks/useDashboard";
+import useDateFnsLocale from "../../hooks/useDateFnsLocale";
 
 import { Resume, View } from "../../types";
 
@@ -63,6 +65,7 @@ import DeleteResumeMenuItem from "../../components/resumes/DeleteResumeMenuItem"
 import CreateNewResumeButtonGroup from "../../components/resumes/CreateNewResumeButtonGroup";
 
 function ResumeGrid() {
+  const { t } = useTranslation();
   const { resumes, duplicate, remove, changeTitle, changeIcon, move } =
     useResumes({ initializeWithStorageValue: false });
   const sensors = useSensors(
@@ -83,22 +86,27 @@ function ResumeGrid() {
     (id: string) => {
       remove(id);
       toast({
-        description: "Resume deleted.",
+        description: t("resume_deleted"),
         isClosable: true,
       });
     },
-    [remove, toast]
+    [remove, toast, t]
   );
+  const { locale } = useDateFnsLocale();
   const columns = React.useMemo(
     () => [
       columnHelper.accessor("title", {
+        header: t("title"),
         cell: (info) => info.getValue(),
       }),
       columnHelper.accessor("updatedAt", {
-        header: "Edited",
+        header: t("edited"),
         cell: (info) =>
-          formatDistanceToNow(info.getValue(), {
-            addSuffix: true,
+          t("edited_time", {
+            time: formatDistanceToNow(info.getValue(), {
+              addSuffix: true,
+              locale,
+            }),
           }),
       }),
       columnHelper.accessor("id", {
@@ -107,7 +115,7 @@ function ResumeGrid() {
           <Stack spacing="2" direction="row">
             <Link href={`/resumes/${info.getValue()}`} passHref>
               <Button display={["none", "inline-flex"]} size="sm">
-                Open
+                {t("open")}
               </Button>
             </Link>
             <Menu>
@@ -120,14 +128,14 @@ function ResumeGrid() {
               <MenuList>
                 <Link href={`/resumes/${info.getValue()}`} passHref>
                   <MenuItem display={["flex", "none"]} icon={<FiLink />}>
-                    Open
+                    {t("open")}
                   </MenuItem>
                 </Link>
                 <MenuItem
                   onClick={() => duplicate(info.getValue())}
                   icon={<FiCopy />}
                 >
-                  Duplicate
+                  {t("duplicate")}
                 </MenuItem>
                 <DeleteResumeMenuItem
                   onDelete={() => handleOnDelete(info.getValue())}
@@ -138,7 +146,7 @@ function ResumeGrid() {
         ),
       }),
     ],
-    [columnHelper, duplicate, handleOnDelete]
+    [columnHelper, duplicate, handleOnDelete, locale, t]
   );
 
   React.useEffect(() => {
@@ -175,7 +183,7 @@ function ResumeGrid() {
 
   function renderResumes() {
     if (isEmpty(filteredResumes)) {
-      return <Text>No resumes found</Text>;
+      return <Text>{t("no_resumes_found")}</Text>;
     }
     if (equals(view, "grid")) {
       return (
@@ -219,7 +227,7 @@ function ResumeGrid() {
       <Flex mb="4">
         <SearchInput
           mr="2"
-          placeholder={`Search ${length(resumes)} resumes...`}
+          placeholder={t("search_n_resumes", { n: length(resumes) })}
           value={search}
           onChangeValue={(nextValue) => setSearch(nextValue)}
           onClear={() => setSearch("")}

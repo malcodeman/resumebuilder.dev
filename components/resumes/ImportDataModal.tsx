@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { isEmpty, map } from "ramda";
 import { FiChevronLeft } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
 
 import FileUploader from "../misc/FileUploader";
 import ImportFromGithub from "./importFromGithub";
@@ -42,13 +43,14 @@ const IMPORTS: { label: string; value: Source; isDisabled: boolean }[] = [
   { label: "JSON Resume", value: "jsonResume", isDisabled: false },
   { label: "JSON", value: "json", isDisabled: false },
   { label: "GitHub", value: "github", isDisabled: false },
-  { label: "Paste data", value: "pasteData", isDisabled: false },
+  { label: "paste_data", value: "pasteData", isDisabled: false },
   { label: "CSV", value: "csv", isDisabled: true },
   { label: "XML", value: "xml", isDisabled: true },
   { label: "PDF", value: "pdf", isDisabled: true },
 ];
 
 function ImportDataModal(props: Props) {
+  const { t } = useTranslation();
   const { isOpen, onClose, onImport } = props;
   const [source, setSource] = React.useState<Source | "">("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -79,7 +81,7 @@ function ImportDataModal(props: Props) {
       onClose();
     } catch (error) {
       toast({
-        description: "Something went wrong.",
+        description: t("something_went_wrong"),
         status: "error",
         isClosable: true,
       });
@@ -98,10 +100,7 @@ function ImportDataModal(props: Props) {
       case "":
         return (
           <>
-            <Text mb="2">
-              You can import resume by uploading a file or copying and pasting
-              data directly. Choose one of the below sources to get started.
-            </Text>
+            <Text mb="2">{t("import_data_description")}</Text>
             <Grid
               gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]}
               gap="4"
@@ -116,7 +115,7 @@ function ImportDataModal(props: Props) {
                     data-cy={`import-${item.value}`}
                     onClick={() => setSource(item.value)}
                   >
-                    {item.label}
+                    {t(item.label)}
                   </Button>
                 );
               }, IMPORTS)}
@@ -138,7 +137,7 @@ function ImportDataModal(props: Props) {
       <ModalContent>
         <ModalHeader>
           {isEmpty(source) ? (
-            <Text>Import data</Text>
+            <Text>{t("import_data")}</Text>
           ) : (
             <Button
               size="sm"
@@ -146,7 +145,7 @@ function ImportDataModal(props: Props) {
               leftIcon={<FiChevronLeft />}
               onClick={() => setSource("")}
             >
-              Back
+              {t("back")}
             </Button>
           )}
         </ModalHeader>

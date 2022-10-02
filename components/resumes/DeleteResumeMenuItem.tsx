@@ -1,5 +1,6 @@
 import { MenuItem, useDisclosure } from "@chakra-ui/react";
 import { FiTrash2 } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
 
 import DeleteResumeModal from "./DeleteResumeModal";
 
@@ -8,6 +9,7 @@ type props = {
 };
 
 function DeleteResumeMenuItem(props: props) {
+  const { t } = useTranslation();
   const { onDelete } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -17,7 +19,7 @@ function DeleteResumeMenuItem(props: props) {
         onClick={onOpen}
         data-cy="delete_resume_btn"
       >
-        Delete
+        {t("delete")}
       </MenuItem>
       <DeleteResumeModal
         isOpen={isOpen}
