@@ -9,6 +9,7 @@ import { FiHome } from "react-icons/fi";
 import { FormProvider, UseFormReturn } from "react-hook-form";
 import { trackGoal } from "fathom-client";
 import { useLocalStorageValue } from "@react-hookz/web";
+import { useTranslation } from "next-i18next";
 
 import NavLink from "../misc/NavLink";
 import HeaderPopover from "./HeaderPopover";
@@ -25,6 +26,7 @@ type props = {
 
 function HeaderMobile(props: props) {
   const { form } = props;
+  const { t } = useTranslation();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px -2px 0px 0px",
@@ -68,7 +70,7 @@ function HeaderMobile(props: props) {
           <NavLink href="/resumes">
             <Flex flexDirection="column" alignItems="center">
               <FiHome />
-              <Text fontSize="xs">Home</Text>
+              <Text fontSize="xs">{t("home")}</Text>
             </Flex>
           </NavLink>
           <ResumeTitle form={form} marginX="2" />

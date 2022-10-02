@@ -421,10 +421,7 @@ function HeaderPopover(props: props) {
                 <DarkModeToggle />
                 <PdfViewer />
                 <DevToolsToggle />
-                <Divider
-                  marginY="2"
-                  display={{ base: "none", lg: "initial" }}
-                />
+                <Divider marginY="2" />
                 <LanguageSelect mb="2" />
                 <ShowTemplates onChangeTemplate={onChangeTemplate} />
                 <CopyLink />

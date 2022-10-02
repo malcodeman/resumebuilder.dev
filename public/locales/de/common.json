@@ -104,6 +104,7 @@
   "dev_tools": "Entwicklungstools",
   "pdf_viewer": "PDF-Viewer",
   "dark_mode": "Dunkler Modus",
+  "light_mode": "Lichtmodus",
   "full_width": "Gesamtbreite",
   "change": "Veränderung",
   "slug": "Schnecke",
@@ -154,5 +155,8 @@
   "role": "Rolle",
   "subtitle": "Untertitel",
   "delete_duplicate_and_more": "Löschen, duplizieren und mehr...",
-  "add_item": "Fügen Sie ein Element hinzu"
+  "add_item": "Fügen Sie ein Element hinzu",
+  "home": "Heim",
+  "downloads": "Downloads",
+  "dashboard": "Armaturenbrett"
 }

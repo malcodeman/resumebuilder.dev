@@ -104,6 +104,7 @@
   "dev_tools": "Dev tools",
   "pdf_viewer": "PDF viewer",
   "dark_mode": "Dark mode",
+  "light_mode": "Light mode",
   "full_width": "Full width",
   "change": "Change",
   "slug": "Slug",
@@ -154,5 +155,8 @@
   "role": "Role",
   "subtitle": "Subtitle",
   "delete_duplicate_and_more": "Delete, duplicate, and more...",
-  "add_item": "Add an item"
+  "add_item": "Add an item",
+  "home": "Home",
+  "downloads": "Downloads",
+  "dashboard": "Dashboard"
 }

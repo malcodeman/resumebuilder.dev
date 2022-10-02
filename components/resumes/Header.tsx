@@ -7,6 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 import useDashboard from "../../hooks/useDashboard";
 
@@ -16,6 +17,7 @@ import LanguageSelect from "../misc/LanguageSelect";
 import UserMenu from "./UserMenu";
 
 function Header() {
+  const { t } = useTranslation();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
@@ -42,13 +44,13 @@ function Header() {
               <Logo href={homeHref} />
             </Box>
             <NavLink href={homeHref} mr="4">
-              <Text>Home</Text>
+              <Text>{t("home")}</Text>
             </NavLink>
             <NavLink href="/templates" mr="4">
-              <Text>Templates</Text>
+              <Text>{t("templates")}</Text>
             </NavLink>
             <NavLink href="/downloads" mr="4">
-              <Text>Downloads</Text>
+              <Text>{t("downloads")}</Text>
             </NavLink>
           </Flex>
           {dashboard ? (
@@ -61,7 +63,7 @@ function Header() {
               <LanguageSelect mr="2" />
               <Link href="/resumes" passHref>
                 <Button size="sm" data-cy="dashboard-button">
-                  Dashboard
+                  {t("dashboard")}
                 </Button>
               </Link>
             </Flex>

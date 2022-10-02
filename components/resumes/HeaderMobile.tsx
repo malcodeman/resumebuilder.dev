@@ -6,6 +6,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FiFileText, FiHome, FiLayers } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
 
 import useDashboard from "../../hooks/useDashboard";
 
@@ -13,6 +14,7 @@ import NavLink from "../misc/NavLink";
 import UserMenu from "./UserMenu";
 
 function HeaderMobile() {
+  const { t } = useTranslation();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px -2px 0px 0px",
@@ -37,13 +39,13 @@ function HeaderMobile() {
           <NavLink href={homeHref}>
             <Flex flexDirection="column" alignItems="center">
               <FiHome />
-              <Text fontSize="xs">Home</Text>
+              <Text fontSize="xs">{t("home")}</Text>
             </Flex>
           </NavLink>
           <NavLink href="/templates">
             <Flex flexDirection="column" alignItems="center">
               <FiLayers />
-              <Text fontSize="xs">Templates</Text>
+              <Text fontSize="xs">{t("templates")}</Text>
             </Flex>
           </NavLink>
           {dashboard ? (
@@ -52,7 +54,7 @@ function HeaderMobile() {
             <NavLink href="/resumes">
               <Flex flexDirection="column" alignItems="center">
                 <FiFileText />
-                <Text fontSize="xs">Dashboard</Text>
+                <Text fontSize="xs">{t("dashboard")}</Text>
               </Flex>
             </NavLink>
           )}
