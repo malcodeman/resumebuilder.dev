@@ -17,6 +17,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { and, not, equals, replace, concat } from "ramda";
+import { useTranslation } from "next-i18next";
 
 import { Section } from "../../types";
 
@@ -59,6 +60,7 @@ function Header({ index, nestIndex, isDragging, onRemove, onDuplicate }) {
 }
 
 function Description({ index, nestIndex, isEmployment }) {
+  const { t } = useTranslation();
   const { control, register, getValues, setValue } = useFormContext();
   const inputName = `section.${index}.nested.${nestIndex}.description`;
   const description = useWatch({
@@ -81,7 +83,7 @@ function Description({ index, nestIndex, isEmployment }) {
     <>
       <GridItem colSpan={2}>
         <FormControl>
-          <FormLabel>Description</FormLabel>
+          <FormLabel>{t("description")}</FormLabel>
           <Textarea
             variant="filled"
             size="sm"
@@ -91,7 +93,7 @@ function Description({ index, nestIndex, isEmployment }) {
           />
           {isEmployment ? (
             <FormHelperText onClick={phrasesModal.onOpen}>
-              Add pre-written phrases
+              {t("add_pre_written_phrases")}
             </FormHelperText>
           ) : null}
         </FormControl>
@@ -109,37 +111,38 @@ function Description({ index, nestIndex, isEmployment }) {
   );
 }
 
-function getTitleLabel(name: Section) {
+function getTitleLabelTransKey(name: Section) {
   switch (name) {
     case "employment":
     case "internships":
-      return "Company";
+      return "company";
     case "education":
-      return "School";
+      return "school";
     case "projects":
-      return "Name";
+      return "name";
     default:
-      return "Title";
+      return "title";
   }
 }
 
-function getSubtitleLabel(name: Section) {
+function getSubtitleLabelTransKey(name: Section) {
   switch (name) {
     case "employment":
     case "internships":
-      return "Job title";
+      return "job_title";
     case "education":
-      return "Degree";
+      return "degree";
     case "projects":
-      return "Role";
+      return "role";
     default:
-      return "Subtitle";
+      return "subtitle";
   }
 }
 
 function StandardSectionBody(props: props) {
   const { id, index, nestIndex, name, isDragDisabled, onDuplicate, onRemove } =
     props;
+  const { t } = useTranslation();
   const {
     attributes,
     listeners,
@@ -186,7 +189,7 @@ function StandardSectionBody(props: props) {
                 <Grid templateColumns="1fr 1fr" gap="4">
                   <GridItem colSpan={2}>
                     <FormControl>
-                      <FormLabel>{getTitleLabel(name)}</FormLabel>
+                      <FormLabel>{t(getTitleLabelTransKey(name))}</FormLabel>
                       <Input
                         variant="filled"
                         size="sm"
@@ -198,7 +201,7 @@ function StandardSectionBody(props: props) {
                   </GridItem>
                   <GridItem colSpan={2}>
                     <FormControl>
-                      <FormLabel>{getSubtitleLabel(name)}</FormLabel>
+                      <FormLabel>{t(getSubtitleLabelTransKey(name))}</FormLabel>
                       <Input
                         variant="filled"
                         size="sm"
@@ -210,7 +213,7 @@ function StandardSectionBody(props: props) {
                   </GridItem>
                   <GridItem colSpan={{ base: 2, md: 1 }}>
                     <FormControl>
-                      <FormLabel>Website</FormLabel>
+                      <FormLabel>{t("website")}</FormLabel>
                       <Input
                         variant="filled"
                         size="sm"
@@ -222,7 +225,7 @@ function StandardSectionBody(props: props) {
                   </GridItem>
                   <GridItem colSpan={{ base: 2, md: 1 }}>
                     <FormControl>
-                      <FormLabel>City</FormLabel>
+                      <FormLabel>{t("city")}</FormLabel>
                       <Input
                         variant="filled"
                         size="sm"
@@ -234,7 +237,7 @@ function StandardSectionBody(props: props) {
                   </GridItem>
                   <GridItem colSpan={{ base: 2, md: 1 }}>
                     <FormControl>
-                      <FormLabel>Start date</FormLabel>
+                      <FormLabel>{t("start_date")}</FormLabel>
                       <Input
                         variant="filled"
                         size="sm"
@@ -246,7 +249,7 @@ function StandardSectionBody(props: props) {
                   </GridItem>
                   <GridItem colSpan={{ base: 2, md: 1 }}>
                     <FormControl>
-                      <FormLabel>End date</FormLabel>
+                      <FormLabel>{t("end_date")}</FormLabel>
                       <Input
                         variant="filled"
                         size="sm"

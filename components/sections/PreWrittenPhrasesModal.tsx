@@ -12,6 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { equals, filter, includes, length, map, toLower } from "ramda";
+import { useTranslation } from "next-i18next";
 
 import { Phrase } from "../../types";
 
@@ -27,6 +28,7 @@ type Props = {
 
 function PreWrittenPhrasesModal(props: Props) {
   const { isOpen, value, phrases, onClose, onChange } = props;
+  const { t } = useTranslation();
   const [name, setName] = React.useState("");
   const filteredPhrases = filter(
     (item) => includes(toLower(name), toLower(item.phrase)),
@@ -37,19 +39,19 @@ function PreWrittenPhrasesModal(props: Props) {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader fontSize="md">Pre-written phrases</ModalHeader>
+        <ModalHeader fontSize="md">{t("pre_written_phrases")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <SearchInput
             mb="2"
             value={name}
-            placeholder={`Search ${length(phrases)} phrases...`}
+            placeholder={t("search_n_phrases", { n: length(phrases) })}
             onChangeValue={(nextValue) => setName(nextValue)}
             onClear={() => setName("")}
           />
           <Stack spacing="2">
             {equals(length(filteredPhrases), 0) ? (
-              <Text>No phrases found</Text>
+              <Text>{t("no_phrases_found")}</Text>
             ) : null}
             {map((item) => {
               const isChecked = includes(item.phrase, value);

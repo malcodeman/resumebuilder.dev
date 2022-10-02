@@ -7,6 +7,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "next-i18next";
 
 import { Section } from "../../types";
 
@@ -15,21 +16,22 @@ type props = {
   name: Section;
 };
 
-function getHelperText(name: Section) {
+function getHelperTextTransKey(name: Section) {
   switch (name) {
     case "skills":
-      return "Add one skill on each line";
+      return "add_one_skill_on_each_line";
     case "hobbies":
-      return "Add one hobbie on each line";
+      return "add_one_hobbie_on_each_line";
     case "languages":
-      return "Add one language on each line";
+      return "add_one_language_on_each_line";
     default:
-      return "Add one item on each line";
+      return "add_one_item_on_each_line";
   }
 }
 
 function TagListSectionBody(props: props) {
   const { index, name } = props;
+  const { t } = useTranslation();
   const { register } = useFormContext();
 
   return (
@@ -42,7 +44,7 @@ function TagListSectionBody(props: props) {
               size="sm"
               {...register(`section.${index}.tags` as const)}
             />
-            <FormHelperText>{getHelperText(name)}</FormHelperText>
+            <FormHelperText>{t(getHelperTextTransKey(name))}</FormHelperText>
           </FormControl>
         </GridItem>
       </Grid>

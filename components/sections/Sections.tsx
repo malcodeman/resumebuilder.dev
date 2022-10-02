@@ -15,6 +15,7 @@ import {
 import { SortableContext } from "@dnd-kit/sortable";
 import { useUpdateEffect, useMediaQuery } from "@react-hookz/web";
 import { findIndex, propEq, isEmpty, find } from "ramda";
+import { useTranslation } from "next-i18next";
 
 import PersonalDetailsSection from "../../components/sections/PersonalDetailsSection";
 import TagListSection from "../../components/sections/TagListSection";
@@ -29,6 +30,7 @@ import useResume from "../../hooks/useResume";
 import { Resume, Section } from "../../types";
 
 function SectionNewButton({ onSubmit }) {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function handleOnSubmit(data: { label: string; name: Section }) {
@@ -52,7 +54,7 @@ function SectionNewButton({ onSubmit }) {
           onClick={onOpen}
           justifyContent="flex-start"
         >
-          New section
+          {t("new_section")}
         </Button>
       </Box>
       <AddSectionModal

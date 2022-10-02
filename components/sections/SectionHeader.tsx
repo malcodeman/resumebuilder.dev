@@ -22,8 +22,9 @@ import {
   FiChevronDown,
   FiChevronUp,
 } from "react-icons/fi";
-import { isNil } from "ramda";
+import { and, isNil } from "ramda";
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "next-i18next";
 
 type props = {
   label: string;
@@ -38,11 +39,12 @@ const TOOLTIP_MORE_LABEL = "Delete, duplicate, and more...";
 
 function SectionHeader(props: props) {
   const { label, index, onAppend, onDuplicate, onRemove } = props;
+  const { t } = useTranslation();
   const isStandardSection = !isNil(onAppend);
   const isAbout =
     isNil(index) && isNil(onAppend) && isNil(onDuplicate) && isNil(onRemove);
   const isNested = isNil(index);
-  const isEditable = !isAbout && !isNested;
+  const isEditable = and(!isAbout, !isNested);
   const ref = React.useRef<HTMLSpanElement>(null);
   const { register } = useFormContext();
   const { isOpen } = useAccordionItemState();
@@ -83,7 +85,7 @@ function SectionHeader(props: props) {
           </Editable>
         ) : (
           <Box noOfLines={1} flex="1" mr="2">
-            {label || "Untitled"}
+            {label || t("untitled")}
           </Box>
         )}
         {isAbout ? (
@@ -93,7 +95,7 @@ function SectionHeader(props: props) {
             {({ isOpen }) => (
               <>
                 <Tooltip
-                  label={TOOLTIP_MORE_LABEL}
+                  label={t("delete_duplicate_and_more")}
                   aria-label={TOOLTIP_MORE_LABEL}
                   isDisabled={isOpen}
                 >
@@ -113,10 +115,10 @@ function SectionHeader(props: props) {
                   onPointerDown={(e) => e.preventDefault()}
                 >
                   <MenuItem onClick={onRemove} icon={<FiTrash2 />}>
-                    Delete
+                    {t("delete")}
                   </MenuItem>
                   <MenuItem onClick={onDuplicate} icon={<FiCopy />}>
-                    Duplicate
+                    {t("duplicate")}
                   </MenuItem>
                   {isNested ? (
                     <></>
@@ -125,7 +127,7 @@ function SectionHeader(props: props) {
                       onClick={() => ref.current.focus()}
                       icon={<FiEdit />}
                     >
-                      Rename
+                      {t("rename")}
                     </MenuItem>
                   )}
                 </MenuList>
@@ -134,7 +136,7 @@ function SectionHeader(props: props) {
           </Menu>
         )}
         {isStandardSection ? (
-          <Tooltip label={TOOLTIP_ADD_LABEL} aria-label={TOOLTIP_ADD_LABEL}>
+          <Tooltip label={t("add_item")} aria-label={TOOLTIP_ADD_LABEL}>
             <IconButton
               size="xs"
               aria-label={TOOLTIP_ADD_LABEL}

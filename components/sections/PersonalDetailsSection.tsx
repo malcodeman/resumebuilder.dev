@@ -15,6 +15,7 @@ import {
 import { FiMail, FiPhone } from "react-icons/fi";
 import { useFormContext, useWatch } from "react-hook-form";
 import { concat, replace } from "ramda";
+import { useTranslation } from "next-i18next";
 
 import phrases from "../../lib/phrases";
 
@@ -22,6 +23,7 @@ import SectionHeader from "./SectionHeader";
 import PreWrittenPhrasesModal from "./PreWrittenPhrasesModal";
 
 function Summary() {
+  const { t } = useTranslation();
   const { control, register, getValues, setValue } = useFormContext();
   const phrasesModal = useDisclosure();
   const inputName = "about.summary";
@@ -44,10 +46,10 @@ function Summary() {
     <>
       <GridItem colSpan={2}>
         <FormControl>
-          <FormLabel>Summary</FormLabel>
+          <FormLabel>{t("summary")}</FormLabel>
           <Textarea variant="filled" size="sm" {...register("about.summary")} />
           <FormHelperText onClick={phrasesModal.onOpen}>
-            Add pre-written phrases
+            {t("add_pre_written_phrases")}
           </FormHelperText>
         </FormControl>
       </GridItem>
@@ -63,6 +65,7 @@ function Summary() {
 }
 
 function PersonalDetailsSection() {
+  const { t } = useTranslation();
   const { register } = useFormContext();
 
   return (
@@ -71,18 +74,18 @@ function PersonalDetailsSection() {
       cursor="pointer"
       _last={{ borderBottomWidth: 0 }}
     >
-      <SectionHeader label="Personal details" />
+      <SectionHeader label={t("personal_details")} />
       <AccordionPanel>
         <Grid templateColumns="1fr 1fr" gap="4">
           <GridItem colSpan={2}>
             <FormControl>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>{t("title")}</FormLabel>
               <Input variant="filled" size="sm" {...register("about.title")} />
             </FormControl>
           </GridItem>
           <GridItem colSpan={{ base: 2, md: 1 }}>
             <FormControl>
-              <FormLabel>First name</FormLabel>
+              <FormLabel>{t("first_name")}</FormLabel>
               <Input
                 variant="filled"
                 size="sm"
@@ -92,7 +95,7 @@ function PersonalDetailsSection() {
           </GridItem>
           <GridItem colSpan={{ base: 2, md: 1 }}>
             <FormControl>
-              <FormLabel>Last name</FormLabel>
+              <FormLabel>{t("last_name")}</FormLabel>
               <Input
                 variant="filled"
                 size="sm"
@@ -113,7 +116,7 @@ function PersonalDetailsSection() {
           </GridItem>
           <GridItem colSpan={{ base: 2, md: 1 }}>
             <FormControl>
-              <FormLabel>Phone</FormLabel>
+              <FormLabel>{t("phone")}</FormLabel>
               <InputGroup size="sm">
                 <InputLeftElement>
                   <FiPhone />
@@ -124,7 +127,7 @@ function PersonalDetailsSection() {
           </GridItem>
           <GridItem colSpan={2}>
             <FormControl>
-              <FormLabel>Website</FormLabel>
+              <FormLabel>{t("website")}</FormLabel>
               <Input
                 variant="filled"
                 size="sm"
@@ -134,13 +137,13 @@ function PersonalDetailsSection() {
           </GridItem>
           <GridItem colSpan={{ base: 2, md: 1 }}>
             <FormControl>
-              <FormLabel>City</FormLabel>
+              <FormLabel>{t("city")}</FormLabel>
               <Input variant="filled" size="sm" {...register("about.city")} />
             </FormControl>
           </GridItem>
           <GridItem colSpan={{ base: 2, md: 1 }}>
             <FormControl>
-              <FormLabel>Country</FormLabel>
+              <FormLabel>{t("country")}</FormLabel>
               <Input
                 variant="filled"
                 size="sm"
