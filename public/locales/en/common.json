@@ -35,5 +35,17 @@
   "build_for_free": "Build for free",
   "unlimited_resumes": "Unlimited resumes",
   "unlimited_sections": "Unlimited sections",
-  "unlimited_downloads": "Unlimited downloads"
+  "unlimited_downloads": "Unlimited downloads",
+  "berlin_description": "Clean, neat template structure with stylish minimalism.",
+  "tokyo_description": "Efficient and elegant resume template with a timeline structure.",
+  "london_description": "Robust modern resume template with bold section highlights.",
+  "rio_description": "Classically structured resume template, for a powerful career history.",
+  "nairobi_description": "A touch of personality with a well-formed resume structure.",
+  "no_templates_found": "No templates found",
+  "use_template": "Use template",
+  "all": "All",
+  "simple": "Simple",
+  "creative": "Creative",
+  "professional": "Professional",
+  "search_n_templates": "Search {{n}} templates..."
 }

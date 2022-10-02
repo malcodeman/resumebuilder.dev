@@ -35,5 +35,17 @@
   "build_for_free": "Kostenlos bauen",
   "unlimited_resumes": "Unbegrenzte Lebensläufe",
   "unlimited_sections": "Unbegrenzte Abschnitte",
-  "unlimited_downloads": "Unbegrenzte Downloads"
+  "unlimited_downloads": "Unbegrenzte Downloads",
+  "berlin_description": "Saubere, ordentliche Vorlagenstruktur mit stilvollem Minimalismus.",
+  "tokyo_description": "Effiziente und elegante Lebenslaufvorlage mit Zeitleistenstruktur.",
+  "london_description": "Robuste, moderne Lebenslaufvorlage mit fetten Abschnittshervorhebungen.",
+  "rio_description": "Klassisch strukturierte Lebenslaufvorlage für einen aussagekräftigen Werdegang.",
+  "nairobi_description": "Ein Hauch von Persönlichkeit mit einer wohlgeformten Lebenslaufstruktur.",
+  "no_templates_found": "Keine Vorlagen gefunden",
+  "use_template": "Benutze Template",
+  "all": "Alle",
+  "simple": "Einfach",
+  "creative": "Kreativ",
+  "professional": "Fachmann",
+  "search_n_templates": "Suche {{n}} Vorlagen..."
 }

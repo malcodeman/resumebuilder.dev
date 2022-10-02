@@ -3,6 +3,8 @@ import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 import Layout from "../components/Layout";
 
@@ -20,6 +22,7 @@ import Template from "../components/templates/Template";
 import useResumes from "../hooks/useResumes";
 
 function Templates() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { createNew } = useResumes();
   const [activeFilter, setActiveFilter] = React.useState(
@@ -53,7 +56,9 @@ function Templates() {
         <SearchInput
           mb="4"
           value={template}
-          placeholder={`Search ${length(filteredTemplatesByTags)} templates...`}
+          placeholder={t("search_n_templates", {
+            n: length(filteredTemplatesByTags),
+          })}
           onChangeValue={(nextValue) => setTemplate(nextValue)}
           onClear={() => setTemplate("")}
         />
@@ -66,14 +71,14 @@ function Templates() {
                 data-cy={`template-filters-${item.value}`}
                 onClick={() => setActiveFilter(item.value)}
               >
-                {item.label}
+                {t(item.labelTransKey)}
               </Button>
             ),
             TEMPLATES_FILTERS
           )}
         </ButtonGroup>
         {isEmpty(filteredTemplatesBySearch) ? (
-          <Text>No templates found</Text>
+          <Text>{t("no_templates_found")}</Text>
         ) : (
           <></>
         )}
@@ -96,6 +101,14 @@ function Templates() {
       </Layout>
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }
 
 export default Templates;

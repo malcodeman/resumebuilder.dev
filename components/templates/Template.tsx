@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { equals, find } from "ramda";
+import { useTranslation } from "next-i18next";
 
 import { TEMPLATES_LIST } from "../../lib/constants";
 
@@ -21,6 +22,7 @@ type props = {
 };
 
 function Template(props: props) {
+  const { t } = useTranslation();
   const { id, renderDescription = true, onUseTemplate } = props;
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
@@ -47,11 +49,11 @@ function Template(props: props) {
           data-cy="use-template-button"
           onClick={() => onUseTemplate(template.template)}
         >
-          Use template
+          {t("use_template")}
         </Button>
       </Flex>
       {renderDescription ? (
-        <Text opacity="0.5">{template.description}</Text>
+        <Text opacity="0.5">{t(template.descriptionTransKey)}</Text>
       ) : (
         <></>
       )}
