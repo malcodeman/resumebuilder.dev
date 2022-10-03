@@ -1,10 +1,17 @@
 import React from "react";
 import { useToast } from "@chakra-ui/toast";
 import { length } from "ramda";
+import { useMountEffect } from "@react-hookz/web";
+import { useTranslation } from "next-i18next";
 
 import utils from "../lib/utils";
 
 const TOAST_ID = "onSave";
+const SAVE_MESSAGE_TRANS_KEYS = [
+  "save_message_description_1",
+  "save_message_description_2",
+  "save_message_description_3",
+];
 
 type props = {
   description?: string;
@@ -13,22 +20,20 @@ type props = {
 };
 
 function useAutoSaveToast(props: props) {
-  const saveMessages = [
-    "Your work is saved automatically.",
-    "💾 No need to hit save. Your changes are saved automatically.",
-    "Don't worry about this save stuff. We got you. 💪",
-  ];
   const {
-    description = saveMessages[utils.getRandomInt(0, length(saveMessages))],
+    description = SAVE_MESSAGE_TRANS_KEYS[
+      utils.getRandomInt(0, length(SAVE_MESSAGE_TRANS_KEYS))
+    ],
     duration = 1000,
     isClosable = true,
   } = props;
+  const { t } = useTranslation();
   const [keyboardJs, setKeyboardJs] = React.useState(null);
   const toast = useToast();
 
-  React.useEffect(() => {
+  useMountEffect(() => {
     import("keyboardjs").then((k) => setKeyboardJs(k.default || k));
-  }, []);
+  });
 
   React.useEffect(() => {
     if (!keyboardJs) {
@@ -40,7 +45,7 @@ function useAutoSaveToast(props: props) {
       if (!toast.isActive(TOAST_ID)) {
         toast({
           id: TOAST_ID,
-          description,
+          description: t(description),
           duration,
           isClosable,
         });
@@ -51,9 +56,9 @@ function useAutoSaveToast(props: props) {
     keyboardJs.bind(`command + s`, handleOnSave);
     return () => {
       keyboardJs.unbind(`ctrl + s`, handleOnSave);
-      keyboardJs.bind(`command + s`, handleOnSave);
+      keyboardJs.unbind(`command + s`, handleOnSave);
     };
-  }, [keyboardJs, toast, description, duration, isClosable]);
+  }, [keyboardJs, toast, description, duration, isClosable, t]);
 }
 
 export default useAutoSaveToast;

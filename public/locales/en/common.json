@@ -159,5 +159,8 @@
   "home": "Home",
   "downloads": "Downloads",
   "dashboard": "Dashboard",
-  "clear_local_storage": "Clear local storage"
+  "clear_local_storage": "Clear local storage",
+  "save_message_description_1": "Your work is saved automatically.",
+  "save_message_description_2": "💾 No need to hit save. Your changes are saved automatically.",
+  "save_message_description_3": "Don't worry about this save stuff. We got you. 💪"
 }
