@@ -158,5 +158,6 @@
   "add_item": "Fügen Sie ein Element hinzu",
   "home": "Heim",
   "downloads": "Downloads",
-  "dashboard": "Armaturenbrett"
+  "dashboard": "Armaturenbrett",
+  "clear_local_storage": "Lokalen Speicher löschen"
 }

@@ -158,5 +158,6 @@
   "add_item": "Add an item",
   "home": "Home",
   "downloads": "Downloads",
-  "dashboard": "Dashboard"
+  "dashboard": "Dashboard",
+  "clear_local_storage": "Clear local storage"
 }

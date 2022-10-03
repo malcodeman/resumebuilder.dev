@@ -9,8 +9,8 @@ type props = {
 };
 
 function FileUploader(props: props) {
-  const { t } = useTranslation();
   const { onDrop, isLoading } = props;
+  const { t } = useTranslation();
   const bg = useColorModeValue("gray.100", "gray.900");
   const bgIsDragActive = useColorModeValue("blue.100", "blue.900");
   const options: DropzoneOptions = {
@@ -34,7 +34,7 @@ function FileUploader(props: props) {
     >
       <Text mb="2">{t("drop_files_here_to_upload")}</Text>
       <Button onClick={open} isLoading={isLoading}>
-        <Text>{t("browse_files")}</Text>
+        {t("browse_files")}
       </Button>
       <input {...getInputProps()} />
     </Flex>
