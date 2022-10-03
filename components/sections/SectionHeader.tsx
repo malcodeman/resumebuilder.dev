@@ -22,7 +22,7 @@ import {
   FiChevronDown,
   FiChevronUp,
 } from "react-icons/fi";
-import { and, isNil } from "ramda";
+import { and, isNil, equals } from "ramda";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 
@@ -57,7 +57,7 @@ function SectionHeader(props: props) {
   function handleOnFocus(event: React.FocusEvent<HTMLDivElement>) {
     if (
       event.relatedTarget &&
-      event.relatedTarget["dataset"]["action"] === "rename"
+      equals(event.relatedTarget["dataset"]["action"], "rename")
     ) {
       return event;
     }
@@ -124,6 +124,7 @@ function SectionHeader(props: props) {
                     <></>
                   ) : (
                     <MenuItem
+                      data-action="rename"
                       onClick={() => ref.current.focus()}
                       icon={<FiEdit />}
                     >
