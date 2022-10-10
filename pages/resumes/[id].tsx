@@ -90,7 +90,14 @@ function Builder() {
   );
 }
 
-export async function getServerSideProps({ locale }) {
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true,
+  };
+}
+
+export async function getStaticProps({ locale }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common"])),
