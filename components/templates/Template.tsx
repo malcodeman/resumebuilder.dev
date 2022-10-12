@@ -18,11 +18,17 @@ import { Template as TemplateType } from "../../types";
 type props = {
   id: TemplateType;
   renderDescription?: boolean;
+  isLoading?: boolean;
   onUseTemplate: (template: TemplateType) => void;
 };
 
 function Template(props: props) {
-  const { id, renderDescription = true, onUseTemplate } = props;
+  const {
+    id,
+    renderDescription = true,
+    isLoading = false,
+    onUseTemplate,
+  } = props;
   const { t } = useTranslation();
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
@@ -41,11 +47,12 @@ function Template(props: props) {
       <Flex mb="2" alignItems="center" justifyContent="space-between">
         <Heading fontSize="md">{template.title}</Heading>
         <Button
-          as={motion.div}
+          as={motion.button}
           whileHover={{ scale: 1.1 }}
           colorScheme="blue"
           size="sm"
           cursor="pointer"
+          isLoading={isLoading}
           data-cy="use-template-button"
           onClick={() => onUseTemplate(template.template)}
         >

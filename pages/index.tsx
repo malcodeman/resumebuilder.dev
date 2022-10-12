@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Divider } from "@chakra-ui/react";
 import { useMountEffect } from "@react-hookz/web";
-import { useRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import Layout from "../components/Layout";
@@ -12,30 +11,14 @@ import Templates from "../components/landing/Templates";
 import Builder from "../components/landing/Builder";
 import Hero from "../components/landing/Hero";
 
-import { DEFAULT_VALUES } from "../lib/constants";
-
-import { Template } from "../types";
-
-import useResumes from "../hooks/useResumes";
 import useDashboard from "../hooks/useDashboard";
 
 function Landing() {
   const { setDashboard } = useDashboard();
-  const router = useRouter();
-  const { createNew } = useResumes();
 
   useMountEffect(() => {
     setDashboard(false);
   });
-
-  function handleOnSubmit(template = Template.berlin) {
-    const design = {
-      ...DEFAULT_VALUES.design,
-      template,
-    };
-    const resume = createNew({ design });
-    router.push(`/resumes/${resume.id}`);
-  }
 
   return (
     <>
@@ -44,14 +27,14 @@ function Landing() {
       </Head>
       <Layout>
         <Hero />
-        <Templates onSubmit={handleOnSubmit} />
+        <Templates />
         <Divider marginY="16" />
         <Features />
         <Divider marginY="16" />
         <Builder />
         <Divider marginY="16" />
         <Faq />
-        <Footer onSubmit={handleOnSubmit} />
+        <Footer />
       </Layout>
     </>
   );

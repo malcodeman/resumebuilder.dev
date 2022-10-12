@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import {
   Heading,
@@ -7,14 +8,17 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { map, slice } from "ramda";
+import { map, slice, equals } from "ramda";
 import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
-import { TEMPLATES_LIST } from "../../lib/constants";
+import { TEMPLATES_LIST, DEFAULT_VALUES } from "../../lib/constants";
 
 import { Template as TemplateType } from "../../types";
+
+import useResumes from "../../hooks/useResumes";
 
 import Template from "../templates/Template";
 
@@ -23,18 +27,28 @@ const ARROW_RIGHT_VARIANTS = {
   mouseleave: { x: 0 },
 };
 
-type props = {
-  onSubmit: (template: TemplateType) => void;
-};
-
-function Templates(props: props) {
-  const { onSubmit } = props;
+function Templates() {
   const { t } = useTranslation();
   const templateCount = useBreakpointValue({
     base: 1,
     sm: 4,
     md: 3,
   });
+  const router = useRouter();
+  const { createNew } = useResumes();
+  const [isLoading, setIsLoading] = React.useState<TemplateType>(null);
+
+  async function handleOnSubmit(template: TemplateType) {
+    setIsLoading(template);
+    const design = {
+      ...DEFAULT_VALUES.design,
+      template,
+    };
+    const resume = createNew({ design });
+    await router.push(`/resumes/${resume.id}`);
+    setIsLoading(null);
+  }
+
   return (
     <Box as="section">
       <Box width={["100%", "100%", "50%"]}>
@@ -77,7 +91,8 @@ function Templates(props: props) {
               <Template
                 key={item.template}
                 id={item.template}
-                onUseTemplate={(template) => onSubmit(template)}
+                isLoading={equals(isLoading, item.template)}
+                onUseTemplate={(template) => handleOnSubmit(template)}
               />
             ),
             TEMPLATES_LIST
