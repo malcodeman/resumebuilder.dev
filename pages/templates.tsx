@@ -29,6 +29,7 @@ function Templates() {
     TEMPLATES_FILTERS[0].value
   );
   const [template, setTemplate] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState<TemplateType>(null);
   const filteredTemplatesByTags = filter(
     (item) => includes(activeFilter, item.tags),
     TEMPLATES_LIST
@@ -38,13 +39,15 @@ function Templates() {
     filteredTemplatesByTags
   );
 
-  function handleOnUseTemplate(template: TemplateType) {
+  async function handleOnUseTemplate(template: TemplateType) {
+    setIsLoading(template);
     const design = {
       ...DEFAULT_VALUES.design,
       template,
     };
     const resume = createNew({ design });
-    router.push(`/resumes/${resume.id}`);
+    await router.push(`/resumes/${resume.id}`);
+    setIsLoading(null);
   }
 
   return (
@@ -92,6 +95,7 @@ function Templates() {
               <Template
                 key={item.template}
                 id={item.template}
+                isLoading={equals(isLoading, item.template)}
                 onUseTemplate={(template) => handleOnUseTemplate(template)}
               />
             ),
