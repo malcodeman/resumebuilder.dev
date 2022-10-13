@@ -1,3 +1,5 @@
+import { DEFAULT_VALUES } from "../../lib/constants";
+
 beforeEach(() => {
   cy.visit("/resumes");
 });
@@ -25,6 +27,16 @@ describe("Resumes page", () => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
       });
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 1);
+    cy.url().should("include", "/resumes/");
+  });
+  it("Create resume button", () => {
+    localStorage.setItem("resumes", JSON.stringify([DEFAULT_VALUES]));
+    cy.get("[data-cy=create-resume-btn]")
+      .click()
+      .should(() => {
+        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
+      });
+    cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
     cy.url().should("include", "/resumes/");
   });
 });

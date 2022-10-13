@@ -9,6 +9,7 @@ import {
   ButtonGroup,
   IconButton,
   useDisclosure,
+  useBoolean,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
@@ -26,6 +27,7 @@ function NewButton() {
   const router = useRouter();
   const { createNew } = useResumes();
   const isMediumDevice = useMediaQuery("(min-width: 30em)");
+  const [isLoading, setIsLoading] = useBoolean();
 
   useKeyboardEvent(
     "n",
@@ -39,16 +41,23 @@ function NewButton() {
     { event: "keyup" }
   );
 
-  function handleOnCreateNew() {
+  async function handleOnCreateNew() {
+    setIsLoading.on();
     const resume = createNew();
-    router.push(`/resumes/${resume.id}`);
+    await router.push(`/resumes/${resume.id}`);
+    setIsLoading.off();
   }
 
   return (
     <Popover trigger="hover">
       <PopoverTrigger>
         {isMediumDevice ? (
-          <Button mr="-px" data-cy="new_resume_btn" onClick={handleOnCreateNew}>
+          <Button
+            mr="-px"
+            data-cy="create-resume-btn"
+            isLoading={isLoading}
+            onClick={handleOnCreateNew}
+          >
             {t("new")}
           </Button>
         ) : (
