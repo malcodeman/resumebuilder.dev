@@ -50,7 +50,7 @@ function Builder() {
     return (
       <>
         <Head>
-          <title>Resume not found - resumebuilder.dev</title>
+          <title>Resume not found | resumebuilder.dev</title>
         </Head>
         <Center flexDirection="column" height="100vh" padding="4">
           <Text mb="2" fontSize="4xl">
