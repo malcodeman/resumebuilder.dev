@@ -110,67 +110,69 @@ function Berlin(props: props) {
             </Text>
           ))}
         </Box>
-        {section.map((sectionItem, index) => {
-          if (utils.isStandardSection(sectionItem.name)) {
+        <Box>
+          {section.map((sectionItem, index) => {
+            if (utils.isStandardSection(sectionItem.name)) {
+              return (
+                <React.Fragment key={index}>
+                  <SectionLabel>{sectionItem.label}</SectionLabel>
+                  {sectionItem.nested.map((item, index) => {
+                    return (
+                      <Box key={index} mb={16}>
+                        <Text
+                          mb={8}
+                          fontSize="sm"
+                          fontWeight={700}
+                          letterSpacing={0.06}
+                          textTransform="uppercase"
+                        >
+                          {item.website ? (
+                            <Link href={item.website}>{item.title}</Link>
+                          ) : (
+                            item.title
+                          )}
+                        </Text>
+                        <Text mb={8} color="#717171">
+                          {isEmpty(item.subtitle) ? "" : item.subtitle}
+                          {isEmpty(item.city) ? "" : ` | ${item.city}`}
+                          {renderDate(item)}
+                        </Text>
+                        {item.description.split("\n").map((item, index) => (
+                          <Text key={index} lineHeight={1.4}>
+                            {item}
+                          </Text>
+                        ))}
+                      </Box>
+                    );
+                  })}
+                </React.Fragment>
+              );
+            }
             return (
               <React.Fragment key={index}>
                 <SectionLabel>{sectionItem.label}</SectionLabel>
-                {sectionItem.nested.map((item, index) => {
-                  return (
-                    <Box key={index} mb={16}>
-                      <Text
-                        mb={8}
-                        fontSize="sm"
-                        fontWeight={700}
-                        letterSpacing={0.06}
-                        textTransform="uppercase"
-                      >
-                        {item.website ? (
-                          <Link href={item.website}>{item.title}</Link>
-                        ) : (
-                          item.title
-                        )}
-                      </Text>
-                      <Text mb={8} color="#717171">
-                        {isEmpty(item.subtitle) ? "" : item.subtitle}
-                        {isEmpty(item.city) ? "" : ` | ${item.city}`}
-                        {renderDate(item)}
-                      </Text>
-                      {item.description.split("\n").map((item, index) => (
-                        <Text key={index} lineHeight={1.4}>
+                <Flex mb={16} flexWrap="wrap">
+                  {isEmpty(sectionItem.tags)
+                    ? null
+                    : split("\n", sectionItem.tags).map((item, index) => (
+                        <Text
+                          key={index}
+                          mr={4}
+                          mb={4}
+                          pt={6}
+                          pb={6}
+                          pl={12}
+                          pr={12}
+                          bgColor="#F7F7F7"
+                        >
                           {item}
                         </Text>
                       ))}
-                    </Box>
-                  );
-                })}
+                </Flex>
               </React.Fragment>
             );
-          }
-          return (
-            <React.Fragment key={index}>
-              <SectionLabel>{sectionItem.label}</SectionLabel>
-              <Flex mb={16} flexWrap="wrap">
-                {isEmpty(sectionItem.tags)
-                  ? null
-                  : split("\n", sectionItem.tags).map((item, index) => (
-                      <Text
-                        key={index}
-                        mr={4}
-                        mb={4}
-                        pt={6}
-                        pb={6}
-                        pl={12}
-                        pr={12}
-                        bgColor="#F7F7F7"
-                      >
-                        {item}
-                      </Text>
-                    ))}
-              </Flex>
-            </React.Fragment>
-          );
-        })}
+          })}
+        </Box>
       </Page>
     </TemplateContext.Provider>
   );

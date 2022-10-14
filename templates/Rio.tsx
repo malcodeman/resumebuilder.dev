@@ -82,63 +82,65 @@ function Rio(props: props) {
             </Text>
           ))}
         </Box>
-        {section.map((sectionItem, index) => {
-          if (utils.isStandardSection(sectionItem.name)) {
+        <Box>
+          {section.map((sectionItem, index) => {
+            if (utils.isStandardSection(sectionItem.name)) {
+              return (
+                <React.Fragment key={index}>
+                  <SectionLabel>{sectionItem.label}</SectionLabel>
+                  {sectionItem.nested.map((item, index) => {
+                    return (
+                      <Box key={index} mb={16}>
+                        <Flex
+                          mb={8}
+                          alignItems="center"
+                          justifyContent="space-between"
+                        >
+                          <Text>
+                            {isEmpty(item.subtitle) ? "" : item.subtitle}
+                            {isEmpty(item.city) ? "" : ` | ${item.city}`}
+                          </Text>
+                          <Text
+                            fontSize="sm"
+                            fontWeight={700}
+                            letterSpacing={0.06}
+                            textTransform="uppercase"
+                          >
+                            {item.website ? (
+                              <Link href={item.website}>{item.title}</Link>
+                            ) : (
+                              item.title
+                            )}
+                          </Text>
+                          <Text>{renderDate(item)}</Text>
+                        </Flex>
+                        {item.description.split("\n").map((item, index) => (
+                          <Text key={index} lineHeight={1.4}>
+                            {item}
+                          </Text>
+                        ))}
+                      </Box>
+                    );
+                  })}
+                </React.Fragment>
+              );
+            }
             return (
               <React.Fragment key={index}>
                 <SectionLabel>{sectionItem.label}</SectionLabel>
-                {sectionItem.nested.map((item, index) => {
-                  return (
-                    <Box key={index} mb={16}>
-                      <Flex
-                        mb={8}
-                        alignItems="center"
-                        justifyContent="space-between"
-                      >
-                        <Text>
-                          {isEmpty(item.subtitle) ? "" : item.subtitle}
-                          {isEmpty(item.city) ? "" : ` | ${item.city}`}
-                        </Text>
-                        <Text
-                          fontSize="sm"
-                          fontWeight={700}
-                          letterSpacing={0.06}
-                          textTransform="uppercase"
-                        >
-                          {item.website ? (
-                            <Link href={item.website}>{item.title}</Link>
-                          ) : (
-                            item.title
-                          )}
-                        </Text>
-                        <Text>{renderDate(item)}</Text>
-                      </Flex>
-                      {item.description.split("\n").map((item, index) => (
-                        <Text key={index} lineHeight={1.4}>
-                          {item}
+                <Flex mb={16} flexWrap="wrap">
+                  {isEmpty(sectionItem.tags)
+                    ? null
+                    : split("\n", sectionItem.tags).map((item, index) => (
+                        <Text key={index} mr={4} mb={4}>
+                          {item};
                         </Text>
                       ))}
-                    </Box>
-                  );
-                })}
+                </Flex>
               </React.Fragment>
             );
-          }
-          return (
-            <React.Fragment key={index}>
-              <SectionLabel>{sectionItem.label}</SectionLabel>
-              <Flex mb={16} flexWrap="wrap">
-                {isEmpty(sectionItem.tags)
-                  ? null
-                  : split("\n", sectionItem.tags).map((item, index) => (
-                      <Text key={index} mr={4} mb={4}>
-                        {item};
-                      </Text>
-                    ))}
-              </Flex>
-            </React.Fragment>
-          );
-        })}
+          })}
+        </Box>
       </Page>
     </TemplateContext.Provider>
   );
