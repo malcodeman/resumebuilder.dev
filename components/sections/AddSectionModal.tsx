@@ -24,8 +24,8 @@ const COMMON_SECTIONS = [
     isDisabled: false,
   },
   {
-    label: "education",
-    labelTransKey: "Education",
+    label: "Education",
+    labelTransKey: "education",
     value: "education" as const,
     isDisabled: false,
   },
@@ -48,7 +48,7 @@ const COMMON_SECTIONS = [
     isDisabled: false,
   },
   {
-    label: "projects",
+    label: "Projects",
     labelTransKey: "projects",
     value: "projects" as const,
     isDisabled: false,
