@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { Divider } from "@chakra-ui/react";
 import { useMountEffect } from "@react-hookz/web";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -28,11 +27,8 @@ function Landing() {
       <Layout>
         <Hero />
         <Templates />
-        <Divider marginY="16" />
         <Features />
-        <Divider marginY="16" />
         <Builder />
-        <Divider marginY="16" />
         <Faq />
         <Footer />
       </Layout>

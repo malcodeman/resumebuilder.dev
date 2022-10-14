@@ -44,40 +44,36 @@ function Footer() {
   }
 
   return (
-    <Center as="section" flexDirection="column">
-      <Heading mb="4">{t("get_started_with_resume_builder")}</Heading>
-      <Button
-        as={motion.button}
-        whileHover={{ scale: 1.1 }}
-        colorScheme="blue"
-        mb="4"
-        isLoading={isLoading}
-        data-cy="build-for-free-button"
-        onClick={() => handleOnSubmit()}
-      >
-        {t("build_for_free")}
-      </Button>
-      <Grid
-        templateColumns={["1fr", `repeat(${length(LIST)}, 1fr)`]}
-        gap="2"
-        mb="16"
-      >
-        {map(
-          (item) => (
-            <Flex key={item.textTransKey} alignItems="center">
-              <FiCheck style={{ marginRight: "0.5rem" }} />
-              <Text mr="2">{t(item.textTransKey)}</Text>
-            </Flex>
-          ),
-          LIST
-        )}
-      </Grid>
-      <Box display={["none", "block"]} width="full">
-        <Box maxW="sm">
-          <Poser20 />
-        </Box>
+    <Box as="section">
+      <Center flexDirection="column" mb="16">
+        <Heading mb="4">{t("get_started_with_resume_builder")}</Heading>
+        <Button
+          as={motion.button}
+          whileHover={{ scale: 1.1 }}
+          colorScheme="blue"
+          mb="4"
+          isLoading={isLoading}
+          data-cy="build-for-free-button"
+          onClick={() => handleOnSubmit()}
+        >
+          {t("build_for_free")}
+        </Button>
+        <Grid templateColumns={["1fr", `repeat(${length(LIST)}, 1fr)`]} gap="2">
+          {map(
+            (item) => (
+              <Flex key={item.textTransKey} alignItems="center">
+                <FiCheck style={{ marginRight: "0.5rem" }} />
+                <Text mr="2">{t(item.textTransKey)}</Text>
+              </Flex>
+            ),
+            LIST
+          )}
+        </Grid>
+      </Center>
+      <Box display={["none", "block"]} maxW="sm">
+        <Poser20 />
       </Box>
-    </Center>
+    </Box>
   );
 }
 

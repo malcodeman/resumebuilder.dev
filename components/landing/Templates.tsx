@@ -50,7 +50,7 @@ function Templates() {
   }
 
   return (
-    <Box as="section">
+    <Box as="section" mb="32">
       <Box width={["100%", "100%", "50%"]}>
         <Heading mb="4">{t("start_with_template")}</Heading>
         <Text mb="4">

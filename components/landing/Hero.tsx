@@ -37,7 +37,7 @@ function Hero() {
       as="section"
       templateColumns={["1fr", "repeat(2, 1fr)"]}
       gap="8"
-      marginBottom="16"
+      mb="32"
     >
       <Box>
         <Heading mb="4">{t("hero_heading")}</Heading>

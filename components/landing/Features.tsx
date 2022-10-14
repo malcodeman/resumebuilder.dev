@@ -24,7 +24,7 @@ const FEATURES = [
 function Features() {
   const { t } = useTranslation();
   return (
-    <Box as="section">
+    <Box as="section" mb="32">
       <Center mb="16">
         <Heading>{t("privacy_focused_and_login_free")}</Heading>
       </Center>

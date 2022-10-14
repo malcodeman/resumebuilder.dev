@@ -158,7 +158,7 @@ function Faq() {
   );
 
   return (
-    <Box as="section" marginBottom="16">
+    <Box as="section" mb="32">
       <Heading mb="4">{t("frequently_asked_questions")}</Heading>
       <Accordion defaultIndex={[0]} allowMultiple>
         {map(
