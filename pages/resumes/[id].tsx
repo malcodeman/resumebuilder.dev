@@ -13,8 +13,6 @@ import Header from "../../components/builder/Header";
 import HeaderMobile from "../../components/builder/HeaderMobile";
 import Document from "../../components/builder/Document";
 
-import { DEFAULT_VALUES } from "../../lib/constants";
-
 import useResume from "../../hooks/useResume";
 import useAutoSaveToast from "../../hooks/useAutoSaveToast";
 import useDashboard from "../../hooks/useDashboard";
@@ -24,9 +22,15 @@ import { Resume } from "../../types";
 function Builder() {
   const { t } = useTranslation();
   const { resume, isLoading } = useResume();
-  const form = useForm<Resume>({ defaultValues: DEFAULT_VALUES });
+  const form = useForm<Resume>();
   const { setDashboard } = useDashboard();
   const isLargeDevice = useMediaQuery("(min-width: 62em)");
+
+  React.useEffect(() => {
+    if (resume) {
+      form.reset(resume);
+    }
+  }, [resume, form]);
 
   useMountEffect(() => {
     setDashboard(true);

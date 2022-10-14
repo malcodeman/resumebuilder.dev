@@ -30,7 +30,7 @@ import {
 } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
-import { equals } from "ramda";
+import { equals, isNil, or } from "ramda";
 import { formatDistanceToNow } from "date-fns";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -362,8 +362,10 @@ function Info() {
     control,
     name: ["updatedAt", "about.summary", "section"],
   });
-  const updatedAt = watch[0];
-  const wordCount = utils.countWords(watch[1], watch[2]);
+  const updatedAt = isNil(watch[0]) ? Date.now() : watch[0];
+  const wordCount = isNil(or(watch[1], watch[2]))
+    ? 0
+    : utils.countWords(watch[1], watch[2]);
   const { locale } = useDateFnsLocale();
   return (
     <Box>

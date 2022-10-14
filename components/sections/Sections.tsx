@@ -13,8 +13,8 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
-import { useUpdateEffect, useMediaQuery } from "@react-hookz/web";
-import { findIndex, propEq, isEmpty, find } from "ramda";
+import { useMediaQuery } from "@react-hookz/web";
+import { findIndex, propEq, isEmpty, find, equals } from "ramda";
 import { useTranslation } from "next-i18next";
 
 import PersonalDetailsSection from "../../components/sections/PersonalDetailsSection";
@@ -24,8 +24,8 @@ import AddSectionModal from "./AddSectionModal";
 import DraggableItem from "./DraggableItem";
 
 import { STANDARD_SECTION_DEFAULT_VALUES } from "../../lib/constants";
+
 import utils from "../../lib/utils";
-import useResume from "../../hooks/useResume";
 
 import { Resume, Section } from "../../types";
 
@@ -72,7 +72,6 @@ type props = {
 
 function Sections(props: props) {
   const { form } = props;
-  const { resume } = useResume();
   const fieldArray = useFieldArray({
     control: form.control,
     name: "section",
@@ -87,12 +86,11 @@ function Sections(props: props) {
   const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
   const [activeLabel, setActiveLabel] = React.useState("");
 
-  useUpdateEffect(() => {
-    form.reset({ ...resume });
-  }, [resume?.id]);
-
   function handleOnDragStart(event: DragStartEvent) {
-    const item = find((item) => item.id === event.active.id, fieldArray.fields);
+    const item = find(
+      (item) => equals(item.id, event.active.id),
+      fieldArray.fields
+    );
     setActiveLabel(item.label);
   }
 

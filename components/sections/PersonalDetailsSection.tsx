@@ -67,7 +67,6 @@ function Summary() {
 function PersonalDetailsSection() {
   const { t } = useTranslation();
   const { register } = useFormContext();
-
   return (
     <AccordionItem
       borderTopWidth="0"

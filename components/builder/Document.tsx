@@ -3,6 +3,7 @@ import { useWatch, UseFormReturn } from "react-hook-form";
 import { useDebouncedEffect, useLocalStorageValue } from "@react-hookz/web";
 import { motion } from "framer-motion";
 import { PDFViewer } from "@react-pdf/renderer";
+import { isNil } from "ramda";
 
 import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
@@ -37,7 +38,9 @@ function Document(props: props) {
     about: watch[2],
     section: watch[3],
   };
-  const document = getTemplate(watch[1], fields, isPdfViewer);
+  const document = isNil(id)
+    ? null
+    : getTemplate(watch[1], fields, isPdfViewer);
   const delay = isPdfViewer ? 2000 : 200;
   const maxWait = isPdfViewer ? 5000 : 500;
 

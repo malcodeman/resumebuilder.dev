@@ -27,7 +27,7 @@ type Props = {
 };
 
 function PreWrittenPhrasesModal(props: Props) {
-  const { isOpen, value, phrases, onClose, onChange } = props;
+  const { isOpen, value = "", phrases, onClose, onChange } = props;
   const { t } = useTranslation();
   const [name, setName] = React.useState("");
   const filteredPhrases = filter(
