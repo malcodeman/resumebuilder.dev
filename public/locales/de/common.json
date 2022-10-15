@@ -162,5 +162,6 @@
   "clear_local_storage": "Lokalen Speicher löschen",
   "save_message_description_1": "Ihre Arbeit wird automatisch gespeichert.",
   "save_message_description_2": "💾 Sie müssen nicht auf Speichern klicken. Ihre Änderungen werden automatisch gespeichert.",
-  "save_message_description_3": "Machen Sie sich keine Sorgen um dieses Sicherungsmaterial. Wir haben dich. 💪"
+  "save_message_description_3": "Machen Sie sich keine Sorgen um dieses Sicherungsmaterial. Wir haben dich. 💪",
+  "no_items_inside": "Keine Gegenstände drin"
 }

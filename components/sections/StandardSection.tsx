@@ -18,6 +18,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
+import { useTranslation } from "next-i18next";
 
 import SectionHeader from "./SectionHeader";
 import StandardSectionBody from "./StandardSectionBody";
@@ -42,6 +43,7 @@ type props = {
 
 function StandardSection(props: props) {
   const { id, index, label, name, isDragDisabled, remove, append } = props;
+  const { t } = useTranslation();
   const { control, getValues, reset } = useFormContext<Resume>();
   const {
     fields: fieldsNested,
@@ -127,7 +129,7 @@ function StandardSection(props: props) {
                   paddingInlineStart="calc(1.5rem + 20px)"
                   paddingInlineEnd="4"
                 >
-                  <Text>No items inside</Text>
+                  <Text>{t("no_items_inside")}</Text>
                 </Box>
               ) : (
                 <></>
