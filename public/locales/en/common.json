@@ -163,5 +163,6 @@
   "save_message_description_1": "Your work is saved automatically.",
   "save_message_description_2": "💾 No need to hit save. Your changes are saved automatically.",
   "save_message_description_3": "Don't worry about this save stuff. We got you. 💪",
-  "no_items_inside": "No items inside"
+  "no_items_inside": "No items inside",
+  "give_feedback": "Give feedback"
 }
