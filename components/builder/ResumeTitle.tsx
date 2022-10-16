@@ -23,13 +23,11 @@ function ResumeTitle(props: props) {
 
   function handleOnIconChange(icon: string) {
     form.setValue("icon", icon);
-    form.setValue("updatedAt", Date.now());
     changeIcon(icon);
   }
 
   function handleOnTitleChange(title: string) {
     form.setValue("title", title);
-    form.setValue("updatedAt", Date.now());
     document.title = `${title} | resumebuilder.dev`;
     changeTitle(title);
   }

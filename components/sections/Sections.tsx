@@ -110,7 +110,6 @@ function Sections(props: props) {
         label: data.label,
         nested: [STANDARD_SECTION_DEFAULT_VALUES],
       });
-      form.reset({ ...form.getValues() });
     } else {
       fieldArray.append({
         name: data.name,

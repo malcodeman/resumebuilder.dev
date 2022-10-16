@@ -1,9 +1,9 @@
+import React from "react";
 import { Box } from "@chakra-ui/react";
 import { useWatch, UseFormReturn } from "react-hook-form";
 import { useDebouncedEffect, useLocalStorageValue } from "@react-hookz/web";
 import { motion } from "framer-motion";
 import { PDFViewer } from "@react-pdf/renderer";
-import { isNil } from "ramda";
 
 import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
@@ -38,19 +38,21 @@ function Document(props: props) {
     about: watch[2],
     section: watch[3],
   };
-  const document = isNil(id)
-    ? null
-    : getTemplate(watch[1], fields, isPdfViewer);
+  const document = id ? getTemplate(watch[1], fields, isPdfViewer) : null;
   const delay = isPdfViewer ? 2000 : 200;
   const maxWait = isPdfViewer ? 5000 : 500;
+
+  React.useEffect(() => {
+    if (form.formState.isDirty) {
+      form.setValue("updatedAt", Date.now());
+    }
+  }, [form, watch]);
 
   useDebouncedEffect(
     () => {
       if (id) {
-        form.setValue("updatedAt", Date.now());
         setResume({
           ...form.getValues(),
-          updatedAt: Date.now(),
         });
       }
     },

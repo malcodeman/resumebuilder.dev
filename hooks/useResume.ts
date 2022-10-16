@@ -54,7 +54,6 @@ function useResume(props: props = {}) {
     setResume({
       ...resume,
       title,
-      updatedAt: Date.now(),
     });
   }
 
@@ -62,7 +61,6 @@ function useResume(props: props = {}) {
     setResume({
       ...resume,
       icon,
-      updatedAt: Date.now(),
     });
   }
 

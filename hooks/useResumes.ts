@@ -62,7 +62,6 @@ function useResumes(props: props = {}) {
         return {
           ...item,
           title,
-          updatedAt: Date.now(),
         };
       }
       return item;
@@ -76,7 +75,6 @@ function useResumes(props: props = {}) {
         return {
           ...item,
           icon,
-          updatedAt: Date.now(),
         };
       }
       return item;
