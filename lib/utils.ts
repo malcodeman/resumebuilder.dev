@@ -18,6 +18,7 @@ import {
   equals,
   has,
 } from "ramda";
+import { i18n } from "next-i18next";
 
 import getTemplate from "./getTemplate";
 
@@ -80,7 +81,7 @@ async function exportAsPng(resume: Resume) {
     saveAs(blob, `${resume.title}.png`);
   } catch (error) {
     toast({
-      description: error.message,
+      description: i18n.t("something_went_wrong").toString(),
       status: "error",
       isClosable: true,
     });
