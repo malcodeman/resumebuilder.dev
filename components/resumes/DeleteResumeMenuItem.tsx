@@ -14,11 +14,7 @@ function DeleteResumeMenuItem(props: props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <MenuItem
-        icon={<FiTrash2 />}
-        onClick={onOpen}
-        data-cy="delete_resume_btn"
-      >
+      <MenuItem icon={<FiTrash2 />} onClick={onOpen} data-cy="delete-btn">
         {t("delete")}
       </MenuItem>
       <DeleteResumeModal

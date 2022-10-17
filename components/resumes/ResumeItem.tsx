@@ -152,29 +152,34 @@ function ResumeItem(props: props) {
             onSubmit={(nextValue) => onTitleChange(resume.id, nextValue)}
             marginX="2"
             width="100%"
+            data-cy="title-editable"
           >
             <EditablePreview ref={ref} noOfLines={1} overflowWrap="anywhere" />
-            <EditableInput {...form.register("title")} />
+            <EditableInput {...form.register("title")} data-cy="title-input" />
           </Editable>
           <Menu>
             <MenuButton
               as={IconButton}
               size="sm"
               aria-label="More options"
-              data-cy="resume_more_options_btn"
+              data-cy="more-options-btn"
               icon={<FiMoreHorizontal />}
               mr="2"
               display="none"
               _groupHover={{ display: "inline-flex" }}
             />
             <MenuList>
-              <MenuItem icon={<FiEdit />} onClick={() => ref.current.focus()}>
+              <MenuItem
+                icon={<FiEdit />}
+                onClick={() => ref.current.focus()}
+                data-cy="rename-btn"
+              >
                 {t("rename")}
               </MenuItem>
               <MenuItem
                 icon={<FiCopy />}
                 onClick={() => onDuplicate(resume.id)}
-                data-cy="duplicate_resume_btn"
+                data-cy="duplicate-btn"
               >
                 {t("duplicate")}
               </MenuItem>

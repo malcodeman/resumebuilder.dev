@@ -1,4 +1,4 @@
-import { DEFAULT_VALUES } from "../../lib/constants";
+import resumes from "../fixtures/resumes.json";
 
 beforeEach(() => {
   cy.visit("/resumes");
@@ -30,7 +30,7 @@ describe("Resumes page", () => {
     cy.url().should("include", "/resumes/");
   });
   it("Create resume button", () => {
-    localStorage.setItem("resumes", JSON.stringify([DEFAULT_VALUES]));
+    localStorage.setItem("resumes", JSON.stringify(resumes));
     cy.get("[data-cy=create-resume-btn]")
       .click()
       .should(() => {
@@ -38,6 +38,13 @@ describe("Resumes page", () => {
       });
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
     cy.url().should("include", "/resumes/");
+  });
+  it("Rename resume", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.get("[data-cy=title-editable]").click();
+    cy.get("[data-cy=title-input]")
+      .type("malcodeman{enter}")
+      .should("have.value", "malcodeman");
   });
 });
 
