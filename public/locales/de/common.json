@@ -93,7 +93,7 @@
   "start_with_templates_description": "Wählen Sie eine Vorlage aus, um loszulegen, und passen Sie sie im Laufe der Zeit an.",
   "template_gallery": "Vorlagengalerie",
   "return_home": "Zur Startseite zurückkehren",
-  "404_description": "Es tut uns leid. Dieser Lebenslauf wurde nicht gefunden.",
+  "404_description": "Entschuldigung, die von Ihnen gesuchte Seite wurde nicht gefunden.",
   "export_pdf": "PDF exportieren",
   "templates": "Vorlagen",
   "generate_fake_data": "Generieren Sie gefälschte Daten",
@@ -164,5 +164,6 @@
   "save_message_description_2": "💾 Sie müssen nicht auf Speichern klicken. Ihre Änderungen werden automatisch gespeichert.",
   "save_message_description_3": "Machen Sie sich keine Sorgen um dieses Sicherungsmaterial. Wir haben dich. 💪",
   "no_items_inside": "Keine Gegenstände drin",
-  "give_feedback": "Feedback geben"
+  "give_feedback": "Feedback geben",
+  "resume_404_description": "Entschuldigung, der gesuchte Lebenslauf wurde nicht gefunden."
 }

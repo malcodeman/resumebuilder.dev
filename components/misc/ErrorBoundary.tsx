@@ -32,7 +32,7 @@ class ErrorBoundary extends Component<Props, State> {
       };
 
       return (
-        <Center flexDirection="column" height="100vh" padding="4">
+        <Center flexDirection="column" minH="100vh" padding="4">
           <Heading fontSize="2xl" mb="4" textAlign="center">
             {this.props.t("something_went_wrong")}
           </Heading>

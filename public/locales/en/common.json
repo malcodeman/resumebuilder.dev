@@ -93,7 +93,7 @@
   "start_with_templates_description": "Select a template to get started and customize as you go.",
   "template_gallery": "Template gallery",
   "return_home": "Return home",
-  "404_description": "We’re sorry. This resume was not found.",
+  "404_description": "Sorry, the page you were looking for was not found.",
   "export_pdf": "Export PDF",
   "templates": "Templates",
   "generate_fake_data": "Generate fake data",
@@ -164,5 +164,6 @@
   "save_message_description_2": "💾 No need to hit save. Your changes are saved automatically.",
   "save_message_description_3": "Don't worry about this save stuff. We got you. 💪",
   "no_items_inside": "No items inside",
-  "give_feedback": "Give feedback"
+  "give_feedback": "Give feedback",
+  "resume_404_description": "Sorry, the resume you were looking for was not found."
 }

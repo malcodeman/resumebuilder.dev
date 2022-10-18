@@ -1,9 +1,8 @@
 import React from "react";
 import Head from "next/head";
-import { Grid, Box, Text, Center, Button, Spinner } from "@chakra-ui/react";
+import { Grid, Box, Center, Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { isNil } from "ramda";
-import Link from "next/link";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -12,6 +11,7 @@ import Sections from "../../components/sections/Sections";
 import Header from "../../components/builder/Header";
 import HeaderMobile from "../../components/builder/HeaderMobile";
 import Document from "../../components/builder/Document";
+import NotFound from "../../components/misc/NotFound";
 
 import useResume from "../../hooks/useResume";
 import useAutoSaveToast from "../../hooks/useAutoSaveToast";
@@ -40,7 +40,7 @@ function Builder() {
 
   if (isLoading) {
     return (
-      <Center flexDirection="column" height="100vh" padding="4">
+      <Center flexDirection="column" minH="100vh" padding="4">
         <Spinner />
       </Center>
     );
@@ -52,15 +52,7 @@ function Builder() {
         <Head>
           <title>Resume not found | resumebuilder.dev</title>
         </Head>
-        <Center flexDirection="column" height="100vh" padding="4">
-          <Text mb="2" fontSize="4xl">
-            404
-          </Text>
-          <Text marginBottom="4">{t("404_description")}</Text>
-          <Link href="/" passHref>
-            <Button>{t("return_home")}</Button>
-          </Link>
-        </Center>
+        <NotFound description={t("resume_404_description")} link="/resumes" />
       </>
     );
   }
