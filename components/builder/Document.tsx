@@ -1,13 +1,14 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import { useWatch, UseFormReturn } from "react-hook-form";
-import { useDebouncedEffect, useLocalStorageValue } from "@react-hookz/web";
+import { useLocalStorageValue } from "@react-hookz/web";
 import { motion } from "framer-motion";
 import { PDFViewer } from "@react-pdf/renderer";
 
 import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
-import useResume from "../../hooks/useResume";
+
+import useAutoSave from "../../hooks/useAutoSave";
 
 import { Resume } from "../../types";
 
@@ -28,7 +29,6 @@ function Document(props: props) {
   const [isPdfViewer] = useLocalStorageValue("isPdfViewer", false, {
     initializeWithStorageValue: false,
   });
-  const { setResume } = useResume({ isolated: true });
   const watch = useWatch({
     control: form.control,
     name: ["id", "design", "about", "section"],
@@ -39,27 +39,8 @@ function Document(props: props) {
     section: watch[3],
   };
   const document = id ? getTemplate(watch[1], fields, isPdfViewer) : null;
-  const delay = isPdfViewer ? 2000 : 200;
-  const maxWait = isPdfViewer ? 5000 : 500;
 
-  React.useEffect(() => {
-    if (form.formState.isDirty) {
-      form.setValue("updatedAt", Date.now());
-    }
-  }, [form, watch]);
-
-  useDebouncedEffect(
-    () => {
-      if (id) {
-        setResume({
-          ...form.getValues(),
-        });
-      }
-    },
-    [watch],
-    delay,
-    maxWait
-  );
+  useAutoSave({ form });
 
   const boxProps = {
     as: motion.div,
