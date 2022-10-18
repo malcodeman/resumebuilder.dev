@@ -126,7 +126,6 @@ function ResumeItem(props: props) {
         <AspectRatio mb="2" ratio={1.618 / 2 / 1}>
           <Box
             borderRadius="lg"
-            overflow="hidden"
             userSelect="none"
             boxShadow={boxShadow}
             _hover={{ cursor: "pointer" }}

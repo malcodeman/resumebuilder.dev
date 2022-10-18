@@ -66,6 +66,7 @@ function Document(props: props) {
     layout: true,
     width: "100%",
     margin: "0 auto",
+    overflow: "hidden",
     height: utils.pt2px(PAGE_SIZE.HEIGHT),
     maxWidth: isFullWidth ? "100%" : utils.pt2px(PAGE_SIZE.WIDTH),
   };
