@@ -233,7 +233,26 @@ function CopyLink() {
 
 function ChangeSlug() {
   const { t } = useTranslation();
+  const router = useRouter();
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { getValues } = useFormContext<Resume>();
+  const { setResume } = useResume();
+
+  function handleOnChangeSlug(nextSlug: string) {
+    const nextResume = {
+      ...getValues(),
+      id: nextSlug,
+    };
+    setResume(nextResume);
+    onClose;
+    toast({
+      description: t("slug_changed"),
+      isClosable: true,
+    });
+    router.push(`/resumes/${nextResume.id}`, undefined, { shallow: true });
+  }
+
   return (
     <>
       <Button
@@ -246,7 +265,11 @@ function ChangeSlug() {
       >
         {t("change_slug")}
       </Button>
-      <ChangeSlugModal isOpen={isOpen} onClose={onClose} />
+      <ChangeSlugModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onChangeSlug={handleOnChangeSlug}
+      />
     </>
   );
 }

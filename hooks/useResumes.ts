@@ -104,6 +104,10 @@ function useResumes(props: props = {}) {
     setResumes(nextResumes);
   }
 
+  function findById(id: string) {
+    return find((item) => equals(item.id, id), resumes);
+  }
+
   return {
     resumes,
     setResumes,
@@ -113,6 +117,7 @@ function useResumes(props: props = {}) {
     changeIcon,
     createNew,
     move,
+    findById,
   };
 }
 

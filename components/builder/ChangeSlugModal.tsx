@@ -14,10 +14,8 @@ import {
   Button,
   InputGroup,
   InputLeftAddon,
-  useToast,
   useMergeRefs,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -25,14 +23,16 @@ import { and, or } from "ramda";
 import { useTranslation } from "next-i18next";
 
 import useResume from "../../hooks/useResume";
+import useResumes from "../../hooks/useResumes";
 
 type props = {
   isOpen: boolean;
   onClose: () => void;
+  onChangeSlug: (nextSlug: string) => void;
 };
 
 function ChangeSlugModal(props: props) {
-  const { isOpen, onClose } = props;
+  const { isOpen, onClose, onChangeSlug } = props;
   const { t } = useTranslation();
   const form = useForm({
     defaultValues: { slug: "" },
@@ -51,9 +51,8 @@ function ChangeSlugModal(props: props) {
         .required()
     ),
   });
-  const { resume, changeSlug } = useResume();
-  const toast = useToast();
-  const router = useRouter();
+  const { resume } = useResume();
+  const { findById } = useResumes();
   const initialRef = React.useRef(null);
   const slugInputRefs = useMergeRefs(form.register("slug").ref, initialRef);
   const isInvalid = Boolean(form.formState.errors.slug);
@@ -65,15 +64,10 @@ function ChangeSlugModal(props: props) {
   }, [form, isOpen, resume]);
 
   function onSubmit(values: { slug: string }) {
-    const resume = changeSlug(values.slug);
-    if (resume) {
-      toast({
-        description: t("slug_changed"),
-        isClosable: true,
-      });
-      router.push(`/resumes/${resume.id}`);
-    } else {
+    if (findById(values.slug)) {
       form.setError("slug", { message: t("slug_taken") });
+    } else {
+      onChangeSlug(values.slug);
     }
   }
 
