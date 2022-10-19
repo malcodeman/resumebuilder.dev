@@ -46,6 +46,14 @@ describe("Resumes page", () => {
       .type("malcodeman{enter}")
       .should("have.value", "malcodeman");
   });
+  it("Dark mode", () => {
+    cy.get("[data-cy=more-options-menu-button]").click();
+    cy.get("[data-cy=dark-mode-menu-item]")
+      .click()
+      .should(() => {
+        expect(localStorage.getItem("chakra-ui-color-mode")).to.eq("dark");
+      });
+  });
 });
 
 export {};

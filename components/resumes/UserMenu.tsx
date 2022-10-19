@@ -24,6 +24,7 @@ function UserMenu() {
         size="sm"
         aria-label="More options"
         icon={<FiMoreVertical />}
+        data-cy="more-options-menu-button"
       />
       <MenuList>
         <Link href={FEEDBACK_LINK} isExternal>
@@ -32,6 +33,7 @@ function UserMenu() {
         <MenuItem
           onClick={toggleColorMode}
           icon={equals(colorMode, "dark") ? <FiMoon /> : <FiSun />}
+          data-cy="dark-mode-menu-item"
         >
           {equals(colorMode, "dark") ? t("dark_mode") : t("light_mode")}
         </MenuItem>

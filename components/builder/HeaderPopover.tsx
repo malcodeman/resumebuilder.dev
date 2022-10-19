@@ -117,6 +117,7 @@ function DarkModeToggle() {
         isChecked={equals(colorMode, "dark")}
         onChange={toggleColorMode}
         id="is-dark-mode"
+        data-cy="dark-mode-switch"
       />
     </FormControl>
   );

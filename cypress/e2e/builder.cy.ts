@@ -30,4 +30,12 @@ describe("Builder page", () => {
     cy.contains("Slug changed");
     cy.url().should("eq", `${Cypress.config().baseUrl}/resumes/malcodeman`);
   });
+  it("Dark mode", () => {
+    cy.get("[data-cy=more-button]").click();
+    cy.get("[data-cy=dark-mode-switch]")
+      .click()
+      .should(() => {
+        expect(localStorage.getItem("chakra-ui-color-mode")).to.eq("dark");
+      });
+  });
 });
