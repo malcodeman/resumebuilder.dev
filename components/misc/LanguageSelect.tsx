@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { map } from "ramda";
 import { useRouter } from "next/router";
-import { useLocalStorageValue, useMountEffect } from "@react-hookz/web";
+import { useMountEffect } from "@react-hookz/web";
 
 const defaultValues = {
   language: "",
@@ -18,22 +18,15 @@ function LanguageSelect(props: BoxProps) {
     { value: "de", label: "Deutsch" },
   ];
   const router = useRouter();
-  const [devTools] = useLocalStorageValue("devTools", false, {
-    initializeWithStorageValue: false,
-  });
 
   useMountEffect(() => {
     form.reset({ language: i18n.language });
   });
 
-  const onSubmit = (data: { language: string }) => {
+  function onSubmit(data: { language: string }) {
     const { pathname, asPath, query } = router;
     const nextLocale = data.language;
     router.push({ pathname, query }, asPath, { locale: nextLocale });
-  };
-
-  if (!devTools) {
-    return null;
   }
 
   return (
