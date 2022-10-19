@@ -31,7 +31,6 @@ describe("Landing page", () => {
       .should(() => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
       });
-    cy.url().should("include", "/resumes/");
   });
   it("Build for free button", () => {
     cy.get("[data-cy=build-for-free-button]")
