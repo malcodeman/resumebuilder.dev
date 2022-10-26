@@ -153,6 +153,7 @@ function PdfViewer() {
         isChecked={isPdfViewer}
         onChange={() => setIsPdfViewer(!isPdfViewer)}
         id="is-pdf-viewer"
+        data-cy="pdf-viewer-switch"
       />
     </FormControl>
   );
@@ -183,6 +184,7 @@ function DevToolsToggle() {
         isChecked={devTools}
         onChange={() => setDevTools(!devTools)}
         id="dev-tools"
+        data-cy="dev-tools-switch"
       />
     </FormControl>
   );

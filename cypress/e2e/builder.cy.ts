@@ -38,4 +38,17 @@ describe("Builder page", () => {
         expect(localStorage.getItem("chakra-ui-color-mode")).to.eq("dark");
       });
   });
+  it("PDF viewer", () => {
+    cy.get("[data-cy=more-button]").click();
+    cy.get("[data-cy=pdf-viewer-switch]").click();
+    cy.get("iframe").should("exist");
+  });
+  it("Dev tools", () => {
+    cy.get("[data-cy=more-button]").click();
+    cy.get("[data-cy=dev-tools-switch]")
+      .click()
+      .should(() => {
+        expect(localStorage.getItem("devTools")).to.eq("true");
+      });
+  });
 });
