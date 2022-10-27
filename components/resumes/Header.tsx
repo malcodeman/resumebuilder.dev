@@ -49,9 +49,6 @@ function Header() {
             <NavLink href="/templates" mr="4">
               <Text>{t("templates")}</Text>
             </NavLink>
-            <NavLink href="/downloads" mr="4">
-              <Text>{t("downloads")}</Text>
-            </NavLink>
           </Flex>
           {dashboard ? (
             <Flex>
