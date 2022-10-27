@@ -63,6 +63,7 @@ import { Resume, View } from "../../types";
 import SearchInput from "../../components/misc/SearchInput";
 import DeleteResumeMenuItem from "../../components/resumes/DeleteResumeMenuItem";
 import CreateNewResumeButtonGroup from "../../components/resumes/CreateNewResumeButtonGroup";
+import CopyLinkMenuItem from "../../components/resumes/CopyLinkMenuItem";
 
 function ResumeGrid() {
   const { t } = useTranslation();
@@ -137,6 +138,7 @@ function ResumeGrid() {
                 >
                   {t("duplicate")}
                 </MenuItem>
+                <CopyLinkMenuItem id={info.getValue()} />
                 <DeleteResumeMenuItem
                   onDelete={() => handleOnDelete(info.getValue())}
                 />
