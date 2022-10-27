@@ -39,12 +39,24 @@ describe("Resumes page", () => {
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
     cy.url().should("include", "/resumes/");
   });
-  it("Rename resume", () => {
+  it("Rename resume | Grid view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
     cy.get("[data-cy=title-editable]").click();
     cy.get("[data-cy=title-input]")
-      .type("malcodeman{enter}")
-      .should("have.value", "malcodeman");
+      .type("malcodeman")
+      .should("have.value", "malcodeman")
+      .type("{enter}");
+    cy.get("[data-cy=title-preview]").should("have.text", "malcodeman");
+  });
+  it("Rename resume | List view", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.get("[data-cy=list-view-icon-button]").click();
+    cy.get("[data-cy=title-editable]").click();
+    cy.get("[data-cy=title-input]")
+      .type("malcodeman")
+      .should("have.value", "malcodeman")
+      .type("{enter}");
+    cy.get("[data-cy=title-preview]").should("have.text", "malcodeman");
   });
   it("Dark mode", () => {
     cy.get("[data-cy=more-options-menu-button]").click();

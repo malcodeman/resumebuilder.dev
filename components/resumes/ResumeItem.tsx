@@ -153,7 +153,12 @@ function ResumeItem(props: props) {
             width="100%"
             data-cy="title-editable"
           >
-            <EditablePreview ref={ref} noOfLines={1} overflowWrap="anywhere" />
+            <EditablePreview
+              ref={ref}
+              noOfLines={1}
+              overflowWrap="anywhere"
+              data-cy="title-preview"
+            />
             <EditableInput {...form.register("title")} data-cy="title-input" />
           </Editable>
           <Menu>

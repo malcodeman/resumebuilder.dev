@@ -64,6 +64,7 @@ import SearchInput from "../../components/misc/SearchInput";
 import DeleteResumeMenuItem from "../../components/resumes/DeleteResumeMenuItem";
 import CreateNewResumeButtonGroup from "../../components/resumes/CreateNewResumeButtonGroup";
 import CopyLinkMenuItem from "../../components/resumes/CopyLinkMenuItem";
+import ResumeTitleColumn from "../../components/resumes/ResumeTitleColumn";
 
 function ResumeGrid() {
   const { t } = useTranslation();
@@ -98,7 +99,12 @@ function ResumeGrid() {
     () => [
       columnHelper.accessor("title", {
         header: t("title"),
-        cell: (info) => info.getValue(),
+        cell: (info) => (
+          <ResumeTitleColumn
+            id={info.row.original.id}
+            defaultValue={info.getValue()}
+          />
+        ),
       }),
       columnHelper.accessor("updatedAt", {
         header: t("edited"),
@@ -241,6 +247,7 @@ function ResumeGrid() {
             icon={<FiGrid />}
             onClick={() => setView("grid")}
             isActive={equals(view, "grid")}
+            data-cy="grid-view-icon-button"
           />
           <IconButton
             size="sm"
@@ -248,6 +255,7 @@ function ResumeGrid() {
             icon={<FiList />}
             onClick={() => setView("list")}
             isActive={equals(view, "list")}
+            data-cy="list-view-icon-button"
           />
         </ButtonGroup>
         <CreateNewResumeButtonGroup />
