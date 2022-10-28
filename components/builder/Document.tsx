@@ -23,10 +23,10 @@ const PAGE_SIZE = {
 
 function Document(props: props) {
   const { form } = props;
-  const [isFullWidth] = useLocalStorageValue("isFullWidth", false, {
+  const [isFullWidth] = useLocalStorageValue("is-full-width", false, {
     initializeWithStorageValue: false,
   });
-  const [isPdfViewer] = useLocalStorageValue("isPdfViewer", false, {
+  const [isPdfViewer] = useLocalStorageValue("is-pdf-viewer", false, {
     initializeWithStorageValue: false,
   });
   const watch = useWatch({

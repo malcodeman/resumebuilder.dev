@@ -30,6 +30,14 @@ describe("Builder page", () => {
     cy.contains("Slug changed");
     cy.url().should("eq", `${Cypress.config().baseUrl}/resumes/malcodeman`);
   });
+  it("Full width", () => {
+    cy.get("[data-cy=more-button]").click();
+    cy.get("[data-cy=full-width-switch]")
+      .click()
+      .should(() => {
+        expect(localStorage.getItem("is-full-width")).to.eq("true");
+      });
+  });
   it("Dark mode", () => {
     cy.get("[data-cy=more-button]").click();
     cy.get("[data-cy=dark-mode-switch]")
@@ -40,15 +48,18 @@ describe("Builder page", () => {
   });
   it("PDF viewer", () => {
     cy.get("[data-cy=more-button]").click();
-    cy.get("[data-cy=pdf-viewer-switch]").click();
-    cy.get("iframe").should("exist");
+    cy.get("[data-cy=pdf-viewer-switch]")
+      .click()
+      .should(() => {
+        expect(localStorage.getItem("is-pdf-viewer")).to.eq("true");
+      });
   });
   it("Dev tools", () => {
     cy.get("[data-cy=more-button]").click();
     cy.get("[data-cy=dev-tools-switch]")
       .click()
       .should(() => {
-        expect(localStorage.getItem("devTools")).to.eq("true");
+        expect(localStorage.getItem("dev-tools")).to.eq("true");
       });
   });
 });

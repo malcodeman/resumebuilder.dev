@@ -43,7 +43,7 @@ function ExportResumeModal(props: props) {
   } = props;
   const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
-  const [isPdfViewer] = useLocalStorageValue("isPdfViewer", false, {
+  const [isPdfViewer] = useLocalStorageValue("is-pdf-viewer", false, {
     initializeWithStorageValue: false,
   });
 

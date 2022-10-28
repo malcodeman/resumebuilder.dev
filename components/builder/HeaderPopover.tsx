@@ -63,7 +63,7 @@ type props = {
 function FullWidth() {
   const { t } = useTranslation();
   const [isFullWidth, setIsFullWidth] = useLocalStorageValue(
-    "isFullWidth",
+    "is-full-width",
     false,
     { initializeWithStorageValue: false }
   );
@@ -88,6 +88,7 @@ function FullWidth() {
         isChecked={isFullWidth}
         onChange={() => setIsFullWidth(!isFullWidth)}
         id="is-full-width"
+        data-cy="full-width-switch"
       />
     </FormControl>
   );
@@ -126,7 +127,7 @@ function DarkModeToggle() {
 function PdfViewer() {
   const { t } = useTranslation();
   const [isPdfViewer, setIsPdfViewer] = useLocalStorageValue(
-    "isPdfViewer",
+    "is-pdf-viewer",
     false,
     {
       initializeWithStorageValue: false,
@@ -161,7 +162,7 @@ function PdfViewer() {
 
 function DevToolsToggle() {
   const { t } = useTranslation();
-  const [devTools, setDevTools] = useLocalStorageValue("devTools", false, {
+  const [devTools, setDevTools] = useLocalStorageValue("dev-tools", false, {
     initializeWithStorageValue: false,
   });
   return (

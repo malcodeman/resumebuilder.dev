@@ -32,7 +32,7 @@ function HeaderMobile(props: props) {
     "rgba(0, 0, 0, 0.03) 0px -2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0 -2px 0 0"
   );
-  const [devTools] = useLocalStorageValue("devTools", false, {
+  const [devTools] = useLocalStorageValue("dev-tools", false, {
     initializeWithStorageValue: false,
   });
 

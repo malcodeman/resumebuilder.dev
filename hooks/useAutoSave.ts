@@ -13,7 +13,7 @@ type props = {
 
 function useAutoSave(props: props) {
   const { form } = props;
-  const [isPdfViewer] = useLocalStorageValue("isPdfViewer", false, {
+  const [isPdfViewer] = useLocalStorageValue("is-pdf-viewer", false, {
     initializeWithStorageValue: false,
   });
   const { setResume } = useResume({ isolated: true });

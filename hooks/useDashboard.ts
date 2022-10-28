@@ -2,7 +2,7 @@ import { useLocalStorageValue } from "@react-hookz/web";
 
 function useDashboard() {
   const [dashboard, setDashboard] = useLocalStorageValue(
-    "showDashboard",
+    "view-dashboard",
     false,
     {
       initializeWithStorageValue: false,

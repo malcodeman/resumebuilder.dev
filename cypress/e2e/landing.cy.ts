@@ -7,7 +7,7 @@ describe("Landing page", () => {
     cy.get("[data-cy=dashboard-button]")
       .click()
       .should(() => {
-        expect(JSON.parse(localStorage.getItem("showDashboard"))).to.be.true;
+        expect(JSON.parse(localStorage.getItem("view-dashboard"))).to.be.true;
       });
     cy.url().should("eq", `${Cypress.config().baseUrl}/resumes`);
   });
@@ -16,7 +16,7 @@ describe("Landing page", () => {
       .click()
       .should(() => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
-        expect(JSON.parse(localStorage.getItem("showDashboard"))).to.be.true;
+        expect(JSON.parse(localStorage.getItem("view-dashboard"))).to.be.true;
       });
     cy.url().should("include", "/resumes/");
   });
@@ -37,7 +37,7 @@ describe("Landing page", () => {
       .click()
       .should(() => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
-        expect(JSON.parse(localStorage.getItem("showDashboard"))).to.be.true;
+        expect(JSON.parse(localStorage.getItem("view-dashboard"))).to.be.true;
       });
     cy.url().should("include", "/resumes/");
   });
