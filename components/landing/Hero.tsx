@@ -34,7 +34,10 @@ function Hero() {
 
   return (
     <Grid
-      as="section"
+      as={motion.section}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
       templateColumns={["1fr", "repeat(2, 1fr)"]}
       gap="8"
       mb="32"

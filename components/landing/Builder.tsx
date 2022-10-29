@@ -8,13 +8,22 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
+import { motion } from "framer-motion";
 
 import Poser16 from "../../illustrations/Poser16";
 
 function Builder() {
   const { t } = useTranslation();
   return (
-    <Grid as="section" templateColumns={["1fr", "1fr 1fr"]} gap="8" mb="32">
+    <Grid
+      as={motion.section}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      templateColumns={["1fr", "1fr 1fr"]}
+      gap="8"
+      mb="32"
+    >
       <Center>
         <Box>
           <Text mb="4" fontSize="xs" fontWeight="700" textTransform="uppercase">

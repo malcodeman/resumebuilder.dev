@@ -2,6 +2,7 @@ import { Heading, Grid, Box, Text, Center } from "@chakra-ui/react";
 import { map } from "ramda";
 import { FiLock, FiGift, FiFastForward } from "react-icons/fi";
 import { useTranslation } from "next-i18next";
+import { motion } from "framer-motion";
 
 const FEATURES = [
   {
@@ -24,7 +25,13 @@ const FEATURES = [
 function Features() {
   const { t } = useTranslation();
   return (
-    <Box as="section" mb="32">
+    <Box
+      as={motion.section}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      mb="32"
+    >
       <Center mb="16">
         <Heading>{t("privacy_focused_and_login_free")}</Heading>
       </Center>

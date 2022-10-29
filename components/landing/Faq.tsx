@@ -17,6 +17,7 @@ import {
 import { FiCheckCircle, FiCircle } from "react-icons/fi";
 import { map } from "ramda";
 import { Trans, useTranslation } from "next-i18next";
+import { motion } from "framer-motion";
 
 function Faq() {
   const { t } = useTranslation();
@@ -158,7 +159,13 @@ function Faq() {
   );
 
   return (
-    <Box as="section" mb="32">
+    <Box
+      as={motion.section}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      mb="32"
+    >
       <Heading mb="4">{t("frequently_asked_questions")}</Heading>
       <Accordion defaultIndex={[0]} allowMultiple>
         {map(
