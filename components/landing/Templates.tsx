@@ -50,7 +50,13 @@ function Templates() {
   }
 
   return (
-    <Box as="section" mb="32">
+    <Box
+      as={motion.section}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      mb="32"
+    >
       <Box width={["100%", "100%", "50%"]}>
         <Heading mb="4">{t("start_with_template")}</Heading>
         <Text mb="4">

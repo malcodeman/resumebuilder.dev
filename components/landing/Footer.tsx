@@ -44,7 +44,12 @@ function Footer() {
   }
 
   return (
-    <Box as="section">
+    <Box
+      as={motion.section}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
       <Center flexDirection="column" mb="16">
         <Heading mb="4">{t("get_started_with_resume_builder")}</Heading>
         <Button
