@@ -16,7 +16,7 @@ function useAutoSave(props: props) {
   const [isPdfViewer] = useLocalStorageValue("is-pdf-viewer", false, {
     initializeWithStorageValue: false,
   });
-  const { setResume } = useResume({ isolated: true });
+  const { setResume } = useResume();
   const watch = useWatch({
     control: form.control,
     name: ["design", "about", "section"],

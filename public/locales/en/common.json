@@ -160,5 +160,6 @@
   "save_message_description_3": "Don't worry about this save stuff. We got you. 💪",
   "no_items_inside": "No items inside",
   "give_feedback": "Give feedback",
-  "resume_404_description": "Sorry, the resume you were looking for was not found."
+  "resume_404_description": "Sorry, the resume you were looking for was not found.",
+  "resume_duplicated": "Resume duplicated"
 }

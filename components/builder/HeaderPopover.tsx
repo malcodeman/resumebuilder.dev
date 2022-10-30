@@ -27,6 +27,7 @@ import {
   FiLayers,
   FiDatabase,
   FiEdit,
+  FiCopy,
 } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
@@ -217,6 +218,33 @@ function ShowTemplates(props: {
   );
 }
 
+function Duplicate() {
+  const { t } = useTranslation();
+  const toast = useToast();
+  const { duplicate } = useResume();
+
+  function handleOnDuplicate() {
+    duplicate();
+    toast({
+      description: t("resume_duplicated"),
+      isClosable: true,
+    });
+  }
+
+  return (
+    <Button
+      size="sm"
+      mb="2"
+      justifyContent="flex-start"
+      data-cy="duplicate-button"
+      leftIcon={<FiCopy />}
+      onClick={handleOnDuplicate}
+    >
+      {t("duplicate")}
+    </Button>
+  );
+}
+
 function CopyLink() {
   const { t } = useTranslation();
   const { hasCopied, onCopy } = useClipboard(
@@ -300,7 +328,7 @@ function DeleteResume() {
   const { t } = useTranslation();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { remove } = useResume();
+  const { remove } = useResume({ isolated: true });
   const toast = useToast();
 
   function handleOnDelete() {
@@ -453,6 +481,7 @@ function HeaderPopover(props: props) {
                 <Divider marginY="2" />
                 <LanguageSelect mb="2" />
                 <ShowTemplates onChangeTemplate={onChangeTemplate} />
+                <Duplicate />
                 <CopyLink />
                 <ChangeSlug />
                 {devTools ? <GenerateFakeData onImport={onImport} /> : null}

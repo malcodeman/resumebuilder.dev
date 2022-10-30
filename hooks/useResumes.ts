@@ -8,6 +8,7 @@ import {
   map,
   propEq,
   move as ramdaMove,
+  clone,
 } from "ramda";
 
 import { DEFAULT_VALUES } from "../lib/constants";
@@ -47,7 +48,7 @@ function useResumes(props: props = {}) {
   function duplicate(id: string) {
     const resume = find((item) => equals(item.id, id), resumes);
     const value = {
-      ...resume,
+      ...clone(resume),
       id: nanoid(),
       title: `${resume.title} copy`,
       createdAt: Date.now(),
