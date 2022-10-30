@@ -160,5 +160,6 @@
   "save_message_description_3": "Machen Sie sich keine Sorgen um dieses Sicherungsmaterial. Wir haben dich. 💪",
   "no_items_inside": "Keine Gegenstände drin",
   "give_feedback": "Feedback geben",
-  "resume_404_description": "Entschuldigung, der gesuchte Lebenslauf wurde nicht gefunden."
+  "resume_404_description": "Entschuldigung, der gesuchte Lebenslauf wurde nicht gefunden.",
+  "resume_duplicated": "Lebenslauf dupliziert"
 }

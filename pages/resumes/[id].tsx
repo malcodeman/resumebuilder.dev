@@ -21,7 +21,7 @@ import { Resume } from "../../types";
 
 function Builder() {
   const { t } = useTranslation();
-  const { resume, isLoading } = useResume();
+  const { resume, isLoading } = useResume({ isolated: true });
   const form = useForm<Resume>();
   const { setDashboard } = useDashboard();
   const isLargeDevice = useMediaQuery("(min-width: 62em)");

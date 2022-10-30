@@ -1,6 +1,7 @@
 import { useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
-import { isNil, find, map, filter, equals, or } from "ramda";
+import { isNil, find, map, filter, equals, or, clone } from "ramda";
+import { nanoid } from "nanoid";
 
 import { Resume } from "../types";
 
@@ -77,6 +78,17 @@ function useResume(props: props = {}) {
     return undefined;
   }
 
+  function duplicate() {
+    const value = {
+      ...clone(resume),
+      id: nanoid(),
+      title: `${resume.title} copy`,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
+    setResumes([...resumes, value]);
+  }
+
   return {
     resume,
     isLoading,
@@ -85,6 +97,7 @@ function useResume(props: props = {}) {
     changeTitle,
     changeIcon,
     changeSlug,
+    duplicate,
   };
 }
 
