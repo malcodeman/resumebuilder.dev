@@ -37,6 +37,7 @@ function LanguageSelect(props: BoxProps) {
           variant="filled"
           size="sm"
           borderRadius="md"
+          data-cy="language-select"
           {...form.register("language")}
         >
           {map(

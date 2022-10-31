@@ -166,7 +166,7 @@ function ResumeItem(props: props) {
               as={IconButton}
               size="sm"
               aria-label="More options"
-              data-cy="more-options-btn"
+              data-cy="resume-more-options-menu-button"
               icon={<FiMoreHorizontal />}
               mr="2"
               display="none"
@@ -176,14 +176,14 @@ function ResumeItem(props: props) {
               <MenuItem
                 icon={<FiEdit />}
                 onClick={() => ref.current.focus()}
-                data-cy="rename-btn"
+                data-cy="rename-menu-item"
               >
                 {t("rename")}
               </MenuItem>
               <MenuItem
                 icon={<FiCopy />}
                 onClick={() => onDuplicate(resume.id)}
-                data-cy="duplicate-btn"
+                data-cy="duplicate-menu-item"
               >
                 {t("duplicate")}
               </MenuItem>
