@@ -36,11 +36,17 @@ describe("Templates page", () => {
     cy.get("[data-cy=templates-grid]").children().should("have.length", count);
   });
   it("Use berlin template", () => {
+    cy.intercept({
+      method: "GET",
+      url: "**/resumes/**",
+    }).as("getResume");
     cy.get("[data-cy=use-template-button]")
       .first()
       .click()
       .should(() => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
       });
+    cy.wait("@getResume");
+    cy.url().should("include", "/resumes/");
   });
 });
