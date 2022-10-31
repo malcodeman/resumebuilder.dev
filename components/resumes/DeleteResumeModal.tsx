@@ -42,7 +42,12 @@ function DeleteResumeModal(props: props) {
           >
             {t("cancel")}
           </Button>
-          <Button size="sm" colorScheme="red" onClick={onSubmit}>
+          <Button
+            size="sm"
+            colorScheme="red"
+            data-cy="delete-this-resume-button"
+            onClick={onSubmit}
+          >
             {t("yes_delete_this_resume")}
           </Button>
         </AlertDialogFooter>

@@ -24,7 +24,7 @@ function UserMenu() {
         size="sm"
         aria-label="More options"
         icon={<FiMoreVertical />}
-        data-cy="more-options-menu-button"
+        data-cy="header-more-options-menu-button"
       />
       <MenuList>
         <Link href={FEEDBACK_LINK} isExternal>

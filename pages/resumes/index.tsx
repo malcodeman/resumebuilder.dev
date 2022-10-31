@@ -235,6 +235,7 @@ function ResumeGrid() {
       <Flex mb="4">
         <SearchInput
           mr="2"
+          data-cy="search-input"
           placeholder={t("search_n_resumes", { n: length(resumes) })}
           value={search}
           onChangeValue={(nextValue) => setSearch(nextValue)}
