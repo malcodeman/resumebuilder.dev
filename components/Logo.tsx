@@ -14,7 +14,7 @@ function Logo(props: props) {
         <Box marginRight="2">
           <FiFileText />
         </Box>
-        <Text>resumebuilder.dev</Text>
+        <Text data-cy="resumebuilder-text">resumebuilder.dev</Text>
       </Flex>
     </Link>
   );

@@ -58,7 +58,7 @@ function TemplatesModal(props: props) {
   return (
     <Modal size="6xl" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent data-cy="templates-modal-content">
         <ModalHeader>{t("template_gallery")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
