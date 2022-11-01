@@ -149,15 +149,36 @@ describe("Resumes page", () => {
     cy.get("[data-cy=duplicate-menu-item]").click();
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
   });
+  it("Duplicate resume | List view", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.get("[data-cy=list-view-icon-button]").click();
+    cy.get("[data-cy=resume-more-options-menu-button]").click();
+    cy.get("[data-cy=duplicate-menu-item]").click();
+    cy.get("[data-cy=table-row]").should("have.length", 2);
+  });
   it("Copy resume link | Grid view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
     cy.get("[data-cy=resume-more-options-menu-button]").click({ force: true });
+    cy.get("[data-cy=copy-link-menu-item]").should("exist");
+  });
+  it("Copy resume link | List view", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.get("[data-cy=list-view-icon-button]").click();
+    cy.get("[data-cy=resume-more-options-menu-button]").click();
     cy.get("[data-cy=copy-link-menu-item]").should("exist");
   });
   it("Delete resume | Grid view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
     cy.get("[data-cy=resume-more-options-menu-button]").click({ force: true });
     cy.get("[data-cy=delete-menu-item]").click();
+    cy.get("[data-cy=delete-this-resume-button]").click();
+    cy.contains("Resume deleted");
+  });
+  it("Delete resume | List view", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.get("[data-cy=list-view-icon-button]").click();
+    cy.get("[data-cy=resume-more-options-menu-button]").click();
+    cy.get("[data-cy=delete-menu-item]").click({ force: true });
     cy.get("[data-cy=delete-this-resume-button]").click();
     cy.contains("Resume deleted");
   });

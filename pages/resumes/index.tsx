@@ -130,6 +130,7 @@ function ResumeGrid() {
                 size="sm"
                 as={IconButton}
                 aria-label="More options"
+                data-cy="resume-more-options-menu-button"
                 icon={<FiMoreHorizontal />}
               />
               <MenuList>
@@ -141,6 +142,7 @@ function ResumeGrid() {
                 <MenuItem
                   onClick={() => duplicate(info.getValue())}
                   icon={<FiCopy />}
+                  data-cy="duplicate-menu-item"
                 >
                   {t("duplicate")}
                 </MenuItem>

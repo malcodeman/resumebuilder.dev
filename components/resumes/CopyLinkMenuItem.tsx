@@ -8,7 +8,7 @@ type props = {
   id: string;
 };
 
-function DeleteResumeMenuItem(props: props) {
+function CopyLinkMenuItem(props: props) {
   const { id } = props;
   const { t } = useTranslation();
   const { onCopy } = useClipboard(
@@ -25,10 +25,14 @@ function DeleteResumeMenuItem(props: props) {
   }
 
   return (
-    <MenuItem icon={<FiLink />} onClick={handleOnCopyLink}>
+    <MenuItem
+      icon={<FiLink />}
+      onClick={handleOnCopyLink}
+      data-cy="copy-link-menu-item"
+    >
       {t("copy_link")}
     </MenuItem>
   );
 }
 
-export default DeleteResumeMenuItem;
+export default CopyLinkMenuItem;
