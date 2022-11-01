@@ -3,6 +3,10 @@ beforeEach(() => {
 });
 
 describe("Landing page", () => {
+  it("Templates page", () => {
+    cy.get("[data-cy=templates-text]").click();
+    cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
+  });
   it("German language", () => {
     cy.get("[data-cy=language-select]").select("de");
     cy.url().should("eq", `${Cypress.config().baseUrl}/de`);
@@ -45,6 +49,10 @@ describe("Landing page", () => {
       });
     cy.wait("@getResume");
     cy.url().should("include", "/resumes/");
+  });
+  it("FAQ", () => {
+    cy.get("[data-cy=accordion-button]").click({ multiple: true });
+    cy.get("[data-cy=accordion-panel]").should("have.length", 6);
   });
   it("Build for free button", () => {
     cy.intercept({

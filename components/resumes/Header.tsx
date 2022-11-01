@@ -44,10 +44,10 @@ function Header() {
               <Logo href={homeHref} />
             </Box>
             <NavLink href={homeHref} mr="4">
-              <Text>{t("home")}</Text>
+              <Text data-cy="home-text">{t("home")}</Text>
             </NavLink>
             <NavLink href="/templates" mr="4">
-              <Text>{t("templates")}</Text>
+              <Text data-cy="templates-text">{t("templates")}</Text>
             </NavLink>
           </Flex>
           {dashboard ? (
