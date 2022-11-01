@@ -5,10 +5,6 @@ beforeEach(() => {
 });
 
 describe("Resumes page", () => {
-  it("German language", () => {
-    cy.get("[data-cy=language-select]").select("de");
-    cy.url().should("eq", `${Cypress.config().baseUrl}/de/resumes`);
-  });
   it("Dark mode", () => {
     cy.get("[data-cy=header-more-options-menu-button]").click();
     cy.get("[data-cy=dark-mode-menu-item]")
@@ -18,28 +14,26 @@ describe("Resumes page", () => {
       });
   });
   it("Start from scratch button", () => {
+    cy.intercept({
+      method: "GET",
+      url: "**/resumes/**",
+    }).as("getResume");
     cy.get("[data-cy=start-from-scratch]")
       .click()
       .should(() => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
       });
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 1);
+    cy.wait("@getResume");
+    cy.url().should("include", "/resumes/");
+  });
+  it("Quicky upload button", () => {
+    cy.get("[data-cy=quickly-upload]").click();
+    cy.get("[data-cy=import-data-modal-content]").should("exist");
   });
   it("Start with templates button", () => {
     cy.get("[data-cy=start-with-templates]").click();
     cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
-  });
-  it("Import from GitHub | Quicky upload", () => {
-    cy.get("[data-cy=quickly-upload]").click();
-    cy.get("[data-cy=import-github]").click();
-    cy.get("[data-cy=import-github-username]").type("malcodeman");
-    cy.get("[data-cy=import-github-submit]")
-      .click()
-      .should(() => {
-        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
-      });
-    cy.get("[data-cy=resumes-grid]").children().should("have.length", 1);
-    cy.url().should("include", "/resumes/");
   });
   it("Search | Not found", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
@@ -51,14 +45,73 @@ describe("Resumes page", () => {
     cy.get("[data-cy=search-input]").type("Cypress");
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 1);
   });
+  it("List view", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.get("[data-cy=list-view-icon-button]").click();
+    cy.get("[data-cy=table-row]").should("have.length", 1);
+  });
   it("Create resume button", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
-    cy.get("[data-cy=create-resume-btn]")
+    cy.intercept({
+      method: "GET",
+      url: "**/resumes/**",
+    }).as("getResume");
+    cy.get("[data-cy=create-resume-button]")
       .click()
       .should(() => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
       });
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
+    cy.wait("@getResume");
+    cy.url().should("include", "/resumes/");
+  });
+  it("GitHub | Import", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    const username = "malcodeman";
+    cy.intercept({
+      method: "GET",
+      url: `https://api.github.com/users/${username}`,
+    }).as("getUser");
+    cy.intercept({
+      method: "GET",
+      url: `https://api.github.com/users/${username}/repos`,
+    }).as("getRepos");
+    cy.intercept({
+      method: "GET",
+      url: "**/resumes/**",
+    }).as("getResume");
+    cy.get("[data-cy=import-icon-button]").click();
+    cy.get("[data-cy=import-github]").click();
+    cy.get("[data-cy=import-github-username]").type(username);
+    cy.get("[data-cy=import-github-submit]")
+      .click()
+      .should(() => {
+        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
+      });
+    cy.wait("@getUser");
+    cy.wait("@getRepos");
+    cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
+    cy.wait("@getResume");
+    cy.url().should("include", "/resumes/");
+  });
+  it("Paste data | Import", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.intercept({
+      method: "GET",
+      url: "**/resumes/**",
+    }).as("getResume");
+    cy.get("[data-cy=import-icon-button]").click();
+    cy.get("[data-cy=import-pasteData]").click();
+    cy.get("[data-cy=data-textarea]").type(JSON.stringify(resumes[0]), {
+      parseSpecialCharSequences: false,
+    });
+    cy.get("[data-cy=import-button]")
+      .click()
+      .should(() => {
+        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
+      });
+    cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
+    cy.wait("@getResume");
     cy.url().should("include", "/resumes/");
   });
   it("Rename resume | Grid view", () => {
@@ -95,6 +148,11 @@ describe("Resumes page", () => {
     cy.get("[data-cy=resume-more-options-menu-button]").click({ force: true });
     cy.get("[data-cy=duplicate-menu-item]").click();
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
+  });
+  it("Copy resume link | Grid view", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.get("[data-cy=resume-more-options-menu-button]").click({ force: true });
+    cy.get("[data-cy=copy-link-menu-item]").should("exist");
   });
   it("Delete resume | Grid view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));

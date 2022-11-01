@@ -49,12 +49,21 @@ function ImportFromPasteData(props: props) {
       <Text mb="2">{t("paste_data_description")}</Text>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormControl mb="4" isInvalid={Boolean(form.formState.errors.data)}>
-          <Textarea variant="filled" {...form.register("data")} />
+          <Textarea
+            variant="filled"
+            data-cy="data-textarea"
+            {...form.register("data")}
+          />
           <FormErrorMessage>
             {form.formState.errors.data?.message}
           </FormErrorMessage>
         </FormControl>
-        <Button size="sm" colorScheme="blue" type="submit">
+        <Button
+          size="sm"
+          colorScheme="blue"
+          type="submit"
+          data-cy="import-button"
+        >
           {t("import")}
         </Button>
       </form>

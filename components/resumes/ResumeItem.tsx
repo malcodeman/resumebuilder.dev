@@ -187,7 +187,11 @@ function ResumeItem(props: props) {
               >
                 {t("duplicate")}
               </MenuItem>
-              <MenuItem icon={<FiLink />} onClick={handleOnCopyLink}>
+              <MenuItem
+                icon={<FiLink />}
+                onClick={handleOnCopyLink}
+                data-cy="copy-link-menu-item"
+              >
                 {t("copy_link")}
               </MenuItem>
               <DeleteResumeMenuItem onDelete={() => onDelete(resume.id)} />

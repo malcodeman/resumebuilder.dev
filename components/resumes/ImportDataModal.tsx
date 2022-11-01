@@ -134,7 +134,7 @@ function ImportDataModal(props: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent data-cy="import-data-modal-content">
         <ModalHeader>
           {isEmpty(source) ? (
             <Text>{t("import_data")}</Text>
