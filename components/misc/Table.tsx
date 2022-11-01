@@ -62,7 +62,7 @@ function Table(props: props) {
       </Thead>
       <Tbody>
         {table.getRowModel().rows.map((row) => (
-          <Tr key={row.id}>
+          <Tr key={row.id} data-cy="table-row">
             {row.getVisibleCells().map((cell) => (
               <Td key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}

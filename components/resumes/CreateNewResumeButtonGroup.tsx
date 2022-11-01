@@ -54,7 +54,7 @@ function NewButton() {
         {isMediumDevice ? (
           <Button
             mr="-px"
-            data-cy="create-resume-btn"
+            data-cy="create-resume-button"
             isLoading={isLoading}
             onClick={handleOnCreateNew}
           >
@@ -96,7 +96,7 @@ function ImportButton() {
     <>
       <IconButton
         aria-label="Import"
-        data-cy="import-button"
+        data-cy="import-icon-button"
         onClick={onOpen}
         icon={<FiUpload />}
       />
