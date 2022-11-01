@@ -7,6 +7,14 @@ beforeEach(() => {
 });
 
 describe("Templates page", () => {
+  it("Search | Not found", () => {
+    cy.get("[data-cy=search-input]").type("malcodeman");
+    cy.contains("No templates found");
+  });
+  it("Search | Found", () => {
+    cy.get("[data-cy=search-input]").type("London");
+    cy.get("[data-cy=templates-grid]").children().should("have.length", 1);
+  });
   it("All templates", () => {
     cy.get(`[data-cy=template-filters-all]`).click();
     const count = length(
@@ -35,13 +43,27 @@ describe("Templates page", () => {
     );
     cy.get("[data-cy=templates-grid]").children().should("have.length", count);
   });
-  it("Use berlin template", () => {
+  it("Use first template", () => {
     cy.intercept({
       method: "GET",
       url: "**/resumes/**",
     }).as("getResume");
     cy.get("[data-cy=use-template-button]")
       .first()
+      .click()
+      .should(() => {
+        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
+      });
+    cy.wait("@getResume");
+    cy.url().should("include", "/resumes/");
+  });
+  it("Use last template", () => {
+    cy.intercept({
+      method: "GET",
+      url: "**/resumes/**",
+    }).as("getResume");
+    cy.get("[data-cy=use-template-button]")
+      .last()
       .click()
       .should(() => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");

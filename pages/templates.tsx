@@ -58,6 +58,7 @@ function Templates() {
       <Layout>
         <SearchInput
           mb="4"
+          data-cy="search-input"
           value={template}
           placeholder={t("search_n_templates", {
             n: length(filteredTemplatesByTags),
