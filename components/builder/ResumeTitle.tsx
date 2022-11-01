@@ -44,9 +44,14 @@ function ResumeTitle(props: props) {
           onSubmit={(nextValue) => handleOnTitleChange(nextValue)}
           ml="2"
           maxWidth="256px"
+          data-cy="title-editable"
         >
-          <EditablePreview noOfLines={1} overflowWrap="anywhere" />
-          <EditableInput data-cy="resume-title" {...form.register("title")} />
+          <EditablePreview
+            noOfLines={1}
+            overflowWrap="anywhere"
+            data-cy="title-preview"
+          />
+          <EditableInput data-cy="title-input" {...form.register("title")} />
         </Editable>
       </Flex>
     );

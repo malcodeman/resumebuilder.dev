@@ -33,7 +33,13 @@ function ShowTemplates(props: {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button mr="2" size="sm" leftIcon={<FiLayers />} onClick={onOpen}>
+      <Button
+        mr="2"
+        size="sm"
+        leftIcon={<FiLayers />}
+        onClick={onOpen}
+        data-cy="header-templates-button"
+      >
         {t("templates")}
       </Button>
       <TemplatesModal
@@ -91,7 +97,12 @@ function Header(props: props) {
         <ResumeTitle form={form} />
         <Flex>
           <ShowTemplates onChangeTemplate={handleOnChangeTemplate} />
-          <Button mr="2" size="sm" onClick={handleOnExportAsPdf}>
+          <Button
+            mr="2"
+            size="sm"
+            onClick={handleOnExportAsPdf}
+            data-cy="header-export-pdf-button"
+          >
             {t("export_pdf")}
           </Button>
           <FormProvider {...form}>

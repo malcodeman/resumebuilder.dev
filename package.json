@@ -8,7 +8,7 @@
     "start": "next start",
     "cypress:open": "cypress open",
     "cypress:ci": " cypress run --headless",
-    "cy:run": "cypress run",
+    "cypress:builder": "cypress run --spec cypress/e2e/builder.cy.ts",
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "serve": "serve out"

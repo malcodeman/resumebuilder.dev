@@ -204,6 +204,7 @@ function ShowTemplates(props: {
         size="sm"
         mb="2"
         justifyContent="flex-start"
+        data-cy="templates-button"
         leftIcon={<FiLayers />}
         onClick={onOpen}
       >
@@ -255,6 +256,7 @@ function CopyLink() {
       size="sm"
       mb="2"
       justifyContent="flex-start"
+      data-cy="copy-link-button"
       leftIcon={<FiLink />}
       onClick={onCopy}
     >
@@ -315,6 +317,7 @@ function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
         size="sm"
         mb="2"
         justifyContent="flex-start"
+        data-cy="generate-fake-data-button"
         leftIcon={<FiDatabase />}
         onClick={() => onImport(utils.generateFakeResume())}
       >
@@ -345,6 +348,7 @@ function DeleteResume() {
       <Button
         size="sm"
         justifyContent="flex-start"
+        data-cy="delete-button"
         leftIcon={<FiTrash2 />}
         onClick={onOpen}
       >
@@ -369,6 +373,7 @@ function ImportData(props: { onImport: (fields: Fields) => void }) {
         size="sm"
         mb="2"
         justifyContent="flex-start"
+        data-cy="import-button"
         leftIcon={<FiUpload />}
         onClick={onOpen}
       >
@@ -393,6 +398,7 @@ function ExportResume(props: {
       <Button
         size="sm"
         justifyContent="flex-start"
+        data-cy="export-button"
         leftIcon={<FiDownload />}
         onClick={onOpen}
       >
