@@ -21,9 +21,6 @@ function useAutoSave(props: props) {
     control: form.control,
     name: ["design", "about", "section"],
   });
-  const design = watch[0];
-  const about = watch[1];
-  const section = watch[2];
   const delay = isPdfViewer ? 2000 : 200;
   const maxWait = isPdfViewer ? 5000 : 500;
 
@@ -40,20 +37,7 @@ function useAutoSave(props: props) {
         setResume(values);
       }
     },
-    [
-      design?.spacing,
-      design?.template,
-      about?.city,
-      about?.country,
-      about?.email,
-      about?.firstName,
-      about?.lastName,
-      about?.phone,
-      about?.summary,
-      about?.title,
-      about?.website,
-      section,
-    ],
+    [watch],
     delay,
     maxWait
   );
