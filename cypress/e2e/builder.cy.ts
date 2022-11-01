@@ -130,6 +130,6 @@ describe("Builder page", () => {
   it("Export", () => {
     cy.get("[data-cy=more-button]").click();
     cy.get("[data-cy=export-button]").click();
-    cy.get("[data-cy=export-modal-content]").should("exist");
+    cy.get("[data-cy=export-resume-modal-content]").should("exist");
   });
 });
