@@ -89,6 +89,8 @@ function useResumes(props: props = {}) {
       ...data?.fields,
       id: nanoid(),
       title: "Untitled resume",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
       design: {
         ...DEFAULT_VALUES.design,
         ...data?.design,
