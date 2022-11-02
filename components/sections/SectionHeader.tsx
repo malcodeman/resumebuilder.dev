@@ -66,7 +66,11 @@ function SectionHeader(props: props) {
 
   return (
     <h2>
-      <AccordionButton as="div" role="group">
+      <AccordionButton
+        as="div"
+        role="group"
+        data-cy="section-label-accordion-button"
+      >
         {isOpen ? (
           <FiChevronUp style={{ marginRight: "0.5rem" }} />
         ) : (

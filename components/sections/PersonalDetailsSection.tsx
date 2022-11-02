@@ -47,8 +47,16 @@ function Summary() {
       <GridItem colSpan={2}>
         <FormControl>
           <FormLabel>{t("summary")}</FormLabel>
-          <Textarea variant="filled" size="sm" {...register("about.summary")} />
-          <FormHelperText onClick={phrasesModal.onOpen}>
+          <Textarea
+            variant="filled"
+            size="sm"
+            data-cy="about-summary-textarea"
+            {...register("about.summary")}
+          />
+          <FormHelperText
+            onClick={phrasesModal.onOpen}
+            data-cy="add-pre-written-phrases-form-helper-text"
+          >
             {t("add_pre_written_phrases")}
           </FormHelperText>
         </FormControl>
@@ -79,7 +87,12 @@ function PersonalDetailsSection() {
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>{t("title")}</FormLabel>
-              <Input variant="filled" size="sm" {...register("about.title")} />
+              <Input
+                variant="filled"
+                size="sm"
+                data-cy="about-title-input"
+                {...register("about.title")}
+              />
             </FormControl>
           </GridItem>
           <GridItem colSpan={{ base: 2, md: 1 }}>
@@ -88,6 +101,7 @@ function PersonalDetailsSection() {
               <Input
                 variant="filled"
                 size="sm"
+                data-cy="about-first-name-input"
                 {...register("about.firstName")}
               />
             </FormControl>
@@ -98,6 +112,7 @@ function PersonalDetailsSection() {
               <Input
                 variant="filled"
                 size="sm"
+                data-cy="about-last-name-input"
                 {...register("about.lastName")}
               />
             </FormControl>
@@ -109,7 +124,11 @@ function PersonalDetailsSection() {
                 <InputLeftElement>
                   <FiMail />
                 </InputLeftElement>
-                <Input variant="filled" {...register("about.email")} />
+                <Input
+                  variant="filled"
+                  data-cy="about-email-input"
+                  {...register("about.email")}
+                />
               </InputGroup>
             </FormControl>
           </GridItem>
@@ -120,7 +139,11 @@ function PersonalDetailsSection() {
                 <InputLeftElement>
                   <FiPhone />
                 </InputLeftElement>
-                <Input variant="filled" {...register("about.phone")} />
+                <Input
+                  variant="filled"
+                  data-cy="about-phone-input"
+                  {...register("about.phone")}
+                />
               </InputGroup>
             </FormControl>
           </GridItem>
@@ -130,6 +153,7 @@ function PersonalDetailsSection() {
               <Input
                 variant="filled"
                 size="sm"
+                data-cy="about-website-input"
                 {...register("about.website")}
               />
             </FormControl>
@@ -137,7 +161,12 @@ function PersonalDetailsSection() {
           <GridItem colSpan={{ base: 2, md: 1 }}>
             <FormControl>
               <FormLabel>{t("city")}</FormLabel>
-              <Input variant="filled" size="sm" {...register("about.city")} />
+              <Input
+                variant="filled"
+                size="sm"
+                data-cy="about-city-input"
+                {...register("about.city")}
+              />
             </FormControl>
           </GridItem>
           <GridItem colSpan={{ base: 2, md: 1 }}>
@@ -146,6 +175,7 @@ function PersonalDetailsSection() {
               <Input
                 variant="filled"
                 size="sm"
+                data-cy="about-country-input"
                 {...register("about.country")}
               />
             </FormControl>

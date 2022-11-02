@@ -21,6 +21,47 @@
       "country": "Germany",
       "summary": ""
     },
-    "section": []
+    "section": [
+      {
+        "name": "employment",
+        "label": "Employment History",
+        "nested": [
+          {
+            "title": "",
+            "subtitle": "",
+            "website": "",
+            "city": "",
+            "startDate": "",
+            "endDate": "",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "education",
+        "label": "Education",
+        "nested": [
+          {
+            "title": "",
+            "subtitle": "",
+            "website": "",
+            "city": "",
+            "startDate": "",
+            "endDate": "",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "name": "skills",
+        "label": "Skills",
+        "tags": ""
+      },
+      {
+        "name": "hobbies",
+        "label": "Hobbies",
+        "tags": ""
+      }
+    ]
   }
 ]

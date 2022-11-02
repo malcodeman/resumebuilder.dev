@@ -37,13 +37,15 @@ function useResume(props: props = {}) {
   const isLoading = or(isNil(id), isNil(resumes));
 
   function setResume(nextResume: Resume) {
-    const nextResumes = map((item) => {
-      if (equals(item.id, id)) {
-        return nextResume;
-      }
-      return item;
-    }, resumes);
-    setResumes(nextResumes);
+    if (resumes) {
+      const nextResumes = map((item) => {
+        if (equals(item.id, id)) {
+          return nextResume;
+        }
+        return item;
+      }, resumes);
+      setResumes(nextResumes);
+    }
   }
 
   function remove() {
