@@ -1,5 +1,11 @@
 import resumes from "../fixtures/resumes.json";
 
+import { Resume } from "../../types";
+
+function getResume(index = 0): Resume {
+  return JSON.parse(localStorage.getItem("resumes"))[index];
+}
+
 beforeEach(() => {
   cy.visit("/resumes");
 });
@@ -58,12 +64,33 @@ describe("Resumes page", () => {
     }).as("getResume");
     cy.get("[data-cy=create-resume-button]")
       .click()
-      .should(() => {
-        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
-      });
+      .should(() =>
+        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array")
+      );
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
     cy.wait("@getResume");
     cy.url().should("include", "/resumes/");
+  });
+  it("Create resume button | Halloween", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.clock(Date.UTC(2022, 9, 31), ["Date"]);
+    cy.get("[data-cy=create-resume-button]")
+      .click()
+      .should(() => expect(getResume(1).icon).to.eq(":ghost:"));
+  });
+  it("Create resume button | New Year's Eve", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.clock(Date.UTC(2022, 11, 31), ["Date"]);
+    cy.get("[data-cy=create-resume-button]")
+      .click()
+      .should(() => expect(getResume(1).icon).to.eq(":fireworks:"));
+  });
+  it("Create resume button | New Year's Day", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.clock(Date.UTC(2022, 0, 1), ["Date"]);
+    cy.get("[data-cy=create-resume-button]")
+      .click()
+      .should(() => expect(getResume(1).icon).to.eq(":fireworks:"));
   });
   it("GitHub | Import", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
@@ -107,9 +134,9 @@ describe("Resumes page", () => {
     });
     cy.get("[data-cy=import-button]")
       .click()
-      .should(() => {
-        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
-      });
+      .should(() =>
+        expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array")
+      );
     cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
     cy.wait("@getResume");
     cy.url().should("include", "/resumes/");

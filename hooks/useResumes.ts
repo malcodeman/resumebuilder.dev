@@ -9,7 +9,10 @@ import {
   propEq,
   move as ramdaMove,
   clone,
+  and,
+  or,
 } from "ramda";
+import { getDate, getMonth } from "date-fns";
 
 import { DEFAULT_VALUES } from "../lib/constants";
 
@@ -83,12 +86,31 @@ function useResumes(props: props = {}) {
     setResumes(nextResumes);
   }
 
+  function getIcon() {
+    const day = getDate(new Date());
+    const month = getMonth(new Date());
+    const isHalloween = and(equals(day, 31), equals(month, 9));
+    const isNewYear = or(
+      and(equals(day, 31), equals(month, 11)),
+      and(equals(day, 1), equals(month, 0))
+    );
+
+    if (isHalloween) {
+      return ":ghost:";
+    }
+    if (isNewYear) {
+      return ":fireworks:";
+    }
+    return "";
+  }
+
   function createNew(data?: { fields?: Fields; design?: Design }) {
     const resume = {
       ...DEFAULT_VALUES,
       ...data?.fields,
       id: nanoid(),
       title: "Untitled resume",
+      icon: getIcon(),
       createdAt: Date.now(),
       updatedAt: Date.now(),
       design: {
