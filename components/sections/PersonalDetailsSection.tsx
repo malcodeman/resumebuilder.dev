@@ -12,7 +12,7 @@ import {
   FormHelperText,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FiMail, FiPhone } from "react-icons/fi";
+import { FiMail, FiPhone, FiLink } from "react-icons/fi";
 import { useFormContext, useWatch } from "react-hook-form";
 import { concat, replace } from "ramda";
 import { useTranslation } from "next-i18next";
@@ -150,12 +150,18 @@ function PersonalDetailsSection() {
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>{t("website")}</FormLabel>
-              <Input
-                variant="filled"
-                size="sm"
-                data-cy="about-website-input"
-                {...register("about.website")}
-              />
+              <InputGroup size="sm">
+                <InputLeftElement>
+                  <FiLink />
+                </InputLeftElement>
+                <Input
+                  borderRadius="md"
+                  variant="filled"
+                  size="sm"
+                  data-cy="about-website-input"
+                  {...register("about.website")}
+                />
+              </InputGroup>
             </FormControl>
           </GridItem>
           <GridItem colSpan={{ base: 2, md: 1 }}>
