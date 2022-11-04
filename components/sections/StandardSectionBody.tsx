@@ -87,6 +87,9 @@ function Description({ index, nestIndex, isEmployment }) {
           <Textarea
             variant="filled"
             size="sm"
+            borderRadius="md"
+            height="40"
+            style={{ scrollbarWidth: "thin" }}
             data-cy="section-nested-description-textarea"
             {...register(
               `section.${index}.nested.${nestIndex}.description` as const
@@ -194,6 +197,7 @@ function StandardSectionBody(props: props) {
                       <Input
                         variant="filled"
                         size="sm"
+                        borderRadius="md"
                         data-cy="section-nested-title-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.title`
@@ -207,6 +211,7 @@ function StandardSectionBody(props: props) {
                       <Input
                         variant="filled"
                         size="sm"
+                        borderRadius="md"
                         data-cy="section-nested-subtitle-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.subtitle` as const
@@ -220,6 +225,7 @@ function StandardSectionBody(props: props) {
                       <Input
                         variant="filled"
                         size="sm"
+                        borderRadius="md"
                         data-cy="section-nested-website-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.website` as const
@@ -233,6 +239,7 @@ function StandardSectionBody(props: props) {
                       <Input
                         variant="filled"
                         size="sm"
+                        borderRadius="md"
                         data-cy="section-nested-city-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.city` as const
@@ -246,6 +253,7 @@ function StandardSectionBody(props: props) {
                       <Input
                         variant="filled"
                         size="sm"
+                        borderRadius="md"
                         data-cy="section-nested-start-date-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.startDate` as const
@@ -259,6 +267,7 @@ function StandardSectionBody(props: props) {
                       <Input
                         variant="filled"
                         size="sm"
+                        borderRadius="md"
                         data-cy="section-nested-end-date-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.endDate` as const

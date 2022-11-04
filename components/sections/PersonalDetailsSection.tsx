@@ -50,6 +50,9 @@ function Summary() {
           <Textarea
             variant="filled"
             size="sm"
+            borderRadius="md"
+            height="40"
+            style={{ scrollbarWidth: "thin" }}
             data-cy="about-summary-textarea"
             {...register("about.summary")}
           />
@@ -90,6 +93,7 @@ function PersonalDetailsSection() {
               <Input
                 variant="filled"
                 size="sm"
+                borderRadius="md"
                 data-cy="about-title-input"
                 {...register("about.title")}
               />
@@ -101,6 +105,7 @@ function PersonalDetailsSection() {
               <Input
                 variant="filled"
                 size="sm"
+                borderRadius="md"
                 data-cy="about-first-name-input"
                 {...register("about.firstName")}
               />
@@ -112,6 +117,7 @@ function PersonalDetailsSection() {
               <Input
                 variant="filled"
                 size="sm"
+                borderRadius="md"
                 data-cy="about-last-name-input"
                 {...register("about.lastName")}
               />
@@ -126,6 +132,7 @@ function PersonalDetailsSection() {
                 </InputLeftElement>
                 <Input
                   variant="filled"
+                  borderRadius="md"
                   data-cy="about-email-input"
                   {...register("about.email")}
                 />
@@ -141,6 +148,7 @@ function PersonalDetailsSection() {
                 </InputLeftElement>
                 <Input
                   variant="filled"
+                  borderRadius="md"
                   data-cy="about-phone-input"
                   {...register("about.phone")}
                 />
@@ -155,9 +163,9 @@ function PersonalDetailsSection() {
                   <FiLink />
                 </InputLeftElement>
                 <Input
-                  borderRadius="md"
                   variant="filled"
                   size="sm"
+                  borderRadius="md"
                   data-cy="about-website-input"
                   {...register("about.website")}
                 />
@@ -170,6 +178,7 @@ function PersonalDetailsSection() {
               <Input
                 variant="filled"
                 size="sm"
+                borderRadius="md"
                 data-cy="about-city-input"
                 {...register("about.city")}
               />
@@ -181,6 +190,7 @@ function PersonalDetailsSection() {
               <Input
                 variant="filled"
                 size="sm"
+                borderRadius="md"
                 data-cy="about-country-input"
                 {...register("about.country")}
               />
