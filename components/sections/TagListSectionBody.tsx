@@ -90,6 +90,8 @@ function TagListSectionBody(props: props) {
             <Textarea
               variant="filled"
               size="sm"
+              borderRadius="md"
+              style={{ scrollbarWidth: "thin" }}
               {...register(`section.${index}.tags` as const)}
             />
             <FormHelperText>{t(getHelperTextTransKey(name))}</FormHelperText>
