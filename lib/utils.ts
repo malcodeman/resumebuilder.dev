@@ -4,7 +4,7 @@ import ReactDOMServer from "react-dom/server";
 import CSSReset from "@chakra-ui/css-reset";
 import * as htmlToImage from "html-to-image";
 import { createStandaloneToast } from "@chakra-ui/react";
-import faker from "faker";
+import { faker } from "@faker-js/faker";
 import {
   join,
   split,
@@ -19,6 +19,7 @@ import {
   has,
 } from "ramda";
 import { i18n } from "next-i18next";
+import { format } from "date-fns";
 
 import getTemplate from "./getTemplate";
 
@@ -129,13 +130,15 @@ function getRandomInt(min: number, max: number) {
 }
 
 function generateFakeResume(): Fields {
+  const firstName = faker.name.firstName();
+  const lastName = faker.name.lastName();
   const fields = {
     about: {
       title: faker.name.jobTitle(),
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      email: faker.internet.email(),
-      phone: faker.phone.phoneNumberFormat(),
+      firstName,
+      lastName,
+      email: faker.internet.email(firstName, lastName),
+      phone: faker.phone.number(),
       website: faker.internet.url(),
       city: faker.address.city(),
       country: faker.address.country(),
@@ -147,21 +150,21 @@ function generateFakeResume(): Fields {
         label: "Employment History",
         nested: [
           {
-            title: faker.company.companyName(),
+            title: faker.company.name(),
             subtitle: faker.name.jobTitle(),
             website: faker.internet.url(),
             city: faker.address.city(),
-            startDate: faker.date.past().toDateString(),
+            startDate: format(faker.date.past(2), "MMM yyyy").toString(),
             endDate: "Current",
             description: faker.lorem.paragraphs(2),
           },
           {
-            title: faker.company.companyName(),
+            title: faker.company.name(),
             subtitle: faker.name.jobTitle(),
             website: faker.internet.url(),
             city: faker.address.city(),
-            startDate: faker.date.past().toDateString(),
-            endDate: faker.date.past().toDateString(),
+            startDate: format(faker.date.past(6), "MMM yyyy").toString(),
+            endDate: format(faker.date.past(4), "MMM yyyy").toString(),
             description: faker.lorem.paragraphs(2),
           },
         ],
