@@ -1,4 +1,4 @@
-import faker from "faker";
+import { faker } from "@faker-js/faker";
 import { length } from "ramda";
 
 import resumes from "../fixtures/resumes.json";
@@ -145,8 +145,8 @@ describe("Builder page", () => {
     const title = faker.name.jobTitle();
     const firstName = faker.name.firstName();
     const lastName = faker.name.lastName();
-    const email = faker.internet.email();
-    const phone = faker.phone.phoneNumberFormat();
+    const email = faker.internet.email(firstName, lastName);
+    const phone = faker.phone.number();
     const website = faker.internet.url();
     const city = faker.address.city();
     const country = faker.address.country();
@@ -228,7 +228,7 @@ describe("Builder page", () => {
       );
   });
   it("Employment history", () => {
-    const title = faker.company.companyName();
+    const title = faker.company.name();
     const subtitle = faker.name.jobTitle();
     const website = faker.internet.url();
     const city = faker.address.city();
