@@ -4,7 +4,7 @@ const SUMMARY = [
   {
     id: nanoid(),
     phrase:
-      "Experienced Web Developer adept in all stages of advanced web development. ",
+      "Experienced Web Developer adept in all stages of advanced web development.",
   },
   {
     id: nanoid(),

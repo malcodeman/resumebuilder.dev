@@ -4,6 +4,7 @@ import { length } from "ramda";
 import resumes from "../fixtures/resumes.json";
 
 import phrases from "../../lib/phrases";
+import tags from "../../lib/tags";
 
 import { Resume } from "../../types";
 
@@ -272,5 +273,27 @@ describe("Builder page", () => {
       .should(() =>
         expect(getResume().section[0].nested[0].description).to.eq(description)
       );
+  });
+  it("Suggested tags | Skills", () => {
+    const skills = `${tags.SKILLS[0].value}\n${tags.SKILLS[1].value}\n${tags.SKILLS[2].value}`;
+    cy.get("[data-cy=section-label-accordion-button]").eq(0).click();
+    cy.get("[data-cy=section-label-accordion-button]").eq(3).click();
+    cy.get("[data-cy=suggested-tags-wrap-item]").first().click();
+    cy.get("[data-cy=suggested-tags-wrap-item]").first().click();
+    cy.get("[data-cy=suggested-tags-wrap-item]")
+      .first()
+      .click()
+      .should(() => expect(getResume().section[2].tags).to.eq(skills));
+  });
+  it("Suggested tags | Hobbies", () => {
+    const hobbies = `${tags.HOBBIES[0].value}\n${tags.HOBBIES[1].value}\n${tags.HOBBIES[2].value}`;
+    cy.get("[data-cy=section-label-accordion-button]").eq(0).click();
+    cy.get("[data-cy=section-label-accordion-button]").eq(4).click();
+    cy.get("[data-cy=suggested-tags-wrap-item]:visible").first().click();
+    cy.get("[data-cy=suggested-tags-wrap-item]:visible").first().click();
+    cy.get("[data-cy=suggested-tags-wrap-item]:visible")
+      .first()
+      .click()
+      .should(() => expect(getResume().section[3].tags).to.eq(hobbies));
   });
 });
