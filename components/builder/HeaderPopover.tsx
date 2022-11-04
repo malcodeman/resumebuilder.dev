@@ -28,6 +28,7 @@ import {
   FiDatabase,
   FiEdit,
   FiCopy,
+  FiCheck,
 } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { useLocalStorageValue } from "@react-hookz/web";
@@ -257,7 +258,7 @@ function CopyLink() {
       mb="2"
       justifyContent="flex-start"
       data-cy="copy-link-button"
-      leftIcon={<FiLink />}
+      leftIcon={hasCopied ? <FiCheck /> : <FiLink />}
       onClick={onCopy}
     >
       {hasCopied ? t("copied") : t("copy_link")}
