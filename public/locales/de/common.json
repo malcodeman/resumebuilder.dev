@@ -161,5 +161,6 @@
   "no_items_inside": "Keine Gegenstände drin",
   "give_feedback": "Feedback geben",
   "resume_404_description": "Entschuldigung, der gesuchte Lebenslauf wurde nicht gefunden.",
-  "resume_duplicated": "Lebenslauf dupliziert"
+  "resume_duplicated": "Lebenslauf dupliziert",
+  "hide_sensitive_data": "Sensible Daten ausblenden"
 }

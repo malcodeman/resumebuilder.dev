@@ -18,6 +18,7 @@ import { concat, replace } from "ramda";
 import { useTranslation } from "next-i18next";
 
 import phrases from "../../lib/phrases";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import SectionHeader from "./SectionHeader";
 import PreWrittenPhrasesModal from "./PreWrittenPhrasesModal";
@@ -78,6 +79,7 @@ function Summary() {
 function PersonalDetailsSection() {
   const { t } = useTranslation();
   const { register } = useFormContext();
+  const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
   return (
     <AccordionItem
       borderTopWidth="0"
@@ -131,6 +133,7 @@ function PersonalDetailsSection() {
                   <FiMail />
                 </InputLeftElement>
                 <Input
+                  type={hideSensitiveData ? "password" : "text"}
                   variant="filled"
                   borderRadius="md"
                   data-cy="about-email-input"
@@ -147,6 +150,7 @@ function PersonalDetailsSection() {
                   <FiPhone />
                 </InputLeftElement>
                 <Input
+                  type={hideSensitiveData ? "password" : "text"}
                   variant="filled"
                   borderRadius="md"
                   data-cy="about-phone-input"

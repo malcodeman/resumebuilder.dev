@@ -130,13 +130,13 @@ function ResumeItem(props: props) {
             boxShadow={boxShadow}
             _hover={{ cursor: "pointer" }}
           >
-            {getTemplate(
-              { ...resume.design, spacing: 0.6 },
-              {
+            {getTemplate({
+              design: { ...resume.design, spacing: 0.6 },
+              fields: {
                 about: resume.about,
                 section: resume.section,
-              }
-            )}
+              },
+            })}
           </Box>
         </AspectRatio>
       </Link>

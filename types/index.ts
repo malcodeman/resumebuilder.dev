@@ -1,13 +1,7 @@
 import { ColorMode } from "@chakra-ui/react";
 import { UseFormRegister } from "react-hook-form";
 
-enum Template {
-  berlin = "berlin",
-  tokyo = "tokyo",
-  london = "london",
-  rio = "rio",
-  nairobi = "nairobi",
-}
+type Template = "berlin" | "tokyo" | "london" | "rio" | "nairobi";
 type Section =
   | "standard"
   | "employment"
@@ -73,8 +67,22 @@ type Phrase = {
   id: string;
   phrase: string;
 };
+type LocalStorageKey =
+  | "dev-tools"
+  | "hide-sensitive-data"
+  | "is-full-width"
+  | "is-pdf-viewer"
+  | "view-dashboard";
+type TemplateProps = {
+  isPdf?: boolean;
+  hideSensitiveData?: boolean;
+  design: Design;
+  fields: Fields;
+};
+type TemplateTags = "all" | "simple" | "creative" | "professional";
 
 export type {
+  Template,
   Resume,
   ChakraThemeConfig,
   Register,
@@ -86,5 +94,7 @@ export type {
   AboutField,
   SectionField,
   Phrase,
+  LocalStorageKey,
+  TemplateProps,
+  TemplateTags,
 };
-export { Template };

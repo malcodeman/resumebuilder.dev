@@ -31,7 +31,6 @@ import {
   FiCheck,
 } from "react-icons/fi";
 import { useRouter } from "next/router";
-import { useLocalStorageValue } from "@react-hookz/web";
 import { equals, isNil, or } from "ramda";
 import { formatDistanceToNow } from "date-fns";
 import { useFormContext, useWatch } from "react-hook-form";
@@ -47,6 +46,7 @@ import LanguageSelect from "../misc/LanguageSelect";
 import utils from "../../lib/utils";
 import useResume from "../../hooks/useResume";
 import useDateFnsLocale from "../../hooks/useDateFnsLocale";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { Fields, Resume, Template } from "../../types";
 
@@ -64,11 +64,7 @@ type props = {
 
 function FullWidth() {
   const { t } = useTranslation();
-  const [isFullWidth, setIsFullWidth] = useLocalStorageValue(
-    "is-full-width",
-    false,
-    { initializeWithStorageValue: false }
-  );
+  const [isFullWidth, setIsFullWidth] = useLocalStorage("is-full-width");
   return (
     <FormControl
       mb="2"
@@ -96,7 +92,7 @@ function FullWidth() {
   );
 }
 
-function DarkModeToggle() {
+function DarkMode() {
   const { t } = useTranslation();
   const { colorMode, toggleColorMode } = useColorMode();
   return (
@@ -128,13 +124,7 @@ function DarkModeToggle() {
 
 function PdfViewer() {
   const { t } = useTranslation();
-  const [isPdfViewer, setIsPdfViewer] = useLocalStorageValue(
-    "is-pdf-viewer",
-    false,
-    {
-      initializeWithStorageValue: false,
-    }
-  );
+  const [isPdfViewer, setIsPdfViewer] = useLocalStorage("is-pdf-viewer");
   return (
     <FormControl
       mb="2"
@@ -162,11 +152,41 @@ function PdfViewer() {
   );
 }
 
-function DevToolsToggle() {
+function HideSensitiveData() {
   const { t } = useTranslation();
-  const [devTools, setDevTools] = useLocalStorageValue("dev-tools", false, {
-    initializeWithStorageValue: false,
-  });
+  const [hideSensitiveData, setHideSensitiveData] = useLocalStorage(
+    "hide-sensitive-data"
+  );
+  return (
+    <FormControl
+      mb="2"
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <FormLabel
+        htmlFor="hide-sensitive-data"
+        mb="0"
+        width="100%"
+        cursor="pointer"
+        marginInlineEnd="0"
+        paddingInlineEnd="3"
+      >
+        {t("hide_sensitive_data")}
+      </FormLabel>
+      <Switch
+        isChecked={hideSensitiveData}
+        onChange={() => setHideSensitiveData(!hideSensitiveData)}
+        id="hide-sensitive-data"
+        data-cy="hide-sensitive-data-switch"
+      />
+    </FormControl>
+  );
+}
+
+function DevTools() {
+  const { t } = useTranslation();
+  const [devTools, setDevTools] = useLocalStorage("dev-tools");
   return (
     <FormControl
       display="flex"
@@ -482,9 +502,10 @@ function HeaderPopover(props: props) {
             <PopoverBody>
               <Flex flexDirection="column">
                 <FullWidth />
-                <DarkModeToggle />
+                <DarkMode />
                 <PdfViewer />
-                <DevToolsToggle />
+                <HideSensitiveData />
+                <DevTools />
                 <Divider marginY="2" />
                 <LanguageSelect mb="2" />
                 <ShowTemplates onChangeTemplate={onChangeTemplate} />

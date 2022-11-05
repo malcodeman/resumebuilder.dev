@@ -1,7 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import { useWatch, UseFormReturn } from "react-hook-form";
-import { useLocalStorageValue } from "@react-hookz/web";
 import { motion } from "framer-motion";
 import { PDFViewer } from "@react-pdf/renderer";
 
@@ -9,6 +8,7 @@ import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
 
 import useAutoSave from "../../hooks/useAutoSave";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { Resume } from "../../types";
 
@@ -23,12 +23,9 @@ const PAGE_SIZE = {
 
 function Document(props: props) {
   const { form } = props;
-  const [isFullWidth] = useLocalStorageValue("is-full-width", false, {
-    initializeWithStorageValue: false,
-  });
-  const [isPdfViewer] = useLocalStorageValue("is-pdf-viewer", false, {
-    initializeWithStorageValue: false,
-  });
+  const [isFullWidth] = useLocalStorage("is-full-width");
+  const [isPdf] = useLocalStorage("is-pdf-viewer");
+  const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
   const watch = useWatch({
     control: form.control,
     name: ["id", "design", "about", "section"],
@@ -38,7 +35,9 @@ function Document(props: props) {
     about: watch[2],
     section: watch[3],
   };
-  const document = id ? getTemplate(watch[1], fields, isPdfViewer) : null;
+  const document = id
+    ? getTemplate({ design: watch[1], fields, isPdf, hideSensitiveData })
+    : null;
 
   useAutoSave({ form });
 
@@ -53,7 +52,7 @@ function Document(props: props) {
   };
 
   if (id) {
-    if (isPdfViewer) {
+    if (isPdf) {
       return (
         <Box {...boxProps}>
           <PDFViewer height="100%" width="100%">
