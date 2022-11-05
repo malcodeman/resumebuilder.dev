@@ -42,12 +42,17 @@ function readAsTextAsync(file: File): Promise<string | ArrayBuffer> {
   });
 }
 
-async function exportAsPdf(resume: Resume) {
+async function exportAsPdf(resume: Resume, hideSensitiveData = false) {
   const fields = {
     about: resume.about,
     section: resume.section,
   };
-  const element = getTemplate(resume.design, fields, true);
+  const element = getTemplate({
+    design: resume.design,
+    fields,
+    isPdf: true,
+    hideSensitiveData,
+  });
   const blob = await pdf(element).toBlob();
   saveAs(blob, resume.title);
 }
@@ -64,7 +69,7 @@ function exportAsHtml(resume: Resume) {
     about: resume.about,
     section: resume.section,
   };
-  const element = getTemplate(resume.design, fields);
+  const element = getTemplate({ design: resume.design, fields });
   const markup = ReactDOMServer.renderToStaticMarkup(element);
   const cssReset = CSSReset().props.styles;
   const data = `<style>${cssReset}</style>${markup}`;

@@ -1,10 +1,10 @@
-import { equals, values } from "ramda";
+import { equals } from "ramda";
 
-import { Template } from "../types";
+import { Template, Resume, TemplateTags } from "../types";
 
 const IS_PROD = equals(process.env.NEXT_PUBLIC_VERCEL_ENV, "production");
-const TEMPLATES: Template[] = values(Template);
-const TEMPLATES_FILTERS = [
+const TEMPLATES: Template[] = ["berlin", "london", "nairobi", "rio", "tokyo"];
+const TEMPLATES_FILTERS: { value: TemplateTags; labelTransKey: string }[] = [
   {
     value: "all",
     labelTransKey: "all",
@@ -31,7 +31,7 @@ const STANDARD_SECTION_DEFAULT_VALUES = {
   endDate: "",
   description: "",
 };
-const DEFAULT_VALUES = {
+const DEFAULT_VALUES: Resume = {
   id: "",
   version: "1.0.0",
   title: "",
@@ -39,7 +39,7 @@ const DEFAULT_VALUES = {
   createdAt: Date.now(),
   updatedAt: Date.now(),
   design: {
-    template: Template.berlin,
+    template: "berlin",
     spacing: 1,
   },
   about: {
@@ -55,68 +55,70 @@ const DEFAULT_VALUES = {
   },
   section: [
     {
-      name: "employment" as const,
+      name: "employment",
       label: "Employment History",
       nested: [STANDARD_SECTION_DEFAULT_VALUES],
     },
     {
-      name: "education" as const,
+      name: "education",
       label: "Education",
       nested: [STANDARD_SECTION_DEFAULT_VALUES],
     },
     {
-      name: "skills" as const,
+      name: "skills",
       label: "Skills",
       tags: "",
     },
     {
-      name: "hobbies" as const,
+      name: "hobbies",
       label: "Hobbies",
       tags: "",
     },
   ],
 };
-const TEMPLATES_LIST = [
+const TEMPLATES_LIST: {
+  title: string;
+  template: Template;
+  descriptionTransKey: string;
+  src: string;
+  tags: TemplateTags[];
+}[] = [
   {
     title: "Berlin",
-    template: Template.berlin,
+    template: "berlin",
     descriptionTransKey: "berlin_description",
     src: "/templates/berlin.png",
     tags: ["all", "creative"],
   },
   {
     title: "Tokyo",
-    template: Template.tokyo,
+    template: "tokyo",
     descriptionTransKey: "tokyo_description",
     src: "/templates/tokyo.png",
     tags: ["all", "simple", "professional"],
   },
   {
     title: "London",
-    template: Template.london,
+    template: "london",
     descriptionTransKey: "london_description",
     src: "/templates/london.png",
     tags: ["all", "simple", "creative"],
   },
   {
     title: "Rio",
-    template: Template.rio,
+    template: "rio",
     descriptionTransKey: "rio_description",
     src: "/templates/rio.png",
     tags: ["all", "simple", "professional"],
   },
   {
     title: "Nairobi",
-    template: Template.nairobi,
+    template: "nairobi",
     descriptionTransKey: "nairobi_description",
     src: "/templates/nairobi.png",
     tags: ["all", "simple", "professional"],
   },
 ];
-const VIEWS = {
-  GRID: "grid",
-  LIST: "list",
-};
 const FATHOM_SITE_ID = "ZMOHRXZI";
 const FATHOM_EVENTS = {
   EXPORT_AS_PDF: "0UNUBD1E",
@@ -129,7 +131,6 @@ export {
   STANDARD_SECTION_DEFAULT_VALUES,
   DEFAULT_VALUES,
   TEMPLATES_LIST,
-  VIEWS,
   FATHOM_SITE_ID,
   FATHOM_EVENTS,
 };

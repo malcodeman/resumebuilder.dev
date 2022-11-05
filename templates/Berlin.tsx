@@ -1,5 +1,5 @@
 import React from "react";
-import { and, isEmpty, split } from "ramda";
+import { and, isEmpty, split, or } from "ramda";
 
 import utils from "../lib/utils";
 
@@ -10,13 +10,7 @@ import Flex from "./components/Flex";
 import Link from "./components/Link";
 import TemplateContext from "./components/TemplateContext";
 
-import { Design, Fields, Template } from "../types";
-
-type props = {
-  isPdf: boolean;
-  design: Design;
-  fields: Fields;
-};
+import { TemplateProps } from "../types";
 
 function SectionLabel(props: { children: React.ReactNode }) {
   const { children } = props;
@@ -33,8 +27,8 @@ function SectionLabel(props: { children: React.ReactNode }) {
   );
 }
 
-function Berlin(props: props) {
-  const { isPdf, design, fields } = props;
+function Berlin(props: TemplateProps) {
+  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
   const { about, section } = fields;
 
   function renderDate(item: { startDate: string; endDate: string }) {
@@ -50,14 +44,26 @@ function Berlin(props: props) {
     return ` | ${item.startDate} - ${item.endDate}`;
   }
 
+  function renderLocation() {
+    if (and(isEmpty(about.city), isEmpty(about.country))) {
+      return null;
+    }
+    if (isEmpty(about.city)) {
+      return `${about.country} | `;
+    }
+    if (isEmpty(about.country)) {
+      return `${about.city} | `;
+    }
+    return `${about.city}, ${about.country} | `;
+  }
+
   function renderWebsite() {
     if (isEmpty(about.website)) {
       return null;
     }
     return (
       <>
-        {" "}
-        | <Link href={about.website}>{utils.getUrlHost(about.website)}</Link>
+        <Link href={about.website}>{utils.getUrlHost(about.website)}</Link> |{" "}
       </>
     );
   }
@@ -88,7 +94,7 @@ function Berlin(props: props) {
 
   return (
     <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
-      <Page id={Template.berlin} pt={40} pr={80} pb={40} pl={80}>
+      <Page id="berlin" pt={40} pr={80} pb={40} pl={80}>
         {renderInitials()}
         <Box mb={16}>
           <Text
@@ -101,8 +107,12 @@ function Berlin(props: props) {
           </Text>
           <Text mb={10}>{about.title}</Text>
           <Text mb={10} color="#717171">
-            {about.city}, {about.country}
-            {renderWebsite()} | {about.email} | {about.phone}
+            {renderLocation()}
+            {renderWebsite()}
+            {or(isEmpty(about.email), hideSensitiveData)
+              ? null
+              : `${about.email} | `}
+            {hideSensitiveData ? null : about.phone}
           </Text>
           {about.summary.split("\n").map((item, index) => (
             <Text key={index} color="#717171" lineHeight={1.4}>

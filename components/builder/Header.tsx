@@ -8,7 +8,6 @@ import {
 import { FormProvider, UseFormReturn } from "react-hook-form";
 import { FiLayers } from "react-icons/fi";
 import { trackGoal } from "fathom-client";
-import { useLocalStorageValue } from "@react-hookz/web";
 import { useTranslation } from "next-i18next";
 
 import Logo from "../Logo";
@@ -18,6 +17,7 @@ import TemplatesModal from "../templates/TemplatesModal";
 
 import { FATHOM_EVENTS } from "../../lib/constants";
 import utils from "../../lib/utils";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { Resume, Fields, Template } from "../../types";
 
@@ -59,9 +59,8 @@ function Header(props: props) {
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0px 2px 0px 0px"
   );
-  const [devTools] = useLocalStorageValue("dev-tools", false, {
-    initializeWithStorageValue: false,
-  });
+  const [devTools] = useLocalStorage("dev-tools");
+  const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
 
   function handleOnImport(fields: Fields) {
     form.setValue("updatedAt", Date.now());
@@ -75,7 +74,7 @@ function Header(props: props) {
   }
 
   function handleOnExportAsPdf() {
-    utils.exportAsPdf(form.getValues());
+    utils.exportAsPdf(form.getValues(), hideSensitiveData);
     trackGoal(FATHOM_EVENTS.EXPORT_AS_PDF, 0);
   }
 

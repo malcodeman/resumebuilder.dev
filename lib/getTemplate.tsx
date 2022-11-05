@@ -4,21 +4,22 @@ import London from "../templates/London";
 import Rio from "../templates/Rio";
 import Nairobi from "../templates/Nairobi";
 
-import { Design, Fields, Template } from "../types";
+import { TemplateProps } from "../types";
 
-function getTemplate(design: Design, fields: Fields, pdf?: boolean) {
+function getTemplate(props: TemplateProps) {
+  const { design } = props;
   switch (design.template) {
     default:
-    case Template.berlin:
-      return <Berlin isPdf={pdf} design={design} fields={fields} />;
-    case Template.tokyo:
-      return <Tokyo isPdf={pdf} design={design} fields={fields} />;
-    case Template.london:
-      return <London isPdf={pdf} design={design} fields={fields} />;
-    case Template.rio:
-      return <Rio isPdf={pdf} design={design} fields={fields} />;
-    case Template.nairobi:
-      return <Nairobi isPdf={pdf} design={design} fields={fields} />;
+    case "berlin":
+      return <Berlin {...props} />;
+    case "tokyo":
+      return <Tokyo {...props} />;
+    case "london":
+      return <London {...props} />;
+    case "rio":
+      return <Rio {...props} />;
+    case "nairobi":
+      return <Nairobi {...props} />;
   }
 }
 

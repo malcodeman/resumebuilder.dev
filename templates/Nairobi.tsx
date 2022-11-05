@@ -11,13 +11,7 @@ import Flex from "./components/Flex";
 import Link from "./components/Link";
 import TemplateContext from "./components/TemplateContext";
 
-import { Design, Fields, Template } from "../types";
-
-type props = {
-  isPdf: boolean;
-  design: Design;
-  fields: Fields;
-};
+import { TemplateProps } from "../types";
 
 function SectionLabel(props: { children: React.ReactNode }) {
   const { children } = props;
@@ -28,8 +22,8 @@ function SectionLabel(props: { children: React.ReactNode }) {
   );
 }
 
-function Nairobi(props: props) {
-  const { isPdf, design, fields } = props;
+function Nairobi(props: TemplateProps) {
+  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
   const { about, section } = fields;
 
   function renderProfile() {
@@ -61,7 +55,7 @@ function Nairobi(props: props) {
 
   return (
     <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
-      <Page id={Template.nairobi}>
+      <Page id="nairobi">
         <Flex height="100%">
           <Box pt={40} pr={20} pb={40} pl={20} width="75%">
             <Box mb={40}>
@@ -113,8 +107,8 @@ function Nairobi(props: props) {
               <SectionLabel>Details</SectionLabel>
               <Text mb={4}>{about.city} </Text>
               <Text mb={4}>{about.country}</Text>
-              <Text mb={4}>{about.phone}</Text>
-              <Text mb={4}>{about.email}</Text>
+              {hideSensitiveData ? null : <Text mb={4}>{about.phone}</Text>}
+              {hideSensitiveData ? null : <Text mb={4}>{about.email}</Text>}
               <Link mb={4} href={about.website}>
                 {utils.getUrlHost(about.website)}
               </Link>

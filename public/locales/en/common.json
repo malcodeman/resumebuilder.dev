@@ -161,5 +161,6 @@
   "no_items_inside": "No items inside",
   "give_feedback": "Give feedback",
   "resume_404_description": "Sorry, the resume you were looking for was not found.",
-  "resume_duplicated": "Resume duplicated"
+  "resume_duplicated": "Resume duplicated",
+  "hide_sensitive_data": "Hide sensitive data"
 }

@@ -10,13 +10,7 @@ import Flex from "./components/Flex";
 import Link from "./components/Link";
 import TemplateContext from "./components/TemplateContext";
 
-import { Design, Fields, Template } from "../types";
-
-type props = {
-  isPdf: boolean;
-  design: Design;
-  fields: Fields;
-};
+import { TemplateProps } from "../types";
 
 function SectionLabel(props: { children: React.ReactNode }) {
   const { children } = props;
@@ -36,8 +30,8 @@ function SectionLabel(props: { children: React.ReactNode }) {
   );
 }
 
-function London(props: props) {
-  const { isPdf, design, fields } = props;
+function London(props: TemplateProps) {
+  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
   const { about, section } = fields;
 
   function renderProfile() {
@@ -69,7 +63,7 @@ function London(props: props) {
 
   return (
     <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
-      <Page id={Template.london}>
+      <Page id="london">
         <Flex
           mb={16}
           pt={16}
@@ -95,8 +89,8 @@ function London(props: props) {
             <Text mb={4}>
               {about.city} {about.country}
             </Text>
-            <Text mb={4}>{about.phone}</Text>
-            <Text mb={4}>{about.email}</Text>
+            {hideSensitiveData ? null : <Text mb={4}>{about.phone}</Text>}
+            {hideSensitiveData ? null : <Text mb={4}>{about.email}</Text>}
             <Link href={about.website}>{utils.getUrlHost(about.website)}</Link>
           </Box>
         </Flex>

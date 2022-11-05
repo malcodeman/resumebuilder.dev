@@ -10,13 +10,7 @@ import Flex from "./components/Flex";
 import Link from "./components/Link";
 import TemplateContext from "./components/TemplateContext";
 
-import { Design, Fields, Template } from "../types";
-
-type props = {
-  isPdf: boolean;
-  design: Design;
-  fields: Fields;
-};
+import { TemplateProps } from "../types";
 
 function SectionLabel(props: { children: React.ReactNode }) {
   const { children } = props;
@@ -36,8 +30,8 @@ function SectionLabel(props: { children: React.ReactNode }) {
   );
 }
 
-function Rio(props: props) {
-  const { isPdf, design, fields } = props;
+function Rio(props: TemplateProps) {
+  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
   const { about, section } = fields;
 
   function renderDate(item: { startDate: string; endDate: string }) {
@@ -55,7 +49,7 @@ function Rio(props: props) {
 
   return (
     <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
-      <Page id={Template.rio} pt={20} pr={40} pb={20} pl={40}>
+      <Page id="rio" pt={20} pr={40} pb={20} pl={40}>
         <Box mb={16}>
           <Flex mb={16} alignItems="center" justifyContent="space-between">
             <Box>
@@ -69,8 +63,8 @@ function Rio(props: props) {
               </Text>
             </Box>
             <Box>
-              <Text>{about.phone}</Text>
-              <Text>{about.email}</Text>
+              {hideSensitiveData ? null : <Text>{about.phone}</Text>}
+              {hideSensitiveData ? null : <Text>{about.email}</Text>}
               <Link href={about.website}>
                 {utils.getUrlHost(about.website)}
               </Link>

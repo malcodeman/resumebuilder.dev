@@ -10,13 +10,7 @@ import Flex from "./components/Flex";
 import Link from "./components/Link";
 import TemplateContext from "./components/TemplateContext";
 
-import { Design, Fields, Template } from "../types";
-
-type props = {
-  isPdf: boolean;
-  design: Design;
-  fields: Fields;
-};
+import { TemplateProps } from "../types";
 
 function SectionLabel(props: { children: React.ReactNode }) {
   const { children } = props;
@@ -27,8 +21,8 @@ function SectionLabel(props: { children: React.ReactNode }) {
   );
 }
 
-function Tokyo(props: props) {
-  const { isPdf, design, fields } = props;
+function Tokyo(props: TemplateProps) {
+  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
   const { about, section } = fields;
 
   function renderProfile() {
@@ -60,7 +54,7 @@ function Tokyo(props: props) {
 
   return (
     <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
-      <Page id={Template.tokyo} pt={20} pr={40} pb={20} pl={40}>
+      <Page id="tokyo" pt={20} pr={40} pb={20} pl={40}>
         <Box mb={40} textAlign="center" textTransform="uppercase">
           <Text
             mb={20}
@@ -71,7 +65,8 @@ function Tokyo(props: props) {
             {about.firstName} {about.lastName}
           </Text>
           <Text>
-            {about.title} {about.city}, {about.country} {about.phone}
+            {about.title} {about.city}, {about.country}{" "}
+            {hideSensitiveData ? null : about.phone}
           </Text>
         </Box>
         <Flex>
@@ -80,8 +75,8 @@ function Tokyo(props: props) {
               <SectionLabel>Details</SectionLabel>
               <Text mb={4}>{about.city}</Text>
               <Text mb={4}>{about.country}</Text>
-              <Text mb={4}>{about.phone}</Text>
-              <Text mb={4}>{about.email}</Text>
+              {hideSensitiveData ? null : <Text mb={4}>{about.phone}</Text>}
+              {hideSensitiveData ? null : <Text mb={4}>{about.email}</Text>}
               <Link mb={4} href={about.website}>
                 {utils.getUrlHost(about.website)}
               </Link>

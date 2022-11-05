@@ -69,6 +69,24 @@ describe("Builder page", () => {
         expect(localStorage.getItem("is-pdf-viewer")).to.eq("true")
       );
   });
+  it("Hide sensitive data", () => {
+    cy.get("[data-cy=more-button]").click();
+    cy.get("[data-cy=hide-sensitive-data-switch]")
+      .click()
+      .should(() =>
+        expect(localStorage.getItem("hide-sensitive-data")).to.eq("true")
+      );
+    cy.get("[data-cy=about-email-input]").should(
+      "have.attr",
+      "type",
+      "password"
+    );
+    cy.get("[data-cy=about-phone-input]").should(
+      "have.attr",
+      "type",
+      "password"
+    );
+  });
   it("Dev tools", () => {
     cy.get("[data-cy=more-button]").click();
     cy.get("[data-cy=dev-tools-switch]")
