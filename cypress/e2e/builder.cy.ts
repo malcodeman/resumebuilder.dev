@@ -122,7 +122,6 @@ describe("Builder page", () => {
     cy.get("[data-cy=copy-link-button]").should("exist");
   });
   it("Change slug", () => {
-    // TODO: Improve
     cy.get("[data-cy=more-button]").click();
     cy.get("[data-cy=change-slug-button]").click();
     cy.get("[data-cy=slug-input]").clear().type("malcodeman");

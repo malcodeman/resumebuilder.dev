@@ -288,7 +288,6 @@ function CopyLink() {
 
 function ChangeSlug() {
   const { t } = useTranslation();
-  const router = useRouter();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getValues } = useFormContext<Resume>();
@@ -300,12 +299,12 @@ function ChangeSlug() {
       id: nextSlug,
     };
     setResume(nextResume);
-    onClose;
+    onClose();
     toast({
       description: t("slug_changed"),
       isClosable: true,
     });
-    router.push(`/resumes/${nextResume.id}`, undefined, { shallow: true });
+    window.location.replace(`/resumes/${nextResume.id}`);
   }
 
   return (
