@@ -170,7 +170,7 @@ function ResumeGrid() {
   function handleOnDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active.id !== over.id) {
-      move(active.id, over.id);
+      move(active.id.toString(), over.id.toString());
     }
   }
 
