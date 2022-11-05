@@ -69,6 +69,8 @@ function SectionHeader(props: props) {
       <AccordionButton
         as="div"
         role="group"
+        cursor="pointer"
+        height="48px"
         data-cy="section-label-accordion-button"
       >
         {isOpen ? (
