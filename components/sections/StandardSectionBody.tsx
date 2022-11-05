@@ -96,7 +96,7 @@ function Description({ index, nestIndex, isEmployment }) {
             )}
           />
           {isEmployment ? (
-            <FormHelperText onClick={phrasesModal.onOpen}>
+            <FormHelperText cursor="pointer" onClick={phrasesModal.onOpen}>
               {t("add_pre_written_phrases")}
             </FormHelperText>
           ) : null}
@@ -162,11 +162,6 @@ function StandardSectionBody(props: props) {
     transition,
   };
   const isOver = and(not(isDragging), equals(overIndex, nestIndex));
-
-  function onPointerDownHandler(e: React.PointerEvent<HTMLDivElement>) {
-    e.stopPropagation();
-  }
-
   return (
     <Accordion
       ref={setNodeRef}
@@ -189,7 +184,10 @@ function StandardSectionBody(props: props) {
               onDuplicate={() => onDuplicate(nestIndex)}
             />
             {isExpanded ? (
-              <AccordionPanel onPointerDown={onPointerDownHandler}>
+              <AccordionPanel
+                cursor="default"
+                onPointerDown={(e) => e.stopPropagation()}
+              >
                 <Grid templateColumns="1fr 1fr" gap="4">
                   <GridItem colSpan={2}>
                     <FormControl>

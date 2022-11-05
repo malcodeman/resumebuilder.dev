@@ -58,6 +58,7 @@ function Summary() {
             {...register("about.summary")}
           />
           <FormHelperText
+            cursor="pointer"
             onClick={phrasesModal.onOpen}
             data-cy="add-pre-written-phrases-form-helper-text"
           >
@@ -81,11 +82,7 @@ function PersonalDetailsSection() {
   const { register } = useFormContext();
   const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
   return (
-    <AccordionItem
-      borderTopWidth="0"
-      cursor="pointer"
-      _last={{ borderBottomWidth: 0 }}
-    >
+    <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
       <SectionHeader label={t("personal_details")} />
       <AccordionPanel>
         <Grid templateColumns="1fr 1fr" gap="4">

@@ -122,7 +122,10 @@ function StandardSection(props: props) {
             onDuplicate={handleOnDuplicate}
           />
           {isExpanded ? (
-            <AccordionPanel>
+            <AccordionPanel
+              cursor="default"
+              onPointerDown={(e) => e.stopPropagation()}
+            >
               {isEmpty(fieldsNested) ? (
                 <Box
                   paddingY="2"

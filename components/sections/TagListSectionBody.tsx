@@ -83,7 +83,7 @@ function TagListSectionBody(props: props) {
   }
 
   return (
-    <AccordionPanel onPointerDown={(e) => e.stopPropagation()}>
+    <AccordionPanel cursor="default" onPointerDown={(e) => e.stopPropagation()}>
       <Grid templateColumns="1fr 1fr" gap="4">
         <GridItem colSpan={2}>
           <FormControl mb={hasSuggestedTags ? "2" : "0"}>
@@ -102,6 +102,7 @@ function TagListSectionBody(props: props) {
                 (item) => (
                   <WrapItem
                     key={item.id}
+                    cursor="pointer"
                     data-cy="suggested-tags-wrap-item"
                     onClick={() => handleOnAddTag(item.value)}
                   >
