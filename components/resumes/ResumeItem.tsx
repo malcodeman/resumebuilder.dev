@@ -121,6 +121,7 @@ function ResumeItem(props: props) {
       opacity={isDragging ? "0.5" : "initial"}
       direction="column"
       role="group"
+      data-cy="resume"
     >
       <Link href={`/resumes/${resume.id}`} passHref>
         <AspectRatio mb="2" ratio={1.618 / 2 / 1}>

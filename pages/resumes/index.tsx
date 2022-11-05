@@ -200,7 +200,6 @@ function ResumeGrid() {
         <Grid
           gap="8"
           gridTemplateColumns={["1fr", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
-          data-cy="resumes-grid"
         >
           <DndContext id="dnd" sensors={sensors} onDragEnd={handleOnDragEnd}>
             <SortableContext items={filteredResumes}>

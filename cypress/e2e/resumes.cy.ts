@@ -29,7 +29,7 @@ describe("Resumes page", () => {
       .should(() => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
       });
-    cy.get("[data-cy=resumes-grid]").children().should("have.length", 1);
+    cy.get("[data-cy=resume]").should("have.length", 1);
     cy.wait("@getResume");
     cy.url().should("include", "/resumes/");
   });
@@ -49,7 +49,7 @@ describe("Resumes page", () => {
   it("Search | Found", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
     cy.get("[data-cy=search-input]").type("Cypress");
-    cy.get("[data-cy=resumes-grid]").children().should("have.length", 1);
+    cy.get("[data-cy=resume]").should("have.length", 1);
   });
   it("List view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
@@ -67,7 +67,7 @@ describe("Resumes page", () => {
       .should(() =>
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array")
       );
-    cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
+    cy.get("[data-cy=resume]").should("have.length", 2);
     cy.wait("@getResume");
     cy.url().should("include", "/resumes/");
   });
@@ -117,7 +117,7 @@ describe("Resumes page", () => {
       });
     cy.wait("@getUser");
     cy.wait("@getRepos");
-    cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
+    cy.get("[data-cy=resume]").should("have.length", 2);
     cy.wait("@getResume");
     cy.url().should("include", "/resumes/");
   });
@@ -137,7 +137,7 @@ describe("Resumes page", () => {
       .should(() =>
         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array")
       );
-    cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
+    cy.get("[data-cy=resume]").should("have.length", 2);
     cy.wait("@getResume");
     cy.url().should("include", "/resumes/");
   });
@@ -174,7 +174,7 @@ describe("Resumes page", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
     cy.get("[data-cy=resume-more-options-menu-button]").click({ force: true });
     cy.get("[data-cy=duplicate-menu-item]").click();
-    cy.get("[data-cy=resumes-grid]").children().should("have.length", 2);
+    cy.get("[data-cy=resume]").should("have.length", 2);
   });
   it("Duplicate resume | List view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
