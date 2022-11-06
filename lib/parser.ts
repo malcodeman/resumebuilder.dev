@@ -2,10 +2,10 @@ import { map, join, split, uniq, filter, isNil } from "ramda";
 
 import { Fields } from "../types";
 
-function parseJsonResume(text: string): Fields {
+function parseJsonResume(text: string) {
   const json = JSON.parse(text);
   const basics = json.basics;
-  const fields = {
+  const fields: Fields = {
     about: {
       title: basics.label,
       firstName: split(" ", basics.name)[0],
@@ -19,7 +19,7 @@ function parseJsonResume(text: string): Fields {
     },
     section: [
       {
-        name: "standard" as const,
+        name: "standard",
         label: "Work",
         nested: map(
           (item) => ({
@@ -35,7 +35,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "standard" as const,
+        name: "standard",
         label: "Volunteer",
         nested: map(
           (item) => ({
@@ -51,7 +51,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "standard" as const,
+        name: "standard",
         label: "Education",
         nested: map(
           (item) => ({
@@ -67,7 +67,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "tagList" as const,
+        name: "tagList",
         label: "Awards",
         tags: join(
           "\n",
@@ -75,7 +75,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "standard" as const,
+        name: "standard",
         label: "Publications",
         nested: map(
           (item) => ({
@@ -91,7 +91,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "tagList" as const,
+        name: "tagList",
         label: "Skills",
         tags: join(
           "\n",
@@ -99,7 +99,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "tagList" as const,
+        name: "tagList",
         label: "Languages",
         tags: join(
           "\n",
@@ -107,7 +107,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "tagList" as const,
+        name: "tagList",
         label: "Interests",
         tags: join(
           "\n",
@@ -115,7 +115,7 @@ function parseJsonResume(text: string): Fields {
         ),
       },
       {
-        name: "standard" as const,
+        name: "standard",
         label: "Projects",
         nested: map(
           (item) => ({
@@ -147,14 +147,14 @@ function parseGithub(data: {
     twitter_username: string | null;
   };
   repos: { language: string | null }[];
-}): Fields {
+}) {
   const skills = uniq(
     filter(
       (item) => !isNil(item),
       map((item) => item.language, data.repos)
     )
   );
-  const fields = {
+  const fields: Fields = {
     about: {
       title: "Developer",
       firstName: data.user.name || "",
@@ -168,7 +168,7 @@ function parseGithub(data: {
     },
     section: [
       {
-        name: "tagList" as const,
+        name: "tagList",
         label: "Skills",
         tags: join("\n", skills),
       },

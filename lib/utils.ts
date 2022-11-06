@@ -134,10 +134,10 @@ function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
 }
 
-function generateFakeResume(): Fields {
+function generateFakeResume() {
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
-  const fields = {
+  const fields: Fields = {
     about: {
       title: faker.name.jobTitle(),
       firstName,
@@ -151,7 +151,7 @@ function generateFakeResume(): Fields {
     },
     section: [
       {
-        name: "employment" as const,
+        name: "employment",
         label: "Employment History",
         nested: [
           {
@@ -175,12 +175,12 @@ function generateFakeResume(): Fields {
         ],
       },
       {
-        name: "skills" as const,
+        name: "skills",
         label: "Skills",
         tags: join("\n", split(" ", faker.lorem.words(getRandomInt(1, 10)))),
       },
       {
-        name: "hobbies" as const,
+        name: "hobbies",
         label: "Hobbies",
         tags: join("\n", split(" ", faker.lorem.words(getRandomInt(1, 10)))),
       },
