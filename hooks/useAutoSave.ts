@@ -1,9 +1,10 @@
 import React from "react";
-import { useDebouncedEffect, useLocalStorageValue } from "@react-hookz/web";
+import { useDebouncedEffect } from "@react-hookz/web";
 import { useWatch, UseFormReturn } from "react-hook-form";
 import { isEmpty } from "ramda";
 
 import useResume from "./useResume";
+import useLocalStorage from "./useLocalStorage";
 
 import { Resume } from "../types";
 
@@ -13,9 +14,7 @@ type props = {
 
 function useAutoSave(props: props) {
   const { form } = props;
-  const [isPdfViewer] = useLocalStorageValue("is-pdf-viewer", false, {
-    initializeWithStorageValue: false,
-  });
+  const [isPdfViewer] = useLocalStorage("is-pdf-viewer");
   const { setResume } = useResume();
   const watch = useWatch({
     control: form.control,

@@ -10,18 +10,83 @@ import {
   InputGroup,
   InputLeftElement,
   FormHelperText,
+  Avatar,
+  Button,
+  Flex,
+  ButtonGroup,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FiMail, FiPhone, FiLink } from "react-icons/fi";
+import {
+  FiMail,
+  FiPhone,
+  FiLink,
+  FiCamera,
+  FiTrash2,
+  FiEdit,
+} from "react-icons/fi";
 import { useFormContext, useWatch } from "react-hook-form";
-import { concat, replace } from "ramda";
+import { concat, replace, isEmpty } from "ramda";
 import { useTranslation } from "next-i18next";
 
 import phrases from "../../lib/phrases";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import useProfilePicture from "../../hooks/useProfilePicture";
 
 import SectionHeader from "./SectionHeader";
 import PreWrittenPhrasesModal from "./PreWrittenPhrasesModal";
+import AddProfilePictureModal from "./AddProfilePictureModal";
+
+function ProfilePicture() {
+  const { t } = useTranslation();
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const [profilePicture, setProfilePicture] = useProfilePicture();
+  return (
+    <>
+      <GridItem colSpan={2}>
+        {isEmpty(profilePicture) ? (
+          <Button
+            size="sm"
+            width="full"
+            leftIcon={<FiCamera />}
+            onClick={onOpen}
+            data-cy="add-profile-picture-button"
+          >
+            {t("add_profile_picture")}
+          </Button>
+        ) : (
+          <>
+            <Flex mb="4" justifyContent="center">
+              <Avatar
+                size="xl"
+                backgroundColor="transparent"
+                src={profilePicture}
+              />
+            </Flex>
+            <ButtonGroup size="sm" width="full" spacing="4">
+              <Button
+                width="full"
+                leftIcon={<FiEdit />}
+                onClick={onOpen}
+                data-cy="change-profile-picture-button"
+              >
+                {t("change")}
+              </Button>
+              <Button
+                width="full"
+                leftIcon={<FiTrash2 />}
+                onClick={() => setProfilePicture("")}
+                data-cy="delete-profile-picture-button"
+              >
+                {t("delete")}
+              </Button>
+            </ButtonGroup>
+          </>
+        )}
+      </GridItem>
+      <AddProfilePictureModal isOpen={isOpen} onClose={onClose} />
+    </>
+  );
+}
 
 function Summary() {
   const { t } = useTranslation();
@@ -86,6 +151,7 @@ function PersonalDetailsSection() {
       <SectionHeader label={t("personal_details")} />
       <AccordionPanel>
         <Grid templateColumns="1fr 1fr" gap="4">
+          <ProfilePicture />
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>{t("title")}</FormLabel>

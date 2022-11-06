@@ -162,5 +162,6 @@
   "give_feedback": "Give feedback",
   "resume_404_description": "Sorry, the resume you were looking for was not found.",
   "resume_duplicated": "Resume duplicated",
-  "hide_sensitive_data": "Hide sensitive data"
+  "hide_sensitive_data": "Hide sensitive data",
+  "add_profile_picture": "Add profile picture"
 }
