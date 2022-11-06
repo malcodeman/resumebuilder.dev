@@ -162,5 +162,6 @@
   "give_feedback": "Feedback geben",
   "resume_404_description": "Entschuldigung, der gesuchte Lebenslauf wurde nicht gefunden.",
   "resume_duplicated": "Lebenslauf dupliziert",
-  "hide_sensitive_data": "Sensible Daten ausblenden"
+  "hide_sensitive_data": "Sensible Daten ausblenden",
+  "add_profile_picture": "Profilbild hinzufügen"
 }

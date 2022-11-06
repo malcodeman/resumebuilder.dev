@@ -39,6 +39,7 @@ import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
 
 import useDateFnsLocale from "../../hooks/useDateFnsLocale";
+import useProfilePicture from "../../hooks/useProfilePicture";
 
 import { Resume } from "../../types";
 
@@ -104,6 +105,7 @@ function ResumeItem(props: props) {
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"
   );
+  const [profilePicture] = useProfilePicture();
 
   function handleOnCopyLink() {
     onCopy();
@@ -137,6 +139,7 @@ function ResumeItem(props: props) {
                 about: resume.about,
                 section: resume.section,
               },
+              profilePicture,
             })}
           </Box>
         </AspectRatio>

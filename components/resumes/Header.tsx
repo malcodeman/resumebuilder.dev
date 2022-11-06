@@ -4,12 +4,14 @@ import {
   Box,
   Container,
   Button,
+  Avatar,
   useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
 import useDashboard from "../../hooks/useDashboard";
+import useProfilePicture from "../../hooks/useProfilePicture";
 
 import Logo from "../Logo";
 import NavLink from "../misc/NavLink";
@@ -24,6 +26,7 @@ function Header() {
     "rgba(255, 255, 255, 0.03) 0px 2px 0px 0px"
   );
   const { dashboard } = useDashboard();
+  const [profilePicture] = useProfilePicture();
   const homeHref = dashboard ? "/resumes" : "/";
   return (
     <Box
@@ -59,7 +62,15 @@ function Header() {
             <Flex>
               <LanguageSelect mr="2" />
               <Link href="/resumes" passHref>
-                <Button size="sm" data-cy="dashboard-button">
+                <Button
+                  size="sm"
+                  leftIcon={
+                    profilePicture ? (
+                      <Avatar src={profilePicture} size="xs" />
+                    ) : null
+                  }
+                  data-cy="dashboard-button"
+                >
                   {t("dashboard")}
                 </Button>
               </Link>

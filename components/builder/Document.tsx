@@ -9,6 +9,7 @@ import utils from "../../lib/utils";
 
 import useAutoSave from "../../hooks/useAutoSave";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import useProfilePicture from "../../hooks/useProfilePicture";
 
 import { Resume } from "../../types";
 
@@ -26,6 +27,7 @@ function Document(props: props) {
   const [isFullWidth] = useLocalStorage("is-full-width");
   const [isPdf] = useLocalStorage("is-pdf-viewer");
   const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
+  const [profilePicture] = useProfilePicture();
   const watch = useWatch({
     control: form.control,
     name: ["id", "design", "about", "section"],
@@ -36,7 +38,13 @@ function Document(props: props) {
     section: watch[3],
   };
   const document = id
-    ? getTemplate({ design: watch[1], fields, isPdf, hideSensitiveData })
+    ? getTemplate({
+        isPdf,
+        hideSensitiveData,
+        design: watch[1],
+        fields,
+        profilePicture,
+      })
     : null;
 
   useAutoSave({ form });

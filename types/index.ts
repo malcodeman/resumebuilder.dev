@@ -78,6 +78,7 @@ type TemplateProps = {
   hideSensitiveData?: boolean;
   design: Design;
   fields: Fields;
+  profilePicture: string;
 };
 type TemplateTags = "all" | "simple" | "creative" | "professional";
 

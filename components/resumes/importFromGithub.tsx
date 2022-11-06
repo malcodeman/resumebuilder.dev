@@ -45,8 +45,8 @@ function ImportFromGithub(props: props) {
       );
       const fields = parser.parseGithub({ user: user.data, repos: repos.data });
       onImport(fields);
-    } catch (err) {
-      form.setError("username", { message: err.response.data.message });
+    } catch (error) {
+      form.setError("username", { message: error.response.data.message });
     } finally {
       setIsLoading(false);
     }

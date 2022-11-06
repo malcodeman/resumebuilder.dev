@@ -8,6 +8,7 @@ import Page from "./components/Page";
 import Box from "./components/Box";
 import Flex from "./components/Flex";
 import Link from "./components/Link";
+import Image from "./components/Image";
 import TemplateContext from "./components/TemplateContext";
 
 import { TemplateProps } from "../types";
@@ -22,7 +23,13 @@ function SectionLabel(props: { children: React.ReactNode }) {
 }
 
 function Tokyo(props: TemplateProps) {
-  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
+  const {
+    isPdf = false,
+    hideSensitiveData = false,
+    design,
+    fields,
+    profilePicture,
+  } = props;
   const { about, section } = fields;
 
   function renderProfile() {
@@ -55,9 +62,21 @@ function Tokyo(props: TemplateProps) {
   return (
     <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
       <Page id="tokyo" pt={20} pr={40} pb={20} pl={40}>
+        {isEmpty(profilePicture) ? null : (
+          <Flex mb={10} justifyContent="center">
+            <Image
+              alt=""
+              width={48}
+              height={48}
+              objectFit="cover"
+              borderRadius="100%"
+              src={profilePicture}
+            />
+          </Flex>
+        )}
         <Box mb={40} textAlign="center" textTransform="uppercase">
           <Text
-            mb={20}
+            mb={10}
             fontSize="2xl"
             fontWeight={700}
             textTransform="uppercase"

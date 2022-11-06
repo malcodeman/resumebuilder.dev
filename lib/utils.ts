@@ -31,27 +31,40 @@ const isBrowser =
   typeof navigator !== "undefined" &&
   typeof document !== "undefined";
 
-function readAsTextAsync(file: File): Promise<string | ArrayBuffer> {
-  return new Promise((resolve, reject) => {
+function file2Text(file: File) {
+  return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = () => {
-      resolve(reader.result);
-    };
-    reader.onerror = reject;
     reader.readAsText(file);
+    reader.onload = () => resolve(reader.result?.toString() || "");
+    reader.onerror = (error) => reject(error);
   });
 }
 
-async function exportAsPdf(resume: Resume, hideSensitiveData = false) {
+function file2Base64(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result?.toString() || "");
+    reader.onerror = (error) => reject(error);
+  });
+}
+
+async function exportAsPdf(data: {
+  resume: Resume;
+  profilePicture: string;
+  hideSensitiveData: boolean;
+}) {
+  const { resume, profilePicture = "", hideSensitiveData = false } = data;
   const fields = {
     about: resume.about,
     section: resume.section,
   };
   const element = getTemplate({
-    design: resume.design,
-    fields,
     isPdf: true,
     hideSensitiveData,
+    design: resume.design,
+    fields,
+    profilePicture,
   });
   const blob = await pdf(element).toBlob();
   saveAs(blob, resume.title);
@@ -64,16 +77,26 @@ function exportAsJson(resume: Resume) {
   saveAs(blob, `${resume.title}.json`);
 }
 
-function exportAsHtml(resume: Resume) {
+function exportAsHtml(data: {
+  resume: Resume;
+  profilePicture: string;
+  hideSensitiveData: boolean;
+}) {
+  const { resume, profilePicture = "", hideSensitiveData = false } = data;
   const fields = {
     about: resume.about,
     section: resume.section,
   };
-  const element = getTemplate({ design: resume.design, fields });
+  const element = getTemplate({
+    hideSensitiveData,
+    design: resume.design,
+    fields,
+    profilePicture,
+  });
   const markup = ReactDOMServer.renderToStaticMarkup(element);
   const cssReset = CSSReset().props.styles;
-  const data = `<style>${cssReset}</style>${markup}`;
-  const blob = new Blob([data], {
+  const blobParts = `<style>${cssReset}</style>${markup}`;
+  const blob = new Blob([blobParts], {
     type: "text/plain;charset=utf-8",
   });
   saveAs(blob, `${resume.title}.html`);
@@ -85,7 +108,7 @@ async function exportAsPng(resume: Resume) {
       document.getElementById(resume.design.template)
     );
     saveAs(blob, `${resume.title}.png`);
-  } catch (error) {
+  } catch {
     toast({
       description: i18n.t("something_went_wrong").toString(),
       status: "error",
@@ -220,7 +243,8 @@ function checkResumeProperties(resume: Resume) {
 
 const EXPORTS = {
   isBrowser,
-  readAsTextAsync,
+  file2Text,
+  file2Base64,
   exportAsPdf,
   exportAsJson,
   exportAsHtml,

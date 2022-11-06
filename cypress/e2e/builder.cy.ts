@@ -1,5 +1,4 @@
 import { faker } from "@faker-js/faker";
-import { length } from "ramda";
 
 import resumes from "../fixtures/resumes.json";
 
@@ -158,6 +157,10 @@ describe("Builder page", () => {
     cy.get("[data-cy=more-button]").click();
     cy.get("[data-cy=export-button]").click();
     cy.get("[data-cy=export-resume-modal-content]").should("exist");
+  });
+  it("Profile picture | Add", () => {
+    cy.get("[data-cy=add-profile-picture-button]").click();
+    cy.get("[data-cy=add-profile-picture-modal-content]").should("exist");
   });
   it("About", () => {
     const title = faker.name.jobTitle();

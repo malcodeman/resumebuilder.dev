@@ -2,13 +2,13 @@ import React from "react";
 import { and, isEmpty } from "ramda";
 
 import utils from "../lib/utils";
-import theme from "./theme";
 
 import Text from "./components/Text";
 import Page from "./components/Page";
 import Box from "./components/Box";
 import Flex from "./components/Flex";
 import Link from "./components/Link";
+import Image from "./components/Image";
 import TemplateContext from "./components/TemplateContext";
 
 import { TemplateProps } from "../types";
@@ -23,7 +23,13 @@ function SectionLabel(props: { children: React.ReactNode }) {
 }
 
 function Nairobi(props: TemplateProps) {
-  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
+  const {
+    isPdf = false,
+    hideSensitiveData = false,
+    design,
+    fields,
+    profilePicture,
+  } = props;
   const { about, section } = fields;
 
   function renderProfile() {
@@ -58,12 +64,25 @@ function Nairobi(props: TemplateProps) {
       <Page id="nairobi">
         <Flex height="100%">
           <Box pt={40} pr={20} pb={40} pl={20} width="75%">
-            <Box mb={40}>
-              <Text mb={4} fontSize="2xl" fontWeight={700}>
-                {about.firstName} {about.lastName}
-              </Text>
-              <Text>{about.title}</Text>
-            </Box>
+            <Flex mb={40} alignItems="center">
+              {isEmpty(profilePicture) ? null : (
+                <Image
+                  mr={8}
+                  alt=""
+                  width={48}
+                  height={48}
+                  objectFit="cover"
+                  borderRadius="100%"
+                  src={profilePicture}
+                />
+              )}
+              <Box>
+                <Text mb={4} fontSize="2xl" fontWeight={700}>
+                  {about.firstName} {about.lastName}
+                </Text>
+                <Text>{about.title}</Text>
+              </Box>
+            </Flex>
             {renderProfile()}
             {section.map((sectionItem, index) => {
               if (utils.isStandardSection(sectionItem.name)) {
@@ -101,7 +120,7 @@ function Nairobi(props: TemplateProps) {
             color="#FFF"
             padding={20}
             bgColor="#00205B"
-            pt={40 + theme.fontSize["2xl"] + 4 + theme.fontSize.xs + 40}
+            pt={40 + 48 + 40}
           >
             <Box mb={16}>
               <SectionLabel>Details</SectionLabel>

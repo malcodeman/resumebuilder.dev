@@ -11,6 +11,7 @@ import {
   Grid,
   Button,
   useToast,
+  useBoolean,
 } from "@chakra-ui/react";
 import { isEmpty, map } from "ramda";
 import { FiChevronLeft } from "react-icons/fi";
@@ -53,7 +54,7 @@ function ImportDataModal(props: Props) {
   const { isOpen, onClose, onImport } = props;
   const { t } = useTranslation();
   const [source, setSource] = React.useState<Source | "">("");
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = useBoolean();
   const toast = useToast();
 
   React.useEffect(() => {
@@ -73,20 +74,19 @@ function ImportDataModal(props: Props) {
 
   async function handleOnDrop(acceptedFiles: File[]) {
     try {
-      setIsLoading(true);
-      const result = await utils.readAsTextAsync(acceptedFiles[0]);
-      const text = result instanceof ArrayBuffer ? "" : result;
+      setIsLoading.on();
+      const text = await utils.file2Text(acceptedFiles[0]);
       const fields = getFields(text);
       onImport(fields);
       onClose();
-    } catch (error) {
+    } catch {
       toast({
         description: t("something_went_wrong"),
         status: "error",
         isClosable: true,
       });
     } finally {
-      setIsLoading(false);
+      setIsLoading.off();
     }
   }
 
@@ -127,7 +127,13 @@ function ImportDataModal(props: Props) {
       case "pasteData":
         return <ImportFromPasteData onImport={handleOnImport} />;
       default:
-        return <FileUploader onDrop={handleOnDrop} isLoading={isLoading} />;
+        return (
+          <FileUploader
+            onDrop={handleOnDrop}
+            isLoading={isLoading}
+            accept={[".json"]}
+          />
+        );
     }
   }
 
@@ -137,7 +143,7 @@ function ImportDataModal(props: Props) {
       <ModalContent data-cy="import-data-modal-content">
         <ModalHeader>
           {isEmpty(source) ? (
-            <Text>{t("import_data")}</Text>
+            t("import_data")
           ) : (
             <Button
               size="sm"

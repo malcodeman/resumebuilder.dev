@@ -18,6 +18,7 @@ import TemplatesModal from "../templates/TemplatesModal";
 import { FATHOM_EVENTS } from "../../lib/constants";
 import utils from "../../lib/utils";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import useProfilePicture from "../../hooks/useProfilePicture";
 
 import { Resume, Fields, Template } from "../../types";
 
@@ -60,6 +61,7 @@ function Header(props: props) {
     "rgba(255, 255, 255, 0.03) 0px 2px 0px 0px"
   );
   const [devTools] = useLocalStorage("dev-tools");
+  const [profilePicture] = useProfilePicture();
   const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
 
   function handleOnImport(fields: Fields) {
@@ -74,8 +76,20 @@ function Header(props: props) {
   }
 
   function handleOnExportAsPdf() {
-    utils.exportAsPdf(form.getValues(), hideSensitiveData);
+    utils.exportAsPdf({
+      resume: form.getValues(),
+      profilePicture,
+      hideSensitiveData,
+    });
     trackGoal(FATHOM_EVENTS.EXPORT_AS_PDF, 0);
+  }
+
+  function handleOnExportAsHtml() {
+    utils.exportAsHtml({
+      resume: form.getValues(),
+      profilePicture,
+      hideSensitiveData,
+    });
   }
 
   return (
@@ -111,7 +125,7 @@ function Header(props: props) {
               onChangeTemplate={handleOnChangeTemplate}
               onPdfExport={handleOnExportAsPdf}
               onJsonExport={() => utils.exportAsJson(form.getValues())}
-              onHtmlExport={() => utils.exportAsHtml(form.getValues())}
+              onHtmlExport={handleOnExportAsHtml}
               onPngExport={() => utils.exportAsPng(form.getValues())}
             />
           </FormProvider>

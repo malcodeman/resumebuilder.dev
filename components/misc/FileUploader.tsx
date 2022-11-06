@@ -6,10 +6,11 @@ import { useTranslation } from "next-i18next";
 type props = {
   onDrop: (acceptedFiles: File[], rejectedFiles: FileRejection[]) => void;
   isLoading?: boolean;
+  accept?: string | string[];
 };
 
 function FileUploader(props: props) {
-  const { onDrop, isLoading } = props;
+  const { onDrop, isLoading, accept } = props;
   const { t } = useTranslation();
   const bg = useColorModeValue("gray.100", "gray.900");
   const bgIsDragActive = useColorModeValue("blue.100", "blue.900");
@@ -17,6 +18,7 @@ function FileUploader(props: props) {
     noClick: true,
     noKeyboard: true,
     disabled: isLoading,
+    accept,
     onDrop,
   };
   const { getRootProps, getInputProps, open, isDragActive } =
@@ -33,7 +35,7 @@ function FileUploader(props: props) {
       {...getRootProps()}
     >
       <Text mb="2">{t("drop_files_here_to_upload")}</Text>
-      <Button onClick={open} isLoading={isLoading}>
+      <Button size="sm" onClick={open} isLoading={isLoading}>
         {t("browse_files")}
       </Button>
       <input {...getInputProps()} />
