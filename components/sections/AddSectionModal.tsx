@@ -16,62 +16,69 @@ import { useTranslation } from "next-i18next";
 
 import { Section } from "../../types";
 
-const COMMON_SECTIONS = [
+type Sections = {
+  label: string;
+  labelTransKey: string;
+  value: Section;
+  isDisabled: boolean;
+}[];
+
+const COMMON_SECTIONS: Sections = [
   {
     label: "Employment",
     labelTransKey: "employment",
-    value: "employment" as const,
+    value: "employment",
     isDisabled: false,
   },
   {
     label: "Education",
     labelTransKey: "education",
-    value: "education" as const,
+    value: "education",
     isDisabled: false,
   },
   {
     label: "Skills",
     labelTransKey: "skills",
-    value: "skills" as const,
+    value: "skills",
     isDisabled: false,
   },
   {
     label: "Hobbies",
     labelTransKey: "hobbies",
-    value: "hobbies" as const,
+    value: "hobbies",
     isDisabled: false,
   },
   {
     label: "Languages",
     labelTransKey: "languages",
-    value: "languages" as const,
+    value: "languages",
     isDisabled: false,
   },
   {
     label: "Projects",
     labelTransKey: "projects",
-    value: "projects" as const,
+    value: "projects",
     isDisabled: false,
   },
   {
     label: "Internships",
     labelTransKey: "internships",
-    value: "internships" as const,
+    value: "internships",
     isDisabled: false,
   },
 ];
 
-const CUSTOM_SECTIONS = [
+const CUSTOM_SECTIONS: Sections = [
   {
     label: "Standard",
     labelTransKey: "standard",
-    value: "standard" as const,
+    value: "standard",
     isDisabled: false,
   },
   {
     label: "Tag list",
     labelTransKey: "tag_list",
-    value: "tagList" as const,
+    value: "tagList",
     isDisabled: false,
   },
 ];

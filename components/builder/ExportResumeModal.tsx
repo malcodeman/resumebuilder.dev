@@ -25,11 +25,11 @@ type props = {
   onPngExport: () => void;
 };
 
-const EXPORTS = [
-  { label: "JSON", value: "json" as const },
-  { label: "PDF", value: "pdf" as const },
-  { label: "HTML", value: "html" as const },
-  { label: "PNG", value: "png" as const },
+const EXPORTS: { label: string; value: Export }[] = [
+  { label: "JSON", value: "json" },
+  { label: "PDF", value: "pdf" },
+  { label: "HTML", value: "html" },
+  { label: "PNG", value: "png" },
 ];
 
 function ExportResumeModal(props: props) {
