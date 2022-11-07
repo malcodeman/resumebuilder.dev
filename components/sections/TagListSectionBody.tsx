@@ -28,6 +28,7 @@ import {
 import { Section } from "../../types";
 
 import allTags from "../../lib/tags";
+import utils from "../../lib/utils";
 
 type props = {
   index: number;
@@ -91,7 +92,7 @@ function TagListSectionBody(props: props) {
               variant="filled"
               size="sm"
               borderRadius="md"
-              style={{ scrollbarWidth: "thin" }}
+              sx={utils.getScrollbarStyle()}
               {...register(`section.${index}.tags` as const)}
             />
             <FormHelperText>{t(getHelperTextTransKey(name))}</FormHelperText>

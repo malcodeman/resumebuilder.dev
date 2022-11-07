@@ -3,7 +3,7 @@ import { saveAs } from "file-saver";
 import ReactDOMServer from "react-dom/server";
 import CSSReset from "@chakra-ui/css-reset";
 import * as htmlToImage from "html-to-image";
-import { createStandaloneToast } from "@chakra-ui/react";
+import { createStandaloneToast, SystemStyleObject } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
 import {
   join,
@@ -241,6 +241,19 @@ function checkResumeProperties(resume: Resume) {
   return false;
 }
 
+function getScrollbarStyle(): SystemStyleObject {
+  const sx = {
+    scrollbarWidth: "thin",
+    "&::-webkit-scrollbar": {
+      width: "8px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#72757b",
+    },
+  };
+  return sx;
+}
+
 const EXPORTS = {
   isBrowser,
   file2Text,
@@ -257,6 +270,7 @@ const EXPORTS = {
   generateFakeResume,
   countWords,
   checkResumeProperties,
+  getScrollbarStyle,
 };
 
 export default EXPORTS;

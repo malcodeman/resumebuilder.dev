@@ -16,6 +16,7 @@ import NotFound from "../../components/misc/NotFound";
 import useResume from "../../hooks/useResume";
 import useAutoSaveToast from "../../hooks/useAutoSaveToast";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import utils from "../../lib/utils";
 
 import { Resume } from "../../types";
 
@@ -76,7 +77,7 @@ function Builder() {
           display={{ base: "none", lg: "block" }}
           padding="8"
           backgroundColor="var(--chakra-colors-blackAlpha-50)"
-          style={{ scrollbarWidth: "thin" }}
+          sx={utils.getScrollbarStyle()}
         >
           <Document form={form} />
         </Box>

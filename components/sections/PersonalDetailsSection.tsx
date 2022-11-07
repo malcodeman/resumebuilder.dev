@@ -29,6 +29,7 @@ import { concat, replace, isEmpty } from "ramda";
 import { useTranslation } from "next-i18next";
 
 import phrases from "../../lib/phrases";
+import utils from "../../lib/utils";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useProfilePicture from "../../hooks/useProfilePicture";
 
@@ -118,7 +119,7 @@ function Summary() {
             size="sm"
             borderRadius="md"
             height="40"
-            style={{ scrollbarWidth: "thin" }}
+            sx={utils.getScrollbarStyle()}
             data-cy="about-summary-textarea"
             {...register("about.summary")}
           />
