@@ -51,7 +51,7 @@ function ImportFromPasteData(props: props) {
         <FormControl mb="4" isInvalid={Boolean(form.formState.errors.data)}>
           <Textarea
             variant="filled"
-            style={{ scrollbarWidth: "thin" }}
+            sx={utils.getScrollbarStyle()}
             data-cy="data-textarea"
             {...form.register("data")}
           />

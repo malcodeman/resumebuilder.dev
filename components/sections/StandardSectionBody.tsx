@@ -22,6 +22,7 @@ import { useTranslation } from "next-i18next";
 import { Section } from "../../types";
 
 import phrases from "../../lib/phrases";
+import utils from "../../lib/utils";
 
 import SectionHeader from "./SectionHeader";
 import PreWrittenPhrasesModal from "./PreWrittenPhrasesModal";
@@ -89,7 +90,7 @@ function Description({ index, nestIndex, isEmployment }) {
             size="sm"
             borderRadius="md"
             height="40"
-            style={{ scrollbarWidth: "thin" }}
+            sx={utils.getScrollbarStyle()}
             data-cy="section-nested-description-textarea"
             {...register(
               `section.${index}.nested.${nestIndex}.description` as const

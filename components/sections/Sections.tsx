@@ -131,8 +131,8 @@ function Sections(props: props) {
         reduceMotion
         overflowY="auto"
         paddingTop={{ base: "8" }}
-        style={{ scrollbarWidth: "thin" }}
         userSelect="none"
+        sx={utils.getScrollbarStyle()}
       >
         <FormProvider {...form}>
           <DndContext
