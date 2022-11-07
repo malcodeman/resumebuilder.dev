@@ -15,7 +15,7 @@ import NotFound from "../../components/misc/NotFound";
 
 import useResume from "../../hooks/useResume";
 import useAutoSaveToast from "../../hooks/useAutoSaveToast";
-import useDashboard from "../../hooks/useDashboard";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { Resume } from "../../types";
 
@@ -23,7 +23,7 @@ function Builder() {
   const { t } = useTranslation();
   const { resume, isLoading } = useResume({ isolated: true });
   const form = useForm<Resume>();
-  const { setDashboard } = useDashboard();
+  const [_viewDashboard, setViewDashboard] = useLocalStorage("view-dashboard");
   const isLargeDevice = useMediaQuery("(min-width: 62em)");
 
   React.useEffect(() => {
@@ -33,7 +33,7 @@ function Builder() {
   }, [resume, form]);
 
   useMountEffect(() => {
-    setDashboard(true);
+    setViewDashboard(true);
   });
 
   useAutoSaveToast({});

@@ -55,7 +55,7 @@ import EmptyResumes from "../../components/resumes/EmptyResumes";
 import Table from "../../components/misc/Table";
 
 import useResumes from "../../hooks/useResumes";
-import useDashboard from "../../hooks/useDashboard";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import useDateFnsLocale from "../../hooks/useDateFnsLocale";
 
 import { Resume, View } from "../../types";
@@ -268,10 +268,10 @@ function ResumeGrid() {
 }
 
 function Dashboard() {
-  const { setDashboard } = useDashboard();
+  const [_viewDashboard, setViewDashboard] = useLocalStorage("view-dashboard");
 
   useMountEffect(() => {
-    setDashboard(true);
+    setViewDashboard(true);
   });
 
   return (

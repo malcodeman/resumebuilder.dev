@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
-import useDashboard from "../../hooks/useDashboard";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import useProfilePicture from "../../hooks/useProfilePicture";
 
 import Logo from "../Logo";
@@ -25,9 +25,9 @@ function Header() {
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0px 2px 0px 0px"
   );
-  const { dashboard } = useDashboard();
+  const [viewDashboard] = useLocalStorage("view-dashboard");
   const [profilePicture] = useProfilePicture();
-  const homeHref = dashboard ? "/resumes" : "/";
+  const homeHref = viewDashboard ? "/resumes" : "/";
   return (
     <Box
       backgroundColor={backgroundColor}
@@ -53,7 +53,7 @@ function Header() {
               <Text data-cy="templates-text">{t("templates")}</Text>
             </NavLink>
           </Flex>
-          {dashboard ? (
+          {viewDashboard ? (
             <Flex>
               <LanguageSelect mr="2" />
               <UserMenu />

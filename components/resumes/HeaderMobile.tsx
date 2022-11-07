@@ -8,7 +8,7 @@ import {
 import { FiFileText, FiHome, FiLayers } from "react-icons/fi";
 import { useTranslation } from "next-i18next";
 
-import useDashboard from "../../hooks/useDashboard";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import NavLink from "../misc/NavLink";
 import UserMenu from "./UserMenu";
@@ -20,8 +20,8 @@ function HeaderMobile() {
     "rgba(0, 0, 0, 0.03) 0px -2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0 -2px 0 0"
   );
-  const { dashboard } = useDashboard();
-  const homeHref = dashboard ? "/resumes" : "/";
+  const [viewDashboard] = useLocalStorage("view-dashboard");
+  const homeHref = viewDashboard ? "/resumes" : "/";
   return (
     <Box
       backgroundColor={backgroundColor}
@@ -48,7 +48,7 @@ function HeaderMobile() {
               <Text fontSize="xs">{t("templates")}</Text>
             </Flex>
           </NavLink>
-          {dashboard ? (
+          {viewDashboard ? (
             <UserMenu />
           ) : (
             <NavLink href="/resumes">
