@@ -9,11 +9,13 @@ import { FormProvider, UseFormReturn } from "react-hook-form";
 import { FiLayers } from "react-icons/fi";
 import { trackGoal } from "fathom-client";
 import { useTranslation } from "next-i18next";
+import { useNetworkState } from "@react-hookz/web";
 
 import Logo from "../Logo";
 import HeaderPopover from "./HeaderPopover";
 import ResumeTitle from "./ResumeTitle";
 import TemplatesModal from "../templates/TemplatesModal";
+import OfflineTag from "../misc/OfflineTag";
 
 import { FATHOM_EVENTS } from "../../lib/constants";
 import utils from "../../lib/utils";
@@ -63,6 +65,7 @@ function Header(props: props) {
   const [devTools] = useLocalStorage("dev-tools");
   const [profilePicture] = useProfilePicture();
   const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
+  const network = useNetworkState();
 
   function handleOnImport(fields: Fields) {
     form.setValue("updatedAt", Date.now());
@@ -109,6 +112,7 @@ function Header(props: props) {
         <Logo href="/resumes" />
         <ResumeTitle form={form} />
         <Flex>
+          {network.online ? null : <OfflineTag mr="2" />}
           <ShowTemplates onChangeTemplate={handleOnChangeTemplate} />
           <Button
             mr="2"
