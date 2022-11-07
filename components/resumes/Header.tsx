@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import { useNetworkState } from "@react-hookz/web";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useProfilePicture from "../../hooks/useProfilePicture";
@@ -17,6 +18,7 @@ import Logo from "../Logo";
 import NavLink from "../misc/NavLink";
 import LanguageSelect from "../misc/LanguageSelect";
 import UserMenu from "./UserMenu";
+import OfflineTag from "../misc/OfflineTag";
 
 function Header() {
   const { t } = useTranslation();
@@ -28,6 +30,7 @@ function Header() {
   const [viewDashboard] = useLocalStorage("view-dashboard");
   const [profilePicture] = useProfilePicture();
   const homeHref = viewDashboard ? "/resumes" : "/";
+  const network = useNetworkState();
   return (
     <Box
       backgroundColor={backgroundColor}
@@ -55,6 +58,7 @@ function Header() {
           </Flex>
           {viewDashboard ? (
             <Flex>
+              {network.online ? null : <OfflineTag mr="2" />}
               <LanguageSelect mr="2" />
               <UserMenu />
             </Flex>

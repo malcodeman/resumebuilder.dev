@@ -163,5 +163,7 @@
   "resume_404_description": "Entschuldigung, der gesuchte Lebenslauf wurde nicht gefunden.",
   "resume_duplicated": "Lebenslauf dupliziert",
   "hide_sensitive_data": "Sensible Daten ausblenden",
-  "add_profile_picture": "Profilbild hinzufügen"
+  "add_profile_picture": "Profilbild hinzufügen",
+  "you_are_offline_check_your_connection": "Du bist offline. Überprüfen Sie Ihre Verbindung.",
+  "offline": "Offline"
 }
