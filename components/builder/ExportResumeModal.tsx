@@ -11,8 +11,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { and, equals, map, or } from "ramda";
-import { useLocalStorageValue, useMediaQuery } from "@react-hookz/web";
+import { useMediaQuery } from "@react-hookz/web";
 import { useTranslation } from "next-i18next";
+
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { Export } from "../../types";
 
@@ -43,9 +45,7 @@ function ExportResumeModal(props: props) {
   } = props;
   const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
-  const [isPdfViewer] = useLocalStorageValue("is-pdf-viewer", false, {
-    initializeWithStorageValue: false,
-  });
+  const [isPdfViewer] = useLocalStorage("is-pdf-viewer");
 
   function handleOnSubmit(format: Export) {
     switch (format) {

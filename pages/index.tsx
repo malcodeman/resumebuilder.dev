@@ -2,6 +2,8 @@ import Head from "next/head";
 import { useMountEffect } from "@react-hookz/web";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import useLocalStorage from "../hooks/useLocalStorage";
+
 import Layout from "../components/Layout";
 import Faq from "../components/landing/Faq";
 import Footer from "../components/landing/Footer";
@@ -10,13 +12,11 @@ import Templates from "../components/landing/Templates";
 import Builder from "../components/landing/Builder";
 import Hero from "../components/landing/Hero";
 
-import useDashboard from "../hooks/useDashboard";
-
 function Landing() {
-  const { setDashboard } = useDashboard();
+  const [_viewDashboard, setViewDashboard] = useLocalStorage("view-dashboard");
 
   useMountEffect(() => {
-    setDashboard(false);
+    setViewDashboard(false);
   });
 
   return (
