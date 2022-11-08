@@ -15,15 +15,20 @@ import {
 import { SortableContext } from "@dnd-kit/sortable";
 import { useMediaQuery } from "@react-hookz/web";
 import { findIndex, propEq, isEmpty, find, equals } from "ramda";
-import { useTranslations } from "next-intl";
-import PersonalDetailsSection from "components/sections/PersonalDetailsSection";
-import TagListSection from "components/sections/TagListSection";
-import StandardSection from "components/sections/StandardSection";
-import AddSectionModal from "components/sections/AddSectionModal";
-import DraggableItem from "components/sections/DraggableItem";
-import { STANDARD_SECTION_DEFAULT_VALUES } from "lib/constants";
-import utils from "lib/utils";
-import { Resume, Section } from "types";
+import { useTranslation } from "next-i18next";
+
+import PersonalDetailsSection from "../../components/sections/PersonalDetailsSection";
+import TagListSection from "../../components/sections/TagListSection";
+import StandardSection from "../../components/sections/StandardSection";
+import AddSectionModal from "./AddSectionModal";
+import DraggableItem from "./DraggableItem";
+import Resize from "../misc/Resize";
+
+import { STANDARD_SECTION_DEFAULT_VALUES } from "../../lib/constants";
+
+import utils from "../../lib/utils";
+
+import { Resume, Section } from "../../types";
 
 function SectionNewButton({ onSubmit }) {
   const t = useTranslations();
@@ -123,7 +128,7 @@ function Sections(props: props) {
   }
 
   return (
-    <Flex height="100%" flexDirection="column">
+    <Resize display="flex" height="100%" flexDirection="column">
       <Accordion
         defaultIndex={[0]}
         allowToggle
@@ -171,7 +176,7 @@ function Sections(props: props) {
         </FormProvider>
       </Accordion>
       <SectionNewButton onSubmit={handleOnSubmit} />
-    </Flex>
+    </Resize>
   );
 }
 
