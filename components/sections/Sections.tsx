@@ -22,6 +22,7 @@ import TagListSection from "../../components/sections/TagListSection";
 import StandardSection from "../../components/sections/StandardSection";
 import AddSectionModal from "./AddSectionModal";
 import DraggableItem from "./DraggableItem";
+import Resize from "../misc/Resize";
 
 import { STANDARD_SECTION_DEFAULT_VALUES } from "../../lib/constants";
 
@@ -125,7 +126,7 @@ function Sections(props: props) {
   }
 
   return (
-    <Flex height="100%" flexDirection="column">
+    <Resize display="flex" height="100%" flexDirection="column">
       <Accordion
         defaultIndex={[0]}
         allowToggle
@@ -174,7 +175,7 @@ function Sections(props: props) {
         </FormProvider>
       </Accordion>
       <SectionNewButton onSubmit={handleOnSubmit} />
-    </Flex>
+    </Resize>
   );
 }
 
