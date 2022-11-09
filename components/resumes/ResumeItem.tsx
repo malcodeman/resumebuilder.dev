@@ -154,7 +154,7 @@ function ResumeItem(props: props) {
             defaultValue={resume.title}
             onSubmit={(nextValue) => onTitleChange(resume.id, nextValue)}
             marginX="2"
-            width="100%"
+            width="full"
             data-cy="title-editable"
           >
             <EditablePreview

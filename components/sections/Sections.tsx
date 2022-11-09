@@ -48,7 +48,7 @@ function SectionNewButton({ onSubmit }) {
       >
         <Button
           size="sm"
-          width="100%"
+          width="full"
           variant="ghost"
           leftIcon={<FiPlus />}
           onClick={onOpen}

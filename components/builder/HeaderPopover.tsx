@@ -75,7 +75,6 @@ function FullWidth() {
       <FormLabel
         htmlFor="is-full-width"
         mb="0"
-        width="100%"
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
@@ -105,7 +104,6 @@ function DarkMode() {
       <FormLabel
         htmlFor="is-dark-mode"
         mb="0"
-        width="100%"
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
@@ -135,7 +133,6 @@ function PdfViewer() {
       <FormLabel
         htmlFor="is-pdf-viewer"
         mb="0"
-        width="100%"
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
@@ -167,7 +164,6 @@ function HideSensitiveData() {
       <FormLabel
         htmlFor="hide-sensitive-data"
         mb="0"
-        width="100%"
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
@@ -196,7 +192,6 @@ function DevTools() {
       <FormLabel
         htmlFor="dev-tools"
         mb="0"
-        width="100%"
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
