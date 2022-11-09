@@ -165,5 +165,15 @@
   "hide_sensitive_data": "Sensible Daten ausblenden",
   "add_profile_picture": "Profilbild hinzufügen",
   "you_are_offline_check_your_connection": "Du bist offline. Überprüfen Sie Ihre Verbindung.",
-  "offline": "Offline"
+  "offline": "Offline",
+  "next": "Nächste",
+  "skip": "Überspringen",
+  "finish": "Fertig",
+  "add_one_more_employment": "Fügen Sie eine weitere Beschäftigung hinzu",
+  "add_one_more_education": "Fügen Sie eine weitere Ausbildung hinzu",
+  "employment_history": "Beschäftigungshistorie",
+  "tell_us_about_yourself": "Erzählen Sie uns von sich.",
+  "you_will_be_able_to_edit_this_later": "Sie können dies später bearbeiten.",
+  "tell_us_about_your_work_experience": "Erzählen Sie uns von Ihrer Berufserfahrung.",
+  "tell_us_about_your_educational_background": "Erzählen Sie uns von Ihrer Ausbildung."
 }

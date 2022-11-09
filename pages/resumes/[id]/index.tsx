@@ -7,18 +7,18 @@ import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
-import Sections from "../../components/sections/Sections";
-import Header from "../../components/builder/Header";
-import HeaderMobile from "../../components/builder/HeaderMobile";
-import Document from "../../components/builder/Document";
-import NotFound from "../../components/misc/NotFound";
+import Sections from "../../../components/sections/Sections";
+import Header from "../../../components/builder/Header";
+import HeaderMobile from "../../../components/builder/HeaderMobile";
+import Document from "../../../components/builder/Document";
+import NotFound from "../../../components/misc/NotFound";
 
-import useResume from "../../hooks/useResume";
-import useAutoSaveToast from "../../hooks/useAutoSaveToast";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import utils from "../../lib/utils";
+import useResume from "../../../hooks/useResume";
+import useAutoSaveToast from "../../../hooks/useAutoSaveToast";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import utils from "../../../lib/utils";
 
-import { Resume } from "../../types";
+import { Resume } from "../../../types";
 
 function Builder() {
   const { t } = useTranslation();
