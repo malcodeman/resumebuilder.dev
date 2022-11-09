@@ -287,7 +287,7 @@ function CopyLink() {
 }
 
 function ChangeSlug() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getValues } = useFormContext<Resume>();
@@ -304,7 +304,7 @@ function ChangeSlug() {
       description: t("slug_changed"),
       isClosable: true,
     });
-    window.location.replace(`/resumes/${nextResume.id}`);
+    window.location.replace(`/${i18n.language}/resumes/${nextResume.id}`);
   }
 
   return (
