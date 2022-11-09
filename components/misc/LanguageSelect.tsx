@@ -14,8 +14,9 @@ function LanguageSelect(props: BoxProps) {
   const { i18n } = useTranslation();
   const form = useForm({ defaultValues });
   const languageOptions = [
-    { value: "en", label: "English" },
+    { value: "bs", label: "Bosanski" },
     { value: "de", label: "Deutsch" },
+    { value: "en", label: "English" },
   ];
   const router = useRouter();
 

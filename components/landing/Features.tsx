@@ -40,7 +40,9 @@ function Features() {
           (item) => (
             <Center key={item.titleTransKey} flexDirection="column">
               {item.icon}
-              <Heading mb="4">{t(item.titleTransKey)}</Heading>
+              <Heading mb="4" textAlign="center">
+                {t(item.titleTransKey)}
+              </Heading>
               <Text>{t(item.textTransKey)}</Text>
             </Center>
           ),
