@@ -39,7 +39,7 @@ function Footer() {
   async function handleOnSubmit() {
     setIsLoading.on();
     const resume = createNew();
-    await router.push(`/resumes/${resume.id}`);
+    await router.push(`/resumes/${resume.id}/about`);
     setIsLoading.off();
   }
 

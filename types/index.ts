@@ -23,19 +23,20 @@ type AboutField = {
   country: string;
   summary: string;
 };
+type NestedField = {
+  title: string;
+  subtitle: string;
+  website: string;
+  city: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+};
 type SectionField = {
   name: Section;
   label: string;
   tags?: string;
-  nested?: {
-    title: string;
-    subtitle: string;
-    website: string;
-    city: string;
-    startDate: string;
-    endDate: string;
-    description: string;
-  }[];
+  nested?: NestedField[];
 };
 type Fields = {
   about: AboutField;
@@ -93,6 +94,7 @@ export type {
   View,
   Design,
   AboutField,
+  NestedField,
   SectionField,
   Phrase,
   LocalStorageKey,

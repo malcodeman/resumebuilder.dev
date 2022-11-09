@@ -165,5 +165,15 @@
   "hide_sensitive_data": "Hide sensitive data",
   "add_profile_picture": "Add profile picture",
   "you_are_offline_check_your_connection": "You're offline. Check your connection.",
-  "offline": "Offline"
+  "offline": "Offline",
+  "next": "Next",
+  "skip": "Skip",
+  "finish": "Finish",
+  "add_one_more_employment": "Add one more employment",
+  "add_one_more_education": "Add one more education",
+  "employment_history": "Employment history",
+  "tell_us_about_yourself": "Tell us about yourself.",
+  "you_will_be_able_to_edit_this_later": "You will be able to edit this later.",
+  "tell_us_about_your_work_experience": "Tell us about your work experience.",
+  "tell_us_about_your_educational_background": "Tell us about your educational background."
 }
