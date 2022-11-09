@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
 import { FiPlus, FiUpload } from "react-icons/fi";
 import { useTranslation } from "next-i18next";
+import { equals } from "ramda";
 
 import { Fields } from "../../types";
 
@@ -32,7 +33,7 @@ function NewButton() {
   useKeyboardEvent(
     "n",
     (e) => {
-      const isBody = e.target["tagName"] === "BODY";
+      const isBody = equals(e.target["tagName"], "BODY");
       if (isBody) {
         handleOnCreateNew();
       }
