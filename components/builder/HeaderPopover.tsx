@@ -78,6 +78,7 @@ function FullWidth() {
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
+        width="full"
       >
         {t("full_width")}
       </FormLabel>
@@ -107,6 +108,7 @@ function DarkMode() {
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
+        width="full"
       >
         {t("dark_mode")}
       </FormLabel>
@@ -136,6 +138,7 @@ function PdfViewer() {
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
+        width="full"
       >
         {t("pdf_viewer")}
       </FormLabel>
@@ -167,6 +170,7 @@ function HideSensitiveData() {
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
+        width="full"
       >
         {t("hide_sensitive_data")}
       </FormLabel>
@@ -195,6 +199,7 @@ function DevTools() {
         cursor="pointer"
         marginInlineEnd="0"
         paddingInlineEnd="3"
+        width="full"
       >
         {t("dev_tools")}
       </FormLabel>

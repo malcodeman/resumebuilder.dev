@@ -7,6 +7,10 @@ describe("Landing page", () => {
     cy.get("[data-cy=templates-text]").click();
     cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
   });
+  it("Bosnian language", () => {
+    cy.get("[data-cy=language-select]").select("bs");
+    cy.url().should("eq", `${Cypress.config().baseUrl}/bs`);
+  });
   it("German language", () => {
     cy.get("[data-cy=language-select]").select("de");
     cy.url().should("eq", `${Cypress.config().baseUrl}/de`);

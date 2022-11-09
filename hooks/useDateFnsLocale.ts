@@ -1,5 +1,5 @@
 import React from "react";
-import { enUS, de } from "date-fns/locale";
+import { enUS, bs, de } from "date-fns/locale";
 import { useTranslation } from "next-i18next";
 
 function useDateFnsLocale() {
@@ -12,6 +12,8 @@ function useDateFnsLocale() {
         case "en":
         case "default":
           return enUS;
+        case "bs":
+          return bs;
         case "de":
           return de;
       }
