@@ -127,7 +127,7 @@ function Employment() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="title-input"
+                      data-cy="employment-title-input"
                       {...form.register(`employment.${index}.title` as const)}
                     />
                   </FormControl>
@@ -139,7 +139,7 @@ function Employment() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="subtitle-input"
+                      data-cy="employment-subtitle-input"
                       {...form.register(
                         `employment.${index}.subtitle` as const
                       )}
@@ -153,7 +153,7 @@ function Employment() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="start-date-input"
+                      data-cy="employment-start-date-input"
                       {...form.register(
                         `employment.${index}.startDate` as const
                       )}
@@ -167,7 +167,7 @@ function Employment() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="end-date-input"
+                      data-cy="employment-end-date-input"
                       {...form.register(`employment.${index}.endDate` as const)}
                     />
                   </FormControl>
@@ -194,6 +194,7 @@ function Employment() {
             colorScheme="blue"
             whileHover="mouseenter"
             type="submit"
+            data-cy="next-button"
             rightIcon={
               <motion.div variants={ARROW_RIGHT_VARIANTS}>
                 <FiArrowRight />

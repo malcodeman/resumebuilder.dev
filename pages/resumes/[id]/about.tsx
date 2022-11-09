@@ -189,6 +189,7 @@ function About() {
             colorScheme="blue"
             whileHover="mouseenter"
             type="submit"
+            data-cy="next-button"
             rightIcon={
               <motion.div variants={ARROW_RIGHT_VARIANTS}>
                 <FiArrowRight />

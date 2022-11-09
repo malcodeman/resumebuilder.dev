@@ -322,4 +322,101 @@ describe("Builder page", () => {
       .click()
       .should(() => expect(getResume().section[3].tags).to.eq(hobbies));
   });
+  it("Steps", () => {
+    cy.intercept({
+      method: "GET",
+      url: "**/employment**",
+    }).as("getEmployment");
+    cy.intercept({
+      method: "GET",
+      url: "**/education**",
+    }).as("getEducation");
+    cy.intercept({
+      method: "GET",
+      url: "**/resumes/**",
+    }).as("getResume");
+    cy.visit(`/resumes/${getResume().id}/about`);
+
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
+    const email = faker.internet.email(firstName, lastName);
+    const phone = faker.phone.number();
+    const city = faker.address.city();
+    const country = faker.address.country();
+
+    cy.contains("Personal details");
+    cy.get("[data-cy=first-name-input]")
+      .type(firstName)
+      .should("have.value", firstName);
+    cy.get("[data-cy=last-name-input]")
+      .type(lastName)
+      .should("have.value", lastName);
+    cy.get("[data-cy=email-input]")
+      .clear()
+      .type(email)
+      .should("have.value", email);
+    cy.get("[data-cy=phone-input]").type(phone).should("have.value", phone);
+    cy.get("[data-cy=city-input]")
+      .clear()
+      .type(city)
+      .should("have.value", city);
+    cy.get("[data-cy=country-input]")
+      .clear()
+      .type(country)
+      .should("have.value", country);
+    cy.get("[data-cy=next-button]").click();
+    cy.wait("@getEmployment");
+    cy.url().should(
+      "eq",
+      `${Cypress.config().baseUrl}/resumes/${getResume().id}/employment`
+    );
+    cy.contains("Employment history");
+
+    // const company = faker.company.name();
+    // const jobTitle = faker.name.jobTitle();
+    // const startDate = faker.date.past().toDateString();
+    // const endDate = "Current";
+
+    // cy.get("[data-cy=employment-title-input]")
+    //   .type(company)
+    //   .should("have.value", company);
+    // cy.get("[data-cy=employment-subtitle-input]")
+    //   .type(jobTitle)
+    //   .should("have.value", jobTitle);
+    // cy.get("[data-cy=employment-start-date-input]")
+    //   .type(startDate)
+    //   .should("have.value", startDate);
+    // cy.get("[data-cy=employment-end-date-input]")
+    //   .type(endDate)
+    //   .should("have.value", endDate);
+    // cy.get("[data-cy=next-button]").click();
+    // cy.wait("@getEducation");
+    // cy.url().should(
+    //   "eq",
+    //   `${Cypress.config().baseUrl}/resumes/${getResume().id}/education`
+    // );
+    // cy.contains("Education");
+
+    // const school = faker.random.word();
+    // const degree = faker.random.word();
+
+    // cy.get("[data-cy=education-title-input]")
+    //   .type(school)
+    //   .should("have.value", school);
+    // cy.get("[data-cy=education-subtitle-input]")
+    //   .type(degree)
+    //   .should("have.value", degree);
+    // cy.get("[data-cy=education-start-date-input]")
+    //   .type(startDate)
+    //   .should("have.value", startDate);
+    // cy.get("[data-cy=education-end-date-input]")
+    //   .type(endDate)
+    //   .should("have.value", endDate);
+    // cy.get("[data-cy=finish-button]").click();
+    // cy.wait("@getResume");
+    // cy.url().should(
+    //   "eq",
+    //   `${Cypress.config().baseUrl}/resumes/${getResume().id}`
+    // );
+  });
 });

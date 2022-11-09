@@ -125,7 +125,7 @@ function Education() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="title-input"
+                      data-cy="education-title-input"
                       {...form.register(`education.${index}.title` as const)}
                     />
                   </FormControl>
@@ -137,7 +137,7 @@ function Education() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="subtitle-input"
+                      data-cy="education-subtitle-input"
                       {...form.register(`education.${index}.subtitle` as const)}
                     />
                   </FormControl>
@@ -149,7 +149,7 @@ function Education() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="start-date-input"
+                      data-cy="education-start-date-input"
                       {...form.register(
                         `education.${index}.startDate` as const
                       )}
@@ -163,7 +163,7 @@ function Education() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="end-date-input"
+                      data-cy="education-end-date-input"
                       {...form.register(`education.${index}.endDate` as const)}
                     />
                   </FormControl>
@@ -190,6 +190,7 @@ function Education() {
             colorScheme="blue"
             whileHover="mouseenter"
             type="submit"
+            data-cy="finish-button"
             rightIcon={
               <motion.div variants={ARROW_RIGHT_VARIANTS}>
                 <FiArrowRight />
