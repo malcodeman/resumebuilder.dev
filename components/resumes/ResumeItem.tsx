@@ -174,8 +174,8 @@ function ResumeItem(props: props) {
               data-cy="resume-more-options-menu-button"
               icon={<FiMoreHorizontal />}
               mr="2"
-              display="none"
-              _groupHover={{ display: "inline-flex" }}
+              visibility="hidden"
+              _groupHover={{ visibility: "visible" }}
             />
             <MenuList>
               <MenuItem
@@ -207,9 +207,9 @@ function ResumeItem(props: props) {
             {...listeners}
             size="sm"
             aria-label="Drag"
-            display="none"
             icon={<FiMove />}
-            _groupHover={{ display: "inline-flex" }}
+            visibility="hidden"
+            _groupHover={{ visibility: "visible" }}
           />
         </Flex>
         <UpdatedAtText updatedAt={resume.updatedAt} />

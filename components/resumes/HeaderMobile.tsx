@@ -32,7 +32,7 @@ function HeaderMobile() {
       left="0"
       right="0"
       bottom="0"
-      zIndex="1"
+      zIndex="3"
     >
       <Container maxW="container.lg">
         <Flex as="nav" justifyContent="space-between" alignItems="center">
