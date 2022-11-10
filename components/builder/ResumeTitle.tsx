@@ -6,6 +6,7 @@ import {
   HTMLChakraProps,
 } from "@chakra-ui/react";
 import { UseFormReturn } from "react-hook-form";
+import { isEmpty } from "ramda";
 
 import EmojiPicker from "../misc/EmojiPicker";
 
@@ -22,14 +23,14 @@ function ResumeTitle(props: props) {
   const { resume, changeIcon, changeTitle } = useResume({ isolated: true });
 
   function handleOnIconChange(icon: string) {
-    form.setValue("icon", icon);
     changeIcon(icon);
   }
 
   function handleOnTitleChange(title: string) {
-    form.setValue("title", title);
-    document.title = `${title} | resumebuilder.dev`;
-    changeTitle(title);
+    if (!isEmpty(title)) {
+      document.title = `${title} | resumebuilder.dev`;
+      changeTitle(title);
+    }
   }
 
   if (resume) {
@@ -40,6 +41,7 @@ function ResumeTitle(props: props) {
           onSelect={(emoji) => handleOnIconChange(emoji)}
         />
         <Editable
+          placeholder={resume.title}
           defaultValue={resume.title}
           onSubmit={(nextValue) => handleOnTitleChange(nextValue)}
           ml="2"
