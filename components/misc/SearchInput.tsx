@@ -19,7 +19,7 @@ function SearchInput(props: Props) {
   const { value, placeholder, onChangeValue, onClear, ...rest } = props;
   return (
     <InputGroup size="sm" {...rest}>
-      <InputLeftElement pointerEvents="none">
+      <InputLeftElement zIndex="0">
         <Icon as={FiSearch} />
       </InputLeftElement>
       <Input
