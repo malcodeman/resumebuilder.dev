@@ -40,17 +40,22 @@ function EmojiPicker(props: props) {
           <Tooltip label={TOOLTIP_LABEL} aria-label={TOOLTIP_LABEL}>
             <Flex>
               <PopoverTrigger>
-                <IconButton size="sm" aria-label="Import" icon={icon} />
+                <IconButton
+                  size="sm"
+                  icon={icon}
+                  aria-label="Import"
+                  data-cy="emoji-picker-icon-button"
+                />
               </PopoverTrigger>
             </Flex>
           </Tooltip>
           <PopoverContent width="unset">
-            {/* <Picker
+            <Picker
               theme={colorMode}
               showPreview={false}
               showSkinTones={false}
               onSelect={(emoji) => handleOnSelect(emoji, onClose)}
-            /> */}
+            />
           </PopoverContent>
         </>
       )}
