@@ -22,6 +22,7 @@ function ResumeTitleColumn(props: props) {
     <Flex alignItems="center">
       <EmojiPicker emoji={icon} onSelect={onChangeIcon} />
       <Editable
+        placeholder={title}
         defaultValue={title}
         onSubmit={onChangeTitle}
         ml="2"

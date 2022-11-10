@@ -11,6 +11,7 @@ import {
   clone,
   and,
   or,
+  isEmpty,
 } from "ramda";
 import { getDate, getMonth } from "date-fns";
 
@@ -61,29 +62,33 @@ function useResumes(props: props = {}) {
   }
 
   function changeTitle(id: string, title: string) {
-    const nextResumes = map((item) => {
-      if (equals(item.id, id)) {
-        return {
-          ...item,
-          title,
-        };
-      }
-      return item;
-    }, resumes);
-    setResumes(nextResumes);
+    if (!isEmpty(title)) {
+      const nextResumes = map((item) => {
+        if (equals(item.id, id)) {
+          return {
+            ...item,
+            title,
+          };
+        }
+        return item;
+      }, resumes);
+      setResumes(nextResumes);
+    }
   }
 
   function changeIcon(id: string, icon: string) {
-    const nextResumes = map((item) => {
-      if (equals(item.id, id)) {
-        return {
-          ...item,
-          icon,
-        };
-      }
-      return item;
-    }, resumes);
-    setResumes(nextResumes);
+    if (!isEmpty(icon)) {
+      const nextResumes = map((item) => {
+        if (equals(item.id, id)) {
+          return {
+            ...item,
+            icon,
+          };
+        }
+        return item;
+      }, resumes);
+      setResumes(nextResumes);
+    }
   }
 
   function getIcon() {

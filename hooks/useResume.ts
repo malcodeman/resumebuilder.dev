@@ -1,6 +1,6 @@
 import { useLocalStorageValue } from "@react-hookz/web";
 import { useRouter } from "next/router";
-import { isNil, find, map, filter, equals, or, clone } from "ramda";
+import { isNil, find, map, filter, equals, or, clone, isEmpty } from "ramda";
 import { nanoid } from "nanoid";
 
 import { Resume } from "../types";
@@ -54,17 +54,21 @@ function useResume(props: props = {}) {
   }
 
   function changeTitle(title: string) {
-    setResume({
-      ...resume,
-      title,
-    });
+    if (!isEmpty(title)) {
+      setResume({
+        ...resume,
+        title,
+      });
+    }
   }
 
   function changeIcon(icon: string) {
-    setResume({
-      ...resume,
-      icon,
-    });
+    if (!isEmpty(icon)) {
+      setResume({
+        ...resume,
+        icon,
+      });
+    }
   }
 
   function changeSlug(slug: string) {

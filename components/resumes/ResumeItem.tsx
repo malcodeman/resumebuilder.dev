@@ -151,6 +151,7 @@ function ResumeItem(props: props) {
             onSelect={(emoji) => onIconChange(resume.id, emoji)}
           />
           <Editable
+            placeholder={resume.title}
             defaultValue={resume.title}
             onSubmit={(nextValue) => onTitleChange(resume.id, nextValue)}
             marginX="2"
