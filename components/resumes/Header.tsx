@@ -41,7 +41,7 @@ function Header() {
       left="0"
       top="0"
       right="0"
-      zIndex="1"
+      zIndex="3"
     >
       <Container maxW="container.lg">
         <Flex as="nav" justifyContent="space-between">

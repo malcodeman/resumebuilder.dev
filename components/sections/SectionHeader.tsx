@@ -109,8 +109,8 @@ function SectionHeader(props: props) {
                     as={IconButton}
                     size="xs"
                     aria-label={TOOLTIP_MORE_LABEL}
-                    display="none"
-                    _groupHover={{ display: "inline-flex" }}
+                    visibility="hidden"
+                    _groupHover={{ visibility: "visible" }}
                     icon={<FiMoreHorizontal />}
                     onClick={(e) => e.stopPropagation()}
                     onPointerDown={(e) => e.preventDefault()}
@@ -146,10 +146,10 @@ function SectionHeader(props: props) {
           <Tooltip label={t("add_item")} aria-label={TOOLTIP_ADD_LABEL}>
             <IconButton
               size="xs"
-              aria-label={TOOLTIP_ADD_LABEL}
-              display="none"
               ml="2"
-              _groupHover={{ display: "inline-flex" }}
+              aria-label={TOOLTIP_ADD_LABEL}
+              visibility="hidden"
+              _groupHover={{ visibility: "visible" }}
               icon={<FiPlus />}
               onClick={(e) => handleOnAppend(e)}
               onPointerDown={(e) => e.preventDefault()}
