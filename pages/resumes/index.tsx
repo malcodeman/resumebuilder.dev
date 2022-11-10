@@ -97,14 +97,22 @@ function ResumeGrid() {
   const { locale } = useDateFnsLocale();
   const columns = React.useMemo(
     () => [
-      columnHelper.accessor("title", {
+      columnHelper.display({
+        id: "editable",
         header: t("title"),
-        cell: (info) => (
-          <ResumeTitleColumn
-            id={info.row.original.id}
-            defaultValue={info.getValue()}
-          />
-        ),
+        cell: (info) => {
+          const icon = info.row.original.icon;
+          const title = info.row.original.title;
+          const id = info.row.original.id;
+          return (
+            <ResumeTitleColumn
+              icon={icon}
+              title={title}
+              onChangeIcon={(nextValue: string) => changeIcon(id, nextValue)}
+              onChangeTitle={(nextValue: string) => changeTitle(id, nextValue)}
+            />
+          );
+        },
       }),
       columnHelper.accessor("updatedAt", {
         header: t("edited"),
@@ -116,11 +124,12 @@ function ResumeGrid() {
             }),
           }),
       }),
-      columnHelper.accessor("id", {
+      columnHelper.display({
+        id: "menu",
         header: "",
         cell: (info) => (
           <Stack spacing="2" direction="row">
-            <Link href={`/resumes/${info.getValue()}`} passHref>
+            <Link href={`/resumes/${info.row.original.id}`} passHref>
               <Button display={["none", "inline-flex"]} size="sm">
                 {t("open")}
               </Button>
@@ -134,21 +143,21 @@ function ResumeGrid() {
                 icon={<FiMoreHorizontal />}
               />
               <MenuList>
-                <Link href={`/resumes/${info.getValue()}`} passHref>
+                <Link href={`/resumes/${info.row.original.id}`} passHref>
                   <MenuItem display={["flex", "none"]} icon={<FiLink />}>
                     {t("open")}
                   </MenuItem>
                 </Link>
                 <MenuItem
-                  onClick={() => duplicate(info.getValue())}
+                  onClick={() => duplicate(info.row.original.id)}
                   icon={<FiCopy />}
                   data-cy="duplicate-menu-item"
                 >
                   {t("duplicate")}
                 </MenuItem>
-                <CopyLinkMenuItem id={info.getValue()} />
+                <CopyLinkMenuItem id={info.row.original.id} />
                 <DeleteResumeMenuItem
-                  onDelete={() => handleOnDelete(info.getValue())}
+                  onDelete={() => handleOnDelete(info.row.original.id)}
                 />
               </MenuList>
             </Menu>
@@ -156,7 +165,15 @@ function ResumeGrid() {
         ),
       }),
     ],
-    [columnHelper, duplicate, handleOnDelete, locale, t]
+    [
+      columnHelper,
+      locale,
+      t,
+      changeIcon,
+      changeTitle,
+      duplicate,
+      handleOnDelete,
+    ]
   );
 
   React.useEffect(() => {

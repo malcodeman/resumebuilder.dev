@@ -1,30 +1,42 @@
-import { Editable, EditableInput, EditablePreview } from "@chakra-ui/react";
+import {
+  Flex,
+  Editable,
+  EditableInput,
+  EditablePreview,
+} from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
-import useResumes from "../../hooks/useResumes";
+import EmojiPicker from "../misc/EmojiPicker";
 
 type props = {
-  id: string;
-  defaultValue: string;
+  icon: string;
+  title: string;
+  onChangeIcon: (nextValue: string) => void;
+  onChangeTitle: (nextValue: string) => void;
 };
 
 function ResumeTitleColumn(props: props) {
-  const { id, defaultValue } = props;
+  const { icon, title, onChangeIcon, onChangeTitle } = props;
   const form = useForm({ defaultValues: { title: "" } });
-  const { changeTitle } = useResumes();
   return (
-    <Editable
-      defaultValue={defaultValue}
-      onSubmit={(nextValue) => changeTitle(id, nextValue)}
-      data-cy="title-editable"
-    >
-      <EditablePreview
-        noOfLines={1}
-        overflowWrap="anywhere"
-        data-cy="title-preview"
-      />
-      <EditableInput {...form.register("title")} data-cy="title-input" />
-    </Editable>
+    <Flex alignItems="center">
+      <EmojiPicker emoji={icon} onSelect={onChangeIcon} />
+      <Editable
+        defaultValue={title}
+        onSubmit={onChangeTitle}
+        ml="2"
+        maxW="256px"
+        data-cy="title-editable"
+      >
+        <EditablePreview
+          noOfLines={1}
+          lineHeight="base"
+          data-cy="title-preview"
+          overflowWrap="anywhere"
+        />
+        <EditableInput {...form.register("title")} data-cy="title-input" />
+      </Editable>
+    </Flex>
   );
 }
 
