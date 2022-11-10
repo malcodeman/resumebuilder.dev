@@ -123,6 +123,10 @@ const FATHOM_SITE_ID = "ZMOHRXZI";
 const FATHOM_EVENTS = {
   EXPORT_AS_PDF: "0UNUBD1E",
 };
+const LINKS = {
+  GITHUB_REPO: "https://github.com/malcodeman/resumebuilder.dev",
+  LINKEDIN_PAGE: "https://www.linkedin.com/company/resumebuilderdev",
+};
 
 export {
   IS_PROD,
@@ -133,4 +137,5 @@ export {
   TEMPLATES_LIST,
   FATHOM_SITE_ID,
   FATHOM_EVENTS,
+  LINKS,
 };

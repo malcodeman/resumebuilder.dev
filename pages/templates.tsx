@@ -18,6 +18,7 @@ import { Template as TemplateType } from "../types";
 
 import SearchInput from "../components/misc/SearchInput";
 import Template from "../components/templates/Template";
+import Footer from "../components/misc/Footer";
 
 import useResumes from "../hooks/useResumes";
 
@@ -87,6 +88,7 @@ function Templates() {
           <></>
         )}
         <Grid
+          mb="32"
           gap="8"
           gridTemplateColumns="repeat(auto-fill, minmax(288px, 1fr))"
           data-cy="templates-grid"
@@ -103,6 +105,7 @@ function Templates() {
             filteredTemplatesBySearch
           )}
         </Grid>
+        <Footer />
       </Layout>
     </>
   );

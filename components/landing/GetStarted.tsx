@@ -30,7 +30,7 @@ const LIST = [
   },
 ];
 
-function Footer() {
+function GetStarted() {
   const { t } = useTranslation();
   const router = useRouter();
   const { createNew } = useResumes();
@@ -49,6 +49,7 @@ function Footer() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
+      mb="32"
     >
       <Center flexDirection="column" mb="16">
         <Heading mb="4">{t("get_started_with_resume_builder")}</Heading>
@@ -82,4 +83,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default GetStarted;
