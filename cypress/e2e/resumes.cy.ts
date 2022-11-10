@@ -149,6 +149,15 @@ describe("Resumes page", () => {
       .click()
       .should(() => expect(getResume(0).icon).to.eq(":+1:"));
   });
+  it("Change icon | List view", () => {
+    localStorage.setItem("resumes", JSON.stringify(resumes));
+    cy.get("[data-cy=list-view-icon-button]").click();
+    cy.get("[data-cy=emoji-picker-icon-button]").click();
+    cy.get(".emoji-mart-emoji")
+      .first()
+      .click({ force: true })
+      .should(() => expect(getResume(0).icon).to.eq(":+1:"));
+  });
   it("Rename resume | Grid view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
     cy.get("[data-cy=title-editable]").click();
