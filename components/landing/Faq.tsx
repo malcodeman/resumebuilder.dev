@@ -19,6 +19,8 @@ import { map } from "ramda";
 import { Trans, useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 
+import { LINKS } from "../../lib/constants";
+
 function Faq() {
   const { t } = useTranslation();
   const faq = React.useMemo(
@@ -57,11 +59,7 @@ function Faq() {
         answer: (
           <Trans i18nKey="faq_answer_4" values={{ link: "GitHub" }}>
             Yes, you can find the source code on
-            <ChakraLink
-              href="https://github.com/malcodeman/resumebuilder.dev"
-              color="blue.400"
-              isExternal
-            >
+            <ChakraLink href={LINKS.GITHUB_REPO} color="blue.400" isExternal>
               GitHub
             </ChakraLink>
             .
