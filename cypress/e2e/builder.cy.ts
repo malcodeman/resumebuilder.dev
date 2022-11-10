@@ -24,6 +24,13 @@ describe("Builder page", () => {
     cy.get("[data-cy=resumebuilder-text]").click();
     cy.url().should("eq", `${Cypress.config().baseUrl}/resumes`);
   });
+  it("Change icon", () => {
+    cy.get("[data-cy=emoji-picker-icon-button]").click();
+    cy.get(".emoji-mart-emoji")
+      .first()
+      .click()
+      .should(() => expect(getResume().icon).to.eq(":+1:"));
+  });
   it("Rename resume", () => {
     cy.get("[data-cy=title-editable]").click();
     cy.get("[data-cy=title-input]")

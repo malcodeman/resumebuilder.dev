@@ -28,7 +28,7 @@
     "@tanstack/react-table": "^8.5.11",
     "axios": "^0.22.0",
     "date-fns": "^2.23.0",
-    "emoji-mart": "^3.0.1",
+    "emoji-mart": "3.0.1",
     "fathom-client": "^3.2.0",
     "file-saver": "^2.0.5",
     "framer-motion": "7.5.1",
