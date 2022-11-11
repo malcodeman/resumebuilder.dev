@@ -130,7 +130,7 @@ function London(props: TemplateProps) {
                     return (
                       <Box key={index} mb={16}>
                         <Text mb={4} fontSize="sm" fontWeight={700}>
-                          {item.subtitle},{" "}
+                          {isEmpty(item.subtitle) ? null : `${item.subtitle}, `}
                           {item.website ? (
                             <Link href={item.website}>{item.title}</Link>
                           ) : (

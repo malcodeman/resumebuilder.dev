@@ -52,11 +52,36 @@ function Nairobi(props: TemplateProps) {
     if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
     }
+    if (isEmpty(item.startDate)) {
+      return (
+        <Text mb={8} color="#707678">
+          {item.endDate}
+        </Text>
+      );
+    }
+    if (isEmpty(item.endDate)) {
+      return (
+        <Text mb={8} color="#707678">
+          {item.startDate}
+        </Text>
+      );
+    }
     return (
       <Text mb={8} color="#707678">
         {item.startDate} - {item.endDate}
       </Text>
     );
+  }
+
+  function renderDescription(description: string) {
+    if (isEmpty(description)) {
+      return null;
+    }
+    return description.split("\n").map((item, index) => (
+      <Text key={index} lineHeight={1.4}>
+        {item}
+      </Text>
+    ));
   }
 
   return (
@@ -93,20 +118,18 @@ function Nairobi(props: TemplateProps) {
                       return (
                         <Box key={index} mb={16}>
                           <Text mb={8} fontSize="sm" fontWeight={700}>
-                            {item.subtitle},{" "}
+                            {isEmpty(item.subtitle)
+                              ? null
+                              : `${item.subtitle}, `}
                             {item.website ? (
                               <Link href={item.website}>{item.title}</Link>
                             ) : (
                               item.title
                             )}
-                            , {item.city}
+                            {isEmpty(item.city) ? null : `, ${item.city}`}
                           </Text>
                           {renderDate(item)}
-                          {item.description.split("\n").map((item, index) => (
-                            <Text key={index} lineHeight={1.4}>
-                              {item}
-                            </Text>
-                          ))}
+                          {renderDescription(item.description)}
                         </Box>
                       );
                     })}
