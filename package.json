@@ -9,6 +9,9 @@
     "cypress:open": "cypress open",
     "cypress:ci": " cypress run --headless",
     "cypress:builder": "cypress run --spec cypress/e2e/builder.cy.ts",
+    "cypress:landing": "cypress run --spec cypress/e2e/landing.cy.ts",
+    "cypress:resumes": "cypress run --spec cypress/e2e/resumes.cy.ts",
+    "cypress:templates": "cypress run --spec cypress/e2e/templates.cy.ts",
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "serve": "serve out"
