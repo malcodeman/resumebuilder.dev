@@ -8,6 +8,7 @@ import Page from "./components/Page";
 import Box from "./components/Box";
 import Flex from "./components/Flex";
 import Link from "./components/Link";
+import Image from "./components/Image";
 import TemplateContext from "./components/TemplateContext";
 
 import { TemplateProps } from "../types";
@@ -28,20 +29,52 @@ function SectionLabel(props: { children: React.ReactNode }) {
 }
 
 function Berlin(props: TemplateProps) {
-  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
+  const {
+    isPdf = false,
+    hideSensitiveData = false,
+    design,
+    fields,
+    profilePicture,
+  } = props;
   const { about, section } = fields;
 
-  function renderDate(item: { startDate: string; endDate: string }) {
-    if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
-      return null;
+  function renderProfilePictureOrInitials() {
+    if (profilePicture) {
+      return (
+        <Image
+          alt=""
+          top={20}
+          left={20}
+          width={36}
+          height={36}
+          objectFit="cover"
+          position="absolute"
+          borderRadius="100%"
+          src={profilePicture}
+        />
+      );
     }
-    if (isEmpty(item.startDate)) {
-      return ` | ${item.endDate}`;
+    if (and(about.firstName, about.lastName)) {
+      return (
+        <Box
+          pt={5}
+          pl={8}
+          pr={8}
+          pb={5}
+          top={20}
+          left={20}
+          color="#FFF"
+          fontWeight={400}
+          bgColor="#FD5C63"
+          position="absolute"
+          textTransform="uppercase"
+        >
+          <Text>{about.firstName[0]}</Text>
+          <Text>{about.lastName[0]}</Text>
+        </Box>
+      );
     }
-    if (isEmpty(item.endDate)) {
-      return ` | ${item.startDate}`;
-    }
-    return ` | ${item.startDate} - ${item.endDate}`;
+    return null;
   }
 
   function renderLocation() {
@@ -68,34 +101,69 @@ function Berlin(props: TemplateProps) {
     );
   }
 
-  function renderInitials() {
-    if (and(about.firstName, about.lastName)) {
-      return (
-        <Box
-          pt={5}
-          pl={8}
-          pr={8}
-          pb={5}
-          top={20}
-          left={20}
-          color="#FFF"
-          fontWeight={400}
-          bgColor="#FD5C63"
-          position="absolute"
-          textTransform="uppercase"
-        >
-          <Text>{about.firstName[0]}</Text>
-          <Text>{about.lastName[0]}</Text>
-        </Box>
-      );
+  function renderSummary(summary: string) {
+    if (isEmpty(summary)) {
+      return null;
     }
-    return null;
+    return split("\n", summary).map((item, index) => (
+      <Text key={index} color="#717171" lineHeight={1.4}>
+        {item}
+      </Text>
+    ));
+  }
+
+  function renderDate(item: { startDate: string; endDate: string }) {
+    if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
+      return null;
+    }
+    if (isEmpty(item.startDate)) {
+      return ` | ${item.endDate}`;
+    }
+    if (isEmpty(item.endDate)) {
+      return ` | ${item.startDate}`;
+    }
+    return ` | ${item.startDate} - ${item.endDate}`;
+  }
+
+  function renderDescription(description: string) {
+    if (isEmpty(description)) {
+      return null;
+    }
+    return split("\n", description).map((item, index) => (
+      <Text key={index} lineHeight={1.4}>
+        {item}
+      </Text>
+    ));
+  }
+
+  function renderTags(tags: string) {
+    if (isEmpty(tags)) {
+      return null;
+    }
+    return (
+      <Flex mb={16} flexWrap="wrap">
+        {split("\n", tags).map((item, index) => (
+          <Text
+            key={index}
+            mr={4}
+            mb={4}
+            pt={6}
+            pb={6}
+            pl={12}
+            pr={12}
+            bgColor="#F7F7F7"
+          >
+            {item}
+          </Text>
+        ))}
+      </Flex>
+    );
   }
 
   return (
     <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
       <Page id="berlin" pt={40} pr={80} pb={40} pl={80}>
-        {renderInitials()}
+        {renderProfilePictureOrInitials()}
         <Box mb={16}>
           <Text
             mb={20}
@@ -114,11 +182,7 @@ function Berlin(props: TemplateProps) {
               : `${about.email} | `}
             {hideSensitiveData ? null : about.phone}
           </Text>
-          {about.summary.split("\n").map((item, index) => (
-            <Text key={index} color="#717171" lineHeight={1.4}>
-              {item}
-            </Text>
-          ))}
+          {renderSummary(about.summary)}
         </Box>
         <Box>
           {section.map((sectionItem, index) => {
@@ -147,11 +211,7 @@ function Berlin(props: TemplateProps) {
                           {isEmpty(item.city) ? "" : ` | ${item.city}`}
                           {renderDate(item)}
                         </Text>
-                        {item.description.split("\n").map((item, index) => (
-                          <Text key={index} lineHeight={1.4}>
-                            {item}
-                          </Text>
-                        ))}
+                        {renderDescription(item.description)}
                       </Box>
                     );
                   })}
@@ -161,24 +221,7 @@ function Berlin(props: TemplateProps) {
             return (
               <React.Fragment key={index}>
                 <SectionLabel>{sectionItem.label}</SectionLabel>
-                <Flex mb={16} flexWrap="wrap">
-                  {isEmpty(sectionItem.tags)
-                    ? null
-                    : split("\n", sectionItem.tags).map((item, index) => (
-                        <Text
-                          key={index}
-                          mr={4}
-                          mb={4}
-                          pt={6}
-                          pb={6}
-                          pl={12}
-                          pr={12}
-                          bgColor="#F7F7F7"
-                        >
-                          {item}
-                        </Text>
-                      ))}
-                </Flex>
+                {renderTags(sectionItem.tags)}
               </React.Fragment>
             );
           })}
