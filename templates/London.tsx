@@ -41,7 +41,7 @@ function London(props: TemplateProps) {
     return (
       <Box mb={16}>
         <SectionLabel>Profile</SectionLabel>
-        {about.summary.split("\n").map((item, index) => (
+        {split("\n", about.summary).map((item, index) => (
           <Text key={index} lineHeight={1.4}>
             {item}
           </Text>
@@ -79,11 +79,35 @@ function London(props: TemplateProps) {
     if (isEmpty(description)) {
       return null;
     }
-    return description.split("\n").map((item, index) => (
+    return split("\n", description).map((item, index) => (
       <Text key={index} lineHeight={1.4}>
         {item}
       </Text>
     ));
+  }
+
+  function renderTags(tags: string) {
+    if (isEmpty(tags)) {
+      return null;
+    }
+    return (
+      <Flex mb={16} flexWrap="wrap">
+        {split("\n", tags).map((item, index) => (
+          <Text
+            key={index}
+            mr={4}
+            mb={4}
+            pt={6}
+            pb={6}
+            pl={12}
+            pr={12}
+            bgColor="#F7F7F7"
+          >
+            {item}
+          </Text>
+        ))}
+      </Flex>
+    );
   }
 
   return (
@@ -149,24 +173,7 @@ function London(props: TemplateProps) {
             return (
               <React.Fragment key={index}>
                 <SectionLabel>{sectionItem.label}</SectionLabel>
-                <Flex mb={16} flexWrap="wrap">
-                  {isEmpty(sectionItem.tags)
-                    ? null
-                    : split("\n", sectionItem.tags).map((item, index) => (
-                        <Text
-                          key={index}
-                          mr={4}
-                          mb={4}
-                          pt={6}
-                          pb={6}
-                          pl={12}
-                          pr={12}
-                          bgColor="#F7F7F7"
-                        >
-                          {item}
-                        </Text>
-                      ))}
-                </Flex>
+                {renderTags(sectionItem.tags)}
               </React.Fragment>
             );
           })}
