@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
-import { length, map } from "ramda";
+import { length, map, equals } from "ramda";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
@@ -33,13 +33,17 @@ const LIST = [
 function GetStarted() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { createNew } = useResumes();
+  const { resumes, createNew } = useResumes();
   const [isLoading, setIsLoading] = useBoolean();
 
   async function handleOnSubmit() {
     setIsLoading.on();
     const resume = createNew();
-    await router.push(`/resumes/${resume.id}/about`);
+    if (equals(length(resumes), 1)) {
+      await router.push(`/resumes/${resume.id}`);
+    } else {
+      await router.push(`/resumes/${resume.id}/about`);
+    }
     setIsLoading.off();
   }
 

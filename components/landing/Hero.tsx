@@ -14,6 +14,7 @@ import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 import { FiCheckCircle } from "react-icons/fi";
 import { useRouter } from "next/router";
+import { equals, length } from "ramda";
 
 import Poser12 from "../../illustrations/Poser12";
 
@@ -22,13 +23,17 @@ import useResumes from "../../hooks/useResumes";
 function Hero() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { createNew } = useResumes();
+  const { resumes, createNew } = useResumes();
   const [isLoading, setIsLoading] = useBoolean();
 
   async function handleOnSubmit() {
     setIsLoading.on();
     const resume = createNew();
-    await router.push(`/resumes/${resume.id}`);
+    if (equals(length(resumes), 1)) {
+      await router.push(`/resumes/${resume.id}`);
+    } else {
+      await router.push(`/resumes/${resume.id}/about`);
+    }
     setIsLoading.off();
   }
 
