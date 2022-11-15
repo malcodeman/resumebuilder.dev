@@ -1,5 +1,5 @@
 import React from "react";
-import { and, isEmpty } from "ramda";
+import { and, isEmpty, split } from "ramda";
 
 import utils from "../lib/utils";
 
@@ -39,7 +39,7 @@ function Nairobi(props: TemplateProps) {
     return (
       <Box mb={16}>
         <SectionLabel>Profile</SectionLabel>
-        {about.summary.split("\n").map((item, index) => (
+        {split("\n", about.summary).map((item, index) => (
           <Text key={index} lineHeight={1.4}>
             {item}
           </Text>
@@ -77,8 +77,19 @@ function Nairobi(props: TemplateProps) {
     if (isEmpty(description)) {
       return null;
     }
-    return description.split("\n").map((item, index) => (
+    return split("\n", description).map((item, index) => (
       <Text key={index} lineHeight={1.4}>
+        {item}
+      </Text>
+    ));
+  }
+
+  function renderTags(tags: string) {
+    if (isEmpty(tags)) {
+      return null;
+    }
+    return split("\n", tags).map((item, index) => (
+      <Text key={index} mb={8}>
         {item}
       </Text>
     ));
@@ -147,7 +158,7 @@ function Nairobi(props: TemplateProps) {
           >
             <Box mb={16}>
               <SectionLabel>Details</SectionLabel>
-              <Text mb={4}>{about.city} </Text>
+              <Text mb={4}>{about.city}</Text>
               <Text mb={4}>{about.country}</Text>
               {hideSensitiveData ? null : <Text mb={4}>{about.phone}</Text>}
               {hideSensitiveData ? null : <Text mb={4}>{about.email}</Text>}
@@ -160,13 +171,7 @@ function Nairobi(props: TemplateProps) {
                 return (
                   <Box key={index} mb={16}>
                     <SectionLabel>{sectionItem.label}</SectionLabel>
-                    {sectionItem.tags?.split("\n").map((item, index) => {
-                      return (
-                        <Text key={index} mb={8}>
-                          {item}
-                        </Text>
-                      );
-                    })}
+                    {renderTags(sectionItem.tags)}
                   </Box>
                 );
               }
