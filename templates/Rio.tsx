@@ -34,6 +34,17 @@ function Rio(props: TemplateProps) {
   const { isPdf = false, hideSensitiveData = false, design, fields } = props;
   const { about, section } = fields;
 
+  function renderSummary(summary: string) {
+    if (isEmpty(summary)) {
+      return null;
+    }
+    return split("\n", summary).map((item, index) => (
+      <Text key={index} lineHeight={1.4}>
+        {item}
+      </Text>
+    ));
+  }
+
   function renderDate(item: { startDate: string; endDate: string }) {
     if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
@@ -45,6 +56,32 @@ function Rio(props: TemplateProps) {
       return item.startDate;
     }
     return `${item.startDate} - ${item.endDate}`;
+  }
+
+  function renderDescription(description: string) {
+    if (isEmpty(description)) {
+      return null;
+    }
+    return split("\n", description).map((item, index) => (
+      <Text key={index} lineHeight={1.4}>
+        {item}
+      </Text>
+    ));
+  }
+
+  function renderTags(tags: string) {
+    if (isEmpty(tags)) {
+      return null;
+    }
+    return (
+      <Flex mb={16} flexWrap="wrap">
+        {split("\n", tags).map((item, index) => (
+          <Text key={index} mr={4} mb={4}>
+            {item}
+          </Text>
+        ))}
+      </Flex>
+    );
   }
 
   return (
@@ -70,11 +107,7 @@ function Rio(props: TemplateProps) {
               </Link>
             </Box>
           </Flex>
-          {about.summary.split("\n").map((item, index) => (
-            <Text key={index} lineHeight={1.4}>
-              {item}
-            </Text>
-          ))}
+          {renderSummary(about.summary)}
         </Box>
         <Box>
           {section.map((sectionItem, index) => {
@@ -108,11 +141,7 @@ function Rio(props: TemplateProps) {
                           </Text>
                           <Text>{renderDate(item)}</Text>
                         </Flex>
-                        {item.description.split("\n").map((item, index) => (
-                          <Text key={index} lineHeight={1.4}>
-                            {item}
-                          </Text>
-                        ))}
+                        {renderDescription(item.description)}
                       </Box>
                     );
                   })}
@@ -122,15 +151,7 @@ function Rio(props: TemplateProps) {
             return (
               <React.Fragment key={index}>
                 <SectionLabel>{sectionItem.label}</SectionLabel>
-                <Flex mb={16} flexWrap="wrap">
-                  {isEmpty(sectionItem.tags)
-                    ? null
-                    : split("\n", sectionItem.tags).map((item, index) => (
-                        <Text key={index} mr={4} mb={4}>
-                          {item};
-                        </Text>
-                      ))}
-                </Flex>
+                {renderTags(sectionItem.tags)}
               </React.Fragment>
             );
           })}
