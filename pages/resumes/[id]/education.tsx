@@ -15,6 +15,7 @@ import {
   Input,
   Spinner,
   Text,
+  useBoolean,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
@@ -56,6 +57,7 @@ function Education() {
     control: form.control,
     name: "education",
   });
+  const [isPageLoading, setIsPageLoading] = useBoolean();
 
   React.useEffect(() => {
     if (resume) {
@@ -69,7 +71,8 @@ function Education() {
     }
   }, [resume, form]);
 
-  function handleOnSubmit(values: { education: NestedField[] }) {
+  async function handleOnSubmit(values: { education: NestedField[] }) {
+    setIsPageLoading.on();
     const section: SectionField = {
       name: "education",
       label: "Education",
@@ -83,7 +86,8 @@ function Education() {
       ),
     };
     setResume(nextResume);
-    router.push(`/resumes/${resume.id}`);
+    await router.push(`/resumes/${resume.id}`);
+    setIsPageLoading.off();
   }
 
   if (isLoading) {
@@ -184,6 +188,7 @@ function Education() {
           </Button>
           <Button
             as={motion.button}
+            isLoading={isPageLoading}
             size="sm"
             mb="2"
             width="full"
