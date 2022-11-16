@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
-import { length, map, equals } from "ramda";
+import { length, map } from "ramda";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
@@ -39,7 +39,7 @@ function GetStarted() {
   async function handleOnSubmit() {
     setIsLoading.on();
     const resume = createNew();
-    if (equals(length(resumes), 1)) {
+    if (length(resumes) > 0) {
       await router.push(`/resumes/${resume.id}`);
     } else {
       await router.push(`/resumes/${resume.id}/about`);

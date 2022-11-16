@@ -14,7 +14,7 @@ import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 import { FiCheckCircle } from "react-icons/fi";
 import { useRouter } from "next/router";
-import { equals, length } from "ramda";
+import { length } from "ramda";
 
 import Poser12 from "../../illustrations/Poser12";
 
@@ -29,7 +29,7 @@ function Hero() {
   async function handleOnSubmit() {
     setIsLoading.on();
     const resume = createNew();
-    if (equals(length(resumes), 1)) {
+    if (length(resumes) > 0) {
       await router.push(`/resumes/${resume.id}`);
     } else {
       await router.push(`/resumes/${resume.id}/about`);
