@@ -174,5 +174,17 @@
   "tell_us_about_yourself": "Tell us about yourself.",
   "you_will_be_able_to_edit_this_later": "You will be able to edit this later.",
   "tell_us_about_your_work_experience": "Tell us about your work experience.",
-  "tell_us_about_your_educational_background": "Tell us about your educational background."
+  "tell_us_about_your_educational_background": "Tell us about your educational background.",
+  "about": "About",
+  "year_founded": "Year founded",
+  "total_funding": "Total funding",
+  "team_members": "Team members",
+  "about_description_1": "I think it should be easy for candidates to build comprehensive resumes for free. That's what resumebuilder.dev does best.",
+  "about_description_2": "I founded resumebuilder with the goal of building the first completely free platform for job seekers, and the mission to empower every candidate.",
+  "about_description_3": "When I do that, more candidates will land their dream job and more companies will hire top tier talent.",
+  "about_description_4": "I am unifying the entire workflow of job seeking, so candidates can go from building resume to applying in no time, and hiring managers and recruiters can connect anywhere, anytime.",
+  "about_description_5": "And I am building an ecosystem where anyone can contribute with templates, suggest ideas and publish stories.",
+  "about_description_6": "Resumebuilder was started in 2021 by myself out of passion for creating well-crafted and delightful to use products.",
+  "complete_platform_for_career": "A complete platform for career",
+  "founder_of_resumebuilder": "Founder of resumebuilder"
 }
