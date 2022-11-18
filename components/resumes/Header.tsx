@@ -55,6 +55,9 @@ function Header() {
             <NavLink href="/templates" mr="4">
               <Text data-cy="templates-text">{t("templates")}</Text>
             </NavLink>
+            <NavLink href="/about" mr="4">
+              <Text data-cy="about-text">{t("about")}</Text>
+            </NavLink>
           </Flex>
           {viewDashboard ? (
             <Flex>
