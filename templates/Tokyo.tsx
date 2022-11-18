@@ -1,5 +1,5 @@
 import React from "react";
-import { and, isEmpty, equals } from "ramda";
+import { and, isEmpty, equals, split } from "ramda";
 
 import utils from "../lib/utils";
 
@@ -39,13 +39,24 @@ function Tokyo(props: TemplateProps) {
     return (
       <Box mb={16}>
         <SectionLabel>Profile</SectionLabel>
-        {about.summary.split("\n").map((item, index) => (
+        {split("\n", about.summary).map((item, index) => (
           <Text key={index} lineHeight={1.4}>
             {item}
           </Text>
         ))}
       </Box>
     );
+  }
+
+  function renderTags(tags: string) {
+    if (isEmpty(tags)) {
+      return null;
+    }
+    return split("\n", tags).map((item, index) => (
+      <Text key={index} mb={8}>
+        {item}
+      </Text>
+    ));
   }
 
   function renderDate(item: { startDate: string; endDate: string }) {
@@ -57,6 +68,17 @@ function Tokyo(props: TemplateProps) {
         {item.startDate} - {item.endDate}
       </Text>
     );
+  }
+
+  function renderDescription(description: string) {
+    if (isEmpty(description)) {
+      return null;
+    }
+    return split("\n", description).map((item, index) => (
+      <Text key={index} lineHeight={1.4}>
+        {item}
+      </Text>
+    ));
   }
 
   return (
@@ -105,13 +127,7 @@ function Tokyo(props: TemplateProps) {
                 return (
                   <Box key={index} mb={16}>
                     <SectionLabel>{sectionItem.label}</SectionLabel>
-                    {sectionItem.tags?.split("\n").map((item, index) => {
-                      return (
-                        <Text key={index} mb={8}>
-                          {item}
-                        </Text>
-                      );
-                    })}
+                    {renderTags(sectionItem.tags)}
                   </Box>
                 );
               }
@@ -140,11 +156,7 @@ function Tokyo(props: TemplateProps) {
                             , {item.city}
                           </Text>
                           {renderDate(item)}
-                          {item.description.split("\n").map((item, index) => (
-                            <Text key={index} lineHeight={1.4}>
-                              {item}
-                            </Text>
-                          ))}
+                          {renderDescription(item.description)}
                         </Box>
                       );
                     })}
