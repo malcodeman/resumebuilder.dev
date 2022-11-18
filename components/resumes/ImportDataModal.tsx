@@ -31,22 +31,13 @@ type Props = {
   onClose: () => void;
   onImport: (fields: Fields) => void;
 };
-type Source =
-  | "jsonResume"
-  | "json"
-  | "github"
-  | "pasteData"
-  | "csv"
-  | "xml"
-  | "pdf";
+type Source = "jsonResume" | "json" | "github" | "pasteData" | "pdf";
 
 const IMPORTS: { label: string; value: Source; isDisabled: boolean }[] = [
   { label: "JSON Resume", value: "jsonResume", isDisabled: false },
   { label: "JSON", value: "json", isDisabled: false },
   { label: "GitHub", value: "github", isDisabled: false },
   { label: "paste_data", value: "pasteData", isDisabled: false },
-  { label: "CSV", value: "csv", isDisabled: true },
-  { label: "XML", value: "xml", isDisabled: true },
   { label: "PDF", value: "pdf", isDisabled: true },
 ];
 

@@ -95,14 +95,6 @@ function Faq() {
             <List>
               <ListItem>
                 <ListIcon as={FiCircle} />
-                CSV
-              </ListItem>
-              <ListItem>
-                <ListIcon as={FiCircle} />
-                XML
-              </ListItem>
-              <ListItem>
-                <ListIcon as={FiCircle} />
                 PDF
               </ListItem>
               <ListItem>
