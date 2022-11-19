@@ -7,12 +7,18 @@ import Layout from "../components/Layout";
 import Footer from "../components/misc/Footer";
 import Stats from "../components/about/Stats";
 
+const DESCRIPTION =
+  "Learn more about us, what we stand for, and where we're going.";
+
 function About() {
   const { t } = useTranslation();
   return (
     <>
       <Head>
         <title>About | resumebuilder.dev</title>
+        <meta name="og:description" content={DESCRIPTION} />
+        <meta name="description" content={DESCRIPTION} />
+        <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
       <Layout>
         <Container maxW="container.sm">

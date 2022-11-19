@@ -3,6 +3,8 @@ import { ColorModeScript } from "@chakra-ui/react";
 
 import theme from "../theme";
 
+const DESCRIPTION = "The fastest way to build your tech resume.";
+
 class MyDocument extends Document {
   render() {
     return (
@@ -15,14 +17,8 @@ class MyDocument extends Document {
             property="og:title"
             content="Free Resume Builder for Developers | resumebuilder.dev"
           />
-          <meta
-            name="og:description"
-            content="The fastest way to build your tech resume."
-          />
-          <meta
-            name="description"
-            content="The fastest way to build your tech resume."
-          />
+          <meta name="og:description" content={DESCRIPTION} />
+          <meta name="description" content={DESCRIPTION} />
           <meta property="og:image" content="opengraph/index.png"></meta>
           <meta property="og:type" content="website"></meta>
           <meta property="og:site_name" content="https://resumebuilder.dev" />
@@ -34,10 +30,7 @@ class MyDocument extends Document {
             name="twitter:title"
             content="Free Resume Builder for Developers | resumebuilder.dev"
           />
-          <meta
-            name="twitter:description"
-            content="The fastest way to build your tech resume"
-          />
+          <meta name="twitter:description" content={DESCRIPTION} />
           <meta name="twitter:image" content="opengraph/index.png" />
         </Head>
         <body>
