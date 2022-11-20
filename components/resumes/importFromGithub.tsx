@@ -23,8 +23,8 @@ type props = {
 };
 
 function ImportFromGithub(props: props) {
-  const { t } = useTranslation();
   const { onImport } = props;
+  const { t } = useTranslation();
   const form = useForm({
     defaultValues: { username: "" },
     resolver: yupResolver(
