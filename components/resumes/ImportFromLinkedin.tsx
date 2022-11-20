@@ -10,6 +10,7 @@ import { Trans, useTranslation } from "next-i18next";
 import JSZip from "jszip";
 
 import parser from "../../lib/parser";
+import { LINKS } from "../../lib/constants";
 
 import FileUploader from "../misc/FileUploader";
 
@@ -65,11 +66,7 @@ function ImportFromLinkedin(props: props) {
       >
         The easiest and fastest way to obtain a copy of your LinkedIn data is to
         initiate a data download from your{" "}
-        <Link
-          href={"https://www.linkedin.com/psettings/data-privacy/"}
-          color="blue.400"
-          isExternal
-        >
+        <Link href={LINKS.LINKEDIN_DATA_PRIVACY} color="blue.400" isExternal>
           Settings & Privacy
         </Link>{" "}
         page:

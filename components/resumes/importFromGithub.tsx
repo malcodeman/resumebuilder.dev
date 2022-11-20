@@ -1,4 +1,3 @@
-import React from "react";
 import {
   FormControl,
   FormLabel,
@@ -7,6 +6,7 @@ import {
   Input,
   FormErrorMessage,
   Button,
+  useBoolean,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -33,11 +33,11 @@ function ImportFromGithub(props: props) {
       })
     ),
   });
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = useBoolean();
 
   async function onSubmit(values: { username: string }) {
     try {
-      setIsLoading(true);
+      setIsLoading.on();
       const username = values.username;
       const user = await axios.get(`https://api.github.com/users/${username}`);
       const repos = await axios.get(
@@ -48,7 +48,7 @@ function ImportFromGithub(props: props) {
     } catch (error) {
       form.setError("username", { message: error.response.data.message });
     } finally {
-      setIsLoading(false);
+      setIsLoading.off();
     }
   }
 

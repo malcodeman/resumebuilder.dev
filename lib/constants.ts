@@ -126,6 +126,7 @@ const FATHOM_EVENTS = {
 const LINKS = {
   GITHUB_REPO: "https://github.com/malcodeman/resumebuilder.dev",
   LINKEDIN_PAGE: "https://www.linkedin.com/company/resumebuilderdev",
+  LINKEDIN_DATA_PRIVACY: "https://www.linkedin.com/psettings/data-privacy",
 };
 
 export {
