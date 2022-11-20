@@ -1,15 +1,14 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import GithubIcon from "simple-icons/icons/github";
-import DribbbleIcon from "simple-icons/icons/dribbble";
+import { siGithub, siDribbble } from "simple-icons/icons";
 
 import SimpleIcon from "../components/misc/SimpleIcon";
 
 describe("SimpleIcon", () => {
   it("Renders a Github icon", () => {
-    render(<SimpleIcon size={16} path={GithubIcon.path} />);
+    render(<SimpleIcon size={16} path={siGithub.path} />);
   });
   it("Renders a Dribbble icon icon", () => {
-    render(<SimpleIcon size={16} path={DribbbleIcon.path} />);
+    render(<SimpleIcon size={16} path={siDribbble.path} />);
   });
 });

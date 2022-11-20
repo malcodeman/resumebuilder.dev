@@ -7,8 +7,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import LinkedinIcon from "simple-icons/icons/linkedin";
-import GithubIcon from "simple-icons/icons/github";
+import { siLinkedin, siGithub } from "simple-icons/icons";
 
 import SimpleIcon from "./SimpleIcon";
 
@@ -30,13 +29,13 @@ function Footer() {
           <Link href={LINKS.LINKEDIN_PAGE} isExternal>
             <IconButton
               aria-label="LinkedIn"
-              icon={<SimpleIcon size={16} path={LinkedinIcon.path} />}
+              icon={<SimpleIcon size={16} path={siLinkedin.path} />}
             />
           </Link>
           <Link href={LINKS.GITHUB_REPO} isExternal>
             <IconButton
               aria-label="GitHub"
-              icon={<SimpleIcon size={16} path={GithubIcon.path} />}
+              icon={<SimpleIcon size={16} path={siGithub.path} />}
             />
           </Link>
         </ButtonGroup>
