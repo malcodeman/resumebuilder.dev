@@ -47,7 +47,7 @@
     "react-dropzone": "^11.3.4",
     "react-hook-form": "^7.38.0",
     "react-icons": "^4.4.0",
-    "simple-icons": "^5.17.0",
+    "simple-icons": "^7.20.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
@@ -59,7 +59,7 @@
     "@types/node": "^18.7.23",
     "@types/ramda": "^0.28.18",
     "@types/react": "^18.0.21",
-    "@types/simple-icons": "^5.8.0",
+    "@types/simple-icons": "^5.21.1",
     "cypress": "10.11.0",
     "eslint": "7.32.0",
     "eslint-config-next": "^12.2.5",

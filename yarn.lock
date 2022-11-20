@@ -2817,7 +2817,7 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
   integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
 
-"@types/simple-icons@^5.8.0":
+"@types/simple-icons@^5.21.1":
   version "5.21.1"
   resolved "https://registry.yarnpkg.com/@types/simple-icons/-/simple-icons-5.21.1.tgz#d80b05d50312f841b0bf77d7e3b005fb5ed52091"
   integrity sha512-exnKcr2DxKe0UsGIjvw/hv88OAWkxwPped5iq7YlgC9flaxAJHHvsjmq45Sr7FYjjyrwJI8VFh85xzY6k+L5WQ==
@@ -7484,10 +7484,10 @@ simple-icons@*:
   resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-7.19.0.tgz#72b2b54a90e5ae488845c8533da8b49dcaa18e1d"
   integrity sha512-r3aHhEQmlB/RziOBhesjYbH5WCgRA6OPelJULOVqpgEeAv9XB+CQdcchSXXKaQv0v6D2ylzb3AIXsFCGUJ8umQ==
 
-simple-icons@^5.17.0:
-  version "5.24.0"
-  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-5.24.0.tgz#6485a5713c2e5758605b461b833396c4874e9e4d"
-  integrity sha512-wKHeqUBsHYB5KPqdc3e7BGQPQCx/NbHfJuukjo70ABGk6hegjTDSoJhsSEcVadknVG4W3+jcC3G3RbytJnapGQ==
+simple-icons@^7.20.0:
+  version "7.20.0"
+  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-7.20.0.tgz#4d706b847b062406e6194abe64352f0e78c4397e"
+  integrity sha512-EP36AFDVul33lL17gfokr3nRjyVY74A1cXdEfvQzA0bI+5lDiQ1ETdOATmjCOMUGG3mdiJb4LRTMajtqhFr72g==
 
 simple-swizzle@^0.2.2:
   version "0.2.2"
