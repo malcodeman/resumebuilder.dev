@@ -90,16 +90,16 @@ function Faq() {
                 <ListIcon as={FiCheckCircle} color="green.500" />
                 JSON
               </ListItem>
+              <ListItem>
+                <ListIcon as={FiCheckCircle} color="green.500" />
+                LinkedIn
+              </ListItem>
             </List>
             <Text>{t("working_on")}</Text>
             <List>
               <ListItem>
                 <ListIcon as={FiCircle} />
                 PDF
-              </ListItem>
-              <ListItem>
-                <ListIcon as={FiCircle} />
-                LinkedIn
               </ListItem>
             </List>
           </>

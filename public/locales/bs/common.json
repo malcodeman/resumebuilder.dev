@@ -186,5 +186,11 @@
   "about_description_5": "I gradim ekosistem u kojem svako može dati svoj doprinos šablonima, predložiti ideje i objaviti priče.",
   "about_description_6": "Resumebuilder sam pokrenuo 2021. godine iz strasti za stvaranjem dobro izrađenih proizvoda koji su ugodni za korištenje.",
   "complete_platform_for_career": "Kompletna platforma za karijeru",
-  "founder_of_resumebuilder": "Osnivač resumebuildera"
+  "founder_of_resumebuilder": "Osnivač resumebuildera",
+  "import_from_linkedin_description": "Najlakši i najbrži način da dobijete kopiju vaših LinkedIn podataka je da pokrenete preuzimanje podataka sa vaše <2>{{link}}</2> stranice:",
+  "import_from_linkedin_list_item_1": "U odjeljku Kako LinkedIn koristi vaše podatke kliknite na <2>{{bold}}</2>.",
+  "get_copy_of_your_data": "Nabavite kopiju vaših podataka",
+  "import_from_linkedin_list_item_2": "Odaberite podatke koje tražite i <2>{{bold}}</2>.",
+  "request_archive": "Zatražite arhivu",
+  "settings_and_privacy": "Postavke i Privatnost"
 }

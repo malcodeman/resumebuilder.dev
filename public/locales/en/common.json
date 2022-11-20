@@ -186,5 +186,11 @@
   "about_description_5": "And I am building an ecosystem where anyone can contribute with templates, suggest ideas and publish stories.",
   "about_description_6": "Resumebuilder was started in 2021 by myself out of passion for creating well-crafted and delightful to use products.",
   "complete_platform_for_career": "A complete platform for career",
-  "founder_of_resumebuilder": "Founder of resumebuilder"
+  "founder_of_resumebuilder": "Founder of resumebuilder",
+  "import_from_linkedin_description": "The easiest and fastest way to obtain a copy of your LinkedIn data is to initiate a data download from your <2>{{link}}</2> page:",
+  "import_from_linkedin_list_item_1": "Under the How LinkedIn uses your data section, click <2>{{bold}}</2>.",
+  "get_copy_of_your_data": "Get a copy of your data",
+  "import_from_linkedin_list_item_2": "Select the data that you're looking for and <2>{{bold}}</2>.",
+  "request_archive": "Request archive",
+  "settings_and_privacy": "Settings & Privacy"
 }

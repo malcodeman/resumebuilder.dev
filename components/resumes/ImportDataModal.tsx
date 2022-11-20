@@ -20,6 +20,7 @@ import { useTranslation } from "next-i18next";
 import FileUploader from "../misc/FileUploader";
 import ImportFromGithub from "./importFromGithub";
 import ImportFromPasteData from "./ImportFromPasteData";
+import ImportFromLinkedin from "./ImportFromLinkedin";
 
 import parser from "../../lib/parser";
 import utils from "../../lib/utils";
@@ -31,13 +32,20 @@ type Props = {
   onClose: () => void;
   onImport: (fields: Fields) => void;
 };
-type Source = "jsonResume" | "json" | "github" | "pasteData" | "pdf";
+type Source =
+  | "jsonResume"
+  | "json"
+  | "github"
+  | "pasteData"
+  | "linkedin"
+  | "pdf";
 
 const IMPORTS: { label: string; value: Source; isDisabled: boolean }[] = [
   { label: "JSON Resume", value: "jsonResume", isDisabled: false },
   { label: "JSON", value: "json", isDisabled: false },
   { label: "GitHub", value: "github", isDisabled: false },
   { label: "paste_data", value: "pasteData", isDisabled: false },
+  { label: "LinkedIn", value: "linkedin", isDisabled: false },
   { label: "PDF", value: "pdf", isDisabled: true },
 ];
 
@@ -117,6 +125,8 @@ function ImportDataModal(props: Props) {
         return <ImportFromGithub onImport={handleOnImport} />;
       case "pasteData":
         return <ImportFromPasteData onImport={handleOnImport} />;
+      case "linkedin":
+        return <ImportFromLinkedin onImport={handleOnImport} />;
       default:
         return (
           <FileUploader

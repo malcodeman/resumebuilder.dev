@@ -1,4 +1,5 @@
 import { map, join, split, uniq, filter, isNil } from "ramda";
+import papa from "papaparse";
 
 import { Fields } from "../types";
 
@@ -177,9 +178,109 @@ function parseGithub(data: {
   return fields;
 }
 
+function parseLinkedin(data: {
+  emailAddresses: string;
+  phoneNumbers: string;
+  positions: string;
+  profile: string;
+  skills: string;
+}) {
+  const parsedEmailAddresses = papa.parse(data.emailAddresses, {
+    header: true,
+    skipEmptyLines: true,
+  }).data[0] as {
+    Confirmed: string;
+    "Email Address": string;
+    Primary: string;
+    "Updated On": string;
+  };
+  const parsedPhoneNumbers = papa.parse(data.phoneNumbers, {
+    header: true,
+    skipEmptyLines: true,
+  }).data[0] as {
+    Extension: string;
+    Number: string;
+    Type: string;
+  };
+  const parsedPositions = papa.parse(data.positions, {
+    header: true,
+    skipEmptyLines: true,
+  }).data as {
+    "Company Name": string;
+    Description: string;
+    "Finished On": string;
+    Location: string;
+    "Started On": string;
+    Title: string;
+  }[];
+  const parsedProfile = papa.parse(data.profile, {
+    header: true,
+    skipEmptyLines: true,
+  }).data[0] as {
+    Address: string;
+    "Birth Date": string;
+    "First Name": string;
+    "Geo Location": string;
+    Headline: string;
+    Industry: string;
+    "Instant Messengers": string;
+    "Last Name": string;
+    "Maiden Name": string;
+    Summary: string;
+    "Twitter Handles": string;
+    Websites: string;
+    "Zip Code": string;
+  };
+  const parsedSkills = papa.parse(data.skills, {
+    header: true,
+    skipEmptyLines: true,
+  }).data as { Name: string }[];
+  const fields: Fields = {
+    about: {
+      title: parsedProfile.Headline,
+      firstName: parsedProfile["First Name"],
+      lastName: parsedProfile["Last Name"],
+      email: parsedEmailAddresses["Email Address"],
+      phone: parsedPhoneNumbers.Number,
+      website: "",
+      city: "",
+      country: parsedProfile["Geo Location"],
+      summary: parsedProfile.Summary,
+    },
+    section: [
+      {
+        name: "employment",
+        label: "Employment History",
+        nested: map(
+          (item) => ({
+            title: item["Company Name"],
+            subtitle: item.Title,
+            website: "",
+            city: item.Location,
+            startDate: item["Started On"],
+            endDate: item["Finished On"],
+            description: item.Description,
+          }),
+          parsedPositions
+        ),
+      },
+      {
+        name: "skills",
+        label: "Skills",
+        tags: join(
+          "\n",
+          map((item) => item.Name, parsedSkills)
+        ),
+      },
+    ],
+  };
+  return fields;
+}
+
 const EXPORTS = {
   parseJsonResume,
   parseGithub,
+  parseLinkedin,
 };
 
 export default EXPORTS;
