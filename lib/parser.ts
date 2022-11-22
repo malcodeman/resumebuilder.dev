@@ -5,12 +5,23 @@ import { Fields } from "../types";
 
 function parseJsonResume(text: string) {
   const json = JSON.parse(text);
-  const basics = json.basics;
+  const basics = json.basics || {
+    label: "",
+    name: "",
+    email: "",
+    phone: "",
+    url: "",
+    location: {
+      city: "",
+      countryCode: "",
+    },
+    summary: "",
+  };
   const fields: Fields = {
     about: {
       title: basics.label,
       firstName: split(" ", basics.name)[0],
-      lastName: split(" ", basics.name)[1],
+      lastName: split(" ", basics.name)[1] || "",
       email: basics.email,
       phone: basics.phone,
       website: basics.url,
@@ -20,8 +31,8 @@ function parseJsonResume(text: string) {
     },
     section: [
       {
-        name: "standard",
-        label: "Work",
+        name: "employment",
+        label: "Employment History",
         nested: map(
           (item) => ({
             title: item.name,
@@ -32,27 +43,11 @@ function parseJsonResume(text: string) {
             endDate: item.endDate,
             description: item.summary,
           }),
-          json.work
+          json.work ? json.work : []
         ),
       },
       {
-        name: "standard",
-        label: "Volunteer",
-        nested: map(
-          (item) => ({
-            title: item.organization,
-            subtitle: item.position,
-            website: item.url,
-            city: "",
-            startDate: item.startDate,
-            endDate: item.endDate,
-            description: item.summary,
-          }),
-          json.volunteer
-        ),
-      },
-      {
-        name: "standard",
+        name: "education",
         label: "Education",
         nested: map(
           (item) => ({
@@ -64,71 +59,23 @@ function parseJsonResume(text: string) {
             endDate: item.endDate,
             description: "",
           }),
-          json.education
+          json.education ? json.education : []
         ),
       },
       {
-        name: "tagList",
-        label: "Awards",
-        tags: join(
-          "\n",
-          map((item) => item.title, json.awards)
-        ),
-      },
-      {
-        name: "standard",
-        label: "Publications",
-        nested: map(
-          (item) => ({
-            title: item.name,
-            subtitle: item.publisher,
-            website: item.url,
-            city: "",
-            startDate: item.releaseDate,
-            endDate: item.endDate,
-            description: item.summary,
-          }),
-          json.publications
-        ),
-      },
-      {
-        name: "tagList",
+        name: "skills",
         label: "Skills",
         tags: join(
           "\n",
-          map((item) => item.name, json.skills)
+          map((item) => item.name, json.skills || [])
         ),
       },
       {
-        name: "tagList",
-        label: "Languages",
+        name: "hobbies",
+        label: "Hobbies",
         tags: join(
           "\n",
-          map((item) => item.language, json.languages)
-        ),
-      },
-      {
-        name: "tagList",
-        label: "Interests",
-        tags: join(
-          "\n",
-          map((item) => item.name, json.interests)
-        ),
-      },
-      {
-        name: "standard",
-        label: "Projects",
-        nested: map(
-          (item) => ({
-            title: item.name,
-            subtitle: item.description,
-            website: item.url,
-            city: "",
-            startDate: item.startDate,
-            endDate: item.endDate,
-            description: "",
-          }),
-          json.projects
+          map((item) => item.name, json.interests || [])
         ),
       },
     ],
