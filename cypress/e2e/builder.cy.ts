@@ -329,6 +329,21 @@ describe("Builder page", () => {
       .click()
       .should(() => expect(getResume().section[3].tags).to.eq(hobbies));
   });
+  it("New section | Standard", () => {
+    // TODO: Improve
+    cy.get("[data-cy=new-section-button]").click();
+    cy.get("[data-cy=add-section-modal-content]").should("exist");
+    cy.get("[data-cy=custom-section-button]").first().click();
+    cy.get("[data-cy=section-label-accordion-button]").eq(5).click();
+    cy.get("[data-cy=section-label-accordion-button]").eq(6).click();
+  });
+  it("New section | Tag list", () => {
+    // TODO: Improve
+    cy.get("[data-cy=new-section-button]").click();
+    cy.get("[data-cy=add-section-modal-content]").should("exist");
+    cy.get("[data-cy=custom-section-button]").eq(1).click();
+    cy.get("[data-cy=section-label-accordion-button]").eq(5).click();
+  });
   it("Steps", () => {
     cy.intercept({
       method: "GET",
