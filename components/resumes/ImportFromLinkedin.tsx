@@ -30,14 +30,22 @@ function ImportFromLinkedin(props: props) {
     try {
       setIsLoading.on();
       const zip = new JSZip();
-      await zip.loadAsync(acceptedFiles[0]);
-      const emailAddresses = await zip
-        .file("Email Addresses.csv")
-        .async("string");
-      const phoneNumbers = await zip.file("PhoneNumbers.csv").async("string");
-      const positions = await zip.file("Positions.csv").async("string");
-      const profile = await zip.file("Profile.csv").async("string");
-      const skills = await zip.file("Skills.csv").async("string");
+      const loaded = await zip.loadAsync(acceptedFiles[0]);
+      const emailAddresses = loaded.files["Email Addresses.csv"]
+        ? await zip.file("Email Addresses.csv").async("string")
+        : "";
+      const phoneNumbers = loaded.files["PhoneNumbers.csv"]
+        ? await zip.file("PhoneNumbers.csv").async("string")
+        : "";
+      const positions = loaded.files["Positions.csv"]
+        ? await zip.file("Positions.csv").async("string")
+        : "";
+      const profile = loaded.files["Profile.csv"]
+        ? await zip.file("Profile.csv").async("string")
+        : "";
+      const skills = loaded.files["Skills.csv"]
+        ? await zip.file("Skills.csv").async("string")
+        : "";
       const fields = parser.parseLinkedin({
         emailAddresses,
         phoneNumbers,

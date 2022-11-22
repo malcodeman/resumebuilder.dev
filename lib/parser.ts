@@ -237,15 +237,15 @@ function parseLinkedin(data: {
   }).data as { Name: string }[];
   const fields: Fields = {
     about: {
-      title: parsedProfile.Headline,
-      firstName: parsedProfile["First Name"],
-      lastName: parsedProfile["Last Name"],
-      email: parsedEmailAddresses["Email Address"],
-      phone: parsedPhoneNumbers.Number,
+      title: parsedProfile ? parsedProfile.Headline : "",
+      firstName: parsedProfile ? parsedProfile["First Name"] : "",
+      lastName: parsedProfile ? parsedProfile["Last Name"] : "",
+      email: parsedEmailAddresses ? parsedEmailAddresses["Email Address"] : "",
+      phone: parsedPhoneNumbers ? parsedPhoneNumbers.Number : "",
       website: "",
       city: "",
-      country: parsedProfile["Geo Location"],
-      summary: parsedProfile.Summary,
+      country: parsedProfile ? parsedProfile["Geo Location"] : "",
+      summary: parsedProfile ? parsedProfile.Summary : "",
     },
     section: [
       {
