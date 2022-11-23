@@ -98,7 +98,7 @@ function Nairobi(props: TemplateProps) {
   return (
     <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
       <Page id="nairobi">
-        <Flex height="100%">
+        <Flex minHeight="100%">
           <Box pt={40} pr={20} pb={40} pl={20} width="75%">
             <Flex mb={40} alignItems="center">
               {isEmpty(profilePicture) ? null : (
