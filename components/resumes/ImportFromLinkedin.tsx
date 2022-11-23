@@ -31,8 +31,17 @@ function ImportFromLinkedin(props: props) {
       setIsLoading.on();
       const zip = new JSZip();
       const loaded = await zip.loadAsync(acceptedFiles[0]);
+      const certifications = loaded.files["Certifications.csv"]
+        ? await zip.file("Certifications.csv").async("string")
+        : "";
+      const education = loaded.files["Education.csv"]
+        ? await zip.file("Education.csv").async("string")
+        : "";
       const emailAddresses = loaded.files["Email Addresses.csv"]
         ? await zip.file("Email Addresses.csv").async("string")
+        : "";
+      const languages = loaded.files["Languages.csv"]
+        ? await zip.file("Languages.csv").async("string")
         : "";
       const phoneNumbers = loaded.files["PhoneNumbers.csv"]
         ? await zip.file("PhoneNumbers.csv").async("string")
@@ -43,14 +52,21 @@ function ImportFromLinkedin(props: props) {
       const profile = loaded.files["Profile.csv"]
         ? await zip.file("Profile.csv").async("string")
         : "";
+      const projects = loaded.files["Projects.csv"]
+        ? await zip.file("Projects.csv").async("string")
+        : "";
       const skills = loaded.files["Skills.csv"]
         ? await zip.file("Skills.csv").async("string")
         : "";
       const fields = parser.parseLinkedin({
+        certifications,
+        education,
         emailAddresses,
+        languages,
         phoneNumbers,
         positions,
         profile,
+        projects,
         skills,
       });
 

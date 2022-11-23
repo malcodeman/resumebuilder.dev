@@ -1,4 +1,4 @@
-import { map, join, split, uniq, filter, isNil } from "ramda";
+import { map, join, split, uniq, filter, isNil, isEmpty, or } from "ramda";
 import papa from "papaparse";
 
 import { Fields } from "../types";
@@ -126,12 +126,38 @@ function parseGithub(data: {
 }
 
 function parseLinkedin(data: {
+  certifications: string;
+  education: string;
   emailAddresses: string;
+  languages: string;
   phoneNumbers: string;
   positions: string;
   profile: string;
+  projects: string;
   skills: string;
 }) {
+  const parsedCertifications = papa.parse(data.certifications, {
+    header: true,
+    skipEmptyLines: true,
+  }).data as {
+    Authority: string;
+    "Finished On": string;
+    "License Number": string;
+    Name: string;
+    "Started On": string;
+    Url: string;
+  }[];
+  const parsedEducation = papa.parse(data.education, {
+    header: true,
+    skipEmptyLines: true,
+  }).data as {
+    Activities: string;
+    "Degree Name": string;
+    "End Date": string;
+    Notes: string;
+    "School Name": string;
+    "Start Date": string;
+  }[];
   const parsedEmailAddresses = papa.parse(data.emailAddresses, {
     header: true,
     skipEmptyLines: true,
@@ -141,6 +167,13 @@ function parseLinkedin(data: {
     Primary: string;
     "Updated On": string;
   };
+  const parsedLanguages = papa.parse(data.languages, {
+    header: true,
+    skipEmptyLines: true,
+  }).data as {
+    Name: string;
+    Proficiency: string;
+  }[];
   const parsedPhoneNumbers = papa.parse(data.phoneNumbers, {
     header: true,
     skipEmptyLines: true,
@@ -178,6 +211,16 @@ function parseLinkedin(data: {
     Websites: string;
     "Zip Code": string;
   };
+  const parsedProjects = papa.parse(data.projects, {
+    header: true,
+    skipEmptyLines: true,
+  }).data as {
+    Description: string;
+    "Finished On": string;
+    "Started On": string;
+    Title: string;
+    Url: string;
+  }[];
   const parsedSkills = papa.parse(data.skills, {
     header: true,
     skipEmptyLines: true,
@@ -205,12 +248,68 @@ function parseLinkedin(data: {
             website: "",
             city: item.Location,
             startDate: item["Started On"],
-            endDate: item["Finished On"],
+            endDate: or(item["Finished On"], "Present"),
             description: item.Description,
           }),
           parsedPositions
         ),
       },
+      {
+        name: "education",
+        label: "Education",
+        nested: map(
+          (item) => ({
+            title: item["School Name"],
+            subtitle: item["Degree Name"],
+            website: "",
+            city: "",
+            startDate: item["Start Date"],
+            endDate: item["End Date"],
+            description: item.Notes,
+          }),
+          parsedEducation
+        ),
+      },
+      ...(isEmpty(parsedCertifications)
+        ? []
+        : [
+            {
+              name: "standard" as const,
+              label: "Certifications",
+              nested: map(
+                (item) => ({
+                  title: item.Name,
+                  subtitle: item.Authority,
+                  website: item.Url,
+                  city: "",
+                  startDate: item["Started On"],
+                  endDate: or(item["Finished On"], "No Expiration Date"),
+                  description: "",
+                }),
+                parsedCertifications
+              ),
+            },
+          ]),
+      ...(isEmpty(parsedProjects)
+        ? []
+        : [
+            {
+              name: "projects" as const,
+              label: "Projects",
+              nested: map(
+                (item) => ({
+                  title: item.Title,
+                  subtitle: "",
+                  website: item.Url,
+                  city: "",
+                  startDate: item["Started On"],
+                  endDate: or(item["Finished On"], "Present"),
+                  description: item.Description,
+                }),
+                parsedProjects
+              ),
+            },
+          ]),
       {
         name: "skills",
         label: "Skills",
@@ -219,6 +318,18 @@ function parseLinkedin(data: {
           map((item) => item.Name, parsedSkills)
         ),
       },
+      ...(isEmpty(parsedLanguages)
+        ? []
+        : [
+            {
+              name: "languages" as const,
+              label: "Languages",
+              tags: join(
+                "\n",
+                map((item) => item.Name, parsedLanguages)
+              ),
+            },
+          ]),
     ],
   };
   return fields;
