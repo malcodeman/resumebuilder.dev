@@ -19,8 +19,8 @@ class MyDocument extends Document {
           />
           <meta name="og:description" content={DESCRIPTION} />
           <meta name="description" content={DESCRIPTION} />
-          <meta property="og:image" content="opengraph/index.png"></meta>
-          <meta property="og:type" content="website"></meta>
+          <meta property="og:image" content="opengraph/index.png" />
+          <meta property="og:type" content="website" />
           <meta property="og:site_name" content="https://resumebuilder.dev" />
           <meta property="og:type" content="website" />
           <meta property="og:determiner" content="a" />
