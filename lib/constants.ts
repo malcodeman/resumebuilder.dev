@@ -122,6 +122,8 @@ const TEMPLATES_LIST: {
 const FATHOM_SITE_ID = "ZMOHRXZI";
 const FATHOM_EVENTS = {
   EXPORT_AS_PDF: "0UNUBD1E",
+  BUILD_RESUME: "WFO1VU6U",
+  BUILD_FOR_FREE: "145BDGRU",
 };
 const LINKS = {
   GITHUB_REPO: "https://github.com/malcodeman/resumebuilder.dev",
