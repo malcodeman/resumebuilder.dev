@@ -13,6 +13,9 @@ import { FiCheck } from "react-icons/fi";
 import { length, map } from "ramda";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { trackGoal } from "fathom-client";
+
+import { FATHOM_EVENTS } from "../../lib/constants";
 
 import useResumes from "../../hooks/useResumes";
 
@@ -37,6 +40,7 @@ function GetStarted() {
   const [isLoading, setIsLoading] = useBoolean();
 
   async function handleOnSubmit() {
+    trackGoal(FATHOM_EVENTS.BUILD_FOR_FREE, 0);
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {
