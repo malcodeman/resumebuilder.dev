@@ -30,7 +30,7 @@ function Hero() {
   const [isLoading, setIsLoading] = useBoolean();
 
   async function handleOnSubmit() {
-    trackGoal(FATHOM_EVENTS.BUILD_RESUME, 0);
+    trackGoal(FATHOM_EVENTS.BUILD_FOR_FREE_TOP, 0);
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {
@@ -60,10 +60,10 @@ function Hero() {
           whileHover={{ scale: 1.1 }}
           colorScheme="blue"
           mb="4"
-          data-cy="build-resume-button"
+          data-cy="build-for-free-top-button"
           onClick={() => handleOnSubmit()}
         >
-          {t("build_resume")}
+          {t("build_for_free")}
         </Button>
         <List>
           <ListItem>

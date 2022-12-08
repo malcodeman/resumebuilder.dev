@@ -40,7 +40,7 @@ function GetStarted() {
   const [isLoading, setIsLoading] = useBoolean();
 
   async function handleOnSubmit() {
-    trackGoal(FATHOM_EVENTS.BUILD_FOR_FREE, 0);
+    trackGoal(FATHOM_EVENTS.BUILD_FOR_FREE_BOTTOM, 0);
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {
@@ -67,7 +67,7 @@ function GetStarted() {
           colorScheme="blue"
           mb="4"
           isLoading={isLoading}
-          data-cy="build-for-free-button"
+          data-cy="build-for-free-bottom-button"
           onClick={() => handleOnSubmit()}
         >
           {t("build_for_free")}
