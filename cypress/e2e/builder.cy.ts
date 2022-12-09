@@ -40,14 +40,6 @@ describe("Builder page", () => {
       .should(() => expect(getResume().title).to.eq("malcodeman"));
     cy.get("[data-cy=title-preview]").should("have.text", "malcodeman");
   });
-  it("Change template", () => {
-    // TODO: Improve
-    cy.get("[data-cy=header-templates-button]").click();
-    // cy.get("[data-cy=use-template-button]")
-    //   .eq(1)
-    //   .click()
-    //   .should(() => expect(getResume().design.template).to.eq("tokyo"));
-  });
   it("Export PDF", () => {
     cy.get("[data-cy=header-export-pdf-button]").should("exist");
   });
@@ -111,11 +103,6 @@ describe("Builder page", () => {
       "eq",
       `${Cypress.config().baseUrl}/de/resumes/${resumes[0].id}`
     );
-  });
-  it("Template gallery", () => {
-    cy.get("[data-cy=more-button]").click();
-    cy.get("[data-cy=templates-button]").click();
-    cy.get("[data-cy=templates-modal-content]").should("exist");
   });
   it("Duplicate resume", () => {
     // TODO: Improve
@@ -343,6 +330,13 @@ describe("Builder page", () => {
     cy.get("[data-cy=add-section-modal-content]").should("exist");
     cy.get("[data-cy=custom-section-button]").eq(1).click();
     cy.get("[data-cy=section-label-accordion-button]").eq(5).click();
+  });
+  it("Change template", () => {
+    cy.get("[data-cy=templates-tab]").click();
+    cy.get("[data-cy=template]")
+      .eq(1)
+      .click()
+      .should(() => expect(getResume().design.template).to.eq("tokyo"));
   });
   it("Steps", () => {
     cy.intercept({

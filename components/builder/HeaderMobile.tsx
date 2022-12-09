@@ -19,7 +19,7 @@ import utils from "../../lib/utils";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useProfilePicture from "../../hooks/useProfilePicture";
 
-import { Resume, Fields, Template } from "../../types";
+import { Resume, Fields } from "../../types";
 
 type props = {
   form: UseFormReturn<Resume, object>;
@@ -41,11 +41,6 @@ function HeaderMobile(props: props) {
     form.setValue("updatedAt", Date.now());
     form.setValue("about", fields.about);
     form.setValue("section", fields.section);
-  }
-
-  function handleOnChangeTemplate(nextTemplate: Template) {
-    form.setValue("updatedAt", Date.now());
-    form.setValue("design.template", nextTemplate);
   }
 
   function handleOnExportAsPdf() {
@@ -91,7 +86,6 @@ function HeaderMobile(props: props) {
             <HeaderPopover
               devTools={devTools}
               onImport={handleOnImport}
-              onChangeTemplate={handleOnChangeTemplate}
               onPdfExport={handleOnExportAsPdf}
               onJsonExport={() => utils.exportAsJson(form.getValues())}
               onHtmlExport={handleOnExportAsHtml}
