@@ -41,7 +41,7 @@ function Template(props: props) {
         src={template.src}
         alt=""
         mb="2"
-        borderRadius="lg"
+        borderRadius="md"
         boxShadow={boxShadow}
       />
       <Flex mb="2" alignItems="center" justifyContent="space-between">

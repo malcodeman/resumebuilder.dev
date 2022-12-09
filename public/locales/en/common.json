@@ -85,7 +85,6 @@
   "quickly_upload_description": "Easily migrate your existing data in just a few seconds.",
   "start_with_templates": "Start with templates",
   "start_with_templates_description": "Select a template to get started and customize as you go.",
-  "template_gallery": "Template gallery",
   "return_home": "Return home",
   "404_description": "Sorry, the page you were looking for was not found.",
   "export_pdf": "Export PDF",
@@ -191,5 +190,6 @@
   "get_copy_of_your_data": "Get a copy of your data",
   "import_from_linkedin_list_item_2": "Select the data that you're looking for and <2>{{bold}}</2>.",
   "request_archive": "Request archive",
-  "settings_and_privacy": "Settings & Privacy"
+  "settings_and_privacy": "Settings & Privacy",
+  "sections": "Sections"
 }

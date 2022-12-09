@@ -24,7 +24,6 @@ import {
   FiMoreHorizontal,
   FiUpload,
   FiTrash2,
-  FiLayers,
   FiDatabase,
   FiEdit,
   FiCopy,
@@ -39,7 +38,6 @@ import { useTranslation } from "next-i18next";
 import ImportDataModal from "../resumes/ImportDataModal";
 import ExportResumeModal from "./ExportResumeModal";
 import DeleteResumeModal from "../resumes/DeleteResumeModal";
-import TemplatesModal from "../templates/TemplatesModal";
 import ChangeSlugModal from "./ChangeSlugModal";
 import LanguageSelect from "../misc/LanguageSelect";
 
@@ -48,14 +46,13 @@ import useResume from "../../hooks/useResume";
 import useDateFnsLocale from "../../hooks/useDateFnsLocale";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-import { Fields, Resume, Template } from "../../types";
+import { Fields, Resume } from "../../types";
 
 const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
 type props = {
   devTools: boolean;
   onImport: (fields: Fields) => void;
-  onChangeTemplate: (nextTemplate: Template) => void;
   onPdfExport: () => void;
   onJsonExport: () => void;
   onHtmlExport: () => void;
@@ -210,33 +207,6 @@ function DevTools() {
         data-cy="dev-tools-switch"
       />
     </FormControl>
-  );
-}
-
-function ShowTemplates(props: {
-  onChangeTemplate: (nextTemplate: Template) => void;
-}) {
-  const { onChangeTemplate } = props;
-  const { t } = useTranslation();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
-    <>
-      <Button
-        size="sm"
-        mb="2"
-        justifyContent="flex-start"
-        data-cy="templates-button"
-        leftIcon={<FiLayers />}
-        onClick={onOpen}
-      >
-        {t("templates")}
-      </Button>
-      <TemplatesModal
-        isOpen={isOpen}
-        onClose={onClose}
-        onChange={onChangeTemplate}
-      />
-    </>
   );
 }
 
@@ -473,7 +443,6 @@ function HeaderPopover(props: props) {
     onJsonExport,
     onHtmlExport,
     onPngExport,
-    onChangeTemplate,
   } = props;
   const { t } = useTranslation();
   return (
@@ -507,7 +476,6 @@ function HeaderPopover(props: props) {
                 <DevTools />
                 <Divider marginY="2" />
                 <LanguageSelect mb="2" />
-                <ShowTemplates onChangeTemplate={onChangeTemplate} />
                 <Duplicate />
                 <CopyLink />
                 <ChangeSlug />

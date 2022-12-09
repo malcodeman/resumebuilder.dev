@@ -85,7 +85,6 @@
   "quickly_upload_description": "Migrieren Sie Ihre vorhandenen Daten ganz einfach in nur wenigen Sekunden.",
   "start_with_templates": "Beginnen Sie mit Vorlagen",
   "start_with_templates_description": "Wählen Sie eine Vorlage aus, um loszulegen, und passen Sie sie im Laufe der Zeit an.",
-  "template_gallery": "Vorlagengalerie",
   "return_home": "Zur Startseite zurückkehren",
   "404_description": "Entschuldigung, die von Ihnen gesuchte Seite wurde nicht gefunden.",
   "export_pdf": "PDF exportieren",
@@ -191,5 +190,6 @@
   "get_copy_of_your_data": "Holen Sie sich eine Kopie Ihrer Daten",
   "import_from_linkedin_list_item_2": "Wählen Sie die gesuchten Daten aus und <2>{{bold}}</2>.",
   "request_archive": "Archiv anfordern",
-  "settings_and_privacy": "Einstellungen & Datenschutz"
+  "settings_and_privacy": "Einstellungen & Datenschutz",
+  "sections": "Abschnitte"
 }

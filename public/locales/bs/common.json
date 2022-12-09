@@ -85,7 +85,6 @@
   "quickly_upload_description": "Lako migrirajte postojeće podatke u samo nekoliko sekundi.",
   "start_with_templates": "Počnite sa šablonima",
   "start_with_templates_description": "Odaberite predložak da započnete i prilagodite ga dok idete.",
-  "template_gallery": "Galerija šablona",
   "return_home": "Povratak na početnu stranicu",
   "404_description": "Nažalost, stranica koju ste tražili nije pronađena.",
   "export_pdf": "Export PDF",
@@ -191,5 +190,6 @@
   "get_copy_of_your_data": "Nabavite kopiju vaših podataka",
   "import_from_linkedin_list_item_2": "Odaberite podatke koje tražite i <2>{{bold}}</2>.",
   "request_archive": "Zatražite arhivu",
-  "settings_and_privacy": "Postavke i Privatnost"
+  "settings_and_privacy": "Postavke i Privatnost",
+  "sections": "Sekcije"
 }

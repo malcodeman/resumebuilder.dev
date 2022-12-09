@@ -128,7 +128,7 @@ function ResumeItem(props: props) {
       <Link href={`/resumes/${resume.id}`} passHref>
         <AspectRatio mb="2" ratio={1.618 / 2 / 1}>
           <Box
-            borderRadius="lg"
+            borderRadius="md"
             userSelect="none"
             boxShadow={boxShadow}
             _hover={{ cursor: "pointer" }}

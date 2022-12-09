@@ -1,6 +1,16 @@
 import React from "react";
 import Head from "next/head";
-import { Grid, Box, Center, Spinner } from "@chakra-ui/react";
+import {
+  Grid,
+  Box,
+  Center,
+  Spinner,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+} from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { isNil } from "ramda";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
@@ -12,13 +22,14 @@ import Header from "../../../components/builder/Header";
 import HeaderMobile from "../../../components/builder/HeaderMobile";
 import Document from "../../../components/builder/Document";
 import NotFound from "../../../components/misc/NotFound";
+import TemplatesTabPanel from "../../../components/builder/TemplatesTabPanel";
 
 import useResume from "../../../hooks/useResume";
 import useAutoSaveToast from "../../../hooks/useAutoSaveToast";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import utils from "../../../lib/utils";
 
-import { Resume } from "../../../types";
+import { Resume, Template } from "../../../types";
 
 function Builder() {
   const { t } = useTranslation();
@@ -38,6 +49,11 @@ function Builder() {
   });
 
   useAutoSaveToast({});
+
+  function handleOnChangeTemplate(nextTemplate: Template) {
+    form.setValue("updatedAt", Date.now());
+    form.setValue("design.template", nextTemplate);
+  }
 
   if (isLoading) {
     return (
@@ -71,7 +87,20 @@ function Builder() {
         paddingBottom={{ base: "54px", lg: "0" }}
         height="100vh"
       >
-        <Sections form={form} />
+        <Tabs size="sm" paddingTop="8" overflowY="hidden" isFitted>
+          <TabList>
+            <Tab>{t("sections")}</Tab>
+            <Tab data-cy="templates-tab">{t("templates")}</Tab>
+          </TabList>
+          <TabPanels height="calc(100% - 31px)">
+            <TabPanel height="full" padding="0">
+              <Sections form={form} />
+            </TabPanel>
+            <TabPanel height="full" padding="0">
+              <TemplatesTabPanel onChangeTemplate={handleOnChangeTemplate} />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
         <Box
           overflowY="auto"
           display={{ base: "none", lg: "block" }}

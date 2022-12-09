@@ -125,13 +125,12 @@ function Sections(props: props) {
   }
 
   return (
-    <Flex flexDirection="column" overflowY="hidden">
+    <Flex height="100%" flexDirection="column">
       <Accordion
         defaultIndex={[0]}
         allowToggle
         reduceMotion
         overflowY="auto"
-        paddingTop={{ base: "8" }}
         userSelect="none"
         sx={utils.getScrollbarStyle()}
       >

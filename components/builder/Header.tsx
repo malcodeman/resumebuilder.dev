@@ -1,12 +1,5 @@
-import {
-  Box,
-  Button,
-  Flex,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
-import { FiLayers } from "react-icons/fi";
 import { trackGoal } from "fathom-client";
 import { useTranslation } from "next-i18next";
 import { useNetworkState } from "@react-hookz/web";
@@ -14,7 +7,6 @@ import { useNetworkState } from "@react-hookz/web";
 import Logo from "../Logo";
 import HeaderPopover from "./HeaderPopover";
 import ResumeTitle from "./ResumeTitle";
-import TemplatesModal from "../templates/TemplatesModal";
 import OfflineTag from "../misc/OfflineTag";
 
 import { FATHOM_EVENTS } from "../../lib/constants";
@@ -22,37 +14,11 @@ import utils from "../../lib/utils";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useProfilePicture from "../../hooks/useProfilePicture";
 
-import { Resume, Fields, Template } from "../../types";
+import { Resume, Fields } from "../../types";
 
 type props = {
   form: UseFormReturn<Resume, object>;
 };
-
-function ShowTemplates(props: {
-  onChangeTemplate: (nextTemplate: Template) => void;
-}) {
-  const { onChangeTemplate } = props;
-  const { t } = useTranslation();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
-    <>
-      <Button
-        mr="2"
-        size="sm"
-        leftIcon={<FiLayers />}
-        onClick={onOpen}
-        data-cy="header-templates-button"
-      >
-        {t("templates")}
-      </Button>
-      <TemplatesModal
-        isOpen={isOpen}
-        onClose={onClose}
-        onChange={onChangeTemplate}
-      />
-    </>
-  );
-}
 
 function Header(props: props) {
   const { form } = props;
@@ -71,11 +37,6 @@ function Header(props: props) {
     form.setValue("updatedAt", Date.now());
     form.setValue("about", fields.about);
     form.setValue("section", fields.section);
-  }
-
-  function handleOnChangeTemplate(nextTemplate: Template) {
-    form.setValue("updatedAt", Date.now());
-    form.setValue("design.template", nextTemplate);
   }
 
   function handleOnExportAsPdf() {
@@ -113,10 +74,10 @@ function Header(props: props) {
         <ResumeTitle form={form} />
         <Flex>
           {network.online ? null : <OfflineTag mr="2" />}
-          <ShowTemplates onChangeTemplate={handleOnChangeTemplate} />
           <Button
             mr="2"
             size="sm"
+            colorScheme="blue"
             onClick={handleOnExportAsPdf}
             data-cy="header-export-pdf-button"
           >
@@ -126,7 +87,6 @@ function Header(props: props) {
             <HeaderPopover
               devTools={devTools}
               onImport={handleOnImport}
-              onChangeTemplate={handleOnChangeTemplate}
               onPdfExport={handleOnExportAsPdf}
               onJsonExport={() => utils.exportAsJson(form.getValues())}
               onHtmlExport={handleOnExportAsHtml}
