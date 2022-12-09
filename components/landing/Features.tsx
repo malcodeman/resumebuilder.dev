@@ -35,7 +35,11 @@ function Features() {
       <Center mb="16">
         <Heading>{t("privacy_focused_and_login_free")}</Heading>
       </Center>
-      <Grid templateColumns={["1fr", "1fr 1fr 1fr"]} gap="8">
+      <Grid
+        gap="8"
+        alignItems="flex-start"
+        templateColumns={["1fr", "1fr 1fr 1fr"]}
+      >
         {map(
           (item) => (
             <Center key={item.titleTransKey} flexDirection="column">
