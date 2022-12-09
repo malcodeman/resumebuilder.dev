@@ -6,7 +6,9 @@ import {
   Text,
   Grid,
   Box,
+  Image,
   useBoolean,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
@@ -14,12 +16,11 @@ import { length, map } from "ramda";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { trackGoal } from "fathom-client";
+import { useMediaQuery } from "@react-hookz/web";
 
 import { FATHOM_EVENTS } from "../../lib/constants";
 
 import useResumes from "../../hooks/useResumes";
-
-import Poser20 from "../../illustrations/Poser20";
 
 const LIST = [
   {
@@ -38,6 +39,18 @@ function GetStarted() {
   const router = useRouter();
   const { resumes, createNew } = useResumes();
   const [isLoading, setIsLoading] = useBoolean();
+  const screenshotSourceMobile = useColorModeValue(
+    "landing/builder-screenshot-mobile-light.png",
+    "landing/builder-screenshot-mobile-dark.png"
+  );
+  const screenshotSourceDesktop = useColorModeValue(
+    "landing/builder-screenshot-desktop-light.png",
+    "landing/builder-screenshot-desktop-dark.png"
+  );
+  const isSmallDevice = useMediaQuery("(min-width: 30em)");
+  const screenshotSource = isSmallDevice
+    ? screenshotSourceDesktop
+    : screenshotSourceMobile;
 
   async function handleOnSubmit() {
     trackGoal(FATHOM_EVENTS.BUILD_FOR_FREE_BOTTOM, 0);
@@ -84,9 +97,11 @@ function GetStarted() {
           )}
         </Grid>
       </Center>
-      <Box display={["none", "block"]} maxW="sm">
-        <Poser20 />
-      </Box>
+      <Image
+        src={screenshotSource}
+        alt=""
+        boxShadow="0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)"
+      />
     </Box>
   );
 }
