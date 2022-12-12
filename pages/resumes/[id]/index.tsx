@@ -89,8 +89,11 @@ function Builder() {
       >
         <Tabs size="sm" paddingTop="8" overflowY="hidden" isFitted>
           <TabList>
-            <Tab>{t("sections")}</Tab>
+            <Tab data-cy="sections-tab">{t("sections")}</Tab>
             <Tab data-cy="templates-tab">{t("templates")}</Tab>
+            {isLargeDevice ? null : (
+              <Tab data-cy="preview-tab">{t("preview")}</Tab>
+            )}
           </TabList>
           <TabPanels height="calc(100% - 31px)">
             <TabPanel height="full" padding="0">
@@ -99,6 +102,20 @@ function Builder() {
             <TabPanel height="full" padding="0">
               <TemplatesTabPanel onChangeTemplate={handleOnChangeTemplate} />
             </TabPanel>
+            {isLargeDevice ? null : (
+              <TabPanel height="full" padding="0">
+                <Box
+                  paddingTop="2"
+                  paddingInlineEnd="4"
+                  paddingBottom="2"
+                  paddingInlineStart="4"
+                  overflowY="auto"
+                  sx={utils.getScrollbarStyle()}
+                >
+                  <Document form={form} isPdf={true} />
+                </Box>
+              </TabPanel>
+            )}
           </TabPanels>
         </Tabs>
         <Box

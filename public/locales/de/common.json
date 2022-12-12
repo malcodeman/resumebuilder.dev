@@ -191,5 +191,6 @@
   "import_from_linkedin_list_item_2": "Wählen Sie die gesuchten Daten aus und <2>{{bold}}</2>.",
   "request_archive": "Archiv anfordern",
   "settings_and_privacy": "Einstellungen & Datenschutz",
-  "sections": "Abschnitte"
+  "sections": "Abschnitte",
+  "preview": "Vorschau"
 }

@@ -3,6 +3,7 @@ import { Box } from "@chakra-ui/react";
 import { useWatch, UseFormReturn } from "react-hook-form";
 import { motion } from "framer-motion";
 import { PDFViewer } from "@react-pdf/renderer";
+import { or } from "ramda";
 
 import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";
@@ -15,6 +16,7 @@ import { Resume } from "../../types";
 
 type props = {
   form: UseFormReturn<Resume, object>;
+  isPdf?: boolean;
 };
 
 const PAGE_SIZE = {
@@ -39,7 +41,7 @@ function Document(props: props) {
   };
   const document = id
     ? getTemplate({
-        isPdf,
+        isPdf: or(props.isPdf, isPdf),
         hideSensitiveData,
         design: watch[1],
         fields,
@@ -60,7 +62,7 @@ function Document(props: props) {
   };
 
   if (id) {
-    if (isPdf) {
+    if (or(props.isPdf, isPdf)) {
       return (
         <Box {...boxProps}>
           <PDFViewer height="100%" width="100%">
