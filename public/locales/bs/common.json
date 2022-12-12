@@ -191,5 +191,6 @@
   "import_from_linkedin_list_item_2": "Odaberite podatke koje tražite i <2>{{bold}}</2>.",
   "request_archive": "Zatražite arhivu",
   "settings_and_privacy": "Postavke i Privatnost",
-  "sections": "Sekcije"
+  "sections": "Sekcije",
+  "preview": "Pregled"
 }
