@@ -23,6 +23,7 @@ import HeaderMobile from "../../../components/builder/HeaderMobile";
 import Document from "../../../components/builder/Document";
 import NotFound from "../../../components/misc/NotFound";
 import TemplatesTabPanel from "../../../components/builder/TemplatesTabPanel";
+import Preview from "../../../components/builder/Preview";
 
 import useResume from "../../../hooks/useResume";
 import useAutoSaveToast from "../../../hooks/useAutoSaveToast";
@@ -112,7 +113,7 @@ function Builder() {
                   overflowY="auto"
                   sx={utils.getScrollbarStyle()}
                 >
-                  <Document form={form} isPdf={true} />
+                  <Preview form={form} />
                 </Box>
               </TabPanel>
             )}
