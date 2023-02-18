@@ -101,6 +101,18 @@ function Berlin(props: TemplateProps) {
     );
   }
 
+  function renderEmail() {
+    if (or(isEmpty(about.email), hideSensitiveData)) {
+      return null;
+    }
+
+    if (isEmpty(about.phone)) {
+      return about.email;
+    }
+
+    return `${about.email} | `;
+  }
+
   function renderSummary(summary: string) {
     if (isEmpty(summary)) {
       return null;
@@ -177,9 +189,7 @@ function Berlin(props: TemplateProps) {
           <Text mb={10} color="#717171">
             {renderLocation()}
             {renderWebsite()}
-            {or(isEmpty(about.email), hideSensitiveData)
-              ? null
-              : `${about.email} | `}
+            {renderEmail()}
             {hideSensitiveData ? null : about.phone}
           </Text>
           {renderSummary(about.summary)}
