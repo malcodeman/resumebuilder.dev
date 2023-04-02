@@ -94,7 +94,7 @@ function exportAsHtml(data: {
     profilePicture,
   });
   const markup = ReactDOMServer.renderToStaticMarkup(element);
-  const cssReset = CSSReset().props.styles;
+  const cssReset = CSSReset({}).props.styles;
   const blobParts = `<style>${cssReset}</style>${markup}`;
   const blob = new Blob([blobParts], {
     type: "text/plain;charset=utf-8",
