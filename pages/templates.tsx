@@ -30,7 +30,7 @@ function Templates() {
     TEMPLATES_FILTERS[0].value
   );
   const [template, setTemplate] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState<TemplateType>(null);
+  const [isLoading, setIsLoading] = React.useState<TemplateType | null>(null);
   const filteredTemplatesByTags = filter(
     (item) => includes(activeFilter, item.tags),
     TEMPLATES_LIST
@@ -111,7 +111,7 @@ function Templates() {
   );
 }
 
-export async function getStaticProps({ locale }) {
+export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common"])),
