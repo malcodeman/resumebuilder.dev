@@ -1,9 +1,10 @@
 import type { AppProps } from "next/app";
 import React from "react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { load } from "fathom-client";
+import { load, trackPageview } from "fathom-client";
 import { IconContext } from "react-icons";
 import { appWithTranslation } from "next-i18next";
+import Router from "next/router";
 import "emoji-mart/css/emoji-mart.css";
 
 import { FATHOM_SITE_ID, IS_PROD } from "../lib/constants";
@@ -26,11 +27,16 @@ const THEME = extendTheme({
   },
 });
 
+Router.events.on("routeChangeComplete", (_as, routeProps) => {
+  if (!routeProps.shallow) {
+    trackPageview();
+  }
+});
+
 function App({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
     if (IS_PROD) {
       load(FATHOM_SITE_ID, {
-        url: "https://warbler.resumebuilder.dev/script.js",
         includedDomains: ["resumebuilder.dev", "www.resumebuilder.dev"],
       });
     }
