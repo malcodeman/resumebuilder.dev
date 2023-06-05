@@ -140,7 +140,9 @@ function London(props: TemplateProps) {
             </Text>
             {hideSensitiveData ? null : <Text mb={4}>{about.phone}</Text>}
             {hideSensitiveData ? null : <Text mb={4}>{about.email}</Text>}
-            <Link href={about.website}>{utils.getUrlHost(about.website)}</Link>
+            <Link href={about.website}>
+              {utils.parseWebsite(about.website)}
+            </Link>
           </Box>
         </Flex>
         <Box pr={80} pl={80}>

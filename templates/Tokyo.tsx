@@ -119,7 +119,7 @@ function Tokyo(props: TemplateProps) {
               {hideSensitiveData ? null : <Text mb={4}>{about.phone}</Text>}
               {hideSensitiveData ? null : <Text mb={4}>{about.email}</Text>}
               <Link mb={4} href={about.website}>
-                {utils.getUrlHost(about.website)}
+                {utils.parseWebsite(about.website)}
               </Link>
             </Box>
             {section.map((sectionItem, index) => {

@@ -96,7 +96,7 @@ function Berlin(props: TemplateProps) {
     }
     return (
       <>
-        <Link href={about.website}>{utils.getUrlHost(about.website)}</Link> |{" "}
+        <Link href={about.website}>{utils.parseWebsite(about.website)}</Link> |{" "}
       </>
     );
   }
