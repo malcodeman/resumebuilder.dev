@@ -143,9 +143,15 @@ function pt2px(pt: number, suffix = true) {
   return (pt * 96) / 72;
 }
 
-function getUrlHost(url: string) {
+function parseWebsite(url: string) {
   try {
-    return new URL(url).host;
+    const parsedUrl = new URL(url);
+    const host = parsedUrl.host;
+    const pathname = parsedUrl.pathname;
+    if (equals(pathname, "/")) {
+      return host;
+    }
+    return `${host}${pathname}`;
   } catch {
     return "";
   }
@@ -265,7 +271,7 @@ const EXPORTS = {
   isStandardSection,
   isTagListSection,
   pt2px,
-  getUrlHost,
+  parseWebsite,
   getRandomInt,
   generateFakeResume,
   countWords,

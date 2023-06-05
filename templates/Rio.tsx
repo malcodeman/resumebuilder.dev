@@ -103,7 +103,7 @@ function Rio(props: TemplateProps) {
               {hideSensitiveData ? null : <Text>{about.phone}</Text>}
               {hideSensitiveData ? null : <Text>{about.email}</Text>}
               <Link href={about.website}>
-                {utils.getUrlHost(about.website)}
+                {utils.parseWebsite(about.website)}
               </Link>
             </Box>
           </Flex>
