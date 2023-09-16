@@ -7,7 +7,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { siLinkedin, siGithub } from "simple-icons/icons";
+import { siLinkedin, siGithub } from "simple-icons";
 
 import SimpleIcon from "./SimpleIcon";
 

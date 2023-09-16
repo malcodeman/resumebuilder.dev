@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { siGithub, siDribbble } from "simple-icons/icons";
+import { siGithub, siDribbble } from "simple-icons";
 
 import SimpleIcon from "../components/misc/SimpleIcon";
 
