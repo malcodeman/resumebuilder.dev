@@ -7614,10 +7614,10 @@ simple-icons@*:
   resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-7.19.0.tgz#72b2b54a90e5ae488845c8533da8b49dcaa18e1d"
   integrity sha512-r3aHhEQmlB/RziOBhesjYbH5WCgRA6OPelJULOVqpgEeAv9XB+CQdcchSXXKaQv0v6D2ylzb3AIXsFCGUJ8umQ==
 
-simple-icons@^7.20.0:
-  version "7.20.0"
-  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-7.20.0.tgz#4d706b847b062406e6194abe64352f0e78c4397e"
-  integrity sha512-EP36AFDVul33lL17gfokr3nRjyVY74A1cXdEfvQzA0bI+5lDiQ1ETdOATmjCOMUGG3mdiJb4LRTMajtqhFr72g==
+simple-icons@^9.14.0:
+  version "9.14.0"
+  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-9.14.0.tgz#493388acbfda6a63a5979e9be0bc2529771cd434"
+  integrity sha512-8nBO/v1y2p4uQX0lpqrBqBAhbx0GlLVYUb904vrsLxLylYkFQMrlPjTYSFI7d9TaY5kUpoDlqC+/9ojyKDZI9g==
 
 simple-swizzle@^0.2.2:
   version "0.2.2"
