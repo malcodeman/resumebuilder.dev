@@ -29,7 +29,7 @@
     "@react-hookz/web": "^16.1.0",
     "@react-pdf/renderer": "^3.0.0",
     "@tanstack/react-table": "^8.5.11",
-    "axios": "^0.22.0",
+    "axios": "^1.5.0",
     "date-fns": "^2.23.0",
     "emoji-mart": "3.0.1",
     "fathom-client": "^3.2.0",
