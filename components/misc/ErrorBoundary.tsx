@@ -1,6 +1,6 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { Button, Center, Heading } from "@chakra-ui/react";
-import { withTranslation, TFunction } from "react-i18next";
+import { withTranslation, TFunction } from "next-i18next";
 
 type Props = {
   children?: ReactNode;

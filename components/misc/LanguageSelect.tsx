@@ -1,6 +1,6 @@
 import { Box, BoxProps, FormControl, Select } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { map } from "ramda";
 import { useRouter } from "next/router";
 import { useMountEffect } from "@react-hookz/web";
