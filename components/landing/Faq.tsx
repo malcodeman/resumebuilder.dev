@@ -41,16 +41,15 @@ function Faq() {
       {
         questionTransKey: "faq_question_3",
         answer: (
-          <Trans i18nKey="faq_answer_3" values={{ link: "Fathom Analytics" }}>
+          <Trans i18nKey="faq_answer_3" values={{ link: "Vercel Analytics" }}>
             We use
             <ChakraLink
-              href="https://usefathom.com/"
+              href="https://vercel.com/analytics"
               color="blue.400"
               isExternal
             >
-              Fathom Analytics
+              Vercel Analytics
             </ChakraLink>
-            , which is privacy-focused and GDPR compliant.
           </Trans>
         ),
       },

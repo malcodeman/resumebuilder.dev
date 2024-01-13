@@ -23,7 +23,7 @@
   "faq_question_2": "Gdje su moji podaci pohranjeni?",
   "faq_answer_2": "Unutar <1>{{code}}</1> pretraživača.",
   "faq_question_3": "Koje analitičke alate koristite?",
-  "faq_answer_3": "Koristimo <1>{{link}}</1>, koji je fokusiran na privatnost i usklađen sa GDPR-om.",
+  "faq_answer_3": "Koristimo <1>{{link}}</1>.",
   "faq_question_4": "Je li resumebuilder.dev open source?",
   "faq_answer_4": "Da, source kod možete pronaći na <1>{{link}}</1>.",
   "faq_question_5": "Koji importi su podržani?",

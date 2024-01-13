@@ -15,10 +15,7 @@ import { FiCheck } from "react-icons/fi";
 import { length, map } from "ramda";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { trackGoal } from "fathom-client";
 import { useMediaQuery } from "@react-hookz/web";
-
-import { FATHOM_EVENTS } from "../../lib/constants";
 
 import useResumes from "../../hooks/useResumes";
 
@@ -53,7 +50,6 @@ function GetStarted() {
     : screenshotSourceMobile;
 
   async function handleOnSubmit() {
-    trackGoal(FATHOM_EVENTS.BUILD_FOR_FREE_BOTTOM, 0);
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {

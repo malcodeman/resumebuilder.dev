@@ -15,9 +15,6 @@ import { motion } from "framer-motion";
 import { FiCheckCircle } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { length } from "ramda";
-import { trackGoal } from "fathom-client";
-
-import { FATHOM_EVENTS } from "../../lib/constants";
 
 import Poser12 from "../../illustrations/Poser12";
 
@@ -30,7 +27,6 @@ function Hero() {
   const [isLoading, setIsLoading] = useBoolean();
 
   async function handleOnSubmit() {
-    trackGoal(FATHOM_EVENTS.BUILD_FOR_FREE_TOP, 0);
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {
