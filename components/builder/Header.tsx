@@ -1,6 +1,5 @@
 import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
-import { trackGoal } from "fathom-client";
 import { useTranslation } from "next-i18next";
 import { useNetworkState } from "@react-hookz/web";
 
@@ -9,7 +8,6 @@ import HeaderPopover from "./HeaderPopover";
 import ResumeTitle from "./ResumeTitle";
 import OfflineTag from "../misc/OfflineTag";
 
-import { FATHOM_EVENTS } from "../../lib/constants";
 import utils from "../../lib/utils";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useProfilePicture from "../../hooks/useProfilePicture";
@@ -45,7 +43,6 @@ function Header(props: props) {
       profilePicture,
       hideSensitiveData,
     });
-    trackGoal(FATHOM_EVENTS.EXPORT_AS_PDF, 0);
   }
 
   function handleOnExportAsHtml() {

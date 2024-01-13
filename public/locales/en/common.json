@@ -23,7 +23,7 @@
   "faq_question_2": "Where is my data stored?",
   "faq_answer_2": "Inside browser <1>{{code}}</1>.",
   "faq_question_3": "What analytics tools do you use?",
-  "faq_answer_3": "We use <1>{{link}}</1>, which is privacy-focused and GDPR compliant.",
+  "faq_answer_3": "We use <1>{{link}}</1>.",
   "faq_question_4": "Is resumebuilder.dev open source?",
   "faq_answer_4": "Yes, you can find the source code on <1>{{link}}</1>.",
   "faq_question_5": "Which imports are supported?",

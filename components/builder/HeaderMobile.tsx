@@ -7,14 +7,12 @@ import {
 } from "@chakra-ui/react";
 import { FiHome } from "react-icons/fi";
 import { FormProvider, UseFormReturn } from "react-hook-form";
-import { trackGoal } from "fathom-client";
 import { useTranslation } from "next-i18next";
 
 import NavLink from "../misc/NavLink";
 import HeaderPopover from "./HeaderPopover";
 import ResumeTitle from "./ResumeTitle";
 
-import { FATHOM_EVENTS } from "../../lib/constants";
 import utils from "../../lib/utils";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useProfilePicture from "../../hooks/useProfilePicture";
@@ -49,7 +47,6 @@ function HeaderMobile(props: props) {
       profilePicture,
       hideSensitiveData,
     });
-    trackGoal(FATHOM_EVENTS.EXPORT_AS_PDF, 0);
   }
 
   function handleOnExportAsHtml() {
