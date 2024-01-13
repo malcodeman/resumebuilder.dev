@@ -4,6 +4,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { IconContext } from "react-icons";
 import { appWithTranslation } from "next-i18next";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "emoji-mart/css/emoji-mart.css";
 
 import ErrorBoundary from "../components/misc/ErrorBoundary";
@@ -31,6 +32,7 @@ function App({ Component, pageProps }: AppProps) {
         <IconContext.Provider value={{ size: "16" }}>
           <Component {...pageProps} />
           <Analytics />
+          <SpeedInsights />
         </IconContext.Provider>
       </ErrorBoundary>
     </ChakraProvider>
