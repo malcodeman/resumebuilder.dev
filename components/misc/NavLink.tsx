@@ -14,7 +14,7 @@ function NavLink(props: props) {
   const router = useRouter();
   const isActive = equals(router.asPath, href);
   return (
-    <NextLink href={href} passHref={passHref}>
+    <NextLink href={href} passHref={passHref} legacyBehavior>
       <Link {...rest} color={isActive ? "blue.400" : "inherit"}>
         {children}
       </Link>
