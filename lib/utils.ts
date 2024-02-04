@@ -1,7 +1,7 @@
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
 import ReactDOMServer from "react-dom/server";
-import CSSReset from "@chakra-ui/css-reset";
+import { CSSReset } from "@chakra-ui/react";
 import * as htmlToImage from "html-to-image";
 import { createStandaloneToast, SystemStyleObject } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
