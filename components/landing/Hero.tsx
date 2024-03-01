@@ -10,7 +10,7 @@ import {
   Center,
   useBoolean,
 } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { FiCheckCircle } from "react-icons/fi";
 import { useRouter } from "next/router";
@@ -21,7 +21,7 @@ import Poser12 from "../../illustrations/Poser12";
 import useResumes from "../../hooks/useResumes";
 
 function Hero() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const router = useRouter();
   const { resumes, createNew } = useResumes();
   const [isLoading, setIsLoading] = useBoolean();

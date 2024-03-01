@@ -16,13 +16,14 @@ import {
 } from "@chakra-ui/react";
 import { FiCheckCircle, FiCircle } from "react-icons/fi";
 import { map } from "ramda";
-import { Trans, useTranslation } from "next-i18next";
+import { Trans } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
 import { LINKS } from "../../lib/constants";
 
 function Faq() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const faq = React.useMemo(
     () => [
       {

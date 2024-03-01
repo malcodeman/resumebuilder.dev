@@ -5,7 +5,7 @@ import {
   StatNumber,
   StatGroupProps,
 } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { map } from "ramda";
 
 const STATS = [
@@ -24,7 +24,7 @@ const STATS = [
 ];
 
 function Stats(props: StatGroupProps) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <StatGroup {...props}>
       {map(

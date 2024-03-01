@@ -46,7 +46,7 @@
   "simple": "Simple",
   "creative": "Creative",
   "professional": "Professional",
-  "search_n_templates": "Search {{n}} templates...",
+  "search_n_templates": "Search {n} templates...",
   "search_n_resumes": "Search {{n}} resumes...",
   "no_resumes_found": "No resumes found",
   "edited_time": "Edited {{time}}",

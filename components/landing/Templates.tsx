@@ -11,7 +11,7 @@ import {
 import { map, slice, equals } from "ramda";
 import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 
 import { TEMPLATES_LIST, DEFAULT_VALUES } from "../../lib/constants";
@@ -28,7 +28,7 @@ const ARROW_RIGHT_VARIANTS = {
 };
 
 function Templates() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const templateCount = useBreakpointValue({
     base: 1,
     sm: 4,

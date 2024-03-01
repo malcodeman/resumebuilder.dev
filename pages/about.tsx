@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Text, Heading, Container, Avatar, Box } from "@chakra-ui/react";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import Layout from "../components/Layout";
 import Footer from "../components/misc/Footer";
@@ -11,7 +10,7 @@ const DESCRIPTION =
   "Learn more about us, what we stand for, and where we're going.";
 
 function About() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <>
       <Head>
@@ -45,7 +44,8 @@ function About() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      messages: (await import(`../public/locales/${locale}/common.json`))
+        .default,
     },
   };
 }

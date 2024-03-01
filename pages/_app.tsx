@@ -5,6 +5,8 @@ import { IconContext } from "react-icons";
 import { appWithTranslation } from "next-i18next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { NextIntlClientProvider } from "next-intl";
+import { useRouter } from "next/router";
 import "emoji-mart/css/emoji-mart.css";
 
 import ErrorBoundary from "../components/misc/ErrorBoundary";
@@ -26,13 +28,21 @@ const THEME = extendTheme({
 });
 
 function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
     <ChakraProvider theme={THEME}>
       <ErrorBoundary>
         <IconContext.Provider value={{ size: "16" }}>
-          <Component {...pageProps} />
-          <Analytics />
-          <SpeedInsights />
+          <NextIntlClientProvider
+            locale={router.locale}
+            timeZone="Europe/Berlin"
+            messages={pageProps.messages}
+          >
+            <Component {...pageProps} />
+            <Analytics />
+            <SpeedInsights />
+          </NextIntlClientProvider>
         </IconContext.Provider>
       </ErrorBoundary>
     </ChakraProvider>

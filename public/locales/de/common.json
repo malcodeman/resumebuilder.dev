@@ -46,7 +46,7 @@
   "simple": "Einfach",
   "creative": "Kreativ",
   "professional": "Fachmann",
-  "search_n_templates": "Suche {{n}} Vorlagen...",
+  "search_n_templates": "Suche {n} Vorlagen...",
   "search_n_resumes": "Suche {{n}} Lebensläufe...",
   "no_resumes_found": "Keine Lebensläufe gefunden",
   "edited_time": "Bearbeitet {{time}}",

@@ -1,7 +1,7 @@
 import { Heading, Grid, Box, Text, Center } from "@chakra-ui/react";
 import { map } from "ramda";
 import { FiLock, FiGift, FiFastForward } from "react-icons/fi";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
 const FEATURES = [
@@ -23,7 +23,7 @@ const FEATURES = [
 ];
 
 function Features() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <Box
       as={motion.section}
