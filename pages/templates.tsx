@@ -3,8 +3,7 @@ import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import Layout from "../components/Layout";
 
@@ -23,7 +22,7 @@ import Footer from "../components/misc/Footer";
 import useResumes from "../hooks/useResumes";
 
 function Templates() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const router = useRouter();
   const { createNew } = useResumes();
   const [activeFilter, setActiveFilter] = React.useState(
@@ -114,7 +113,8 @@ function Templates() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      messages: (await import(`../public/locales/${locale}/common.json`))
+        .default,
     },
   };
 }

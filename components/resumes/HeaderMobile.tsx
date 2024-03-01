@@ -6,7 +6,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FiFileText, FiHome, FiLayers } from "react-icons/fi";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 
@@ -14,7 +14,7 @@ import NavLink from "../misc/NavLink";
 import UserMenu from "./UserMenu";
 
 function HeaderMobile() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px -2px 0px 0px",

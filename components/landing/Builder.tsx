@@ -7,13 +7,13 @@ import {
   UnorderedList,
   ListItem,
 } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
 import Poser16 from "../../illustrations/Poser16";
 
 function Builder() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <Grid
       as={motion.section}

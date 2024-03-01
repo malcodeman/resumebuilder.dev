@@ -13,7 +13,7 @@ import {
 import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
 import { length, map } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "@react-hookz/web";
 
@@ -32,7 +32,7 @@ const LIST = [
 ];
 
 function GetStarted() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const router = useRouter();
   const { resumes, createNew } = useResumes();
   const [isLoading, setIsLoading] = useBoolean();

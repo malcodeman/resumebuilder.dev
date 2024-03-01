@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { useNetworkState } from "@react-hookz/web";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -21,7 +21,7 @@ import UserMenu from "./UserMenu";
 import OfflineTag from "../misc/OfflineTag";
 
 function Header() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",

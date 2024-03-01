@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { equals, find } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import { TEMPLATES_LIST } from "../../lib/constants";
 
@@ -29,7 +29,7 @@ function Template(props: props) {
     isLoading = false,
     onUseTemplate,
   } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"

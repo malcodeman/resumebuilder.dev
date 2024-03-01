@@ -46,7 +46,7 @@
   "simple": "Jednostavni",
   "creative": "Kreativni",
   "professional": "Profesionalni",
-  "search_n_templates": "Pretraži {{n}} šablona...",
+  "search_n_templates": "Pretraži {n} šablona...",
   "search_n_resumes": "Pretraži {{n}} resumea...",
   "no_resumes_found": "Nema pronađenih resumea",
   "edited_time": "Uređeno {{time}}",

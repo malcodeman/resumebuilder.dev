@@ -1,5 +1,5 @@
 import { Box, Button, Center, Heading } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import Poser5 from "../../illustrations/Poser5";
@@ -10,7 +10,7 @@ type props = {
 };
 
 function NotFound(props: props) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { description = t("404_description"), link = "/" } = props;
   return (
     <Center flexDirection="column" minH="100vh" padding="4">
