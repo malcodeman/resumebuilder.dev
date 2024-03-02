@@ -15,7 +15,7 @@ import {
 import { SortableContext } from "@dnd-kit/sortable";
 import { useMediaQuery } from "@react-hookz/web";
 import { findIndex, propEq, isEmpty, find, equals } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import PersonalDetailsSection from "../../components/sections/PersonalDetailsSection";
 import TagListSection from "../../components/sections/TagListSection";
@@ -30,7 +30,7 @@ import utils from "../../lib/utils";
 import { Resume, Section } from "../../types";
 
 function SectionNewButton({ onSubmit }) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function handleOnSubmit(data: { label: string; name: Section }) {

@@ -33,7 +33,7 @@ import { useRouter } from "next/router";
 import { equals, isNil, or } from "ramda";
 import { formatDistanceToNow } from "date-fns";
 import { useFormContext, useWatch } from "react-hook-form";
-import { useTranslation } from "next-i18next";
+import { useLocale, useTranslations } from "next-intl";
 
 import ImportDataModal from "../resumes/ImportDataModal";
 import ExportResumeModal from "./ExportResumeModal";
@@ -60,7 +60,7 @@ type props = {
 };
 
 function FullWidth() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [isFullWidth, setIsFullWidth] = useLocalStorage("is-full-width");
   return (
     <FormControl
@@ -90,7 +90,7 @@ function FullWidth() {
 }
 
 function DarkMode() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <FormControl
@@ -120,7 +120,7 @@ function DarkMode() {
 }
 
 function PdfViewer() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [isPdfViewer, setIsPdfViewer] = useLocalStorage("is-pdf-viewer");
   return (
     <FormControl
@@ -150,7 +150,7 @@ function PdfViewer() {
 }
 
 function HideSensitiveData() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [hideSensitiveData, setHideSensitiveData] = useLocalStorage(
     "hide-sensitive-data"
   );
@@ -182,7 +182,7 @@ function HideSensitiveData() {
 }
 
 function DevTools() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [devTools, setDevTools] = useLocalStorage("dev-tools");
   return (
     <FormControl
@@ -211,7 +211,7 @@ function DevTools() {
 }
 
 function Duplicate() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const toast = useToast();
   const { duplicate } = useResume();
 
@@ -238,7 +238,7 @@ function Duplicate() {
 }
 
 function CopyLink() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { hasCopied, onCopy } = useClipboard(
     utils.isBrowser ? window.location.href : ""
   );
@@ -257,7 +257,8 @@ function CopyLink() {
 }
 
 function ChangeSlug() {
-  const { t, i18n } = useTranslation();
+  const t = useTranslations();
+  const language = useLocale();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getValues } = useFormContext<Resume>();
@@ -274,7 +275,7 @@ function ChangeSlug() {
       description: t("slug_changed"),
       isClosable: true,
     });
-    window.location.replace(`/${i18n.language}/resumes/${nextResume.id}`);
+    window.location.replace(`/${language}/resumes/${nextResume.id}`);
   }
 
   return (
@@ -300,7 +301,7 @@ function ChangeSlug() {
 
 function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
   const { onImport } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <>
       <Button
@@ -318,7 +319,7 @@ function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
 }
 
 function DeleteResume() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { remove } = useResume({ isolated: true });
@@ -355,7 +356,7 @@ function DeleteResume() {
 
 function ImportData(props: { onImport: (fields: Fields) => void }) {
   const { onImport } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -381,7 +382,7 @@ function ExportResume(props: {
   onPngExport: () => void;
 }) {
   const { onPdfExport, onJsonExport, onHtmlExport, onPngExport } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -407,7 +408,7 @@ function ExportResume(props: {
 }
 
 function Info() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { control } = useFormContext<Resume>();
   const watch = useWatch({
     control,
@@ -444,7 +445,7 @@ function HeaderPopover(props: props) {
     onHtmlExport,
     onPngExport,
   } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <Popover placement="bottom-start">
       {({ isOpen }) => (

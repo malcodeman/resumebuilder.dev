@@ -12,7 +12,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { FiPlus } from "react-icons/fi";
 import {
   equals,
@@ -61,7 +61,7 @@ function getTags(name: Section) {
 
 function TagListSectionBody(props: props) {
   const { index, name } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { control, register, setValue } = useFormContext();
   const hasSuggestedTags = or(equals(name, "skills"), equals(name, "hobbies"));
   const tags: string = useWatch({

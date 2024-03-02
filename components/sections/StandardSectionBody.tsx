@@ -17,7 +17,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { and, not, equals, replace, concat } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import { Section } from "../../types";
 
@@ -61,7 +61,7 @@ function Header({ index, nestIndex, isDragging, onRemove, onDuplicate }) {
 }
 
 function Description({ index, nestIndex, isEmployment }) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { control, register, getValues, setValue } = useFormContext();
   const inputName = `section.${index}.nested.${nestIndex}.description`;
   const description = useWatch({
@@ -147,7 +147,7 @@ function getSubtitleLabelTransKey(name: Section) {
 function StandardSectionBody(props: props) {
   const { id, index, nestIndex, name, isDragDisabled, onDuplicate, onRemove } =
     props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const {
     attributes,
     listeners,

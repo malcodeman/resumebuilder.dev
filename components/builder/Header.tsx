@@ -1,6 +1,6 @@
 import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { useNetworkState } from "@react-hookz/web";
 
 import Logo from "../Logo";
@@ -20,7 +20,7 @@ type props = {
 
 function Header(props: props) {
   const { form } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const backgroundColor = useColorModeValue("white", "gray.800");
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",

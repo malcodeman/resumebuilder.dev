@@ -20,7 +20,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { and, or } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import useResume from "../../hooks/useResume";
 import useResumes from "../../hooks/useResumes";
@@ -33,7 +33,7 @@ type props = {
 
 function ChangeSlugModal(props: props) {
   const { isOpen, onClose, onChangeSlug } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const form = useForm({
     defaultValues: { slug: "" },
     resolver: yupResolver(

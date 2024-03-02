@@ -30,7 +30,7 @@ import { useForm } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useRerender } from "@react-hookz/web";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import EmojiPicker from "../misc/EmojiPicker";
 import DeleteResumeMenuItem from "./DeleteResumeMenuItem";
@@ -44,7 +44,7 @@ import useProfilePicture from "../../hooks/useProfilePicture";
 import { Resume } from "../../types";
 
 function UpdatedAtText(props: { updatedAt: number }) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { updatedAt } = props;
   const rerender = useRerender();
   const { locale } = useDateFnsLocale();
@@ -82,7 +82,7 @@ function ResumeItem(props: props) {
     onIconChange,
     ...rest
   } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const ref = React.useRef<HTMLSpanElement>(null);
   const form = useForm({ defaultValues: { title: "" } });
   const {

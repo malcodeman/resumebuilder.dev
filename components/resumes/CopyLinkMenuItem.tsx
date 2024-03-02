@@ -1,6 +1,6 @@
 import { MenuItem, useClipboard, useToast } from "@chakra-ui/react";
 import { FiLink } from "react-icons/fi";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import utils from "../../lib/utils";
 
@@ -10,7 +10,7 @@ type props = {
 
 function CopyLinkMenuItem(props: props) {
   const { id } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { onCopy } = useClipboard(
     utils.isBrowser ? `${window.location.href}/${id}` : ""
   );

@@ -1,6 +1,6 @@
 import { Box, BoxProps, FormControl, Select } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { useLocale } from "next-intl";
 import { map } from "ramda";
 import { useRouter } from "next/router";
 import { useMountEffect } from "@react-hookz/web";
@@ -11,7 +11,7 @@ const defaultValues = {
 
 function LanguageSelect(props: BoxProps) {
   const { ...rest } = props;
-  const { i18n } = useTranslation();
+  const language = useLocale();
   const form = useForm({ defaultValues });
   const languageOptions = [
     { value: "bs", label: "Bosanski" },
@@ -21,7 +21,7 @@ function LanguageSelect(props: BoxProps) {
   const router = useRouter();
 
   useMountEffect(() => {
-    form.reset({ language: i18n.language });
+    form.reset({ language });
   });
 
   function onSubmit(data: { language: string }) {

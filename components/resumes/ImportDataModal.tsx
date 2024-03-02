@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { isEmpty, map } from "ramda";
 import { FiChevronLeft } from "react-icons/fi";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import FileUploader from "../misc/FileUploader";
 import ImportFromGithub from "./importFromGithub";
@@ -51,7 +51,7 @@ const IMPORTS: { label: string; value: Source; isDisabled: boolean }[] = [
 
 function ImportDataModal(props: Props) {
   const { isOpen, onClose, onImport } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [source, setSource] = React.useState<Source | "">("");
   const [isLoading, setIsLoading] = useBoolean();
   const toast = useToast();

@@ -18,7 +18,6 @@ import {
   equals,
   has,
 } from "ramda";
-import { i18n } from "next-i18next";
 import { format } from "date-fns";
 
 import getTemplate from "./getTemplate";
@@ -110,7 +109,7 @@ async function exportAsPng(resume: Resume) {
     saveAs(blob, `${resume.title}.png`);
   } catch {
     toast({
-      description: i18n.t("something_went_wrong").toString(),
+      description: "Something went wrong",
       status: "error",
       isClosable: true,
     });

@@ -9,13 +9,13 @@ import {
 } from "@chakra-ui/react";
 import { FiMoreVertical, FiSun, FiMoon, FiMessageSquare } from "react-icons/fi";
 import { equals } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 const FEEDBACK_LINK =
   "https://github.com/malcodeman/resumebuilder.dev/discussions/categories/feedback";
 
 function UserMenu() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Menu closeOnSelect={false}>

@@ -14,7 +14,7 @@ import {
 import { useRouter } from "next/router";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
 import { FiPlus, FiUpload } from "react-icons/fi";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { equals } from "ramda";
 
 import { Fields } from "../../types";
@@ -24,7 +24,7 @@ import useResumes from "../../hooks/useResumes";
 import ImportDataModal from "./ImportDataModal";
 
 function NewButton() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const router = useRouter();
   const { createNew } = useResumes();
   const isMediumDevice = useMediaQuery("(min-width: 30em)");

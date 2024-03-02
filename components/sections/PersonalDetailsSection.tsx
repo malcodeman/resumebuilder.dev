@@ -26,7 +26,7 @@ import {
 } from "react-icons/fi";
 import { useFormContext, useWatch } from "react-hook-form";
 import { concat, replace, isEmpty } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import phrases from "../../lib/phrases";
 import utils from "../../lib/utils";
@@ -38,7 +38,7 @@ import PreWrittenPhrasesModal from "./PreWrittenPhrasesModal";
 import AddProfilePictureModal from "./AddProfilePictureModal";
 
 function ProfilePicture() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [profilePicture, setProfilePicture] = useProfilePicture();
   return (
@@ -90,7 +90,7 @@ function ProfilePicture() {
 }
 
 function Summary() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { control, register, getValues, setValue } = useFormContext();
   const phrasesModal = useDisclosure();
   const inputName = "about.summary";
@@ -144,7 +144,7 @@ function Summary() {
 }
 
 function PersonalDetailsSection() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { register } = useFormContext();
   const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
   return (

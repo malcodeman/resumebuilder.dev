@@ -5,11 +5,11 @@ import {
   TagProps,
   Tooltip,
 } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { FiZap } from "react-icons/fi";
 
 function OfflineTag(props: TagProps) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <Tooltip
       label={t("you_are_offline_check_your_connection")}

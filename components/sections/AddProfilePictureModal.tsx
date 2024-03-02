@@ -9,7 +9,7 @@ import {
   useToast,
   useBoolean,
 } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import utils from "../../lib/utils";
 import useProfilePicture from "../../hooks/useProfilePicture";
@@ -23,7 +23,7 @@ type Props = {
 
 function AddProfilePictureModal(props: Props) {
   const { isOpen, onClose } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const toast = useToast();
   const [isLoading, setIsLoading] = useBoolean();
   const [_profilePicture, setProfilePicture] = useProfilePicture();
