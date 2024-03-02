@@ -16,7 +16,6 @@ import {
 } from "@chakra-ui/react";
 import { FiCheckCircle, FiCircle } from "react-icons/fi";
 import { map } from "ramda";
-import { Trans } from "next-i18next";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
@@ -32,39 +31,33 @@ function Faq() {
       },
       {
         questionTransKey: "faq_question_2",
-        answer: (
-          <Trans i18nKey="faq_answer_2" values={{ code: "localStorage" }}>
-            Inside browser
-            <Code>localStorage</Code>
-          </Trans>
-        ),
+        answer: t.rich("faq_answer_2", {
+          code: (chunks) => <Code>{chunks}</Code>,
+        }),
       },
       {
         questionTransKey: "faq_question_3",
-        answer: (
-          <Trans i18nKey="faq_answer_3" values={{ link: "Vercel Analytics" }}>
-            We use
+        answer: t.rich("faq_answer_3", {
+          link: (chunks) => (
             <ChakraLink
               href="https://vercel.com/analytics"
               color="blue.400"
               isExternal
             >
-              Vercel Analytics
+              {chunks}
             </ChakraLink>
-          </Trans>
-        ),
+          ),
+        }),
       },
       {
         questionTransKey: "faq_question_4",
-        answer: (
-          <Trans i18nKey="faq_answer_4" values={{ link: "GitHub" }}>
-            Yes, you can find the source code on
+        answer: t.rich("faq_answer_4", {
+          link: (chunks) => (
             <ChakraLink href={LINKS.GITHUB_REPO} color="blue.400" isExternal>
-              GitHub
+              {chunks}
             </ChakraLink>
-            .
-          </Trans>
-        ),
+          ),
+        }),
       },
       {
         questionTransKey: "faq_question_5",

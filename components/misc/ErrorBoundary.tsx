@@ -1,10 +1,8 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { Button, Center, Heading } from "@chakra-ui/react";
-import { withTranslation, TFunction } from "react-i18next";
 
 type Props = {
   children?: ReactNode;
-  t: TFunction;
 };
 
 type State = {
@@ -34,10 +32,10 @@ class ErrorBoundary extends Component<Props, State> {
       return (
         <Center flexDirection="column" minH="100vh" padding="4">
           <Heading fontSize="2xl" mb="4" textAlign="center">
-            {this.props.t("something_went_wrong")}
+            Something went wrong
           </Heading>
           <Button colorScheme="blue" onClick={handleOnClear}>
-            {this.props.t("clear_local_storage")}
+            Clear local storage
           </Button>
         </Center>
       );
@@ -47,4 +45,4 @@ class ErrorBoundary extends Component<Props, State> {
   }
 }
 
-export default withTranslation()(ErrorBoundary);
+export default ErrorBoundary;
