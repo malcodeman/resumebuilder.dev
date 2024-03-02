@@ -6,7 +6,6 @@ import {
   useBoolean,
   useToast,
 } from "@chakra-ui/react";
-import { Trans } from "next-i18next";
 import JSZip from "jszip";
 import { useTranslations } from "next-intl";
 
@@ -85,41 +84,31 @@ function ImportFromLinkedin(props: props) {
 
   return (
     <>
-      <Trans
-        i18nKey="import_from_linkedin_description"
-        values={{ link: t("settings_and_privacy") }}
-      >
-        The easiest and fastest way to obtain a copy of your LinkedIn data is to
-        initiate a data download from your{" "}
-        <Link href={LINKS.LINKEDIN_DATA_PRIVACY} color="blue.400" isExternal>
-          Settings & Privacy
-        </Link>{" "}
-        page:
-      </Trans>
+      {t.rich("import_from_linkedin_description", {
+        link: (chunks) => (
+          <Link href={LINKS.LINKEDIN_DATA_PRIVACY} color="blue.400" isExternal>
+            {chunks}
+          </Link>
+        ),
+      })}
       <OrderedList mb="2">
         <ListItem>
-          <Trans
-            i18nKey="import_from_linkedin_list_item_1"
-            values={{ bold: t("get_copy_of_your_data") }}
-          >
-            Under the How LinkedIn uses your data section, click{" "}
-            <Text as="span" fontWeight="bold">
-              Get a copy of your data
-            </Text>
-            .
-          </Trans>
+          {t.rich("import_from_linkedin_list_item_1", {
+            text: (chunks) => (
+              <Text as="span" fontWeight="bold">
+                {chunks}
+              </Text>
+            ),
+          })}
         </ListItem>
         <ListItem>
-          <Trans
-            i18nKey="import_from_linkedin_list_item_2"
-            values={{ bold: t("request_archive") }}
-          >
-            Select the data that you&apos;re looking for and{" "}
-            <Text as="span" fontWeight="bold">
-              Request archive
-            </Text>
-            .
-          </Trans>
+          {t.rich("import_from_linkedin_list_item_2", {
+            text: (chunks) => (
+              <Text as="span" fontWeight="bold">
+                {chunks}
+              </Text>
+            ),
+          })}
         </ListItem>
       </OrderedList>
       <FileUploader

@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useMountEffect } from "@react-hookz/web";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -41,7 +40,6 @@ function Landing() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
       messages: (await import(`../public/locales/${locale}/common.json`))
         .default,
     },

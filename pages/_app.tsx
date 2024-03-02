@@ -2,7 +2,6 @@ import type { AppProps } from "next/app";
 import React from "react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { IconContext } from "react-icons";
-import { appWithTranslation } from "next-i18next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { NextIntlClientProvider } from "next-intl";
@@ -49,4 +48,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default appWithTranslation(App);
+export default App;
