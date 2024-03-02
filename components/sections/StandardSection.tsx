@@ -18,7 +18,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import SectionHeader from "./SectionHeader";
 import StandardSectionBody from "./StandardSectionBody";
@@ -43,7 +43,7 @@ type props = {
 
 function StandardSection(props: props) {
   const { id, index, label, name, isDragDisabled, remove, append } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { control, getValues, reset } = useFormContext<Resume>();
   const {
     fields: fieldsNested,

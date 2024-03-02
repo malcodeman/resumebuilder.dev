@@ -1,14 +1,14 @@
 import React from "react";
 import { enUS, bs, de } from "date-fns/locale";
-import { useTranslation } from "next-i18next";
+import { useLocale } from "next-intl";
 
 function useDateFnsLocale() {
-  const { i18n } = useTranslation();
+  const language = useLocale();
   const [locale, setLocale] = React.useState(enUS);
 
   React.useEffect(() => {
     function getLocale() {
-      switch (i18n.language) {
+      switch (language) {
         case "en":
         case "default":
           return enUS;
@@ -19,7 +19,7 @@ function useDateFnsLocale() {
       }
     }
     setLocale(getLocale());
-  }, [i18n.language]);
+  }, [language]);
 
   return {
     locale,

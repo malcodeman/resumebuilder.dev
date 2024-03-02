@@ -9,7 +9,7 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import utils from "../../lib/utils";
 
@@ -21,7 +21,7 @@ type props = {
 
 function ImportFromPasteData(props: props) {
   const { onImport } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const form = useForm({
     defaultValues: { data: "" },
     resolver: yupResolver(

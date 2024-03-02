@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Text, Image, Box, useColorModeValue } from "@chakra-ui/react";
 import { filter, includes, isEmpty, length, map, toLower } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import { TEMPLATES_LIST } from "../../lib/constants";
 import utils from "../../lib/utils";
@@ -16,7 +16,7 @@ type props = {
 
 function TemplatesTabPanel(props: props) {
   const { onChangeTemplate } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [template, setTemplate] = React.useState("");
   const filteredTemplatesBySearch = filter(
     (item) => includes(toLower(template), toLower(item.title)),

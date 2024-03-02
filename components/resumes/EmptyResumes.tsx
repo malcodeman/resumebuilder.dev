@@ -10,7 +10,7 @@ import { FiLayers, FiPlus, FiUpload } from "react-icons/fi";
 import { map } from "ramda";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import ImportDataModal from "./ImportDataModal";
 
@@ -19,7 +19,7 @@ import { Fields } from "../../types";
 import useResumes from "../../hooks/useResumes";
 
 function EmptyResumes() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"

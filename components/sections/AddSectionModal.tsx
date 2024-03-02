@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { map } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import { Section } from "../../types";
 
@@ -91,7 +91,7 @@ type props = {
 
 function AddSectionModal(props: props) {
   const { isOpen, onClose, onSubmit } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

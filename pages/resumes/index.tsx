@@ -46,8 +46,7 @@ import { SortableContext } from "@dnd-kit/sortable";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { createColumnHelper, VisibilityState } from "@tanstack/react-table";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import Layout from "../../components/Layout";
 import ResumeItem from "../../components/resumes/ResumeItem";
@@ -67,7 +66,7 @@ import CopyLinkMenuItem from "../../components/resumes/CopyLinkMenuItem";
 import ResumeTitleColumn from "../../components/resumes/ResumeTitleColumn";
 
 function ResumeGrid() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { resumes, duplicate, remove, changeTitle, changeIcon, move } =
     useResumes({ initializeWithStorageValue: false });
   const sensors = useSensors(
@@ -308,7 +307,6 @@ export async function getStaticProps({ locale }: { locale: string }) {
     props: {
       messages: (await import(`../../public/locales/${locale}/common.json`))
         .default,
-      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }

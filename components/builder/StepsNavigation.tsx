@@ -5,7 +5,7 @@ import {
   BreadcrumbProps,
 } from "@chakra-ui/react";
 import { FiChevronRight } from "react-icons/fi";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { equals } from "ramda";
 import Link from "next/link";
 
@@ -17,7 +17,7 @@ type props = BreadcrumbProps & {
 
 function StepsNavigation(props: props) {
   const { currentPage, ...rest } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { resume } = useResume();
   const id = resume?.id;
   return (

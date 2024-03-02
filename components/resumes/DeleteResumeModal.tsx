@@ -9,7 +9,7 @@ import {
   AlertDialogFooter,
   Button,
 } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 type props = {
   isOpen: boolean;
@@ -18,7 +18,7 @@ type props = {
 };
 
 function DeleteResumeModal(props: props) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { isOpen, onClose, onSubmit } = props;
   const cancelRef = React.useRef();
   return (

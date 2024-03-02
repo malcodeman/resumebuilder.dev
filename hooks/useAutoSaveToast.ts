@@ -2,7 +2,7 @@ import React from "react";
 import { useToast } from "@chakra-ui/toast";
 import { length } from "ramda";
 import { useMountEffect } from "@react-hookz/web";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import utils from "../lib/utils";
 
@@ -27,7 +27,7 @@ function useAutoSaveToast(props: props) {
     duration = 1000,
     isClosable = true,
   } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [keyboardJs, setKeyboardJs] = React.useState(null);
   const toast = useToast();
 

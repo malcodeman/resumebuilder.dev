@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import parser from "../../lib/parser";
 
@@ -24,7 +24,7 @@ type props = {
 
 function ImportFromGithub(props: props) {
   const { onImport } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const form = useForm({
     defaultValues: { username: "" },
     resolver: yupResolver(

@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { and, equals, map, or } from "ramda";
 import { useMediaQuery } from "@react-hookz/web";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 
@@ -43,7 +43,7 @@ function ExportResumeModal(props: props) {
     onHtmlExport,
     onPngExport,
   } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
   const [isPdfViewer] = useLocalStorage("is-pdf-viewer");
 

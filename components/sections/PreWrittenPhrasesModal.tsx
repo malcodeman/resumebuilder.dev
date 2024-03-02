@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { equals, filter, includes, length, map, toLower } from "ramda";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import { Phrase } from "../../types";
 
@@ -28,7 +28,7 @@ type Props = {
 
 function PreWrittenPhrasesModal(props: Props) {
   const { isOpen, value = "", phrases, onClose, onChange } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [name, setName] = React.useState("");
   const filteredPhrases = filter(
     (item) => includes(toLower(name), toLower(item.phrase)),

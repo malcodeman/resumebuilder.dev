@@ -24,7 +24,7 @@ import {
 } from "react-icons/fi";
 import { and, isNil, equals } from "ramda";
 import { useFormContext } from "react-hook-form";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 type props = {
   label: string;
@@ -39,7 +39,7 @@ const TOOLTIP_MORE_LABEL = "Delete, duplicate, and more...";
 
 function SectionHeader(props: props) {
   const { label, index, onAppend, onDuplicate, onRemove } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const isStandardSection = !isNil(onAppend);
   const isAbout =
     isNil(index) && isNil(onAppend) && isNil(onDuplicate) && isNil(onRemove);

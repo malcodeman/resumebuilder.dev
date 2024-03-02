@@ -14,8 +14,7 @@ import {
 import { useForm } from "react-hook-form";
 import { isNil } from "ramda";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 import Sections from "../../../components/sections/Sections";
 import Header from "../../../components/builder/Header";
@@ -33,7 +32,7 @@ import utils from "../../../lib/utils";
 import { Resume, Template } from "../../../types";
 
 function Builder() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { resume, isLoading } = useResume({ isolated: true });
   const form = useForm<Resume>();
   const [_viewDashboard, setViewDashboard] = useLocalStorage("view-dashboard");
@@ -144,7 +143,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      messages: (await import(`../../../public/locales/${locale}/common.json`))
+        .default,
     },
   };
 }

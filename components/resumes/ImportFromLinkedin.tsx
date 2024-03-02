@@ -6,8 +6,9 @@ import {
   useBoolean,
   useToast,
 } from "@chakra-ui/react";
-import { Trans, useTranslation } from "next-i18next";
+import { Trans } from "next-i18next";
 import JSZip from "jszip";
+import { useTranslations } from "next-intl";
 
 import parser from "../../lib/parser";
 import { LINKS } from "../../lib/constants";
@@ -22,7 +23,7 @@ type props = {
 
 function ImportFromLinkedin(props: props) {
   const { onImport } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [isLoading, setIsLoading] = useBoolean();
   const toast = useToast();
 

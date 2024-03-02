@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useForm, useFieldArray } from "react-hook-form";
 import {
   Button,
@@ -17,7 +16,7 @@ import {
   Text,
   useBoolean,
 } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
@@ -45,7 +44,7 @@ const defaultValues = {
 };
 
 function Education() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const form = useForm({
     defaultValues: {
       education: [defaultValues],
@@ -220,7 +219,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      messages: (await import(`../../../public/locales/${locale}/common.json`))
+        .default,
     },
   };
 }

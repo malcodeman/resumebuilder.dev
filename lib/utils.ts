@@ -3,7 +3,7 @@ import { saveAs } from "file-saver";
 import ReactDOMServer from "react-dom/server";
 import { CSSReset } from "@chakra-ui/react";
 import * as htmlToImage from "html-to-image";
-import { createStandaloneToast, SystemStyleObject } from "@chakra-ui/react";
+import { SystemStyleObject } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
 import {
   join,
@@ -18,14 +18,12 @@ import {
   equals,
   has,
 } from "ramda";
-import { i18n } from "next-i18next";
 import { format } from "date-fns";
 
 import getTemplate from "./getTemplate";
 
 import { Resume, Section, Fields, SectionField } from "../types";
 
-const { toast } = createStandaloneToast();
 const isBrowser =
   typeof window !== "undefined" &&
   typeof navigator !== "undefined" &&
@@ -103,18 +101,10 @@ function exportAsHtml(data: {
 }
 
 async function exportAsPng(resume: Resume) {
-  try {
-    const blob = await htmlToImage.toBlob(
-      document.getElementById(resume.design.template)
-    );
-    saveAs(blob, `${resume.title}.png`);
-  } catch {
-    toast({
-      description: i18n.t("something_went_wrong").toString(),
-      status: "error",
-      isClosable: true,
-    });
-  }
+  const blob = await htmlToImage.toBlob(
+    document.getElementById(resume.design.template)
+  );
+  saveAs(blob, `${resume.title}.png`);
 }
 
 function isStandardSection(name: Section) {
