@@ -113,8 +113,7 @@ function Templates() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      messages: (await import(`../public/locales/${locale}/common.json`))
-        .default,
+      messages: (await import(`../messages/${locale}.json`)).default,
     },
   };
 }
