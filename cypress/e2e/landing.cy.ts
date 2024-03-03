@@ -37,6 +37,7 @@ describe("Landing page", () => {
     cy.url().should("include", "/resumes/");
   });
   it("See all templates button", () => {
+    cy.wait(100);
     cy.get("[data-cy=see-all-templates-button]").click();
     cy.url().should("eq", `${Cypress.config().baseUrl}/en/templates`);
   });
