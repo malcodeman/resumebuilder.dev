@@ -19,7 +19,7 @@ import {
 import { useTranslations } from "next-intl";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { equals, find, isNil, length, map } from "ramda";
 
 import useResume from "../../../../../hooks/useResume";
@@ -53,8 +53,7 @@ function Employment() {
   });
   const { resume, isLoading, setResume } = useResume();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const id = searchParams?.get("id");
+  const id = useParams().id;
   const { fields, append } = useFieldArray({
     control: form.control,
     name: "employment",
