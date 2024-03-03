@@ -31,7 +31,7 @@ describe("Resumes page", () => {
       });
     cy.get("[data-cy=resume]").should("have.length", 1);
     cy.wait("@getResume");
-    cy.url().should("include", "/resumes/");
+    cy.url().should("include", "/en/resumes/");
   });
   it("Quicky upload button", () => {
     cy.get("[data-cy=quickly-upload]").click();
@@ -69,7 +69,7 @@ describe("Resumes page", () => {
       );
     cy.get("[data-cy=resume]").should("have.length", 2);
     cy.wait("@getResume");
-    cy.url().should("include", "/resumes/");
+    cy.url().should("include", "/en/resumes/");
   });
   it("Create resume button | Halloween", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
