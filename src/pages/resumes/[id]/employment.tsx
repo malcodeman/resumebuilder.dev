@@ -14,12 +14,12 @@ import {
   Input,
   Spinner,
   Text,
-  useBoolean,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { equals, find, isNil, length, map } from "ramda";
 
 import useResume from "../../../hooks/useResume";
@@ -43,50 +43,48 @@ const defaultValues = {
   description: "",
 };
 
-function Education() {
+function Employment() {
   const t = useTranslations();
   const form = useForm({
     defaultValues: {
-      education: [defaultValues],
+      employment: [defaultValues],
     },
   });
   const { resume, isLoading, setResume } = useResume();
   const router = useRouter();
+  const { id } = router.query;
   const { fields, append } = useFieldArray({
     control: form.control,
-    name: "education",
+    name: "employment",
   });
-  const [isPageLoading, setIsPageLoading] = useBoolean();
 
   React.useEffect(() => {
     if (resume) {
       const field = find(
-        (item) => equals(item.name, "education"),
+        (item) => equals(item.name, "employment"),
         resume.section
       );
       if (field) {
-        form.reset({ education: field.nested });
+        form.reset({ employment: field.nested });
       }
     }
   }, [resume, form]);
 
-  async function handleOnSubmit(values: { education: NestedField[] }) {
-    setIsPageLoading.on();
+  function handleOnSubmit(values: { employment: NestedField[] }) {
     const section: SectionField = {
-      name: "education",
-      label: "Education",
-      nested: values.education,
+      name: "employment",
+      label: "Employment History",
+      nested: values.employment,
     };
     const nextResume = {
       ...resume,
       section: map(
-        (item) => (equals(item.name, "education") ? section : item),
+        (item) => (equals(item.name, "employment") ? section : item),
         resume.section
       ),
     };
     setResume(nextResume);
-    await router.push(`/resumes/${resume.id}`);
-    setIsPageLoading.off();
+    router.push(`/resumes/${resume.id}/education`);
   }
 
   if (isLoading) {
@@ -111,37 +109,39 @@ function Education() {
   return (
     <>
       <Head>
-        <title>Education | resumebuilder.dev</title>
+        <title>Employment | resumebuilder.dev</title>
       </Head>
       <Container paddingY="8" maxW="container.sm">
-        <Heading mb="4">{t("education")}</Heading>
-        <Text mb="4">{t("tell_us_about_your_educational_background")}</Text>
-        <StepsNavigation mb="4" currentPage="education" />
+        <Heading mb="4">{t("employment_history")}</Heading>
+        <Text mb="4">{t("tell_us_about_your_work_experience")}</Text>
+        <StepsNavigation mb="4" currentPage="employment" />
         <form onSubmit={form.handleSubmit(handleOnSubmit)}>
           {fields.map((field, index) => (
             <React.Fragment key={field.id}>
               <Grid mb="4" templateColumns="1fr 1fr" gap="4">
                 <GridItem colSpan={2}>
                   <FormControl>
-                    <FormLabel>{t("school")}</FormLabel>
+                    <FormLabel>{t("company")}</FormLabel>
                     <Input
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="education-title-input"
-                      {...form.register(`education.${index}.title` as const)}
+                      data-cy="employment-title-input"
+                      {...form.register(`employment.${index}.title` as const)}
                     />
                   </FormControl>
                 </GridItem>
                 <GridItem colSpan={2}>
                   <FormControl>
-                    <FormLabel>{t("degree")}</FormLabel>
+                    <FormLabel>{t("job_title")}</FormLabel>
                     <Input
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="education-subtitle-input"
-                      {...form.register(`education.${index}.subtitle` as const)}
+                      data-cy="employment-subtitle-input"
+                      {...form.register(
+                        `employment.${index}.subtitle` as const
+                      )}
                     />
                   </FormControl>
                 </GridItem>
@@ -152,9 +152,9 @@ function Education() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="education-start-date-input"
+                      data-cy="employment-start-date-input"
                       {...form.register(
-                        `education.${index}.startDate` as const
+                        `employment.${index}.startDate` as const
                       )}
                     />
                   </FormControl>
@@ -166,8 +166,8 @@ function Education() {
                       variant="filled"
                       size="sm"
                       borderRadius="md"
-                      data-cy="education-end-date-input"
-                      {...form.register(`education.${index}.endDate` as const)}
+                      data-cy="employment-end-date-input"
+                      {...form.register(`employment.${index}.endDate` as const)}
                     />
                   </FormControl>
                 </GridItem>
@@ -183,26 +183,30 @@ function Education() {
             leftIcon={<FiPlus />}
             onClick={() => append(defaultValues)}
           >
-            {t("add_one_more_education")}
+            {t("add_one_more_employment")}
           </Button>
           <Button
             as={motion.button}
-            isLoading={isPageLoading}
             size="sm"
             mb="2"
             width="full"
             colorScheme="blue"
             whileHover="mouseenter"
             type="submit"
-            data-cy="finish-button"
+            data-cy="next-button"
             rightIcon={
               <motion.div variants={ARROW_RIGHT_VARIANTS}>
                 <FiArrowRight />
               </motion.div>
             }
           >
-            {t("finish")}
+            {t("next")}
           </Button>
+          <Link href={`/resumes/${id}/education`} passHref>
+            <Button size="sm" width="full" variant="ghost">
+              {t("skip")}
+            </Button>
+          </Link>
         </form>
       </Container>
     </>
@@ -219,9 +223,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default,
+      messages: (await import(`../../../../messages/${locale}.json`)).default,
     },
   };
 }
 
-export default Education;
+export default Employment;

@@ -40,7 +40,7 @@ function Landing() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      messages: (await import(`../messages/${locale}.json`)).default,
+      messages: (await import(`../../messages/${locale}.json`)).default,
     },
   };
 }
