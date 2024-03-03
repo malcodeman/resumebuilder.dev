@@ -10,7 +10,7 @@ import {
   Center,
   useBoolean,
 } from "@chakra-ui/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { FiCheckCircle } from "react-icons/fi";
 import { useRouter } from "next/navigation";
@@ -25,14 +25,15 @@ function Hero() {
   const router = useRouter();
   const { resumes, createNew } = useResumes();
   const [isLoading, setIsLoading] = useBoolean();
+  const locale = useLocale();
 
   async function handleOnSubmit() {
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {
-      router.push(`/resumes/${resume.id}`);
+      router.push(`/${locale}/resumes/${resume.id}`);
     } else {
-      router.push(`/resumes/${resume.id}/about`);
+      router.push(`/${locale}/resumes/${resume.id}/about`);
     }
     setIsLoading.off();
   }

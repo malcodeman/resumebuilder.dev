@@ -7,7 +7,7 @@ function getResume(index = 0): Resume {
 }
 
 beforeEach(() => {
-  cy.visit("/resumes");
+  cy.visit("/en/resumes");
 });
 
 describe("Resumes page", () => {
@@ -39,7 +39,7 @@ describe("Resumes page", () => {
   });
   it("Start with templates button", () => {
     cy.get("[data-cy=start-with-templates]").click();
-    cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
+    cy.url().should("eq", `${Cypress.config().baseUrl}/en/templates`);
   });
   it("Search | Not found", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));

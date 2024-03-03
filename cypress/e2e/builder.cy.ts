@@ -13,7 +13,7 @@ function getResume(): Resume {
 
 beforeEach(() => {
   localStorage.setItem("resumes", JSON.stringify(resumes));
-  cy.visit(`/resumes/${resumes[0].id}`);
+  cy.visit(`/en/resumes/${resumes[0].id}`);
 });
 
 describe("Builder page", () => {
@@ -22,7 +22,7 @@ describe("Builder page", () => {
   });
   it("Go home", () => {
     cy.get("[data-cy=resumebuilder-text]").click();
-    cy.url().should("eq", `${Cypress.config().baseUrl}/resumes`);
+    cy.url().should("eq", `${Cypress.config().baseUrl}/en/resumes`);
   });
   it("Change icon", () => {
     cy.get("[data-cy=emoji-picker-icon-button]").click();
@@ -120,7 +120,7 @@ describe("Builder page", () => {
     cy.get("[data-cy=change-slug-button]").click();
     cy.get("[data-cy=slug-input]").clear().type("malcodeman");
     cy.get("[data-cy=change-button]").click();
-    cy.url().should("eq", `${Cypress.config().baseUrl}/resumes/malcodeman`);
+    cy.url().should("eq", `${Cypress.config().baseUrl}/en/resumes/malcodeman`);
   });
   it("Generate fake data | Hidden", () => {
     cy.get("[data-cy=more-button]").click();
@@ -140,7 +140,7 @@ describe("Builder page", () => {
         expect(JSON.parse(localStorage.getItem("resumes"))).to.have.length(0)
       );
     cy.contains("Resume deleted");
-    cy.url().should("eq", `${Cypress.config().baseUrl}/resumes`);
+    cy.url().should("eq", `${Cypress.config().baseUrl}/en/resumes`);
   });
   it("Import data", () => {
     cy.get("[data-cy=more-button]").click();

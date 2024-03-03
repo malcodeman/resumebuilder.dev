@@ -3,7 +3,7 @@ import { filter, includes, length } from "ramda";
 import { TEMPLATES_LIST } from "../../src/lib/constants";
 
 beforeEach(() => {
-  cy.visit("/templates");
+  cy.visit("/en/templates");
 });
 
 describe("Templates page", () => {

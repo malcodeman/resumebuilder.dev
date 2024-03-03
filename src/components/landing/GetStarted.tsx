@@ -13,7 +13,7 @@ import {
 import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
 import { length, map } from "ramda";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMediaQuery } from "@react-hookz/web";
 
@@ -48,14 +48,15 @@ function GetStarted() {
   const screenshotSource = isSmallDevice
     ? screenshotSourceDesktop
     : screenshotSourceMobile;
+  const locale = useLocale();
 
   function handleOnSubmit() {
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {
-      router.push(`/resumes/${resume.id}`);
+      router.push(`/${locale}/resumes/${resume.id}`);
     } else {
-      router.push(`/resumes/${resume.id}/about`);
+      router.push(`/${locale}/resumes/${resume.id}/about`);
     }
     setIsLoading.off();
   }

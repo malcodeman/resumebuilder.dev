@@ -5,7 +5,7 @@ beforeEach(() => {
 describe("Landing page", () => {
   it("Templates page", () => {
     cy.get("[data-cy=templates-text]").click();
-    cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
+    cy.url().should("eq", `${Cypress.config().baseUrl}/en/templates`);
   });
   it("Bosnian language", () => {
     cy.get("[data-cy=language-select]").select("bs");
@@ -21,7 +21,7 @@ describe("Landing page", () => {
       .should(() => {
         expect(JSON.parse(localStorage.getItem("view-dashboard"))).to.be.true;
       });
-    cy.url().should("eq", `${Cypress.config().baseUrl}/resumes`);
+    cy.url().should("eq", `${Cypress.config().baseUrl}/en/resumes`);
   });
   it("Build for free top button", () => {
     cy.intercept({
@@ -38,7 +38,7 @@ describe("Landing page", () => {
   });
   it("See all templates button", () => {
     cy.get("[data-cy=see-all-templates-button]").click();
-    cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
+    cy.url().should("eq", `${Cypress.config().baseUrl}/en/templates`);
   });
   it("Use berlin template", () => {
     cy.intercept({
