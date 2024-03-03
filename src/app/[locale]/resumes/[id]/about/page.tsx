@@ -21,13 +21,13 @@ import { useTranslations } from "next-intl";
 import { FiArrowRight, FiMail, FiPhone } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { isNil } from "ramda";
 
 import useResume from "../../../../../hooks/useResume";
 
 import NotFound from "../../../../../components/misc/NotFound";
 import StepsNavigation from "../../../../../components/builder/StepsNavigation";
+import { Link } from "../../../../../navigation";
 
 import { AboutField } from "../../../../../types";
 

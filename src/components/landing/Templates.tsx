@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import {
   Heading,
   Button,
@@ -21,6 +20,7 @@ import { Template as TemplateType } from "../../types";
 import useResumes from "../../hooks/useResumes";
 
 import Template from "../templates/Template";
+import { Link } from "../../navigation";
 
 const ARROW_RIGHT_VARIANTS = {
   mouseenter: { x: 5 },

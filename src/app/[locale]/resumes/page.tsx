@@ -45,7 +45,6 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import { formatDistanceToNow } from "date-fns";
-import Link from "next/link";
 import { createColumnHelper, VisibilityState } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 
@@ -65,6 +64,7 @@ import DeleteResumeMenuItem from "../../../components/resumes/DeleteResumeMenuIt
 import CreateNewResumeButtonGroup from "../../../components/resumes/CreateNewResumeButtonGroup";
 import CopyLinkMenuItem from "../../../components/resumes/CopyLinkMenuItem";
 import ResumeTitleColumn from "../../../components/resumes/ResumeTitleColumn";
+import { Link } from "../../../navigation";
 
 function ResumeGrid() {
   const t = useTranslations();

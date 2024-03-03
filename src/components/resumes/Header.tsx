@@ -7,7 +7,6 @@ import {
   Avatar,
   useColorModeValue,
 } from "@chakra-ui/react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useNetworkState } from "@react-hookz/web";
 
@@ -19,6 +18,7 @@ import NavLink from "../misc/NavLink";
 import LanguageSelect from "../misc/LanguageSelect";
 import UserMenu from "./UserMenu";
 import OfflineTag from "../misc/OfflineTag";
+import { Link } from "../../navigation";
 
 function Header() {
   const t = useTranslations();

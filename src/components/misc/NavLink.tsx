@@ -1,7 +1,8 @@
 import { Link, SpaceProps } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { equals } from "ramda";
 import { usePathname } from "next/navigation";
+
+import { Link as NextLink } from "../../navigation";
 
 type props = {
   href: string;
