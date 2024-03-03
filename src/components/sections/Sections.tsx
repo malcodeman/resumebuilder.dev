@@ -17,9 +17,9 @@ import { useMediaQuery } from "@react-hookz/web";
 import { findIndex, propEq, isEmpty, find, equals } from "ramda";
 import { useTranslations } from "next-intl";
 
-import PersonalDetailsSection from "../../components/sections/PersonalDetailsSection";
-import TagListSection from "../../components/sections/TagListSection";
-import StandardSection from "../../components/sections/StandardSection";
+import PersonalDetailsSection from "./PersonalDetailsSection";
+import TagListSection from "./TagListSection";
+import StandardSection from "./StandardSection";
 import AddSectionModal from "./AddSectionModal";
 import DraggableItem from "./DraggableItem";
 
