@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { FiLayers, FiPlus, FiUpload } from "react-icons/fi";
 import { map } from "ramda";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 

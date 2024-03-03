@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
@@ -19,16 +20,16 @@ import {
 import { useTranslations } from "next-intl";
 import { FiArrowRight, FiMail, FiPhone } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { isNil } from "ramda";
 
-import useResume from "../../../hooks/useResume";
+import useResume from "../../../../../hooks/useResume";
 
-import NotFound from "../../../components/misc/NotFound";
-import StepsNavigation from "../../../components/builder/StepsNavigation";
+import NotFound from "../../../../../components/misc/NotFound";
+import StepsNavigation from "../../../../../components/builder/StepsNavigation";
 
-import { AboutField } from "../../../types";
+import { AboutField } from "../../../../../types";
 
 const ARROW_RIGHT_VARIANTS = {
   mouseenter: { x: 5 },
@@ -206,21 +207,6 @@ function About() {
       </Container>
     </>
   );
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      messages: (await import(`../../../../messages/${locale}.json`)).default,
-    },
-  };
 }
 
 export default About;

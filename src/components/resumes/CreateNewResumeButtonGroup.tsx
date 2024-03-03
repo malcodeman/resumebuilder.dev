@@ -11,7 +11,7 @@ import {
   useDisclosure,
   useBoolean,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
 import { FiPlus, FiUpload } from "react-icons/fi";
 import { useTranslations } from "next-intl";
@@ -42,10 +42,10 @@ function NewButton() {
     { event: "keyup" }
   );
 
-  async function handleOnCreateNew() {
+  function handleOnCreateNew() {
     setIsLoading.on();
     const resume = createNew();
-    await router.push(`/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
     setIsLoading.off();
   }
 

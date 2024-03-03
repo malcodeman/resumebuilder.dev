@@ -1,10 +1,11 @@
+"use client";
 import Head from "next/head";
 import { Text, Heading, Container, Avatar, Box } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 
-import Layout from "../components/Layout";
-import Footer from "../components/misc/Footer";
-import Stats from "../components/about/Stats";
+import Layout from "../../../components/Layout";
+import Footer from "../../../components/misc/Footer";
+import Stats from "../../../components/about/Stats";
 
 const DESCRIPTION =
   "Learn more about us, what we stand for, and where we're going.";
@@ -39,14 +40,6 @@ function About() {
       </Layout>
     </>
   );
-}
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      messages: (await import(`../../messages/${locale}.json`)).default,
-    },
-  };
 }
 
 export default About;

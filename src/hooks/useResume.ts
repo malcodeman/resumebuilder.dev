@@ -1,5 +1,5 @@
 import { useLocalStorageValue } from "@react-hookz/web";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { isNil, find, map, filter, equals, or, clone, isEmpty } from "ramda";
 import { nanoid } from "nanoid";
 
@@ -19,8 +19,8 @@ function useResume(props: props = {}) {
     storeDefaultValue = false,
     initializeWithStorageValue = false,
   } = props;
-  const router = useRouter();
-  const { id } = router.query;
+  const searchParams = useSearchParams();
+  const id = searchParams?.get("id");
   const [resumes, setResumes] = useLocalStorageValue<Resume[] | null>(
     "resumes",
     [],

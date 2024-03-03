@@ -29,7 +29,7 @@ import {
   FiCopy,
   FiCheck,
 } from "react-icons/fi";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { equals, isNil, or } from "ramda";
 import { formatDistanceToNow } from "date-fns";
 import { useFormContext, useWatch } from "react-hook-form";

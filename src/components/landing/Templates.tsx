@@ -12,7 +12,7 @@ import { map, slice, equals } from "ramda";
 import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import { TEMPLATES_LIST, DEFAULT_VALUES } from "../../lib/constants";
 
@@ -38,14 +38,14 @@ function Templates() {
   const { createNew } = useResumes();
   const [isLoading, setIsLoading] = React.useState<TemplateType>(null);
 
-  async function handleOnSubmit(template: TemplateType) {
+  function handleOnSubmit(template: TemplateType) {
     setIsLoading(template);
     const design = {
       ...DEFAULT_VALUES.design,
       template,
     };
     const resume = createNew({ design });
-    await router.push(`/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
     setIsLoading(null);
   }
 

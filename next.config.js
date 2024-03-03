@@ -1,6 +1,3 @@
-const i18n = {
-  defaultLocale: "en",
-  locales: ["bs", "de", "en"],
-};
+const withNextIntl = require("next-intl/plugin")();
 
-module.exports = { i18n };
+module.exports = withNextIntl();

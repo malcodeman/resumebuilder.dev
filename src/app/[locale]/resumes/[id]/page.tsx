@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Head from "next/head";
 import {
@@ -16,20 +17,20 @@ import { isNil } from "ramda";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import { useTranslations } from "next-intl";
 
-import Sections from "../../../components/sections/Sections";
-import Header from "../../../components/builder/Header";
-import HeaderMobile from "../../../components/builder/HeaderMobile";
-import Document from "../../../components/builder/Document";
-import NotFound from "../../../components/misc/NotFound";
-import TemplatesTabPanel from "../../../components/builder/TemplatesTabPanel";
-import Preview from "../../../components/builder/Preview";
+import Sections from "../../../../components/sections/Sections";
+import Header from "../../../../components/builder/Header";
+import HeaderMobile from "../../../../components/builder/HeaderMobile";
+import Document from "../../../../components/builder/Document";
+import NotFound from "../../../../components/misc/NotFound";
+import TemplatesTabPanel from "../../../../components/builder/TemplatesTabPanel";
+import Preview from "../../../../components/builder/Preview";
 
-import useResume from "../../../hooks/useResume";
-import useAutoSaveToast from "../../../hooks/useAutoSaveToast";
-import useLocalStorage from "../../../hooks/useLocalStorage";
-import utils from "../../../lib/utils";
+import useResume from "../../../../hooks/useResume";
+import useAutoSaveToast from "../../../../hooks/useAutoSaveToast";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
+import utils from "../../../../lib/utils";
 
-import { Resume, Template } from "../../../types";
+import { Resume, Template } from "../../../../types";
 
 function Builder() {
   const t = useTranslations();
@@ -131,21 +132,6 @@ function Builder() {
       {isLargeDevice ? null : <HeaderMobile form={form} />}
     </>
   );
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      messages: (await import(`../../../../messages/${locale}.json`)).default,
-    },
-  };
 }
 
 export default Builder;

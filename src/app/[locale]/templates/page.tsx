@@ -1,25 +1,26 @@
+"use client";
 import React from "react";
 import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
 import { useTranslations } from "next-intl";
 
-import Layout from "../components/Layout";
+import Layout from "../../../components/Layout";
 
 import {
   DEFAULT_VALUES,
   TEMPLATES_LIST,
   TEMPLATES_FILTERS,
-} from "../lib/constants";
+} from "../../../lib/constants";
 
-import { Template as TemplateType } from "../types";
+import { Template as TemplateType } from "../../../types";
 
-import SearchInput from "../components/misc/SearchInput";
-import Template from "../components/templates/Template";
-import Footer from "../components/misc/Footer";
+import SearchInput from "../../../components/misc/SearchInput";
+import Template from "../../../components/templates/Template";
+import Footer from "../../../components/misc/Footer";
 
-import useResumes from "../hooks/useResumes";
+import useResumes from "../../../hooks/useResumes";
 
 function Templates() {
   const t = useTranslations();
@@ -39,14 +40,14 @@ function Templates() {
     filteredTemplatesByTags
   );
 
-  async function handleOnUseTemplate(template: TemplateType) {
+  function handleOnUseTemplate(template: TemplateType) {
     setIsLoading(template);
     const design = {
       ...DEFAULT_VALUES.design,
       template,
     };
     const resume = createNew({ design });
-    await router.push(`/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
     setIsLoading(null);
   }
 
@@ -108,14 +109,6 @@ function Templates() {
       </Layout>
     </>
   );
-}
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      messages: (await import(`../../messages/${locale}.json`)).default,
-    },
-  };
 }
 
 export default Templates;
