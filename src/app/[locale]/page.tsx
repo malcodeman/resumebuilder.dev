@@ -1,5 +1,4 @@
 "use client";
-import Head from "next/head";
 import { useMountEffect } from "@react-hookz/web";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -21,20 +20,15 @@ function Landing() {
   });
 
   return (
-    <>
-      <Head>
-        <title>Free Resume Builder for Developers | resumebuilder.dev</title>
-      </Head>
-      <Layout>
-        <Hero />
-        <Templates />
-        <Features />
-        <Builder />
-        <Faq />
-        <GetStarted />
-        <Footer />
-      </Layout>
-    </>
+    <Layout>
+      <Hero />
+      <Templates />
+      <Features />
+      <Builder />
+      <Faq />
+      <GetStarted />
+      <Footer />
+    </Layout>
   );
 }
 

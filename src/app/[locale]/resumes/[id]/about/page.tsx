@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Head from "next/head";
 import { useForm } from "react-hook-form";
 import {
   Button,
@@ -79,133 +78,123 @@ function About() {
 
   if (isNil(resume)) {
     return (
-      <>
-        <Head>
-          <title>Resume not found | resumebuilder.dev</title>
-        </Head>
-        <NotFound description={t("resume_404_description")} link="/resumes" />
-      </>
+      <NotFound description={t("resume_404_description")} link="/resumes" />
     );
   }
 
   return (
-    <>
-      <Head>
-        <title>About | resumebuilder.dev</title>
-      </Head>
-      <Container paddingY="8" maxW="container.sm">
-        <Heading mb="4">{t("personal_details")}</Heading>
-        <Text>{t("tell_us_about_yourself")}</Text>
-        <Text mb="4">{t("you_will_be_able_to_edit_this_later")}</Text>
-        <StepsNavigation mb="4" currentPage="about" />
-        <form onSubmit={form.handleSubmit(handleOnSubmit)}>
-          <Grid mb="16" templateColumns="1fr 1fr" gap="4">
-            <GridItem colSpan={{ base: 2, md: 1 }}>
-              <FormControl>
-                <FormLabel>{t("first_name")}</FormLabel>
+    <Container paddingY="8" maxW="container.sm">
+      <Heading mb="4">{t("personal_details")}</Heading>
+      <Text>{t("tell_us_about_yourself")}</Text>
+      <Text mb="4">{t("you_will_be_able_to_edit_this_later")}</Text>
+      <StepsNavigation mb="4" currentPage="about" />
+      <form onSubmit={form.handleSubmit(handleOnSubmit)}>
+        <Grid mb="16" templateColumns="1fr 1fr" gap="4">
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>{t("first_name")}</FormLabel>
+              <Input
+                variant="filled"
+                size="sm"
+                borderRadius="md"
+                data-cy="first-name-input"
+                {...form.register("firstName")}
+              />
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>{t("last_name")}</FormLabel>
+              <Input
+                variant="filled"
+                size="sm"
+                borderRadius="md"
+                data-cy="last-name-input"
+                {...form.register("lastName")}
+              />
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <InputGroup size="sm">
+                <InputLeftElement>
+                  <FiMail />
+                </InputLeftElement>
                 <Input
                   variant="filled"
-                  size="sm"
                   borderRadius="md"
-                  data-cy="first-name-input"
-                  {...form.register("firstName")}
+                  data-cy="email-input"
+                  {...form.register("email")}
                 />
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={{ base: 2, md: 1 }}>
-              <FormControl>
-                <FormLabel>{t("last_name")}</FormLabel>
+              </InputGroup>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>{t("phone")}</FormLabel>
+              <InputGroup size="sm">
+                <InputLeftElement>
+                  <FiPhone />
+                </InputLeftElement>
                 <Input
                   variant="filled"
-                  size="sm"
                   borderRadius="md"
-                  data-cy="last-name-input"
-                  {...form.register("lastName")}
+                  data-cy="phone-input"
+                  {...form.register("phone")}
                 />
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={{ base: 2, md: 1 }}>
-              <FormControl>
-                <FormLabel>Email</FormLabel>
-                <InputGroup size="sm">
-                  <InputLeftElement>
-                    <FiMail />
-                  </InputLeftElement>
-                  <Input
-                    variant="filled"
-                    borderRadius="md"
-                    data-cy="email-input"
-                    {...form.register("email")}
-                  />
-                </InputGroup>
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={{ base: 2, md: 1 }}>
-              <FormControl>
-                <FormLabel>{t("phone")}</FormLabel>
-                <InputGroup size="sm">
-                  <InputLeftElement>
-                    <FiPhone />
-                  </InputLeftElement>
-                  <Input
-                    variant="filled"
-                    borderRadius="md"
-                    data-cy="phone-input"
-                    {...form.register("phone")}
-                  />
-                </InputGroup>
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={{ base: 2, md: 1 }}>
-              <FormControl>
-                <FormLabel>{t("city")}</FormLabel>
-                <Input
-                  variant="filled"
-                  size="sm"
-                  borderRadius="md"
-                  data-cy="city-input"
-                  {...form.register("city")}
-                />
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={{ base: 2, md: 1 }}>
-              <FormControl>
-                <FormLabel>{t("country")}</FormLabel>
-                <Input
-                  variant="filled"
-                  size="sm"
-                  borderRadius="md"
-                  data-cy="country-input"
-                  {...form.register("country")}
-                />
-              </FormControl>
-            </GridItem>
-          </Grid>
-          <Button
-            as={motion.button}
-            size="sm"
-            mb="2"
-            width="full"
-            colorScheme="blue"
-            whileHover="mouseenter"
-            type="submit"
-            data-cy="next-button"
-            rightIcon={
-              <motion.div variants={ARROW_RIGHT_VARIANTS}>
-                <FiArrowRight />
-              </motion.div>
-            }
-          >
-            {t("next")}
+              </InputGroup>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>{t("city")}</FormLabel>
+              <Input
+                variant="filled"
+                size="sm"
+                borderRadius="md"
+                data-cy="city-input"
+                {...form.register("city")}
+              />
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={{ base: 2, md: 1 }}>
+            <FormControl>
+              <FormLabel>{t("country")}</FormLabel>
+              <Input
+                variant="filled"
+                size="sm"
+                borderRadius="md"
+                data-cy="country-input"
+                {...form.register("country")}
+              />
+            </FormControl>
+          </GridItem>
+        </Grid>
+        <Button
+          as={motion.button}
+          size="sm"
+          mb="2"
+          width="full"
+          colorScheme="blue"
+          whileHover="mouseenter"
+          type="submit"
+          data-cy="next-button"
+          rightIcon={
+            <motion.div variants={ARROW_RIGHT_VARIANTS}>
+              <FiArrowRight />
+            </motion.div>
+          }
+        >
+          {t("next")}
+        </Button>
+        <Link href={`/resumes/${id}/employment`} passHref>
+          <Button size="sm" width="full" variant="ghost">
+            {t("skip")}
           </Button>
-          <Link href={`/resumes/${id}/employment`} passHref>
-            <Button size="sm" width="full" variant="ghost">
-              {t("skip")}
-            </Button>
-          </Link>
-        </form>
-      </Container>
-    </>
+        </Link>
+      </form>
+    </Container>
   );
 }
 

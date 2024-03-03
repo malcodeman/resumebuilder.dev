@@ -351,7 +351,7 @@ describe("Builder page", () => {
       method: "GET",
       url: "**/resumes/**",
     }).as("getResume");
-    cy.visit(`/resumes/${getResume().id}/about`);
+    cy.visit(`/en/resumes/${getResume().id}/about`);
 
     const firstName = faker.name.firstName();
     const lastName = faker.name.lastName();

@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Head from "next/head";
 import { useForm, useFieldArray } from "react-hook-form";
 import {
   Button,
@@ -100,113 +99,101 @@ function Education() {
 
   if (isNil(resume)) {
     return (
-      <>
-        <Head>
-          <title>Resume not found | resumebuilder.dev</title>
-        </Head>
-        <NotFound description={t("resume_404_description")} link="/resumes" />
-      </>
+      <NotFound description={t("resume_404_description")} link="/resumes" />
     );
   }
 
   return (
-    <>
-      <Head>
-        <title>Education | resumebuilder.dev</title>
-      </Head>
-      <Container paddingY="8" maxW="container.sm">
-        <Heading mb="4">{t("education")}</Heading>
-        <Text mb="4">{t("tell_us_about_your_educational_background")}</Text>
-        <StepsNavigation mb="4" currentPage="education" />
-        <form onSubmit={form.handleSubmit(handleOnSubmit)}>
-          {fields.map((field, index) => (
-            <React.Fragment key={field.id}>
-              <Grid mb="4" templateColumns="1fr 1fr" gap="4">
-                <GridItem colSpan={2}>
-                  <FormControl>
-                    <FormLabel>{t("school")}</FormLabel>
-                    <Input
-                      variant="filled"
-                      size="sm"
-                      borderRadius="md"
-                      data-cy="education-title-input"
-                      {...form.register(`education.${index}.title` as const)}
-                    />
-                  </FormControl>
-                </GridItem>
-                <GridItem colSpan={2}>
-                  <FormControl>
-                    <FormLabel>{t("degree")}</FormLabel>
-                    <Input
-                      variant="filled"
-                      size="sm"
-                      borderRadius="md"
-                      data-cy="education-subtitle-input"
-                      {...form.register(`education.${index}.subtitle` as const)}
-                    />
-                  </FormControl>
-                </GridItem>
-                <GridItem colSpan={{ base: 2, md: 1 }}>
-                  <FormControl>
-                    <FormLabel>{t("start_date")}</FormLabel>
-                    <Input
-                      variant="filled"
-                      size="sm"
-                      borderRadius="md"
-                      data-cy="education-start-date-input"
-                      {...form.register(
-                        `education.${index}.startDate` as const
-                      )}
-                    />
-                  </FormControl>
-                </GridItem>
-                <GridItem colSpan={{ base: 2, md: 1 }}>
-                  <FormControl>
-                    <FormLabel>{t("end_date")}</FormLabel>
-                    <Input
-                      variant="filled"
-                      size="sm"
-                      borderRadius="md"
-                      data-cy="education-end-date-input"
-                      {...form.register(`education.${index}.endDate` as const)}
-                    />
-                  </FormControl>
-                </GridItem>
-              </Grid>
-              {index < length(fields) - 1 ? <Divider marginY="2" /> : null}
-            </React.Fragment>
-          ))}
-          <Button
-            mb="16"
-            size="sm"
-            width="100%"
-            variant="ghost"
-            leftIcon={<FiPlus />}
-            onClick={() => append(defaultValues)}
-          >
-            {t("add_one_more_education")}
-          </Button>
-          <Button
-            as={motion.button}
-            isLoading={isPageLoading}
-            size="sm"
-            mb="2"
-            width="full"
-            colorScheme="blue"
-            whileHover="mouseenter"
-            type="submit"
-            data-cy="finish-button"
-            rightIcon={
-              <motion.div variants={ARROW_RIGHT_VARIANTS}>
-                <FiArrowRight />
-              </motion.div>
-            }
-          >
-            {t("finish")}
-          </Button>
-        </form>
-      </Container>
-    </>
+    <Container paddingY="8" maxW="container.sm">
+      <Heading mb="4">{t("education")}</Heading>
+      <Text mb="4">{t("tell_us_about_your_educational_background")}</Text>
+      <StepsNavigation mb="4" currentPage="education" />
+      <form onSubmit={form.handleSubmit(handleOnSubmit)}>
+        {fields.map((field, index) => (
+          <React.Fragment key={field.id}>
+            <Grid mb="4" templateColumns="1fr 1fr" gap="4">
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <FormLabel>{t("school")}</FormLabel>
+                  <Input
+                    variant="filled"
+                    size="sm"
+                    borderRadius="md"
+                    data-cy="education-title-input"
+                    {...form.register(`education.${index}.title` as const)}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <FormLabel>{t("degree")}</FormLabel>
+                  <Input
+                    variant="filled"
+                    size="sm"
+                    borderRadius="md"
+                    data-cy="education-subtitle-input"
+                    {...form.register(`education.${index}.subtitle` as const)}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={{ base: 2, md: 1 }}>
+                <FormControl>
+                  <FormLabel>{t("start_date")}</FormLabel>
+                  <Input
+                    variant="filled"
+                    size="sm"
+                    borderRadius="md"
+                    data-cy="education-start-date-input"
+                    {...form.register(`education.${index}.startDate` as const)}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={{ base: 2, md: 1 }}>
+                <FormControl>
+                  <FormLabel>{t("end_date")}</FormLabel>
+                  <Input
+                    variant="filled"
+                    size="sm"
+                    borderRadius="md"
+                    data-cy="education-end-date-input"
+                    {...form.register(`education.${index}.endDate` as const)}
+                  />
+                </FormControl>
+              </GridItem>
+            </Grid>
+            {index < length(fields) - 1 ? <Divider marginY="2" /> : null}
+          </React.Fragment>
+        ))}
+        <Button
+          mb="16"
+          size="sm"
+          width="100%"
+          variant="ghost"
+          leftIcon={<FiPlus />}
+          onClick={() => append(defaultValues)}
+        >
+          {t("add_one_more_education")}
+        </Button>
+        <Button
+          as={motion.button}
+          isLoading={isPageLoading}
+          size="sm"
+          mb="2"
+          width="full"
+          colorScheme="blue"
+          whileHover="mouseenter"
+          type="submit"
+          data-cy="finish-button"
+          rightIcon={
+            <motion.div variants={ARROW_RIGHT_VARIANTS}>
+              <FiArrowRight />
+            </motion.div>
+          }
+        >
+          {t("finish")}
+        </Button>
+      </form>
+    </Container>
   );
 }
 

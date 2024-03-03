@@ -324,10 +324,11 @@ function DeleteResume() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { remove } = useResume({ isolated: true });
   const toast = useToast();
+  const locale = useLocale();
 
   function handleOnDelete() {
     remove();
-    router.push("/resumes");
+    router.push(`/${locale}/resumes`);
     toast({
       description: t("resume_deleted"),
       isClosable: true,

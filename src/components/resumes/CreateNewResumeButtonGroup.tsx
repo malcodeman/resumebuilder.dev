@@ -14,7 +14,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
 import { FiPlus, FiUpload } from "react-icons/fi";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { equals } from "ramda";
 
 import { Fields } from "../../types";
@@ -29,6 +29,7 @@ function NewButton() {
   const { createNew } = useResumes();
   const isMediumDevice = useMediaQuery("(min-width: 30em)");
   const [isLoading, setIsLoading] = useBoolean();
+  const locale = useLocale();
 
   useKeyboardEvent(
     "n",
@@ -45,7 +46,7 @@ function NewButton() {
   function handleOnCreateNew() {
     setIsLoading.on();
     const resume = createNew();
-    router.push(`/resumes/${resume.id}`);
+    router.push(`/${locale}/resumes/${resume.id}`);
     setIsLoading.off();
   }
 

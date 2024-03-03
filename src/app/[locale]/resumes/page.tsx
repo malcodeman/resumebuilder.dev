@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Head from "next/head";
 import {
   Flex,
   Button,
@@ -292,14 +291,9 @@ function Dashboard() {
   });
 
   return (
-    <>
-      <Head>
-        <title>Dashboard | resumebuilder.dev</title>
-      </Head>
-      <Layout>
-        <ResumeGrid />
-      </Layout>
-    </>
+    <Layout>
+      <ResumeGrid />
+    </Layout>
   );
 }
 

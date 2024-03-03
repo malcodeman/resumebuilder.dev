@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Head from "next/head";
 import { useForm, useFieldArray } from "react-hook-form";
 import {
   Button,
@@ -98,119 +97,105 @@ function Employment() {
 
   if (isNil(resume)) {
     return (
-      <>
-        <Head>
-          <title>Resume not found | resumebuilder.dev</title>
-        </Head>
-        <NotFound description={t("resume_404_description")} link="/resumes" />
-      </>
+      <NotFound description={t("resume_404_description")} link="/resumes" />
     );
   }
 
   return (
-    <>
-      <Head>
-        <title>Employment | resumebuilder.dev</title>
-      </Head>
-      <Container paddingY="8" maxW="container.sm">
-        <Heading mb="4">{t("employment_history")}</Heading>
-        <Text mb="4">{t("tell_us_about_your_work_experience")}</Text>
-        <StepsNavigation mb="4" currentPage="employment" />
-        <form onSubmit={form.handleSubmit(handleOnSubmit)}>
-          {fields.map((field, index) => (
-            <React.Fragment key={field.id}>
-              <Grid mb="4" templateColumns="1fr 1fr" gap="4">
-                <GridItem colSpan={2}>
-                  <FormControl>
-                    <FormLabel>{t("company")}</FormLabel>
-                    <Input
-                      variant="filled"
-                      size="sm"
-                      borderRadius="md"
-                      data-cy="employment-title-input"
-                      {...form.register(`employment.${index}.title` as const)}
-                    />
-                  </FormControl>
-                </GridItem>
-                <GridItem colSpan={2}>
-                  <FormControl>
-                    <FormLabel>{t("job_title")}</FormLabel>
-                    <Input
-                      variant="filled"
-                      size="sm"
-                      borderRadius="md"
-                      data-cy="employment-subtitle-input"
-                      {...form.register(
-                        `employment.${index}.subtitle` as const
-                      )}
-                    />
-                  </FormControl>
-                </GridItem>
-                <GridItem colSpan={{ base: 2, md: 1 }}>
-                  <FormControl>
-                    <FormLabel>{t("start_date")}</FormLabel>
-                    <Input
-                      variant="filled"
-                      size="sm"
-                      borderRadius="md"
-                      data-cy="employment-start-date-input"
-                      {...form.register(
-                        `employment.${index}.startDate` as const
-                      )}
-                    />
-                  </FormControl>
-                </GridItem>
-                <GridItem colSpan={{ base: 2, md: 1 }}>
-                  <FormControl>
-                    <FormLabel>{t("end_date")}</FormLabel>
-                    <Input
-                      variant="filled"
-                      size="sm"
-                      borderRadius="md"
-                      data-cy="employment-end-date-input"
-                      {...form.register(`employment.${index}.endDate` as const)}
-                    />
-                  </FormControl>
-                </GridItem>
-              </Grid>
-              {index < length(fields) - 1 ? <Divider marginY="2" /> : null}
-            </React.Fragment>
-          ))}
-          <Button
-            mb="16"
-            size="sm"
-            width="100%"
-            variant="ghost"
-            leftIcon={<FiPlus />}
-            onClick={() => append(defaultValues)}
-          >
-            {t("add_one_more_employment")}
+    <Container paddingY="8" maxW="container.sm">
+      <Heading mb="4">{t("employment_history")}</Heading>
+      <Text mb="4">{t("tell_us_about_your_work_experience")}</Text>
+      <StepsNavigation mb="4" currentPage="employment" />
+      <form onSubmit={form.handleSubmit(handleOnSubmit)}>
+        {fields.map((field, index) => (
+          <React.Fragment key={field.id}>
+            <Grid mb="4" templateColumns="1fr 1fr" gap="4">
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <FormLabel>{t("company")}</FormLabel>
+                  <Input
+                    variant="filled"
+                    size="sm"
+                    borderRadius="md"
+                    data-cy="employment-title-input"
+                    {...form.register(`employment.${index}.title` as const)}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <FormLabel>{t("job_title")}</FormLabel>
+                  <Input
+                    variant="filled"
+                    size="sm"
+                    borderRadius="md"
+                    data-cy="employment-subtitle-input"
+                    {...form.register(`employment.${index}.subtitle` as const)}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={{ base: 2, md: 1 }}>
+                <FormControl>
+                  <FormLabel>{t("start_date")}</FormLabel>
+                  <Input
+                    variant="filled"
+                    size="sm"
+                    borderRadius="md"
+                    data-cy="employment-start-date-input"
+                    {...form.register(`employment.${index}.startDate` as const)}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={{ base: 2, md: 1 }}>
+                <FormControl>
+                  <FormLabel>{t("end_date")}</FormLabel>
+                  <Input
+                    variant="filled"
+                    size="sm"
+                    borderRadius="md"
+                    data-cy="employment-end-date-input"
+                    {...form.register(`employment.${index}.endDate` as const)}
+                  />
+                </FormControl>
+              </GridItem>
+            </Grid>
+            {index < length(fields) - 1 ? <Divider marginY="2" /> : null}
+          </React.Fragment>
+        ))}
+        <Button
+          mb="16"
+          size="sm"
+          width="100%"
+          variant="ghost"
+          leftIcon={<FiPlus />}
+          onClick={() => append(defaultValues)}
+        >
+          {t("add_one_more_employment")}
+        </Button>
+        <Button
+          as={motion.button}
+          size="sm"
+          mb="2"
+          width="full"
+          colorScheme="blue"
+          whileHover="mouseenter"
+          type="submit"
+          data-cy="next-button"
+          rightIcon={
+            <motion.div variants={ARROW_RIGHT_VARIANTS}>
+              <FiArrowRight />
+            </motion.div>
+          }
+        >
+          {t("next")}
+        </Button>
+        <Link href={`/resumes/${id}/education`} passHref>
+          <Button size="sm" width="full" variant="ghost">
+            {t("skip")}
           </Button>
-          <Button
-            as={motion.button}
-            size="sm"
-            mb="2"
-            width="full"
-            colorScheme="blue"
-            whileHover="mouseenter"
-            type="submit"
-            data-cy="next-button"
-            rightIcon={
-              <motion.div variants={ARROW_RIGHT_VARIANTS}>
-                <FiArrowRight />
-              </motion.div>
-            }
-          >
-            {t("next")}
-          </Button>
-          <Link href={`/resumes/${id}/education`} passHref>
-            <Button size="sm" width="full" variant="ghost">
-              {t("skip")}
-            </Button>
-          </Link>
-        </form>
-      </Container>
-    </>
+        </Link>
+      </form>
+    </Container>
   );
 }
 

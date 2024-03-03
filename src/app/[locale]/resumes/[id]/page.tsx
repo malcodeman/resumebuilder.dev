@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import Head from "next/head";
+import React, { useEffect } from "react";
 import {
   Grid,
   Box,
@@ -49,6 +48,12 @@ function Builder() {
     setViewDashboard(true);
   });
 
+  useEffect(() => {
+    if (resume) {
+      document.title = `${resume.title} | resumebuilder.dev`;
+    }
+  }, [resume]);
+
   useAutoSaveToast({});
 
   function handleOnChangeTemplate(nextTemplate: Template) {
@@ -66,20 +71,12 @@ function Builder() {
 
   if (isNil(resume)) {
     return (
-      <>
-        <Head>
-          <title>Resume not found | resumebuilder.dev</title>
-        </Head>
-        <NotFound description={t("resume_404_description")} link="/resumes" />
-      </>
+      <NotFound description={t("resume_404_description")} link="/resumes" />
     );
   }
 
   return (
     <>
-      <Head>
-        <title>{resume.title} | resumebuilder.dev</title>
-      </Head>
       {isLargeDevice ? <Header form={form} /> : null}
       <Grid
         as="main"
