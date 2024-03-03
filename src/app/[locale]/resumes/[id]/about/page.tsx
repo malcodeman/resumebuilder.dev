@@ -16,7 +16,7 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { FiArrowRight, FiMail, FiPhone } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -52,6 +52,7 @@ function About() {
   const { resume, isLoading, setResume } = useResume();
   const router = useRouter();
   const id = resume?.id;
+  const locale = useLocale();
 
   React.useEffect(() => {
     if (resume) {
@@ -65,7 +66,7 @@ function About() {
       about,
     };
     setResume(nextResume);
-    router.push(`/resumes/${resume.id}/employment`);
+    router.push(`/${locale}/resumes/${resume.id}/employment`);
   }
 
   if (isLoading) {

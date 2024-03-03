@@ -10,7 +10,7 @@ import {
 import { map, slice, equals } from "ramda";
 import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 import { TEMPLATES_LIST, DEFAULT_VALUES } from "../../lib/constants";
@@ -37,6 +37,7 @@ function Templates() {
   const router = useRouter();
   const { createNew } = useResumes();
   const [isLoading, setIsLoading] = React.useState<TemplateType>(null);
+  const locale = useLocale();
 
   function handleOnSubmit(template: TemplateType) {
     setIsLoading(template);
@@ -45,7 +46,7 @@ function Templates() {
       template,
     };
     const resume = createNew({ design });
-    router.push(`/resumes/${resume.id}`);
+    router.push(`/${locale}/resumes/${resume.id}`);
     setIsLoading(null);
   }
 

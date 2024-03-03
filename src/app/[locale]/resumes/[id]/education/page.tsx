@@ -16,7 +16,7 @@ import {
   Text,
   useBoolean,
 } from "@chakra-ui/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -57,6 +57,7 @@ function Education() {
     name: "education",
   });
   const [isPageLoading, setIsPageLoading] = useBoolean();
+  const locale = useLocale();
 
   React.useEffect(() => {
     if (resume) {
@@ -85,7 +86,7 @@ function Education() {
       ),
     };
     setResume(nextResume);
-    router.push(`/resumes/${resume.id}`);
+    router.push(`/${locale}/resumes/${resume.id}`);
     setIsPageLoading.off();
   }
 

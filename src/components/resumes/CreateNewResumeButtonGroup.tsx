@@ -87,11 +87,12 @@ function ImportButton() {
   const router = useRouter();
   const { createNew } = useResumes();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const locale = useLocale();
 
   function onImport(fields: Fields) {
     const resume = createNew({ fields });
     onClose();
-    router.push(`/resumes/${resume.id}`);
+    router.push(`/${locale}/resumes/${resume.id}`);
   }
 
   return (

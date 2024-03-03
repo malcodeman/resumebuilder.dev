@@ -3,7 +3,7 @@ import React from "react";
 import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import Layout from "../../../components/Layout";
 
@@ -38,6 +38,7 @@ function Templates() {
     (item) => includes(toLower(template), toLower(item.title)),
     filteredTemplatesByTags
   );
+  const locale = useLocale();
 
   function handleOnUseTemplate(template: TemplateType) {
     setIsLoading(template);
@@ -46,7 +47,7 @@ function Templates() {
       template,
     };
     const resume = createNew({ design });
-    router.push(`/resumes/${resume.id}`);
+    router.push(`/${locale}/resumes/${resume.id}`);
     setIsLoading(null);
   }
 

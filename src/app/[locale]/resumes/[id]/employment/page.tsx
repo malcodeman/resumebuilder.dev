@@ -15,7 +15,7 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useParams, useRouter } from "next/navigation";
@@ -57,6 +57,7 @@ function Employment() {
     control: form.control,
     name: "employment",
   });
+  const locale = useLocale();
 
   React.useEffect(() => {
     if (resume) {
@@ -84,7 +85,7 @@ function Employment() {
       ),
     };
     setResume(nextResume);
-    router.push(`/resumes/${resume.id}/education`);
+    router.push(`/${locale}/resumes/${resume.id}/education`);
   }
 
   if (isLoading) {
