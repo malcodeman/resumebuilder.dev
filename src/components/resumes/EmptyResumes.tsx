@@ -53,7 +53,7 @@ function EmptyResumes() {
       headingTransKey: "start_with_templates",
       textTransKey: "start_with_templates_description",
       dataCy: "start-with-templates",
-      onClick: () => router.push(`/templates`),
+      onClick: () => router.push("templates"),
     },
   ];
 
