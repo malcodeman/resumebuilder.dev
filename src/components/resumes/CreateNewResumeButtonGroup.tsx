@@ -11,7 +11,6 @@ import {
   useDisclosure,
   useBoolean,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
 import { FiPlus, FiUpload } from "react-icons/fi";
 import { useLocale, useTranslations } from "next-intl";
@@ -22,6 +21,7 @@ import { Fields } from "../../types";
 import useResumes from "../../hooks/useResumes";
 
 import ImportDataModal from "./ImportDataModal";
+import { useRouter } from "../../navigation";
 
 function NewButton() {
   const t = useTranslations();
@@ -29,7 +29,6 @@ function NewButton() {
   const { createNew } = useResumes();
   const isMediumDevice = useMediaQuery("(min-width: 30em)");
   const [isLoading, setIsLoading] = useBoolean();
-  const locale = useLocale();
 
   useKeyboardEvent(
     "n",
@@ -46,7 +45,7 @@ function NewButton() {
   function handleOnCreateNew() {
     setIsLoading.on();
     const resume = createNew();
-    router.push(`/${locale}/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
     setIsLoading.off();
   }
 
@@ -87,12 +86,11 @@ function ImportButton() {
   const router = useRouter();
   const { createNew } = useResumes();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const locale = useLocale();
 
   function onImport(fields: Fields) {
     const resume = createNew({ fields });
     onClose();
-    router.push(`/${locale}/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
   }
 
   return (

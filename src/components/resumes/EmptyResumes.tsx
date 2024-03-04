@@ -8,15 +8,15 @@ import {
 } from "@chakra-ui/react";
 import { FiLayers, FiPlus, FiUpload } from "react-icons/fi";
 import { map } from "ramda";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import ImportDataModal from "./ImportDataModal";
 
 import { Fields } from "../../types";
 
 import useResumes from "../../hooks/useResumes";
+import { useRouter } from "../../navigation";
 
 function EmptyResumes() {
   const t = useTranslations();
@@ -30,7 +30,6 @@ function EmptyResumes() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const { createNew } = useResumes();
-  const locale = useLocale();
   const ITEMS = [
     {
       color: green,
@@ -54,19 +53,19 @@ function EmptyResumes() {
       headingTransKey: "start_with_templates",
       textTransKey: "start_with_templates_description",
       dataCy: "start-with-templates",
-      onClick: () => router.push(`/${locale}/templates`),
+      onClick: () => router.push(`/templates`),
     },
   ];
 
   function handleOnNew() {
     const resume = createNew();
-    router.push(`/${locale}/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
   }
 
   function handleOnImport(fields: Fields) {
     const resume = createNew({ fields });
     onClose();
-    router.push(`/${locale}/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
   }
 
   return (

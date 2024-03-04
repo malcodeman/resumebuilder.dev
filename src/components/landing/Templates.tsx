@@ -10,8 +10,7 @@ import {
 import { map, slice, equals } from "ramda";
 import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { TEMPLATES_LIST, DEFAULT_VALUES } from "../../lib/constants";
 
@@ -20,7 +19,7 @@ import { Template as TemplateType } from "../../types";
 import useResumes from "../../hooks/useResumes";
 
 import Template from "../templates/Template";
-import { Link } from "../../navigation";
+import { Link, useRouter } from "../../navigation";
 
 const ARROW_RIGHT_VARIANTS = {
   mouseenter: { x: 5 },
@@ -37,7 +36,6 @@ function Templates() {
   const router = useRouter();
   const { createNew } = useResumes();
   const [isLoading, setIsLoading] = React.useState<TemplateType>(null);
-  const locale = useLocale();
 
   function handleOnSubmit(template: TemplateType) {
     setIsLoading(template);
@@ -46,7 +44,7 @@ function Templates() {
       template,
     };
     const resume = createNew({ design });
-    router.push(`/${locale}/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
     setIsLoading(null);
   }
 

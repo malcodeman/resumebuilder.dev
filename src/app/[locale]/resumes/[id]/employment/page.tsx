@@ -15,17 +15,17 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { equals, find, isNil, length, map } from "ramda";
 
 import useResume from "../../../../../hooks/useResume";
 
 import NotFound from "../../../../../components/misc/NotFound";
 import StepsNavigation from "../../../../../components/builder/StepsNavigation";
-import { Link } from "../../../../../navigation";
+import { Link, useRouter } from "../../../../../navigation";
 
 import { NestedField, SectionField } from "../../../../../types";
 
@@ -57,7 +57,6 @@ function Employment() {
     control: form.control,
     name: "employment",
   });
-  const locale = useLocale();
 
   React.useEffect(() => {
     if (resume) {
@@ -85,7 +84,7 @@ function Employment() {
       ),
     };
     setResume(nextResume);
-    router.push(`/${locale}/resumes/${resume.id}/education`);
+    router.push(`/resumes/${resume.id}/education`);
   }
 
   if (isLoading) {

@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
 import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
 import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import Layout from "../../../components/Layout";
 
@@ -20,6 +19,7 @@ import Template from "../../../components/templates/Template";
 import Footer from "../../../components/misc/Footer";
 
 import useResumes from "../../../hooks/useResumes";
+import { useRouter } from "../../../navigation";
 
 function Templates() {
   const t = useTranslations();
@@ -38,7 +38,6 @@ function Templates() {
     (item) => includes(toLower(template), toLower(item.title)),
     filteredTemplatesByTags
   );
-  const locale = useLocale();
 
   function handleOnUseTemplate(template: TemplateType) {
     setIsLoading(template);
@@ -47,7 +46,7 @@ function Templates() {
       template,
     };
     const resume = createNew({ design });
-    router.push(`/${locale}/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
     setIsLoading(null);
   }
 

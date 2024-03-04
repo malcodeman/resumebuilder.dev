@@ -13,11 +13,11 @@ import {
 import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
 import { length, map } from "ramda";
-import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useMediaQuery } from "@react-hookz/web";
 
 import useResumes from "../../hooks/useResumes";
+import { useRouter } from "../../navigation";
 
 const LIST = [
   {
@@ -48,15 +48,14 @@ function GetStarted() {
   const screenshotSource = isSmallDevice
     ? screenshotSourceDesktop
     : screenshotSourceMobile;
-  const locale = useLocale();
 
   function handleOnSubmit() {
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {
-      router.push(`/${locale}/resumes/${resume.id}`);
+      router.push(`/resumes/${resume.id}`);
     } else {
-      router.push(`/${locale}/resumes/${resume.id}/about`);
+      router.push(`/resumes/${resume.id}/about`);
     }
     setIsLoading.off();
   }

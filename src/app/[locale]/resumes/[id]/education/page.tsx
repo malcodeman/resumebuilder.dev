@@ -16,16 +16,16 @@ import {
   Text,
   useBoolean,
 } from "@chakra-ui/react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import { equals, find, isNil, length, map } from "ramda";
 
 import useResume from "../../../../../hooks/useResume";
 
 import NotFound from "../../../../../components/misc/NotFound";
 import StepsNavigation from "../../../../../components/builder/StepsNavigation";
+import { useRouter } from "../../../../../navigation";
 
 import { NestedField, SectionField } from "../../../../../types";
 
@@ -57,7 +57,6 @@ function Education() {
     name: "education",
   });
   const [isPageLoading, setIsPageLoading] = useBoolean();
-  const locale = useLocale();
 
   React.useEffect(() => {
     if (resume) {
@@ -86,7 +85,7 @@ function Education() {
       ),
     };
     setResume(nextResume);
-    router.push(`/${locale}/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
     setIsPageLoading.off();
   }
 

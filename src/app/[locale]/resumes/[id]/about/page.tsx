@@ -16,17 +16,16 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { FiArrowRight, FiMail, FiPhone } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import { isNil } from "ramda";
 
 import useResume from "../../../../../hooks/useResume";
 
 import NotFound from "../../../../../components/misc/NotFound";
 import StepsNavigation from "../../../../../components/builder/StepsNavigation";
-import { Link } from "../../../../../navigation";
+import { Link, useRouter } from "../../../../../navigation";
 
 import { AboutField } from "../../../../../types";
 
@@ -52,7 +51,6 @@ function About() {
   const { resume, isLoading, setResume } = useResume();
   const router = useRouter();
   const id = resume?.id;
-  const locale = useLocale();
 
   React.useEffect(() => {
     if (resume) {
@@ -66,7 +64,7 @@ function About() {
       about,
     };
     setResume(nextResume);
-    router.push(`/${locale}/resumes/${resume.id}/employment`);
+    router.push(`/resumes/${resume.id}/employment`);
   }
 
   if (isLoading) {
