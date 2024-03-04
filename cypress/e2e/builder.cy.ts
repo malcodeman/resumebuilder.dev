@@ -384,7 +384,7 @@ describe("Builder page", () => {
     cy.wait("@getEmployment");
     cy.url().should(
       "eq",
-      `${Cypress.config().baseUrl}/resumes/${getResume().id}/employment`
+      `${Cypress.config().baseUrl}/en/resumes/${getResume().id}/employment`
     );
     cy.contains("Employment history");
 
