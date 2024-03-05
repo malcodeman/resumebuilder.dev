@@ -65,7 +65,7 @@ function Templates() {
             whileHover="mouseenter"
             variant="outline"
             mb="8"
-            data-cy="see-all-templates-button"
+            data-testid="see-all-templates-button"
             rightIcon={
               <motion.div variants={ARROW_RIGHT_VARIANTS}>
                 <FiArrowRight />

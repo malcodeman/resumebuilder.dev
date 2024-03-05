@@ -80,7 +80,7 @@ function FullWidth() {
         isChecked={isFullWidth}
         onChange={() => setIsFullWidth(!isFullWidth)}
         id="is-full-width"
-        data-cy="full-width-switch"
+        data-testid="full-width-switch"
       />
     </FormControl>
   );
@@ -110,7 +110,7 @@ function DarkMode() {
         isChecked={equals(colorMode, "dark")}
         onChange={toggleColorMode}
         id="is-dark-mode"
-        data-cy="dark-mode-switch"
+        data-testid="dark-mode-switch"
       />
     </FormControl>
   );
@@ -140,7 +140,7 @@ function PdfViewer() {
         isChecked={isPdfViewer}
         onChange={() => setIsPdfViewer(!isPdfViewer)}
         id="is-pdf-viewer"
-        data-cy="pdf-viewer-switch"
+        data-testid="pdf-viewer-switch"
       />
     </FormControl>
   );
@@ -172,7 +172,7 @@ function HideSensitiveData() {
         isChecked={hideSensitiveData}
         onChange={() => setHideSensitiveData(!hideSensitiveData)}
         id="hide-sensitive-data"
-        data-cy="hide-sensitive-data-switch"
+        data-testid="hide-sensitive-data-switch"
       />
     </FormControl>
   );
@@ -201,7 +201,7 @@ function DevTools() {
         isChecked={devTools}
         onChange={() => setDevTools(!devTools)}
         id="dev-tools"
-        data-cy="dev-tools-switch"
+        data-testid="dev-tools-switch"
       />
     </FormControl>
   );
@@ -225,7 +225,7 @@ function Duplicate() {
       size="sm"
       mb="2"
       justifyContent="flex-start"
-      data-cy="duplicate-button"
+      data-testid="duplicate-button"
       leftIcon={<FiCopy />}
       onClick={handleOnDuplicate}
     >
@@ -244,7 +244,7 @@ function CopyLink() {
       size="sm"
       mb="2"
       justifyContent="flex-start"
-      data-cy="copy-link-button"
+      data-testid="copy-link-button"
       leftIcon={hasCopied ? <FiCheck /> : <FiLink />}
       onClick={onCopy}
     >
@@ -281,7 +281,7 @@ function ChangeSlug() {
         size="sm"
         mb="2"
         justifyContent="flex-start"
-        data-cy="change-slug-button"
+        data-testid="change-slug-button"
         leftIcon={<FiEdit />}
         onClick={onOpen}
       >
@@ -305,7 +305,7 @@ function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
         size="sm"
         mb="2"
         justifyContent="flex-start"
-        data-cy="generate-fake-data-button"
+        data-testid="generate-fake-data-button"
         leftIcon={<FiDatabase />}
         onClick={() => onImport(utils.generateFakeResume())}
       >
@@ -336,7 +336,7 @@ function DeleteResume() {
       <Button
         size="sm"
         justifyContent="flex-start"
-        data-cy="delete-button"
+        data-testid="delete-button"
         leftIcon={<FiTrash2 />}
         onClick={onOpen}
       >
@@ -361,7 +361,7 @@ function ImportData(props: { onImport: (fields: Fields) => void }) {
         size="sm"
         mb="2"
         justifyContent="flex-start"
-        data-cy="import-button"
+        data-testid="import-button"
         leftIcon={<FiUpload />}
         onClick={onOpen}
       >
@@ -386,7 +386,7 @@ function ExportResume(props: {
       <Button
         size="sm"
         justifyContent="flex-start"
-        data-cy="export-button"
+        data-testid="export-button"
         leftIcon={<FiDownload />}
         onClick={onOpen}
       >
@@ -457,7 +457,7 @@ function HeaderPopover(props: props) {
               <PopoverTrigger>
                 <IconButton
                   size="sm"
-                  data-cy="more-button"
+                  data-testid="more-button"
                   aria-label={TOOLTIP_MORE_LABEL}
                   icon={<FiMoreHorizontal />}
                 />

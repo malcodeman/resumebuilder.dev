@@ -85,7 +85,7 @@ function EmptyResumes() {
               alignItems="center"
               flexDirection="column"
               boxShadow={boxShadow}
-              data-cy={item.dataCy}
+              data-testid={item.dataCy}
               onClick={item.onClick}
             >
               <Flex

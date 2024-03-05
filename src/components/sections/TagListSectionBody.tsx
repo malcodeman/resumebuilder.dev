@@ -102,7 +102,7 @@ function TagListSectionBody(props: props) {
                   <WrapItem
                     key={item.id}
                     cursor="pointer"
-                    data-cy="suggested-tags-wrap-item"
+                    data-testid="suggested-tags-wrap-item"
                     onClick={() => handleOnAddTag(item.value)}
                   >
                     <Tag>

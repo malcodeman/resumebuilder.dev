@@ -73,7 +73,7 @@ function Header(props: props) {
             size="sm"
             colorScheme="blue"
             onClick={handleOnExportAsPdf}
-            data-cy="header-export-pdf-button"
+            data-testid="header-export-pdf-button"
           >
             {t("export_pdf")}
           </Button>

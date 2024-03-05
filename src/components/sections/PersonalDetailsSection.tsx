@@ -48,7 +48,7 @@ function ProfilePicture() {
             width="full"
             leftIcon={<FiCamera />}
             onClick={onOpen}
-            data-cy="add-profile-picture-button"
+            data-testid="add-profile-picture-button"
           >
             {t("add_profile_picture")}
           </Button>
@@ -66,7 +66,7 @@ function ProfilePicture() {
                 width="full"
                 leftIcon={<FiEdit />}
                 onClick={onOpen}
-                data-cy="change-profile-picture-button"
+                data-testid="change-profile-picture-button"
               >
                 {t("change")}
               </Button>
@@ -74,7 +74,7 @@ function ProfilePicture() {
                 width="full"
                 leftIcon={<FiTrash2 />}
                 onClick={() => setProfilePicture("")}
-                data-cy="delete-profile-picture-button"
+                data-testid="delete-profile-picture-button"
               >
                 {t("delete")}
               </Button>
@@ -118,13 +118,13 @@ function Summary() {
             borderRadius="md"
             height="40"
             sx={utils.getScrollbarStyle()}
-            data-cy="about-summary-textarea"
+            data-testid="about-summary-textarea"
             {...register("about.summary")}
           />
           <FormHelperText
             cursor="pointer"
             onClick={phrasesModal.onOpen}
-            data-cy="add-pre-written-phrases-form-helper-text"
+            data-testid="add-pre-written-phrases-form-helper-text"
           >
             {t("add_pre_written_phrases")}
           </FormHelperText>
@@ -158,7 +158,7 @@ function PersonalDetailsSection() {
                 variant="filled"
                 size="sm"
                 borderRadius="md"
-                data-cy="about-title-input"
+                data-testid="about-title-input"
                 {...register("about.title")}
               />
             </FormControl>
@@ -170,7 +170,7 @@ function PersonalDetailsSection() {
                 variant="filled"
                 size="sm"
                 borderRadius="md"
-                data-cy="about-first-name-input"
+                data-testid="about-first-name-input"
                 {...register("about.firstName")}
               />
             </FormControl>
@@ -182,7 +182,7 @@ function PersonalDetailsSection() {
                 variant="filled"
                 size="sm"
                 borderRadius="md"
-                data-cy="about-last-name-input"
+                data-testid="about-last-name-input"
                 {...register("about.lastName")}
               />
             </FormControl>
@@ -198,7 +198,7 @@ function PersonalDetailsSection() {
                   type={hideSensitiveData ? "password" : "text"}
                   variant="filled"
                   borderRadius="md"
-                  data-cy="about-email-input"
+                  data-testid="about-email-input"
                   {...register("about.email")}
                 />
               </InputGroup>
@@ -215,7 +215,7 @@ function PersonalDetailsSection() {
                   type={hideSensitiveData ? "password" : "text"}
                   variant="filled"
                   borderRadius="md"
-                  data-cy="about-phone-input"
+                  data-testid="about-phone-input"
                   {...register("about.phone")}
                 />
               </InputGroup>
@@ -232,7 +232,7 @@ function PersonalDetailsSection() {
                   variant="filled"
                   size="sm"
                   borderRadius="md"
-                  data-cy="about-website-input"
+                  data-testid="about-website-input"
                   {...register("about.website")}
                 />
               </InputGroup>
@@ -245,7 +245,7 @@ function PersonalDetailsSection() {
                 variant="filled"
                 size="sm"
                 borderRadius="md"
-                data-cy="about-city-input"
+                data-testid="about-city-input"
                 {...register("about.city")}
               />
             </FormControl>
@@ -257,7 +257,7 @@ function PersonalDetailsSection() {
                 variant="filled"
                 size="sm"
                 borderRadius="md"
-                data-cy="about-country-input"
+                data-testid="about-country-input"
                 {...register("about.country")}
               />
             </FormControl>

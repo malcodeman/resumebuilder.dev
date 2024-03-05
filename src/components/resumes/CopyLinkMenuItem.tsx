@@ -27,7 +27,7 @@ function CopyLinkMenuItem(props: props) {
     <MenuItem
       icon={<FiLink />}
       onClick={handleOnCopyLink}
-      data-cy="copy-link-menu-item"
+      data-testid="copy-link-menu-item"
     >
       {t("copy_link")}
     </MenuItem>

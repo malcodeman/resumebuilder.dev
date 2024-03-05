@@ -75,7 +75,7 @@ function GetStarted() {
           colorScheme="blue"
           mb="4"
           isLoading={isLoading}
-          data-cy="build-for-free-bottom-button"
+          data-testid="build-for-free-bottom-button"
           onClick={() => handleOnSubmit()}
         >
           {t("build_for_free")}

@@ -50,7 +50,7 @@ function ImportFromPasteData(props: props) {
           <Textarea
             variant="filled"
             sx={utils.getScrollbarStyle()}
-            data-cy="data-textarea"
+            data-testid="data-textarea"
             {...form.register("data")}
           />
           <FormErrorMessage>
@@ -61,7 +61,7 @@ function ImportFromPasteData(props: props) {
           size="sm"
           colorScheme="blue"
           type="submit"
-          data-cy="import-button"
+          data-testid="import-button"
         >
           {t("import")}
         </Button>

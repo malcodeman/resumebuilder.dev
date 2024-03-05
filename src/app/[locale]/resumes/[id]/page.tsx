@@ -84,10 +84,10 @@ function Builder() {
       >
         <Tabs size="sm" paddingTop="8" overflowY="hidden" isFitted>
           <TabList>
-            <Tab data-cy="sections-tab">{t("sections")}</Tab>
-            <Tab data-cy="templates-tab">{t("templates")}</Tab>
+            <Tab data-testid="sections-tab">{t("sections")}</Tab>
+            <Tab data-testid="templates-tab">{t("templates")}</Tab>
             {isLargeDevice ? null : (
-              <Tab data-cy="preview-tab">{t("preview")}</Tab>
+              <Tab data-testid="preview-tab">{t("preview")}</Tab>
             )}
           </TabList>
           <TabPanels height="calc(100% - 31px)">

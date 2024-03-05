@@ -12,7 +12,9 @@
     "cypress:landing": "cypress run --spec cypress/e2e/landing.cy.ts",
     "cypress:resumes": "cypress run --spec cypress/e2e/resumes.cy.ts",
     "cypress:templates": "cypress run --spec cypress/e2e/templates.cy.ts",
-    "serve": "serve out"
+    "serve": "serve out",
+    "playwright:test": "playwright test",
+    "playwright:ui": "playwright test --ui"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
@@ -51,6 +53,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@playwright/test": "^1.42.1",
     "@types/emoji-mart": "^3.0.5",
     "@types/file-saver": "^2.0.2",
     "@types/keyboardjs": "^2.5.0",

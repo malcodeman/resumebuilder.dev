@@ -51,7 +51,7 @@ function Template(props: props) {
           size="sm"
           cursor="pointer"
           isLoading={isLoading}
-          data-cy="use-template-button"
+          data-testid="use-template-button"
           onClick={() => onUseTemplate(template.template)}
         >
           {t("use_template")}

@@ -26,15 +26,15 @@ function ResumeTitleColumn(props: props) {
         onSubmit={onChangeTitle}
         ml="2"
         maxW="256px"
-        data-cy="title-editable"
+        data-testid="title-editable"
       >
         <EditablePreview
           noOfLines={1}
           lineHeight="base"
-          data-cy="title-preview"
+          data-testid="title-preview"
           overflowWrap="anywhere"
         />
-        <EditableInput {...form.register("title")} data-cy="title-input" />
+        <EditableInput {...form.register("title")} data-testid="title-input" />
       </Editable>
     </Flex>
   );
