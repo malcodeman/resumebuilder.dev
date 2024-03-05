@@ -1,17 +1,14 @@
 import React from "react";
 import { and, isEmpty, split, or } from "ramda";
-
-import utils from "../lib/utils";
-
-import Text from "./components/Text";
-import Page from "./components/Page";
-import Box from "./components/Box";
-import Flex from "./components/Flex";
-import Link from "./components/Link";
-import Image from "./components/Image";
-import TemplateContext from "./components/TemplateContext";
-
-import { TemplateProps } from "../types";
+import utils from "lib/utils";
+import Text from "templates/components/Text";
+import Page from "templates/components/Page";
+import Box from "templates/components/Box";
+import Flex from "templates/components/Flex";
+import Link from "templates/components/Link";
+import Image from "templates/components/Image";
+import TemplateContext from "templates/components/TemplateContext";
+import { TemplateProps } from "types";
 
 function SectionLabel(props: { children: React.ReactNode }) {
   const { children } = props;

@@ -10,10 +10,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useTranslations } from "next-intl";
-
-import utils from "../../lib/utils";
-
-import { Fields } from "../../types";
+import utils from "lib/utils";
+import { Fields } from "types";
 
 type props = {
   onImport: (fields: Fields) => void;

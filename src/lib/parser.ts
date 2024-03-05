@@ -1,7 +1,6 @@
 import { map, join, split, uniq, filter, isNil, isEmpty, or } from "ramda";
 import papa from "papaparse";
-
-import { Fields } from "../types";
+import { Fields } from "types";
 
 function parseJsonResume(text: string) {
   const json = JSON.parse(text);

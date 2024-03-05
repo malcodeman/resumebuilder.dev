@@ -5,8 +5,7 @@ import {
   EditablePreview,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-
-import EmojiPicker from "../misc/EmojiPicker";
+import EmojiPicker from "components/misc/EmojiPicker";
 
 type props = {
   icon: string;

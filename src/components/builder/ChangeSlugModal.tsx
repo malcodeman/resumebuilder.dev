@@ -21,9 +21,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { and, or } from "ramda";
 import { useTranslations } from "next-intl";
-
-import useResume from "../../hooks/useResume";
-import useResumes from "../../hooks/useResumes";
+import useResume from "hooks/useResume";
+import useResumes from "hooks/useResumes";
 
 type props = {
   isOpen: boolean;

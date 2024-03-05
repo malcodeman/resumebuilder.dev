@@ -1,9 +1,7 @@
 import { Image as ReactPdfImage } from "@react-pdf/renderer";
-
-import useStyles from "../useStyles";
-import utils from "../../lib/utils";
-
-import { Style } from "../types";
+import useStyles from "templates/useStyles";
+import { Style } from "templates/types";
+import utils from "lib/utils";
 
 type props = Style & {
   src: string;

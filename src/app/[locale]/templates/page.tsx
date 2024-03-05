@@ -3,23 +3,18 @@ import React from "react";
 import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
 import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
 import { useTranslations } from "next-intl";
-
-import Layout from "../../../components/Layout";
-
+import Layout from "components/Layout";
 import {
   DEFAULT_VALUES,
   TEMPLATES_LIST,
   TEMPLATES_FILTERS,
-} from "../../../lib/constants";
-
-import { Template as TemplateType } from "../../../types";
-
-import SearchInput from "../../../components/misc/SearchInput";
-import Template from "../../../components/templates/Template";
-import Footer from "../../../components/misc/Footer";
-
-import useResumes from "../../../hooks/useResumes";
-import { useRouter } from "../../../navigation";
+} from "lib/constants";
+import { Template as TemplateType } from "types";
+import SearchInput from "components/misc/SearchInput";
+import Template from "components/templates/Template";
+import Footer from "components/misc/Footer";
+import useResumes from "hooks/useResumes";
+import { useRouter } from "navigation";
 
 function Templates() {
   const t = useTranslations();

@@ -16,16 +16,13 @@ import {
 import { isEmpty, map } from "ramda";
 import { FiChevronLeft } from "react-icons/fi";
 import { useTranslations } from "next-intl";
-
-import FileUploader from "../misc/FileUploader";
-import ImportFromGithub from "./importFromGithub";
-import ImportFromPasteData from "./ImportFromPasteData";
-import ImportFromLinkedin from "./ImportFromLinkedin";
-
-import parser from "../../lib/parser";
-import utils from "../../lib/utils";
-
-import { Fields } from "../../types";
+import FileUploader from "components/misc/FileUploader";
+import ImportFromGithub from "components/resumes/importFromGithub";
+import ImportFromPasteData from "components/resumes/ImportFromPasteData";
+import ImportFromLinkedin from "components/resumes/ImportFromLinkedin";
+import parser from "lib/parser";
+import utils from "lib/utils";
+import { Fields } from "types";
 
 type Props = {
   isOpen: boolean;

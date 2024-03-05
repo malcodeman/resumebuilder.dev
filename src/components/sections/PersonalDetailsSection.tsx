@@ -27,15 +27,13 @@ import {
 import { useFormContext, useWatch } from "react-hook-form";
 import { concat, replace, isEmpty } from "ramda";
 import { useTranslations } from "next-intl";
-
-import phrases from "../../lib/phrases";
-import utils from "../../lib/utils";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useProfilePicture from "../../hooks/useProfilePicture";
-
-import SectionHeader from "./SectionHeader";
-import PreWrittenPhrasesModal from "./PreWrittenPhrasesModal";
-import AddProfilePictureModal from "./AddProfilePictureModal";
+import phrases from "lib/phrases";
+import utils from "lib/utils";
+import useLocalStorage from "hooks/useLocalStorage";
+import useProfilePicture from "hooks/useProfilePicture";
+import SectionHeader from "components/sections/SectionHeader";
+import PreWrittenPhrasesModal from "components/sections/PreWrittenPhrasesModal";
+import AddProfilePictureModal from "components/sections/AddProfilePictureModal";
 
 function ProfilePicture() {
   const t = useTranslations();

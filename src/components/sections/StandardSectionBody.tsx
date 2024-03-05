@@ -18,14 +18,11 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { and, not, equals, replace, concat } from "ramda";
 import { useTranslations } from "next-intl";
-
-import { Section } from "../../types";
-
-import phrases from "../../lib/phrases";
-import utils from "../../lib/utils";
-
-import SectionHeader from "./SectionHeader";
-import PreWrittenPhrasesModal from "./PreWrittenPhrasesModal";
+import { Section } from "types";
+import phrases from "lib/phrases";
+import utils from "lib/utils";
+import SectionHeader from "components/sections/SectionHeader";
+import PreWrittenPhrasesModal from "components/sections/PreWrittenPhrasesModal";
 
 type props = {
   id: string;

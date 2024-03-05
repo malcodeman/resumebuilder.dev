@@ -7,9 +7,8 @@ import {
 import { FiChevronRight } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 import { equals } from "ramda";
-
-import useResume from "../../hooks/useResume";
-import { Link } from "../../navigation";
+import useResume from "hooks/useResume";
+import { Link } from "navigation";
 
 type props = BreadcrumbProps & {
   currentPage: "about" | "employment" | "education";

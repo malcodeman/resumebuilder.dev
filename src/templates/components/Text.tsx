@@ -1,8 +1,6 @@
 import { Text as ReactPdfText } from "@react-pdf/renderer";
-
-import useStyles from "../useStyles";
-
-import { Style } from "../types";
+import useStyles from "templates/useStyles";
+import { Style } from "templates/types";
 
 type props = Style & {
   children?: React.ReactNode;

@@ -2,13 +2,10 @@ import React from "react";
 import { Grid, Text, Image, Box, useColorModeValue } from "@chakra-ui/react";
 import { filter, includes, isEmpty, length, map, toLower } from "ramda";
 import { useTranslations } from "next-intl";
-
-import { TEMPLATES_LIST } from "../../lib/constants";
-import utils from "../../lib/utils";
-
-import { Template as TemplateType } from "../../types";
-
-import SearchInput from "../misc/SearchInput";
+import { TEMPLATES_LIST } from "lib/constants";
+import utils from "lib/utils";
+import { Template as TemplateType } from "types";
+import SearchInput from "components/misc/SearchInput";
 
 type props = {
   onChangeTemplate: (nextTemplate: TemplateType) => void;

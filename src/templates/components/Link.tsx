@@ -1,9 +1,7 @@
 import { Text, Link as ReactPdfLink } from "@react-pdf/renderer";
 import { or } from "ramda";
-
-import useStyles from "../useStyles";
-
-import { Style } from "../types";
+import useStyles from "templates/useStyles";
+import { Style } from "templates/types";
 
 type props = Style & {
   href: string;

@@ -13,10 +13,8 @@ import {
 import { and, equals, map, or } from "ramda";
 import { useMediaQuery } from "@react-hookz/web";
 import { useTranslations } from "next-intl";
-
-import useLocalStorage from "../../hooks/useLocalStorage";
-
-import { Export } from "../../types";
+import useLocalStorage from "hooks/useLocalStorage";
+import { Export } from "types";
 
 type props = {
   isOpen: boolean;

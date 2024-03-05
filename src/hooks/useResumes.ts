@@ -14,10 +14,8 @@ import {
   isEmpty,
 } from "ramda";
 import { getDate, getMonth } from "date-fns";
-
-import { DEFAULT_VALUES } from "../lib/constants";
-
-import { Design, Fields, Resume } from "../types";
+import { DEFAULT_VALUES } from "lib/constants";
+import { Design, Fields, Resume } from "types";
 
 type props = {
   isolated?: boolean;

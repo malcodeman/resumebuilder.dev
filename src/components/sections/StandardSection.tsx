@@ -19,14 +19,11 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { useTranslations } from "next-intl";
-
-import SectionHeader from "./SectionHeader";
-import StandardSectionBody from "./StandardSectionBody";
-import DraggableItem from "./DraggableItem";
-
-import { STANDARD_SECTION_DEFAULT_VALUES } from "../../lib/constants";
-
-import { Resume, Section } from "../../types";
+import SectionHeader from "components/sections/SectionHeader";
+import StandardSectionBody from "components/sections/StandardSectionBody";
+import DraggableItem from "components/sections/DraggableItem";
+import { STANDARD_SECTION_DEFAULT_VALUES } from "lib/constants";
+import { Resume, Section } from "types";
 
 type props = {
   id: string;

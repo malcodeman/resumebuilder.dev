@@ -2,11 +2,9 @@ import React from "react";
 import { useDebouncedEffect } from "@react-hookz/web";
 import { useWatch, UseFormReturn } from "react-hook-form";
 import { isEmpty } from "ramda";
-
-import useResume from "./useResume";
-import useLocalStorage from "./useLocalStorage";
-
-import { Resume } from "../types";
+import useResume from "hooks/useResume";
+import useLocalStorage from "hooks/useLocalStorage";
+import { Resume } from "types";
 
 type props = {
   form: UseFormReturn<Resume, object>;

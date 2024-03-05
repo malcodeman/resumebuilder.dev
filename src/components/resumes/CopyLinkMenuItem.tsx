@@ -1,8 +1,7 @@
 import { MenuItem, useClipboard, useToast } from "@chakra-ui/react";
 import { FiLink } from "react-icons/fi";
 import { useTranslations } from "next-intl";
-
-import utils from "../../lib/utils";
+import utils from "lib/utils";
 
 type props = {
   id: string;

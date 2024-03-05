@@ -1,11 +1,8 @@
 import { useContext } from "react";
-
-import utils from "../lib/utils";
-import theme from "./theme";
-
-import TemplateContext from "./components/TemplateContext";
-
-import { Style } from "./types";
+import utils from "lib/utils";
+import theme from "templates/theme";
+import TemplateContext from "templates/components/TemplateContext";
+import { Style } from "templates/types";
 
 function useStyles(props: Style) {
   const {

@@ -10,10 +10,8 @@ import {
 import { motion } from "framer-motion";
 import { equals, find } from "ramda";
 import { useTranslations } from "next-intl";
-
-import { TEMPLATES_LIST } from "../../lib/constants";
-
-import { Template as TemplateType } from "../../types";
+import { TEMPLATES_LIST } from "lib/constants";
+import { Template as TemplateType } from "types";
 
 type props = {
   id: TemplateType;

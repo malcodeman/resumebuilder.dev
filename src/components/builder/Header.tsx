@@ -2,17 +2,14 @@ import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useNetworkState } from "@react-hookz/web";
-
-import Logo from "../Logo";
-import HeaderPopover from "./HeaderPopover";
-import ResumeTitle from "./ResumeTitle";
-import OfflineTag from "../misc/OfflineTag";
-
-import utils from "../../lib/utils";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useProfilePicture from "../../hooks/useProfilePicture";
-
-import { Resume, Fields } from "../../types";
+import Logo from "components/Logo";
+import HeaderPopover from "components/builder/HeaderPopover";
+import ResumeTitle from "components/builder/ResumeTitle";
+import OfflineTag from "components/misc/OfflineTag";
+import utils from "lib/utils";
+import useLocalStorage from "hooks/useLocalStorage";
+import useProfilePicture from "hooks/useProfilePicture";
+import { Resume, Fields } from "types";
 
 type props = {
   form: UseFormReturn<Resume, object>;

@@ -13,8 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { map } from "ramda";
 import { useTranslations } from "next-intl";
-
-import { Section } from "../../types";
+import { Section } from "types";
 
 type Sections = {
   label: string;

@@ -1,6 +1,5 @@
 import { Text, Flex, Box } from "@chakra-ui/react";
-
-import { Link } from "../navigation";
+import { Link } from "navigation";
 
 type props = {
   href: string;

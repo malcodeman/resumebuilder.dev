@@ -1,11 +1,9 @@
 import { faker } from "@faker-js/faker";
+import phrases from "lib/phrases";
+import tags from "lib/tags";
+import { Resume } from "types";
 
 import resumes from "../fixtures/resumes.json";
-
-import phrases from "../../src/lib/phrases";
-import tags from "../../src/lib/tags";
-
-import { Resume } from "../../src/types";
 
 function getResume(): Resume {
   return JSON.parse(localStorage.getItem("resumes"))[0];

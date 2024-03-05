@@ -1,7 +1,6 @@
 import { useLocalStorageValue } from "@react-hookz/web";
 import { NextState } from "@react-hookz/web/cjs/util/resolveHookState";
-
-import { LocalStorageKey } from "../types";
+import { LocalStorageKey } from "types";
 
 function useLocalStorage(
   key: LocalStorageKey
