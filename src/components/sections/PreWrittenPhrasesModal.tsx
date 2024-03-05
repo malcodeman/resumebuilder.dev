@@ -13,10 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { equals, filter, includes, length, map, toLower } from "ramda";
 import { useTranslations } from "next-intl";
-
-import { Phrase } from "../../types";
-
-import SearchInput from "../misc/SearchInput";
+import { Phrase } from "types";
+import SearchInput from "components/misc/SearchInput";
 
 type Props = {
   isOpen: boolean;

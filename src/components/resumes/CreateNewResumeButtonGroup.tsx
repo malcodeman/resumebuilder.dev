@@ -15,13 +15,10 @@ import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
 import { FiPlus, FiUpload } from "react-icons/fi";
 import { useLocale, useTranslations } from "next-intl";
 import { equals } from "ramda";
-
-import { Fields } from "../../types";
-
-import useResumes from "../../hooks/useResumes";
-
-import ImportDataModal from "./ImportDataModal";
-import { useRouter } from "../../navigation";
+import { Fields } from "types";
+import useResumes from "hooks/useResumes";
+import ImportDataModal from "components/resumes/ImportDataModal";
+import { useRouter } from "navigation";
 
 function NewButton() {
   const t = useTranslations();

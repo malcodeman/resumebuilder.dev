@@ -19,10 +19,8 @@ import {
   has,
 } from "ramda";
 import { format } from "date-fns";
-
-import getTemplate from "./getTemplate";
-
-import { Resume, Section, Fields, SectionField } from "../types";
+import getTemplate from "lib/getTemplate";
+import { Resume, Section, Fields, SectionField } from "types";
 
 const isBrowser =
   typeof window !== "undefined" &&

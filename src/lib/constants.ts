@@ -1,6 +1,5 @@
 import { equals } from "ramda";
-
-import { Template, Resume, TemplateTags } from "../types";
+import { Template, Resume, TemplateTags } from "types";
 
 const IS_PROD = equals(process.env.NEXT_PUBLIC_VERCEL_ENV, "production");
 const TEMPLATES: Template[] = ["berlin", "london", "nairobi", "rio", "tokyo"];

@@ -5,13 +5,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useWatch, UseFormReturn } from "react-hook-form";
-
-import getTemplate from "../../lib/getTemplate";
-
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useProfilePicture from "../../hooks/useProfilePicture";
-
-import { Resume } from "../../types";
+import getTemplate from "lib/getTemplate";
+import useLocalStorage from "hooks/useLocalStorage";
+import useProfilePicture from "hooks/useProfilePicture";
+import { Resume } from "types";
 
 type props = {
   form: UseFormReturn<Resume, object>;

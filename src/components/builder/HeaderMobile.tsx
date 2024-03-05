@@ -8,15 +8,13 @@ import {
 import { FiHome } from "react-icons/fi";
 import { FormProvider, UseFormReturn } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import NavLink from "../misc/NavLink";
-import HeaderPopover from "./HeaderPopover";
-import ResumeTitle from "./ResumeTitle";
-
-import utils from "../../lib/utils";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useProfilePicture from "../../hooks/useProfilePicture";
-
-import { Resume, Fields } from "../../types";
+import NavLink from "components/misc/NavLink";
+import HeaderPopover from "components/builder/HeaderPopover";
+import ResumeTitle from "components/builder/ResumeTitle";
+import utils from "lib/utils";
+import useLocalStorage from "hooks/useLocalStorage";
+import useProfilePicture from "hooks/useProfilePicture";
+import { Resume, Fields } from "types";
 
 type props = {
   form: UseFormReturn<Resume, object>;

@@ -1,6 +1,6 @@
-import resumes from "../fixtures/resumes.json";
+import { Resume } from "types";
 
-import { Resume } from "../../src/types";
+import resumes from "../fixtures/resumes.json";
 
 function getResume(index = 0): Resume {
   return JSON.parse(localStorage.getItem("resumes"))[index];

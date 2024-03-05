@@ -8,13 +8,10 @@ import {
 } from "@chakra-ui/react";
 import JSZip from "jszip";
 import { useTranslations } from "next-intl";
-
-import parser from "../../lib/parser";
-import { LINKS } from "../../lib/constants";
-
-import FileUploader from "../misc/FileUploader";
-
-import { Fields } from "../../types";
+import parser from "lib/parser";
+import { LINKS } from "lib/constants";
+import FileUploader from "components/misc/FileUploader";
+import { Fields } from "types";
 
 type props = {
   onImport: (fields: Fields) => void;

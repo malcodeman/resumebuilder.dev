@@ -20,14 +20,11 @@ import { useTranslations } from "next-intl";
 import { FiArrowRight, FiMail, FiPhone } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { isNil } from "ramda";
-
-import useResume from "../../../../../hooks/useResume";
-
-import NotFound from "../../../../../components/misc/NotFound";
-import StepsNavigation from "../../../../../components/builder/StepsNavigation";
-import { Link, useRouter } from "../../../../../navigation";
-
-import { AboutField } from "../../../../../types";
+import useResume from "hooks/useResume";
+import NotFound from "components/misc/NotFound";
+import StepsNavigation from "components/builder/StepsNavigation";
+import { Link, useRouter } from "navigation";
+import { AboutField } from "types";
 
 const ARROW_RIGHT_VARIANTS = {
   mouseenter: { x: 5 },

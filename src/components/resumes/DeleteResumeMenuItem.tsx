@@ -1,8 +1,7 @@
 import { MenuItem, useDisclosure } from "@chakra-ui/react";
 import { FiTrash2 } from "react-icons/fi";
 import { useTranslations } from "next-intl";
-
-import DeleteResumeModal from "./DeleteResumeModal";
+import DeleteResumeModal from "components/resumes/DeleteResumeModal";
 
 type props = {
   onDelete: () => void;

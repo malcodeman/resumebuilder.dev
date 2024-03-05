@@ -4,8 +4,7 @@ import { useLocale } from "next-intl";
 import { map } from "ramda";
 import { useRouter } from "next/navigation";
 import { useMountEffect } from "@react-hookz/web";
-
-import { usePathname } from "../../navigation";
+import { usePathname } from "navigation";
 
 const defaultValues = {
   language: "",

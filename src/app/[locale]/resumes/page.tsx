@@ -46,24 +46,20 @@ import { SortableContext } from "@dnd-kit/sortable";
 import { formatDistanceToNow } from "date-fns";
 import { createColumnHelper, VisibilityState } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
-
-import Layout from "../../../components/Layout";
-import ResumeItem from "../../../components/resumes/ResumeItem";
-import EmptyResumes from "../../../components/resumes/EmptyResumes";
-import Table from "../../../components/misc/Table";
-
-import useResumes from "../../../hooks/useResumes";
-import useLocalStorage from "../../../hooks/useLocalStorage";
-import useDateFnsLocale from "../../../hooks/useDateFnsLocale";
-
-import { Resume, View } from "../../../types";
-
-import SearchInput from "../../../components/misc/SearchInput";
-import DeleteResumeMenuItem from "../../../components/resumes/DeleteResumeMenuItem";
-import CreateNewResumeButtonGroup from "../../../components/resumes/CreateNewResumeButtonGroup";
-import CopyLinkMenuItem from "../../../components/resumes/CopyLinkMenuItem";
-import ResumeTitleColumn from "../../../components/resumes/ResumeTitleColumn";
-import { Link } from "../../../navigation";
+import Layout from "components/Layout";
+import ResumeItem from "components/resumes/ResumeItem";
+import EmptyResumes from "components/resumes/EmptyResumes";
+import Table from "components/misc/Table";
+import useResumes from "hooks/useResumes";
+import useLocalStorage from "hooks/useLocalStorage";
+import useDateFnsLocale from "hooks/useDateFnsLocale";
+import { Resume, View } from "types";
+import SearchInput from "components/misc/SearchInput";
+import DeleteResumeMenuItem from "components/resumes/DeleteResumeMenuItem";
+import CreateNewResumeButtonGroup from "components/resumes/CreateNewResumeButtonGroup";
+import CopyLinkMenuItem from "components/resumes/CopyLinkMenuItem";
+import ResumeTitleColumn from "components/resumes/ResumeTitleColumn";
+import { Link } from "navigation";
 
 function ResumeGrid() {
   const t = useTranslations();

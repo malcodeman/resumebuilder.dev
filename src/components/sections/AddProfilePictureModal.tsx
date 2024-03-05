@@ -10,11 +10,9 @@ import {
   useBoolean,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-
-import utils from "../../lib/utils";
-import useProfilePicture from "../../hooks/useProfilePicture";
-
-import FileUploader from "../misc/FileUploader";
+import utils from "lib/utils";
+import useProfilePicture from "hooks/useProfilePicture";
+import FileUploader from "components/misc/FileUploader";
 
 type Props = {
   isOpen: boolean;

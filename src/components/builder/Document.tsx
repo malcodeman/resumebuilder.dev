@@ -4,15 +4,12 @@ import { useWatch, UseFormReturn } from "react-hook-form";
 import { motion } from "framer-motion";
 import { PDFViewer } from "@react-pdf/renderer";
 import { or } from "ramda";
-
-import getTemplate from "../../lib/getTemplate";
-import utils from "../../lib/utils";
-
-import useAutoSave from "../../hooks/useAutoSave";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useProfilePicture from "../../hooks/useProfilePicture";
-
-import { Resume } from "../../types";
+import getTemplate from "lib/getTemplate";
+import utils from "lib/utils";
+import useAutoSave from "hooks/useAutoSave";
+import useLocalStorage from "hooks/useLocalStorage";
+import useProfilePicture from "hooks/useProfilePicture";
+import { Resume } from "types";
 
 type props = {
   form: UseFormReturn<Resume, object>;

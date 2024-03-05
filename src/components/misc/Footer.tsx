@@ -8,10 +8,8 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { siLinkedin, siGithub } from "simple-icons";
-
-import SimpleIcon from "./SimpleIcon";
-
-import { LINKS } from "../../lib/constants";
+import SimpleIcon from "components/misc/SimpleIcon";
+import { LINKS } from "lib/constants";
 
 function Footer() {
   return (

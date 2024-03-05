@@ -15,9 +15,8 @@ import { FiCheck } from "react-icons/fi";
 import { length, map } from "ramda";
 import { useTranslations } from "next-intl";
 import { useMediaQuery } from "@react-hookz/web";
-
-import useResumes from "../../hooks/useResumes";
-import { useRouter } from "../../navigation";
+import useResumes from "hooks/useResumes";
+import { useRouter } from "navigation";
 
 const LIST = [
   {

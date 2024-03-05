@@ -24,11 +24,9 @@ import {
   slice,
   split,
 } from "ramda";
-
-import { Section } from "../../types";
-
-import allTags from "../../lib/tags";
-import utils from "../../lib/utils";
+import { Section } from "types";
+import allTags from "lib/tags";
+import utils from "lib/utils";
 
 type props = {
   index: number;

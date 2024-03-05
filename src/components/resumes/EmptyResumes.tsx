@@ -10,13 +10,10 @@ import { FiLayers, FiPlus, FiUpload } from "react-icons/fi";
 import { map } from "ramda";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-
-import ImportDataModal from "./ImportDataModal";
-
-import { Fields } from "../../types";
-
-import useResumes from "../../hooks/useResumes";
-import { useRouter } from "../../navigation";
+import ImportDataModal from "components/resumes/ImportDataModal";
+import { Fields } from "types";
+import useResumes from "hooks/useResumes";
+import { useRouter } from "navigation";
 
 function EmptyResumes() {
   const t = useTranslations();

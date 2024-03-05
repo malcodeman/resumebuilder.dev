@@ -30,18 +30,14 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useRerender } from "@react-hookz/web";
 import { useTranslations } from "next-intl";
-
-import EmojiPicker from "../misc/EmojiPicker";
-import DeleteResumeMenuItem from "./DeleteResumeMenuItem";
-import { Link } from "../../navigation";
-
-import getTemplate from "../../lib/getTemplate";
-import utils from "../../lib/utils";
-
-import useDateFnsLocale from "../../hooks/useDateFnsLocale";
-import useProfilePicture from "../../hooks/useProfilePicture";
-
-import { Resume } from "../../types";
+import EmojiPicker from "components/misc/EmojiPicker";
+import DeleteResumeMenuItem from "components/resumes/DeleteResumeMenuItem";
+import { Link } from "navigation";
+import getTemplate from "lib/getTemplate";
+import utils from "lib/utils";
+import useDateFnsLocale from "hooks/useDateFnsLocale";
+import useProfilePicture from "hooks/useProfilePicture";
+import { Resume } from "types";
 
 function UpdatedAtText(props: { updatedAt: number }) {
   const t = useTranslations();

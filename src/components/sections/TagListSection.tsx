@@ -3,11 +3,9 @@ import { FieldArrayMethodProps, useFormContext } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { and, not, equals } from "ramda";
-
-import SectionHeader from "./SectionHeader";
-import TagListSectionBody from "./TagListSectionBody";
-
-import { Section } from "../../types";
+import SectionHeader from "components/sections/SectionHeader";
+import TagListSectionBody from "components/sections/TagListSectionBody";
+import { Section } from "types";
 
 type props = {
   id: string;

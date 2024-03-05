@@ -7,11 +7,9 @@ import {
 } from "@chakra-ui/react";
 import { FiFileText, FiHome, FiLayers } from "react-icons/fi";
 import { useTranslations } from "next-intl";
-
-import useLocalStorage from "../../hooks/useLocalStorage";
-
-import NavLink from "../misc/NavLink";
-import UserMenu from "./UserMenu";
+import useLocalStorage from "hooks/useLocalStorage";
+import NavLink from "components/misc/NavLink";
+import UserMenu from "components/resumes/UserMenu";
 
 function HeaderMobile() {
   const t = useTranslations();

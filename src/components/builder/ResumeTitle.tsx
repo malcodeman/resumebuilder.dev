@@ -7,12 +7,9 @@ import {
 } from "@chakra-ui/react";
 import { UseFormReturn } from "react-hook-form";
 import { isEmpty } from "ramda";
-
-import EmojiPicker from "../misc/EmojiPicker";
-
-import useResume from "../../hooks/useResume";
-
-import { Resume } from "../../types";
+import EmojiPicker from "components/misc/EmojiPicker";
+import useResume from "hooks/useResume";
+import { Resume } from "types";
 
 type props = HTMLChakraProps<"div"> & {
   form: UseFormReturn<Resume, object>;

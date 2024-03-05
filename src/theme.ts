@@ -1,6 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-
-import { ChakraThemeConfig } from "./types";
+import { ChakraThemeConfig } from "types";
 
 const config: ChakraThemeConfig = {
   initialColorMode: "light",

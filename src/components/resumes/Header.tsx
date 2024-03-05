@@ -9,16 +9,14 @@ import {
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { useNetworkState } from "@react-hookz/web";
-
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useProfilePicture from "../../hooks/useProfilePicture";
-
-import Logo from "../Logo";
-import NavLink from "../misc/NavLink";
-import LanguageSelect from "../misc/LanguageSelect";
-import UserMenu from "./UserMenu";
-import OfflineTag from "../misc/OfflineTag";
-import { Link } from "../../navigation";
+import useLocalStorage from "hooks/useLocalStorage";
+import useProfilePicture from "hooks/useProfilePicture";
+import Logo from "components/Logo";
+import NavLink from "components/misc/NavLink";
+import LanguageSelect from "components/misc/LanguageSelect";
+import UserMenu from "components/resumes/UserMenu";
+import OfflineTag from "components/misc/OfflineTag";
+import { Link } from "navigation";
 
 function Header() {
   const t = useTranslations();

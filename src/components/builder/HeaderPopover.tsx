@@ -33,20 +33,17 @@ import { equals, isNil, or } from "ramda";
 import { formatDistanceToNow } from "date-fns";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
-
-import ImportDataModal from "../resumes/ImportDataModal";
-import ExportResumeModal from "./ExportResumeModal";
-import DeleteResumeModal from "../resumes/DeleteResumeModal";
-import ChangeSlugModal from "./ChangeSlugModal";
-import LanguageSelect from "../misc/LanguageSelect";
-
-import utils from "../../lib/utils";
-import useResume from "../../hooks/useResume";
-import useDateFnsLocale from "../../hooks/useDateFnsLocale";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { useRouter } from "../../navigation";
-
-import { Fields, Resume } from "../../types";
+import ImportDataModal from "components/resumes/ImportDataModal";
+import ExportResumeModal from "components/builder/ExportResumeModal";
+import DeleteResumeModal from "components/resumes/DeleteResumeModal";
+import ChangeSlugModal from "components/builder/ChangeSlugModal";
+import LanguageSelect from "components/misc/LanguageSelect";
+import utils from "lib/utils";
+import useResume from "hooks/useResume";
+import useDateFnsLocale from "hooks/useDateFnsLocale";
+import useLocalStorage from "hooks/useLocalStorage";
+import { useRouter } from "navigation";
+import { Fields, Resume } from "types";
 
 const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 

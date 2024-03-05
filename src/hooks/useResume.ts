@@ -2,8 +2,7 @@ import { useLocalStorageValue } from "@react-hookz/web";
 import { useParams } from "next/navigation";
 import { isNil, find, map, filter, equals, or, clone, isEmpty } from "ramda";
 import { nanoid } from "nanoid";
-
-import { Resume } from "../types";
+import { Resume } from "types";
 
 type props = {
   isolated?: boolean;

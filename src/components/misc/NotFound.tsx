@@ -1,8 +1,7 @@
 import { Box, Button, Center, Heading } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-
-import Poser5 from "../../illustrations/Poser5";
-import { Link } from "../../navigation";
+import Poser5 from "illustrations/Poser5";
+import { Link } from "navigation";
 
 type props = {
   description?: string;

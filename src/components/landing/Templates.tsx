@@ -11,15 +11,11 @@ import { map, slice, equals } from "ramda";
 import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-
-import { TEMPLATES_LIST, DEFAULT_VALUES } from "../../lib/constants";
-
-import { Template as TemplateType } from "../../types";
-
-import useResumes from "../../hooks/useResumes";
-
-import Template from "../templates/Template";
-import { Link, useRouter } from "../../navigation";
+import { TEMPLATES_LIST, DEFAULT_VALUES } from "lib/constants";
+import { Template as TemplateType } from "types";
+import useResumes from "hooks/useResumes";
+import Template from "components/templates/Template";
+import { Link, useRouter } from "navigation";
 
 const ARROW_RIGHT_VARIANTS = {
   mouseenter: { x: 5 },

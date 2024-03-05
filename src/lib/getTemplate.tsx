@@ -1,10 +1,9 @@
-import Berlin from "../templates/Berlin";
-import Tokyo from "../templates/Tokyo";
-import London from "../templates/London";
-import Rio from "../templates/Rio";
-import Nairobi from "../templates/Nairobi";
-
-import { TemplateProps } from "../types";
+import Berlin from "templates/Berlin";
+import Tokyo from "templates/Tokyo";
+import London from "templates/London";
+import Rio from "templates/Rio";
+import Nairobi from "templates/Nairobi";
+import { TemplateProps } from "types";
 
 function getTemplate(props: TemplateProps) {
   const { design } = props;

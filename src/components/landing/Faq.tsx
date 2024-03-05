@@ -18,8 +18,7 @@ import { FiCheckCircle, FiCircle } from "react-icons/fi";
 import { map } from "ramda";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-
-import { LINKS } from "../../lib/constants";
+import { LINKS } from "lib/constants";
 
 function Faq() {
   const t = useTranslations();

@@ -1,6 +1,5 @@
 import { filter, includes, length } from "ramda";
-
-import { TEMPLATES_LIST } from "../../src/lib/constants";
+import { TEMPLATES_LIST } from "lib/constants";
 
 beforeEach(() => {
   cy.visit("/en/templates");
