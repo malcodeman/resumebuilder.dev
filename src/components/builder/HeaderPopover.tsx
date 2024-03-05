@@ -327,7 +327,7 @@ function DeleteResume() {
 
   function handleOnDelete() {
     remove();
-    router.push("resumes");
+    router.push("/resumes");
     toast({
       description: t("resume_deleted"),
       isClosable: true,
