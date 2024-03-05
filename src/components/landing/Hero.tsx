@@ -13,12 +13,12 @@ import {
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { FiCheckCircle } from "react-icons/fi";
-import { useRouter } from "next/router";
 import { length } from "ramda";
 
 import Poser12 from "../../illustrations/Poser12";
 
 import useResumes from "../../hooks/useResumes";
+import { useRouter } from "../../navigation";
 
 function Hero() {
   const t = useTranslations();
@@ -30,9 +30,9 @@ function Hero() {
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {
-      await router.push(`/resumes/${resume.id}`);
+      router.push(`/resumes/${resume.id}`);
     } else {
-      await router.push(`/resumes/${resume.id}/about`);
+      router.push(`/resumes/${resume.id}/about`);
     }
     setIsLoading.off();
   }

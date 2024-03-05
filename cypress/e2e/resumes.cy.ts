@@ -7,7 +7,7 @@ function getResume(index = 0): Resume {
 }
 
 beforeEach(() => {
-  cy.visit("/resumes");
+  cy.visit("/en/resumes");
 });
 
 describe("Resumes page", () => {
@@ -31,7 +31,7 @@ describe("Resumes page", () => {
       });
     cy.get("[data-cy=resume]").should("have.length", 1);
     cy.wait("@getResume");
-    cy.url().should("include", "/resumes/");
+    cy.url().should("include", "/en/resumes/");
   });
   it("Quicky upload button", () => {
     cy.get("[data-cy=quickly-upload]").click();
@@ -39,7 +39,7 @@ describe("Resumes page", () => {
   });
   it("Start with templates button", () => {
     cy.get("[data-cy=start-with-templates]").click();
-    cy.url().should("eq", `${Cypress.config().baseUrl}/templates`);
+    cy.url().should("eq", `${Cypress.config().baseUrl}/en/templates`);
   });
   it("Search | Not found", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
@@ -69,7 +69,7 @@ describe("Resumes page", () => {
       );
     cy.get("[data-cy=resume]").should("have.length", 2);
     cy.wait("@getResume");
-    cy.url().should("include", "/resumes/");
+    cy.url().should("include", "/en/resumes/");
   });
   it("Create resume button | Halloween", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));

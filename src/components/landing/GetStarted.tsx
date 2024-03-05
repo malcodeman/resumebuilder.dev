@@ -14,10 +14,10 @@ import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
 import { length, map } from "ramda";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/router";
 import { useMediaQuery } from "@react-hookz/web";
 
 import useResumes from "../../hooks/useResumes";
+import { useRouter } from "../../navigation";
 
 const LIST = [
   {
@@ -49,13 +49,13 @@ function GetStarted() {
     ? screenshotSourceDesktop
     : screenshotSourceMobile;
 
-  async function handleOnSubmit() {
+  function handleOnSubmit() {
     setIsLoading.on();
     const resume = createNew();
     if (length(resumes) > 0) {
-      await router.push(`/resumes/${resume.id}`);
+      router.push(`/resumes/${resume.id}`);
     } else {
-      await router.push(`/resumes/${resume.id}/about`);
+      router.push(`/resumes/${resume.id}/about`);
     }
     setIsLoading.off();
   }

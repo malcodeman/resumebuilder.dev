@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
 import { Link, SpaceProps } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { equals } from "ramda";
+
+import { Link as NextLink, usePathname } from "../../navigation";
 
 type props = {
   href: string;
@@ -11,8 +11,8 @@ type props = {
 
 function NavLink(props: props) {
   const { href, passHref = true, children, ...rest } = props;
-  const router = useRouter();
-  const isActive = equals(router.asPath, href);
+  const pathname = usePathname();
+  const isActive = equals(pathname, href);
   return (
     <NextLink href={href} passHref={passHref} legacyBehavior>
       <Link {...rest} color={isActive ? "blue.400" : "inherit"}>

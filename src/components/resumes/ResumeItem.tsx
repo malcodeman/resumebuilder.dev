@@ -25,7 +25,6 @@ import {
   FiLink,
 } from "react-icons/fi";
 import { formatDistanceToNow } from "date-fns";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -34,6 +33,7 @@ import { useTranslations } from "next-intl";
 
 import EmojiPicker from "../misc/EmojiPicker";
 import DeleteResumeMenuItem from "./DeleteResumeMenuItem";
+import { Link } from "../../navigation";
 
 import getTemplate from "../../lib/getTemplate";
 import utils from "../../lib/utils";

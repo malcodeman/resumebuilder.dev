@@ -2,8 +2,10 @@ import { Box, BoxProps, FormControl, Select } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useLocale } from "next-intl";
 import { map } from "ramda";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useMountEffect } from "@react-hookz/web";
+
+import { usePathname } from "../../navigation";
 
 const defaultValues = {
   language: "",
@@ -19,15 +21,14 @@ function LanguageSelect(props: BoxProps) {
     { value: "en", label: "English" },
   ];
   const router = useRouter();
+  const pathname = usePathname();
 
   useMountEffect(() => {
     form.reset({ language });
   });
 
   function onSubmit(data: { language: string }) {
-    const { pathname, asPath, query } = router;
-    const nextLocale = data.language;
-    router.push({ pathname, query }, asPath, { locale: nextLocale });
+    router.push(`/${data.language}${pathname}`);
   }
 
   return (

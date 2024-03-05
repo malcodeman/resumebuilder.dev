@@ -29,7 +29,6 @@ import {
   FiCopy,
   FiCheck,
 } from "react-icons/fi";
-import { useRouter } from "next/router";
 import { equals, isNil, or } from "ramda";
 import { formatDistanceToNow } from "date-fns";
 import { useFormContext, useWatch } from "react-hook-form";
@@ -45,6 +44,7 @@ import utils from "../../lib/utils";
 import useResume from "../../hooks/useResume";
 import useDateFnsLocale from "../../hooks/useDateFnsLocale";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useRouter } from "../../navigation";
 
 import { Fields, Resume } from "../../types";
 

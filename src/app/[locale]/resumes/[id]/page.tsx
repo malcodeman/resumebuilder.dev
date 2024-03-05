@@ -1,5 +1,5 @@
-import React from "react";
-import Head from "next/head";
+"use client";
+import React, { useEffect } from "react";
 import {
   Grid,
   Box,
@@ -16,20 +16,20 @@ import { isNil } from "ramda";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import { useTranslations } from "next-intl";
 
-import Sections from "../../../components/sections/Sections";
-import Header from "../../../components/builder/Header";
-import HeaderMobile from "../../../components/builder/HeaderMobile";
-import Document from "../../../components/builder/Document";
-import NotFound from "../../../components/misc/NotFound";
-import TemplatesTabPanel from "../../../components/builder/TemplatesTabPanel";
-import Preview from "../../../components/builder/Preview";
+import Sections from "../../../../components/sections/Sections";
+import Header from "../../../../components/builder/Header";
+import HeaderMobile from "../../../../components/builder/HeaderMobile";
+import Document from "../../../../components/builder/Document";
+import NotFound from "../../../../components/misc/NotFound";
+import TemplatesTabPanel from "../../../../components/builder/TemplatesTabPanel";
+import Preview from "../../../../components/builder/Preview";
 
-import useResume from "../../../hooks/useResume";
-import useAutoSaveToast from "../../../hooks/useAutoSaveToast";
-import useLocalStorage from "../../../hooks/useLocalStorage";
-import utils from "../../../lib/utils";
+import useResume from "../../../../hooks/useResume";
+import useAutoSaveToast from "../../../../hooks/useAutoSaveToast";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
+import utils from "../../../../lib/utils";
 
-import { Resume, Template } from "../../../types";
+import { Resume, Template } from "../../../../types";
 
 function Builder() {
   const t = useTranslations();
@@ -48,6 +48,12 @@ function Builder() {
     setViewDashboard(true);
   });
 
+  useEffect(() => {
+    if (resume) {
+      document.title = `${resume.title} | resumebuilder.dev`;
+    }
+  }, [resume]);
+
   useAutoSaveToast({});
 
   function handleOnChangeTemplate(nextTemplate: Template) {
@@ -65,20 +71,12 @@ function Builder() {
 
   if (isNil(resume)) {
     return (
-      <>
-        <Head>
-          <title>Resume not found | resumebuilder.dev</title>
-        </Head>
-        <NotFound description={t("resume_404_description")} link="/resumes" />
-      </>
+      <NotFound description={t("resume_404_description")} link="/resumes" />
     );
   }
 
   return (
     <>
-      <Head>
-        <title>{resume.title} | resumebuilder.dev</title>
-      </Head>
       {isLargeDevice ? <Header form={form} /> : null}
       <Grid
         as="main"
@@ -131,21 +129,6 @@ function Builder() {
       {isLargeDevice ? null : <HeaderMobile form={form} />}
     </>
   );
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      messages: (await import(`../../../../messages/${locale}.json`)).default,
-    },
-  };
 }
 
 export default Builder;

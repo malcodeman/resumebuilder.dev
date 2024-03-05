@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { FiLayers, FiPlus, FiUpload } from "react-icons/fi";
 import { map } from "ramda";
-import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
@@ -17,6 +16,7 @@ import ImportDataModal from "./ImportDataModal";
 import { Fields } from "../../types";
 
 import useResumes from "../../hooks/useResumes";
+import { useRouter } from "../../navigation";
 
 function EmptyResumes() {
   const t = useTranslations();
@@ -53,7 +53,7 @@ function EmptyResumes() {
       headingTransKey: "start_with_templates",
       textTransKey: "start_with_templates_description",
       dataCy: "start-with-templates",
-      onClick: () => router.push("/templates"),
+      onClick: () => router.push("templates"),
     },
   ];
 

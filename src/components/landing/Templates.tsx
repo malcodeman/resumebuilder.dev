@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import {
   Heading,
   Button,
@@ -12,7 +11,6 @@ import { map, slice, equals } from "ramda";
 import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/router";
 
 import { TEMPLATES_LIST, DEFAULT_VALUES } from "../../lib/constants";
 
@@ -21,6 +19,7 @@ import { Template as TemplateType } from "../../types";
 import useResumes from "../../hooks/useResumes";
 
 import Template from "../templates/Template";
+import { Link, useRouter } from "../../navigation";
 
 const ARROW_RIGHT_VARIANTS = {
   mouseenter: { x: 5 },
@@ -38,14 +37,14 @@ function Templates() {
   const { createNew } = useResumes();
   const [isLoading, setIsLoading] = React.useState<TemplateType>(null);
 
-  async function handleOnSubmit(template: TemplateType) {
+  function handleOnSubmit(template: TemplateType) {
     setIsLoading(template);
     const design = {
       ...DEFAULT_VALUES.design,
       template,
     };
     const resume = createNew({ design });
-    await router.push(`/resumes/${resume.id}`);
+    router.push(`/resumes/${resume.id}`);
     setIsLoading(null);
   }
 
