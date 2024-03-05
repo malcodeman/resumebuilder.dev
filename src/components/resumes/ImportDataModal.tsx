@@ -108,7 +108,7 @@ function ImportDataModal(props: Props) {
                     variant="outline"
                     size="sm"
                     isDisabled={item.isDisabled}
-                    data-cy={`import-${item.value}`}
+                    data-testid={`import-${item.value}`}
                     onClick={() => setSource(item.value)}
                   >
                     {t(item.label)}
@@ -138,7 +138,7 @@ function ImportDataModal(props: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent data-cy="import-data-modal-content">
+      <ModalContent data-testid="import-data-modal-content">
         <ModalHeader>
           {isEmpty(source) ? (
             t("import_data")

@@ -69,7 +69,7 @@ function ExportResumeModal(props: props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent data-cy="export-resume-modal-content">
+      <ModalContent data-testid="export-resume-modal-content">
         <ModalHeader>{t("export")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

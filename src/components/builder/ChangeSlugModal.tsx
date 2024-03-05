@@ -85,7 +85,7 @@ function ChangeSlugModal(props: props) {
                 <Input
                   variant="filled"
                   borderRadius="md"
-                  data-cy="slug-input"
+                  data-testid="slug-input"
                   {...form.register("slug")}
                   ref={slugInputRefs}
                 />
@@ -103,7 +103,7 @@ function ChangeSlugModal(props: props) {
               size="sm"
               colorScheme="blue"
               type="submit"
-              data-cy="change-button"
+              data-testid="change-button"
               isDisabled={or(!form.formState.isDirty, isInvalid)}
             >
               {t("change")}

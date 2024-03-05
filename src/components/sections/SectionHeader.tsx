@@ -71,7 +71,7 @@ function SectionHeader(props: props) {
         role="group"
         cursor="pointer"
         height="48px"
-        data-cy="section-label-accordion-button"
+        data-testid="section-label-accordion-button"
       >
         {isOpen ? (
           <FiChevronUp style={{ marginRight: "0.5rem" }} />

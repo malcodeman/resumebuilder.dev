@@ -134,7 +134,7 @@ function ResumeGrid() {
                 size="sm"
                 as={IconButton}
                 aria-label="More options"
-                data-cy="resume-more-options-menu-button"
+                data-testid="resume-more-options-menu-button"
                 icon={<FiMoreHorizontal />}
               />
               <MenuList>
@@ -146,7 +146,7 @@ function ResumeGrid() {
                 <MenuItem
                   onClick={() => duplicate(info.row.original.id)}
                   icon={<FiCopy />}
-                  data-cy="duplicate-menu-item"
+                  data-testid="duplicate-menu-item"
                 >
                   {t("duplicate")}
                 </MenuItem>
@@ -248,7 +248,7 @@ function ResumeGrid() {
       <Flex mb="4">
         <SearchInput
           mr="2"
-          data-cy="search-input"
+          data-testid="search-input"
           placeholder={t("search_n_resumes", { n: length(resumes) })}
           value={search}
           onChangeValue={(nextValue) => setSearch(nextValue)}
@@ -261,7 +261,7 @@ function ResumeGrid() {
             icon={<FiGrid />}
             onClick={() => setView("grid")}
             isActive={equals(view, "grid")}
-            data-cy="grid-view-icon-button"
+            data-testid="grid-view-icon-button"
           />
           <IconButton
             size="sm"
@@ -269,7 +269,7 @@ function ResumeGrid() {
             icon={<FiList />}
             onClick={() => setView("list")}
             isActive={equals(view, "list")}
-            data-cy="list-view-icon-button"
+            data-testid="list-view-icon-button"
           />
         </ButtonGroup>
         <CreateNewResumeButtonGroup />

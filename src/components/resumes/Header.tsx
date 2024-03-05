@@ -48,13 +48,13 @@ function Header() {
               <Logo href={homeHref} />
             </Box>
             <NavLink href={homeHref} mr="4">
-              <Text data-cy="home-text">{t("home")}</Text>
+              <Text data-testid="home-text">{t("home")}</Text>
             </NavLink>
             <NavLink href="/templates" mr="4">
-              <Text data-cy="templates-text">{t("templates")}</Text>
+              <Text data-testid="templates-text">{t("templates")}</Text>
             </NavLink>
             <NavLink href="/about" mr="4">
-              <Text data-cy="about-text">{t("about")}</Text>
+              <Text data-testid="about-text">{t("about")}</Text>
             </NavLink>
           </Flex>
           {viewDashboard ? (
@@ -74,7 +74,7 @@ function Header() {
                       <Avatar src={profilePicture} size="xs" />
                     ) : null
                   }
-                  data-cy="dashboard-button"
+                  data-testid="dashboard-button"
                 >
                   {t("dashboard")}
                 </Button>

@@ -49,7 +49,7 @@ function Templates() {
     <Layout>
       <SearchInput
         mb="4"
-        data-cy="search-input"
+        data-testid="search-input"
         value={template}
         placeholder={t("search_n_templates", {
           n: length(filteredTemplatesByTags),
@@ -63,7 +63,7 @@ function Templates() {
             <Button
               key={item.value}
               isActive={equals(activeFilter, item.value)}
-              data-cy={`template-filters-${item.value}`}
+              data-testid={`template-filters-${item.value}`}
               onClick={() => setActiveFilter(item.value)}
             >
               {t(item.labelTransKey)}
@@ -81,7 +81,7 @@ function Templates() {
         mb="32"
         gap="8"
         gridTemplateColumns="repeat(auto-fill, minmax(288px, 1fr))"
-        data-cy="templates-grid"
+        data-testid="templates-grid"
       >
         {map(
           (item) => (

@@ -59,7 +59,7 @@ function ImportFromGithub(props: props) {
           <Input
             variant="filled"
             borderRadius="md"
-            data-cy="import-github-username"
+            data-testid="import-github-username"
             {...form.register("username")}
           />
         </InputGroup>
@@ -72,7 +72,7 @@ function ImportFromGithub(props: props) {
         size="sm"
         colorScheme="blue"
         type="submit"
-        data-cy="import-github-submit"
+        data-testid="import-github-submit"
       >
         {t("import")}
       </Button>

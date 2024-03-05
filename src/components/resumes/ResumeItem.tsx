@@ -119,7 +119,7 @@ function ResumeItem(props: props) {
       opacity={isDragging ? "0.5" : "initial"}
       direction="column"
       role="group"
-      data-cy="resume"
+      data-testid="resume"
     >
       <Link href={`/resumes/${resume.id}`} passHref>
         <AspectRatio mb="2" ratio={1.618 / 2 / 1}>
@@ -152,22 +152,25 @@ function ResumeItem(props: props) {
             onSubmit={(nextValue) => onTitleChange(resume.id, nextValue)}
             marginX="2"
             width="full"
-            data-cy="title-editable"
+            data-testid="title-editable"
           >
             <EditablePreview
               ref={ref}
               noOfLines={1}
               overflowWrap="anywhere"
-              data-cy="title-preview"
+              data-testid="title-preview"
             />
-            <EditableInput {...form.register("title")} data-cy="title-input" />
+            <EditableInput
+              {...form.register("title")}
+              data-testid="title-input"
+            />
           </Editable>
           <Menu>
             <MenuButton
               as={IconButton}
               size="sm"
               aria-label="More options"
-              data-cy="resume-more-options-menu-button"
+              data-testid="resume-more-options-menu-button"
               icon={<FiMoreHorizontal />}
               mr="2"
               visibility="hidden"
@@ -177,21 +180,21 @@ function ResumeItem(props: props) {
               <MenuItem
                 icon={<FiEdit />}
                 onClick={() => ref.current.focus()}
-                data-cy="rename-menu-item"
+                data-testid="rename-menu-item"
               >
                 {t("rename")}
               </MenuItem>
               <MenuItem
                 icon={<FiCopy />}
                 onClick={() => onDuplicate(resume.id)}
-                data-cy="duplicate-menu-item"
+                data-testid="duplicate-menu-item"
               >
                 {t("duplicate")}
               </MenuItem>
               <MenuItem
                 icon={<FiLink />}
                 onClick={handleOnCopyLink}
-                data-cy="copy-link-menu-item"
+                data-testid="copy-link-menu-item"
               >
                 {t("copy_link")}
               </MenuItem>

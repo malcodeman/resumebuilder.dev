@@ -44,7 +44,7 @@ function EmojiPicker(props: props) {
                   size="sm"
                   icon={icon}
                   aria-label="Import"
-                  data-cy="emoji-picker-icon-button"
+                  data-testid="emoji-picker-icon-button"
                 />
               </PopoverTrigger>
             </Flex>

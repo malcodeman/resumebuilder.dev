@@ -95,7 +95,7 @@ function AddSectionModal(props: props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent data-cy="add-section-modal-content">
+      <ModalContent data-testid="add-section-modal-content">
         <ModalHeader>{t("add_section")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -133,7 +133,7 @@ function AddSectionModal(props: props) {
                   onClick={() =>
                     onSubmit({ label: item.label, name: item.value })
                   }
-                  data-cy="custom-section-button"
+                  data-testid="custom-section-button"
                 >
                   {t(item.labelTransKey)}
                 </Button>

@@ -45,7 +45,7 @@ function DeleteResumeModal(props: props) {
           <Button
             size="sm"
             colorScheme="red"
-            data-cy="delete-this-resume-button"
+            data-testid="delete-this-resume-button"
             onClick={onSubmit}
           >
             {t("yes_delete_this_resume")}

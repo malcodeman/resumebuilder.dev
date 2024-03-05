@@ -154,14 +154,14 @@ function Faq() {
           (item) => (
             <AccordionItem key={item.questionTransKey}>
               <h2>
-                <AccordionButton data-cy="accordion-button">
+                <AccordionButton data-testid="accordion-button">
                   <Box flex="1" textAlign="left">
                     {t(item.questionTransKey)}
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
-              <AccordionPanel pb={4} data-cy="accordion-panel">
+              <AccordionPanel pb={4} data-testid="accordion-panel">
                 {item.answer}
               </AccordionPanel>
             </AccordionItem>

@@ -42,13 +42,13 @@ function PreWrittenPhrasesModal(props: Props) {
         <ModalBody>
           <SearchInput
             mb="2"
-            data-cy="search-input"
+            data-testid="search-input"
             value={name}
             placeholder={t("search_n_phrases", { n: length(phrases) })}
             onChangeValue={(nextValue) => setName(nextValue)}
             onClear={() => setName("")}
           />
-          <Stack spacing="2" data-cy="phrases-stack">
+          <Stack spacing="2" data-testid="phrases-stack">
             {equals(length(filteredPhrases), 0) ? (
               <Text>{t("no_phrases_found")}</Text>
             ) : null}
@@ -59,7 +59,7 @@ function PreWrittenPhrasesModal(props: Props) {
                   key={item.id}
                   isChecked={isChecked}
                   onChange={() => onChange(item.phrase, isChecked)}
-                  data-cy="phrase-checkbox"
+                  data-testid="phrase-checkbox"
                 >
                   <Text fontSize="sm">{item.phrase}</Text>
                 </Checkbox>

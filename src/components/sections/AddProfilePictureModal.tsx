@@ -46,7 +46,7 @@ function AddProfilePictureModal(props: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent data-cy="add-profile-picture-modal-content">
+      <ModalContent data-testid="add-profile-picture-modal-content">
         <ModalHeader>{t("add_profile_picture")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

@@ -48,7 +48,7 @@ function TemplatesTabPanel(props: props) {
       <Grid gap="4" gridTemplateColumns={["1fr", "1fr 1fr"]}>
         {map(
           (item) => (
-            <Box key={item.template} data-cy="template">
+            <Box key={item.template} data-testid="template">
               <Image
                 src={item.src}
                 boxShadow={boxShadow}

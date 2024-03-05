@@ -93,7 +93,7 @@ function About() {
                 variant="filled"
                 size="sm"
                 borderRadius="md"
-                data-cy="first-name-input"
+                data-testid="first-name-input"
                 {...form.register("firstName")}
               />
             </FormControl>
@@ -105,7 +105,7 @@ function About() {
                 variant="filled"
                 size="sm"
                 borderRadius="md"
-                data-cy="last-name-input"
+                data-testid="last-name-input"
                 {...form.register("lastName")}
               />
             </FormControl>
@@ -120,7 +120,7 @@ function About() {
                 <Input
                   variant="filled"
                   borderRadius="md"
-                  data-cy="email-input"
+                  data-testid="email-input"
                   {...form.register("email")}
                 />
               </InputGroup>
@@ -136,7 +136,7 @@ function About() {
                 <Input
                   variant="filled"
                   borderRadius="md"
-                  data-cy="phone-input"
+                  data-testid="phone-input"
                   {...form.register("phone")}
                 />
               </InputGroup>
@@ -149,7 +149,7 @@ function About() {
                 variant="filled"
                 size="sm"
                 borderRadius="md"
-                data-cy="city-input"
+                data-testid="city-input"
                 {...form.register("city")}
               />
             </FormControl>
@@ -161,7 +161,7 @@ function About() {
                 variant="filled"
                 size="sm"
                 borderRadius="md"
-                data-cy="country-input"
+                data-testid="country-input"
                 {...form.register("country")}
               />
             </FormControl>
@@ -175,7 +175,7 @@ function About() {
           colorScheme="blue"
           whileHover="mouseenter"
           type="submit"
-          data-cy="next-button"
+          data-testid="next-button"
           rightIcon={
             <motion.div variants={ARROW_RIGHT_VARIANTS}>
               <FiArrowRight />

@@ -54,7 +54,7 @@ function Hero() {
           whileHover={{ scale: 1.1 }}
           colorScheme="blue"
           mb="4"
-          data-cy="build-for-free-top-button"
+          data-testid="build-for-free-top-button"
           onClick={() => handleOnSubmit()}
         >
           {t("build_for_free")}

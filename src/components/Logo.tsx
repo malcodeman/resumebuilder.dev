@@ -35,7 +35,7 @@ function Logo(props: props) {
             </g>
           </svg>
         </Box>
-        <Text data-cy="resumebuilder-text">resumebuilder.dev</Text>
+        <Text data-testid="resumebuilder-text">resumebuilder.dev</Text>
       </Flex>
     </Link>
   );

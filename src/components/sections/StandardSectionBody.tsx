@@ -88,7 +88,7 @@ function Description({ index, nestIndex, isEmployment }) {
             borderRadius="md"
             height="40"
             sx={utils.getScrollbarStyle()}
-            data-cy="section-nested-description-textarea"
+            data-testid="section-nested-description-textarea"
             {...register(
               `section.${index}.nested.${nestIndex}.description` as const
             )}
@@ -194,7 +194,7 @@ function StandardSectionBody(props: props) {
                         variant="filled"
                         size="sm"
                         borderRadius="md"
-                        data-cy="section-nested-title-input"
+                        data-testid="section-nested-title-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.title`
                         )}
@@ -208,7 +208,7 @@ function StandardSectionBody(props: props) {
                         variant="filled"
                         size="sm"
                         borderRadius="md"
-                        data-cy="section-nested-subtitle-input"
+                        data-testid="section-nested-subtitle-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.subtitle` as const
                         )}
@@ -222,7 +222,7 @@ function StandardSectionBody(props: props) {
                         variant="filled"
                         size="sm"
                         borderRadius="md"
-                        data-cy="section-nested-website-input"
+                        data-testid="section-nested-website-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.website` as const
                         )}
@@ -236,7 +236,7 @@ function StandardSectionBody(props: props) {
                         variant="filled"
                         size="sm"
                         borderRadius="md"
-                        data-cy="section-nested-city-input"
+                        data-testid="section-nested-city-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.city` as const
                         )}
@@ -250,7 +250,7 @@ function StandardSectionBody(props: props) {
                         variant="filled"
                         size="sm"
                         borderRadius="md"
-                        data-cy="section-nested-start-date-input"
+                        data-testid="section-nested-start-date-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.startDate` as const
                         )}
@@ -264,7 +264,7 @@ function StandardSectionBody(props: props) {
                         variant="filled"
                         size="sm"
                         borderRadius="md"
-                        data-cy="section-nested-end-date-input"
+                        data-testid="section-nested-end-date-input"
                         {...register(
                           `section.${index}.nested.${nestIndex}.endDate` as const
                         )}

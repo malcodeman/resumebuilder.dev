@@ -49,7 +49,7 @@ function SectionNewButton({ onSubmit }) {
           leftIcon={<FiPlus />}
           onClick={onOpen}
           justifyContent="flex-start"
-          data-cy="new-section-button"
+          data-testid="new-section-button"
         >
           {t("new_section")}
         </Button>
