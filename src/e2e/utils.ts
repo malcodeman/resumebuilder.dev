@@ -1,5 +1,6 @@
 import { BrowserContext } from "@playwright/test";
 import { Resume } from "types";
+import { find, equals } from "ramda";
 
 async function getLocalStorageItem({
   context,
@@ -10,8 +11,10 @@ async function getLocalStorageItem({
 }) {
   const storageState = await context.storageState();
 
-  return storageState.origins[0].localStorage.find((item) => item.name === name)
-    .value;
+  return find(
+    (item) => equals(item.name, name),
+    storageState.origins[0].localStorage
+  ).value;
 }
 
 async function getResume({
