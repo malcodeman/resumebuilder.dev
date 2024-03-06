@@ -21,7 +21,7 @@ function About() {
         <Text mb="4">{t("about_description_6")}</Text>
         <Stats mb="4" />
         <Box mb="32">
-          <Avatar name="Amer Karamustafić" src="about/avatar.png" />
+          <Avatar name="Amer Karamustafić" src="/about/avatar.png" />
           <Text>Amer Karamustafić, {t("founder_of_resumebuilder")}</Text>
         </Box>
       </Container>

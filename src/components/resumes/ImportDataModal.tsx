@@ -13,7 +13,7 @@ import {
   useToast,
   useBoolean,
 } from "@chakra-ui/react";
-import { isEmpty, map } from "ramda";
+import { equals, isEmpty, map } from "ramda";
 import { FiChevronLeft } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 import FileUploader from "components/misc/FileUploader";
@@ -111,7 +111,9 @@ function ImportDataModal(props: Props) {
                     data-testid={`import-${item.value}`}
                     onClick={() => setSource(item.value)}
                   >
-                    {t(item.label)}
+                    {equals(item.label, "paste_data")
+                      ? t(item.label)
+                      : item.label}
                   </Button>
                 );
               }, IMPORTS)}
