@@ -146,7 +146,6 @@ function Sections(props: props) {
               {fieldArray.fields.map((item, index) => {
                 const props = {
                   index,
-                  key: item.id,
                   id: item.id,
                   label: item.label,
                   name: item.name,
@@ -155,9 +154,9 @@ function Sections(props: props) {
                   append: fieldArray.append,
                 };
                 return utils.isStandardSection(item.name) ? (
-                  <StandardSection {...props} />
+                  <StandardSection key={item.id} {...props} />
                 ) : (
-                  <TagListSection {...props} />
+                  <TagListSection key={item.id} {...props} />
                 );
               })}
             </SortableContext>
