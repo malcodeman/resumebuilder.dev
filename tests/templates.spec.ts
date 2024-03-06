@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
+import { filter, includes, length } from "ramda";
 import utils from "e2e/utils";
 import { TEMPLATES_LIST } from "lib/constants";
-import { filter, includes, length } from "ramda";
 
 test.describe("Templates page", () => {
   test.beforeEach(async ({ page }) => {
