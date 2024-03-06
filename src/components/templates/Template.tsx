@@ -34,7 +34,7 @@ function Template(props: props) {
   );
   const template = find((item) => equals(item.template, id), TEMPLATES_LIST);
   return (
-    <Box>
+    <Box data-testid="template">
       <Image
         src={template.src}
         alt=""

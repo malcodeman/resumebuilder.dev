@@ -34,7 +34,6 @@ test.describe("Landing page", () => {
   });
   test("See all templates button", async ({ page, baseURL, context }) => {
     await page.getByTestId("see-all-templates-button").click();
-
     await expect(page).toHaveURL(`${baseURL}/en/templates`);
   });
   test("Use berlin template", async ({ page, baseURL, context }) => {
