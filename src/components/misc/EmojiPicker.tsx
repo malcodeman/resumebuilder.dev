@@ -8,9 +8,13 @@ import {
   Flex,
   useColorMode,
 } from "@chakra-ui/react";
-import { EmojiData, Picker, Emoji } from "emoji-mart";
+import Picker from "@emoji-mart/react";
+import data from "@emoji-mart/data";
 import { FiFileText } from "react-icons/fi";
 import { isNil, isEmpty, or } from "ramda";
+import { useLocale } from "next-intl";
+import Emoji from "components/misc/Emoji";
+import { Emoji as EmojiType } from "types";
 
 const TOOLTIP_LABEL = "Change icon";
 
@@ -22,14 +26,15 @@ type props = {
 function EmojiPicker(props: props) {
   const { emoji, onSelect } = props;
   const { colorMode } = useColorMode();
+  const locale = useLocale();
   const icon = or(isNil(emoji), isEmpty(emoji)) ? (
     <FiFileText />
   ) : (
-    <Emoji size={16} emoji={emoji} />
+    <Emoji shortcodes={emoji} />
   );
 
-  function handleOnSelect(emoji: EmojiData, onClose: () => void) {
-    onSelect(emoji.colons);
+  function handleOnSelect(emoji: EmojiType, onClose: () => void) {
+    onSelect(emoji.shortcodes);
     onClose();
   }
 
@@ -51,10 +56,13 @@ function EmojiPicker(props: props) {
           </Tooltip>
           <PopoverContent width="unset">
             <Picker
+              data={data}
               theme={colorMode}
-              showPreview={false}
-              showSkinTones={false}
-              onSelect={(emoji) => handleOnSelect(emoji, onClose)}
+              previewPosition="none"
+              locale={locale}
+              onEmojiSelect={(emoji: EmojiType) =>
+                handleOnSelect(emoji, onClose)
+              }
             />
           </PopoverContent>
         </>

@@ -3,7 +3,6 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { IconContext } from "react-icons";
-import "emoji-mart/css/emoji-mart.css";
 
 const THEME = extendTheme({
   styles: {

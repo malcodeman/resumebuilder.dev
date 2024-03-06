@@ -82,6 +82,14 @@ type TemplateProps = {
   profilePicture: string;
 };
 type TemplateTags = "all" | "simple" | "creative" | "professional";
+type Emoji = {
+  id: string;
+  keywords: string[];
+  name: string;
+  native: string;
+  shortcodes: string;
+  unified: string;
+};
 
 export type {
   Template,
@@ -100,4 +108,5 @@ export type {
   LocalStorageKey,
   TemplateProps,
   TemplateTags,
+  Emoji,
 };
