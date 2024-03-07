@@ -6,15 +6,16 @@ import {
   IconButton,
   PopoverContent,
   Flex,
-  useColorMode,
+  PopoverHeader,
+  PopoverCloseButton,
+  PopoverBody,
+  Text,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
-import Picker from "@emoji-mart/react";
-import data from "@emoji-mart/data";
-import { FiFileText } from "react-icons/fi";
-import { isNil, isEmpty, or } from "ramda";
-import { useLocale } from "next-intl";
-import Emoji from "components/misc/Emoji";
-import { Emoji as EmojiType } from "types";
+import { values, map, find } from "ramda";
+import native from "emojis/native.json";
+import { useTranslations } from "next-intl";
 
 const TOOLTIP_LABEL = "Change icon";
 
@@ -23,18 +24,22 @@ type props = {
   onSelect: (emoji: string) => void;
 };
 
+const EMOJIS = values(native.emojis);
+const DEFAULT_EMOJI = find((e) => e.id === "page_facing_up", EMOJIS).skins[0]
+  .native;
+
 function EmojiPicker(props: props) {
   const { emoji, onSelect } = props;
-  const { colorMode } = useColorMode();
-  const locale = useLocale();
-  const icon = or(isNil(emoji), isEmpty(emoji)) ? (
-    <FiFileText />
-  ) : (
-    <Emoji shortcodes={emoji} />
+  const icon = (
+    <Text as="span" fontSize="16px">
+      {EMOJIS.find((e) => `:${e.id}:` === emoji)?.skins[0].native ||
+        DEFAULT_EMOJI}
+    </Text>
   );
+  const t = useTranslations();
 
-  function handleOnSelect(emoji: EmojiType, onClose: () => void) {
-    onSelect(emoji.shortcodes);
+  function handleOnSelect(id: string, onClose: () => void) {
+    onSelect(`:${id}:`);
     onClose();
   }
 
@@ -54,16 +59,29 @@ function EmojiPicker(props: props) {
               </PopoverTrigger>
             </Flex>
           </Tooltip>
-          <PopoverContent width="unset">
-            <Picker
-              data={data}
-              theme={colorMode}
-              previewPosition="none"
-              locale={locale}
-              onEmojiSelect={(emoji: EmojiType) =>
-                handleOnSelect(emoji, onClose)
-              }
-            />
+          <PopoverContent>
+            <PopoverHeader>👇 {t("pick_an_emoji")}</PopoverHeader>
+            <PopoverCloseButton />
+            <PopoverBody maxHeight="256px" overflowY="scroll">
+              <Wrap>
+                {map(
+                  (emoji) => (
+                    <WrapItem
+                      key={emoji.id}
+                      title={emoji.id}
+                      cursor="pointer"
+                      data-testid="emoji"
+                      onClick={() => handleOnSelect(emoji.id, onClose)}
+                    >
+                      <Text as="span" fontSize="16px">
+                        {emoji.skins[0].native}
+                      </Text>
+                    </WrapItem>
+                  ),
+                  EMOJIS
+                )}
+              </Wrap>
+            </PopoverBody>
           </PopoverContent>
         </>
       )}

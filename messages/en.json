@@ -189,5 +189,6 @@
   "import_from_linkedin_list_item_1": "Under the How LinkedIn uses your data section, click <text>Get a copy of your data</text>.",
   "import_from_linkedin_list_item_2": "Select the data that you're looking for and <text>Request archive</text>.",
   "sections": "Sections",
-  "preview": "Preview"
+  "preview": "Preview",
+  "pick_an_emoji": "Pick an emoji"
 }
