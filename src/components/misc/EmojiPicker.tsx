@@ -13,7 +13,7 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { values, map, find } from "ramda";
+import { values, map, find, equals } from "ramda";
 import native from "emojis/native.json";
 import { useTranslations } from "next-intl";
 
@@ -25,18 +25,18 @@ type props = {
 };
 
 const EMOJIS = values(native.emojis);
-const DEFAULT_EMOJI = find((e) => e.id === "page_facing_up", EMOJIS).skins[0]
-  .native;
+const DEFAULT_EMOJI = find((e) => equals(e.id, "page_facing_up"), EMOJIS)
+  .skins[0].native;
 
 function EmojiPicker(props: props) {
   const { emoji, onSelect } = props;
+  const t = useTranslations();
   const icon = (
     <Text as="span" fontSize="16px">
-      {EMOJIS.find((e) => `:${e.id}:` === emoji)?.skins[0].native ||
+      {EMOJIS.find((e) => equals(`:${e.id}:`, emoji))?.skins[0].native ||
         DEFAULT_EMOJI}
     </Text>
   );
-  const t = useTranslations();
 
   function handleOnSelect(id: string, onClose: () => void) {
     onSelect(`:${id}:`);
