@@ -147,7 +147,7 @@ describe("Resumes page", () => {
     cy.get("[data-testid=emoji]")
       .first()
       .click()
-      .should(() => expect(getResume(0).icon).to.eq(":+1:"));
+      .should(() => expect(getResume(0).icon).to.eq(":100:"));
   });
   it("Change icon | List view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
@@ -156,7 +156,7 @@ describe("Resumes page", () => {
     cy.get("[data-testid=emoji]")
       .first()
       .click({ force: true })
-      .should(() => expect(getResume(0).icon).to.eq(":+1:"));
+      .should(() => expect(getResume(0).icon).to.eq(":100:"));
   });
   it("Rename resume | Grid view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));

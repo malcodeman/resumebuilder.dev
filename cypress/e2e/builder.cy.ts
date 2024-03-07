@@ -27,7 +27,7 @@ describe("Builder page", () => {
     cy.get("[data-testid=emoji]")
       .first()
       .click()
-      .should(() => expect(getResume().icon).to.eq(":+1:"));
+      .should(() => expect(getResume().icon).to.eq(":100:"));
   });
   it("Rename resume", () => {
     cy.get("[data-testid=title-editable]").click();
