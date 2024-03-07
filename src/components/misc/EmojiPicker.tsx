@@ -60,7 +60,12 @@ function EmojiPicker(props: props) {
             </Flex>
           </Tooltip>
           <PopoverContent>
-            <PopoverHeader>👇 {t("pick_an_emoji")}</PopoverHeader>
+            <PopoverHeader>
+              <Text as="span" fontSize="16px">
+                👇
+              </Text>{" "}
+              {t("pick_an_emoji")}
+            </PopoverHeader>
             <PopoverCloseButton />
             <PopoverBody maxHeight="256px" overflowY="scroll">
               <Wrap>
