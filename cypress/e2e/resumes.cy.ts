@@ -144,19 +144,19 @@ describe("Resumes page", () => {
   it("Change icon | Grid view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
     cy.get("[data-testid=emoji-picker-icon-button]").click();
-    cy.get(".emoji-mart-emoji")
+    cy.get("[data-testid=emoji]")
       .first()
       .click()
-      .should(() => expect(getResume(0).icon).to.eq(":+1:"));
+      .should(() => expect(getResume(0).icon).to.eq(":100:"));
   });
   it("Change icon | List view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));
     cy.get("[data-testid=list-view-icon-button]").click();
     cy.get("[data-testid=emoji-picker-icon-button]").click();
-    cy.get(".emoji-mart-emoji")
+    cy.get("[data-testid=emoji]")
       .first()
       .click({ force: true })
-      .should(() => expect(getResume(0).icon).to.eq(":+1:"));
+      .should(() => expect(getResume(0).icon).to.eq(":100:"));
   });
   it("Rename resume | Grid view", () => {
     localStorage.setItem("resumes", JSON.stringify(resumes));

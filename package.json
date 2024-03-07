@@ -33,7 +33,6 @@
     "@vercel/speed-insights": "^1.0.3",
     "axios": "^1.5.0",
     "date-fns": "^2.23.0",
-    "emoji-mart": "3.0.1",
     "file-saver": "^2.0.5",
     "framer-motion": "7.5.1",
     "html-to-image": "^1.10.8",
@@ -54,7 +53,6 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.42.1",
-    "@types/emoji-mart": "^3.0.5",
     "@types/file-saver": "^2.0.2",
     "@types/keyboardjs": "^2.5.0",
     "@types/node": "^18.7.23",
