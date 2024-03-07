@@ -64,7 +64,7 @@ import { Link } from "navigation";
 function ResumeGrid() {
   const t = useTranslations();
   const { resumes, duplicate, remove, changeTitle, changeIcon, move } =
-    useResumes({ initializeWithStorageValue: false });
+    useResumes();
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {

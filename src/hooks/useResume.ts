@@ -4,31 +4,14 @@ import { isNil, find, map, filter, equals, or, clone, isEmpty } from "ramda";
 import { nanoid } from "nanoid";
 import { Resume } from "types";
 
-type props = {
-  isolated?: boolean;
-  handleStorageEvent?: boolean;
-  storeDefaultValue?: boolean;
-  initializeWithStorageValue?: boolean;
-};
-
-function useResume(props: props = {}) {
-  const {
-    isolated = false,
-    handleStorageEvent = true,
-    storeDefaultValue = false,
-    initializeWithStorageValue = false,
-  } = props;
+function useResume() {
   const id = useParams().id;
-  const [resumes, setResumes] = useLocalStorageValue<Resume[] | null>(
-    "resumes",
-    [],
-    {
-      isolated,
-      handleStorageEvent,
-      storeDefaultValue,
-      initializeWithStorageValue,
-    }
-  );
+  const { value: resumes, set: setResumes } = useLocalStorageValue<
+    Resume[] | null
+  >("resumes", {
+    defaultValue: [],
+    initializeWithValue: false,
+  });
   const resume = isNil(resumes)
     ? undefined
     : find((item) => equals(item.id, id), resumes);

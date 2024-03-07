@@ -17,30 +17,13 @@ import { getDate, getMonth } from "date-fns";
 import { DEFAULT_VALUES } from "lib/constants";
 import { Design, Fields, Resume } from "types";
 
-type props = {
-  isolated?: boolean;
-  handleStorageEvent?: boolean;
-  storeDefaultValue?: boolean;
-  initializeWithStorageValue?: boolean;
-};
-
-function useResumes(props: props = {}) {
-  const {
-    isolated = false,
-    handleStorageEvent = true,
-    storeDefaultValue = false,
-    initializeWithStorageValue = false,
-  } = props;
-  const [resumes, setResumes] = useLocalStorageValue<Resume[] | null>(
-    "resumes",
-    [],
-    {
-      isolated,
-      handleStorageEvent,
-      storeDefaultValue,
-      initializeWithStorageValue,
-    }
-  );
+function useResumes() {
+  const { value: resumes, set: setResumes } = useLocalStorageValue<
+    Resume[] | null
+  >("resumes", {
+    defaultValue: [],
+    initializeWithValue: false,
+  });
 
   function remove(id: string) {
     const nextResumes = filter((item) => item.id !== id, resumes);
