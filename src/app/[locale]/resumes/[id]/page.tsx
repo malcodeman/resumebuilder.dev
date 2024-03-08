@@ -33,7 +33,9 @@ function Builder() {
   const { resume, isLoading } = useResume();
   const form = useForm<Resume>();
   const [_viewDashboard, setViewDashboard] = useLocalStorage("view-dashboard");
-  const isLargeDevice = useMediaQuery("(min-width: 62em)");
+  const isLargeDevice = useMediaQuery("(min-width: 62em)", {
+    initializeWithValue: false,
+  });
 
   React.useEffect(() => {
     if (resume) {

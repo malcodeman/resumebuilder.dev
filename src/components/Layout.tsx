@@ -11,7 +11,9 @@ type props = {
 
 function Layout(props: props) {
   const { children } = props;
-  const isLargeDevice = useMediaQuery("(min-width: 62em)");
+  const isLargeDevice = useMediaQuery("(min-width: 62em)", {
+    initializeWithValue: false,
+  });
   return (
     <>
       {isLargeDevice ? <Header /> : null}

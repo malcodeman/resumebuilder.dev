@@ -76,7 +76,9 @@ function ResumeGrid() {
   const [view, setView] = React.useState<View>("grid");
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-  const isSmallDevice = useMediaQuery("(max-width: 48em)");
+  const isSmallDevice = useMediaQuery("(max-width: 48em)", {
+    initializeWithValue: false,
+  });
   const columnHelper = createColumnHelper<Resume>();
   const toast = useToast();
   const handleOnDelete = React.useCallback(

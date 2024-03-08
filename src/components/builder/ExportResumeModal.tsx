@@ -42,7 +42,9 @@ function ExportResumeModal(props: props) {
     onPngExport,
   } = props;
   const t = useTranslations();
-  const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
+  const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)", {
+    initializeWithValue: false,
+  });
   const [isPdfViewer] = useLocalStorage("is-pdf-viewer");
 
   function handleOnSubmit(format: Export) {
