@@ -7,7 +7,7 @@ import { Resume } from "types";
 function useResume() {
   const id = useParams().id;
   const { value: resumes, set: setResumes } = useLocalStorageValue<
-    Resume[] | null
+    Resume[] | undefined
   >("resumes", {
     defaultValue: [],
     initializeWithValue: false,

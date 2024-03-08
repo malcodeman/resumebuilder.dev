@@ -19,7 +19,7 @@ import { Design, Fields, Resume } from "types";
 
 function useResumes() {
   const { value: resumes, set: setResumes } = useLocalStorageValue<
-    Resume[] | null
+    Resume[] | undefined
   >("resumes", {
     defaultValue: [],
     initializeWithValue: false,
