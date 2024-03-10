@@ -59,7 +59,7 @@ function Templates() {
             "choose_from_any_of_our_free_templates_that_best_fit_your_personal_and_professional_needs"
           )}
         </Text>
-        <Link href="/templates">
+        <Link href="/templates" passHref>
           <Button
             as={motion.button}
             whileHover="mouseenter"
