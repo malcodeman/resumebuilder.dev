@@ -9,8 +9,8 @@ function useDateFnsLocale() {
   React.useEffect(() => {
     function getLocale() {
       switch (language) {
+        default:
         case "en":
-        case "default":
           return enUS;
         case "bs":
           return bs;
