@@ -22,6 +22,7 @@ function SectionLabel(props: { children: React.ReactNode }) {
 function Tokyo(props: TemplateProps) {
   const {
     isPdf = false,
+    isDescendantOfLink = false,
     hideSensitiveData = false,
     design,
     fields,
@@ -79,7 +80,9 @@ function Tokyo(props: TemplateProps) {
   }
 
   return (
-    <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
+    <TemplateContext.Provider
+      value={{ isPdf, isDescendantOfLink, spacing: design.spacing }}
+    >
       <Page id="tokyo" pt={20} pr={40} pb={20} pl={40}>
         {isEmpty(profilePicture) ? null : (
           <Flex mb={10} justifyContent="center">

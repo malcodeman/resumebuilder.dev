@@ -22,6 +22,7 @@ function SectionLabel(props: { children: React.ReactNode }) {
 function Nairobi(props: TemplateProps) {
   const {
     isPdf = false,
+    isDescendantOfLink = false,
     hideSensitiveData = false,
     design,
     fields,
@@ -93,7 +94,9 @@ function Nairobi(props: TemplateProps) {
   }
 
   return (
-    <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
+    <TemplateContext.Provider
+      value={{ isPdf, isDescendantOfLink, spacing: design.spacing }}
+    >
       <Page id="nairobi">
         <Flex minHeight="100%">
           <Box pt={40} pr={20} pb={40} pl={20} width="75%">
