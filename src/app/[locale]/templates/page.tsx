@@ -11,8 +11,8 @@ import {
 } from "lib/constants";
 import { Template as TemplateType } from "types";
 import SearchInput from "components/misc/SearchInput";
-import Template from "components/templates/Template";
-import Footer from "components/misc/Footer";
+import Template from "app/[locale]/templates/components/Template";
+import Footer from "app/[locale]/components/Footer";
 import useResumes from "hooks/useResumes";
 import { useRouter } from "navigation";
 

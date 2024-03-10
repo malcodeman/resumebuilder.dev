@@ -22,7 +22,7 @@ import { motion } from "framer-motion";
 import { equals, find, isNil, length, map } from "ramda";
 import useResume from "hooks/useResume";
 import NotFound from "components/misc/NotFound";
-import StepsNavigation from "components/builder/StepsNavigation";
+import StepsNavigation from "app/[locale]/resumes/[id]/components/StepsNavigation";
 import { useRouter } from "navigation";
 import { NestedField, SectionField } from "types";
 
