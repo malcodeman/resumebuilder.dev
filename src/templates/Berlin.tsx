@@ -28,6 +28,7 @@ function SectionLabel(props: { children: React.ReactNode }) {
 function Berlin(props: TemplateProps) {
   const {
     isPdf = false,
+    isDescendantOfLink = false,
     hideSensitiveData = false,
     design,
     fields,
@@ -170,7 +171,9 @@ function Berlin(props: TemplateProps) {
   }
 
   return (
-    <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
+    <TemplateContext.Provider
+      value={{ isPdf, isDescendantOfLink, spacing: design.spacing }}
+    >
       <Page id="berlin" pt={40} pr={80} pb={40} pl={80}>
         {renderProfilePictureOrInitials()}
         <Box mb={16}>

@@ -28,7 +28,13 @@ function SectionLabel(props: { children: React.ReactNode }) {
 }
 
 function Rio(props: TemplateProps) {
-  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
+  const {
+    isPdf = false,
+    isDescendantOfLink = false,
+    hideSensitiveData = false,
+    design,
+    fields,
+  } = props;
   const { about, section } = fields;
 
   function renderSummary(summary: string) {
@@ -82,7 +88,9 @@ function Rio(props: TemplateProps) {
   }
 
   return (
-    <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
+    <TemplateContext.Provider
+      value={{ isPdf, isDescendantOfLink, spacing: design.spacing }}
+    >
       <Page id="rio" pt={20} pr={40} pb={20} pl={40}>
         <Box mb={16}>
           <Flex mb={16} alignItems="center" justifyContent="space-between">

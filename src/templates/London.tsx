@@ -28,7 +28,13 @@ function SectionLabel(props: { children: React.ReactNode }) {
 }
 
 function London(props: TemplateProps) {
-  const { isPdf = false, hideSensitiveData = false, design, fields } = props;
+  const {
+    isPdf = false,
+    isDescendantOfLink = false,
+    hideSensitiveData = false,
+    design,
+    fields,
+  } = props;
   const { about, section } = fields;
 
   function renderProfile() {
@@ -108,7 +114,9 @@ function London(props: TemplateProps) {
   }
 
   return (
-    <TemplateContext.Provider value={{ isPdf, spacing: design.spacing }}>
+    <TemplateContext.Provider
+      value={{ isPdf, isDescendantOfLink, spacing: design.spacing }}
+    >
       <Page id="london">
         <Flex
           mb={16}

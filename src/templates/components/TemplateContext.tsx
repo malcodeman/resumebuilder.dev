@@ -1,3 +1,7 @@
 import { createContext } from "react";
 
-export default createContext({ isPdf: false, spacing: 1 });
+export default createContext({
+  isPdf: false,
+  isDescendantOfLink: false,
+  spacing: 1,
+});

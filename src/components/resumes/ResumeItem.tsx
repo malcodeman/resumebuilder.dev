@@ -136,6 +136,7 @@ function ResumeItem(props: props) {
                 section: resume.section,
               },
               profilePicture,
+              isDescendantOfLink: true,
             })}
           </Box>
         </AspectRatio>

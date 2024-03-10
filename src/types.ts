@@ -76,6 +76,7 @@ type LocalStorageKey =
   | "view-dashboard";
 type TemplateProps = {
   isPdf?: boolean;
+  isDescendantOfLink?: boolean;
   hideSensitiveData?: boolean;
   design: Design;
   fields: Fields;
