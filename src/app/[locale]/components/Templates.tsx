@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 import { TEMPLATES_LIST, DEFAULT_VALUES } from "lib/constants";
 import { Template as TemplateType } from "types";
 import useResumes from "hooks/useResumes";
-import Template from "components/templates/Template";
+import Template from "app/[locale]/templates/components/Template";
 import { Link, useRouter } from "navigation";
 
 const ARROW_RIGHT_VARIANTS = {
