@@ -12,7 +12,7 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { isNil } from "ramda";
+import { equals, isNil } from "ramda";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import { useTranslations } from "next-intl";
 import Sections from "components/sections/Sections";
@@ -38,7 +38,7 @@ function Builder() {
   });
 
   React.useEffect(() => {
-    if (resume) {
+    if (resume && !equals(form.getValues(), resume)) {
       form.reset(resume);
     }
   }, [resume, form]);
