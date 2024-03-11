@@ -319,7 +319,7 @@ function DeleteResume() {
   const t = useTranslations();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { remove } = useResume({ isolated: true });
+  const { remove } = useResume();
   const toast = useToast();
 
   function handleOnDelete() {

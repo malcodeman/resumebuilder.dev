@@ -80,7 +80,9 @@ function Sections(props: props) {
       },
     })
   );
-  const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)");
+  const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)", {
+    initializeWithValue: false,
+  });
   const [activeLabel, setActiveLabel] = React.useState("");
 
   function handleOnDragStart(event: DragStartEvent) {

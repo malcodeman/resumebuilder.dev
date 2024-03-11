@@ -17,7 +17,7 @@ type props = HTMLChakraProps<"div"> & {
 
 function ResumeTitle(props: props) {
   const { form } = props;
-  const { resume, changeIcon, changeTitle } = useResume({ isolated: true });
+  const { resume, changeIcon, changeTitle } = useResume();
 
   function handleOnIconChange(icon: string) {
     changeIcon(icon);

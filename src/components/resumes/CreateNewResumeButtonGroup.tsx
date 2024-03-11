@@ -24,7 +24,9 @@ function NewButton() {
   const t = useTranslations();
   const router = useRouter();
   const { createNew } = useResumes();
-  const isMediumDevice = useMediaQuery("(min-width: 30em)");
+  const isMediumDevice = useMediaQuery("(min-width: 30em)", {
+    initializeWithValue: false,
+  });
   const [isLoading, setIsLoading] = useBoolean();
 
   useKeyboardEvent(

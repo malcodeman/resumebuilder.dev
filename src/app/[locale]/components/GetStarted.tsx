@@ -43,7 +43,9 @@ function GetStarted() {
     "landing/builder-screenshot-desktop-light.png",
     "landing/builder-screenshot-desktop-dark.png"
   );
-  const isSmallDevice = useMediaQuery("(min-width: 30em)");
+  const isSmallDevice = useMediaQuery("(min-width: 30em)", {
+    initializeWithValue: false,
+  });
   const screenshotSource = isSmallDevice
     ? screenshotSourceDesktop
     : screenshotSourceMobile;

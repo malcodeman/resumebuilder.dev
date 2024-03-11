@@ -12,7 +12,7 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { isNil } from "ramda";
+import { equals, isNil } from "ramda";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import { useTranslations } from "next-intl";
 import Sections from "components/sections/Sections";
@@ -30,13 +30,15 @@ import { Resume, Template } from "types";
 
 function Builder() {
   const t = useTranslations();
-  const { resume, isLoading } = useResume({ isolated: true });
+  const { resume, isLoading } = useResume();
   const form = useForm<Resume>();
   const [_viewDashboard, setViewDashboard] = useLocalStorage("view-dashboard");
-  const isLargeDevice = useMediaQuery("(min-width: 62em)");
+  const isLargeDevice = useMediaQuery("(min-width: 62em)", {
+    initializeWithValue: false,
+  });
 
   React.useEffect(() => {
-    if (resume) {
+    if (resume && !equals(form.getValues(), resume)) {
       form.reset(resume);
     }
   }, [resume, form]);

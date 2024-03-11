@@ -64,7 +64,7 @@ import { Link } from "navigation";
 function ResumeGrid() {
   const t = useTranslations();
   const { resumes, duplicate, remove, changeTitle, changeIcon, move } =
-    useResumes({ initializeWithStorageValue: false });
+    useResumes();
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -76,7 +76,9 @@ function ResumeGrid() {
   const [view, setView] = React.useState<View>("grid");
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-  const isSmallDevice = useMediaQuery("(max-width: 48em)");
+  const isSmallDevice = useMediaQuery("(max-width: 48em)", {
+    initializeWithValue: false,
+  });
   const columnHelper = createColumnHelper<Resume>();
   const toast = useToast();
   const handleOnDelete = React.useCallback(
