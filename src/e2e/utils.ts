@@ -52,6 +52,7 @@ async function setResume({ page }: { page: Page }): Promise<Resume> {
     (value) => localStorage.setItem("resumes", value),
     JSON.stringify([resume])
   );
+  await page.reload();
 
   return resume;
 }
