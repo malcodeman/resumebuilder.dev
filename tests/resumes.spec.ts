@@ -73,11 +73,11 @@ test.describe("Resumes page", () => {
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });
-  test("Create resume button | Halloween", async ({ page, context }) => {
+  test("Create resume button | Halloween", async ({ page }) => {
     await utils.setResume({ page });
     await page.getByTestId("create-resume-button").click();
 
-    const resume = await utils.getResume({ context });
+    // const resume = await utils.getResume({ context });
 
     // expect(resume.icon).toBe(":ghost:");
   });
