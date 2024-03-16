@@ -27,16 +27,23 @@ async function getResume({
     context,
     name: "resumes",
   });
+  const parsed = JSON.parse(resumes);
 
-  return JSON.parse(resumes)[0];
+  return parsed[parsed.length - 1];
 }
 
-async function setResume({ page }: { page: Page }): Promise<Resume> {
+async function setResume({
+  page,
+  title = "Untitled resume",
+}: {
+  page: Page;
+  title?: string;
+}): Promise<Resume> {
   const fields = utils.generateFakeResume();
   const resume: Resume = {
     id: "1",
     version: "1.0.0",
-    title: "Untitled resume",
+    title,
     icon: "",
     createdAt: Date.now(),
     updatedAt: Date.now(),

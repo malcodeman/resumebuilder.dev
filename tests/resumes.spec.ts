@@ -32,7 +32,7 @@ test.describe("Resumes page", () => {
 
     await expect(page).toHaveURL(`${baseURL}/en/templates`);
   });
-  test("Search | Not found", async ({ page, context, baseURL }) => {
+  test("Search | Not found", async ({ page }) => {
     await utils.setResume({ page });
 
     const input = page.getByTestId("search-input").getByRole("textbox");
@@ -45,87 +45,89 @@ test.describe("Resumes page", () => {
       "No resumes found"
     );
   });
+  test("Search | Found", async ({ page }) => {
+    await utils.setResume({ page, title: "Playwright" });
 
-  //   it("Search | Not found", () => {
-  //     localStorage.setItem("resumes", JSON.stringify(resumes));
-  //     cy.get("[data-testid=search-input]").type("malcodeman");
-  //     cy.contains("No resumes found");
-  //   });
-  //   it("Search | Found", () => {
-  //     localStorage.setItem("resumes", JSON.stringify(resumes));
-  //     cy.get("[data-testid=search-input]").type("Cypress");
-  //     cy.get("[data-testid=resume]").should("have.length", 1);
-  //   });
-  //   it("List view", () => {
-  //     localStorage.setItem("resumes", JSON.stringify(resumes));
-  //     cy.get("[data-testid=list-view-icon-button]").click();
-  //     cy.get("[data-testid=table-row]").should("have.length", 1);
-  //   });
-  //   it("Create resume button", () => {
-  //     localStorage.setItem("resumes", JSON.stringify(resumes));
-  //     cy.intercept({
-  //       method: "GET",
-  //       url: "**/resumes/**",
-  //     }).as("getResume");
-  //     cy.get("[data-testid=create-resume-button]")
-  //       .click()
-  //       .should(() =>
-  //         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array")
-  //       );
-  //     cy.get("[data-testid=resume]").should("have.length", 2);
-  //     cy.wait("@getResume");
-  //     cy.url().should("include", "/en/resumes/");
-  //   });
-  //   it("Create resume button | Halloween", () => {
-  //     localStorage.setItem("resumes", JSON.stringify(resumes));
-  //     cy.clock(Date.UTC(2022, 9, 31), ["Date"]);
-  //     cy.get("[data-testid=create-resume-button]")
-  //       .click()
-  //       .should(() => expect(getResume(1).icon).to.eq(":ghost:"));
-  //   });
-  //   it("Create resume button | New Year's Eve", () => {
-  //     localStorage.setItem("resumes", JSON.stringify(resumes));
-  //     cy.clock(Date.UTC(2022, 11, 31), ["Date"]);
-  //     cy.get("[data-testid=create-resume-button]")
-  //       .click()
-  //       .should(() => expect(getResume(1).icon).to.eq(":fireworks:"));
-  //   });
-  //   it("Create resume button | New Year's Day", () => {
-  //     localStorage.setItem("resumes", JSON.stringify(resumes));
-  //     cy.clock(Date.UTC(2022, 0, 1), ["Date"]);
-  //     cy.get("[data-testid=create-resume-button]")
-  //       .click()
-  //       .should(() => expect(getResume(1).icon).to.eq(":fireworks:"));
-  //   });
-  //   it("GitHub | Import", () => {
-  //     localStorage.setItem("resumes", JSON.stringify(resumes));
-  //     const username = "malcodeman";
-  //     cy.intercept({
-  //       method: "GET",
-  //       url: `https://api.github.com/users/${username}`,
-  //     }).as("getUser");
-  //     cy.intercept({
-  //       method: "GET",
-  //       url: `https://api.github.com/users/${username}/repos`,
-  //     }).as("getRepos");
-  //     cy.intercept({
-  //       method: "GET",
-  //       url: "**/resumes/**",
-  //     }).as("getResume");
-  //     cy.get("[data-testid=import-icon-button]").click();
-  //     cy.get("[data-testid=import-github]").click();
-  //     cy.get("[data-testid=import-github-username]").type(username);
-  //     cy.get("[data-testid=import-github-submit]")
-  //       .click()
-  //       .should(() => {
-  //         expect(JSON.parse(localStorage.getItem("resumes"))).to.be.a("array");
-  //       });
-  //     cy.wait("@getUser");
-  //     cy.wait("@getRepos");
-  //     cy.get("[data-testid=resume]").should("have.length", 2);
-  //     cy.wait("@getResume");
-  //     cy.url().should("include", "/resumes/");
-  //   });
+    const input = page.getByTestId("search-input").getByRole("textbox");
+    const name = "Playwright";
+
+    await input.fill(name);
+    await expect(input).toHaveValue(name);
+
+    expect(await page.getByTestId("resume").count()).toBe(1);
+  });
+  test("List view", async ({ page }) => {
+    await utils.setResume({ page });
+
+    await page.getByTestId("list-view-icon-button").click();
+
+    expect(await page.getByTestId("table-row").count()).toBe(1);
+  });
+  test("Create resume button", async ({ page, context, baseURL }) => {
+    await utils.setResume({ page });
+    await page.getByTestId("create-resume-button").click();
+
+    expect(await page.getByTestId("resume").count()).toBe(2);
+
+    const resume = await utils.getResume({ context });
+
+    await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
+  });
+  test("Create resume button | Halloween", async ({ page, context }) => {
+    await utils.setResume({ page });
+    await page.getByTestId("create-resume-button").click();
+
+    const resume = await utils.getResume({ context });
+
+    // expect(resume.icon).toBe(":ghost:");
+  });
+  test("Create resume button | New Year's Eve", async ({ page, context }) => {
+    await utils.setResume({ page });
+    await page.getByTestId("create-resume-button").click();
+
+    const resume = await utils.getResume({ context });
+
+    // expect(resume.icon).toBe(":fireworks:");
+  });
+  test("Create resume button | New Year's Day", async ({ page, context }) => {
+    await utils.setResume({ page });
+    await page.getByTestId("create-resume-button").click();
+
+    const resume = await utils.getResume({ context });
+
+    // expect(resume.icon).toBe(":fireworks:");
+  });
+  test("GitHub | Import", async ({ page, context, baseURL }) => {
+    await utils.setResume({ page });
+    await page.getByTestId("import-icon-button").click();
+    await page.getByTestId("import-github").click();
+
+    const input = page.getByTestId("import-github-username");
+    const username = "malcodeman";
+
+    await input.fill(username);
+    await expect(input).toHaveValue(username);
+    await page.getByTestId("import-github-submit").click();
+
+    const response1 = await page.waitForResponse(
+      `https://api.github.com/users/${username}`
+    );
+    const body1 = await response1.json();
+
+    expect(body1.login).toBe(username);
+
+    const response2 = await page.waitForResponse(
+      `https://api.github.com/users/${username}/repos`
+    );
+    await response2.json();
+
+    expect(await page.getByTestId("resume").count()).toBe(2);
+
+    const resume = await utils.getResume({ context });
+
+    await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
+  });
+
   //   it("Paste data | Import", () => {
   //     localStorage.setItem("resumes", JSON.stringify(resumes));
   //     cy.intercept({
