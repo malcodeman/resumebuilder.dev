@@ -32,13 +32,7 @@ async function getResume({
   return parsed[parsed.length - 1];
 }
 
-async function setResume({
-  page,
-  title = "Untitled resume",
-}: {
-  page: Page;
-  title?: string;
-}): Promise<Resume> {
+async function generateFakeResume({ title = "Untitled resume" }) {
   const fields = utils.generateFakeResume();
   const resume: Resume = {
     id: "1",
@@ -55,6 +49,18 @@ async function setResume({
     section: fields.section,
   };
 
+  return resume;
+}
+
+async function setResume({
+  page,
+  title,
+}: {
+  page: Page;
+  title?: string;
+}): Promise<Resume> {
+  const resume = await generateFakeResume({ title });
+
   await page.evaluate(
     (value) => localStorage.setItem("resumes", value),
     JSON.stringify([resume])
@@ -68,6 +74,7 @@ const EXPORTS = {
   getLocalStorageItem,
   getResume,
   setResume,
+  generateFakeResume,
 };
 
 export default EXPORTS;
