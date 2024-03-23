@@ -39,37 +39,29 @@ function useResumes() {
       createdAt: Date.now(),
       updatedAt: Date.now(),
     };
-    setResumes([...resumes, value]);
+    setResumes((prevResumes) => [...prevResumes, value]);
+  }
+
+  function changeProperty(id: string, property: keyof Resume, value: string) {
+    setResumes((prevResumes) =>
+      map((item) => {
+        if (equals(item.id, id)) {
+          return {
+            ...item,
+            [property]: value,
+          };
+        }
+        return item;
+      }, prevResumes)
+    );
   }
 
   function changeTitle(id: string, title: string) {
-    if (!isEmpty(title)) {
-      const nextResumes = map((item) => {
-        if (equals(item.id, id)) {
-          return {
-            ...item,
-            title,
-          };
-        }
-        return item;
-      }, resumes);
-      setResumes(nextResumes);
-    }
+    changeProperty(id, "title", title);
   }
 
   function changeIcon(id: string, icon: string) {
-    if (!isEmpty(icon)) {
-      const nextResumes = map((item) => {
-        if (equals(item.id, id)) {
-          return {
-            ...item,
-            icon,
-          };
-        }
-        return item;
-      }, resumes);
-      setResumes(nextResumes);
-    }
+    changeProperty(id, "icon", icon);
   }
 
   function getIcon() {
@@ -104,7 +96,7 @@ function useResumes() {
         ...data?.design,
       },
     };
-    setResumes([...resumes, resume]);
+    setResumes((prevResumes) => [...prevResumes, resume]);
     return resume;
   }
 

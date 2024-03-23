@@ -18,15 +18,17 @@ function useResume() {
   const isLoading = or(isNil(id), isNil(resumes));
 
   function setResume(nextResume: Resume) {
-    if (resumes) {
-      const nextResumes = map((item) => {
-        if (equals(item.id, id)) {
-          return nextResume;
-        }
-        return item;
-      }, resumes);
-      setResumes(nextResumes);
-    }
+    setResumes((prevResumes) => {
+      if (prevResumes) {
+        return map((item) => {
+          if (equals(item.id, id)) {
+            return nextResume;
+          }
+          return item;
+        }, prevResumes);
+      }
+      return prevResumes;
+    });
   }
 
   function remove() {
@@ -34,22 +36,19 @@ function useResume() {
     setResumes(nextResumes);
   }
 
+  function changeProperty(property: keyof Resume, value: string) {
+    setResume({
+      ...resume,
+      [property]: value,
+    });
+  }
+
   function changeTitle(title: string) {
-    if (!isEmpty(title)) {
-      setResume({
-        ...resume,
-        title,
-      });
-    }
+    changeProperty("title", title);
   }
 
   function changeIcon(icon: string) {
-    if (!isEmpty(icon)) {
-      setResume({
-        ...resume,
-        icon,
-      });
-    }
+    changeProperty("icon", icon);
   }
 
   function changeSlug(slug: string) {
@@ -73,7 +72,7 @@ function useResume() {
       createdAt: Date.now(),
       updatedAt: Date.now(),
     };
-    setResumes([...resumes, value]);
+    setResumes((prevResumes) => [...prevResumes, value]);
   }
 
   return {
