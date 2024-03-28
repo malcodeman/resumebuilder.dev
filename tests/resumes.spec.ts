@@ -24,8 +24,7 @@ test.describe("Resumes page", () => {
   });
   test("Quicky upload button", async ({ page }) => {
     await page.getByTestId("quickly-upload").click();
-
-    expect(page.getByTestId("import-data-modal-content")).toBeVisible();
+    await expect(page.getByTestId("import-data-modal-content")).toBeVisible();
   });
   test("Start with templates button", async ({ page, baseURL }) => {
     await page.getByTestId("start-with-templates").click();
@@ -173,8 +172,7 @@ test.describe("Resumes page", () => {
 
     await input.fill(name);
     await expect(input).toHaveValue(name);
-
-    expect(page.getByTestId("title-preview")).toHaveText(name);
+    await expect(page.getByTestId("title-preview")).toHaveText(name);
   });
   test("Rename resume from menu | Grid view", async ({ page }) => {
     await utils.setResume({ page });
@@ -188,8 +186,7 @@ test.describe("Resumes page", () => {
 
     await input.fill(name);
     await expect(input).toHaveValue(name);
-
-    expect(page.getByTestId("title-preview")).toHaveText(name);
+    await expect(page.getByTestId("title-preview")).toHaveText(name);
   });
   test("Rename resume | List view", async ({ page }) => {
     await utils.setResume({ page });
@@ -201,8 +198,7 @@ test.describe("Resumes page", () => {
 
     await input.fill(name);
     await expect(input).toHaveValue(name);
-
-    expect(page.getByTestId("title-preview")).toHaveText(name);
+    await expect(page.getByTestId("title-preview")).toHaveText(name);
   });
   test("Duplicate resume | Grid view", async ({ page }) => {
     await utils.setResume({ page });
