@@ -4,7 +4,6 @@ import utils from "e2e/utils";
 test.describe("Builder page", () => {
   test.beforeEach(async ({ page, context, baseURL }) => {
     await page.goto("/en/resumes/new");
-
     await expect(page.getByTestId("spinner")).toBeVisible();
 
     const resume = await utils.getResume({ context });
