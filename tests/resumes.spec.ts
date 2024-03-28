@@ -186,8 +186,7 @@ test.describe("Resumes page", () => {
 
     await input.fill(name);
     await expect(input).toHaveValue(name);
-
-    expect(page.getByTestId("title-preview")).toHaveText(name);
+    await expect(page.getByTestId("title-preview")).toHaveText(name);
   });
   test("Rename resume | List view", async ({ page }) => {
     await utils.setResume({ page });
@@ -199,8 +198,7 @@ test.describe("Resumes page", () => {
 
     await input.fill(name);
     await expect(input).toHaveValue(name);
-
-    expect(page.getByTestId("title-preview")).toHaveText(name);
+    await expect(page.getByTestId("title-preview")).toHaveText(name);
   });
   test("Duplicate resume | Grid view", async ({ page }) => {
     await utils.setResume({ page });

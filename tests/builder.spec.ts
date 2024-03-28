@@ -5,6 +5,8 @@ test.describe("Builder page", () => {
   test.beforeEach(async ({ page, context, baseURL }) => {
     await page.goto("/en/resumes/new");
 
+    await expect(page.getByTestId("spinner")).toBeVisible();
+
     const resume = await utils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
@@ -42,7 +44,8 @@ test.describe("Builder page", () => {
     const resume = await utils.getResume({ context });
 
     expect(resume.title).toBe(name);
-    expect(page.getByTestId("title-preview")).toHaveText(name);
+
+    await expect(page.getByTestId("title-preview")).toHaveText(name);
   });
   test("Export PDF", async ({ page }) => {
     const downloadEvent = page.waitForEvent("download");

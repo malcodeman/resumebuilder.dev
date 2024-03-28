@@ -6,7 +6,7 @@ test.describe("New resume page", () => {
     await page.goto("/en/resumes/new");
   });
   test("Redirect", async ({ page, context, baseURL }) => {
-    expect(page.getByTestId("spinner")).toBeVisible();
+    await expect(page.getByTestId("spinner")).toBeVisible();
 
     const resume = await utils.getResume({ context });
 
