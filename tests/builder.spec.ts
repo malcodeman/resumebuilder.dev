@@ -98,6 +98,6 @@ test.describe("Builder page", () => {
     expect(
       await utils.getLocalStorageItem({ context, name: "dev-tools" })
     ).toBe("true");
-    expect(page.getByTestId("generate-fake-data-button")).toBeVisible();
+    await expect(page.getByTestId("generate-fake-data-button")).toBeVisible();
   });
 });
