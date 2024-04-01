@@ -1,5 +1,7 @@
+import { faker } from "@faker-js/faker";
 import { test, expect } from "@playwright/test";
 import utils from "e2e/utils";
+import libUtils from "lib/utils";
 
 test.describe("Builder page", () => {
   test.beforeEach(async ({ page, context, baseURL }) => {
@@ -101,5 +103,147 @@ test.describe("Builder page", () => {
       await utils.getLocalStorageItem({ context, name: "dev-tools" })
     ).toBe("true");
     await expect(page.getByTestId("generate-fake-data-button")).toBeVisible();
+  });
+  test("German language", async ({ page, context, baseURL }) => {
+    await page.getByTestId("more-button").click();
+    await page.getByTestId("language-select").selectOption("de");
+
+    const resume = await utils.getResume({ context });
+
+    await expect(page).toHaveURL(`${baseURL}/de/resumes/${resume.id}`);
+  });
+  test("Duplicate resume", async ({ page }) => {
+    await page.getByTestId("more-button").click();
+    await page.getByTestId("duplicate-button").click();
+
+    expect(await page.content()).toContain("Resume duplicated");
+  });
+  test("Copy link", async ({ page }) => {
+    await page.getByTestId("more-button").click();
+
+    const button = page.getByTestId("copy-link-button");
+
+    expect(await button.textContent()).toBe("Copy link");
+
+    await button.click();
+
+    expect(await button.textContent()).toBe("Copied");
+  });
+  test("Change slug", async ({ page, baseURL }) => {
+    await page.getByTestId("more-button").click();
+    await page.getByTestId("change-slug-button").click();
+
+    const input = page.getByTestId("slug-input");
+    const name = "malcodeman";
+
+    await input.fill(name);
+    await expect(input).toHaveValue(name);
+    await page.getByTestId("change-button").click();
+    await expect(page).toHaveURL(`${baseURL}/en/resumes/${name}`);
+  });
+  test("Delete", async ({ page, baseURL }) => {
+    await page.getByTestId("more-button").click();
+    await page.getByTestId("delete-button").click();
+    await page.getByTestId("delete-this-resume-button").click();
+
+    expect(await page.content()).toContain("Resume deleted");
+
+    await expect(page).toHaveURL(`${baseURL}/en/resumes`);
+  });
+  test("Import data", async ({ page }) => {
+    await page.getByTestId("more-button").click();
+    await page.getByTestId("import-button").click();
+    await expect(page.getByTestId("import-data-modal-content")).toBeVisible();
+  });
+  test("Export", async ({ page }) => {
+    await page.getByTestId("more-button").click();
+    await page.getByTestId("export-button").click();
+    await expect(page.getByTestId("export-resume-modal-content")).toBeVisible();
+  });
+  test("Profile picture | Add", async ({ page }) => {
+    await page.getByTestId("add-profile-picture-button").click();
+    await expect(
+      page.getByTestId("add-profile-picture-modal-content")
+    ).toBeVisible();
+  });
+  test("About", async ({ page }) => {
+    const title = faker.name.jobTitle();
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
+    const email = faker.internet.email(firstName, lastName);
+    const phone = faker.phone.number();
+    const website = faker.internet.url();
+    const city = faker.address.city();
+    const country = faker.address.country();
+    const summary = faker.random.words();
+
+    await page.getByTestId("about-title-input").fill(title);
+
+    expect(await page.getByTestId("document").textContent()).toContain(title);
+
+    await page.getByTestId("about-first-name-input").fill(firstName);
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      firstName
+    );
+
+    await page.getByTestId("about-last-name-input").fill(lastName);
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      lastName
+    );
+
+    await page.getByTestId("about-email-input").fill(email);
+
+    expect(await page.getByTestId("document").textContent()).toContain(email);
+
+    await page.getByTestId("about-phone-input").fill(phone);
+
+    expect(await page.getByTestId("document").textContent()).toContain(phone);
+
+    await page.getByTestId("about-website-input").fill(website);
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      libUtils.parseWebsite(website)
+    );
+
+    await page.getByTestId("about-city-input").fill(city);
+
+    expect(await page.getByTestId("document").textContent()).toContain(city);
+
+    await page.getByTestId("about-country-input").fill(country);
+
+    expect(await page.getByTestId("document").textContent()).toContain(country);
+
+    await page.getByTestId("about-summary-textarea").fill(summary);
+
+    expect(await page.getByTestId("document").textContent()).toContain(summary);
+  });
+  test("Summary pre-written phrases search | Not found", async ({ page }) => {
+    await page.getByTestId("add-pre-written-phrases-form-helper-text").click();
+
+    const input = page.getByTestId("search-input").getByRole("textbox");
+    const phrase = "malcodeman";
+
+    await input.fill(phrase);
+    await expect(input).toHaveValue(phrase);
+
+    expect(
+      await page.getByTestId("pre-written-phrases-modal-content").textContent()
+    ).toContain("No phrases found");
+  });
+  test("Summary pre-written phrases | React", async ({ page }) => {
+    await page.getByTestId("add-pre-written-phrases-form-helper-text").click();
+
+    const input = page.getByTestId("search-input").getByRole("textbox");
+    const phrase = "React";
+
+    await input.fill(phrase);
+    await expect(input).toHaveValue(phrase);
+    await page.getByTestId("phrases-stack").click();
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      "Proficient in an assortment of technologies, including React, React Native and Node."
+    );
   });
 });

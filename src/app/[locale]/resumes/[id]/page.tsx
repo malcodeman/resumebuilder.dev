@@ -121,6 +121,7 @@ function Builder() {
           padding="8"
           backgroundColor="var(--chakra-colors-blackAlpha-50)"
           sx={utils.getScrollbarStyle()}
+          data-testid="document"
         >
           <Document form={form} />
         </Box>
