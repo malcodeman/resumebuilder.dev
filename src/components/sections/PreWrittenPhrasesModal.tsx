@@ -36,7 +36,7 @@ function PreWrittenPhrasesModal(props: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent data-testid="pre-written-phrases-modal-content">
         <ModalHeader fontSize="md">{t("pre_written_phrases")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
