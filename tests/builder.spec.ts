@@ -304,32 +304,4 @@ test.describe("Builder page", () => {
       "Next.js"
     );
   });
-  test("Suggested tags | Hobbies", async ({ page }) => {
-    await page.getByTestId("section-label-accordion-button").nth(0).click();
-    await page.getByTestId("section-label-accordion-button").nth(4).click();
-
-    await page.getByTestId("suggested-tags-wrap-item").nth(0).click();
-
-    await page.getByTestId("suggested-tags-wrap-item").nth(0).click();
-
-    // cy.get("[data-testid=suggested-tags-wrap-item]:visible")
-    //   .first()
-    //   .click()
-    //   .should(() => expect(getResume().section[3].tags).to.eq(hobbies));
-  });
-  // it("New section | Standard", () => {
-  //   // TODO: Improve
-  //   cy.get("[data-testid=new-section-button]").click();
-  //   cy.get("[data-testid=add-section-modal-content]").should("exist");
-  //   cy.get("[data-testid=custom-section-button]").first().click();
-  //   cy.get("[data-testid=section-label-accordion-button]").eq(5).click();
-  //   cy.get("[data-testid=section-label-accordion-button]").eq(6).click();
-  // });
-  // it("New section | Tag list", () => {
-  //   // TODO: Improve
-  //   cy.get("[data-testid=new-section-button]").click();
-  //   cy.get("[data-testid=add-section-modal-content]").should("exist");
-  //   cy.get("[data-testid=custom-section-button]").eq(1).click();
-  //   cy.get("[data-testid=section-label-accordion-button]").eq(5).click();
-  // });
 });
