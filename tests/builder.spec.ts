@@ -246,4 +246,62 @@ test.describe("Builder page", () => {
       "Proficient in an assortment of technologies, including React, React Native and Node."
     );
   });
+  test("Employment history", async ({ page }) => {
+    const title = faker.company.name();
+    const subtitle = faker.name.jobTitle();
+    const website = faker.internet.url();
+    const city = faker.address.city();
+    const startDate = faker.date.past().toDateString();
+    const endDate = "Current";
+    const description = faker.random.words();
+
+    await page.getByTestId("section-label-accordion-button").nth(0).click();
+    await page.getByTestId("section-label-accordion-button").nth(1).click();
+    await page.getByTestId("section-label-accordion-button").nth(2).click();
+    await page.getByTestId("section-nested-title-input").fill(title);
+
+    expect(await page.getByTestId("document").textContent()).toContain(title);
+
+    await page.getByTestId("section-nested-subtitle-input").fill(subtitle);
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      subtitle
+    );
+
+    await page.getByTestId("section-nested-website-input").fill(website);
+    await page.getByTestId("section-nested-city-input").fill(city);
+
+    expect(await page.getByTestId("document").textContent()).toContain(city);
+
+    await page.getByTestId("section-nested-start-date-input").fill(startDate);
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      startDate
+    );
+
+    await page.getByTestId("section-nested-end-date-input").fill(endDate);
+
+    expect(await page.getByTestId("document").textContent()).toContain(endDate);
+
+    await page
+      .getByTestId("section-nested-description-textarea")
+      .fill(description);
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      description
+    );
+  });
+  test("Suggested tags | Skills", async ({ page }) => {
+    await page.getByTestId("section-label-accordion-button").nth(0).click();
+    await page.getByTestId("section-label-accordion-button").nth(3).click();
+    await page.getByTestId("suggested-tags-wrap-item").nth(0).click();
+
+    expect(await page.getByTestId("document").textContent()).toContain("React");
+
+    await page.getByTestId("suggested-tags-wrap-item").nth(0).click();
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      "Next.js"
+    );
+  });
 });
