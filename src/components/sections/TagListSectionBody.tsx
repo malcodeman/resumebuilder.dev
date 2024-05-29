@@ -91,6 +91,7 @@ function TagListSectionBody(props: props) {
               size="sm"
               borderRadius="md"
               sx={utils.getScrollbarStyle()}
+              data-testid="section-tags-textarea"
               {...register(`section.${index}.tags` as const)}
             />
             <FormHelperText>{t(getHelperTextTransKey(name))}</FormHelperText>

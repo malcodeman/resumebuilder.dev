@@ -152,18 +152,18 @@ function getRandomInt(min: number, max: number) {
 }
 
 function generateFakeResume() {
-  const firstName = faker.name.firstName();
-  const lastName = faker.name.lastName();
+  const firstName = faker.person.firstName();
+  const lastName = faker.person.lastName();
   const fields: Fields = {
     about: {
-      title: faker.name.jobTitle(),
+      title: faker.person.jobTitle(),
       firstName,
       lastName,
-      email: faker.internet.email(firstName, lastName),
+      email: faker.internet.email({ firstName, lastName }),
       phone: faker.phone.number(),
       website: faker.internet.url(),
-      city: faker.address.city(),
-      country: faker.address.country(),
+      city: faker.location.city(),
+      country: faker.location.country(),
       summary: faker.lorem.paragraphs(1),
     },
     section: [
@@ -173,20 +173,29 @@ function generateFakeResume() {
         nested: [
           {
             title: faker.company.name(),
-            subtitle: faker.name.jobTitle(),
+            subtitle: faker.person.jobTitle(),
             website: faker.internet.url(),
-            city: faker.address.city(),
-            startDate: format(faker.date.past(2), "MMM yyyy").toString(),
+            city: faker.location.city(),
+            startDate: format(
+              faker.date.past({ years: 2 }),
+              "MMM yyyy"
+            ).toString(),
             endDate: "Current",
             description: faker.lorem.paragraphs(2),
           },
           {
             title: faker.company.name(),
-            subtitle: faker.name.jobTitle(),
+            subtitle: faker.person.jobTitle(),
             website: faker.internet.url(),
-            city: faker.address.city(),
-            startDate: format(faker.date.past(6), "MMM yyyy").toString(),
-            endDate: format(faker.date.past(4), "MMM yyyy").toString(),
+            city: faker.location.city(),
+            startDate: format(
+              faker.date.past({ years: 6 }),
+              "MMM yyyy"
+            ).toString(),
+            endDate: format(
+              faker.date.past({ years: 4 }),
+              "MMM yyyy"
+            ).toString(),
             description: faker.lorem.paragraphs(2),
           },
         ],
