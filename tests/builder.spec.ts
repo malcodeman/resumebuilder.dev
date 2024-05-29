@@ -167,15 +167,15 @@ test.describe("Builder page", () => {
     ).toBeVisible();
   });
   test("About", async ({ page }) => {
-    const title = faker.name.jobTitle();
-    const firstName = faker.name.firstName();
-    const lastName = faker.name.lastName();
-    const email = faker.internet.email(firstName, lastName);
+    const title = faker.person.jobTitle();
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
+    const email = faker.internet.email({ firstName, lastName });
     const phone = faker.phone.number();
     const website = faker.internet.url();
-    const city = faker.address.city();
-    const country = faker.address.country();
-    const summary = faker.random.words();
+    const city = faker.location.city();
+    const country = faker.location.country();
+    const summary = faker.word.words();
 
     await page.getByTestId("about-title-input").fill(title);
 
@@ -248,12 +248,12 @@ test.describe("Builder page", () => {
   });
   test("Employment history", async ({ page }) => {
     const title = faker.company.name();
-    const subtitle = faker.name.jobTitle();
+    const subtitle = faker.person.jobTitle();
     const website = faker.internet.url();
-    const city = faker.address.city();
+    const city = faker.location.city();
     const startDate = faker.date.past().toDateString();
     const endDate = "Current";
-    const description = faker.random.words();
+    const description = faker.word.words();
 
     await page.getByTestId("section-label-accordion-button").nth(0).click();
     await page.getByTestId("section-label-accordion-button").nth(1).click();
@@ -303,5 +303,51 @@ test.describe("Builder page", () => {
     expect(await page.getByTestId("document").textContent()).toContain(
       "Next.js"
     );
+  });
+  test("Suggested tags | Hobbies", async ({ page }) => {
+    await page.getByTestId("section-label-accordion-button").nth(0).click();
+    await page.getByTestId("section-label-accordion-button").nth(4).click();
+    await page.getByTestId("suggested-tags-wrap-item").nth(10).click();
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      "Cooking"
+    );
+
+    await page.getByTestId("suggested-tags-wrap-item").nth(10).click();
+
+    expect(await page.getByTestId("document").textContent()).toContain(
+      "Reading"
+    );
+  });
+  test("New section | Standard", async ({ page }) => {
+    await page.getByTestId("new-section-button").click();
+    await page.getByTestId("custom-section-button").first().click();
+    await page.getByTestId("section-label-accordion-button").nth(5).click();
+    await page.getByTestId("section-label-accordion-button").nth(6).click();
+
+    const title = faker.company.name();
+
+    await page.getByTestId("section-nested-title-input").fill(title);
+
+    expect(await page.getByTestId("document").textContent()).toContain(title);
+  });
+  test("New section | Tag list", async ({ page }) => {
+    await page.getByTestId("new-section-button").click();
+    await page.getByTestId("custom-section-button").nth(1).click();
+    await page.getByTestId("section-label-accordion-button").nth(5).click();
+
+    const verb = faker.word.verb();
+
+    await page.getByTestId("section-tags-textarea").nth(2).fill(verb);
+
+    expect(await page.getByTestId("document").textContent()).toContain(verb);
+  });
+  test("Change template", async ({ page, context }) => {
+    await page.getByTestId("templates-tab").click();
+    await page.getByTestId("template").nth(1).click();
+
+    // const resume = await utils.getResume({ context });
+
+    // expect(resume.design.template).toBe("tokyo");
   });
 });

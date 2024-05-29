@@ -24,7 +24,7 @@
     "@dnd-kit/utilities": "^3.2.0",
     "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
-    "@faker-js/faker": "^7.6.0",
+    "@faker-js/faker": "^8.4.1",
     "@hookform/resolvers": "^2.9.7",
     "@react-hookz/web": "^24.0.4",
     "@react-pdf/renderer": "^3.0.0",
