@@ -37,7 +37,6 @@
     "framer-motion": "7.5.1",
     "html-to-image": "^1.10.8",
     "jszip": "^3.10.1",
-    "keyboardjs": "^2.6.4",
     "lucide-react": "^0.379.0",
     "nanoid": "5.0.1",
     "next": "^14.1.0",
@@ -48,13 +47,13 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^11.3.4",
     "react-hook-form": "^7.47.0",
+    "react-hotkeys-hook": "^4.5.0",
     "simple-icons": "^12.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
     "@playwright/test": "^1.42.1",
     "@types/file-saver": "^2.0.2",
-    "@types/keyboardjs": "^2.5.0",
     "@types/node": "^18.7.23",
     "@types/papaparse": "^5.3.5",
     "@types/ramda": "^0.28.18",
