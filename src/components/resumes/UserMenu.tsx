@@ -7,7 +7,12 @@ import {
   Link,
   useColorMode,
 } from "@chakra-ui/react";
-import { FiMoreVertical, FiSun, FiMoon, FiMessageSquare } from "react-icons/fi";
+import {
+  MoreVerticalIcon,
+  SunIcon,
+  MoonIcon,
+  MessageSquareIcon,
+} from "lucide-react";
 import { equals } from "ramda";
 import { useTranslations } from "next-intl";
 
@@ -23,16 +28,24 @@ function UserMenu() {
         as={IconButton}
         size="sm"
         aria-label="More options"
-        icon={<FiMoreVertical />}
+        icon={<MoreVerticalIcon size={16} />}
         data-testid="header-more-options-menu-button"
       />
       <MenuList>
         <Link href={FEEDBACK_LINK} isExternal>
-          <MenuItem icon={<FiMessageSquare />}>{t("give_feedback")}</MenuItem>
+          <MenuItem icon={<MessageSquareIcon size={16} />}>
+            {t("give_feedback")}
+          </MenuItem>
         </Link>
         <MenuItem
           onClick={toggleColorMode}
-          icon={equals(colorMode, "dark") ? <FiMoon /> : <FiSun />}
+          icon={
+            equals(colorMode, "dark") ? (
+              <MoonIcon size={16} />
+            ) : (
+              <SunIcon size={16} />
+            )
+          }
           data-testid="dark-mode-menu-item"
         >
           {equals(colorMode, "dark") ? t("dark_mode") : t("light_mode")}

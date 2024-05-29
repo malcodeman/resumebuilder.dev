@@ -5,7 +5,7 @@ import {
   Container,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FiFileText, FiHome, FiLayers } from "react-icons/fi";
+import { FileTextIcon, HomeIcon, LayersIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import useLocalStorage from "hooks/useLocalStorage";
 import NavLink from "components/misc/NavLink";
@@ -36,13 +36,13 @@ function HeaderMobile() {
         <Flex as="nav" justifyContent="space-between" alignItems="center">
           <NavLink href={homeHref}>
             <Flex flexDirection="column" alignItems="center">
-              <FiHome />
+              <HomeIcon size={16} />
               <Text fontSize="xs">{t("home")}</Text>
             </Flex>
           </NavLink>
           <NavLink href="/templates">
             <Flex flexDirection="column" alignItems="center">
-              <FiLayers />
+              <LayersIcon size={16} />
               <Text fontSize="xs">{t("templates")}</Text>
             </Flex>
           </NavLink>
@@ -51,7 +51,7 @@ function HeaderMobile() {
           ) : (
             <NavLink href="/resumes">
               <Flex flexDirection="column" alignItems="center">
-                <FiFileText />
+                <FileTextIcon size={16} />
                 <Text fontSize="xs">{t("dashboard")}</Text>
               </Flex>
             </NavLink>

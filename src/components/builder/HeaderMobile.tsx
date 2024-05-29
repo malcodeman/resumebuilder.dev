@@ -5,7 +5,7 @@ import {
   Container,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FiHome } from "react-icons/fi";
+import { HomeIcon } from "lucide-react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import NavLink from "components/misc/NavLink";
@@ -71,7 +71,7 @@ function HeaderMobile(props: props) {
         <Flex as="nav" justifyContent="space-between" alignItems="center">
           <NavLink href="/resumes">
             <Flex flexDirection="column" alignItems="center">
-              <FiHome />
+              <HomeIcon size={16} />
               <Text fontSize="xs">{t("home")}</Text>
             </Flex>
           </NavLink>

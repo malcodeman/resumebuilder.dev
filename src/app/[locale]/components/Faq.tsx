@@ -14,7 +14,7 @@ import {
   ListIcon,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { FiCheckCircle, FiCircle } from "react-icons/fi";
+import { CheckCircleIcon, CircleIcon } from "lucide-react";
 import { map } from "ramda";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
@@ -65,7 +65,7 @@ function Faq() {
             <Text>{t("currently_we_support")}</Text>
             <List mb="2">
               <ListItem>
-                <ListIcon as={FiCheckCircle} color="green.500" />
+                <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
                 <ChakraLink
                   href="https://jsonresume.org/"
                   color="blue.400"
@@ -75,22 +75,22 @@ function Faq() {
                 </ChakraLink>
               </ListItem>
               <ListItem>
-                <ListIcon as={FiCheckCircle} color="green.500" />
+                <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
                 GitHub
               </ListItem>
               <ListItem>
-                <ListIcon as={FiCheckCircle} color="green.500" />
+                <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
                 JSON
               </ListItem>
               <ListItem>
-                <ListIcon as={FiCheckCircle} color="green.500" />
+                <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
                 LinkedIn
               </ListItem>
             </List>
             <Text>{t("working_on")}</Text>
             <List>
               <ListItem>
-                <ListIcon as={FiCircle} />
+                <ListIcon as={CircleIcon} size={16} />
                 PDF
               </ListItem>
             </List>
@@ -104,26 +104,26 @@ function Faq() {
             <Text>{t("currently_we_support")}</Text>
             <List mb="2">
               <ListItem>
-                <ListIcon as={FiCheckCircle} color="green.500" />
+                <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
                 JSON
               </ListItem>
               <ListItem>
-                <ListIcon as={FiCheckCircle} color="green.500" />
+                <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
                 PDF
               </ListItem>
               <ListItem>
-                <ListIcon as={FiCheckCircle} color="green.500" />
+                <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
                 HTML
               </ListItem>
               <ListItem>
-                <ListIcon as={FiCheckCircle} color="green.500" />
+                <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
                 PNG
               </ListItem>
             </List>
             <Text>{t("working_on")}</Text>
             <List>
               <ListItem>
-                <ListIcon as={FiCircle} />
+                <ListIcon as={CircleIcon} size={16} />
                 <ChakraLink
                   href="https://jsonresume.org/"
                   color="blue.400"

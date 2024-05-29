@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { FiCheckCircle } from "react-icons/fi";
+import { CheckCircleIcon } from "lucide-react";
 import { length } from "ramda";
 import Poser12 from "illustrations/Poser12";
 import useResumes from "hooks/useResumes";
@@ -61,11 +61,11 @@ function Hero() {
         </Button>
         <List>
           <ListItem>
-            <ListIcon as={FiCheckCircle} color="green.500" />
+            <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
             {t("no_credit_card_needed")}
           </ListItem>
           <ListItem>
-            <ListIcon as={FiCheckCircle} color="green.500" />
+            <ListIcon as={CheckCircleIcon} size={16} color="green.500" />
             {t("no_account_needed")}
           </ListItem>
         </List>

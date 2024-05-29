@@ -8,7 +8,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { map, slice, equals } from "ramda";
-import { FiArrowRight } from "react-icons/fi";
+import { ArrowRightIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { TEMPLATES_LIST, DEFAULT_VALUES } from "lib/constants";
@@ -68,7 +68,7 @@ function Templates() {
             data-testid="see-all-templates-button"
             rightIcon={
               <motion.div variants={ARROW_RIGHT_VARIANTS}>
-                <FiArrowRight />
+                <ArrowRightIcon size={16} />
               </motion.div>
             }
           >

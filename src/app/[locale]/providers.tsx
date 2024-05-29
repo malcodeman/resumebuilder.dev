@@ -2,7 +2,6 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { IconContext } from "react-icons";
 
 const THEME = extendTheme({
   styles: {
@@ -23,11 +22,9 @@ const THEME = extendTheme({
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ChakraProvider theme={THEME}>
-      <IconContext.Provider value={{ size: "16" }}>
-        {children}
-        <Analytics />
-        <SpeedInsights />
-      </IconContext.Provider>
+      {children}
+      <Analytics />
+      <SpeedInsights />
     </ChakraProvider>
   );
 }

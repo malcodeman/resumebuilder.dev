@@ -18,12 +18,12 @@ import {
   useInterval,
 } from "@chakra-ui/react";
 import {
-  FiCopy,
-  FiMoreHorizontal,
-  FiEdit,
-  FiMove,
-  FiLink,
-} from "react-icons/fi";
+  CopyIcon,
+  MoreHorizontalIcon,
+  EditIcon,
+  MoveIcon,
+  LinkIcon,
+} from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
@@ -172,28 +172,28 @@ function ResumeItem(props: props) {
               size="sm"
               aria-label="More options"
               data-testid="resume-more-options-menu-button"
-              icon={<FiMoreHorizontal />}
+              icon={<MoreHorizontalIcon size={16} />}
               mr="2"
               visibility="hidden"
               _groupHover={{ visibility: "visible" }}
             />
             <MenuList>
               <MenuItem
-                icon={<FiEdit />}
+                icon={<EditIcon size={16} />}
                 onClick={() => ref.current.focus()}
                 data-testid="rename-menu-item"
               >
                 {t("rename")}
               </MenuItem>
               <MenuItem
-                icon={<FiCopy />}
+                icon={<CopyIcon size={16} />}
                 onClick={() => onDuplicate(resume.id)}
                 data-testid="duplicate-menu-item"
               >
                 {t("duplicate")}
               </MenuItem>
               <MenuItem
-                icon={<FiLink />}
+                icon={<LinkIcon size={16} />}
                 onClick={handleOnCopyLink}
                 data-testid="copy-link-menu-item"
               >
@@ -207,7 +207,7 @@ function ResumeItem(props: props) {
             {...listeners}
             size="sm"
             aria-label="Drag"
-            icon={<FiMove />}
+            icon={<MoveIcon size={16} />}
             visibility="hidden"
             _groupHover={{ visibility: "visible" }}
           />

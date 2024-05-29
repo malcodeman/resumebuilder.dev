@@ -11,7 +11,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FiCheck } from "react-icons/fi";
+import { CheckIcon } from "lucide-react";
 import { length, map } from "ramda";
 import { useTranslations } from "next-intl";
 import { useMediaQuery } from "@react-hookz/web";
@@ -86,7 +86,7 @@ function GetStarted() {
           {map(
             (item) => (
               <Flex key={item.textTransKey} alignItems="center">
-                <FiCheck style={{ marginRight: "0.5rem" }} />
+                <CheckIcon size={16} style={{ marginRight: "0.5rem" }} />
                 <Text mr="2">{t(item.textTransKey)}</Text>
               </Flex>
             ),

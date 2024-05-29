@@ -19,16 +19,16 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import {
-  FiDownload,
-  FiLink,
-  FiMoreHorizontal,
-  FiUpload,
-  FiTrash2,
-  FiDatabase,
-  FiEdit,
-  FiCopy,
-  FiCheck,
-} from "react-icons/fi";
+  DownloadIcon,
+  LinkIcon,
+  MoreHorizontalIcon,
+  UploadIcon,
+  Trash2Icon,
+  DatabaseIcon,
+  EditIcon,
+  CopyIcon,
+  CheckIcon,
+} from "lucide-react";
 import { equals, isNil, or } from "ramda";
 import { formatDistanceToNow } from "date-fns";
 import { useFormContext, useWatch } from "react-hook-form";
@@ -226,7 +226,7 @@ function Duplicate() {
       mb="2"
       justifyContent="flex-start"
       data-testid="duplicate-button"
-      leftIcon={<FiCopy />}
+      leftIcon={<CopyIcon size={16} />}
       onClick={handleOnDuplicate}
     >
       {t("duplicate")}
@@ -245,7 +245,7 @@ function CopyLink() {
       mb="2"
       justifyContent="flex-start"
       data-testid="copy-link-button"
-      leftIcon={hasCopied ? <FiCheck /> : <FiLink />}
+      leftIcon={hasCopied ? <CheckIcon size={16} /> : <LinkIcon size={16} />}
       onClick={onCopy}
     >
       {hasCopied ? t("copied") : t("copy_link")}
@@ -282,7 +282,7 @@ function ChangeSlug() {
         mb="2"
         justifyContent="flex-start"
         data-testid="change-slug-button"
-        leftIcon={<FiEdit />}
+        leftIcon={<EditIcon size={16} />}
         onClick={onOpen}
       >
         {t("change_slug")}
@@ -306,7 +306,7 @@ function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
         mb="2"
         justifyContent="flex-start"
         data-testid="generate-fake-data-button"
-        leftIcon={<FiDatabase />}
+        leftIcon={<DatabaseIcon size={16} />}
         onClick={() => onImport(utils.generateFakeResume())}
       >
         <Text noOfLines={1}>{t("generate_fake_data")}</Text>
@@ -337,7 +337,7 @@ function DeleteResume() {
         size="sm"
         justifyContent="flex-start"
         data-testid="delete-button"
-        leftIcon={<FiTrash2 />}
+        leftIcon={<Trash2Icon size={16} />}
         onClick={onOpen}
       >
         {t("delete")}
@@ -362,7 +362,7 @@ function ImportData(props: { onImport: (fields: Fields) => void }) {
         mb="2"
         justifyContent="flex-start"
         data-testid="import-button"
-        leftIcon={<FiUpload />}
+        leftIcon={<UploadIcon size={16} />}
         onClick={onOpen}
       >
         {t("import")}
@@ -387,7 +387,7 @@ function ExportResume(props: {
         size="sm"
         justifyContent="flex-start"
         data-testid="export-button"
-        leftIcon={<FiDownload />}
+        leftIcon={<DownloadIcon size={16} />}
         onClick={onOpen}
       >
         {t("export")}
@@ -459,7 +459,7 @@ function HeaderPopover(props: props) {
                   size="sm"
                   data-testid="more-button"
                   aria-label={TOOLTIP_MORE_LABEL}
-                  icon={<FiMoreHorizontal />}
+                  icon={<MoreHorizontalIcon size={16} />}
                 />
               </PopoverTrigger>
             </Flex>

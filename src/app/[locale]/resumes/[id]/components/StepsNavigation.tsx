@@ -4,7 +4,7 @@ import {
   BreadcrumbLink,
   BreadcrumbProps,
 } from "@chakra-ui/react";
-import { FiChevronRight } from "react-icons/fi";
+import { ChevronRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { equals } from "ramda";
 import useResume from "hooks/useResume";
@@ -20,7 +20,7 @@ function StepsNavigation(props: props) {
   const { resume } = useResume();
   const id = resume?.id;
   return (
-    <Breadcrumb {...rest} separator={<FiChevronRight />}>
+    <Breadcrumb {...rest} separator={<ChevronRightIcon size={16} />}>
       <BreadcrumbItem
         sx={{
           a: {

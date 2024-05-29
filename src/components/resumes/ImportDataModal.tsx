@@ -14,7 +14,7 @@ import {
   useBoolean,
 } from "@chakra-ui/react";
 import { equals, isEmpty, map } from "ramda";
-import { FiChevronLeft } from "react-icons/fi";
+import { ChevronLeftIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import FileUploader from "components/misc/FileUploader";
 import ImportFromGithub from "components/resumes/importFromGithub";
@@ -148,7 +148,7 @@ function ImportDataModal(props: Props) {
             <Button
               size="sm"
               variant="link"
-              leftIcon={<FiChevronLeft />}
+              leftIcon={<ChevronLeftIcon size={16} />}
               onClick={() => setSource("")}
             >
               {t("back")}
