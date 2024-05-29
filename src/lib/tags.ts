@@ -51,7 +51,7 @@ const SKILLS = [
   },
   {
     id: nanoid(),
-    value: "Playwright ",
+    value: "Playwright",
   },
   {
     id: nanoid(),
