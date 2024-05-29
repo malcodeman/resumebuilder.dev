@@ -1567,13 +1567,6 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
   integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
 
-"@types/simple-icons@^5.21.1":
-  version "5.21.1"
-  resolved "https://registry.yarnpkg.com/@types/simple-icons/-/simple-icons-5.21.1.tgz#d80b05d50312f841b0bf77d7e3b005fb5ed52091"
-  integrity sha512-exnKcr2DxKe0UsGIjvw/hv88OAWkxwPped5iq7YlgC9flaxAJHHvsjmq45Sr7FYjjyrwJI8VFh85xzY6k+L5WQ==
-  dependencies:
-    simple-icons "*"
-
 "@types/sinonjs__fake-timers@8.1.1":
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/@types/sinonjs__fake-timers/-/sinonjs__fake-timers-8.1.1.tgz#b49c2c70150141a15e0fa7e79cf1f92a72934ce3"
@@ -4703,15 +4696,10 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
-simple-icons@*:
-  version "7.19.0"
-  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-7.19.0.tgz#72b2b54a90e5ae488845c8533da8b49dcaa18e1d"
-  integrity sha512-r3aHhEQmlB/RziOBhesjYbH5WCgRA6OPelJULOVqpgEeAv9XB+CQdcchSXXKaQv0v6D2ylzb3AIXsFCGUJ8umQ==
-
-simple-icons@^9.14.0:
-  version "9.14.0"
-  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-9.14.0.tgz#493388acbfda6a63a5979e9be0bc2529771cd434"
-  integrity sha512-8nBO/v1y2p4uQX0lpqrBqBAhbx0GlLVYUb904vrsLxLylYkFQMrlPjTYSFI7d9TaY5kUpoDlqC+/9ojyKDZI9g==
+simple-icons@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-12.0.0.tgz#9cd7257fd8289008457ef8e2551e6b46a9fbf723"
+  integrity sha512-KsqyGTRS1c9hp1oGEspCdp8qbqljjH199pUZZWR3DeStg2RBjzB3EJT9kLZ8tPlIrWOyktjj+TIgDQphYHq7XQ==
 
 simple-swizzle@^0.2.2:
   version "0.2.2"
