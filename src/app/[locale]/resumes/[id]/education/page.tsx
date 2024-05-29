@@ -17,7 +17,7 @@ import {
   useBoolean,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import { FiArrowRight, FiPlus } from "react-icons/fi";
+import { ArrowRightIcon, PlusIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { equals, find, isNil, length, map } from "ramda";
 import useResume from "hooks/useResume";
@@ -166,7 +166,7 @@ function Education() {
           size="sm"
           width="100%"
           variant="ghost"
-          leftIcon={<FiPlus />}
+          leftIcon={<PlusIcon size={16} />}
           onClick={() => append(defaultValues)}
         >
           {t("add_one_more_education")}
@@ -183,7 +183,7 @@ function Education() {
           data-testid="finish-button"
           rightIcon={
             <motion.div variants={ARROW_RIGHT_VARIANTS}>
-              <FiArrowRight />
+              <ArrowRightIcon size={16} />
             </motion.div>
           }
         >

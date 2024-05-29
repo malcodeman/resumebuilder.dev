@@ -1,5 +1,5 @@
 import { MenuItem, useClipboard, useToast } from "@chakra-ui/react";
-import { FiLink } from "react-icons/fi";
+import { LinkIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import utils from "lib/utils";
 
@@ -25,7 +25,7 @@ function CopyLinkMenuItem(props: props) {
 
   return (
     <MenuItem
-      icon={<FiLink />}
+      icon={<LinkIcon size={16} />}
       onClick={handleOnCopyLink}
       data-testid="copy-link-menu-item"
     >

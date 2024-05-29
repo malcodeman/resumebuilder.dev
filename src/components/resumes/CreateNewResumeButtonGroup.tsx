@@ -12,7 +12,7 @@ import {
   useBoolean,
 } from "@chakra-ui/react";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
-import { FiPlus, FiUpload } from "react-icons/fi";
+import { PlusIcon, UploadIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { equals } from "ramda";
 import { Fields } from "types";
@@ -65,7 +65,7 @@ function NewButton() {
             mr="-px"
             aria-label="Create new"
             onClick={handleOnCreateNew}
-            icon={<FiPlus />}
+            icon={<PlusIcon size={16} />}
           />
         )}
       </PopoverTrigger>
@@ -98,7 +98,7 @@ function ImportButton() {
         aria-label="Import"
         data-testid="import-icon-button"
         onClick={onOpen}
-        icon={<FiUpload />}
+        icon={<UploadIcon size={16} />}
       />
       <ImportDataModal isOpen={isOpen} onClose={onClose} onImport={onImport} />
     </>

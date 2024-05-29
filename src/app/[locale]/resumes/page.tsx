@@ -17,12 +17,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import {
-  FiGrid,
-  FiList,
-  FiLink,
-  FiMoreHorizontal,
-  FiCopy,
-} from "react-icons/fi";
+  GridIcon,
+  ListIcon,
+  LinkIcon,
+  MoreHorizontalIcon,
+  CopyIcon,
+} from "lucide-react";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import {
   map,
@@ -137,17 +137,20 @@ function ResumeGrid() {
                 as={IconButton}
                 aria-label="More options"
                 data-testid="resume-more-options-menu-button"
-                icon={<FiMoreHorizontal />}
+                icon={<MoreHorizontalIcon size={16} />}
               />
               <MenuList>
                 <Link href={`/resumes/${info.row.original.id}`} passHref>
-                  <MenuItem display={["flex", "none"]} icon={<FiLink />}>
+                  <MenuItem
+                    display={["flex", "none"]}
+                    icon={<LinkIcon size={16} />}
+                  >
                     {t("open")}
                   </MenuItem>
                 </Link>
                 <MenuItem
                   onClick={() => duplicate(info.row.original.id)}
-                  icon={<FiCopy />}
+                  icon={<CopyIcon size={16} />}
                   data-testid="duplicate-menu-item"
                 >
                   {t("duplicate")}
@@ -260,7 +263,7 @@ function ResumeGrid() {
           <IconButton
             size="sm"
             aria-label="Grid view"
-            icon={<FiGrid />}
+            icon={<GridIcon size={16} />}
             onClick={() => setView("grid")}
             isActive={equals(view, "grid")}
             data-testid="grid-view-icon-button"
@@ -268,7 +271,7 @@ function ResumeGrid() {
           <IconButton
             size="sm"
             aria-label="List view"
-            icon={<FiList />}
+            icon={<ListIcon size={16} />}
             onClick={() => setView("list")}
             isActive={equals(view, "list")}
             data-testid="list-view-icon-button"

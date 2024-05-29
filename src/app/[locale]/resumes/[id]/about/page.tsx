@@ -17,7 +17,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import { FiArrowRight, FiMail, FiPhone } from "react-icons/fi";
+import { ArrowRightIcon, MailIcon, PhoneIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { isNil } from "ramda";
 import useResume from "hooks/useResume";
@@ -115,7 +115,7 @@ function About() {
               <FormLabel>Email</FormLabel>
               <InputGroup size="sm">
                 <InputLeftElement>
-                  <FiMail />
+                  <MailIcon size={16} />
                 </InputLeftElement>
                 <Input
                   variant="filled"
@@ -131,7 +131,7 @@ function About() {
               <FormLabel>{t("phone")}</FormLabel>
               <InputGroup size="sm">
                 <InputLeftElement>
-                  <FiPhone />
+                  <PhoneIcon size={16} />
                 </InputLeftElement>
                 <Input
                   variant="filled"
@@ -178,7 +178,7 @@ function About() {
           data-testid="next-button"
           rightIcon={
             <motion.div variants={ARROW_RIGHT_VARIANTS}>
-              <FiArrowRight />
+              <ArrowRightIcon size={16} />
             </motion.div>
           }
         >

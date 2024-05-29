@@ -17,13 +17,13 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import {
-  FiMail,
-  FiPhone,
-  FiLink,
-  FiCamera,
-  FiTrash2,
-  FiEdit,
-} from "react-icons/fi";
+  MailIcon,
+  PhoneIcon,
+  LinkIcon,
+  CameraIcon,
+  Trash2Icon,
+  EditIcon,
+} from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { concat, replace, isEmpty } from "ramda";
 import { useTranslations } from "next-intl";
@@ -46,7 +46,7 @@ function ProfilePicture() {
           <Button
             size="sm"
             width="full"
-            leftIcon={<FiCamera />}
+            leftIcon={<CameraIcon size={16} />}
             onClick={onOpen}
             data-testid="add-profile-picture-button"
           >
@@ -64,7 +64,7 @@ function ProfilePicture() {
             <ButtonGroup size="sm" width="full" spacing="4">
               <Button
                 width="full"
-                leftIcon={<FiEdit />}
+                leftIcon={<EditIcon size={16} />}
                 onClick={onOpen}
                 data-testid="change-profile-picture-button"
               >
@@ -72,7 +72,7 @@ function ProfilePicture() {
               </Button>
               <Button
                 width="full"
-                leftIcon={<FiTrash2 />}
+                leftIcon={<Trash2Icon size={16} />}
                 onClick={() => setProfilePicture("")}
                 data-testid="delete-profile-picture-button"
               >
@@ -192,7 +192,7 @@ function PersonalDetailsSection() {
               <FormLabel>Email</FormLabel>
               <InputGroup size="sm">
                 <InputLeftElement>
-                  <FiMail />
+                  <MailIcon size={16} />
                 </InputLeftElement>
                 <Input
                   type={hideSensitiveData ? "password" : "text"}
@@ -209,7 +209,7 @@ function PersonalDetailsSection() {
               <FormLabel>{t("phone")}</FormLabel>
               <InputGroup size="sm">
                 <InputLeftElement>
-                  <FiPhone />
+                  <PhoneIcon size={16} />
                 </InputLeftElement>
                 <Input
                   type={hideSensitiveData ? "password" : "text"}
@@ -226,7 +226,7 @@ function PersonalDetailsSection() {
               <FormLabel>{t("website")}</FormLabel>
               <InputGroup size="sm">
                 <InputLeftElement>
-                  <FiLink />
+                  <LinkIcon size={16} />
                 </InputLeftElement>
                 <Input
                   variant="filled"

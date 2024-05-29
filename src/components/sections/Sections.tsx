@@ -1,6 +1,6 @@
 import React from "react";
 import { Accordion, Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
-import { FiPlus } from "react-icons/fi";
+import { PlusIcon } from "lucide-react";
 import { useFieldArray, FormProvider, UseFormReturn } from "react-hook-form";
 import {
   DndContext,
@@ -46,7 +46,7 @@ function SectionNewButton({ onSubmit }) {
           size="sm"
           width="full"
           variant="ghost"
-          leftIcon={<FiPlus />}
+          leftIcon={<PlusIcon size={16} />}
           onClick={onOpen}
           justifyContent="flex-start"
           data-testid="new-section-button"

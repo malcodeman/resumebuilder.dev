@@ -6,7 +6,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FiLayers, FiPlus, FiUpload } from "react-icons/fi";
+import { LayersIcon, PlusIcon, UploadIcon } from "lucide-react";
 import { map } from "ramda";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -30,7 +30,7 @@ function EmptyResumes() {
   const ITEMS = [
     {
       color: green,
-      icon: <FiPlus size={48} color={green} />,
+      icon: <PlusIcon size={48} color={green} />,
       headingTransKey: "start_from_scratch",
       textTransKey: "start_from_scratch_description",
       dataCy: "start-from-scratch",
@@ -38,7 +38,7 @@ function EmptyResumes() {
     },
     {
       color: blue,
-      icon: <FiUpload size={48} color={blue} />,
+      icon: <UploadIcon size={48} color={blue} />,
       headingTransKey: "quickly_upload",
       textTransKey: "quickly_upload_description",
       dataCy: "quickly-upload",
@@ -46,7 +46,7 @@ function EmptyResumes() {
     },
     {
       color: purple,
-      icon: <FiLayers size={48} color={purple} />,
+      icon: <LayersIcon size={48} color={purple} />,
       headingTransKey: "start_with_templates",
       textTransKey: "start_with_templates_description",
       dataCy: "start-with-templates",

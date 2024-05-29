@@ -1,6 +1,6 @@
 import { Heading, Grid, Box, Text, Center } from "@chakra-ui/react";
 import { map } from "ramda";
-import { FiLock, FiGift, FiFastForward } from "react-icons/fi";
+import { LockIcon, GiftIcon, FastForwardIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
@@ -8,17 +8,17 @@ const FEATURES = [
   {
     titleTransKey: "privacy_first",
     textTransKey: "own_and_manage_your_own_database",
-    icon: <FiLock size={48} color="#f82b60" />,
+    icon: <LockIcon size={48} color="#f82b60" />,
   },
   {
     titleTransKey: "free_forever",
     textTransKey: "anyone_can_build_resumes",
-    icon: <FiGift size={48} color="#ff6f2c" />,
+    icon: <GiftIcon size={48} color="#ff6f2c" />,
   },
   {
     titleTransKey: "fast",
     textTransKey: "statically_rendered_pages",
-    icon: <FiFastForward size={48} color="#fcb400" />,
+    icon: <FastForwardIcon size={48} color="#fcb400" />,
   },
 ];
 

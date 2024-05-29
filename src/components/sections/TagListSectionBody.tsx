@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { FiPlus } from "react-icons/fi";
+import { PlusIcon } from "lucide-react";
 import {
   equals,
   includes,
@@ -107,7 +107,7 @@ function TagListSectionBody(props: props) {
                   >
                     <Tag>
                       <TagLabel>{item.value}</TagLabel>
-                      <TagRightIcon as={FiPlus} />
+                      <TagRightIcon as={PlusIcon} size={16} />
                     </Tag>
                   </WrapItem>
                 ),
