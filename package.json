@@ -26,7 +26,7 @@
     "@vercel/analytics": "^1.1.1",
     "@vercel/speed-insights": "^1.0.3",
     "axios": "^1.5.0",
-    "date-fns": "^2.23.0",
+    "date-fns": "^3.6.0",
     "file-saver": "^2.0.5",
     "framer-motion": "7.5.1",
     "html-to-image": "^1.10.8",

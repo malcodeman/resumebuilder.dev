@@ -11,7 +11,6 @@ import {
   clone,
   and,
   or,
-  isEmpty,
 } from "ramda";
 import { getDate, getMonth } from "date-fns";
 import { DEFAULT_VALUES } from "lib/constants";
