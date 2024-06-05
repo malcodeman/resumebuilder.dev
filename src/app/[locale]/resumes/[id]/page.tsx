@@ -79,7 +79,7 @@ function Builder() {
       {isLargeDevice ? <Header form={form} /> : null}
       <Grid
         as="main"
-        templateColumns={{ base: "1fr", lg: "340px 1fr" }}
+        templateColumns={{ base: "1fr", lg: "auto 1fr" }}
         paddingTop={{ base: "0", lg: "48px" }}
         paddingBottom={{ base: "54px", lg: "0" }}
         height="100vh"
