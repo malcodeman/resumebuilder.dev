@@ -14,7 +14,6 @@ import {
 import { useForm } from "react-hook-form";
 import { equals, isNil } from "ramda";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
-<<<<<<< HEAD:src/app/[locale]/resumes/[id]/page.tsx
 import { useTranslations } from "next-intl";
 import Sections from "components/sections/Sections";
 import Header from "components/builder/Header";
@@ -28,26 +27,7 @@ import useAutoSaveToast from "hooks/useAutoSaveToast";
 import useLocalStorage from "hooks/useLocalStorage";
 import utils from "lib/utils";
 import { Resume, Template } from "types";
-=======
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
-
-import Sections from "../../../components/sections/Sections";
-import Header from "../../../components/builder/Header";
-import HeaderMobile from "../../../components/builder/HeaderMobile";
-import Document from "../../../components/builder/Document";
-import NotFound from "../../../components/misc/NotFound";
-import TemplatesTabPanel from "../../../components/builder/TemplatesTabPanel";
-import Preview from "../../../components/builder/Preview";
-import Resize from "../../../components/misc/Resize";
-
-import useResume from "../../../hooks/useResume";
-import useAutoSaveToast from "../../../hooks/useAutoSaveToast";
-import useLocalStorage from "../../../hooks/useLocalStorage";
-import utils from "../../../lib/utils";
-
-import { Resume, Template } from "../../../types";
->>>>>>> 77ba4b3 (adds bg color):pages/resumes/[id]/index.tsx
+import Resize from "components/misc/Resize";
 
 function Builder() {
   const t = useTranslations();
@@ -105,35 +85,16 @@ function Builder() {
         paddingBottom={{ base: "54px", lg: "0" }}
         height="100vh"
       >
-<<<<<<< HEAD:src/app/[locale]/resumes/[id]/page.tsx
-        <Tabs size="sm" paddingTop="8" overflowY="hidden" isFitted>
-          <TabList>
-            <Tab data-testid="sections-tab">{t("sections")}</Tab>
-            <Tab data-testid="templates-tab">{t("templates")}</Tab>
-            {isLargeDevice ? null : (
-              <Tab data-testid="preview-tab">{t("preview")}</Tab>
-            )}
-          </TabList>
-          <TabPanels height="calc(100% - 31px)">
-            <TabPanel height="full" padding="0">
-              <Sections form={form} />
-            </TabPanel>
-            <TabPanel height="full" padding="0">
-              <TemplatesTabPanel onChangeTemplate={handleOnChangeTemplate} />
-            </TabPanel>
-            {isLargeDevice ? null : (
-=======
         <Resize>
           <Tabs size="sm" paddingTop="8" overflowY="hidden" isFitted>
             <TabList>
-              <Tab data-cy="sections-tab">{t("sections")}</Tab>
-              <Tab data-cy="templates-tab">{t("templates")}</Tab>
+              <Tab data-testid="sections-tab">{t("sections")}</Tab>
+              <Tab data-testid="templates-tab">{t("templates")}</Tab>
               {isLargeDevice ? null : (
-                <Tab data-cy="preview-tab">{t("preview")}</Tab>
+                <Tab data-testid="preview-tab">{t("preview")}</Tab>
               )}
             </TabList>
             <TabPanels height="calc(100% - 31px)">
->>>>>>> 77ba4b3 (adds bg color):pages/resumes/[id]/index.tsx
               <TabPanel height="full" padding="0">
                 <Sections form={form} />
               </TabPanel>
