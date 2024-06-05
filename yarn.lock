@@ -1131,6 +1131,7 @@
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -1389,6 +1390,8 @@
     "@jridgewell/sourcemap-codec" "1.4.14"
 
 >>>>>>> b572612 (small fix)
+=======
+>>>>>>> 0e7b3f2 (fix: lock)
 "@next/env@14.1.0":
   version "14.1.0"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-14.1.0.tgz#43d92ebb53bc0ae43dcc64fb4d418f8f17d7a341"
@@ -2863,6 +2866,7 @@ framer-motion@^11.2.10:
   version "11.2.10"
   resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.2.10.tgz#c8671e33e8f8d4abbd95efd20d3b8a888f457ed7"
   integrity sha512-/gr3PLZUVFCc86a9MqCUboVrALscrdluzTb3yew+2/qKBU8CX6nzs918/SRBRCqaPbx0TZP10CB6yFgK2C5cYQ==
+<<<<<<< HEAD
   dependencies:
 <<<<<<< HEAD
     tslib "^2.4.0"
@@ -2880,6 +2884,10 @@ framer-motion@^11.0.3:
   optionalDependencies:
     "@emotion/is-prop-valid" "^0.8.2"
 >>>>>>> b572612 (small fix)
+=======
+  dependencies:
+    tslib "^2.4.0"
+>>>>>>> 0e7b3f2 (fix: lock)
 
 framesync@6.1.2:
   version "6.1.2"
@@ -3054,10 +3062,14 @@ has@^1.0.3:
     function-bind "^1.1.1"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 hoist-non-react-statics@^3.3.1:
 =======
 hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
 >>>>>>> b572612 (small fix)
+=======
+hoist-non-react-statics@^3.3.1:
+>>>>>>> 0e7b3f2 (fix: lock)
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -3799,6 +3811,7 @@ playwright@1.42.1:
   integrity sha512-PgwB03s2DZBcNRoW+1w9E+VkLBxweib6KTXM0M3tkiT4jVxKSi6PmVJ591J+0u10LUrgxB7dLRbiJqO5s2QPMg==
   dependencies:
 <<<<<<< HEAD
+<<<<<<< HEAD
     playwright-core "1.42.1"
   optionalDependencies:
     fsevents "2.3.2"
@@ -3822,6 +3835,11 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 >>>>>>> b572612 (small fix)
+=======
+    playwright-core "1.42.1"
+  optionalDependencies:
+    fsevents "2.3.2"
+>>>>>>> 0e7b3f2 (fix: lock)
 
 postcss-value-parser@^4.1.0:
   version "4.2.0"
