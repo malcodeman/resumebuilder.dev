@@ -33,6 +33,9 @@ function Resize(props: props) {
           cursor: "ew-resize",
           top: 0,
         }}
+        whileHover={{
+          backgroundColor: "var(--chakra-colors-chakra-border-color)",
+        }}
       />
     </>
   );
