@@ -31,6 +31,7 @@ function Resize(props: props) {
           height: "100%",
           position: "fixed",
           cursor: "ew-resize",
+          top: 0,
         }}
       />
     </>
