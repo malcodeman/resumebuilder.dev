@@ -17,7 +17,7 @@ import { equals, isEmpty, map } from "ramda";
 import { ChevronLeftIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import FileUploader from "components/misc/FileUploader";
-import ImportFromGithub from "components/resumes/importFromGithub";
+import ImportFromGithub from "components/resumes/ImportFromGithub";
 import ImportFromPasteData from "components/resumes/ImportFromPasteData";
 import ImportFromLinkedin from "components/resumes/ImportFromLinkedin";
 import parser from "lib/parser";
