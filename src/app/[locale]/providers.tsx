@@ -19,7 +19,7 @@ const THEME = extendTheme({
   },
 });
 
-export function Providers({ children }: { children: React.ReactNode }) {
+function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ChakraProvider theme={THEME}>
       {children}
@@ -28,3 +28,5 @@ export function Providers({ children }: { children: React.ReactNode }) {
     </ChakraProvider>
   );
 }
+
+export default Providers;

@@ -2,8 +2,8 @@ import React from "react";
 import { Box, Container } from "@chakra-ui/react";
 import { useMediaQuery } from "@react-hookz/web";
 import { and, isNil, ifElse } from "ramda";
-import Header from "components/resumes/Header";
-import HeaderMobile from "components/resumes/HeaderMobile";
+import Header from "app/[locale]/resumes/_components/Header";
+import HeaderMobile from "app/[locale]/resumes/_components/HeaderMobile";
 
 type props = {
   children: React.ReactNode;
