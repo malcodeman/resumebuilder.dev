@@ -5,12 +5,12 @@ import { PlusIcon } from "lucide-react";
 import phrases from "lib/phrases";
 
 type Props = {
-  value: string;
+  currentPhrases: string;
   onChange: (phrase: string, isChecked: boolean) => void;
 };
 
 function AddPreWrittenPhrasesButton(props: Props) {
-  const { value, onChange } = props;
+  const { currentPhrases, onChange } = props;
   const t = useTranslations();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -27,7 +27,7 @@ function AddPreWrittenPhrasesButton(props: Props) {
       </Button>
       <PreWrittenPhrasesModal
         isOpen={isOpen}
-        value={value}
+        value={currentPhrases}
         phrases={phrases.SUMMARY}
         onClose={onClose}
         onChange={onChange}

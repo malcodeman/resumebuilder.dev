@@ -120,7 +120,7 @@ function Summary() {
           />
         </FormControl>
         <AddPreWrittenPhrasesButton
-          value={summary}
+          currentPhrases={summary}
           onChange={handleOnPhraseChange}
         />
       </GridItem>

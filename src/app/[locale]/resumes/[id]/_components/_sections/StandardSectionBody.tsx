@@ -92,7 +92,7 @@ function Description({ index, nestIndex, isEmployment }) {
         </FormControl>
         {isEmployment ? (
           <AddPreWrittenPhrasesButton
-            value={description}
+            currentPhrases={description}
             onChange={handleOnPhraseChange}
           />
         ) : null}
