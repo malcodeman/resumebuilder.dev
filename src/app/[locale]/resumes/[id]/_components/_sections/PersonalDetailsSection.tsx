@@ -22,18 +22,16 @@ import {
   CameraIcon,
   Trash2Icon,
   EditIcon,
-  PlusIcon,
 } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { concat, replace, isEmpty } from "ramda";
 import { useTranslations } from "next-intl";
-import phrases from "lib/phrases";
 import utils from "lib/utils";
 import useLocalStorage from "hooks/useLocalStorage";
 import useProfilePicture from "hooks/useProfilePicture";
 import SectionHeader from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
-import PreWrittenPhrasesModal from "app/[locale]/resumes/[id]/_components/_sections/PreWrittenPhrasesModal";
 import AddProfilePictureModal from "app/[locale]/resumes/[id]/_components/_sections/AddProfilePictureModal";
+import AddPreWrittenPhrasesButton from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
 
 function ProfilePicture() {
   const t = useTranslations();
@@ -90,7 +88,6 @@ function ProfilePicture() {
 function Summary() {
   const t = useTranslations();
   const { control, register, getValues, setValue } = useFormContext();
-  const phrasesModal = useDisclosure();
   const inputName = "about.summary";
   const summary = useWatch({
     control,
@@ -122,23 +119,11 @@ function Summary() {
             {...register("about.summary")}
           />
         </FormControl>
-        <Button
-          size="sm"
-          variant="ghost"
-          onClick={phrasesModal.onOpen}
-          data-testid="add-pre-written-phrases-button"
-          rightIcon={<PlusIcon size={16} />}
-        >
-          {t("add_pre_written_phrases")}
-        </Button>
+        <AddPreWrittenPhrasesButton
+          currentPhrases={summary}
+          onChange={handleOnPhraseChange}
+        />
       </GridItem>
-      <PreWrittenPhrasesModal
-        isOpen={phrasesModal.isOpen}
-        value={summary}
-        phrases={phrases.SUMMARY}
-        onClose={phrasesModal.onClose}
-        onChange={handleOnPhraseChange}
-      />
     </>
   );
 }
