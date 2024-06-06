@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 const TITLE = "Free Resume Builder for Developers | resumebuilder.dev";
 const DESCRIPTION = "The fastest way to build your tech resume.";
-const URL = "https://www.resumebuilder.dev";
+const WEBSITE_URL = "https://www.resumebuilder.dev";
 const AUTHOR = "Amer Karamustafić";
 const KEYWORDS = [
   "Resume builder",
@@ -22,6 +22,7 @@ const KEYWORDS = [
 ];
 
 export const metadata: Metadata = {
+  metadataBase: new URL(WEBSITE_URL),
   title: TITLE,
   description: DESCRIPTION,
   applicationName: "Resume Builder",
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   openGraph: {
     type: "website",
-    url: URL,
+    url: WEBSITE_URL,
     title: TITLE,
     description: DESCRIPTION,
     siteName: TITLE,
