@@ -3,11 +3,11 @@ import { LinkIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import utils from "lib/utils";
 
-type props = {
+type Props = {
   id: string;
 };
 
-function CopyLinkMenuItem(props: props) {
+function CopyLinkMenuItem(props: Props) {
   const { id } = props;
   const t = useTranslations();
   const { onCopy } = useClipboard(

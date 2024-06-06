@@ -24,13 +24,13 @@ import { useTranslations } from "next-intl";
 import useResume from "hooks/useResume";
 import useResumes from "hooks/useResumes";
 
-type props = {
+type Props = {
   isOpen: boolean;
   onClose: () => void;
   onChangeSlug: (nextSlug: string) => void;
 };
 
-function ChangeSlugModal(props: props) {
+function ChangeSlugModal(props: Props) {
   const { isOpen, onClose, onChangeSlug } = props;
   const t = useTranslations();
   const form = useForm({

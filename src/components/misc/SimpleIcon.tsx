@@ -1,12 +1,12 @@
 import React from "react";
 
-type props = {
+type Props = {
   size?: number;
   color?: string;
   path: string;
 };
 
-function SimpleIcon(props: props) {
+function SimpleIcon(props: Props) {
   const { size = 24, color = "currentColor", path, ...rest } = props;
   return (
     <svg

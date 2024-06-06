@@ -63,11 +63,11 @@ function SectionNewButton({ onSubmit }) {
   );
 }
 
-type props = {
+type Props = {
   form: UseFormReturn<Resume, object>;
 };
 
-function Sections(props: props) {
+function Sections(props: Props) {
   const { form } = props;
   const fieldArray = useFieldArray({
     control: form.control,

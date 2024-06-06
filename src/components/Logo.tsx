@@ -1,11 +1,11 @@
 import { Text, Flex, Box } from "@chakra-ui/react";
 import { Link } from "navigation";
 
-type props = {
+type Props = {
   href: string;
 };
 
-function Logo(props: props) {
+function Logo(props: Props) {
   const { href } = props;
   return (
     <Link href={href} passHref>

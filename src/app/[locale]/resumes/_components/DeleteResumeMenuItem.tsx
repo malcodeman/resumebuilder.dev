@@ -3,11 +3,11 @@ import { Trash2Icon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import DeleteResumeModal from "app/[locale]/resumes/_components/DeleteResumeModal";
 
-type props = {
+type Props = {
   onDelete: () => void;
 };
 
-function DeleteResumeMenuItem(props: props) {
+function DeleteResumeMenuItem(props: Props) {
   const { onDelete } = props;
   const t = useTranslations();
   const { isOpen, onOpen, onClose } = useDisclosure();

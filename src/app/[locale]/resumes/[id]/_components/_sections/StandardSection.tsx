@@ -25,7 +25,7 @@ import DraggableItem from "app/[locale]/resumes/[id]/_components/_sections/Dragg
 import { STANDARD_SECTION_DEFAULT_VALUES } from "lib/constants";
 import { Resume, Section } from "types";
 
-type props = {
+type Props = {
   id: string;
   index: number;
   label: string;
@@ -38,7 +38,7 @@ type props = {
   ) => void;
 };
 
-function StandardSection(props: props) {
+function StandardSection(props: Props) {
   const { id, index, label, name, isDragDisabled, remove, append } = props;
   const t = useTranslations();
   const { control, getValues, reset } = useFormContext<Resume>();

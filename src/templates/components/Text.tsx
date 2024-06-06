@@ -2,11 +2,11 @@ import { Text as ReactPdfText } from "@react-pdf/renderer";
 import useStyles from "templates/useStyles";
 import { Style } from "templates/types";
 
-type props = Style & {
+type Props = Style & {
   children?: React.ReactNode;
 };
 
-function Text(props: props) {
+function Text(props: Props) {
   const { children, ...rest } = props;
   const { isPdf, style } = useStyles(rest);
   return isPdf ? (

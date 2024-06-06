@@ -13,14 +13,14 @@ import { useTranslations } from "next-intl";
 import { TEMPLATES_LIST } from "lib/constants";
 import { Template as TemplateType } from "types";
 
-type props = {
+type Props = {
   id: TemplateType;
   renderDescription?: boolean;
   isLoading?: boolean;
   onUseTemplate: (template: TemplateType) => void;
 };
 
-function Template(props: props) {
+function Template(props: Props) {
   const {
     id,
     renderDescription = true,

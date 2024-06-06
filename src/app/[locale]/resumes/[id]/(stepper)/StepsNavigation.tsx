@@ -10,11 +10,11 @@ import { equals } from "ramda";
 import useResume from "hooks/useResume";
 import { Link } from "navigation";
 
-type props = BreadcrumbProps & {
+type Props = BreadcrumbProps & {
   currentPage: "about" | "employment" | "education";
 };
 
-function StepsNavigation(props: props) {
+function StepsNavigation(props: Props) {
   const { currentPage, ...rest } = props;
   const t = useTranslations();
   const { resume } = useResume();

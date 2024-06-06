@@ -11,13 +11,13 @@ const SAVE_MESSAGE_TRANS_KEYS = [
   "save_message_description_3",
 ];
 
-type props = {
+type Props = {
   description?: string;
   duration?: number;
   isClosable?: boolean;
 };
 
-function useAutoSaveToast(props: props) {
+function useAutoSaveToast(props: Props) {
   const {
     description = SAVE_MESSAGE_TRANS_KEYS[
       utils.getRandomInt(0, length(SAVE_MESSAGE_TRANS_KEYS))

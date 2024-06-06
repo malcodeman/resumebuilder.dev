@@ -47,7 +47,7 @@ import { Fields, Resume } from "types";
 
 const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
-type props = {
+type Props = {
   devTools: boolean;
   onImport: (fields: Fields) => void;
   onPdfExport: () => void;
@@ -433,7 +433,7 @@ function Info() {
   );
 }
 
-function HeaderPopover(props: props) {
+function HeaderPopover(props: Props) {
   const {
     devTools,
     onImport,

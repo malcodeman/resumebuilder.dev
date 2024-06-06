@@ -16,7 +16,7 @@ import { useTranslations } from "next-intl";
 import useLocalStorage from "hooks/useLocalStorage";
 import { Export } from "types";
 
-type props = {
+type Props = {
   isOpen: boolean;
   onClose: () => void;
   onPdfExport: () => void;
@@ -32,7 +32,7 @@ const EXPORTS: { label: string; value: Export }[] = [
   { label: "PNG", value: "png" },
 ];
 
-function ExportResumeModal(props: props) {
+function ExportResumeModal(props: Props) {
   const {
     isOpen,
     onClose,

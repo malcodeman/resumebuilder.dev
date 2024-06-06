@@ -5,11 +5,11 @@ import { and, isNil, ifElse } from "ramda";
 import Header from "app/[locale]/resumes/_components/Header";
 import HeaderMobile from "app/[locale]/resumes/_components/HeaderMobile";
 
-type props = {
+type Props = {
   children: React.ReactNode;
 };
 
-function Layout(props: props) {
+function Layout(props: Props) {
   const { children } = props;
   const isLargeDevice = useMediaQuery("(min-width: 62em)", {
     initializeWithValue: false,

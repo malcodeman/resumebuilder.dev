@@ -61,7 +61,7 @@ function UpdatedAtText(props: { updatedAt: number }) {
   );
 }
 
-type props = {
+type Props = {
   resume: Resume;
   onDelete: (id: string) => void;
   onDuplicate: (id: string) => void;
@@ -69,7 +69,7 @@ type props = {
   onIconChange: (id: string, emoji: string) => void;
 };
 
-function ResumeItem(props: props) {
+function ResumeItem(props: Props) {
   const {
     resume,
     onDelete,

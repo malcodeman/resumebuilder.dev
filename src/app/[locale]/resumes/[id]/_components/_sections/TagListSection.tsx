@@ -7,7 +7,7 @@ import SectionHeader from "app/[locale]/resumes/[id]/_components/_sections/Secti
 import TagListSectionBody from "app/[locale]/resumes/[id]/_components/_sections/TagListSectionBody";
 import { Section } from "types";
 
-type props = {
+type Props = {
   id: string;
   index: number;
   label: string;
@@ -20,7 +20,7 @@ type props = {
   ) => void;
 };
 
-function TagListSection(props: props) {
+function TagListSection(props: Props) {
   const { id, index, label, name, isDragDisabled, remove, append } = props;
   const {
     attributes,

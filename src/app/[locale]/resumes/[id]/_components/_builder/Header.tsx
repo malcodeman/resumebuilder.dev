@@ -11,11 +11,11 @@ import useLocalStorage from "hooks/useLocalStorage";
 import useProfilePicture from "hooks/useProfilePicture";
 import { Resume, Fields } from "types";
 
-type props = {
+type Props = {
   form: UseFormReturn<Resume, object>;
 };
 
-function Header(props: props) {
+function Header(props: Props) {
   const { form } = props;
   const t = useTranslations();
   const backgroundColor = useColorModeValue("white", "gray.800");

@@ -11,13 +11,13 @@ import {
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 
-type props = {
+type Props = {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: () => void;
 };
 
-function DeleteResumeModal(props: props) {
+function DeleteResumeModal(props: Props) {
   const t = useTranslations();
   const { isOpen, onClose, onSubmit } = props;
   const cancelRef = React.useRef();
