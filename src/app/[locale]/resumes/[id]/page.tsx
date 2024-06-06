@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { equals, isNil } from "ramda";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import { useTranslations } from "next-intl";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import Sections from "components/sections/Sections";
 import Header from "components/builder/Header";
 import HeaderMobile from "components/builder/HeaderMobile";
@@ -22,12 +23,13 @@ import Document from "components/builder/Document";
 import NotFound from "components/misc/NotFound";
 import TemplatesTabPanel from "components/builder/TemplatesTabPanel";
 import Preview from "components/builder/Preview";
-import ResizeHandler from "components/misc/ResizeHandler";
 import useResume from "hooks/useResume";
 import useAutoSaveToast from "hooks/useAutoSaveToast";
 import useLocalStorage from "hooks/useLocalStorage";
 import utils from "lib/utils";
 import { Resume, Template } from "types";
+
+const DEFAULT_WIDTH = 340;
 
 function Builder() {
   const t = useTranslations();
@@ -37,6 +39,8 @@ function Builder() {
   const isLargeDevice = useMediaQuery("(min-width: 62em)", {
     initializeWithValue: false,
   });
+  const x = useMotionValue(DEFAULT_WIDTH);
+  const width = useTransform(x, (x) => `${x}px`);
 
   React.useEffect(() => {
     if (resume && !equals(form.getValues(), resume)) {
@@ -85,39 +89,63 @@ function Builder() {
         paddingBottom={{ base: "54px", lg: "0" }}
         height="100vh"
       >
-        <ResizeHandler>
-          <Tabs size="sm" paddingTop="8" overflowY="hidden" isFitted>
-            <TabList>
-              <Tab data-testid="sections-tab">{t("sections")}</Tab>
-              <Tab data-testid="templates-tab">{t("templates")}</Tab>
-              {isLargeDevice ? null : (
-                <Tab data-testid="preview-tab">{t("preview")}</Tab>
-              )}
-            </TabList>
-            <TabPanels height="calc(100% - 31px)">
+        <Tabs
+          as={motion.div}
+          size="sm"
+          paddingTop="8"
+          overflowY="hidden"
+          isFitted
+          // @ts-ignore
+          style={{ width: isLargeDevice ? width : "initial" }}
+        >
+          <TabList>
+            <Tab data-testid="sections-tab">{t("sections")}</Tab>
+            <Tab data-testid="templates-tab">{t("templates")}</Tab>
+            {isLargeDevice ? null : (
+              <Tab data-testid="preview-tab">{t("preview")}</Tab>
+            )}
+          </TabList>
+          <TabPanels height="calc(100% - 31px)">
+            <TabPanel height="full" padding="0">
+              <Sections form={form} />
+            </TabPanel>
+            <TabPanel height="full" padding="0">
+              <TemplatesTabPanel onChangeTemplate={handleOnChangeTemplate} />
+            </TabPanel>
+            {isLargeDevice ? null : (
               <TabPanel height="full" padding="0">
-                <Sections form={form} />
+                <Box
+                  paddingTop="2"
+                  paddingInlineEnd="4"
+                  paddingBottom="2"
+                  paddingInlineStart="4"
+                  overflowY="auto"
+                  sx={utils.getScrollbarStyle()}
+                >
+                  <Preview form={form} />
+                </Box>
               </TabPanel>
-              <TabPanel height="full" padding="0">
-                <TemplatesTabPanel onChangeTemplate={handleOnChangeTemplate} />
-              </TabPanel>
-              {isLargeDevice ? null : (
-                <TabPanel height="full" padding="0">
-                  <Box
-                    paddingTop="2"
-                    paddingInlineEnd="4"
-                    paddingBottom="2"
-                    paddingInlineStart="4"
-                    overflowY="auto"
-                    sx={utils.getScrollbarStyle()}
-                  >
-                    <Preview form={form} />
-                  </Box>
-                </TabPanel>
-              )}
-            </TabPanels>
-          </Tabs>
-        </ResizeHandler>
+            )}
+          </TabPanels>
+          {isLargeDevice ? (
+            <motion.div
+              drag="x"
+              dragConstraints={{
+                left: DEFAULT_WIDTH,
+                right: DEFAULT_WIDTH + 140,
+              }}
+              style={{
+                x,
+                width: "6px",
+                height: "100%",
+                position: "fixed",
+                cursor: "ew-resize",
+                top: 0,
+              }}
+              onDoubleClick={() => x.set(DEFAULT_WIDTH)}
+            />
+          ) : null}
+        </Tabs>
         <Box
           overflowY="auto"
           display={{ base: "none", lg: "block" }}
