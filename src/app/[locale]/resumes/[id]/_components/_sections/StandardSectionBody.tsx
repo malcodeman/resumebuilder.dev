@@ -9,21 +9,17 @@ import {
   FormControl,
   FormLabel,
   Accordion,
-  Button,
   useAccordionItemState,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { and, not, equals, replace, concat } from "ramda";
 import { useTranslations } from "next-intl";
-import { PlusIcon } from "lucide-react";
 import { Section } from "types";
-import phrases from "lib/phrases";
 import utils from "lib/utils";
 import SectionHeader from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
-import PreWrittenPhrasesModal from "app/[locale]/resumes/[id]/_components/_sections/PreWrittenPhrasesModal";
+import AddPreWrittenPhrasesButton from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
 
 type props = {
   id: string;
@@ -66,7 +62,6 @@ function Description({ index, nestIndex, isEmployment }) {
     control,
     name: inputName,
   });
-  const phrasesModal = useDisclosure();
 
   function handleOnPhraseChange(phrase: string, isChecked: boolean) {
     const currentValue: string = getValues(inputName);
@@ -96,26 +91,12 @@ function Description({ index, nestIndex, isEmployment }) {
           />
         </FormControl>
         {isEmployment ? (
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={phrasesModal.onOpen}
-            data-testid="add-pre-written-phrases-button"
-            rightIcon={<PlusIcon size={16} />}
-          >
-            {t("add_pre_written_phrases")}
-          </Button>
+          <AddPreWrittenPhrasesButton
+            value={description}
+            onChange={handleOnPhraseChange}
+          />
         ) : null}
       </GridItem>
-      {isEmployment ? (
-        <PreWrittenPhrasesModal
-          isOpen={phrasesModal.isOpen}
-          value={description}
-          phrases={phrases.EMPLOYMENT}
-          onClose={phrasesModal.onClose}
-          onChange={handleOnPhraseChange}
-        />
-      ) : null}
     </>
   );
 }
