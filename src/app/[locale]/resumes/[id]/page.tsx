@@ -22,6 +22,7 @@ import Document from "components/builder/Document";
 import NotFound from "components/misc/NotFound";
 import TemplatesTabPanel from "components/builder/TemplatesTabPanel";
 import Preview from "components/builder/Preview";
+import ResizeHandler from "components/misc/ResizeHandler";
 import useResume from "hooks/useResume";
 import useAutoSaveToast from "hooks/useAutoSaveToast";
 import useLocalStorage from "hooks/useLocalStorage";
@@ -79,42 +80,44 @@ function Builder() {
       {isLargeDevice ? <Header form={form} /> : null}
       <Grid
         as="main"
-        templateColumns={{ base: "1fr", lg: "340px 1fr" }}
+        templateColumns={{ base: "1fr", lg: "auto 1fr" }}
         paddingTop={{ base: "0", lg: "48px" }}
         paddingBottom={{ base: "54px", lg: "0" }}
         height="100vh"
       >
-        <Tabs size="sm" paddingTop="8" overflowY="hidden" isFitted>
-          <TabList>
-            <Tab data-testid="sections-tab">{t("sections")}</Tab>
-            <Tab data-testid="templates-tab">{t("templates")}</Tab>
-            {isLargeDevice ? null : (
-              <Tab data-testid="preview-tab">{t("preview")}</Tab>
-            )}
-          </TabList>
-          <TabPanels height="calc(100% - 31px)">
-            <TabPanel height="full" padding="0">
-              <Sections form={form} />
-            </TabPanel>
-            <TabPanel height="full" padding="0">
-              <TemplatesTabPanel onChangeTemplate={handleOnChangeTemplate} />
-            </TabPanel>
-            {isLargeDevice ? null : (
+        <ResizeHandler>
+          <Tabs size="sm" paddingTop="8" overflowY="hidden" isFitted>
+            <TabList>
+              <Tab data-testid="sections-tab">{t("sections")}</Tab>
+              <Tab data-testid="templates-tab">{t("templates")}</Tab>
+              {isLargeDevice ? null : (
+                <Tab data-testid="preview-tab">{t("preview")}</Tab>
+              )}
+            </TabList>
+            <TabPanels height="calc(100% - 31px)">
               <TabPanel height="full" padding="0">
-                <Box
-                  paddingTop="2"
-                  paddingInlineEnd="4"
-                  paddingBottom="2"
-                  paddingInlineStart="4"
-                  overflowY="auto"
-                  sx={utils.getScrollbarStyle()}
-                >
-                  <Preview form={form} />
-                </Box>
+                <Sections form={form} />
               </TabPanel>
-            )}
-          </TabPanels>
-        </Tabs>
+              <TabPanel height="full" padding="0">
+                <TemplatesTabPanel onChangeTemplate={handleOnChangeTemplate} />
+              </TabPanel>
+              {isLargeDevice ? null : (
+                <TabPanel height="full" padding="0">
+                  <Box
+                    paddingTop="2"
+                    paddingInlineEnd="4"
+                    paddingBottom="2"
+                    paddingInlineStart="4"
+                    overflowY="auto"
+                    sx={utils.getScrollbarStyle()}
+                  >
+                    <Preview form={form} />
+                  </Box>
+                </TabPanel>
+              )}
+            </TabPanels>
+          </Tabs>
+        </ResizeHandler>
         <Box
           overflowY="auto"
           display={{ base: "none", lg: "block" }}
