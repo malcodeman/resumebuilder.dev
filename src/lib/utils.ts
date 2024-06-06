@@ -17,6 +17,9 @@ import {
   isEmpty,
   equals,
   has,
+  startsWith,
+  or,
+  drop,
 } from "ramda";
 import { format } from "date-fns";
 import getTemplate from "lib/getTemplate";
@@ -133,15 +136,21 @@ function pt2px(pt: number, suffix = true) {
 
 function parseWebsite(url: string) {
   try {
-    const parsedUrl = new URL(url);
-    const host = parsedUrl.host;
+    const hasProtocol = or(
+      startsWith("http://", url),
+      startsWith("https://", url)
+    );
+    const parsedUrl = new URL(hasProtocol ? url : `https://${url}`);
+    const host = startsWith("www.", parsedUrl.host)
+      ? drop(4, parsedUrl.host)
+      : parsedUrl.host;
     const pathname = parsedUrl.pathname;
     if (equals(pathname, "/")) {
       return host;
     }
     return `${host}${pathname}`;
   } catch {
-    return "";
+    return url;
   }
 }
 
