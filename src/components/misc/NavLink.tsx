@@ -2,12 +2,12 @@ import { Link, SpaceProps } from "@chakra-ui/react";
 import { equals } from "ramda";
 import { Link as NextLink, usePathname } from "navigation";
 
-type props = {
+type Props = {
   href: string;
   children: React.ReactNode;
 } & SpaceProps;
 
-function NavLink(props: props) {
+function NavLink(props: Props) {
   const { href, children, ...rest } = props;
   const pathname = usePathname();
   const isActive = equals(pathname, href);

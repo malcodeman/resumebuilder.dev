@@ -13,11 +13,11 @@ import { LINKS } from "lib/constants";
 import FileUploader from "components/misc/FileUploader";
 import { Fields } from "types";
 
-type props = {
+type Props = {
   onImport: (fields: Fields) => void;
 };
 
-function ImportFromLinkedin(props: props) {
+function ImportFromLinkedin(props: Props) {
   const { onImport } = props;
   const t = useTranslations();
   const [isLoading, setIsLoading] = useBoolean();

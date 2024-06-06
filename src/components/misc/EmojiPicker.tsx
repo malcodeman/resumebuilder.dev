@@ -19,7 +19,7 @@ import { useTranslations } from "next-intl";
 
 const TOOLTIP_LABEL = "Change icon";
 
-type props = {
+type Props = {
   emoji?: string;
   onSelect: (emoji: string) => void;
 };
@@ -28,7 +28,7 @@ const EMOJIS = values(native.emojis);
 const DEFAULT_EMOJI = find((e) => equals(e.id, "page_facing_up"), EMOJIS)
   .skins[0].native;
 
-function EmojiPicker(props: props) {
+function EmojiPicker(props: Props) {
   const { emoji, onSelect } = props;
   const t = useTranslations();
   const icon = (

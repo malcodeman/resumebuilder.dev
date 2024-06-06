@@ -16,11 +16,11 @@ import { useTranslations } from "next-intl";
 import parser from "lib/parser";
 import { Fields } from "types";
 
-type props = {
+type Props = {
   onImport: (fields: Fields) => void;
 };
 
-function ImportFromGithub(props: props) {
+function ImportFromGithub(props: Props) {
   const { onImport } = props;
   const t = useTranslations();
   const form = useForm({

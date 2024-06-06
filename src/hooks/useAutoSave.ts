@@ -6,11 +6,11 @@ import useResume from "hooks/useResume";
 import useLocalStorage from "hooks/useLocalStorage";
 import { Resume } from "types";
 
-type props = {
+type Props = {
   form: UseFormReturn<Resume, object>;
 };
 
-function useAutoSave(props: props) {
+function useAutoSave(props: Props) {
   const { form } = props;
   const [isPdfViewer] = useLocalStorage("is-pdf-viewer");
   const { setResume } = useResume();

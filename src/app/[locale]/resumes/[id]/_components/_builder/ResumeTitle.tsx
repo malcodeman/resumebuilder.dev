@@ -11,11 +11,11 @@ import EmojiPicker from "components/misc/EmojiPicker";
 import useResume from "hooks/useResume";
 import { Resume } from "types";
 
-type props = HTMLChakraProps<"div"> & {
+type Props = HTMLChakraProps<"div"> & {
   form: UseFormReturn<Resume, object>;
 };
 
-function ResumeTitle(props: props) {
+function ResumeTitle(props: Props) {
   const { form } = props;
   const { resume, changeIcon, changeTitle } = useResume();
 

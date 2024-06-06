@@ -21,7 +21,7 @@ import utils from "lib/utils";
 import SectionHeader from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
 import AddPreWrittenPhrasesButton from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
 
-type props = {
+type Props = {
   id: string;
   index: number;
   nestIndex: number;
@@ -129,7 +129,7 @@ function getSubtitleLabelTransKey(name: Section) {
   }
 }
 
-function StandardSectionBody(props: props) {
+function StandardSectionBody(props: Props) {
   const { id, index, nestIndex, name, isDragDisabled, onDuplicate, onRemove } =
     props;
   const t = useTranslations();

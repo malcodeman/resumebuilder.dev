@@ -10,11 +10,11 @@ import useLocalStorage from "hooks/useLocalStorage";
 import useProfilePicture from "hooks/useProfilePicture";
 import { Resume } from "types";
 
-type props = {
+type Props = {
   form: UseFormReturn<Resume, object>;
 };
 
-function Preview(props: props) {
+function Preview(props: Props) {
   const { form } = props;
   const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
   const [profilePicture] = useProfilePicture();

@@ -2,11 +2,11 @@ import { View as ReactPdfView } from "@react-pdf/renderer";
 import useStyles from "templates/useStyles";
 import { Style } from "templates/types";
 
-type props = Style & {
+type Props = Style & {
   children?: React.ReactNode;
 };
 
-function Flex(props: props) {
+function Flex(props: Props) {
   const { children, ...rest } = props;
   const { isPdf, style } = useStyles(rest);
   const localStyle = {

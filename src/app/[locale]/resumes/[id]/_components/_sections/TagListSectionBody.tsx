@@ -28,7 +28,7 @@ import { Section } from "types";
 import allTags from "lib/tags";
 import utils from "lib/utils";
 
-type props = {
+type Props = {
   index: number;
   name: Section;
 };
@@ -57,7 +57,7 @@ function getTags(name: Section) {
   }
 }
 
-function TagListSectionBody(props: props) {
+function TagListSectionBody(props: Props) {
   const { index, name } = props;
   const t = useTranslations();
   const { control, register, setValue } = useFormContext();

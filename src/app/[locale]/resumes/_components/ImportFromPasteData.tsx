@@ -13,11 +13,11 @@ import { useTranslations } from "next-intl";
 import utils from "lib/utils";
 import { Fields } from "types";
 
-type props = {
+type Props = {
   onImport: (fields: Fields) => void;
 };
 
-function ImportFromPasteData(props: props) {
+function ImportFromPasteData(props: Props) {
   const { onImport } = props;
   const t = useTranslations();
   const form = useForm({

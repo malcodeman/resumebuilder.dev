@@ -17,13 +17,13 @@ Font.register({
   ],
 });
 
-type props = Style & {
+type Props = Style & {
   id: Template;
   size?: PageSize;
   children: React.ReactNode;
 };
 
-function Page(props: props) {
+function Page(props: Props) {
   const { id, size = "A4", children, ...rest } = props;
   const { isPdf, spacing, style } = useStyles(rest);
   const localStyle = {

@@ -7,14 +7,14 @@ import {
 import { useForm } from "react-hook-form";
 import EmojiPicker from "components/misc/EmojiPicker";
 
-type props = {
+type Props = {
   icon: string;
   title: string;
   onChangeIcon: (nextValue: string) => void;
   onChangeTitle: (nextValue: string) => void;
 };
 
-function ResumeTitleColumn(props: props) {
+function ResumeTitleColumn(props: Props) {
   const { icon, title, onChangeIcon, onChangeTitle } = props;
   const form = useForm({ defaultValues: { title: "" } });
   return (

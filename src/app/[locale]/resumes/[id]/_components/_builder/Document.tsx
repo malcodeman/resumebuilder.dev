@@ -11,7 +11,7 @@ import useLocalStorage from "hooks/useLocalStorage";
 import useProfilePicture from "hooks/useProfilePicture";
 import { Resume } from "types";
 
-type props = {
+type Props = {
   form: UseFormReturn<Resume, object>;
   isPdf?: boolean;
 };
@@ -21,7 +21,7 @@ const PAGE_SIZE = {
   HEIGHT: 841.89,
 };
 
-function Document(props: props) {
+function Document(props: Props) {
   const { form } = props;
   const [isFullWidth] = useLocalStorage("is-full-width");
   const [isPdf] = useLocalStorage("is-pdf-viewer");

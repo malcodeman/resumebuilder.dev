@@ -1,11 +1,11 @@
 import { Flex } from "@chakra-ui/react";
 import { ChevronDownIcon } from "lucide-react";
 
-type props = {
+type Props = {
   children: React.ReactNode;
 };
 
-function DraggableItem(props: props) {
+function DraggableItem(props: Props) {
   const { children } = props;
   return (
     <Flex

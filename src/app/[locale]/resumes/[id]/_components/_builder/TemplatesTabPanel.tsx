@@ -7,11 +7,11 @@ import utils from "lib/utils";
 import { Template as TemplateType } from "types";
 import SearchInput from "components/misc/SearchInput";
 
-type props = {
+type Props = {
   onChangeTemplate: (nextTemplate: TemplateType) => void;
 };
 
-function TemplatesTabPanel(props: props) {
+function TemplatesTabPanel(props: Props) {
   const { onChangeTemplate } = props;
   const t = useTranslations();
   const [template, setTemplate] = React.useState("");

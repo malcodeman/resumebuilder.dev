@@ -3,12 +3,12 @@ import { useTranslations } from "next-intl";
 import Poser5 from "illustrations/Poser5";
 import { Link } from "navigation";
 
-type props = {
+type Props = {
   description?: string;
   link?: string;
 };
 
-function NotFound(props: props) {
+function NotFound(props: Props) {
   const t = useTranslations();
   const { description = t("404_description"), link = "/" } = props;
   return (

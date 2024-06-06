@@ -82,13 +82,13 @@ const CUSTOM_SECTIONS: Sections = [
   },
 ];
 
-type props = {
+type Props = {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: { label: string; name: Section }) => void;
 };
 
-function AddSectionModal(props: props) {
+function AddSectionModal(props: Props) {
   const { isOpen, onClose, onSubmit } = props;
   const t = useTranslations();
 

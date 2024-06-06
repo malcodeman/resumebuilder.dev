@@ -5,12 +5,12 @@ import { Style } from "templates/types";
 import { useContext } from "react";
 import TemplateContext from "templates/components/TemplateContext";
 
-type props = Style & {
+type Props = Style & {
   href: string;
   children?: React.ReactNode;
 };
 
-function Link(props: props) {
+function Link(props: Props) {
   const { href, color, children, ...rest } = props;
   const { isPdf, style } = useStyles(rest);
   const { isDescendantOfLink } = useContext(TemplateContext);

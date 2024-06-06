@@ -3,12 +3,12 @@ import useStyles from "templates/useStyles";
 import { Style } from "templates/types";
 import utils from "lib/utils";
 
-type props = Style & {
+type Props = Style & {
   src: string;
   alt?: string;
 };
 
-function Image(props: props) {
+function Image(props: Props) {
   const { src, alt = "", width, height, ...rest } = props;
   const { isPdf, spacing, style } = useStyles(rest);
   return isPdf ? (

@@ -26,7 +26,7 @@ import { and, isNil, equals } from "ramda";
 import { useFormContext } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
-type props = {
+type Props = {
   label: string;
   index?: number;
   onAppend?: () => void;
@@ -37,7 +37,7 @@ type props = {
 const TOOLTIP_ADD_LABEL = "Add an item";
 const TOOLTIP_MORE_LABEL = "Delete, duplicate, and more...";
 
-function SectionHeader(props: props) {
+function SectionHeader(props: Props) {
   const { label, index, onAppend, onDuplicate, onRemove } = props;
   const t = useTranslations();
   const isStandardSection = !isNil(onAppend);

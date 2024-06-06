@@ -15,7 +15,7 @@ import {
   Td,
 } from "@chakra-ui/react";
 
-type props = {
+type Props = {
   size?: "sm" | "md" | "lg";
   columns: ColumnDef<any, any>[];
   data: any[];
@@ -23,7 +23,7 @@ type props = {
   onColumnVisibilityChange?: OnChangeFn<VisibilityState>;
 };
 
-function Table(props: props) {
+function Table(props: Props) {
   const {
     size = "sm",
     columns,
