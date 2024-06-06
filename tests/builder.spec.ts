@@ -220,7 +220,7 @@ test.describe("Builder page", () => {
     expect(await page.getByTestId("document").textContent()).toContain(summary);
   });
   test("Summary pre-written phrases search | Not found", async ({ page }) => {
-    await page.getByTestId("add-pre-written-phrases-form-helper-text").click();
+    await page.getByTestId("add-pre-written-phrases-button").click();
 
     const input = page.getByTestId("search-input").getByRole("textbox");
     const phrase = "malcodeman";
@@ -233,7 +233,7 @@ test.describe("Builder page", () => {
     ).toContain("No phrases found");
   });
   test("Summary pre-written phrases | React", async ({ page }) => {
-    await page.getByTestId("add-pre-written-phrases-form-helper-text").click();
+    await page.getByTestId("add-pre-written-phrases-button").click();
 
     const input = page.getByTestId("search-input").getByRole("textbox");
     const phrase = "React";
