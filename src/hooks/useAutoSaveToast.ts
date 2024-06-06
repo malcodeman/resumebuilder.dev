@@ -1,8 +1,8 @@
 import { useToast } from "@chakra-ui/toast";
 import { length } from "ramda";
 import { useTranslations } from "next-intl";
-import utils from "lib/utils";
 import { useHotkeys } from "react-hotkeys-hook";
+import utils from "lib/utils";
 
 const TOAST_ID = "onSave";
 const SAVE_MESSAGE_TRANS_KEYS = [

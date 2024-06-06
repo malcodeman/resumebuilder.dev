@@ -14,8 +14,8 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { values, map, find, equals } from "ramda";
-import native from "emojis/native.json";
 import { useTranslations } from "next-intl";
+import native from "emojis/native.json";
 
 const TOOLTIP_LABEL = "Change icon";
 

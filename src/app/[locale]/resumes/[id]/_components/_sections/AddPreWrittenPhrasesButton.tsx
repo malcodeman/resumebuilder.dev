@@ -1,7 +1,7 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
-import PreWrittenPhrasesModal from "app/[locale]/resumes/[id]/_components/_sections/PreWrittenPhrasesModal";
 import { useTranslations } from "next-intl";
 import { PlusIcon } from "lucide-react";
+import PreWrittenPhrasesModal from "app/[locale]/resumes/[id]/_components/_sections/PreWrittenPhrasesModal";
 import phrases from "lib/phrases";
 
 type Props = {
