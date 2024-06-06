@@ -9,8 +9,8 @@ import {
   FormControl,
   FormLabel,
   Accordion,
+  Button,
   useAccordionItemState,
-  FormHelperText,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useFormContext, useWatch } from "react-hook-form";
@@ -18,6 +18,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { and, not, equals, replace, concat } from "ramda";
 import { useTranslations } from "next-intl";
+import { PlusIcon } from "lucide-react";
 import { Section } from "types";
 import phrases from "lib/phrases";
 import utils from "lib/utils";
@@ -80,7 +81,7 @@ function Description({ index, nestIndex, isEmployment }) {
   return (
     <>
       <GridItem colSpan={2}>
-        <FormControl>
+        <FormControl mb="2">
           <FormLabel>{t("description")}</FormLabel>
           <Textarea
             variant="filled"
@@ -93,12 +94,18 @@ function Description({ index, nestIndex, isEmployment }) {
               `section.${index}.nested.${nestIndex}.description` as const
             )}
           />
-          {isEmployment ? (
-            <FormHelperText cursor="pointer" onClick={phrasesModal.onOpen}>
-              {t("add_pre_written_phrases")}
-            </FormHelperText>
-          ) : null}
         </FormControl>
+        {isEmployment ? (
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={phrasesModal.onOpen}
+            data-testid="add-pre-written-phrases-button"
+            rightIcon={<PlusIcon size={16} />}
+          >
+            {t("add_pre_written_phrases")}
+          </Button>
+        ) : null}
       </GridItem>
       {isEmployment ? (
         <PreWrittenPhrasesModal

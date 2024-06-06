@@ -9,7 +9,6 @@ import {
   FormLabel,
   InputGroup,
   InputLeftElement,
-  FormHelperText,
   Avatar,
   Button,
   Flex,
@@ -23,6 +22,7 @@ import {
   CameraIcon,
   Trash2Icon,
   EditIcon,
+  PlusIcon,
 } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { concat, replace, isEmpty } from "ramda";
@@ -110,7 +110,7 @@ function Summary() {
   return (
     <>
       <GridItem colSpan={2}>
-        <FormControl>
+        <FormControl mb="2">
           <FormLabel>{t("summary")}</FormLabel>
           <Textarea
             variant="filled"
@@ -121,14 +121,16 @@ function Summary() {
             data-testid="about-summary-textarea"
             {...register("about.summary")}
           />
-          <FormHelperText
-            cursor="pointer"
-            onClick={phrasesModal.onOpen}
-            data-testid="add-pre-written-phrases-form-helper-text"
-          >
-            {t("add_pre_written_phrases")}
-          </FormHelperText>
         </FormControl>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={phrasesModal.onOpen}
+          data-testid="add-pre-written-phrases-button"
+          rightIcon={<PlusIcon size={16} />}
+        >
+          {t("add_pre_written_phrases")}
+        </Button>
       </GridItem>
       <PreWrittenPhrasesModal
         isOpen={phrasesModal.isOpen}
