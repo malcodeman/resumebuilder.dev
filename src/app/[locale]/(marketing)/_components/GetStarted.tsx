@@ -15,7 +15,7 @@ import { CheckIcon } from "lucide-react";
 import { length, map } from "ramda";
 import { useTranslations } from "next-intl";
 import { useMediaQuery } from "@react-hookz/web";
-import useResumes from "hooks/useResumes";
+import { useResumes } from "hooks/useResumes";
 import { useRouter } from "navigation";
 
 const LIST = [
@@ -103,4 +103,4 @@ function GetStarted() {
   );
 }
 
-export default GetStarted;
+export { GetStarted };

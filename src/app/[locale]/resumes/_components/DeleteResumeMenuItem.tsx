@@ -1,7 +1,7 @@
 import { MenuItem, useDisclosure } from "@chakra-ui/react";
 import { Trash2Icon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import DeleteResumeModal from "app/[locale]/resumes/_components/DeleteResumeModal";
+import { DeleteResumeModal } from "app/[locale]/resumes/_components/DeleteResumeModal";
 
 type Props = {
   onDelete: () => void;
@@ -29,4 +29,4 @@ function DeleteResumeMenuItem(props: Props) {
   );
 }
 
-export default DeleteResumeMenuItem;
+export { DeleteResumeMenuItem };

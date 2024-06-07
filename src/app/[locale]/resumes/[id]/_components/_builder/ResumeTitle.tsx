@@ -7,8 +7,8 @@ import {
 } from "@chakra-ui/react";
 import { UseFormReturn } from "react-hook-form";
 import { isEmpty } from "ramda";
-import EmojiPicker from "components/misc/EmojiPicker";
-import useResume from "hooks/useResume";
+import { EmojiPicker } from "components/misc/EmojiPicker";
+import { useResume } from "hooks/useResume";
 import { Resume } from "types";
 
 type Props = HTMLChakraProps<"div"> & {
@@ -61,4 +61,4 @@ function ResumeTitle(props: Props) {
   return <></>;
 }
 
-export default ResumeTitle;
+export { ResumeTitle };

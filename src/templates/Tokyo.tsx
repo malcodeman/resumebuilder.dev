@@ -1,13 +1,13 @@
 import React from "react";
 import { and, isEmpty, equals, split } from "ramda";
-import utils from "lib/utils";
-import Text from "templates/components/Text";
-import Page from "templates/components/Page";
-import Box from "templates/components/Box";
-import Flex from "templates/components/Flex";
-import Link from "templates/components/Link";
-import Image from "templates/components/Image";
-import TemplateContext from "templates/components/TemplateContext";
+import { utils } from "lib/utils";
+import { Text } from "templates/components/Text";
+import { Page } from "templates/components/Page";
+import { Box } from "templates/components/Box";
+import { Flex } from "templates/components/Flex";
+import { Link } from "templates/components/Link";
+import { Image } from "templates/components/Image";
+import { TemplateContext } from "templates/components/TemplateContext";
 import { TemplateProps } from "types";
 
 function SectionLabel(props: { children: React.ReactNode }) {
@@ -171,4 +171,4 @@ function Tokyo(props: TemplateProps) {
   );
 }
 
-export default Tokyo;
+export { Tokyo };

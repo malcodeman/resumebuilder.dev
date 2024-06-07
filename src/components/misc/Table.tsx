@@ -75,4 +75,4 @@ function Table(props: Props) {
   );
 }
 
-export default Table;
+export { Table };

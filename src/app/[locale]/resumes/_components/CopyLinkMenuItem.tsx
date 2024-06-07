@@ -1,7 +1,7 @@
 import { MenuItem, useClipboard, useToast } from "@chakra-ui/react";
 import { LinkIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import utils from "lib/utils";
+import { utils } from "lib/utils";
 
 type Props = {
   id: string;
@@ -34,4 +34,4 @@ function CopyLinkMenuItem(props: Props) {
   );
 }
 
-export default CopyLinkMenuItem;
+export { CopyLinkMenuItem };

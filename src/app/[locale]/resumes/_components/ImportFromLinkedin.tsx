@@ -8,9 +8,9 @@ import {
 } from "@chakra-ui/react";
 import JSZip from "jszip";
 import { useTranslations } from "next-intl";
-import parser from "lib/parser";
+import { parser } from "lib/parser";
 import { LINKS } from "lib/constants";
-import FileUploader from "components/misc/FileUploader";
+import { FileUploader } from "components/misc/FileUploader";
 import { Fields } from "types";
 
 type Props = {
@@ -117,4 +117,4 @@ function ImportFromLinkedin(props: Props) {
   );
 }
 
-export default ImportFromLinkedin;
+export { ImportFromLinkedin };

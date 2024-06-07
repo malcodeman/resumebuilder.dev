@@ -173,4 +173,4 @@ function Faq() {
   );
 }
 
-export default Faq;
+export { Faq };

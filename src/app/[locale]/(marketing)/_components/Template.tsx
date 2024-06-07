@@ -66,4 +66,4 @@ function Template(props: Props) {
   );
 }
 
-export default Template;
+export { Template };

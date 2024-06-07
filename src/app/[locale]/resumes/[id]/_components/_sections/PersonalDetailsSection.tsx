@@ -26,12 +26,12 @@ import {
 import { useFormContext, useWatch } from "react-hook-form";
 import { concat, replace, isEmpty } from "ramda";
 import { useTranslations } from "next-intl";
-import utils from "lib/utils";
-import useLocalStorage from "hooks/useLocalStorage";
-import useProfilePicture from "hooks/useProfilePicture";
-import SectionHeader from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
-import AddProfilePictureModal from "app/[locale]/resumes/[id]/_components/_sections/AddProfilePictureModal";
-import AddPreWrittenPhrasesButton from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
+import { utils } from "lib/utils";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { useProfilePicture } from "hooks/useProfilePicture";
+import { SectionHeader } from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
+import { AddProfilePictureModal } from "app/[locale]/resumes/[id]/_components/_sections/AddProfilePictureModal";
+import { AddPreWrittenPhrasesButton } from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
 
 function ProfilePicture() {
   const t = useTranslations();
@@ -256,4 +256,4 @@ function PersonalDetailsSection() {
   );
 }
 
-export default PersonalDetailsSection;
+export { PersonalDetailsSection };

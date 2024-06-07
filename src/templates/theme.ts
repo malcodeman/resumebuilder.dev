@@ -9,8 +9,6 @@ const fontSize = {
   "4xl": 27,
 };
 
-const EXPORTS = {
+export const theme = {
   fontSize,
 };
-
-export default EXPORTS;

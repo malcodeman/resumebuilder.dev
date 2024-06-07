@@ -13,7 +13,7 @@ import {
 import { and, equals, map, or } from "ramda";
 import { useMediaQuery } from "@react-hookz/web";
 import { useTranslations } from "next-intl";
-import useLocalStorage from "hooks/useLocalStorage";
+import { useLocalStorage } from "hooks/useLocalStorage";
 import { Export } from "types";
 
 type Props = {
@@ -98,4 +98,4 @@ function ExportResumeModal(props: Props) {
     </Modal>
   );
 }
-export default ExportResumeModal;
+export { ExportResumeModal };

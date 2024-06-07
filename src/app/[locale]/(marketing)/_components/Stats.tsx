@@ -40,4 +40,4 @@ function Stats(props: StatGroupProps) {
   );
 }
 
-export default Stats;
+export { Stats };

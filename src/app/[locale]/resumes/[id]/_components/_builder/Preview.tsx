@@ -5,9 +5,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useWatch, UseFormReturn } from "react-hook-form";
-import getTemplate from "lib/getTemplate";
-import useLocalStorage from "hooks/useLocalStorage";
-import useProfilePicture from "hooks/useProfilePicture";
+import { getTemplate } from "lib/getTemplate";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { useProfilePicture } from "hooks/useProfilePicture";
 import { Resume } from "types";
 
 type Props = {
@@ -58,4 +58,4 @@ function Preview(props: Props) {
   );
 }
 
-export default Preview;
+export { Preview };

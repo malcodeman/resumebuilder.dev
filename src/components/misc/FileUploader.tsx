@@ -43,4 +43,4 @@ function FileUploader(props: Props) {
   );
 }
 
-export default FileUploader;
+export { FileUploader };

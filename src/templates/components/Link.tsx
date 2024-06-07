@@ -1,9 +1,9 @@
 import { Text, Link as ReactPdfLink } from "@react-pdf/renderer";
 import { or } from "ramda";
 import { useContext } from "react";
-import useStyles from "templates/useStyles";
+import { useStyles } from "templates/useStyles";
 import { Style } from "templates/types";
-import TemplateContext from "templates/components/TemplateContext";
+import { TemplateContext } from "templates/components/TemplateContext";
 
 type Props = Style & {
   href: string;
@@ -37,4 +37,4 @@ function Link(props: Props) {
   );
 }
 
-export default Link;
+export { Link };

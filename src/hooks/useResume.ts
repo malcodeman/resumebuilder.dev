@@ -87,4 +87,4 @@ function useResume() {
   };
 }
 
-export default useResume;
+export { useResume };

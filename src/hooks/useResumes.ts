@@ -123,4 +123,4 @@ function useResumes() {
   };
 }
 
-export default useResumes;
+export { useResumes };

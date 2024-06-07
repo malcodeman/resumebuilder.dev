@@ -163,4 +163,4 @@ function SectionHeader(props: Props) {
   );
 }
 
-export default SectionHeader;
+export { SectionHeader };

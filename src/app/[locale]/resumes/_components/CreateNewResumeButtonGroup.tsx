@@ -16,8 +16,8 @@ import { PlusIcon, UploadIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { equals } from "ramda";
 import { Fields } from "types";
-import useResumes from "hooks/useResumes";
-import ImportDataModal from "app/[locale]/resumes/_components/ImportDataModal";
+import { useResumes } from "hooks/useResumes";
+import { ImportDataModal } from "app/[locale]/resumes/_components/ImportDataModal";
 import { useRouter } from "navigation";
 
 function NewButton() {
@@ -114,4 +114,4 @@ function CreateNewResumeButtonGroup() {
   );
 }
 
-export default CreateNewResumeButtonGroup;
+export { CreateNewResumeButtonGroup };

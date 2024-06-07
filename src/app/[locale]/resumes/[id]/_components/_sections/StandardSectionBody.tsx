@@ -17,9 +17,9 @@ import { CSS } from "@dnd-kit/utilities";
 import { and, not, equals, replace, concat } from "ramda";
 import { useTranslations } from "next-intl";
 import { Section } from "types";
-import utils from "lib/utils";
-import SectionHeader from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
-import AddPreWrittenPhrasesButton from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
+import { utils } from "lib/utils";
+import { SectionHeader } from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
+import { AddPreWrittenPhrasesButton } from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
 
 type Props = {
   id: string;
@@ -276,4 +276,4 @@ function StandardSectionBody(props: Props) {
   );
 }
 
-export default StandardSectionBody;
+export { StandardSectionBody };

@@ -9,4 +9,4 @@ function useLocalStorage(key: LocalStorageKey) {
   return storage;
 }
 
-export default useLocalStorage;
+export { useLocalStorage };

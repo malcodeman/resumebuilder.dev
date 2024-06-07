@@ -33,15 +33,15 @@ import { equals, isNil, or } from "ramda";
 import { formatDistanceToNow } from "date-fns";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
-import ImportDataModal from "app/[locale]/resumes/_components/ImportDataModal";
-import ExportResumeModal from "app/[locale]/resumes/[id]/_components/_builder/ExportResumeModal";
-import DeleteResumeModal from "app/[locale]/resumes/_components/DeleteResumeModal";
-import ChangeSlugModal from "app/[locale]/resumes/[id]/_components/_builder/ChangeSlugModal";
-import LanguageSelect from "components/misc/LanguageSelect";
-import utils from "lib/utils";
-import useResume from "hooks/useResume";
-import useDateFnsLocale from "hooks/useDateFnsLocale";
-import useLocalStorage from "hooks/useLocalStorage";
+import { ImportDataModal } from "app/[locale]/resumes/_components/ImportDataModal";
+import { ExportResumeModal } from "app/[locale]/resumes/[id]/_components/_builder/ExportResumeModal";
+import { DeleteResumeModal } from "app/[locale]/resumes/_components/DeleteResumeModal";
+import { ChangeSlugModal } from "app/[locale]/resumes/[id]/_components/_builder/ChangeSlugModal";
+import { LanguageSelect } from "components/misc/LanguageSelect";
+import { utils } from "lib/utils";
+import { useResume } from "hooks/useResume";
+import { useDateFnsLocale } from "hooks/useDateFnsLocale";
+import { useLocalStorage } from "hooks/useLocalStorage";
 import { useRouter } from "navigation";
 import { Fields, Resume } from "types";
 
@@ -496,4 +496,4 @@ function HeaderPopover(props: Props) {
   );
 }
 
-export default HeaderPopover;
+export { HeaderPopover };

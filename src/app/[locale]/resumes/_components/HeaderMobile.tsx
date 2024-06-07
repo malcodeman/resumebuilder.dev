@@ -7,9 +7,9 @@ import {
 } from "@chakra-ui/react";
 import { FileTextIcon, HomeIcon, LayersIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import useLocalStorage from "hooks/useLocalStorage";
-import NavLink from "components/misc/NavLink";
-import UserMenu from "app/[locale]/resumes/_components/UserMenu";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { NavLink } from "components/misc/NavLink";
+import { UserMenu } from "app/[locale]/resumes/_components/UserMenu";
 
 function HeaderMobile() {
   const t = useTranslations();
@@ -62,4 +62,4 @@ function HeaderMobile() {
   );
 }
 
-export default HeaderMobile;
+export { HeaderMobile };

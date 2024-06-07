@@ -13,8 +13,8 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { TEMPLATES_LIST, DEFAULT_VALUES } from "lib/constants";
 import { Template as TemplateType } from "types";
-import useResumes from "hooks/useResumes";
-import Template from "app/[locale]/(marketing)/_components/Template";
+import { useResumes } from "hooks/useResumes";
+import { Template } from "app/[locale]/(marketing)/_components/Template";
 import { Link, useRouter } from "navigation";
 
 const ARROW_RIGHT_VARIANTS = {
@@ -104,4 +104,4 @@ function Templates() {
   );
 }
 
-export default Templates;
+export { Templates };

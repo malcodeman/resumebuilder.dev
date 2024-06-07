@@ -1,7 +1,7 @@
 import { BrowserContext, Page } from "@playwright/test";
 import { find, equals } from "ramda";
 import { Resume } from "types";
-import utils from "lib/utils";
+import { utils } from "lib/utils";
 
 async function getLocalStorageItem({
   context,
@@ -77,4 +77,4 @@ const EXPORTS = {
   generateFakeResume,
 };
 
-export default EXPORTS;
+export { EXPORTS };

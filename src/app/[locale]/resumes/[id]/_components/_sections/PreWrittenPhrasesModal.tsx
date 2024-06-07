@@ -14,7 +14,7 @@ import {
 import { equals, filter, includes, length, map, toLower } from "ramda";
 import { useTranslations } from "next-intl";
 import { Phrase } from "types";
-import SearchInput from "components/misc/SearchInput";
+import { SearchInput } from "components/misc/SearchInput";
 
 type Props = {
   isOpen: boolean;
@@ -73,4 +73,4 @@ function PreWrittenPhrasesModal(props: Props) {
   );
 }
 
-export default PreWrittenPhrasesModal;
+export { PreWrittenPhrasesModal };

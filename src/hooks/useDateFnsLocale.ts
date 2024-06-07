@@ -26,4 +26,4 @@ function useDateFnsLocale() {
   };
 }
 
-export default useDateFnsLocale;
+export { useDateFnsLocale };

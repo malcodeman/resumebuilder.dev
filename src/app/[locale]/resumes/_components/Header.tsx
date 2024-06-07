@@ -9,13 +9,13 @@ import {
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { useNetworkState } from "@react-hookz/web";
-import useLocalStorage from "hooks/useLocalStorage";
-import useProfilePicture from "hooks/useProfilePicture";
-import Logo from "components/Logo";
-import NavLink from "components/misc/NavLink";
-import LanguageSelect from "components/misc/LanguageSelect";
-import UserMenu from "app/[locale]/resumes/_components/UserMenu";
-import OfflineTag from "components/misc/OfflineTag";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { useProfilePicture } from "hooks/useProfilePicture";
+import { Logo } from "components/Logo";
+import { NavLink } from "components/misc/NavLink";
+import { LanguageSelect } from "components/misc/LanguageSelect";
+import { UserMenu } from "app/[locale]/resumes/_components/UserMenu";
+import { OfflineTag } from "components/misc/OfflineTag";
 import { Link } from "navigation";
 
 function Header() {
@@ -87,4 +87,4 @@ function Header() {
   );
 }
 
-export default Header;
+export { Header };

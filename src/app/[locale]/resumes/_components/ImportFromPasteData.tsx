@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useTranslations } from "next-intl";
-import utils from "lib/utils";
+import { utils } from "lib/utils";
 import { Fields } from "types";
 
 type Props = {
@@ -70,4 +70,4 @@ function ImportFromPasteData(props: Props) {
   );
 }
 
-export default ImportFromPasteData;
+export { ImportFromPasteData };

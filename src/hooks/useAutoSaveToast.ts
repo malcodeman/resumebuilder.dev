@@ -2,7 +2,7 @@ import { useToast } from "@chakra-ui/toast";
 import { length } from "ramda";
 import { useTranslations } from "next-intl";
 import { useHotkeys } from "react-hotkeys-hook";
-import utils from "lib/utils";
+import { utils } from "lib/utils";
 
 const TOAST_ID = "onSave";
 const SAVE_MESSAGE_TRANS_KEYS = [
@@ -44,4 +44,4 @@ function useAutoSaveToast(props: Props) {
   });
 }
 
-export default useAutoSaveToast;
+export { useAutoSaveToast };

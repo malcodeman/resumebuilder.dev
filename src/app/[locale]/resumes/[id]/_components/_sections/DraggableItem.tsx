@@ -21,4 +21,4 @@ function DraggableItem(props: Props) {
   );
 }
 
-export default DraggableItem;
+export { DraggableItem };

@@ -1,9 +1,9 @@
 "use client";
 import { Text, Heading, Container, Avatar, Box } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import Layout from "components/Layout";
-import Footer from "app/[locale]/(marketing)/_components/Footer";
-import Stats from "app/[locale]/(marketing)/_components/Stats";
+import { Layout } from "components/Layout";
+import { Footer } from "app/[locale]/(marketing)/_components/Footer";
+import { Stats } from "app/[locale]/(marketing)/_components/Stats";
 
 function About() {
   const t = useTranslations();

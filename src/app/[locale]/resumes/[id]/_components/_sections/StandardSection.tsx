@@ -19,9 +19,9 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { useTranslations } from "next-intl";
-import SectionHeader from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
-import StandardSectionBody from "app/[locale]/resumes/[id]/_components/_sections/StandardSectionBody";
-import DraggableItem from "app/[locale]/resumes/[id]/_components/_sections/DraggableItem";
+import { SectionHeader } from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
+import { StandardSectionBody } from "app/[locale]/resumes/[id]/_components/_sections/StandardSectionBody";
+import { DraggableItem } from "app/[locale]/resumes/[id]/_components/_sections/DraggableItem";
 import { STANDARD_SECTION_DEFAULT_VALUES } from "lib/constants";
 import { Resume, Section } from "types";
 
@@ -179,4 +179,4 @@ function StandardSection(props: Props) {
   );
 }
 
-export default StandardSection;
+export { StandardSection };

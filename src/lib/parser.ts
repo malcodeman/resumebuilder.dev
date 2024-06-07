@@ -334,10 +334,8 @@ function parseLinkedin(data: {
   return fields;
 }
 
-const EXPORTS = {
+export const parser = {
   parseJsonResume,
   parseGithub,
   parseLinkedin,
 };
-
-export default EXPORTS;

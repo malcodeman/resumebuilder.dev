@@ -147,4 +147,4 @@ function AddSectionModal(props: Props) {
   );
 }
 
-export default AddSectionModal;
+export { AddSectionModal };

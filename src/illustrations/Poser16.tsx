@@ -167,4 +167,4 @@ function Poser16() {
   );
 }
 
-export default Poser16;
+export { Poser16 };

@@ -1,9 +1,9 @@
 import { Document, Font, Page as ReactPdfPage } from "@react-pdf/renderer";
 import { PageSize } from "@react-pdf/types";
-import useStyles from "templates/useStyles";
+import { useStyles } from "templates/useStyles";
 import { Style } from "templates/types";
-import utils from "lib/utils";
-import theme from "templates/theme";
+import { utils } from "lib/utils";
+import { theme } from "templates/theme";
 import { Template } from "types";
 
 Font.register({
@@ -52,4 +52,4 @@ function Page(props: Props) {
   );
 }
 
-export default Page;
+export { Page };

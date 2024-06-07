@@ -10,9 +10,9 @@ import { LayersIcon, PlusIcon, UploadIcon } from "lucide-react";
 import { map } from "ramda";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import ImportDataModal from "app/[locale]/resumes/_components/ImportDataModal";
+import { ImportDataModal } from "app/[locale]/resumes/_components/ImportDataModal";
 import { Fields } from "types";
-import useResumes from "hooks/useResumes";
+import { useResumes } from "hooks/useResumes";
 import { useRouter } from "navigation";
 
 function EmptyResumes() {
@@ -118,4 +118,4 @@ function EmptyResumes() {
   );
 }
 
-export default EmptyResumes;
+export { EmptyResumes };

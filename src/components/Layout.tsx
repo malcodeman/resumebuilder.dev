@@ -2,8 +2,8 @@ import React from "react";
 import { Box, Container } from "@chakra-ui/react";
 import { useMediaQuery } from "@react-hookz/web";
 import { and, isNil, ifElse } from "ramda";
-import Header from "app/[locale]/resumes/_components/Header";
-import HeaderMobile from "app/[locale]/resumes/_components/HeaderMobile";
+import { Header } from "app/[locale]/resumes/_components/Header";
+import { HeaderMobile } from "app/[locale]/resumes/_components/HeaderMobile";
 
 type Props = {
   children: React.ReactNode;
@@ -34,4 +34,4 @@ function Layout(props: Props) {
   );
 }
 
-export default Layout;
+export { Layout };

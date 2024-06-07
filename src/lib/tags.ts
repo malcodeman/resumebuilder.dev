@@ -80,9 +80,7 @@ const HOBBIES = [
     value: "Gardening",
   },
 ];
-const EXPORTS = {
+export const TAGS = {
   SKILLS,
   HOBBIES,
 };
-
-export default EXPORTS;

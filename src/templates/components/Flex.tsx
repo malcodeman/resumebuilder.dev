@@ -1,5 +1,5 @@
 import { View as ReactPdfView } from "@react-pdf/renderer";
-import useStyles from "templates/useStyles";
+import { useStyles } from "templates/useStyles";
 import { Style } from "templates/types";
 
 type Props = Style & {
@@ -21,4 +21,4 @@ function Flex(props: Props) {
   );
 }
 
-export default Flex;
+export { Flex };

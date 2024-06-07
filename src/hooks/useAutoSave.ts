@@ -2,8 +2,8 @@ import React from "react";
 import { useDebouncedEffect } from "@react-hookz/web";
 import { useWatch, UseFormReturn } from "react-hook-form";
 import { isEmpty } from "ramda";
-import useResume from "hooks/useResume";
-import useLocalStorage from "hooks/useLocalStorage";
+import { useResume } from "hooks/useResume";
+import { useLocalStorage } from "hooks/useLocalStorage";
 import { Resume } from "types";
 
 type Props = {
@@ -56,4 +56,4 @@ function useAutoSave(props: Props) {
   );
 }
 
-export default useAutoSave;
+export { useAutoSave };

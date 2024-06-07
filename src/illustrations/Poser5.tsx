@@ -171,4 +171,4 @@ function Poser5() {
   );
 }
 
-export default Poser5;
+export { Poser5 };

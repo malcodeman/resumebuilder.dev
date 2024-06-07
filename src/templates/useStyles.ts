@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import utils from "lib/utils";
-import theme from "templates/theme";
-import TemplateContext from "templates/components/TemplateContext";
+import { utils } from "lib/utils";
+import { theme } from "templates/theme";
+import { TemplateContext } from "templates/components/TemplateContext";
 import { Style } from "templates/types";
 
 function useStyles(props: Style) {
@@ -93,4 +93,4 @@ function useStyles(props: Style) {
   return { style, isPdf, spacing };
 }
 
-export default useStyles;
+export { useStyles };

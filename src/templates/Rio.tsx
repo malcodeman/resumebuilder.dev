@@ -1,12 +1,12 @@
 import React from "react";
 import { and, isEmpty, split } from "ramda";
-import utils from "lib/utils";
-import Text from "templates/components/Text";
-import Page from "templates/components/Page";
-import Box from "templates/components/Box";
-import Flex from "templates/components/Flex";
-import Link from "templates/components/Link";
-import TemplateContext from "templates/components/TemplateContext";
+import { utils } from "lib/utils";
+import { Text } from "templates/components/Text";
+import { Page } from "templates/components/Page";
+import { Box } from "templates/components/Box";
+import { Flex } from "templates/components/Flex";
+import { Link } from "templates/components/Link";
+import { TemplateContext } from "templates/components/TemplateContext";
 import { TemplateProps } from "types";
 
 function SectionLabel(props: { children: React.ReactNode }) {
@@ -166,4 +166,4 @@ function Rio(props: TemplateProps) {
   );
 }
 
-export default Rio;
+export { Rio };

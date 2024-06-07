@@ -3,8 +3,8 @@ import { FieldArrayMethodProps, useFormContext } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { and, not, equals } from "ramda";
-import SectionHeader from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
-import TagListSectionBody from "app/[locale]/resumes/[id]/_components/_sections/TagListSectionBody";
+import { SectionHeader } from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
+import { TagListSectionBody } from "app/[locale]/resumes/[id]/_components/_sections/TagListSectionBody";
 import { Section } from "types";
 
 type Props = {
@@ -60,4 +60,4 @@ function TagListSection(props: Props) {
   );
 }
 
-export default TagListSection;
+export { TagListSection };

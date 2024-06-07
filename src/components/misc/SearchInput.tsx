@@ -38,4 +38,4 @@ function SearchInput(props: Props) {
   );
 }
 
-export default SearchInput;
+export { SearchInput };
