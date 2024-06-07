@@ -1,6 +1,6 @@
 import { useLocalStorageValue } from "@react-hookz/web";
 import { useParams } from "next/navigation";
-import { isNil, find, map, filter, equals, or, clone, isEmpty } from "ramda";
+import { isNil, find, map, filter, equals, or, clone } from "ramda";
 import { nanoid } from "nanoid";
 import { Resume } from "types";
 

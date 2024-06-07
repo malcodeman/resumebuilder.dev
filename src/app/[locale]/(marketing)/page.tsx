@@ -11,10 +11,10 @@ import Hero from "app/[locale]/(marketing)/_components/Hero";
 import Footer from "app/[locale]/(marketing)/_components/Footer";
 
 function Landing() {
-  const [_viewDashboard, setViewDashboard] = useLocalStorage("view-dashboard");
+  const viewDashboard = useLocalStorage("view-dashboard");
 
   useMountEffect(() => {
-    setViewDashboard(false);
+    viewDashboard.set(false);
   });
 
   return (

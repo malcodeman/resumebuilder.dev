@@ -85,7 +85,7 @@ const CUSTOM_SECTIONS: Sections = [
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { label: string; name: Section }) => void;
+  onSubmit: (_data: { label: string; name: Section }) => void;
 };
 
 function AddSectionModal(props: Props) {

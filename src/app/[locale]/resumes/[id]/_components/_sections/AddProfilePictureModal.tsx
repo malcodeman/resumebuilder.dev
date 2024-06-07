@@ -24,13 +24,13 @@ function AddProfilePictureModal(props: Props) {
   const t = useTranslations();
   const toast = useToast();
   const [isLoading, setIsLoading] = useBoolean();
-  const [_profilePicture, setProfilePicture] = useProfilePicture();
+  const profilePicture = useProfilePicture();
 
   async function handleOnDrop(acceptedFiles: File[]) {
     try {
       setIsLoading.on();
       const picture = await utils.file2Base64(acceptedFiles[0]);
-      setProfilePicture(picture);
+      profilePicture.set(picture);
       onClose();
     } catch {
       toast({

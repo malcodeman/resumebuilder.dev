@@ -8,7 +8,7 @@ import { Template as TemplateType } from "types";
 import SearchInput from "components/misc/SearchInput";
 
 type Props = {
-  onChangeTemplate: (nextTemplate: TemplateType) => void;
+  onChangeTemplate: (_nextTemplate: TemplateType) => void;
 };
 
 function TemplatesTabPanel(props: Props) {

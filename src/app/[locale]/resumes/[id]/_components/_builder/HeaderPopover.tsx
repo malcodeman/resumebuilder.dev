@@ -49,7 +49,7 @@ const TOOLTIP_MORE_LABEL = "Style, export, and more...";
 
 type Props = {
   devTools: boolean;
-  onImport: (fields: Fields) => void;
+  onImport: (_fields: Fields) => void;
   onPdfExport: () => void;
   onJsonExport: () => void;
   onHtmlExport: () => void;
@@ -58,7 +58,7 @@ type Props = {
 
 function FullWidth() {
   const t = useTranslations();
-  const [isFullWidth, setIsFullWidth] = useLocalStorage("is-full-width");
+  const isFullWidth = useLocalStorage("is-full-width");
   return (
     <FormControl
       mb="2"
@@ -77,8 +77,8 @@ function FullWidth() {
         {t("full_width")}
       </FormLabel>
       <Switch
-        isChecked={isFullWidth}
-        onChange={() => setIsFullWidth(!isFullWidth)}
+        isChecked={isFullWidth.value}
+        onChange={() => isFullWidth.set(!isFullWidth)}
         id="is-full-width"
         data-testid="full-width-switch"
       />
@@ -118,7 +118,7 @@ function DarkMode() {
 
 function PdfViewer() {
   const t = useTranslations();
-  const [isPdfViewer, setIsPdfViewer] = useLocalStorage("is-pdf-viewer");
+  const isPdfViewer = useLocalStorage("is-pdf-viewer");
   return (
     <FormControl
       mb="2"
@@ -137,8 +137,8 @@ function PdfViewer() {
         {t("pdf_viewer")}
       </FormLabel>
       <Switch
-        isChecked={isPdfViewer}
-        onChange={() => setIsPdfViewer(!isPdfViewer)}
+        isChecked={isPdfViewer.value}
+        onChange={() => isPdfViewer.set(!isPdfViewer)}
         id="is-pdf-viewer"
         data-testid="pdf-viewer-switch"
       />
@@ -148,9 +148,7 @@ function PdfViewer() {
 
 function HideSensitiveData() {
   const t = useTranslations();
-  const [hideSensitiveData, setHideSensitiveData] = useLocalStorage(
-    "hide-sensitive-data"
-  );
+  const hideSensitiveData = useLocalStorage("hide-sensitive-data");
   return (
     <FormControl
       mb="2"
@@ -169,8 +167,8 @@ function HideSensitiveData() {
         {t("hide_sensitive_data")}
       </FormLabel>
       <Switch
-        isChecked={hideSensitiveData}
-        onChange={() => setHideSensitiveData(!hideSensitiveData)}
+        isChecked={hideSensitiveData.value}
+        onChange={() => hideSensitiveData.set(!hideSensitiveData)}
         id="hide-sensitive-data"
         data-testid="hide-sensitive-data-switch"
       />
@@ -180,7 +178,7 @@ function HideSensitiveData() {
 
 function DevTools() {
   const t = useTranslations();
-  const [devTools, setDevTools] = useLocalStorage("dev-tools");
+  const devTools = useLocalStorage("dev-tools");
   return (
     <FormControl
       display="flex"
@@ -198,8 +196,8 @@ function DevTools() {
         {t("dev_tools")}
       </FormLabel>
       <Switch
-        isChecked={devTools}
-        onChange={() => setDevTools(!devTools)}
+        isChecked={devTools.value}
+        onChange={() => devTools.set(!devTools)}
         id="dev-tools"
         data-testid="dev-tools-switch"
       />
@@ -296,7 +294,7 @@ function ChangeSlug() {
   );
 }
 
-function GenerateFakeData(props: { onImport: (fields: Fields) => void }) {
+function GenerateFakeData(props: { onImport: (_fields: Fields) => void }) {
   const { onImport } = props;
   const t = useTranslations();
   return (
@@ -351,7 +349,7 @@ function DeleteResume() {
   );
 }
 
-function ImportData(props: { onImport: (fields: Fields) => void }) {
+function ImportData(props: { onImport: (_fields: Fields) => void }) {
   const { onImport } = props;
   const t = useTranslations();
   const { isOpen, onOpen, onClose } = useDisclosure();

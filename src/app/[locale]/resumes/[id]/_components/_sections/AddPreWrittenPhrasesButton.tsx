@@ -6,7 +6,7 @@ import phrases from "lib/phrases";
 
 type Props = {
   currentPhrases: string;
-  onChange: (phrase: string, isChecked: boolean) => void;
+  onChange: (_phrase: string, _isChecked: boolean) => void;
 };
 
 function AddPreWrittenPhrasesButton(props: Props) {

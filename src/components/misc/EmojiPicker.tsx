@@ -21,7 +21,7 @@ const TOOLTIP_LABEL = "Change icon";
 
 type Props = {
   emoji?: string;
-  onSelect: (emoji: string) => void;
+  onSelect: (_emoji: string) => void;
 };
 
 const EMOJIS = values(native.emojis);

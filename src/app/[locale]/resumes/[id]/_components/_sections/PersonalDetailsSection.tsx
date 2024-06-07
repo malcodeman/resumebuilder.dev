@@ -36,11 +36,11 @@ import AddPreWrittenPhrasesButton from "app/[locale]/resumes/[id]/_components/_s
 function ProfilePicture() {
   const t = useTranslations();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [profilePicture, setProfilePicture] = useProfilePicture();
+  const profilePicture = useProfilePicture();
   return (
     <>
       <GridItem colSpan={2}>
-        {isEmpty(profilePicture) ? (
+        {isEmpty(profilePicture.value) ? (
           <Button
             size="sm"
             width="full"
@@ -56,7 +56,7 @@ function ProfilePicture() {
               <Avatar
                 size="xl"
                 backgroundColor="transparent"
-                src={profilePicture}
+                src={profilePicture.value}
               />
             </Flex>
             <ButtonGroup size="sm" width="full" spacing="4">
@@ -71,7 +71,7 @@ function ProfilePicture() {
               <Button
                 width="full"
                 leftIcon={<Trash2Icon size={16} />}
-                onClick={() => setProfilePicture("")}
+                onClick={() => profilePicture.set("")}
                 data-testid="delete-profile-picture-button"
               >
                 {t("delete")}
@@ -131,7 +131,7 @@ function Summary() {
 function PersonalDetailsSection() {
   const t = useTranslations();
   const { register } = useFormContext();
-  const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
+  const hideSensitiveData = useLocalStorage("hide-sensitive-data");
   return (
     <AccordionItem borderTopWidth="0" _last={{ borderBottomWidth: 0 }}>
       <SectionHeader label={t("personal_details")} />
@@ -182,7 +182,7 @@ function PersonalDetailsSection() {
                   <MailIcon size={16} />
                 </InputLeftElement>
                 <Input
-                  type={hideSensitiveData ? "password" : "text"}
+                  type={hideSensitiveData.value ? "password" : "text"}
                   variant="filled"
                   borderRadius="md"
                   data-testid="about-email-input"
@@ -199,7 +199,7 @@ function PersonalDetailsSection() {
                   <PhoneIcon size={16} />
                 </InputLeftElement>
                 <Input
-                  type={hideSensitiveData ? "password" : "text"}
+                  type={hideSensitiveData.value ? "password" : "text"}
                   variant="filled"
                   borderRadius="md"
                   data-testid="about-phone-input"

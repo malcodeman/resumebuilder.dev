@@ -63,10 +63,10 @@ function UpdatedAtText(props: { updatedAt: number }) {
 
 type Props = {
   resume: Resume;
-  onDelete: (id: string) => void;
-  onDuplicate: (id: string) => void;
-  onTitleChange: (id: string, nextValue: string) => void;
-  onIconChange: (id: string, emoji: string) => void;
+  onDelete: (_id: string) => void;
+  onDuplicate: (_id: string) => void;
+  onTitleChange: (_id: string, _nextValue: string) => void;
+  onIconChange: (_id: string, _emoji: string) => void;
 };
 
 function ResumeItem(props: Props) {
@@ -101,7 +101,7 @@ function ResumeItem(props: Props) {
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"
   );
-  const [profilePicture] = useProfilePicture();
+  const profilePicture = useProfilePicture();
 
   function handleOnCopyLink() {
     onCopy();
@@ -135,7 +135,7 @@ function ResumeItem(props: Props) {
                 about: resume.about,
                 section: resume.section,
               },
-              profilePicture,
+              profilePicture: profilePicture.value,
               isDescendantOfLink: true,
             })}
           </Box>

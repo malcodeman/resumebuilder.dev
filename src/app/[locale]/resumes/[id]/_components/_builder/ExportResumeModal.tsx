@@ -45,7 +45,7 @@ function ExportResumeModal(props: Props) {
   const isSmallDevice = useMediaQuery("only screen and (max-width: 62em)", {
     initializeWithValue: false,
   });
-  const [isPdfViewer] = useLocalStorage("is-pdf-viewer");
+  const isPdfViewer = useLocalStorage("is-pdf-viewer");
 
   function handleOnSubmit(format: Export) {
     switch (format) {
@@ -62,7 +62,7 @@ function ExportResumeModal(props: Props) {
   }
 
   function getIsDisabled(item: Export) {
-    if (and(equals(item, "png"), or(isSmallDevice, isPdfViewer))) {
+    if (and(equals(item, "png"), or(isSmallDevice, isPdfViewer.value))) {
       return true;
     }
     return false;

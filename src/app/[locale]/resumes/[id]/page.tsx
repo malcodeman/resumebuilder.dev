@@ -35,7 +35,7 @@ function Builder() {
   const t = useTranslations();
   const { resume, isLoading } = useResume();
   const form = useForm<Resume>();
-  const [_viewDashboard, setViewDashboard] = useLocalStorage("view-dashboard");
+  const viewDashboard = useLocalStorage("view-dashboard");
   const isLargeDevice = useMediaQuery("(min-width: 62em)", {
     initializeWithValue: false,
   });
@@ -49,7 +49,7 @@ function Builder() {
   }, [resume, form]);
 
   useMountEffect(() => {
-    setViewDashboard(true);
+    viewDashboard.set(true);
   });
 
   useEffect(() => {

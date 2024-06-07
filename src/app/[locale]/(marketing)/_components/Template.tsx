@@ -17,7 +17,7 @@ type Props = {
   id: TemplateType;
   renderDescription?: boolean;
   isLoading?: boolean;
-  onUseTemplate: (template: TemplateType) => void;
+  onUseTemplate: (_template: TemplateType) => void;
 };
 
 function Template(props: Props) {
