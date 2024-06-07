@@ -1,8 +1,8 @@
 import { Text, Link as ReactPdfLink } from "@react-pdf/renderer";
 import { or } from "ramda";
+import { useContext } from "react";
 import useStyles from "templates/useStyles";
 import { Style } from "templates/types";
-import { useContext } from "react";
 import TemplateContext from "templates/components/TemplateContext";
 
 type Props = Style & {
