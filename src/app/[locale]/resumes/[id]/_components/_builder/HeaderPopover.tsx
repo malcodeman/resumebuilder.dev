@@ -78,7 +78,7 @@ function FullWidth() {
       </FormLabel>
       <Switch
         isChecked={isFullWidth.value}
-        onChange={() => isFullWidth.set(!isFullWidth)}
+        onChange={() => isFullWidth.set(!isFullWidth.value)}
         id="is-full-width"
         data-testid="full-width-switch"
       />
@@ -138,7 +138,7 @@ function PdfViewer() {
       </FormLabel>
       <Switch
         isChecked={isPdfViewer.value}
-        onChange={() => isPdfViewer.set(!isPdfViewer)}
+        onChange={() => isPdfViewer.set(!isPdfViewer.value)}
         id="is-pdf-viewer"
         data-testid="pdf-viewer-switch"
       />
@@ -168,7 +168,7 @@ function HideSensitiveData() {
       </FormLabel>
       <Switch
         isChecked={hideSensitiveData.value}
-        onChange={() => hideSensitiveData.set(!hideSensitiveData)}
+        onChange={() => hideSensitiveData.set(!hideSensitiveData.value)}
         id="hide-sensitive-data"
         data-testid="hide-sensitive-data-switch"
       />
@@ -197,7 +197,7 @@ function DevTools() {
       </FormLabel>
       <Switch
         isChecked={devTools.value}
-        onChange={() => devTools.set(!devTools)}
+        onChange={() => devTools.set(!devTools.value)}
         id="dev-tools"
         data-testid="dev-tools-switch"
       />

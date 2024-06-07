@@ -70,7 +70,7 @@ function Header() {
                 <Button
                   size="sm"
                   leftIcon={
-                    profilePicture ? (
+                    profilePicture.value ? (
                       <Avatar src={profilePicture.value} size="xs" />
                     ) : null
                   }
