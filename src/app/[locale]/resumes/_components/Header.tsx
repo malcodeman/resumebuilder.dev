@@ -25,8 +25,8 @@ function Header() {
     "rgba(0, 0, 0, 0.03) 0px 2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0px 2px 0px 0px"
   );
-  const [viewDashboard] = useLocalStorage("view-dashboard");
-  const [profilePicture] = useProfilePicture();
+  const viewDashboard = useLocalStorage("view-dashboard");
+  const profilePicture = useProfilePicture();
   const homeHref = viewDashboard ? "/resumes" : "/";
   const network = useNetworkState();
   return (
@@ -57,7 +57,7 @@ function Header() {
               <Text data-testid="about-text">{t("about")}</Text>
             </NavLink>
           </Flex>
-          {viewDashboard ? (
+          {viewDashboard.value ? (
             <Flex>
               {network.online ? null : <OfflineTag mr="2" />}
               <LanguageSelect mr="2" />
@@ -70,8 +70,8 @@ function Header() {
                 <Button
                   size="sm"
                   leftIcon={
-                    profilePicture ? (
-                      <Avatar src={profilePicture} size="xs" />
+                    profilePicture.value ? (
+                      <Avatar src={profilePicture.value} size="xs" />
                     ) : null
                   }
                   data-testid="dashboard-button"

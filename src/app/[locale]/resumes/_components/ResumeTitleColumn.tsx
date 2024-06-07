@@ -10,8 +10,8 @@ import EmojiPicker from "components/misc/EmojiPicker";
 type Props = {
   icon: string;
   title: string;
-  onChangeIcon: (nextValue: string) => void;
-  onChangeTitle: (nextValue: string) => void;
+  onChangeIcon: (_nextValue: string) => void;
+  onChangeTitle: (_nextValue: string) => void;
 };
 
 function ResumeTitleColumn(props: Props) {

@@ -28,9 +28,9 @@ function HeaderMobile(props: Props) {
     "rgba(0, 0, 0, 0.03) 0px -2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0 -2px 0 0"
   );
-  const [devTools] = useLocalStorage("dev-tools");
-  const [profilePicture] = useProfilePicture();
-  const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
+  const devTools = useLocalStorage("dev-tools");
+  const profilePicture = useProfilePicture();
+  const hideSensitiveData = useLocalStorage("hide-sensitive-data");
 
   function handleOnImport(fields: Fields) {
     form.setValue("updatedAt", Date.now());
@@ -41,16 +41,16 @@ function HeaderMobile(props: Props) {
   function handleOnExportAsPdf() {
     utils.exportAsPdf({
       resume: form.getValues(),
-      profilePicture,
-      hideSensitiveData,
+      profilePicture: profilePicture.value,
+      hideSensitiveData: hideSensitiveData.value,
     });
   }
 
   function handleOnExportAsHtml() {
     utils.exportAsHtml({
       resume: form.getValues(),
-      profilePicture,
-      hideSensitiveData,
+      profilePicture: profilePicture.value,
+      hideSensitiveData: hideSensitiveData.value,
     });
   }
 
@@ -78,7 +78,7 @@ function HeaderMobile(props: Props) {
           <ResumeTitle form={form} marginX="2" />
           <FormProvider {...form}>
             <HeaderPopover
-              devTools={devTools}
+              devTools={devTools.value}
               onImport={handleOnImport}
               onPdfExport={handleOnExportAsPdf}
               onJsonExport={() => utils.exportAsJson(form.getValues())}

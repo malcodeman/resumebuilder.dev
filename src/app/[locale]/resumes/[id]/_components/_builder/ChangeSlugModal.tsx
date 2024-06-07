@@ -27,7 +27,7 @@ import useResumes from "hooks/useResumes";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  onChangeSlug: (nextSlug: string) => void;
+  onChangeSlug: (_nextSlug: string) => void;
 };
 
 function ChangeSlugModal(props: Props) {

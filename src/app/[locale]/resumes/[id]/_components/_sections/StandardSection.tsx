@@ -31,10 +31,10 @@ type Props = {
   label: string;
   name: Section;
   isDragDisabled: boolean;
-  remove: (index: number) => void;
+  remove: (_index: number) => void;
   append: (
-    value: Partial<any> | Partial<any>[],
-    options?: FieldArrayMethodProps
+    _value: Partial<any> | Partial<any>[],
+    _options?: FieldArrayMethodProps
   ) => void;
 };
 

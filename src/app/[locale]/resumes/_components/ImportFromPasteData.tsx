@@ -14,7 +14,7 @@ import utils from "lib/utils";
 import { Fields } from "types";
 
 type Props = {
-  onImport: (fields: Fields) => void;
+  onImport: (_fields: Fields) => void;
 };
 
 function ImportFromPasteData(props: Props) {

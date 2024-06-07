@@ -27,8 +27,8 @@ type Props = {
   nestIndex: number;
   name: Section;
   isDragDisabled: boolean;
-  onDuplicate: (index: number) => void;
-  onRemove: (index: number) => void;
+  onDuplicate: (_index: number) => void;
+  onRemove: (_index: number) => void;
 };
 
 function Header({ index, nestIndex, isDragging, onRemove, onDuplicate }) {

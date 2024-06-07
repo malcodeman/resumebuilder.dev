@@ -4,7 +4,7 @@ import { useDropzone, DropzoneOptions, FileRejection } from "react-dropzone";
 import { useTranslations } from "next-intl";
 
 type Props = {
-  onDrop: (acceptedFiles: File[], rejectedFiles: FileRejection[]) => void;
+  onDrop: (_acceptedFiles: File[], _rejectedFiles: FileRejection[]) => void;
   isLoading?: boolean;
   accept?: string | string[];
 };

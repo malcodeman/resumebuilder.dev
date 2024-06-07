@@ -12,7 +12,7 @@ type Props = {
 
 function useAutoSave(props: Props) {
   const { form } = props;
-  const [isPdfViewer] = useLocalStorage("is-pdf-viewer");
+  const isPdfViewer = useLocalStorage("is-pdf-viewer");
   const { setResume } = useResume();
   const watch = useWatch({
     control: form.control,
@@ -21,8 +21,8 @@ function useAutoSave(props: Props) {
   const design = watch[0];
   const about = watch[1];
   const section = watch[2];
-  const delay = isPdfViewer ? 2000 : 200;
-  const maxWait = isPdfViewer ? 5000 : 500;
+  const delay = isPdfViewer.value ? 2000 : 200;
+  const maxWait = isPdfViewer.value ? 5000 : 500;
 
   React.useEffect(() => {
     if (form.formState.isDirty) {

@@ -18,7 +18,7 @@ function HeaderMobile() {
     "rgba(0, 0, 0, 0.03) 0px -2px 0px 0px",
     "rgba(255, 255, 255, 0.03) 0 -2px 0 0"
   );
-  const [viewDashboard] = useLocalStorage("view-dashboard");
+  const viewDashboard = useLocalStorage("view-dashboard");
   const homeHref = viewDashboard ? "/resumes" : "/";
   return (
     <Box
@@ -46,7 +46,7 @@ function HeaderMobile() {
               <Text fontSize="xs">{t("templates")}</Text>
             </Flex>
           </NavLink>
-          {viewDashboard ? (
+          {viewDashboard.value ? (
             <UserMenu />
           ) : (
             <NavLink href="/resumes">

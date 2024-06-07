@@ -16,8 +16,8 @@ type Props = {
 
 function Preview(props: Props) {
   const { form } = props;
-  const [hideSensitiveData] = useLocalStorage("hide-sensitive-data");
-  const [profilePicture] = useProfilePicture();
+  const hideSensitiveData = useLocalStorage("hide-sensitive-data");
+  const profilePicture = useProfilePicture();
   const watch = useWatch({
     control: form.control,
     name: ["id", "design", "about", "section"],
@@ -43,10 +43,10 @@ function Preview(props: Props) {
   const document = id
     ? getTemplate({
         isPdf: false,
-        hideSensitiveData,
+        hideSensitiveData: hideSensitiveData.value,
         design: { ...watch[1], spacing },
         fields,
-        profilePicture,
+        profilePicture: profilePicture.value,
       })
     : null;
   return (

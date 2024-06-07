@@ -21,7 +21,7 @@ type Props = {
   value: string;
   phrases: Phrase[];
   onClose: () => void;
-  onChange: (phrase: string, isChecked: boolean) => void;
+  onChange: (_phrase: string, _isChecked: boolean) => void;
 };
 
 function PreWrittenPhrasesModal(props: Props) {

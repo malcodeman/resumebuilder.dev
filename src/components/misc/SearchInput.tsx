@@ -11,7 +11,7 @@ import { SearchIcon, XIcon } from "lucide-react";
 type Props = {
   value: string;
   placeholder?: string;
-  onChangeValue: (nextValue: string) => void;
+  onChangeValue: (_nextValue: string) => void;
   onClear: () => void;
 } & InputGroupProps;
 

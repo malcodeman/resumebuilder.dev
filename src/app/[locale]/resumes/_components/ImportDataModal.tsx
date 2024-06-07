@@ -27,7 +27,7 @@ import { Fields } from "types";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  onImport: (fields: Fields) => void;
+  onImport: (_fields: Fields) => void;
 };
 type Source =
   | "jsonResume"

@@ -285,10 +285,10 @@ function ResumeGrid() {
 }
 
 function Dashboard() {
-  const [_viewDashboard, setViewDashboard] = useLocalStorage("view-dashboard");
+  const viewDashboard = useLocalStorage("view-dashboard");
 
   useMountEffect(() => {
-    setViewDashboard(true);
+    viewDashboard.set(true);
   });
 
   return (

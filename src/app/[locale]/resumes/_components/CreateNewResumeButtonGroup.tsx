@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useKeyboardEvent, useMediaQuery } from "@react-hookz/web";
 import { PlusIcon, UploadIcon } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { equals } from "ramda";
 import { Fields } from "types";
 import useResumes from "hooks/useResumes";
