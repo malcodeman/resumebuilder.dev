@@ -342,7 +342,7 @@ test.describe("Builder page", () => {
 
     expect(await page.getByTestId("document").textContent()).toContain(verb);
   });
-  test("Change template", async ({ page, context }) => {
+  test("Change template", async ({ page }) => {
     await page.getByTestId("templates-tab").click();
     await page.getByTestId("template").nth(1).click();
 

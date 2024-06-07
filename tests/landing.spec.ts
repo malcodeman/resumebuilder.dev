@@ -32,7 +32,7 @@ test.describe("Landing page", () => {
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}/about`);
   });
-  test("See all templates button", async ({ page, baseURL, context }) => {
+  test("See all templates button", async ({ page, baseURL }) => {
     await page.getByTestId("see-all-templates-button").click();
     await expect(page).toHaveURL(`${baseURL}/en/templates`);
   });
