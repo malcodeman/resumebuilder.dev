@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import utils from "e2e/utils";
+import { playwrightUtils } from "lib/playwrightUtils";
 
 test.describe("Landing page", () => {
   test.beforeEach(async ({ page }) => {
@@ -22,13 +22,16 @@ test.describe("Landing page", () => {
     await expect(page).toHaveURL(`${baseURL}/en/resumes`);
 
     expect(
-      await utils.getLocalStorageItem({ context, name: "view-dashboard" })
+      await playwrightUtils.getLocalStorageItem({
+        context,
+        name: "view-dashboard",
+      })
     ).toBe("true");
   });
   test("Build for free top button", async ({ page, baseURL, context }) => {
     await page.getByTestId("build-for-free-top-button").click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}/about`);
   });
@@ -39,7 +42,7 @@ test.describe("Landing page", () => {
   test("Use berlin template", async ({ page, baseURL, context }) => {
     await page.getByTestId("use-template-button").first().click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });
@@ -53,7 +56,7 @@ test.describe("Landing page", () => {
   test("Build for free bottom button", async ({ page, baseURL, context }) => {
     await page.getByTestId("build-for-free-bottom-button").click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}/about`);
   });

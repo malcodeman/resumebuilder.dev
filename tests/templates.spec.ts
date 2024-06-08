@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { filter, includes, length } from "ramda";
-import utils from "e2e/utils";
+import { playwrightUtils } from "lib/playwrightUtils";
 import { TEMPLATES_LIST } from "lib/constants";
 
 test.describe("Templates page", () => {
@@ -69,14 +69,14 @@ test.describe("Templates page", () => {
   test("Use first template", async ({ page, context, baseURL }) => {
     await page.getByTestId("use-template-button").first().click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });
   test("Use last template", async ({ page, context, baseURL }) => {
     await page.getByTestId("use-template-button").last().click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });

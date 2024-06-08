@@ -1,26 +1,26 @@
 import { faker } from "@faker-js/faker";
 import { test, expect } from "@playwright/test";
-import utils from "e2e/utils";
-import libUtils from "lib/utils";
+import { playwrightUtils } from "lib/playwrightUtils";
+import { utils } from "lib/utils";
 
 test.describe("Builder page", () => {
   test.beforeEach(async ({ page, context, baseURL }) => {
     await page.goto("/en/resumes/new");
     await expect(page.getByTestId("spinner")).toBeVisible();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });
   test("Page title", async ({ context, page }) => {
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     expect(await page.title()).toBe(`${resume.title} | resumebuilder.dev`);
   });
   test("Go home", async ({ page, context, baseURL }) => {
     await page.getByTestId("resumebuilder-text").click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });
@@ -28,7 +28,7 @@ test.describe("Builder page", () => {
     await page.getByTestId("emoji-picker-icon-button").click();
     await page.getByTestId("emoji").first().click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     expect(resume.icon).toBe(":100:");
   });
@@ -42,7 +42,7 @@ test.describe("Builder page", () => {
     await expect(input).toHaveValue(name);
     await page.keyboard.press("Enter");
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     expect(resume.title).toBe(name);
 
@@ -62,7 +62,10 @@ test.describe("Builder page", () => {
     await page.getByTestId("full-width-switch").click();
 
     expect(
-      await utils.getLocalStorageItem({ context, name: "is-full-width" })
+      await playwrightUtils.getLocalStorageItem({
+        context,
+        name: "is-full-width",
+      })
     ).toBe("true");
   });
   test("Dark mode", async ({ page, context }) => {
@@ -70,7 +73,10 @@ test.describe("Builder page", () => {
     await page.getByTestId("dark-mode-switch").click();
 
     expect(
-      await utils.getLocalStorageItem({ context, name: "chakra-ui-color-mode" })
+      await playwrightUtils.getLocalStorageItem({
+        context,
+        name: "chakra-ui-color-mode",
+      })
     ).toBe("dark");
   });
   test("PDF viewer", async ({ page, context }) => {
@@ -78,7 +84,10 @@ test.describe("Builder page", () => {
     await page.getByTestId("pdf-viewer-switch").click();
 
     expect(
-      await utils.getLocalStorageItem({ context, name: "is-pdf-viewer" })
+      await playwrightUtils.getLocalStorageItem({
+        context,
+        name: "is-pdf-viewer",
+      })
     ).toBe("true");
   });
   test("Hide sensitive data", async ({ page, context }) => {
@@ -86,7 +95,10 @@ test.describe("Builder page", () => {
     await page.getByTestId("hide-sensitive-data-switch").click();
 
     expect(
-      await utils.getLocalStorageItem({ context, name: "hide-sensitive-data" })
+      await playwrightUtils.getLocalStorageItem({
+        context,
+        name: "hide-sensitive-data",
+      })
     ).toBe("true");
     expect(
       await page.getByTestId("about-email-input").getAttribute("type")
@@ -100,7 +112,7 @@ test.describe("Builder page", () => {
     await page.getByTestId("dev-tools-switch").click();
 
     expect(
-      await utils.getLocalStorageItem({ context, name: "dev-tools" })
+      await playwrightUtils.getLocalStorageItem({ context, name: "dev-tools" })
     ).toBe("true");
     await expect(page.getByTestId("generate-fake-data-button")).toBeVisible();
   });
@@ -108,7 +120,7 @@ test.describe("Builder page", () => {
     await page.getByTestId("more-button").click();
     await page.getByTestId("language-select").selectOption("de");
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/de/resumes/${resume.id}`);
   });
@@ -204,7 +216,7 @@ test.describe("Builder page", () => {
     await page.getByTestId("about-website-input").fill(website);
 
     expect(await page.getByTestId("document").textContent()).toContain(
-      libUtils.parseWebsite(website)
+      utils.parseWebsite(website)
     );
 
     await page.getByTestId("about-city-input").fill(city);

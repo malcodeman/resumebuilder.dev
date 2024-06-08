@@ -70,11 +70,9 @@ async function setResume({
   return resume;
 }
 
-const EXPORTS = {
+export const playwrightUtils = {
   getLocalStorageItem,
   getResume,
   setResume,
   generateFakeResume,
 };
-
-export { EXPORTS };
