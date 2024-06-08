@@ -27,7 +27,7 @@ function Header() {
   );
   const viewDashboard = useLocalStorage("view-dashboard");
   const profilePicture = useProfilePicture();
-  const homeHref = viewDashboard ? "/resumes" : "/";
+  const homeHref = viewDashboard.value ? "/resumes" : "/";
   const network = useNetworkState();
   return (
     <Box
