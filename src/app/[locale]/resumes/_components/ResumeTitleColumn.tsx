@@ -5,7 +5,7 @@ import {
   EditablePreview,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import EmojiPicker from "components/misc/EmojiPicker";
+import { EmojiPicker } from "components/misc/EmojiPicker";
 
 type Props = {
   icon: string;
@@ -40,4 +40,4 @@ function ResumeTitleColumn(props: Props) {
   );
 }
 
-export default ResumeTitleColumn;
+export { ResumeTitleColumn };

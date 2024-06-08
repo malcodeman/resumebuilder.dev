@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Center, Spinner } from "@chakra-ui/react";
-import useResumes from "hooks/useResumes";
+import { useResumes } from "hooks/useResumes";
 import { useRouter } from "navigation";
 
 function NewResumePage() {

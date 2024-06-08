@@ -187,9 +187,7 @@ const EMPLOYMENT = [
       "Overhauled continuous integration (CI) and continuous delivery (CD) pipeline which increased code delivery speed by 7%.",
   },
 ];
-const EXPORTS = {
+export const PHRASES = {
   SUMMARY,
   EMPLOYMENT,
 };
-
-export default EXPORTS;

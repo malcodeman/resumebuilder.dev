@@ -56,4 +56,4 @@ function DeleteResumeModal(props: Props) {
   );
 }
 
-export default DeleteResumeModal;
+export { DeleteResumeModal };

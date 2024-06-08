@@ -25,8 +25,8 @@ import {
   split,
 } from "ramda";
 import { Section } from "types";
-import allTags from "lib/tags";
-import utils from "lib/utils";
+import { TAGS } from "lib/tags";
+import { utils } from "lib/utils";
 
 type Props = {
   index: number;
@@ -49,9 +49,9 @@ function getHelperTextTransKey(name: Section) {
 function getTags(name: Section) {
   switch (name) {
     case "skills":
-      return allTags.SKILLS;
+      return TAGS.SKILLS;
     case "hobbies":
-      return allTags.HOBBIES;
+      return TAGS.HOBBIES;
     default:
       return [];
   }
@@ -122,4 +122,4 @@ function TagListSectionBody(props: Props) {
   );
 }
 
-export default TagListSectionBody;
+export { TagListSectionBody };

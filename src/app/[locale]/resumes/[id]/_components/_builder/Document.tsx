@@ -3,11 +3,11 @@ import { Box } from "@chakra-ui/react";
 import { useWatch, UseFormReturn } from "react-hook-form";
 import { motion } from "framer-motion";
 import { PDFViewer } from "@react-pdf/renderer";
-import getTemplate from "lib/getTemplate";
-import utils from "lib/utils";
-import useAutoSave from "hooks/useAutoSave";
-import useLocalStorage from "hooks/useLocalStorage";
-import useProfilePicture from "hooks/useProfilePicture";
+import { getTemplate } from "lib/getTemplate";
+import { utils } from "lib/utils";
+import { useAutoSave } from "hooks/useAutoSave";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { useProfilePicture } from "hooks/useProfilePicture";
 import { Resume } from "types";
 
 type Props = {
@@ -71,4 +71,4 @@ function Document(props: Props) {
   return <></>;
 }
 
-export default Document;
+export { Document };

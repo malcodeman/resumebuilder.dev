@@ -26,6 +26,21 @@
         "vars": "all",
         "varsIgnorePattern": "^_"
       }
-    ]
-  }
+    ],
+    // https://github.com/vercel/style-guide/blob/1377fa3bedafe60954d20f80a455e3a0597bb354/eslint/rules/import.js#L32
+    "import/no-default-export": "error"
+  },
+  "overrides": [
+    {
+      "files": [
+        "playwright.config.ts",
+        "src/i18n.ts",
+        "src/middleware.ts",
+        "src/app/**/{error,layout,loading,not-found,page}.tsx"
+      ],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
 }

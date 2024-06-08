@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { filter, includes, length } from "ramda";
-import utils from "e2e/utils";
-import { TEMPLATES_LIST } from "lib/constants";
+import { playwrightUtils } from "lib/playwrightUtils";
+import { CONSTANTS } from "lib/constants";
 
 test.describe("Templates page", () => {
   test.beforeEach(async ({ page }) => {
@@ -34,7 +34,7 @@ test.describe("Templates page", () => {
     await page.getByTestId("template-filters-all").click();
 
     const count = length(
-      filter((item) => includes("all", item.tags), TEMPLATES_LIST)
+      filter((item) => includes("all", item.tags), CONSTANTS.TEMPLATES_LIST)
     );
 
     expect(await page.getByTestId("template").count()).toBe(count);
@@ -43,7 +43,7 @@ test.describe("Templates page", () => {
     await page.getByTestId("template-filters-simple").click();
 
     const count = length(
-      filter((item) => includes("simple", item.tags), TEMPLATES_LIST)
+      filter((item) => includes("simple", item.tags), CONSTANTS.TEMPLATES_LIST)
     );
 
     expect(await page.getByTestId("template").count()).toBe(count);
@@ -52,7 +52,10 @@ test.describe("Templates page", () => {
     await page.getByTestId("template-filters-creative").click();
 
     const count = length(
-      filter((item) => includes("creative", item.tags), TEMPLATES_LIST)
+      filter(
+        (item) => includes("creative", item.tags),
+        CONSTANTS.TEMPLATES_LIST
+      )
     );
 
     expect(await page.getByTestId("template").count()).toBe(count);
@@ -61,7 +64,10 @@ test.describe("Templates page", () => {
     await page.getByTestId("template-filters-professional").click();
 
     const count = length(
-      filter((item) => includes("professional", item.tags), TEMPLATES_LIST)
+      filter(
+        (item) => includes("professional", item.tags),
+        CONSTANTS.TEMPLATES_LIST
+      )
     );
 
     expect(await page.getByTestId("template").count()).toBe(count);
@@ -69,14 +75,14 @@ test.describe("Templates page", () => {
   test("Use first template", async ({ page, context, baseURL }) => {
     await page.getByTestId("use-template-button").first().click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });
   test("Use last template", async ({ page, context, baseURL }) => {
     await page.getByTestId("use-template-button").last().click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });

@@ -8,12 +8,12 @@ import {
 import { HomeIcon } from "lucide-react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import NavLink from "components/misc/NavLink";
-import HeaderPopover from "app/[locale]/resumes/[id]/_components/_builder/HeaderPopover";
-import ResumeTitle from "app/[locale]/resumes/[id]/_components/_builder/ResumeTitle";
-import utils from "lib/utils";
-import useLocalStorage from "hooks/useLocalStorage";
-import useProfilePicture from "hooks/useProfilePicture";
+import { NavLink } from "components/misc/NavLink";
+import { HeaderPopover } from "app/[locale]/resumes/[id]/_components/_builder/HeaderPopover";
+import { ResumeTitle } from "app/[locale]/resumes/[id]/_components/_builder/ResumeTitle";
+import { utils } from "lib/utils";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { useProfilePicture } from "hooks/useProfilePicture";
 import { Resume, Fields } from "types";
 
 type Props = {
@@ -92,4 +92,4 @@ function HeaderMobile(props: Props) {
   );
 }
 
-export default HeaderMobile;
+export { HeaderMobile };

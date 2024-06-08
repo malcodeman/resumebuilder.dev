@@ -13,7 +13,7 @@ import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useTranslations } from "next-intl";
-import parser from "lib/parser";
+import { parser } from "lib/parser";
 import { Fields } from "types";
 
 type Props = {
@@ -80,4 +80,4 @@ function ImportFromGithub(props: Props) {
   );
 }
 
-export default ImportFromGithub;
+export { ImportFromGithub };

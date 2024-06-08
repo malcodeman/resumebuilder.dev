@@ -8,9 +8,9 @@ import {
 } from "@chakra-ui/react";
 import JSZip from "jszip";
 import { useTranslations } from "next-intl";
-import parser from "lib/parser";
-import { LINKS } from "lib/constants";
-import FileUploader from "components/misc/FileUploader";
+import { parser } from "lib/parser";
+import { CONSTANTS } from "lib/constants";
+import { FileUploader } from "components/misc/FileUploader";
 import { Fields } from "types";
 
 type Props = {
@@ -83,7 +83,11 @@ function ImportFromLinkedin(props: Props) {
     <>
       {t.rich("import_from_linkedin_description", {
         link: (chunks) => (
-          <Link href={LINKS.LINKEDIN_DATA_PRIVACY} color="blue.400" isExternal>
+          <Link
+            href={CONSTANTS.LINKS.LINKEDIN_DATA_PRIVACY}
+            color="blue.400"
+            isExternal
+          >
             {chunks}
           </Link>
         ),
@@ -117,4 +121,4 @@ function ImportFromLinkedin(props: Props) {
   );
 }
 
-export default ImportFromLinkedin;
+export { ImportFromLinkedin };

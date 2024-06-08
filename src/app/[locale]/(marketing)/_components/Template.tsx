@@ -10,7 +10,7 @@ import {
 import { motion } from "framer-motion";
 import { equals, find } from "ramda";
 import { useTranslations } from "next-intl";
-import { TEMPLATES_LIST } from "lib/constants";
+import { CONSTANTS } from "lib/constants";
 import { Template as TemplateType } from "types";
 
 type Props = {
@@ -32,7 +32,10 @@ function Template(props: Props) {
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
     "rgba(255, 255, 255, 0.05) 0 0 0 2px"
   );
-  const template = find((item) => equals(item.template, id), TEMPLATES_LIST);
+  const template = find(
+    (item) => equals(item.template, id),
+    CONSTANTS.TEMPLATES_LIST
+  );
   return (
     <Box data-testid="template">
       <Image
@@ -66,4 +69,4 @@ function Template(props: Props) {
   );
 }
 
-export default Template;
+export { Template };

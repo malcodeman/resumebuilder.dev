@@ -16,13 +16,13 @@ import { SortableContext } from "@dnd-kit/sortable";
 import { useMediaQuery } from "@react-hookz/web";
 import { findIndex, propEq, isEmpty, find, equals } from "ramda";
 import { useTranslations } from "next-intl";
-import PersonalDetailsSection from "app/[locale]/resumes/[id]/_components/_sections/PersonalDetailsSection";
-import TagListSection from "app/[locale]/resumes/[id]/_components/_sections/TagListSection";
-import StandardSection from "app/[locale]/resumes/[id]/_components/_sections/StandardSection";
-import AddSectionModal from "app/[locale]/resumes/[id]/_components/_sections/AddSectionModal";
-import DraggableItem from "app/[locale]/resumes/[id]/_components/_sections/DraggableItem";
-import { STANDARD_SECTION_DEFAULT_VALUES } from "lib/constants";
-import utils from "lib/utils";
+import { PersonalDetailsSection } from "app/[locale]/resumes/[id]/_components/_sections/PersonalDetailsSection";
+import { TagListSection } from "app/[locale]/resumes/[id]/_components/_sections/TagListSection";
+import { StandardSection } from "app/[locale]/resumes/[id]/_components/_sections/StandardSection";
+import { AddSectionModal } from "app/[locale]/resumes/[id]/_components/_sections/AddSectionModal";
+import { DraggableItem } from "app/[locale]/resumes/[id]/_components/_sections/DraggableItem";
+import { CONSTANTS } from "lib/constants";
+import { utils } from "lib/utils";
 import { Resume, Section } from "types";
 
 function SectionNewButton({ onSubmit }) {
@@ -107,7 +107,7 @@ function Sections(props: Props) {
       fieldArray.append({
         name: data.name,
         label: data.label,
-        nested: [STANDARD_SECTION_DEFAULT_VALUES],
+        nested: [CONSTANTS.STANDARD_SECTION_DEFAULT_VALUES],
       });
     } else {
       fieldArray.append({
@@ -175,4 +175,4 @@ function Sections(props: Props) {
   );
 }
 
-export default Sections;
+export { Sections };

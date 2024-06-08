@@ -23,4 +23,4 @@ function SimpleIcon(props: Props) {
   );
 }
 
-export default SimpleIcon;
+export { SimpleIcon };

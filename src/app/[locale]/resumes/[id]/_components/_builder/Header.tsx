@@ -2,13 +2,13 @@ import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useNetworkState } from "@react-hookz/web";
-import Logo from "components/Logo";
-import HeaderPopover from "app/[locale]/resumes/[id]/_components/_builder/HeaderPopover";
-import ResumeTitle from "app/[locale]/resumes/[id]/_components/_builder/ResumeTitle";
-import OfflineTag from "components/misc/OfflineTag";
-import utils from "lib/utils";
-import useLocalStorage from "hooks/useLocalStorage";
-import useProfilePicture from "hooks/useProfilePicture";
+import { Logo } from "components/Logo";
+import { HeaderPopover } from "app/[locale]/resumes/[id]/_components/_builder/HeaderPopover";
+import { ResumeTitle } from "app/[locale]/resumes/[id]/_components/_builder/ResumeTitle";
+import { OfflineTag } from "components/misc/OfflineTag";
+import { utils } from "lib/utils";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { useProfilePicture } from "hooks/useProfilePicture";
 import { Resume, Fields } from "types";
 
 type Props = {
@@ -93,4 +93,4 @@ function Header(props: Props) {
   );
 }
 
-export default Header;
+export { Header };

@@ -8,4 +8,4 @@ function useProfilePicture() {
   return storage;
 }
 
-export default useProfilePicture;
+export { useProfilePicture };

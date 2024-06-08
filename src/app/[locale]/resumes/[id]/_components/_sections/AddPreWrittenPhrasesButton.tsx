@@ -1,8 +1,8 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { PlusIcon } from "lucide-react";
-import PreWrittenPhrasesModal from "app/[locale]/resumes/[id]/_components/_sections/PreWrittenPhrasesModal";
-import phrases from "lib/phrases";
+import { PreWrittenPhrasesModal } from "app/[locale]/resumes/[id]/_components/_sections/PreWrittenPhrasesModal";
+import { PHRASES } from "lib/phrases";
 
 type Props = {
   currentPhrases: string;
@@ -28,7 +28,7 @@ function AddPreWrittenPhrasesButton(props: Props) {
       <PreWrittenPhrasesModal
         isOpen={isOpen}
         value={currentPhrases}
-        phrases={phrases.SUMMARY}
+        phrases={PHRASES.SUMMARY}
         onClose={onClose}
         onChange={onChange}
       />
@@ -36,4 +36,4 @@ function AddPreWrittenPhrasesButton(props: Props) {
   );
 }
 
-export default AddPreWrittenPhrasesButton;
+export { AddPreWrittenPhrasesButton };

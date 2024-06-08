@@ -23,4 +23,4 @@ function OfflineTag(props: TagProps) {
   );
 }
 
-export default OfflineTag;
+export { OfflineTag };

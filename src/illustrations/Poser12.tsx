@@ -524,4 +524,4 @@ function Poser12() {
   );
 }
 
-export default Poser12;
+export { Poser12 };

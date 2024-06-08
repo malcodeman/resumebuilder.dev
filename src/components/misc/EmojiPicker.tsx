@@ -94,4 +94,4 @@ function EmojiPicker(props: Props) {
   );
 }
 
-export default EmojiPicker;
+export { EmojiPicker };

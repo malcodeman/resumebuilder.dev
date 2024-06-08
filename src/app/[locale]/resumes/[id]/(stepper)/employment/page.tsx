@@ -20,9 +20,9 @@ import { ArrowRightIcon, PlusIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useParams } from "next/navigation";
 import { equals, find, isNil, length, map } from "ramda";
-import useResume from "hooks/useResume";
-import NotFound from "components/misc/NotFound";
-import StepsNavigation from "app/[locale]/resumes/[id]/(stepper)/StepsNavigation";
+import { useResume } from "hooks/useResume";
+import { NotFound } from "components/misc/NotFound";
+import { StepsNavigation } from "app/[locale]/resumes/[id]/(stepper)/StepsNavigation";
 import { Link, useRouter } from "navigation";
 import { NestedField, SectionField } from "types";
 

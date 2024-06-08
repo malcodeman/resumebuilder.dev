@@ -55,4 +55,4 @@ function LanguageSelect(props: BoxProps) {
   );
 }
 
-export default LanguageSelect;
+export { LanguageSelect };

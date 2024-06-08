@@ -20,9 +20,9 @@ import { useTranslations } from "next-intl";
 import { ArrowRightIcon, MailIcon, PhoneIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { isNil } from "ramda";
-import useResume from "hooks/useResume";
-import NotFound from "components/misc/NotFound";
-import StepsNavigation from "app/[locale]/resumes/[id]/(stepper)/StepsNavigation";
+import { useResume } from "hooks/useResume";
+import { NotFound } from "components/misc/NotFound";
+import { StepsNavigation } from "app/[locale]/resumes/[id]/(stepper)/StepsNavigation";
 import { Link, useRouter } from "navigation";
 import { AboutField } from "types";
 

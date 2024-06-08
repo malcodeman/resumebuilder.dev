@@ -41,4 +41,4 @@ function Logo(props: Props) {
   );
 }
 
-export default Logo;
+export { Logo };

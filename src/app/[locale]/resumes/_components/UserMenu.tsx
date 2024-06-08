@@ -55,4 +55,4 @@ function UserMenu() {
   );
 }
 
-export default UserMenu;
+export { UserMenu };

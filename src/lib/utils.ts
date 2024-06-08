@@ -22,7 +22,7 @@ import {
   drop,
 } from "ramda";
 import { format } from "date-fns";
-import getTemplate from "lib/getTemplate";
+import { getTemplate } from "lib/getTemplate";
 import { Resume, Section, Fields, SectionField } from "types";
 
 const isBrowser =
@@ -266,7 +266,7 @@ function getScrollbarStyle(): SystemStyleObject {
   return sx;
 }
 
-const EXPORTS = {
+export const utils = {
   isBrowser,
   file2Text,
   file2Base64,
@@ -284,5 +284,3 @@ const EXPORTS = {
   checkResumeProperties,
   getScrollbarStyle,
 };
-
-export default EXPORTS;

@@ -1,5 +1,5 @@
 import { NextIntlClientProvider, useMessages } from "next-intl";
-import Providers from "app/[locale]/Providers";
+import { Providers } from "app/[locale]/Providers";
 
 export default function LocaleLayout({
   children,

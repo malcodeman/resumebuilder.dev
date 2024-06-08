@@ -1,5 +1,5 @@
 import { Text as ReactPdfText } from "@react-pdf/renderer";
-import useStyles from "templates/useStyles";
+import { useStyles } from "templates/useStyles";
 import { Style } from "templates/types";
 
 type Props = Style & {
@@ -16,4 +16,4 @@ function Text(props: Props) {
   );
 }
 
-export default Text;
+export { Text };

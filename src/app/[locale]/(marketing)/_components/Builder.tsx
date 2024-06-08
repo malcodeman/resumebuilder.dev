@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import Poser16 from "illustrations/Poser16";
+import { Poser16 } from "illustrations/Poser16";
 
 function Builder() {
   const t = useTranslations();
@@ -55,4 +55,4 @@ function Builder() {
   );
 }
 
-export default Builder;
+export { Builder };

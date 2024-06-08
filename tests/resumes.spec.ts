@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import utils from "e2e/utils";
+import { playwrightUtils } from "lib/playwrightUtils";
 
 test.describe("Resumes page", () => {
   test.beforeEach(async ({ page }) => {
@@ -10,13 +10,16 @@ test.describe("Resumes page", () => {
     await page.getByTestId("dark-mode-menu-item").click();
 
     expect(
-      await utils.getLocalStorageItem({ context, name: "chakra-ui-color-mode" })
+      await playwrightUtils.getLocalStorageItem({
+        context,
+        name: "chakra-ui-color-mode",
+      })
     ).toBe("dark");
   });
   test("Start from scratch button", async ({ page, context, baseURL }) => {
     await page.getByTestId("start-from-scratch").click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     expect(await page.getByTestId("resume").count()).toBe(1);
 
@@ -32,7 +35,7 @@ test.describe("Resumes page", () => {
     await expect(page).toHaveURL(`${baseURL}/en/templates`);
   });
   test("Search | Not found", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
 
     const input = page.getByTestId("search-input").getByRole("textbox");
     const name = "malcodeman";
@@ -45,7 +48,7 @@ test.describe("Resumes page", () => {
     );
   });
   test("Search | Found", async ({ page }) => {
-    await utils.setResume({ page, title: "Playwright" });
+    await playwrightUtils.setResume({ page, title: "Playwright" });
 
     const input = page.getByTestId("search-input").getByRole("textbox");
     const name = "Playwright";
@@ -56,48 +59,48 @@ test.describe("Resumes page", () => {
     expect(await page.getByTestId("resume").count()).toBe(1);
   });
   test("List view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
 
     await page.getByTestId("list-view-icon-button").click();
 
     expect(await page.getByTestId("table-row").count()).toBe(1);
   });
   test("Create resume button", async ({ page, context, baseURL }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("create-resume-button").click();
 
     expect(await page.getByTestId("resume").count()).toBe(2);
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });
   test("Create resume button | Halloween", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("create-resume-button").click();
 
-    // const resume = await utils.getResume({ context });
+    // const resume = await playwrightUtils.getResume({ context });
 
     // expect(resume.icon).toBe(":ghost:");
   });
   test("Create resume button | New Year's Eve", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("create-resume-button").click();
 
-    // const resume = await utils.getResume({ context });
+    // const resume = await playwrightUtils.getResume({ context });
 
     // expect(resume.icon).toBe(":fireworks:");
   });
   test("Create resume button | New Year's Day", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("create-resume-button").click();
 
-    // const resume = await utils.getResume({ context });
+    // const resume = await playwrightUtils.getResume({ context });
 
     // expect(resume.icon).toBe(":fireworks:");
   });
   test("GitHub | Import", async ({ page, context, baseURL }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("import-icon-button").click();
     await page.getByTestId("import-github").click();
 
@@ -122,17 +125,17 @@ test.describe("Resumes page", () => {
 
     expect(await page.getByTestId("resume").count()).toBe(2);
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });
   test("Paste data | Import", async ({ page, baseURL, context }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("import-icon-button").click();
     await page.getByTestId("import-pasteData").click();
 
     const input = page.getByTestId("data-textarea");
-    const value = JSON.stringify(await utils.generateFakeResume({}));
+    const value = JSON.stringify(await playwrightUtils.generateFakeResume({}));
 
     await input.fill(value);
     await expect(input).toHaveValue(value);
@@ -140,31 +143,31 @@ test.describe("Resumes page", () => {
 
     expect(await page.getByTestId("resume").count()).toBe(2);
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     await expect(page).toHaveURL(`${baseURL}/en/resumes/${resume.id}`);
   });
   test("Change icon | Grid view", async ({ page, context }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("emoji-picker-icon-button").click();
     await page.getByTestId("emoji").first().click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     expect(resume.icon).toBe(":100:");
   });
   test("Change icon | List view", async ({ page, context }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("list-view-icon-button").click();
     await page.getByTestId("emoji-picker-icon-button").click();
     await page.getByTestId("emoji").first().click();
 
-    const resume = await utils.getResume({ context });
+    const resume = await playwrightUtils.getResume({ context });
 
     expect(resume.icon).toBe(":100:");
   });
   test("Rename resume | Grid view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("title-editable").click();
 
     const input = page.getByTestId("title-input");
@@ -175,7 +178,7 @@ test.describe("Resumes page", () => {
     await expect(page.getByTestId("title-preview")).toHaveText(name);
   });
   test("Rename resume from menu | Grid view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("resume").hover();
     await page.getByTestId("resume-more-options-menu-button").click();
     await page.getByTestId("rename-menu-item").click();
@@ -189,7 +192,7 @@ test.describe("Resumes page", () => {
     await expect(page.getByTestId("title-preview")).toHaveText(name);
   });
   test("Rename resume | List view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("list-view-icon-button").click();
     await page.getByTestId("title-editable").click();
 
@@ -201,7 +204,7 @@ test.describe("Resumes page", () => {
     await expect(page.getByTestId("title-preview")).toHaveText(name);
   });
   test("Duplicate resume | Grid view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("resume").hover();
     await page.getByTestId("resume-more-options-menu-button").click();
     await page.getByTestId("duplicate-menu-item").click();
@@ -209,7 +212,7 @@ test.describe("Resumes page", () => {
     expect(await page.getByTestId("resume").count()).toBe(2);
   });
   test("Duplicate resume | List view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("list-view-icon-button").click();
     await page.getByTestId("resume-more-options-menu-button").click();
     await page.getByTestId("duplicate-menu-item").click();
@@ -217,7 +220,7 @@ test.describe("Resumes page", () => {
     expect(await page.getByTestId("table-row").count()).toBe(2);
   });
   test("Copy resume link | Grid view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("resume").hover();
     await page.getByTestId("resume-more-options-menu-button").click();
     await page.getByTestId("copy-link-menu-item").click();
@@ -225,7 +228,7 @@ test.describe("Resumes page", () => {
     expect(await page.content()).toContain("Link copied");
   });
   test("Copy resume link | List view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("list-view-icon-button").click();
     await page.getByTestId("resume-more-options-menu-button").click();
     await page.getByTestId("copy-link-menu-item").click();
@@ -233,7 +236,7 @@ test.describe("Resumes page", () => {
     expect(await page.content()).toContain("Link copied");
   });
   test("Delete resume | Grid view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("resume").hover();
     await page.getByTestId("resume-more-options-menu-button").click();
     await page.getByTestId("delete-menu-item").click();
@@ -242,7 +245,7 @@ test.describe("Resumes page", () => {
     expect(await page.content()).toContain("Resume delete");
   });
   test("Delete resume | List view", async ({ page }) => {
-    await utils.setResume({ page });
+    await playwrightUtils.setResume({ page });
     await page.getByTestId("list-view-icon-button").click();
     await page.getByTestId("resume-more-options-menu-button").click();
     await page.getByTestId("delete-menu-item").click();

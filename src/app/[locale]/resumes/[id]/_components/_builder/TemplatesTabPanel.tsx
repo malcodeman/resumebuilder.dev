@@ -2,10 +2,10 @@ import React from "react";
 import { Grid, Text, Image, Box, useColorModeValue } from "@chakra-ui/react";
 import { filter, includes, isEmpty, length, map, toLower } from "ramda";
 import { useTranslations } from "next-intl";
-import { TEMPLATES_LIST } from "lib/constants";
-import utils from "lib/utils";
+import { CONSTANTS } from "lib/constants";
+import { utils } from "lib/utils";
 import { Template as TemplateType } from "types";
-import SearchInput from "components/misc/SearchInput";
+import { SearchInput } from "components/misc/SearchInput";
 
 type Props = {
   onChangeTemplate: (_nextTemplate: TemplateType) => void;
@@ -17,7 +17,7 @@ function TemplatesTabPanel(props: Props) {
   const [template, setTemplate] = React.useState("");
   const filteredTemplatesBySearch = filter(
     (item) => includes(toLower(template), toLower(item.title)),
-    TEMPLATES_LIST
+    CONSTANTS.TEMPLATES_LIST
   );
   const boxShadow = useColorModeValue(
     "rgba(0, 0, 0, 0.05) 0 0 0 2px",
@@ -37,7 +37,7 @@ function TemplatesTabPanel(props: Props) {
         mb="4"
         value={template}
         placeholder={t("search_n_templates", {
-          n: length(TEMPLATES_LIST),
+          n: length(CONSTANTS.TEMPLATES_LIST),
         })}
         onChangeValue={(nextValue) => setTemplate(nextValue)}
         onClear={() => setTemplate("")}
@@ -70,4 +70,4 @@ function TemplatesTabPanel(props: Props) {
   );
 }
 
-export default TemplatesTabPanel;
+export { TemplatesTabPanel };

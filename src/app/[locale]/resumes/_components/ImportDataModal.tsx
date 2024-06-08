@@ -16,12 +16,12 @@ import {
 import { equals, isEmpty, map } from "ramda";
 import { ChevronLeftIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import FileUploader from "components/misc/FileUploader";
-import ImportFromGithub from "app/[locale]/resumes/_components/ImportFromGithub";
-import ImportFromPasteData from "app/[locale]/resumes/_components/ImportFromPasteData";
-import ImportFromLinkedin from "app/[locale]/resumes/_components/ImportFromLinkedin";
-import parser from "lib/parser";
-import utils from "lib/utils";
+import { FileUploader } from "components/misc/FileUploader";
+import { ImportFromGithub } from "app/[locale]/resumes/_components/ImportFromGithub";
+import { ImportFromPasteData } from "app/[locale]/resumes/_components/ImportFromPasteData";
+import { ImportFromLinkedin } from "app/[locale]/resumes/_components/ImportFromLinkedin";
+import { parser } from "lib/parser";
+import { utils } from "lib/utils";
 import { Fields } from "types";
 
 type Props = {
@@ -162,4 +162,4 @@ function ImportDataModal(props: Props) {
     </Modal>
   );
 }
-export default ImportDataModal;
+export { ImportDataModal };

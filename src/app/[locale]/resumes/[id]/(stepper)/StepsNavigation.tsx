@@ -7,7 +7,7 @@ import {
 import { ChevronRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { equals } from "ramda";
-import useResume from "hooks/useResume";
+import { useResume } from "hooks/useResume";
 import { Link } from "navigation";
 
 type Props = BreadcrumbProps & {
@@ -58,4 +58,4 @@ function StepsNavigation(props: Props) {
   );
 }
 
-export default StepsNavigation;
+export { StepsNavigation };
