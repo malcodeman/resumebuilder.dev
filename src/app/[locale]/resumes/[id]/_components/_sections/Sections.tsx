@@ -21,7 +21,7 @@ import { TagListSection } from "app/[locale]/resumes/[id]/_components/_sections/
 import { StandardSection } from "app/[locale]/resumes/[id]/_components/_sections/StandardSection";
 import { AddSectionModal } from "app/[locale]/resumes/[id]/_components/_sections/AddSectionModal";
 import { DraggableItem } from "app/[locale]/resumes/[id]/_components/_sections/DraggableItem";
-import { STANDARD_SECTION_DEFAULT_VALUES } from "lib/constants";
+import { CONSTANTS } from "lib/constants";
 import { utils } from "lib/utils";
 import { Resume, Section } from "types";
 
@@ -107,7 +107,7 @@ function Sections(props: Props) {
       fieldArray.append({
         name: data.name,
         label: data.label,
-        nested: [STANDARD_SECTION_DEFAULT_VALUES],
+        nested: [CONSTANTS.STANDARD_SECTION_DEFAULT_VALUES],
       });
     } else {
       fieldArray.append({

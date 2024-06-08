@@ -9,7 +9,7 @@ import {
 import { motion } from "framer-motion";
 import { siLinkedin, siGithub } from "simple-icons";
 import { SimpleIcon } from "components/misc/SimpleIcon";
-import { LINKS } from "lib/constants";
+import { CONSTANTS } from "lib/constants";
 
 function Footer() {
   return (
@@ -24,13 +24,13 @@ function Footer() {
           &copy; {new Date().getFullYear()} resumebuilder.dev
         </Text>
         <ButtonGroup variant="ghost" size="sm">
-          <Link href={LINKS.LINKEDIN_PAGE} isExternal>
+          <Link href={CONSTANTS.LINKS.LINKEDIN_PAGE} isExternal>
             <IconButton
               aria-label="LinkedIn"
               icon={<SimpleIcon size={16} path={siLinkedin.path} />}
             />
           </Link>
-          <Link href={LINKS.GITHUB_REPO} isExternal>
+          <Link href={CONSTANTS.LINKS.GITHUB_REPO} isExternal>
             <IconButton
               aria-label="GitHub"
               icon={<SimpleIcon size={16} path={siGithub.path} />}

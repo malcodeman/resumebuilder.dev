@@ -22,7 +22,7 @@ import { useTranslations } from "next-intl";
 import { SectionHeader } from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
 import { StandardSectionBody } from "app/[locale]/resumes/[id]/_components/_sections/StandardSectionBody";
 import { DraggableItem } from "app/[locale]/resumes/[id]/_components/_sections/DraggableItem";
-import { STANDARD_SECTION_DEFAULT_VALUES } from "lib/constants";
+import { CONSTANTS } from "lib/constants";
 import { Resume, Section } from "types";
 
 type Props = {
@@ -114,7 +114,9 @@ function StandardSection(props: Props) {
           <SectionHeader
             label={label}
             index={index}
-            onAppend={() => appendNested(STANDARD_SECTION_DEFAULT_VALUES)}
+            onAppend={() =>
+              appendNested(CONSTANTS.STANDARD_SECTION_DEFAULT_VALUES)
+            }
             onRemove={() => remove(index)}
             onDuplicate={handleOnDuplicate}
           />

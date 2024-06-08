@@ -4,11 +4,7 @@ import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
 import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
 import { useTranslations } from "next-intl";
 import { Layout } from "components/Layout";
-import {
-  DEFAULT_VALUES,
-  TEMPLATES_LIST,
-  TEMPLATES_FILTERS,
-} from "lib/constants";
+import { CONSTANTS } from "lib/constants";
 import { Template as TemplateType } from "types";
 import { SearchInput } from "components/misc/SearchInput";
 import { Template } from "app/[locale]/(marketing)/_components/Template";
@@ -21,13 +17,13 @@ function Templates() {
   const router = useRouter();
   const { createNew } = useResumes();
   const [activeFilter, setActiveFilter] = React.useState(
-    TEMPLATES_FILTERS[0].value
+    CONSTANTS.TEMPLATES_FILTERS[0].value
   );
   const [template, setTemplate] = React.useState("");
   const [isLoading, setIsLoading] = React.useState<TemplateType | null>(null);
   const filteredTemplatesByTags = filter(
     (item) => includes(activeFilter, item.tags),
-    TEMPLATES_LIST
+    CONSTANTS.TEMPLATES_LIST
   );
   const filteredTemplatesBySearch = filter(
     (item) => includes(toLower(template), toLower(item.title)),
@@ -37,7 +33,7 @@ function Templates() {
   function handleOnUseTemplate(template: TemplateType) {
     setIsLoading(template);
     const design = {
-      ...DEFAULT_VALUES.design,
+      ...CONSTANTS.DEFAULT_VALUES.design,
       template,
     };
     const resume = createNew({ design });
@@ -69,7 +65,7 @@ function Templates() {
               {t(item.labelTransKey)}
             </Button>
           ),
-          TEMPLATES_FILTERS
+          CONSTANTS.TEMPLATES_FILTERS
         )}
       </ButtonGroup>
       {isEmpty(filteredTemplatesBySearch) ? (

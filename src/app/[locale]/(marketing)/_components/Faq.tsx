@@ -18,7 +18,7 @@ import { CheckCircleIcon, CircleIcon } from "lucide-react";
 import { map } from "ramda";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { LINKS } from "lib/constants";
+import { CONSTANTS } from "lib/constants";
 
 function Faq() {
   const t = useTranslations();
@@ -52,7 +52,11 @@ function Faq() {
         questionTransKey: "faq_question_4",
         answer: t.rich("faq_answer_4", {
           link: (chunks) => (
-            <ChakraLink href={LINKS.GITHUB_REPO} color="blue.400" isExternal>
+            <ChakraLink
+              href={CONSTANTS.LINKS.GITHUB_REPO}
+              color="blue.400"
+              isExternal
+            >
               {chunks}
             </ChakraLink>
           ),

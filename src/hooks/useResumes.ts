@@ -13,7 +13,7 @@ import {
   or,
 } from "ramda";
 import { getDate, getMonth } from "date-fns";
-import { DEFAULT_VALUES } from "lib/constants";
+import { CONSTANTS } from "lib/constants";
 import { Design, Fields, Resume } from "types";
 
 function useResumes() {
@@ -83,7 +83,7 @@ function useResumes() {
 
   function createNew(data?: { fields?: Fields; design?: Design }) {
     const resume = {
-      ...DEFAULT_VALUES,
+      ...CONSTANTS.DEFAULT_VALUES,
       ...data?.fields,
       id: nanoid(),
       title: "Untitled resume",
@@ -91,7 +91,7 @@ function useResumes() {
       createdAt: Date.now(),
       updatedAt: Date.now(),
       design: {
-        ...DEFAULT_VALUES.design,
+        ...CONSTANTS.DEFAULT_VALUES.design,
         ...data?.design,
       },
     };

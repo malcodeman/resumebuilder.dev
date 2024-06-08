@@ -1,7 +1,5 @@
-import { equals } from "ramda";
 import { Template, Resume, TemplateTags } from "types";
 
-const IS_PROD = equals(process.env.NEXT_PUBLIC_VERCEL_ENV, "production");
 const TEMPLATES: Template[] = ["berlin", "london", "nairobi", "rio", "tokyo"];
 const TEMPLATES_FILTERS: { value: TemplateTags; labelTransKey: string }[] = [
   {
@@ -123,9 +121,7 @@ const LINKS = {
   LINKEDIN_PAGE: "https://www.linkedin.com/company/resumebuilderdev",
   LINKEDIN_DATA_PRIVACY: "https://www.linkedin.com/psettings/data-privacy",
 };
-
-export {
-  IS_PROD,
+export const CONSTANTS = {
   TEMPLATES,
   TEMPLATES_FILTERS,
   STANDARD_SECTION_DEFAULT_VALUES,

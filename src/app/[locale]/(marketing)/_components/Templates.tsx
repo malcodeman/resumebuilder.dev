@@ -11,7 +11,7 @@ import { map, slice, equals } from "ramda";
 import { ArrowRightIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { TEMPLATES_LIST, DEFAULT_VALUES } from "lib/constants";
+import { CONSTANTS } from "lib/constants";
 import { Template as TemplateType } from "types";
 import { useResumes } from "hooks/useResumes";
 import { Template } from "app/[locale]/(marketing)/_components/Template";
@@ -36,7 +36,7 @@ function Templates() {
   function handleOnSubmit(template: TemplateType) {
     setIsLoading(template);
     const design = {
-      ...DEFAULT_VALUES.design,
+      ...CONSTANTS.DEFAULT_VALUES.design,
       template,
     };
     const resume = createNew({ design });
@@ -96,7 +96,7 @@ function Templates() {
                 onUseTemplate={(template) => handleOnSubmit(template)}
               />
             ),
-            TEMPLATES_LIST
+            CONSTANTS.TEMPLATES_LIST
           )
         )}
       </Grid>
