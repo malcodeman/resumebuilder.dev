@@ -28,7 +28,9 @@
       }
     ],
     // https://github.com/vercel/style-guide/blob/1377fa3bedafe60954d20f80a455e3a0597bb354/eslint/rules/import.js#L32
-    "import/no-default-export": "error"
+    "import/no-default-export": "error",
+    // https://github.com/vercel/style-guide/blob/1377fa3bedafe60954d20f80a455e3a0597bb354/eslint/rules/best-practice.js#L26
+    "default-case-last": "error"
   },
   "overrides": [
     {

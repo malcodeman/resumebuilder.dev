@@ -49,15 +49,15 @@ function ExportResumeModal(props: Props) {
 
   function handleOnSubmit(format: Export) {
     switch (format) {
-      default:
-      case "pdf":
-        return onPdfExport();
       case "json":
         return onJsonExport();
       case "html":
         return onHtmlExport();
       case "png":
         return onPngExport();
+      case "pdf":
+      default:
+        return onPdfExport();
     }
   }
 
