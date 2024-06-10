@@ -8,9 +8,6 @@ import { TemplateProps } from "types";
 function getTemplate(props: TemplateProps) {
   const { design } = props;
   switch (design.template) {
-    default:
-    case "berlin":
-      return <Berlin {...props} />;
     case "tokyo":
       return <Tokyo {...props} />;
     case "london":
@@ -19,6 +16,9 @@ function getTemplate(props: TemplateProps) {
       return <Rio {...props} />;
     case "nairobi":
       return <Nairobi {...props} />;
+    case "berlin":
+    default:
+      return <Berlin {...props} />;
   }
 }
 
