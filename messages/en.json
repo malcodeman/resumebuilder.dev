@@ -192,8 +192,8 @@
   "preview": "Preview",
   "pick_an_emoji": "Pick an emoji",
   "template_does_not_support_profile_picture": "{template} template doesn't support profile picture",
-  "add_job": "Add Job",
-  "add_education": "Add Education",
-  "add_internship": "Add Internship",
-  "add_project": "Add Project"
+  "add_job": "Add job",
+  "add_education": "Add education",
+  "add_internship": "Add internship",
+  "add_project": "Add project"
 }
