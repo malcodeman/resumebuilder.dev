@@ -149,14 +149,13 @@
   "role": "Rolle",
   "subtitle": "Untertitel",
   "delete_duplicate_and_more": "Löschen, duplizieren und mehr...",
-  "add_item": "Fügen Sie ein Element hinzu",
+  "add_item": "Element hinzufügen",
   "home": "Heim",
   "dashboard": "Armaturenbrett",
   "clear_local_storage": "Lokalen Speicher löschen",
   "save_message_description_1": "Ihre Arbeit wird automatisch gespeichert.",
   "save_message_description_2": "💾 Sie müssen nicht auf Speichern klicken. Ihre Änderungen werden automatisch gespeichert.",
   "save_message_description_3": "Machen Sie sich keine Sorgen um dieses Sicherungsmaterial. Wir haben dich. 💪",
-  "no_items_inside": "Keine Gegenstände drin",
   "give_feedback": "Feedback geben",
   "resume_404_description": "Entschuldigung, der gesuchte Lebenslauf wurde nicht gefunden.",
   "resume_duplicated": "Lebenslauf dupliziert",
@@ -192,5 +191,9 @@
   "sections": "Abschnitte",
   "preview": "Vorschau",
   "pick_an_emoji": "Wählen Sie ein Emoji",
-  "template_does_not_support_profile_picture": "Die Vorlage {template} unterstützt kein Profilbild"
+  "template_does_not_support_profile_picture": "Die Vorlage {template} unterstützt kein Profilbild",
+  "add_job": "Job hinzufügen",
+  "add_education": "Ausbildung hinzufügen",
+  "add_internship": "Praktikum hinzufügen",
+  "add_project": "Projekt hinzufügen"
 }

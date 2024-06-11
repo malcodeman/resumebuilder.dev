@@ -156,7 +156,6 @@
   "save_message_description_1": "Vaš rad se automatski pohranjuje.",
   "save_message_description_2": "💾 Nema potrebe da pritisnete sačuvaj. Vaše promjene se automatski spremaju.",
   "save_message_description_3": "Ne brinite o ovim sačuvanim stvarima. Imamo te. 💪",
-  "no_items_inside": "Nema predmeta unutra",
   "give_feedback": "Dajte povratnu informaciju",
   "resume_404_description": "Žao nam je, resume koji ste tražili nije pronađen.",
   "resume_duplicated": "Resume dupliran",
@@ -192,5 +191,9 @@
   "sections": "Sekcije",
   "preview": "Pregled",
   "pick_an_emoji": "Odaberite emoji",
-  "template_does_not_support_profile_picture": "Predložak {template} ne podržava sliku profila"
+  "template_does_not_support_profile_picture": "Predložak {template} ne podržava sliku profila",
+  "add_job": "Dodaj posao",
+  "add_education": "Dodaj obrazovanje",
+  "add_internship": "Dodaj praksu",
+  "add_project": "Dodaj projekat"
 }

@@ -149,14 +149,13 @@
   "role": "Role",
   "subtitle": "Subtitle",
   "delete_duplicate_and_more": "Delete, duplicate, and more...",
-  "add_item": "Add an item",
+  "add_item": "Add item",
   "home": "Home",
   "dashboard": "Dashboard",
   "clear_local_storage": "Clear local storage",
   "save_message_description_1": "Your work is saved automatically.",
   "save_message_description_2": "💾 No need to hit save. Your changes are saved automatically.",
   "save_message_description_3": "Don't worry about this save stuff. We got you. 💪",
-  "no_items_inside": "No items inside",
   "give_feedback": "Give feedback",
   "resume_404_description": "Sorry, the resume you were looking for was not found.",
   "resume_duplicated": "Resume duplicated",
@@ -192,5 +191,9 @@
   "sections": "Sections",
   "preview": "Preview",
   "pick_an_emoji": "Pick an emoji",
-  "template_does_not_support_profile_picture": "{template} template doesn't support profile picture"
+  "template_does_not_support_profile_picture": "{template} template doesn't support profile picture",
+  "add_job": "Add Job",
+  "add_education": "Add Education",
+  "add_internship": "Add Internship",
+  "add_project": "Add Project"
 }
