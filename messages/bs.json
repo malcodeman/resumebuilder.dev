@@ -191,5 +191,6 @@
   "import_from_linkedin_list_item_2": "Odaberite podatke koje tražite i <text>Zatražite arhivu</text>.",
   "sections": "Sekcije",
   "preview": "Pregled",
-  "pick_an_emoji": "Odaberite emoji"
+  "pick_an_emoji": "Odaberite emoji",
+  "template_does_not_support_profile_picture": "Predložak {template} ne podržava sliku profila"
 }

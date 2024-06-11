@@ -191,5 +191,6 @@
   "import_from_linkedin_list_item_2": "Wählen Sie die gesuchten Daten aus und <text>Archiv anfordern</text>.",
   "sections": "Abschnitte",
   "preview": "Vorschau",
-  "pick_an_emoji": "Wählen Sie ein Emoji"
+  "pick_an_emoji": "Wählen Sie ein Emoji",
+  "template_does_not_support_profile_picture": "Die Vorlage {template} unterstützt kein Profilbild"
 }

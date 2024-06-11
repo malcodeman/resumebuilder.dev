@@ -9,83 +9,32 @@ import {
   FormLabel,
   InputGroup,
   InputLeftElement,
-  Avatar,
-  Button,
-  Flex,
-  ButtonGroup,
-  useDisclosure,
 } from "@chakra-ui/react";
-import {
-  MailIcon,
-  PhoneIcon,
-  LinkIcon,
-  CameraIcon,
-  Trash2Icon,
-  EditIcon,
-} from "lucide-react";
+import { MailIcon, PhoneIcon, LinkIcon } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { concat, replace, isEmpty } from "ramda";
+import { concat, replace } from "ramda";
 import { useTranslations } from "next-intl";
 import { utils } from "lib/utils";
 import { useLocalStorage } from "hooks/useLocalStorage";
-import { useProfilePicture } from "hooks/useProfilePicture";
 import { SectionHeader } from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
-import { AddProfilePictureModal } from "app/[locale]/resumes/[id]/_components/_sections/AddProfilePictureModal";
 import { AddPreWrittenPhrasesButton } from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
+import { ProfilePicture } from "app/[locale]/resumes/[id]/_components/_sections/ProfilePicture";
 
-function ProfilePicture() {
-  const t = useTranslations();
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const profilePicture = useProfilePicture();
+function ProfilePictureGridItem() {
+  const { control } = useFormContext();
+  const template = useWatch({
+    control,
+    name: "design.template",
+  });
+
   return (
-    <>
-      <GridItem colSpan={2}>
-        {isEmpty(profilePicture.value) ? (
-          <Button
-            size="sm"
-            width="full"
-            leftIcon={<CameraIcon size={16} />}
-            onClick={onOpen}
-            data-testid="add-profile-picture-button"
-          >
-            {t("add_profile_picture")}
-          </Button>
-        ) : (
-          <>
-            <Flex mb="4" justifyContent="center">
-              <Avatar
-                size="xl"
-                backgroundColor="transparent"
-                src={profilePicture.value}
-              />
-            </Flex>
-            <ButtonGroup size="sm" width="full" spacing="4">
-              <Button
-                width="full"
-                leftIcon={<EditIcon size={16} />}
-                onClick={onOpen}
-                data-testid="change-profile-picture-button"
-              >
-                {t("change")}
-              </Button>
-              <Button
-                width="full"
-                leftIcon={<Trash2Icon size={16} />}
-                onClick={() => profilePicture.set("")}
-                data-testid="delete-profile-picture-button"
-              >
-                {t("delete")}
-              </Button>
-            </ButtonGroup>
-          </>
-        )}
-      </GridItem>
-      <AddProfilePictureModal isOpen={isOpen} onClose={onClose} />
-    </>
+    <GridItem colSpan={2}>
+      <ProfilePicture template={template} />
+    </GridItem>
   );
 }
 
-function Summary() {
+function SummaryGridItem() {
   const t = useTranslations();
   const { control, register, getValues, setValue } = useFormContext();
   const inputName = "about.summary";
@@ -137,7 +86,7 @@ function PersonalDetailsSection() {
       <SectionHeader label={t("personal_details")} />
       <AccordionPanel>
         <Grid templateColumns="1fr 1fr" gap="4">
-          <ProfilePicture />
+          <ProfilePictureGridItem />
           <GridItem colSpan={2}>
             <FormControl>
               <FormLabel>{t("title")}</FormLabel>
@@ -249,7 +198,7 @@ function PersonalDetailsSection() {
               />
             </FormControl>
           </GridItem>
-          <Summary />
+          <SummaryGridItem />
         </Grid>
       </AccordionPanel>
     </AccordionItem>

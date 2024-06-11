@@ -191,5 +191,6 @@
   "import_from_linkedin_list_item_2": "Select the data that you're looking for and <text>Request archive</text>.",
   "sections": "Sections",
   "preview": "Preview",
-  "pick_an_emoji": "Pick an emoji"
+  "pick_an_emoji": "Pick an emoji",
+  "template_does_not_support_profile_picture": "{template} template doesn't support profile picture"
 }
