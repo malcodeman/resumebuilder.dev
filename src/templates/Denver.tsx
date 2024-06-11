@@ -89,12 +89,16 @@ function Denver(props: TemplateProps) {
       return null;
     }
     if (isEmpty(item.startDate)) {
-      return ` - ${item.endDate}`;
+      return <Text>{item.endDate}</Text>;
     }
     if (isEmpty(item.endDate)) {
-      return `${item.startDate} -`;
+      return <Text>{item.startDate}</Text>;
     }
-    return `${item.startDate} - ${item.endDate}`;
+    return (
+      <Text>
+        {item.startDate} - {item.endDate}
+      </Text>
+    );
   }
 
   function renderDescription(description: string) {
@@ -189,7 +193,7 @@ function Denver(props: TemplateProps) {
                             )}
                             {isEmpty(item.city) ? null : `, ${item.city}`}
                           </Text>
-                          <Text>{renderDate(item)}</Text>
+                          {renderDate(item)}
                         </Flex>
                         {renderDescription(item.description)}
                       </Box>

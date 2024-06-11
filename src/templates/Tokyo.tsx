@@ -63,6 +63,20 @@ function Tokyo(props: TemplateProps) {
     if (and(isEmpty(item.startDate), isEmpty(item.endDate))) {
       return null;
     }
+    if (isEmpty(item.startDate)) {
+      return (
+        <Text mb={8} color="#707678">
+          {item.endDate}
+        </Text>
+      );
+    }
+    if (isEmpty(item.endDate)) {
+      return (
+        <Text mb={8} color="#707678">
+          {item.startDate}
+        </Text>
+      );
+    }
     return (
       <Text mb={8} color="#707678">
         {item.startDate} - {item.endDate}
