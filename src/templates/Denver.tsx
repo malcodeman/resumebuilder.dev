@@ -52,7 +52,7 @@ function Denver(props: TemplateProps) {
     }
     return (
       <>
-        <Link href={about.website} color="#f1f7f6">
+        <Link href={about.website} color="#F1F7F6">
           {utils.parseWebsite(about.website)}
         </Link>{" "}
         •{" "}
@@ -123,8 +123,8 @@ function Denver(props: TemplateProps) {
             pb={6}
             pl={12}
             pr={12}
-            bgColor="#03624c"
-            color="#fff"
+            bgColor="#03624C"
+            color="#FFF"
             borderRadius={16}
           >
             {item}
@@ -138,14 +138,14 @@ function Denver(props: TemplateProps) {
     <TemplateContext.Provider
       value={{ isPdf, isDescendantOfLink, spacing: design.spacing }}
     >
-      <Page id="denver" bgColor="#111110" display="flex" flexDirection="column">
+      <Page id="denver" display="flex" flexDirection="column">
         <Flex
-          bgColor="#014e3c"
+          bgColor="#014E3C"
           padding={16}
           justifyContent="space-between"
           alignItems="flex-end"
           height="10%"
-          color="#f1f7f6"
+          color="#F1F7F6"
         >
           <Text fontSize="3xl" fontWeight={700}>
             {about.firstName} {about.lastName}
@@ -161,7 +161,7 @@ function Denver(props: TemplateProps) {
             </Text>
           </Flex>
         </Flex>
-        <Box padding={16} flexGrow={1} bgColor="#e7f2f1" color="#032221">
+        <Box padding={16} flexGrow={1} bgColor="#E7F2F1" color="#032221">
           <Text mb={4} fontSize="md" fontWeight={700}>
             {about.title}
           </Text>
