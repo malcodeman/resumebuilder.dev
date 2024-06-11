@@ -3,6 +3,7 @@ import { Tokyo } from "templates/Tokyo";
 import { London } from "templates/London";
 import { Rio } from "templates/Rio";
 import { Nairobi } from "templates/Nairobi";
+import { Denver } from "templates/Denver";
 import { TemplateProps } from "types";
 
 function getTemplate(props: TemplateProps) {
@@ -16,6 +17,8 @@ function getTemplate(props: TemplateProps) {
       return <Rio {...props} />;
     case "nairobi":
       return <Nairobi {...props} />;
+    case "denver":
+      return <Denver {...props} />;
     case "berlin":
     default:
       return <Berlin {...props} />;
