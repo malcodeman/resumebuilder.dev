@@ -1,7 +1,7 @@
 import { ColorMode } from "@chakra-ui/react";
 import { UseFormRegister } from "react-hook-form";
 
-type Template = "berlin" | "tokyo" | "london" | "rio" | "nairobi";
+type Template = "berlin" | "tokyo" | "london" | "rio" | "nairobi" | "denver";
 type Section =
   | "standard"
   | "employment"

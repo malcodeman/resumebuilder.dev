@@ -115,6 +115,13 @@ const TEMPLATES_LIST: {
     src: "/templates/nairobi.png",
     tags: ["all", "simple", "professional"],
   },
+  {
+    title: "Denver",
+    template: "denver",
+    descriptionTransKey: "denver_description",
+    src: "/templates/denver.png",
+    tags: ["all", "simple", "professional"],
+  },
 ];
 const LINKS = {
   GITHUB_REPO: "https://github.com/malcodeman/resumebuilder.dev",

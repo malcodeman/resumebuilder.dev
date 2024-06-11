@@ -155,7 +155,7 @@ function Tokyo(props: TemplateProps) {
                             ) : (
                               item.title
                             )}
-                            , {item.city}
+                            {isEmpty(item.city) ? null : `, ${item.city}`}
                           </Text>
                           {renderDate(item)}
                           {renderDescription(item.description)}
