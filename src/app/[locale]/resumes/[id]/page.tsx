@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Grid,
   Box,
@@ -12,7 +12,7 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { equals, isNil } from "ramda";
+import { and, equals, isNil } from "ramda";
 import { useMediaQuery, useMountEffect } from "@react-hookz/web";
 import { useTranslations } from "next-intl";
 import { motion, useMotionValue, useTransform } from "framer-motion";
@@ -41,6 +41,7 @@ function Builder() {
   });
   const x = useMotionValue(DEFAULT_WIDTH);
   const width = useTransform(x, (x) => `${x}px`);
+  const [tabIndex, setTabIndex] = React.useState(0);
 
   React.useEffect(() => {
     if (resume && !equals(form.getValues(), resume)) {
@@ -48,15 +49,21 @@ function Builder() {
     }
   }, [resume, form]);
 
-  useMountEffect(() => {
-    viewDashboard.set(true);
-  });
-
-  useEffect(() => {
+  React.useEffect(() => {
     if (resume) {
       document.title = `${resume.title} | resumebuilder.dev`;
     }
   }, [resume]);
+
+  React.useEffect(() => {
+    if (and(isLargeDevice, equals(tabIndex, 2))) {
+      setTabIndex(0);
+    }
+  }, [isLargeDevice, tabIndex]);
+
+  useMountEffect(() => {
+    viewDashboard.set(true);
+  });
 
   useAutoSaveToast({});
 
@@ -91,6 +98,8 @@ function Builder() {
       >
         <Tabs
           as={motion.div}
+          index={tabIndex}
+          onChange={(index) => setTabIndex(index)}
           size="sm"
           paddingTop="8"
           overflowY="hidden"
