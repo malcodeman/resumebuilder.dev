@@ -1,5 +1,5 @@
 import React from "react";
-import { AccordionItem, AccordionPanel, Text, Box } from "@chakra-ui/react";
+import { AccordionItem, AccordionPanel } from "@chakra-ui/react";
 import {
   useFieldArray,
   FieldArrayMethodProps,
@@ -18,12 +18,12 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { useTranslations } from "next-intl";
 import { SectionHeader } from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
 import { StandardSectionBody } from "app/[locale]/resumes/[id]/_components/_sections/StandardSectionBody";
 import { DraggableItem } from "app/[locale]/resumes/[id]/_components/_sections/DraggableItem";
 import { CONSTANTS } from "lib/constants";
 import { Resume, Section } from "types";
+import { AddSectionItemButton } from "app/[locale]/resumes/[id]/_components/_sections/AddSectionItemButton";
 
 type Props = {
   id: string;
@@ -40,7 +40,6 @@ type Props = {
 
 function StandardSection(props: Props) {
   const { id, index, label, name, isDragDisabled, remove, append } = props;
-  const t = useTranslations();
   const { control, getValues, reset } = useFormContext<Resume>();
   const {
     fields: fieldsNested,
@@ -114,9 +113,6 @@ function StandardSection(props: Props) {
           <SectionHeader
             label={label}
             index={index}
-            onAppend={() =>
-              appendNested(CONSTANTS.STANDARD_SECTION_DEFAULT_VALUES)
-            }
             onRemove={() => remove(index)}
             onDuplicate={handleOnDuplicate}
           />
@@ -125,17 +121,6 @@ function StandardSection(props: Props) {
               cursor="default"
               onPointerDown={(e) => e.stopPropagation()}
             >
-              {isEmpty(fieldsNested) ? (
-                <Box
-                  paddingY="2"
-                  paddingInlineStart="calc(1.5rem + 20px)"
-                  paddingInlineEnd="4"
-                >
-                  <Text>{t("no_items_inside")}</Text>
-                </Box>
-              ) : (
-                <></>
-              )}
               <DndContext
                 sensors={sensors}
                 collisionDetection={closestCenter}
@@ -171,6 +156,12 @@ function StandardSection(props: Props) {
                   )}
                 </DragOverlay>
               </DndContext>
+              <AddSectionItemButton
+                name={name}
+                onAppend={() =>
+                  appendNested(CONSTANTS.STANDARD_SECTION_DEFAULT_VALUES)
+                }
+              />
             </AccordionPanel>
           ) : (
             <></>
