@@ -3,7 +3,6 @@ import React from "react";
 import { Grid, Text, ButtonGroup, Button } from "@chakra-ui/react";
 import { includes, map, filter, length, toLower, isEmpty, equals } from "ramda";
 import { useTranslations } from "next-intl";
-import { Layout } from "components/Layout";
 import { CONSTANTS } from "lib/constants";
 import { Template as TemplateType } from "types";
 import { SearchInput } from "components/misc/SearchInput";
@@ -42,7 +41,7 @@ function Templates() {
   }
 
   return (
-    <Layout>
+    <>
       <SearchInput
         mb="4"
         data-testid="search-input"
@@ -92,7 +91,7 @@ function Templates() {
         )}
       </Grid>
       <Footer />
-    </Layout>
+    </>
   );
 }
 
