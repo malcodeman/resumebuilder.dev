@@ -1,7 +1,6 @@
 "use client";
 import { useMountEffect } from "@react-hookz/web";
 import { useLocalStorage } from "hooks/useLocalStorage";
-import { Layout } from "components/Layout";
 import { Faq } from "app/[locale]/(marketing)/_components/Faq";
 import { GetStarted } from "app/[locale]/(marketing)/_components/GetStarted";
 import { Features } from "app/[locale]/(marketing)/_components/Features";
@@ -18,7 +17,7 @@ function Landing() {
   });
 
   return (
-    <Layout>
+    <>
       <Hero />
       <Templates />
       <Features />
@@ -26,7 +25,7 @@ function Landing() {
       <Faq />
       <GetStarted />
       <Footer />
-    </Layout>
+    </>
   );
 }
 
