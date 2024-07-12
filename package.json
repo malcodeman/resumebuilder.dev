@@ -23,7 +23,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@react-hookz/web": "^24.0.4",
     "@react-pdf/renderer": "^3.4.4",
-    "@tanstack/react-table": "^8.5.11",
+    "@tanstack/react-table": "^8.19.2",
     "@vercel/analytics": "^1.1.1",
     "@vercel/speed-insights": "^1.0.3",
     "axios": "^1.5.0",
