@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: TITLE,
     images: [
       {
-        url: `${URL}/opengraph/index.png`,
+        url: `${WEBSITE_URL}/opengraph/index.png`,
         width: 1200,
         height: 630,
       },
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: [
       {
-        url: `${URL}/opengraph/index.png`,
+        url: `${WEBSITE_URL}/opengraph/index.png`,
         width: 1200,
         height: 630,
       },
