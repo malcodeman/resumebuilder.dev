@@ -20,6 +20,7 @@ import { Section } from "types";
 import { utils } from "lib/utils";
 import { SectionHeader } from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
 import { AddPreWrittenPhrasesButton } from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
+import { PHRASES } from "lib/phrases";
 
 type Props = {
   id: string;
@@ -92,6 +93,7 @@ function Description({ index, nestIndex, isEmployment }) {
         </FormControl>
         {isEmployment ? (
           <AddPreWrittenPhrasesButton
+            phrases={PHRASES.EMPLOYMENT}
             currentPhrases={description}
             onChange={handleOnPhraseChange}
           />
