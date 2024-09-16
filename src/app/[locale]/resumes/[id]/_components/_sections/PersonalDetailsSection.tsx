@@ -19,6 +19,7 @@ import { useLocalStorage } from "hooks/useLocalStorage";
 import { SectionHeader } from "app/[locale]/resumes/[id]/_components/_sections/SectionHeader";
 import { AddPreWrittenPhrasesButton } from "app/[locale]/resumes/[id]/_components/_sections/AddPreWrittenPhrasesButton";
 import { ProfilePicture } from "app/[locale]/resumes/[id]/_components/_sections/ProfilePicture";
+import { PHRASES } from "lib/phrases";
 
 function ProfilePictureGridItem() {
   const { control } = useFormContext();
@@ -69,6 +70,7 @@ function SummaryGridItem() {
           />
         </FormControl>
         <AddPreWrittenPhrasesButton
+          phrases={PHRASES.SUMMARY}
           currentPhrases={summary}
           onChange={handleOnPhraseChange}
         />
