@@ -11,7 +11,7 @@ type Props = {
 };
 
 function AddPreWrittenPhrasesButton(props: Props) {
-  const { currentPhrases, phrases, onChange } = props;
+  const { phrases, currentPhrases, onChange } = props;
   const t = useTranslations();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
