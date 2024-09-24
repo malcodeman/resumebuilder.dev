@@ -19,7 +19,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@faker-js/faker": "^8.4.1",
+    "@faker-js/faker": "^9.0.2",
     "@hookform/resolvers": "^3.9.0",
     "@react-hookz/web": "^24.0.4",
     "@react-pdf/renderer": "^3.4.4",
